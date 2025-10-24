@@ -11,6 +11,28 @@ Chatbot CLI inspirado em Fernando Pessoa, usando Llama 3 e RAG com FAISS.
 pip install -r requirements.txt
 python src/main.py
 ```
+
+
+💡 Instruções rápidas
+
+1. Baixa o arquivo no teu celular.
+
+
+2. No GitHub, abre o repositório pessoa-bot.
+
+
+3. Vai em “Add file → Upload files”, e envia o ZIP (ou descompacta antes e envia os arquivos individualmente).
+
+
+4. Depois, quando estiver num computador com Python instalado:
+
+pip install -r requirements.txt
+python src/main.py
+
+
+5. Adiciona teus poemas em data/pessoa_poems/ para testar o RAG
+
+
 ## Estrutura
 - `data/pessoa_poems/` — [PONTO] Adicione aqui os textos e poemas do Pessoa.
 - `src/` — Código-fonte principal.
