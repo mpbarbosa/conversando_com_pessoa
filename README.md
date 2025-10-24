@@ -1,5 +1,20 @@
 # conversando_com_pessoa
 
+# PessoaBot (Prova de Conceito)
+
+Chatbot CLI inspirado em Fernando Pessoa, usando Llama 3 e RAG com FAISS.
+
+## Estrutura
+- `data/pessoa_poems/` — [PONTO] Adicione aqui os textos e poemas do Pessoa.
+- `src/` — Código-fonte principal.
+
+## Como rodar
+```bash
+pip install -r requirements.txt
+python src/main.py
+
+
+
 pessoa-bot/
 │
 ├── data/
