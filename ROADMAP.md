@@ -1,22 +1,21 @@
 # PessoaBot Development Roadmap
 
 ## Current Status (October 2025)
-- ✅ **Project Setup Complete**: Virtual environment, dependencies installed
+- ✅ **Project Setup Complete**: Virtual environment, dependencies installed, accelerate added
 - ✅ **Import Issues Resolved**: Fixed relative import paths in `main.py`
 - ✅ **Documentation Created**: `.github/copilot-instructions.md` and `ROADMAP.md`
-- ✅ **Model Updated**: Changed to `meta-llama/Meta-Llama-3-8B` (base model)
-- ⏳ **Pending**: Hugging Face authentication setup for Llama 3 access
-- ⏳ **Next**: Full application testing with authenticated model access
+- ✅ **Free Model Successfully Deployed**: Switched to `google/flan-t5-large` (no auth required)
+- ✅ **Full Pipeline Tested**: RAG retrieval + Flan-T5 generation working in Portuguese
+- ✅ **Code Quality**: Fixed deprecation warnings (torch_dtype, early_stopping)
+- ✅ **Ready for Production**: Chatbot responds authentically as Fernando Pessoa
 
 ## Immediate Priorities
 
-### 1. Complete Basic Setup (HIGH PRIORITY)
-- **Hugging Face Authentication**: Get model access working
-  - Request access to `meta-llama/Meta-Llama-3-8B`
-  - Generate and configure HF token
-  - Test full application pipeline
-- **Validate RAG Pipeline**: Ensure text retrieval and context building works
-- **Test Portuguese Response Quality**: Verify Pessoa-style responses
+### 1. Enhancement Opportunities (MEDIUM PRIORITY)
+- **Prompt Engineering**: Fine-tune persona consistency and response quality
+- **Retrieval Optimization**: Adjust top_k parameters and similarity thresholds  
+- **Performance Tuning**: Monitor memory usage and generation speed
+- **Content Expansion**: Add more poems or heteronym-specific texts
 
 ### 2. Core Stability Improvements (MEDIUM PRIORITY)
 - **Error Handling**: Add graceful failures for model loading, file access
@@ -112,12 +111,29 @@
   # Edit src/model.py to use "microsoft/DialoGPT-large" or similar
   ```
 
-### Alternative Models (Backup Options)
-If Llama 3 access is delayed, consider these alternatives for testing:
-- **`microsoft/DialoGPT-large`**: Conversational model, no authentication required
-- **`EleutherAI/gpt-neo-2.7B`**: Open source GPT-style model
-- **`google/flan-t5-large`**: Instruction-following model, good for structured responses
-- **Note**: May require prompt template adjustments for optimal Portuguese responses
+### Alternative Free Models (No Authentication Required)
+
+#### **Active: Google Flan-T5-Large** ✅ **DEPLOYED & WORKING**
+- **Model**: `google/flan-t5-large` 
+- **Size**: ~3.13GB (instruction-following, multilingual)
+- **Pros**: Excellent Portuguese support, instruction-following, no auth required
+- **Cons**: Larger download, slower initial startup
+- **Status**: **Fully integrated and tested** - authentic Portuguese responses confirmed!
+
+#### **Other Strong Options:**
+- **`google/flan-t5-large`**: Instruction-following, multilingual (3GB)
+- **`EleutherAI/gpt-neo-2.7B`**: GPT-style architecture, fully open (10GB)
+- **`facebook/blenderbot-400M-distill`**: Conversational, very fast (400MB)
+- **`microsoft/DialoGPT-medium`**: Smaller version of DialoGPT (355MB)
+
+#### **Quick Model Switching:**
+```python
+# In src/model.py, change the default model_name to:
+"google/flan-t5-large"           # ✅ CURRENT: Best multilingual performance
+"microsoft/DialoGPT-large"      # Alternative: Faster conversational model  
+"EleutherAI/gpt-neo-2.7B"       # Alternative: Larger context window
+"microsoft/DialoGPT-medium"     # Alternative: Fastest performance
+```
 
 ## Technical Debt & Code Quality
 
