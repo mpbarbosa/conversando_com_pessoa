@@ -102,8 +102,10 @@ garantir-lhe um resultado negativo por construção.**
 
 ### 3.2 E parte do que falta não é recuperável de todo
 
-O `nDCG@5` do denso é 0,677 com 209 candidatos julgados. Falta decompor essa
-falta em duas parcelas com destinos opostos:
+O `nDCG@5` do denso é **0,638** com os 291 candidatos julgados depois da Fase 3.
+(Escrevi 0,677 na primeira versão deste protocolo, que é o valor de depois da
+Fase 2; o `FASE-3-RELATORIO.md` registou a descida e o `CONTROLO.md` não a
+propagou.) Falta decompor essa falta em duas parcelas com destinos opostos:
 
 | parcela | natureza | o enriquecimento ajuda? |
 |---|---|---|
@@ -197,7 +199,7 @@ há um limiar abaixo do qual o roteador diz «não sei» e mantém a voz corrent
 
 ### B1 — A falta é recuperável? (2 h, antes de gastar máquina)
 
-Decompor o `nDCG@5 = 0,677` do denso nas parcelas do §3.2: para cada uma das 20
+Decompor o `nDCG@5 = 0,638` do denso nas parcelas do §3.2: para cada uma das 20
 perguntas julgadas, quantos documentos de nota 2 existem, quantos cabem no
 top-5, e quantos estão julgados mas abaixo da posição 5.
 

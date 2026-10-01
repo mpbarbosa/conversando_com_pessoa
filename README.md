@@ -52,7 +52,7 @@ híbrida da Fase 2. Relatório: [`docs/fase-1/08-RELATORIO.md`](docs/fase-1/08-R
 | índice | 7,0 MB · busca em **5,57 ms** |
 | construção do corpus · do índice | ~40 s · 383 s |
 | latência de resposta | ~44 s a 500 tokens de contexto (CPU) |
-| testes | **165, todos a passar** |
+| testes | **230, todos a passar** |
 
 ---
 
@@ -123,13 +123,15 @@ Na primeira execução constrói o `corpus.jsonl` (~40 s) e o índice (~6,4 min)
 grava-os em `data/`; nas seguintes carrega-os, se o manifesto os aceitar. Use
 `--verboso` para ver o progresso.
 
-Dentro da conversa: `/caeiro` `/campos` `/reis` `/pessoa` `/search` trocam de voz,
+Dentro da conversa: `/auto` deixa o roteador propor a voz a cada pergunta
+(72% de acerto, +0,5 s); `/caeiro` `/campos` `/reis` `/pessoa` `/search` trocam de voz
+e desligam o roteador,
 `/pt` `/en` de língua, `/sair` sai. Cada resposta imprime as **fontes** usadas e os
 tempos — o *prefill* domina a espera (58–89%), e mostrá-lo ensina o custo em vez de
 o esconder.
 
 ```bash
-pytest          # 165 testes, ~4 min
+pytest          # 230 testes, ~2 min
 ```
 
 ---
@@ -165,7 +167,7 @@ também ficam fora, por serem precisamente isso.
 | **1 — Pipeline** (parsing → índice → vozes → gerador → guardas → conjunto dourado → CLI) | ✅ **completa, 9 de 9** |
 | **2 — Busca híbrida** (fundir denso + BM25) | ⬜ desbloqueada pela linha de base |
 | **3 — Rerank** | 🔄 candidato escolhido por *benchmark* (MiniLM-L12 a 1694 tok/s contra 90 do bge-m3) |
-| **4 — Enriquecimento e roteador de voz** | ⬜ |
+| **4 — Enriquecimento e roteador de voz** | ✅ roteador em `/auto` (72%, 92% com etiqueta múltipla); enriquecimento **vetado** por medição |
 | **5 — Interface e geração remota** | ⬜ |
 
 Limitações conhecidas e não resolvidas estão listadas em

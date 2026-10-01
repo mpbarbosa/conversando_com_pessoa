@@ -28,7 +28,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **1 — Pipeline** | [`FASE-1.md`](FASE-1.md) | ✅ **completa** (9 de 9) |
 | **2 — Busca híbrida** | [`FASE-2.md`](FASE-2.md) · [relatório](FASE-2-RELATORIO.md) | ✅ **negativo**: +0,004 é ruído; `apt@3` cai 95%→90% |
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
-| **4 — Enriquecimento e roteador** | §Fase 4 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
+| **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
 | **5 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -45,7 +45,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | 8 | **Conjunto dourado** | ✅ | `src/avaliacao.py` · `src/retrieval/lexical.py` · `tests/test_retrieval_gold.py` · 8 testes |
 | 9 | CLI | ✅ | `src/cli.py` · `pipeline.responder_em_fluxo` · 7 testes |
 
-**188 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
+**230 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
 (280 linhas, o código antigo corrigido no início da sessão) continuam no
 repositório e serão substituídos no Passo 9.
 
@@ -74,6 +74,10 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | Índice | **`numpy`**, não FAISS | 2290 × 768 = **7,0 MB**; busca em 5,57 ms |
 | Reranker candidato | **MiniLM-L12-H384** (~120M) | 1694 tok/s contra 90 do bge-m3 de 568M |
 | LangChain | **removido** | declarado no `requirements.txt`, usado em zero linhas |
+| Roteador de voz | **chamada ao qwen2.5:7b** | 72% contra 52,5% do melhor embedding; o 3b faz 42% |
+| `temperature` do roteador | **0,0** | um classificador tem de ser determinista; os 0,9 são para verso |
+| O roteador **propõe** | não decide | a 72%, 1 em 4 iria à voz errada; em silêncio custa 30 s, à vista custa uma tecla |
+| Enriquecimento offline | **não se faz** | 88% da falta do nDCG@5 é reordenação; o enriquecimento ataca 12% por 3,2–7,5 h |
 
 ### Números do sistema
 
@@ -82,10 +86,11 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | poemas | 2083 (2062 após deduplicação) |
 | chunks indexados | **2290** |
 | índice | 7,0 MB · busca 5,57 ms |
-| recuperação | **nDCG@5 = 0,719** (denso) · 0,488 (BM25) · apt@3 = 95% |
+| recuperação | **nDCG@5 = 0,638** (denso) · apt@3 = 95% · oráculo@20 = **0,956** |
 | corpus.jsonl | 3,0 MB · build em ~40 s |
 | construção do índice | 383 s (6,4 min) |
 | latência de resposta prevista | ~44 s a 500 tokens de contexto |
+| roteador de voz (`/auto`) | +0,5 s por pergunta, e ~20 s uma vez a aquecer |
 
 ---
 
@@ -157,37 +162,38 @@ requisito de reprodutibilidade e continua pendente.
 
 ## 6. Próximos passos
 
-### Imediato — Fase 1 Passo 5: vozes e prompt
+> As Fases 1 a 4 estão feitas. Esta secção descrevia o «imediato» como sendo o
+> Passo 5 da Fase 1 e ficou para trás quatro fases seguidas; o que estava aqui
+> é agora história e vive nos relatórios por fase.
 
-Orçamento derivado da medição:
+### Imediato — a reordenação, que a Fase 4 reabriu com um número
 
-```
-500 tokens:  ~90 persona · ~30 pergunta · ~40 forma e PT-PT · ~340 contexto
-             -> 3-4 poemas curtos (mediana 93 tokens)
-```
+A Fase 4 mediu que o oráculo sobre o top-20 dá `nDCG@5 = 0,956` contra os 0,640
+do denso: **88% da falta está em reordenar o que o índice já traz**. A Fase 3
+mediu *um* reranker (MiniLM-L12) contra um portão de latência de 6 s e deu-o por
+inconclusivo — e eu li isso como «não há ganho a capturar», o que a decomposição
+desmente.
 
-Mitigação de PT-BR, que a Fase 0 mostrou ser o defeito mais consistente:
-instrução de enclíticas, **few-shot da própria voz vindo da recuperação** (a
-aposta mais forte), e lista de interdições povoada com os casos medidos —
-`fumaça`→`fumo`, `ator`→`actor`, `demônios`→`demónios`,
-`espetáculo`→`espectáculo`, `refletem`→`reflectem`, `galhos`→`ramos`.
+O que mudou desde a Fase 3, e que torna isto diferente de repetir o mesmo:
 
-Guarda de saída contra os quatro modos de falha vistos às cegas: preâmbulo meta,
-quebra de persona nomeando o heterónimo, resposta em latim, ortografia BR.
+1. **A premissa da iGPU estava errada.** O prefill é 6x mais rápido nela
+   ([`fase-0/07`](fase-0/07-igpu-vulkan.md)), e um cross-encoder é prefill puro —
+   é a carga em que a iGPU ganha, ao contrário do decode do gerador.
+2. **O orçamento de latência pode mudar de forma.** O portão de 6 s da Fase 3
+   vinha de somar o rerank aos 44 s do gerador em CPU.
+3. **O ganho está quantificado.** A Fase 3 decidia às cegas se valia a pena; há
+   agora um tecto de 0,316 para comparar com o custo.
 
 ### Depois, em ordem
 
 | | Passo | Desbloqueia |
 |---|---|---|
-| 1 | Fase 1 Passo 6 — gerador com streaming | — |
-| 2 | Fase 1 Passo 7 — guardas | — |
-| 3 | **Fase 1 Passo 8 — conjunto dourado** | **Fases 2 e 3** |
-| 4 | Fase 1 Passo 9 — CLI | critério de saída da Fase 1 |
-| 5 | Fase 2 completa | — |
-| 6 | Fase 3 Passos 2–4 | — |
+| 1 | **Reordenação, segunda tentativa** — reranker capaz, prefill na iGPU | os 0,316 de nDCG@5 que o oráculo@20 mostra |
+| 2 | A pergunta aberta desde a Fase 1 Passo 7: **a voz gerada é a voz pedida?** | a rubrica de geração do §6.2 do plano |
+| 3 | Fase 5 — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
 
-O **Passo 8 é o nó**: sem ele, nem a busca híbrida nem o rerank podem ser
-avaliados, e ambos existem exclusivamente para melhorar um número.
+O **Passo 2 continua a ser o que importa mais**, e nenhuma das Fases 2, 3 e 4
+mexeu nele: todas mediram recuperação, e o produto é verso.
 
 ### Pendências de limpeza
 
@@ -198,6 +204,8 @@ avaliados, e ambos existem exclusivamente para melhorar um número.
 [ ] remover src/{main,model,retriever}.py no Passo 9
 [ ] remover langchain do requirements.txt
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
+[ ] num_predict=220 corta o versiculo longo de Campos (visto 2x na Fase 4)
+[ ] registar a origem dos 2083 ficheiros (reprodutibilidade, §5)
 ```
 
 ---
@@ -212,10 +220,12 @@ avaliados, e ambos existem exclusivamente para melhorar um número.
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
 | [`FASE-3.md`](FASE-3.md) · [`FASE-3-PASSO-1.md`](FASE-3-PASSO-1.md) | rerank e latência medida |
+| [`FASE-4.md`](FASE-4.md) · [`FASE-4-RELATORIO.md`](FASE-4-RELATORIO.md) | roteador de voz, e o veto ao enriquecimento |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
 | `fase-3/` | latência dos rerankers e script |
+| `fase-4/` | 7 bancos de roteador, o conjunto adversarial pré-registado, e a decomposição do tecto |
 
 ### Código
 
@@ -377,6 +387,17 @@ k=5.** O caminho que resta não é melhorar o ranking — é mudar o que se mede
 `apt@3` de 95% diz que o sistema já encontra quase sempre uma resposta apta; a
 pergunta aberta desde o Passo 7 da Fase 1 continua a ser a que importa, e é
 sobre **geração**: se o modelo é a voz pedida quando não copia.
+
+> ⚠️ **As duas frases a negrito acima estão erradas, e a Fase 4 mediu-o.** O
+> oráculo sobre o top-20 — o melhor que uma reordenação da lista que o índice
+> **já devolve** conseguiria — dá `nDCG@5 = 0,956` contra os 0,640 do denso. Há
+> **0,316 de nDCG@5, ou 88% da falta, dentro do top-20**, e 17 das 20 perguntas
+> têm notas 2 abaixo da 5.ª posição. O tecto é do MiniLM, não do corpus.
+>
+> O erro foi de inferência: o argumento dos 84 documentos de nota 2 explica por
+> que o **`apt@3`** satura a 95%, e não por que o **`nDCG@5`** fica em 0,640.
+> São perguntas diferentes — «há uma nota 2 no top-3?» satura; «quantas, e em que
+> ordem?» não. Ver [`FASE-4-RELATORIO.md`](FASE-4-RELATORIO.md) §2.2.
 
 ### Código mantido fora do caminho de execução
 

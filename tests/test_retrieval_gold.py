@@ -129,8 +129,10 @@ def test_linha_de_base_do_denso(denso, perguntas, gabarito):
     # Baixado de 0,65 para 0,62: o gabarito cresceu de 176 para 209 candidatos
     # quando a Fase 2 agrupou e julgou os 33 que só a fusão trazia, e 12 têm
     # nota 2. Um ideal mais completo dá nDCG mais baixo e mais verdadeiro —
-    # o denso passou de 0,719 para 0,677 sem nada mudar no denso.
-    assert r.ndcg5 >= 0.62, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,677)"
+    # o denso passou de 0,719 para 0,677 sem nada mudar no denso, e para
+    # **0,638** quando a Fase 3 ampliou o gabarito para 291 candidatos. A
+    # margem de 0,62 continua a servir; o valor medido é que mudou duas vezes.
+    assert r.ndcg5 >= 0.62, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,638)"
     assert r.apt3 >= 0.85, f"regressão: apt@3 = {r.apt3:.0%} (medido 95%)"
 
 

@@ -1,0 +1,213 @@
+{
+ "n": 20,
+ "ndcg5_denso": 0.64,
+ "ndcg5_oraculo20": 0.956,
+ "falta": 0.36,
+ "recuperavel_reordenando": 0.316,
+ "fracao_reordenando": 0.879,
+ "exige_trazer": 0.044,
+ "fracao_trazer": 0.121,
+ "saturadas": "3/20",
+ "por_pergunta": [
+  {
+   "id": "q01",
+   "voz": "caeiro",
+   "n2_gabarito": 2,
+   "n2_top5": 2,
+   "n2_top20": 2,
+   "ndcg5": 0.834,
+   "oraculo20": 1.0,
+   "saturado": true
+  },
+  {
+   "id": "q02",
+   "voz": "caeiro",
+   "n2_gabarito": 4,
+   "n2_top5": 2,
+   "n2_top20": 3,
+   "ndcg5": 0.66,
+   "oraculo20": 0.893,
+   "saturado": false
+  },
+  {
+   "id": "q03",
+   "voz": "caeiro",
+   "n2_gabarito": 5,
+   "n2_top5": 2,
+   "n2_top20": 5,
+   "ndcg5": 0.517,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q04",
+   "voz": "caeiro",
+   "n2_gabarito": 3,
+   "n2_top5": 2,
+   "n2_top20": 3,
+   "ndcg5": 0.683,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q05",
+   "voz": "caeiro",
+   "n2_gabarito": 4,
+   "n2_top5": 2,
+   "n2_top20": 4,
+   "ndcg5": 0.594,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q11",
+   "voz": "campos",
+   "n2_gabarito": 4,
+   "n2_top5": 3,
+   "n2_top20": 3,
+   "ndcg5": 0.84,
+   "oraculo20": 0.845,
+   "saturado": false
+  },
+  {
+   "id": "q12",
+   "voz": "campos",
+   "n2_gabarito": 4,
+   "n2_top5": 1,
+   "n2_top20": 2,
+   "ndcg5": 0.424,
+   "oraculo20": 0.769,
+   "saturado": false
+  },
+  {
+   "id": "q13",
+   "voz": "campos",
+   "n2_gabarito": 1,
+   "n2_top5": 1,
+   "n2_top20": 1,
+   "ndcg5": 0.686,
+   "oraculo20": 1.0,
+   "saturado": true
+  },
+  {
+   "id": "q14",
+   "voz": "campos",
+   "n2_gabarito": 3,
+   "n2_top5": 1,
+   "n2_top20": 3,
+   "ndcg5": 0.584,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q15",
+   "voz": "campos",
+   "n2_gabarito": 5,
+   "n2_top5": 1,
+   "n2_top20": 3,
+   "ndcg5": 0.41,
+   "oraculo20": 0.815,
+   "saturado": false
+  },
+  {
+   "id": "q21",
+   "voz": "reis",
+   "n2_gabarito": 4,
+   "n2_top5": 3,
+   "n2_top20": 4,
+   "ndcg5": 0.84,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q22",
+   "voz": "reis",
+   "n2_gabarito": 4,
+   "n2_top5": 2,
+   "n2_top20": 4,
+   "ndcg5": 0.394,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q23",
+   "voz": "reis",
+   "n2_gabarito": 5,
+   "n2_top5": 1,
+   "n2_top20": 4,
+   "ndcg5": 0.446,
+   "oraculo20": 0.913,
+   "saturado": false
+  },
+  {
+   "id": "q24",
+   "voz": "reis",
+   "n2_gabarito": 2,
+   "n2_top5": 2,
+   "n2_top20": 2,
+   "ndcg5": 1.0,
+   "oraculo20": 1.0,
+   "saturado": true
+  },
+  {
+   "id": "q25",
+   "voz": "reis",
+   "n2_gabarito": 5,
+   "n2_top5": 3,
+   "n2_top20": 5,
+   "ndcg5": 0.76,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q31",
+   "voz": "ortonimo",
+   "n2_gabarito": 5,
+   "n2_top5": 1,
+   "n2_top20": 5,
+   "ndcg5": 0.427,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q32",
+   "voz": "ortonimo",
+   "n2_gabarito": 6,
+   "n2_top5": 3,
+   "n2_top20": 5,
+   "ndcg5": 0.733,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q33",
+   "voz": "ortonimo",
+   "n2_gabarito": 10,
+   "n2_top5": 4,
+   "n2_top20": 9,
+   "ndcg5": 0.661,
+   "oraculo20": 1.0,
+   "saturado": false
+  },
+  {
+   "id": "q34",
+   "voz": "ortonimo",
+   "n2_gabarito": 4,
+   "n2_top5": 2,
+   "n2_top20": 3,
+   "ndcg5": 0.594,
+   "oraculo20": 0.893,
+   "saturado": false
+  },
+  {
+   "id": "q35",
+   "voz": "ortonimo",
+   "n2_gabarito": 4,
+   "n2_top5": 3,
+   "n2_top20": 4,
+   "ndcg5": 0.724,
+   "oraculo20": 1.0,
+   "saturado": false
+  }
+ ]
+}
