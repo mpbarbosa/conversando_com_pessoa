@@ -26,8 +26,8 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 |---|---|---|
 | **0 — Medir** | [`FASE-0.md`](FASE-0.md) · [relatório](FASE-0-RELATORIO.md) | ✅ **completa**, com adenda de 3 correcções |
 | **1 — Pipeline** | [`FASE-1.md`](FASE-1.md) | ✅ **completa** (9 de 9) |
-| **2 — Busca híbrida** | [`FASE-2.md`](FASE-2.md) | ⬜ **desbloqueada**: denso 0,719 · BM25 0,488 · sobreposição 1/5 |
-| **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [Passo 1](FASE-3-PASSO-1.md) | 🔄 Passo 1 feito; **2–4 desbloqueados** |
+| **2 — Busca híbrida** | [`FASE-2.md`](FASE-2.md) · [relatório](FASE-2-RELATORIO.md) | ✅ **negativo**: +0,004 é ruído; `apt@3` cai 95%→90% |
+| **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
 | **4 — Enriquecimento e roteador** | §Fase 4 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 | **5 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
@@ -45,7 +45,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | 8 | **Conjunto dourado** | ✅ | `src/avaliacao.py` · `src/retrieval/lexical.py` · `tests/test_retrieval_gold.py` · 8 testes |
 | 9 | CLI | ✅ | `src/cli.py` · `pipeline.responder_em_fluxo` · 7 testes |
 
-**121 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
+**188 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
 (280 linhas, o código antigo corrigido no início da sessão) continuam no
 repositório e serão substituídos no Passo 9.
 
@@ -337,3 +337,41 @@ e cada pergunta em inglês era a **primeira daquela persona**, logo sem cache.
 agora dá 14–17 tok/s contra os ~21 tok/s da Fase 0, e a mesma configuração sai
 do orçamento sem nada ter mudado no código. Os números do plano são de uma
 máquina em repouso.
+
+
+---
+
+## As duas fases de melhoria não melhoraram, e a causa é a mesma
+
+| fase | resultado |
+|---|---|
+| **2 — busca híbrida (RRF)** | **negativo**: a melhor fusão dá +0,004 de nDCG@5, ruído a n=20, e o `apt@3` cai de 95% para 90% |
+| **3 — reranking (cross-encoder)** | **inconclusivo**: o sinal inverte-se com o gabarito (−0,048 no original, +0,074 no ampliado) e o `apt@3` fica a 95% nos três |
+
+### A causa, medida
+
+| | documentos de nota 2 no top-5, somados em 20 perguntas |
+|---|---|
+| denso | **40** |
+| fusão | 39 |
+
+Há **84 documentos de nota 2** no gabarito, mediana de 4 por pergunta, e o top-5
+só leva cinco. Reordenar **troca respostas boas por outras respostas boas** — e
+o `apt@3` constante a 95% nos dois casos é a assinatura disso.
+
+Não é propriedade dos algoritmos: é propriedade do corpus, medida desde a Fase 0
+(67% dos candidatos agrupados eram aproveitáveis).
+
+**A recuperação densa simples parece estar no tecto do que este corpus permite a
+k=5.** O caminho que resta não é melhorar o ranking — é mudar o que se mede. O
+`apt@3` de 95% diz que o sistema já encontra quase sempre uma resposta apta; a
+pergunta aberta desde o Passo 7 da Fase 1 continua a ser a que importa, e é
+sobre **geração**: se o modelo é a voz pedida quando não copia.
+
+### Código mantido fora do caminho de execução
+
+`fusion.py`, `search.py` e `rerank.py` ficam no repositório, testados, e **não
+ligados ao pipeline** — não desligados por configuração, porque um componente
+desligado por omissão é dívida. O que os limita é mensurável e pode mudar:
+julgar as 20 perguntas restantes, agrupar a top-10, ou um orçamento de contexto
+maior que 300 tokens.
