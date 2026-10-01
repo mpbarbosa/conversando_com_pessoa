@@ -65,6 +65,7 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | Persona no `system` | 313 tok, em cache | 13,63 s → 0,91 s da 2ª pergunta |
 | `repeat_penalty` | **1,1** | resolveu a degeneração em ciclo |
 | Regra anti-cópia no `system` | preventiva, em cache | mediana de versos copiados: **82% → 0%** |
+| Repetição por plágio | **sem os poemas copiados** | rejeições 4/5 → 1/5; reincidência 3/5 → 0/5 |
 | `LIMIAR_VERSO` de plágio | **0,72** | lacuna entre 0,70 (limpas) e 0,79 (copiam) |
 | `LIMIAR_FRACAO` de plágio | **0,10** | 21% de repetição, 33,8 s de média |
 | Encoder | **`intfloat/multilingual-e5-base`** | `maxlen=512` cobre 96% dos poemas inteiros |
@@ -122,6 +123,8 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | Fracção de stopwords tomada por teste de língua | Verso telegráfico dado por língua errada: 38 s de regeneração por uma resposta boa |
 | `fracao_lingua` caindo no pt quando a língua é `?` | 4 poemas reais dados por língua errada |
 | Buffer do CLI sem `remover_preambulo` | O ecrã mostrava mais do que o veredicto julgara |
+| `REFORCO_EN` nunca usado no caminho do CLI | Sessão em inglês recebia o reforço em português |
+| Medição condicionada a re-observar um evento estocástico | 0/3 plágios na 1.ª tentativa: zero dados |
 
 ---
 
@@ -211,6 +214,7 @@ avaliados, e ambos existem exclusivamente para melhorar um número.
 | [`FASE-3.md`](FASE-3.md) · [`FASE-3-PASSO-1.md`](FASE-3-PASSO-1.md) | rerank e latência medida |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
+| [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
 | `fase-3/` | latência dos rerankers e script |
 
 ### Código
@@ -500,3 +504,55 @@ A guarda volta ao limiar absoluto, que é o comportamento antigo: rejeita. «Nã
 sei» não pode virar «está bem» — sem a ressalva, uma máquina sem `aspell`
 perderia a guarda contra o latim. O preço é o falso positivo telegráfico voltar
 nessas máquinas.
+
+
+---
+
+## Correcção: a repetição por plágio voltava ao mesmo poema
+
+Observado a correr o chatbot, à pergunta «você conhece o senhor fernando
+pessoa?»: a 1.ª tentativa copiou 9 de 14 versos do `poem_1164` — um deles à
+letra — por substituição de palavras (`Natureza`→`Silêncio`, `brisa`→`luz`,
+`perceber`→`escutar`). A repetição voltou **ao mesmo poema**: 5/14. Duas
+rejeições, ~80 s, e o utilizador interrompeu.
+
+O `REFORCO` já dizia «não reutilizes nenhum verso nem o reescrevas trocando uma
+palavra», e foi ignorado duas vezes. **O contexto não mudava entre as
+tentativas** — `poem_1164` continuava no prompt, e a única diferença era o
+reforço e a amostragem.
+
+A repetição passa a **tirar do contexto os poemas de que o modelo copiou**. Não é
+encolher: `montar` corta pelo orçamento, logo deixar um poema de fora deixa
+entrar o seguinte da recuperação — aqui, `poem_1130` em vez de `poem_1164`.
+
+### Medido, 5 repetições por política
+
+| | A (antes) | B (agora) |
+|---|---|---|
+| rejeitadas por plágio | **4/5** | **1/5** |
+| reincidiu no poema proibido | **3/5** | **0/5** |
+| corridas com zero versos copiados | **0/5** | **4/5** |
+| fracção nas corridas que falharam | 0,08 – 0,57 | **0,89** |
+
+**O mecanismo faz o que foi desenhado para fazer**, e a ressalva é importante:
+não remove a tendência de se encostar a um poema, remove **aquele** atractor. A
+falha única do B foi a mais grave das dez em fracção copiada, e veio do poema que
+acabou de entrar. Com `MAX_TENTATIVAS = 2` não há ronda para tirar o segundo.
+
+n=5, uma pergunta, uma voz — chega para a decisão, não chega para uma taxa.
+
+### Dois defeitos encontrados pelo caminho
+
+**`REFORCO_EN` existia e nunca era usado.** O `responder()` escolhia a língua; o
+`responder_em_fluxo()` — o caminho que o CLI corre — fazia `user = p.user +
+REFORCO` sem ramo nenhum. Uma sessão em inglês recebia o reforço em português.
+
+**O primeiro desenho da medição não produziu dados.** Condicionei a comparação a
+re-observar o plágio na 1.ª tentativa, e em 3 perguntas 0 plagiaram — incluindo
+esta, com o mesmo poema no contexto. Com temperatura 0,9 e sem semente o plágio é
+estocástico; o ponto de partida tinha de vir da observação, não de nova geração.
+
+Número lateral dessa corrida falhada: **0 de 3 primeiras tentativas plagiaram**,
+contra 1 de 1 na sessão do utilizador. O plágio é um evento, não o estado normal
+destas respostas — e isto enquadra o que a correcção vale, porque ela só age
+quando a primeira tentativa falha.

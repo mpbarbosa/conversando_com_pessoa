@@ -1,0 +1,122 @@
+[
+ {
+  "pergunta": "você conhece o senhor fernando pessoa?",
+  "copiados_observados": [
+   "poem_1164"
+  ],
+  "contexto_a": [
+   "poem_1164",
+   "poem_384"
+  ],
+  "contexto_b": [
+   "poem_1130",
+   "poem_384"
+  ],
+  "A": [
+   {
+    "plagiou": true,
+    "frac": 0.571,
+    "max": 1.0,
+    "poemas": [
+     "poem_1164"
+    ],
+    "reincidiu": true,
+    "truncada": false,
+    "s": 38.2
+   },
+   {
+    "plagiou": true,
+    "frac": 0.357,
+    "max": 1.0,
+    "poemas": [
+     "poem_1164"
+    ],
+    "reincidiu": true,
+    "truncada": false,
+    "s": 26.8
+   },
+   {
+    "plagiou": false,
+    "frac": 0.083,
+    "max": 0.763,
+    "poemas": [
+     "poem_384"
+    ],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 21.8
+   },
+   {
+    "plagiou": true,
+    "frac": 0.417,
+    "max": 0.869,
+    "poemas": [
+     "poem_1164"
+    ],
+    "reincidiu": true,
+    "truncada": false,
+    "s": 20.7
+   },
+   {
+    "plagiou": true,
+    "frac": 0.125,
+    "max": 0.817,
+    "poemas": [
+     "poem_384"
+    ],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 18.0
+   }
+  ],
+  "B": [
+   {
+    "plagiou": false,
+    "frac": 0.0,
+    "max": 0.691,
+    "poemas": [],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 43.3
+   },
+   {
+    "plagiou": true,
+    "frac": 0.889,
+    "max": 1.0,
+    "poemas": [
+     "poem_1130"
+    ],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 22.2
+   },
+   {
+    "plagiou": false,
+    "frac": 0.0,
+    "max": 0.519,
+    "poemas": [],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 30.3
+   },
+   {
+    "plagiou": false,
+    "frac": 0.0,
+    "max": 0.597,
+    "poemas": [],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 24.4
+   },
+   {
+    "plagiou": false,
+    "frac": 0.0,
+    "max": 0.5,
+    "poemas": [],
+    "reincidiu": false,
+    "truncada": false,
+    "s": 29.7
+   }
+  ]
+ }
+]
