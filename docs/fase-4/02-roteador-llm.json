@@ -1,0 +1,390 @@
+{
+ "lexical@20": {
+  "exactidao": 0.45,
+  "certos": 18,
+  "n": 40,
+  "por_voz": {
+   "caeiro": 0.1,
+   "campos": 0.7,
+   "reis": 0.1,
+   "ortonimo": 0.9
+  },
+  "erros": [
+   {
+    "id": "q01",
+    "q": "por que é que as pessoas acham melancólico o fim do dia?",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q02",
+    "q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q03",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q04",
+    "q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q05",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q07",
+    "q": "pensar estraga o que se está a ver",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q08",
+    "q": "um rebanho a passar numa encosta, e nada mais do que isso",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q09",
+    "q": "quando eu morrer o mundo continua exactamente como está",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q10",
+    "q": "aprender a ver é mais difícil do que aprender a pensar",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q11",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q19",
+    "q": "fumo e olho pela janela e nada tem remédio",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q20",
+    "q": "sou uma série de sensações sem nada por baixo que as una",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q21",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q22",
+    "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q23",
+    "q": "colher as flores antes que murchem, sem lhes pedir mais nada",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q25",
+    "q": "não vale a pena querer mais do que o que cabe num dia",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q26",
+    "q": "sentar-me à beira do rio e deixar passar o que passa",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q27",
+    "q": "o destino é o mesmo para quem o procura e para quem o espera",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q28",
+    "q": "ser senhor de si é mais do que ser senhor do mundo",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q29",
+    "q": "nada fica de nós depois, nem das obras que deixamos",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q30",
+    "q": "beber o vinho sem pensar no fim da taça",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q37",
+    "q": "há em mim mais do que uma pessoa e nenhuma é a verdadeira",
+    "esperada": "ortonimo",
+    "prevista": "campos"
+   }
+  ]
+ },
+ "llm 3b": {
+  "exactidao": 0.425,
+  "certos": 17,
+  "n": 40,
+  "por_voz": {
+   "caeiro": 0.4,
+   "campos": 0.4,
+   "reis": 0.1,
+   "ortonimo": 0.8
+  },
+  "erros": [
+   {
+    "id": "q01",
+    "q": "por que é que as pessoas acham melancólico o fim do dia?",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q02",
+    "q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q04",
+    "q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q05",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q09",
+    "q": "quando eu morrer o mundo continua exactamente como está",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q10",
+    "q": "aprender a ver é mais difícil do que aprender a pensar",
+    "esperada": "caeiro",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q11",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q12",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q16",
+    "q": "queria ser todas as pessoas e todos os lugares de uma só vez",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q17",
+    "q": "a cidade acorda e eu não consigo acompanhar",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q19",
+    "q": "fumo e olho pela janela e nada tem remédio",
+    "esperada": "campos",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q20",
+    "q": "sou uma série de sensações sem nada por baixo que as una",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q21",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+    "esperada": "reis",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q22",
+    "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q24",
+    "q": "os deuses não se importam connosco e isso é um alívio",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q25",
+    "q": "não vale a pena querer mais do que o que cabe num dia",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q26",
+    "q": "sentar-me à beira do rio e deixar passar o que passa",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q27",
+    "q": "o destino é o mesmo para quem o procura e para quem o espera",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q28",
+    "q": "ser senhor de si é mais do que ser senhor do mundo",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q29",
+    "q": "nada fica de nós depois, nem das obras que deixamos",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q30",
+    "q": "beber o vinho sem pensar no fim da taça",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q34",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperada": "ortonimo",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q39",
+    "q": "o mar e o destino de um povo que partiu e não voltou",
+    "esperada": "ortonimo",
+    "prevista": null
+   }
+  ],
+  "parede_mediana_s": 0.58,
+  "prefill_mediana_s": 0.4,
+  "prefill_tok_mediana": 331.0,
+  "sem_voz_reconhecida": [
+   {
+    "id": "q39",
+    "bruto": "ortonioimo"
+   }
+  ]
+ },
+ "llm 7b": {
+  "exactidao": 0.725,
+  "certos": 29,
+  "n": 40,
+  "por_voz": {
+   "caeiro": 0.7,
+   "campos": 0.9,
+   "reis": 0.5,
+   "ortonimo": 0.8
+  },
+  "erros": [
+   {
+    "id": "q01",
+    "q": "por que é que as pessoas acham melancólico o fim do dia?",
+    "esperada": "caeiro",
+    "prevista": "campos"
+   },
+   {
+    "id": "q05",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+    "esperada": "caeiro",
+    "prevista": "campos"
+   },
+   {
+    "id": "q09",
+    "q": "quando eu morrer o mundo continua exactamente como está",
+    "esperada": "caeiro",
+    "prevista": "reis"
+   },
+   {
+    "id": "q12",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+    "esperada": "campos",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q21",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+    "esperada": "reis",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q24",
+    "q": "os deuses não se importam connosco e isso é um alívio",
+    "esperada": "reis",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q26",
+    "q": "sentar-me à beira do rio e deixar passar o que passa",
+    "esperada": "reis",
+    "prevista": "caeiro"
+   },
+   {
+    "id": "q29",
+    "q": "nada fica de nós depois, nem das obras que deixamos",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q30",
+    "q": "beber o vinho sem pensar no fim da taça",
+    "esperada": "reis",
+    "prevista": "ortonimo"
+   },
+   {
+    "id": "q32",
+    "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+    "esperada": "ortonimo",
+    "prevista": "campos"
+   },
+   {
+    "id": "q33",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+    "esperada": "ortonimo",
+    "prevista": "campos"
+   }
+  ],
+  "parede_mediana_s": 1.23,
+  "prefill_mediana_s": 0.89,
+  "prefill_tok_mediana": 331.0,
+  "sem_voz_reconhecida": []
+ }
+}

@@ -1,0 +1,92 @@
+{
+ "adversarial": {
+  "llm 7b": {
+   "primaria": "8/12",
+   "primaria_pct": 0.667,
+   "aceitavel": "11/12",
+   "aceitavel_pct": 0.917,
+   "controlos": "2/2",
+   "previstas": [
+    "caeiro",
+    "caeiro",
+    "campos",
+    "ortonimo",
+    "campos",
+    "ortonimo",
+    "caeiro",
+    "caeiro",
+    "campos",
+    "caeiro",
+    "ortonimo",
+    "ortonimo"
+   ],
+   "parede_mediana_s": 0.89
+  },
+  "centroide": {
+   "primaria": "4/12",
+   "primaria_pct": 0.333,
+   "aceitavel": "8/12",
+   "aceitavel_pct": 0.667,
+   "controlos": "2/2",
+   "previstas": [
+    "caeiro",
+    "caeiro",
+    "caeiro",
+    "caeiro",
+    "caeiro",
+    "ortonimo",
+    "caeiro",
+    "caeiro",
+    "campos",
+    "caeiro",
+    "ortonimo",
+    "caeiro"
+   ]
+  }
+ },
+ "ablacao": {
+  "llm 7b": {
+   "antes": "29/40",
+   "depois": "28/40",
+   "queda": 1,
+   "nas_15_tocadas": {
+    "antes": "12/15",
+    "depois": "11/15",
+    "queda": 1
+   },
+   "perdidas": [
+    "q19",
+    "q39",
+    "q40"
+   ],
+   "ganhas": [
+    "q24",
+    "q30"
+   ],
+   "parede_mediana_s": 1.15
+  },
+  "centroide": {
+   "antes": "18/40",
+   "depois": "17/40",
+   "queda": 1,
+   "nas_15_tocadas": {
+    "antes": "6/15",
+    "depois": "5/15",
+    "queda": 1
+   },
+   "perdidas": [
+    "q24",
+    "q26"
+   ],
+   "ganhas": [
+    "q39"
+   ]
+  }
+ },
+ "linhas_de_base": {
+  "acaso_4_classes": 0.25,
+  "sempre_ortonimo_40": 0.25,
+  "sempre_ortonimo_12_primaria": 0.25,
+  "sempre_ortonimo_12_aceitavel": 0.583
+ }
+}

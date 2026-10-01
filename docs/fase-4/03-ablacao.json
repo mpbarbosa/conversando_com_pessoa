@@ -1,0 +1,26 @@
+{
+ "_meta": {
+  "passo": "A3.2 da Fase 4",
+  "o_que_mede": "Quanto da exactidão do roteador vem de a pergunta DIZER a voz, em vez de o roteador a saber. Cada substituição troca um substantivo-assinatura por uma paráfrase neutra que preserva o sentido da pergunta.",
+  "criterio": "Substitui-se o que é imagem privativa de uma voz no corpus (rebanho, máquinas, vinho, deuses, mar). NÃO se substitui o que é o conteúdo da própria pergunta: em q07 «pensar estraga o que se está a ver», os verbos «pensar» e «ver» são a assinatura de Caeiro E são a pergunta — tirá-los não deixa pergunta nenhuma.",
+  "honestidade": "A lista de assinaturas é minha e é discutível. Fica aqui item por item para que a discordância seja sobre uma substituição concreta, e não sobre o resultado agregado.",
+  "nao_tocadas": "26 das 40. A infância (q15, q22, q38) é partilhada por Campos e pelo ortónimo, logo não é assinatura de uma voz."
+ },
+ "substituicoes": [
+  {"id": "q03", "voz": "caeiro", "de": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela", "para": "olho aquilo sem sentir nada por ele, e é isso que me aproxima dele", "assinatura": "paisagem"},
+  {"id": "q08", "voz": "caeiro", "de": "um rebanho a passar numa encosta, e nada mais do que isso", "para": "algo a passar ao longe, e nada mais do que isso", "assinatura": "rebanho, encosta"},
+  {"id": "q11", "voz": "campos", "de": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe", "para": "ver algo a chegar de manhã enche-me de ânsia de ir para longe", "assinatura": "embarcação"},
+  {"id": "q13", "voz": "campos", "de": "o ruído das máquinas dá-me uma espécie de febre", "para": "o ruído em volta dá-me uma espécie de febre", "assinatura": "máquinas"},
+  {"id": "q17", "voz": "campos", "de": "a cidade acorda e eu não consigo acompanhar", "para": "tudo acorda em volta e eu não consigo acompanhar", "assinatura": "cidade"},
+  {"id": "q18", "voz": "campos", "de": "náusea de viajar, e ao mesmo tempo necessidade de partir", "para": "enjoo de me deslocar, e ao mesmo tempo necessidade de ir", "assinatura": "náusea"},
+  {"id": "q19", "voz": "campos", "de": "fumo e olho pela janela e nada tem remédio", "para": "espero e olho para fora e nada tem remédio", "assinatura": "fumo, janela (Tabacaria)"},
+  {"id": "q23", "voz": "reis", "de": "colher as flores antes que murchem, sem lhes pedir mais nada", "para": "aproveitar as coisas antes que acabem, sem lhes pedir mais nada", "assinatura": "colher as flores"},
+  {"id": "q24", "voz": "reis", "de": "os deuses não se importam connosco e isso é um alívio", "para": "aquilo que nos governa não se importa connosco e isso é um alívio", "assinatura": "os deuses"},
+  {"id": "q26", "voz": "reis", "de": "sentar-me à beira do rio e deixar passar o que passa", "para": "ficar num sítio calmo e deixar passar o que passa", "assinatura": "à beira do rio"},
+  {"id": "q30", "voz": "reis", "de": "beber o vinho sem pensar no fim da taça", "para": "aproveitar o que é bom sem pensar no fim", "assinatura": "vinho, taça"},
+  {"id": "q31", "voz": "ortonimo", "de": "quando acordamos, o sítio prometido desaparece e fica só água", "para": "quando acordamos, o sítio prometido desaparece e fica só o que já havia", "assinatura": "água (Ilhas Afortunadas)"},
+  {"id": "q36", "voz": "ortonimo", "de": "finjo tão bem que já não sei o que sinto de verdade", "para": "disfarço tão bem que já não sei o que sinto de verdade", "assinatura": "fingir (o poeta é um fingidor)"},
+  {"id": "q39", "voz": "ortonimo", "de": "o mar e o destino de um povo que partiu e não voltou", "para": "o destino de um povo que partiu e não voltou", "assinatura": "o mar (Mensagem)"},
+  {"id": "q40", "voz": "ortonimo", "de": "há um mistério nas coisas que nunca se deixa dizer", "para": "há algo nas coisas que nunca se deixa dizer", "assinatura": "mistério"}
+ ]
+}

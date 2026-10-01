@@ -111,3 +111,66 @@ def test_retem_enquanto_nao_houver_linha_completa():
     texto, a_reter = _limpar_inicio("sem mudança de linha ainda", PERGUNTA)
     assert a_reter
     assert texto == "sem mudança de linha ainda"
+
+
+# --- roteador no CLI — Passo A4 da Fase 4 ---------------------------------
+#
+# O que importa aqui não é a exactidão (medida em `docs/fase-4/`), é que o
+# roteador **propõe e não decide**: a proposta aparece antes de gerar, e um
+# comando de voz desliga-o.
+
+from src.cli import COMANDOS_AUTO, _propor
+from src.generation.base import Resposta
+
+
+class _GeradorDeVoz:
+    def __init__(self, texto: str):
+        self.texto = texto
+
+    @property
+    def nome(self) -> str:
+        return "falso"
+
+    @property
+    def janela_contexto(self) -> int:
+        return 4096
+
+    def gerar(self, system, user, *, max_tokens=220, temperatura=None):
+        return Resposta(texto=self.texto, prefill_s=0.1, decode_s=0.1,
+                        prefill_tokens=331, decode_tokens=2)
+
+    def gerar_em_fluxo(self, system, user, *, max_tokens=220):
+        raise NotImplementedError
+
+
+class _PipelineFalso:
+    def __init__(self, texto: str):
+        self.gerador = _GeradorDeVoz(texto)
+
+
+def test_comandos_auto_ligam_e_desligam():
+    assert COMANDOS_AUTO == {"/auto", "/manual"}
+
+
+def test_propor_usa_a_voz_do_roteador(capsys):
+    voz = _propor(_PipelineFalso("campos"), "o ruído das máquinas",
+                  Voice.ORTONIMO)
+    assert voz is Voice.CAMPOS
+    saida = capsys.readouterr().out
+    assert "Álvaro de Campos" in saida
+
+
+def test_a_proposta_nomeia_os_comandos_de_override(capsys):
+    """A 72% de acerto, o que separa «custa uma tecla» de «custa 30 s» é o
+    utilizador ver como mudar enquanto a proposta ainda não gerou nada."""
+    _propor(_PipelineFalso("reis"), "beber sem pensar no fim", Voice.ORTONIMO)
+    saida = capsys.readouterr().out
+    for comando in ("/caeiro", "/campos", "/reis", "/pessoa"):
+        assert comando in saida
+
+
+def test_propor_mantem_a_voz_corrente_quando_o_roteador_nao_sabe(capsys):
+    voz = _propor(_PipelineFalso("não tenho a certeza"), "qualquer coisa",
+                  Voice.CAEIRO)
+    assert voz is Voice.CAEIRO
+    assert "sem opinião" in capsys.readouterr().out

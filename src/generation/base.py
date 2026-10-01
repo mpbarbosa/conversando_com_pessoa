@@ -51,8 +51,13 @@ class Generator(Protocol):
     @property
     def janela_contexto(self) -> int: ...
 
-    def gerar(self, system: str, user: str, *, max_tokens: int = ...) -> Resposta:
-        """Gera de uma vez. Usar só quando não há interface a mostrar o texto."""
+    def gerar(self, system: str, user: str, *, max_tokens: int = ...,
+              temperatura: float | None = ...) -> Resposta:
+        """Gera de uma vez. Usar só quando não há interface a mostrar o texto.
+
+        `temperatura` sobrepõe-se à do backend. Existe para o roteador da Fase
+        4, que precisa de determinismo onde o verso precisa de variedade.
+        """
         ...
 
     def gerar_em_fluxo(self, system: str, user: str, *,

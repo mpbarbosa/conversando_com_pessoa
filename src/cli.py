@@ -2,8 +2,13 @@
 
 ## Decisões de interface, e de onde vêm
 
-**Seleção de voz explícita**, não automática. É grátis e nunca erra; o roteador
-automático fica para a Fase 4. `/caeiro`, `/campos`, `/reis`, `/pessoa`.
+**Seleção de voz explícita por omissão**, com o roteador da Fase 4 em `/auto`.
+A explícita é grátis e nunca erra; o roteador acerta 72% contra 25% do «ortónimo
+sempre» (medido em `docs/fase-4/`) e custa **+0,5 s por pergunta** depois de
+aquecido, mais ~20 s uma vez — ver `_aquecer_roteador`. Daí ser opcional, **propor em
+vez de decidir**, e qualquer `/caeiro` o desligar: a 72%, uma em cada quatro
+perguntas iria para a voz errada, e em silêncio isso custaria ~30 s de espera
+por uma resposta que ninguém pediu.
 
 **Streaming sempre.** A Fase 1 Passo 5 mediu ~19 s de prefill antes do primeiro
 verso e ~23 s de decode. Sem streaming são 42 s de nada; com streaming são 19 s
@@ -65,6 +70,11 @@ COMANDOS_VOZ = {
 
 COMANDOS_IDIOMA = {"/pt": Lang.PT, "/en": Lang.EN,
                    "/portugues": Lang.PT, "/ingles": Lang.EN}
+
+#: Liga e desliga o roteador. Só em português: o `SYSTEM` do roteador está em
+#: português e as quatro vozes roteáveis também, logo propor em inglês seria
+#: propor fora do que foi medido.
+COMANDOS_AUTO = {"/auto", "/manual"}
 SAIR = {"/sair", "/exit", "/quit", "sair"}
 
 VERDE, CINZA, NEGRITO, FIM = "\033[32m", "\033[90m", "\033[1m", "\033[0m"
@@ -137,6 +147,8 @@ def main(
     idioma: str = typer.Option("pt", "--idioma", "-i",
                                help="língua: pt ou en"),
     modelo: str = typer.Option(None, "--modelo", "-m", help="modelo do Ollama"),
+    auto: bool = typer.Option(False, "--auto",
+                              help="roteador propõe a voz a cada pergunta"),
     verboso: bool = typer.Option(False, "--verboso", help="mostra progresso de construção"),
 ) -> None:
     chave = f"/{voz.lower().lstrip('/')}"
@@ -160,14 +172,21 @@ def main(
     typer.secho("PessoaBot", bold=True)
     typer.echo(_cinza(f"{n_chunks} chunks · {pipeline.gerador.nome}"))
     typer.echo(_cinza("vozes: /caeiro /campos /reis /pessoa /search · língua: /pt /en"))
+    typer.echo(_cinza("/auto para o roteador propor a voz "
+                      "(72% de acerto, +0,5 s por pergunta)"))
     typer.echo(_cinza("/sair para sair"))
     typer.echo(_cinza("uma resposta leva ~30 s em CPU; os versos aparecem à medida"))
     typer.echo()
+
+    if auto:
+        _aquecer_roteador(pipeline)
 
     while True:
         try:
             etiqueta = (actual.value if lingua is Lang.PT
                         else f"{actual.value}/{lingua.value}")
+            if auto:
+                etiqueta = f"auto·{etiqueta}"
             linha = input(f"{NEGRITO}você{FIM} [{etiqueta}]> ").strip()
         except (EOFError, KeyboardInterrupt):
             typer.echo("\nAdeus, como quem se despede de si mesmo.")
@@ -181,7 +200,25 @@ def main(
             actual = COMANDOS_VOZ[linha.lower()]
             lingua = _ajustar_lingua(actual, lingua)
             p = persona(actual, lingua)
-            typer.echo(_cinza(f"voz: {p.nome} ({p.idioma.value})"))
+            # Pedir uma voz é override absoluto: desliga o roteador. Se não
+            # desligasse, a pergunta seguinte desfazia a escolha em silêncio.
+            desligou = auto
+            auto = False
+            typer.echo(_cinza(f"voz: {p.nome} ({p.idioma.value})"
+                              + (" · roteador desligado" if desligou else "")))
+            continue
+        if linha.lower() in COMANDOS_AUTO:
+            auto, lingua_antes = linha.lower() == "/auto", lingua
+            if auto and lingua_antes is not Lang.PT:
+                auto = False
+                typer.echo(_cinza("  o roteador só foi medido em português; "
+                                  "use /pt primeiro"))
+            elif auto:
+                typer.echo(_cinza("roteador ligado: propõe a voz e mostra-a "
+                                  "antes de gerar"))
+                _aquecer_roteador(pipeline)
+            else:
+                typer.echo(_cinza("roteador desligado"))
             continue
         if linha.lower() in COMANDOS_IDIOMA:
             pedida = COMANDOS_IDIOMA[linha.lower()]
@@ -193,7 +230,10 @@ def main(
             typer.echo(_cinza(f"comando desconhecido: {linha}"))
             continue
 
-        _responder(pipeline, linha, actual, lingua)
+        voz_da_vez = actual
+        if auto:
+            voz_da_vez = _propor(pipeline, linha, actual)
+        _responder(pipeline, linha, voz_da_vez, lingua)
 
 
 def _ajustar_lingua(voz: Voice, pedida: Lang, avisar: bool = False) -> Lang:
@@ -216,6 +256,46 @@ def _ajustar_lingua(voz: Voice, pedida: Lang, avisar: bool = False) -> Lang:
                                   f"{', '.join(l.value for l in disponiveis)}"))
             return disponiveis[0]
     return pedida
+
+
+def _aquecer_roteador(pipeline: Pipeline) -> None:
+    """Paga o prefill a frio do roteador aqui, e não na 1.ª pergunta.
+
+    Medido a correr o CLI: a primeira pergunta em `/auto` custou 20,0 s de
+    roteamento — o prefill dos 331 tokens do `SYSTEM` a 16,5 tok/s. Do 2.º turno
+    em diante são 0,5 s, porque o Ollama mantém os dois prefixos em cache
+    (Passo A4b). O custo é inevitável; cair sem aviso no meio de um poema é que
+    não.
+    """
+    from .roteador import aquecer
+
+    typer.echo(_cinza("  a aquecer o roteador (~20 s, uma vez)..."), nl=False)
+    s = aquecer(pipeline.gerador)
+    typer.echo(_cinza(f" {s:.1f} s"))
+
+
+def _propor(pipeline: Pipeline, pergunta: str, corrente: Voice) -> Voice:
+    """Mostra a proposta do roteador e devolve a voz a usar neste turno.
+
+    Mostra **antes** de gerar, e nomeia os comandos de override na mesma linha:
+    a 72% de acerto, uma pergunta em cada quatro vai para a voz errada, e o que
+    separa «custa uma tecla» de «custa 30 s» é o utilizador ver a proposta
+    enquanto ela ainda não produziu nada.
+
+    `voz is None` — Ollama em baixo, ou o modelo a divagar — mantém a voz
+    corrente. Inventar uma seria pior que não propor.
+    """
+    from .roteador import rotear
+
+    p = rotear(pergunta, pipeline.gerador)
+    if not p.decidiu:
+        typer.echo(_cinza(f"  roteador sem opinião ({p.segundos:.1f} s); "
+                          f"mantenho {persona(corrente).nome}"))
+        return corrente
+    nome = persona(p.voz).nome
+    typer.echo(_cinza(f"  voz proposta: {nome} ({p.segundos:.1f} s) · "
+                      f"/caeiro /campos /reis /pessoa para fixar outra"))
+    return p.voz
 
 
 def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,

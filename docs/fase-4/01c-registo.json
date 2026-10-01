@@ -1,0 +1,63 @@
+{
+ "sim_media_por_voz": {
+  "caeiro": {
+   "caeiro": 0.8071,
+   "campos": 0.8062,
+   "reis": 0.8045,
+   "ortonimo": 0.8035
+  },
+  "campos": {
+   "caeiro": 0.8034,
+   "campos": 0.8075,
+   "reis": 0.801,
+   "ortonimo": 0.8017
+  },
+  "reis": {
+   "caeiro": 0.8044,
+   "campos": 0.8053,
+   "reis": 0.8059,
+   "ortonimo": 0.801
+  },
+  "ortonimo": {
+   "caeiro": 0.8037,
+   "campos": 0.8038,
+   "reis": 0.8008,
+   "ortonimo": 0.8027
+  }
+ },
+ "variantes": {
+  "poema -> centróide": {
+   "exactidao": 0.425,
+   "certos": 34,
+   "n": 80,
+   "por_voz": {
+    "caeiro": 0.65,
+    "campos": 0.8,
+    "reis": 0.2,
+    "ortonimo": 0.05
+   }
+  },
+  "poema -> probe": {
+   "exactidao": 0.463,
+   "certos": 37,
+   "n": 80,
+   "por_voz": {
+    "caeiro": 0.75,
+    "campos": 0.75,
+    "reis": 0.3,
+    "ortonimo": 0.05
+   }
+  },
+  "pergunta -> centróide": {
+   "exactidao": 0.45,
+   "certos": 18,
+   "n": 40,
+   "por_voz": {
+    "caeiro": 0.9,
+    "campos": 0.6,
+    "reis": 0.2,
+    "ortonimo": 0.1
+   }
+  }
+ }
+}

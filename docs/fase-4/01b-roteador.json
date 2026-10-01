@@ -1,0 +1,503 @@
+{
+ "coerencia": {
+  "caeiro": {
+   "n": 127,
+   "coerencia": 0.9339,
+   "sim_ao_centro": 0.9803
+  },
+  "campos": {
+   "n": 455,
+   "coerencia": 0.9381,
+   "sim_ao_centro": 0.9841
+  },
+  "reis": {
+   "n": 246,
+   "coerencia": 0.9386,
+   "sim_ao_centro": 0.9817
+  },
+  "ortonimo": {
+   "n": 1250,
+   "coerencia": 0.9359,
+   "sim_ao_centro": 0.9969
+  }
+ },
+ "variantes": {
+  "centrado": {
+   "exactidao": 0.325,
+   "certos": 13,
+   "n": 40,
+   "por_voz": {
+    "caeiro": 0.9,
+    "campos": 0.3,
+    "reis": 0.1,
+    "ortonimo": 0.0
+   },
+   "erros": [
+    {
+     "id": "q08",
+     "q": "um rebanho a passar numa encosta, e nada mais do que isso",
+     "esperada": "caeiro",
+     "prevista": "campos"
+    },
+    {
+     "id": "q12",
+     "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q13",
+     "q": "o ruído das máquinas dá-me uma espécie de febre",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q14",
+     "q": "estou cansado de ser tanta coisa ao mesmo tempo",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q15",
+     "q": "a infância está perdida e isso dói mais que tudo",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q16",
+     "q": "queria ser todas as pessoas e todos os lugares de uma só vez",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q19",
+     "q": "fumo e olho pela janela e nada tem remédio",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q20",
+     "q": "sou uma série de sensações sem nada por baixo que as una",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q21",
+     "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q22",
+     "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q23",
+     "q": "colher as flores antes que murchem, sem lhes pedir mais nada",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q25",
+     "q": "não vale a pena querer mais do que o que cabe num dia",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q26",
+     "q": "sentar-me à beira do rio e deixar passar o que passa",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q27",
+     "q": "o destino é o mesmo para quem o procura e para quem o espera",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q28",
+     "q": "ser senhor de si é mais do que ser senhor do mundo",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q29",
+     "q": "nada fica de nós depois, nem das obras que deixamos",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q30",
+     "q": "beber o vinho sem pensar no fim da taça",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q31",
+     "q": "quando acordamos, o sítio prometido desaparece e fica só água",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q32",
+     "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q33",
+     "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q34",
+     "q": "ofereço-lhe o meu afecto e ela nem repara",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q35",
+     "q": "o que escrevo deixa de ser meu no momento em que o escrevo",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q36",
+     "q": "finjo tão bem que já não sei o que sinto de verdade",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q37",
+     "q": "há em mim mais do que uma pessoa e nenhuma é a verdadeira",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q38",
+     "q": "lembro-me de ser criança e não reconheço quem era",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q39",
+     "q": "o mar e o destino de um povo que partiu e não voltou",
+     "esperada": "ortonimo",
+     "prevista": "campos"
+    },
+    {
+     "id": "q40",
+     "q": "há um mistério nas coisas que nunca se deixa dizer",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    }
+   ]
+  },
+  "probe": {
+   "exactidao": 0.425,
+   "certos": 17,
+   "n": 40,
+   "por_voz": {
+    "caeiro": 0.8,
+    "campos": 0.6,
+    "reis": 0.2,
+    "ortonimo": 0.1
+   },
+   "erros": [
+    {
+     "id": "q01",
+     "q": "por que é que as pessoas acham melancólico o fim do dia?",
+     "esperada": "caeiro",
+     "prevista": "campos"
+    },
+    {
+     "id": "q08",
+     "q": "um rebanho a passar numa encosta, e nada mais do que isso",
+     "esperada": "caeiro",
+     "prevista": "campos"
+    },
+    {
+     "id": "q13",
+     "q": "o ruído das máquinas dá-me uma espécie de febre",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q15",
+     "q": "a infância está perdida e isso dói mais que tudo",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q19",
+     "q": "fumo e olho pela janela e nada tem remédio",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q20",
+     "q": "sou uma série de sensações sem nada por baixo que as una",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q21",
+     "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q22",
+     "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q23",
+     "q": "colher as flores antes que murchem, sem lhes pedir mais nada",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q25",
+     "q": "não vale a pena querer mais do que o que cabe num dia",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q27",
+     "q": "o destino é o mesmo para quem o procura e para quem o espera",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q28",
+     "q": "ser senhor de si é mais do que ser senhor do mundo",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q29",
+     "q": "nada fica de nós depois, nem das obras que deixamos",
+     "esperada": "reis",
+     "prevista": "campos"
+    },
+    {
+     "id": "q30",
+     "q": "beber o vinho sem pensar no fim da taça",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q31",
+     "q": "quando acordamos, o sítio prometido desaparece e fica só água",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q32",
+     "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q33",
+     "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q34",
+     "q": "ofereço-lhe o meu afecto e ela nem repara",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q35",
+     "q": "o que escrevo deixa de ser meu no momento em que o escrevo",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q36",
+     "q": "finjo tão bem que já não sei o que sinto de verdade",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q37",
+     "q": "há em mim mais do que uma pessoa e nenhuma é a verdadeira",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q38",
+     "q": "lembro-me de ser criança e não reconheço quem era",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q40",
+     "q": "há um mistério nas coisas que nunca se deixa dizer",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    }
+   ]
+  },
+  "probe+centrado": {
+   "exactidao": 0.425,
+   "certos": 17,
+   "n": 40,
+   "por_voz": {
+    "caeiro": 0.7,
+    "campos": 0.3,
+    "reis": 0.2,
+    "ortonimo": 0.5
+   },
+   "erros": [
+    {
+     "id": "q01",
+     "q": "por que é que as pessoas acham melancólico o fim do dia?",
+     "esperada": "caeiro",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q07",
+     "q": "pensar estraga o que se está a ver",
+     "esperada": "caeiro",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q08",
+     "q": "um rebanho a passar numa encosta, e nada mais do que isso",
+     "esperada": "caeiro",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q12",
+     "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+     "esperada": "campos",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q13",
+     "q": "o ruído das máquinas dá-me uma espécie de febre",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q14",
+     "q": "estou cansado de ser tanta coisa ao mesmo tempo",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q15",
+     "q": "a infância está perdida e isso dói mais que tudo",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q17",
+     "q": "a cidade acorda e eu não consigo acompanhar",
+     "esperada": "campos",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q19",
+     "q": "fumo e olho pela janela e nada tem remédio",
+     "esperada": "campos",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q20",
+     "q": "sou uma série de sensações sem nada por baixo que as una",
+     "esperada": "campos",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q21",
+     "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+     "esperada": "reis",
+     "prevista": "campos"
+    },
+    {
+     "id": "q22",
+     "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q23",
+     "q": "colher as flores antes que murchem, sem lhes pedir mais nada",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q25",
+     "q": "não vale a pena querer mais do que o que cabe num dia",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q27",
+     "q": "o destino é o mesmo para quem o procura e para quem o espera",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q28",
+     "q": "ser senhor de si é mais do que ser senhor do mundo",
+     "esperada": "reis",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q29",
+     "q": "nada fica de nós depois, nem das obras que deixamos",
+     "esperada": "reis",
+     "prevista": "campos"
+    },
+    {
+     "id": "q30",
+     "q": "beber o vinho sem pensar no fim da taça",
+     "esperada": "reis",
+     "prevista": "ortonimo"
+    },
+    {
+     "id": "q32",
+     "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q34",
+     "q": "ofereço-lhe o meu afecto e ela nem repara",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q35",
+     "q": "o que escrevo deixa de ser meu no momento em que o escrevo",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q36",
+     "q": "finjo tão bem que já não sei o que sinto de verdade",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    },
+    {
+     "id": "q38",
+     "q": "lembro-me de ser criança e não reconheço quem era",
+     "esperada": "ortonimo",
+     "prevista": "caeiro"
+    }
+   ]
+  }
+ }
+}

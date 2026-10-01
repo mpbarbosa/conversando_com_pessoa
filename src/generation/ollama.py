@@ -67,23 +67,33 @@ class OllamaGenerator:
 
     # --- plumbing -----------------------------------------------------------
 
-    def _opcoes(self, max_tokens: int) -> dict:
+    def _opcoes(self, max_tokens: int,
+                temperatura: float | None = None) -> dict:
+        """Opções de amostragem.
+
+        `temperatura` existe por causa do roteador da Fase 4: um classificador
+        tem de ser **determinista** — a mesma pergunta não pode dar vozes
+        diferentes em duas sessões — e os 0,9 daqui foram medidos às cegas na
+        Fase 0 para **verso**, que é o problema oposto.
+        """
+        t = TEMPERATURE if temperatura is None else temperatura
         return {
             "num_thread": self.num_thread,
             "num_predict": max_tokens,
-            "temperature": TEMPERATURE,
-            "top_p": TOP_P,
+            "temperature": t,
+            "top_p": 1.0 if t == 0.0 else TOP_P,
             "repeat_penalty": REPEAT_PENALTY,
         }
 
-    def _corpo(self, system: str, user: str, max_tokens: int, fluxo: bool) -> dict:
+    def _corpo(self, system: str, user: str, max_tokens: int, fluxo: bool,
+               temperatura: float | None = None) -> dict:
         return {
             "model": self.modelo,
             "stream": fluxo,
             "keep_alive": KEEP_ALIVE,
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
-            "options": self._opcoes(max_tokens),
+            "options": self._opcoes(max_tokens, temperatura),
         }
 
     @staticmethod
@@ -124,8 +134,10 @@ class OllamaGenerator:
     # --- API ----------------------------------------------------------------
 
     def gerar(self, system: str, user: str, *,
-              max_tokens: int = NUM_PREDICT) -> Resposta:
-        r = self._post(self._corpo(system, user, max_tokens, False), False)
+              max_tokens: int = NUM_PREDICT,
+              temperatura: float | None = None) -> Resposta:
+        r = self._post(self._corpo(system, user, max_tokens, False,
+                                   temperatura), False)
         d = r.json()
         return self._resposta(d.get("message", {}).get("content", ""), d)
 

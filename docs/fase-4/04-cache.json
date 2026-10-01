@@ -1,0 +1,65 @@
+{
+ "sys_roteador_tok": null,
+ "sys_persona_tok": null,
+ "so_gerador": [
+  {
+   "prefill_s": 0.72,
+   "prefill_tok": 442,
+   "decode_s": 10.1
+  },
+  {
+   "prefill_s": 0.66,
+   "prefill_tok": 441,
+   "decode_s": 9.87
+  },
+  {
+   "prefill_s": 0.57,
+   "prefill_tok": 438,
+   "decode_s": 9.6
+  }
+ ],
+ "alternado": [
+  {
+   "roteador": {
+    "prefill_s": 0.59,
+    "prefill_tok": 325,
+    "decode_s": 0.28
+   },
+   "gerador": {
+    "prefill_s": 0.81,
+    "prefill_tok": 442,
+    "decode_s": 8.77
+   }
+  },
+  {
+   "roteador": {
+    "prefill_s": 0.69,
+    "prefill_tok": 324,
+    "decode_s": 0.26
+   },
+   "gerador": {
+    "prefill_s": 0.67,
+    "prefill_tok": 441,
+    "decode_s": 8.0
+   }
+  },
+  {
+   "roteador": {
+    "prefill_s": 0.51,
+    "prefill_tok": 321,
+    "decode_s": 0.28
+   },
+   "gerador": {
+    "prefill_s": 0.52,
+    "prefill_tok": 438,
+    "decode_s": 8.33
+   }
+  }
+ ],
+ "resumo": {
+  "gerador_sozinho_s": 0.57,
+  "gerador_alternado_s": 0.52,
+  "roteador_alternado_s": 0.51,
+  "custo_auto_s": 0.46
+ }
+}
