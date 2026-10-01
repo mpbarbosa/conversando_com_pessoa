@@ -1,0 +1,59 @@
+{
+ "_meta": {
+  "n": 12,
+  "passo": "A3.1 da Fase 4",
+  "pre_registado": "Este ficheiro foi escrito e gravado ANTES de qualquer roteador correr sobre ele. É a defesa contra o que invalidaria a medição: eu já vi os 11 erros do roteador de 7B nas 40 perguntas originais, logo etiquetar essas a posteriori seria corrigir o exame depois de ver as respostas.",
+  "porque": "As 40 perguntas de 08-perguntas.json foram escritas PARA uma voz, 10 por voz, e trazem os indícios dessa voz no vocabulário. Estas 12 são escritas sem voz em mente, no registo chão de quem pergunta, e sem substantivo-assinatura (nada de Lídia, máquinas, rebanho).",
+  "etiqueta": "`aceitaveis` é o CONJUNTO de vozes que responderiam bem — §2.2 da FASE-4.md. `primaria` é a que eu escolheria se tivesse de escolher uma. Duas perguntas têm conjunto de tamanho 1, de propósito, como controlo: se um roteador falha nessas, falha no fácil.",
+  "aviso": "O autor das perguntas e o autor das etiquetas são a mesma pessoa, e essa pessoa não é especialista em Pessoa. Isto mede a concordância do roteador com um leitor informado, não com a crítica pessoana."
+ },
+ "perguntas": [
+  {"id": "a01", "q": "o que faço com o tempo que me sobra?",
+   "primaria": "reis", "aceitaveis": ["reis", "caeiro"],
+   "nota": "a medida e o gozo breve do presente são de Reis; não fazer nada de especial com ele é de Caeiro"},
+
+  {"id": "a02", "q": "vale a pena ter esperança?",
+   "primaria": "reis", "aceitaveis": ["reis", "ortonimo"],
+   "nota": "Reis responde com aceitação do destino; o ortónimo com o sonho que não chega"},
+
+  {"id": "a03", "q": "sinto-me sozinho no meio de muita gente",
+   "primaria": "campos", "aceitaveis": ["campos", "ortonimo"],
+   "nota": "a multidão é de Campos, a solidão de si é dos dois"},
+
+  {"id": "a04", "q": "não sei se o que sinto é verdadeiro",
+   "primaria": "ortonimo", "aceitaveis": ["ortonimo", "campos"],
+   "nota": "«o poeta é um fingidor» é do ortónimo; Campos duvida do próprio excesso"},
+
+  {"id": "a05", "q": "porque é que me cansa tanto decidir?",
+   "primaria": "campos", "aceitaveis": ["campos", "reis"],
+   "nota": "o cansaço de ser é de Campos; a recusa de querer demais é de Reis"},
+
+  {"id": "a06", "q": "o que resta de uma pessoa depois de morrer?",
+   "primaria": "reis", "aceitaveis": ["reis", "ortonimo"],
+   "nota": "Reis encara a morte com calma clássica; o ortónimo com mistério"},
+
+  {"id": "a07", "q": "devia preocupar-me com o futuro?",
+   "primaria": "reis", "aceitaveis": ["reis", "caeiro"],
+   "nota": "Reis aconselha a medida; Caeiro nem põe a pergunta"},
+
+  {"id": "a08", "q": "olho para o céu e não sinto nada de especial",
+   "primaria": "caeiro", "aceitaveis": ["caeiro"],
+   "nota": "CONTROLO: recusar o significado oculto do que se vê é só de Caeiro"},
+
+  {"id": "a09", "q": "queria estar em todos os lugares ao mesmo tempo",
+   "primaria": "campos", "aceitaveis": ["campos"],
+   "nota": "CONTROLO: a ânsia de ser tudo e estar em tudo é só de Campos"},
+
+  {"id": "a10", "q": "há algo por trás do que vemos?",
+   "primaria": "caeiro", "aceitaveis": ["caeiro", "ortonimo"],
+   "nota": "Caeiro responde «não»; o ortónimo responde «há, e não se diz». As duas são respostas"},
+
+  {"id": "a11", "q": "lembro-me de quem fui e já não sou",
+   "primaria": "ortonimo", "aceitaveis": ["ortonimo", "campos"],
+   "nota": "a infância perdida é dos dois, e em Campos é ferida aberta"},
+
+  {"id": "a12", "q": "é melhor saber ou não saber?",
+   "primaria": "ortonimo", "aceitaveis": ["ortonimo", "caeiro", "reis"],
+   "nota": "três respostas legítimas e diferentes: o mistério, a recusa de pensar, a medida"}
+ ]
+}
