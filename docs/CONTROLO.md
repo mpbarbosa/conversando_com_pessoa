@@ -106,6 +106,7 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 9 | `poem_12`/`poem_619` não são variantes | **São**: contenção. Diagnostiquei lendo 320 caracteres | §Passo 2 |
 | 10 | A extrapolação de rerank falhou por atenção quadrática | Explicação **errada**, tirada de resultados parciais. A estimativa era optimista por 1,9x | `FASE-3-PASSO-1.md` |
 | 11 | Esta máquina não tem GPU utilizável | **Tem**: Intel Arc por Vulkan. Concluí de `nvidia-smi` ausente, vi o `lspci` dizer «Intel Graphics» e não verifiquei | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) |
+| 12 | A guarda de idioma estava com o limiar alto | **Não estava**: contra o corpus, 0,12 rejeita 3 de 1906 (0,16%). O errado era o **instrumento** — media registo, não língua | secção abaixo |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -118,6 +119,9 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | Limpeza de título apagava 3 poemas | «Vou atirar uma bomba ao destino.» — título **é** o poema |
 | Sem pausa de arrefecimento no bench de rerank | Variância de 6x na mesma configuração |
 | Jaccard de n-gramas para variantes | Não separa variantes de poemas distintos |
+| Fracção de stopwords tomada por teste de língua | Verso telegráfico dado por língua errada: 38 s de regeneração por uma resposta boa |
+| `fracao_lingua` caindo no pt quando a língua é `?` | 4 poemas reais dados por língua errada |
+| Buffer do CLI sem `remover_preambulo` | O ecrã mostrava mais do que o veredicto julgara |
 
 ---
 
@@ -419,3 +423,80 @@ desenho que ninguém considerou, **prefill na iGPU e decode na CPU**
 (`llama.cpp --n-gpu-layers` parcial), que é onde os dois números apontam.
 
 Detalhe e reprodução: [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md).
+
+
+---
+
+## Correcção: a guarda de idioma media registo, não língua
+
+Observado a correr o chatbot, à pergunta «qual é o futuro de portugal?». O
+modelo respondeu isto, e a guarda rejeitou-o por «idioma improvável (fracção pt
+0,077)», custando 38 s de nova geração:
+
+> os passos ecoam / silêncio envolve / vogais cantam / pés descalços ligam terra
+> ar / brotam esperanças / raízes aprofundam
+
+É português inequívoco. O que lá não há são palavras funcionais: o registo é
+telegráfico, sem artigos nem preposições.
+
+**O meu primeiro diagnóstico — «o limiar está alto» — estava errado, e a medição
+diz porquê.** Contra o corpus, 0,12 rejeita 3 de 1906 poemas portugueses
+(0,16%), e um desses três é francês. Os poemas reais têm mediana 0,385 e p5
+0,267. O limiar está bem posto; o instrumento é que mede a coisa errada.
+
+### As três perguntas, em ordem de custo
+
+| | pergunta | medida que a sustenta |
+|---|---|---|
+| 1 | há stopwords em abundância? | mediana 0,385 (pt) e 0,375 (en); resolve 99,8% dos casos sem subprocessos |
+| 2 | outra língua pontua mais que a pedida? | pt dá 0,385 na própria e 0,048 na alheia; en 0,375 e 0,035. Em 2058 poemas, **zero** pontuam mais na língua errada |
+| 3 | o dicionário reconhece o vocabulário? | **a única que não depende do registo** |
+
+A terceira é a que separa o caso telegráfico do latim, e é a única que o faz:
+
+| | dicionário pt | dicionário en |
+|---|---|---|
+| verso telegráfico (o caso observado) | **1,000** | 0,050 |
+| latim (a falha da Fase 0) | **0,043** | 0,130 |
+| poemas reais | p1 **0,857** | p1 **0,900** |
+
+`MIN_FRACAO_DICIONARIO = 0,50` fica no meio dessa lacuna. A folga é deliberada:
+o dicionário é pós-acordo de 1990 e rejeita 7,1% do vocabulário real de Pessoa.
+
+**O teste relativo sozinho não bastaria**, e foi o teste que já existia que o
+provou: o latim de `tests/test_guard.py` contém `se`, stopword portuguesa, logo
+pontua 0,040 em pt contra 0,000 em inglês e passaria. Escrevi a versão relativa,
+ela passou no meu próprio caso de latim, e reprovou no do repositório.
+
+### Dois defeitos encontrados pelo caminho
+
+**`fracao_lingua` caía no português quando não conhecia a língua.** `Lang.INDETERMINADO`
+existe para poemas curtos demais para classificar, e `_STOPWORDS` não o cobre.
+A primeira versão da correcção dava 4 poemas reais por língua errada — entre
+eles «Iniguais pertencemos.» Sem autoridade sobre a língua, a guarda é agora
+inerte.
+
+**`poem_561` é francês, rotulado como português.** «Elle est si belle, / La
+petite rebelle» — e é o único: medido com palavras funcionais francesas, nenhum
+outro poema do corpus tem o francês a dominar (0,460 contra 0,046 de português).
+A guarda sinaliza-o, e tem razão; a etiqueta do corpus é que está errada. O
+teste afirma esse único positivo pelo nome, para que qualquer outro o faça
+reprovar.
+
+### E o preâmbulo que chegava ao ecrã
+
+Na mesma resposta, o modelo começou por «Aqui está um poema novo, seguindo as
+instruções:», e essa linha **foi impressa**. O `remover_preambulo` existe e a sua
+regex apanha-a, mas o buffer de streaming do CLI só chamava `remover_cercas` e
+`remover_eco_da_pergunta`. O texto validado não tinha o preâmbulo; o ecrã tinha.
+
+A correcção não foi só acrescentar a chamada: a retenção passou a ser **por
+linha, enquanto a linha limpa sair vazia**. Com uma só linha de retenção, um
+preâmbulo seguido do eco da pergunta deixava o segundo passar.
+
+### Sem dicionário
+
+A guarda volta ao limiar absoluto, que é o comportamento antigo: rejeita. «Não
+sei» não pode virar «está bem» — sem a ressalva, uma máquina sem `aspell`
+perderia a guarda contra o latim. O preço é o falso positivo telegráfico voltar
+nessas máquinas.

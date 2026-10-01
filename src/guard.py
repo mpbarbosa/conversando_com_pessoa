@@ -156,6 +156,100 @@ def fracao_pt(texto: str) -> float:
     return fracao_lingua(texto, Lang.PT)
 
 
+#: Fracção mínima de palavras que o dicionário da língua tem de reconhecer.
+#: Medida nos poemas reais: p1 de 0,857 em português e 0,900 em inglês, contra
+#: **0,043** da amostra em latim. 0,50 fica no meio dessa lacuna, longe de ambos
+#: — folga deliberada, porque o dicionário é pós-acordo de 1990 e rejeita 7,1%
+#: do vocabulário real de Pessoa (ver `src/lexico.py`).
+MIN_FRACAO_DICIONARIO = 0.50
+
+
+def _fracao_reconhecida(texto: str, idioma: Lang) -> float | None:
+    """Fracção das palavras que o dicionário da língua reconhece.
+
+    `None` quando não há dicionário — e aí quem chama tem de decidir, porque
+    «não sei» não é «está bem».
+    """
+    from .lexico import (MIN_LETRAS, _RE_PALAVRA, aspell_disponivel,
+                         desconhecidas_do_dicionario)
+    if not aspell_disponivel(idioma):
+        return None
+    palavras = {p.lower() for p in _RE_PALAVRA.findall(texto)
+                if len(p) >= MIN_LETRAS}
+    if not palavras:
+        return 1.0
+    return 1.0 - len(desconhecidas_do_dicionario(palavras, idioma)) / len(palavras)
+
+
+def lingua_errada(texto: str, esperada: Lang, piso: float = 0.12) -> bool:
+    """A resposta está numa língua que não a pedida?
+
+    ## O falso positivo que isto corrige
+
+    Observado no CLI, a «qual é o futuro de portugal?»:
+
+        os passos ecoam / silêncio envolve / vogais cantam
+        pés descalços ligam terra ar / brotam esperanças
+
+    Fracção pt de 0,077, rejeitado, 38 s de regeneração perdidos. É português
+    inequívoco — `silêncio`, `raízes`, `descalços` — mas telegráfico, sem artigos
+    nem preposições, logo sem as palavras funcionais que a fracção conta. **O
+    limiar media registo e chamava-lhe língua.**
+
+    Baixar o limiar não era a correcção, e a medição di-lo: contra o corpus, 0,12
+    rejeita 3 de 1906 poemas portugueses (0,16%) e um deles é francês
+    (`poem_561`). Os poemas reais têm mediana 0,385 e p5 0,267. O limiar está bem
+    posto; o instrumento é que é o errado.
+
+    ## As três perguntas, em ordem de custo
+
+    1. **Há stopwords em abundância?** Acima do piso não há dúvida nenhuma, e é
+       o caso de 99,8% dos textos. Sai aqui, sem subprocessos.
+    2. **Outra língua pontua mais que a pedida?** Discriminação medida:
+       poemas pt dão 0,385 na própria língua e 0,048 na alheia; os ingleses
+       0,375 e 0,035. Em 2058 poemas, **zero** pontuam mais na língua errada.
+    3. **O dicionário da língua reconhece o vocabulário?** É a única das três
+       que não depende do registo, e é ela que distingue o caso telegráfico do
+       latim. O teste relativo sozinho não o faria: o latim de
+       `tests/test_guard.py` contém `se`, stopword portuguesa, logo pontua 0,040
+       em pt contra 0,000 em inglês e passaria. Medido: dicionário pt reconhece
+       **1,000** do telegráfico e **0,043** do latim.
+
+    ## Quando não há dicionário
+
+    Volta ao limiar absoluto, que é o comportamento antigo: rejeita. «Não sei»
+    não pode virar «está bem» — sem esta ressalva, uma máquina sem `aspell`
+    perderia a guarda contra o latim, que é o modo de falha que ela existe para
+    apanhar. O preço é o falso positivo telegráfico voltar nessas máquinas.
+
+    ## Línguas sem autoridade
+
+    `Lang.INDETERMINADO` existe para poemas curtos demais para classificar, e
+    `_STOPWORDS` não o cobre. Antes disto, `fracao_lingua` caía silenciosamente
+    no português e a guarda dava quatro poemas reais por língua errada
+    (`poem_3516`, `poem_3525`, `poem_4281`, `poem_4372` — entre eles «Iniguais
+    pertencemos.»). Sem autoridade sobre a língua, a guarda é inerte.
+
+    Medido: 0 falsos positivos em 2058 poemas reais, e apanha os três modos de
+    falha (latim, inglês quando se pediu português, e o inverso).
+    """
+    if esperada not in _STOPWORDS:
+        return False
+
+    f_esperada = fracao_lingua(texto, esperada)
+    if f_esperada >= piso:
+        return False
+
+    outras = [fracao_lingua(texto, l) for l in _STOPWORDS if l is not esperada]
+    if f_esperada <= max(outras, default=0.0):
+        return True
+
+    reconhecida = _fracao_reconhecida(texto, esperada)
+    if reconhecida is None:
+        return True            # sem dicionário, vale o limiar absoluto
+    return reconhecida < MIN_FRACAO_DICIONARIO
+
+
 def brasileirismos(texto: str) -> tuple[str, ...]:
     baixo = texto.lower()
     return tuple(k for k in INTERDICOES if re.search(rf"\b{re.escape(k)}\b", baixo))
@@ -214,9 +308,11 @@ def verificar(texto: str, *, pergunta: str | None = None,
               lexico: bool = True) -> Veredicto:
     """Limpa o que é removível e julga o que resta.
 
-    `min_fracao_pt` a 0,12: medido no corpus, poemas portugueses ficam bem acima
-    disso, e a amostra em latim ficaria muito abaixo. Verso é denso em
-    substantivos, logo o limiar não pode ser alto.
+    `min_fracao_pt` a 0,12 é o **piso** do teste de língua, não o seu critério:
+    medido no corpus, poemas portugueses ficam bem acima disso (mediana 0,385,
+    p5 0,267). Quem decide é `lingua_errada`, que exige também que nenhuma outra
+    língua pontue mais — ver a sua docstring para o falso positivo que isso
+    corrige.
     """
     t = remover_preambulo(remover_cercas(texto))
     if pergunta:
@@ -226,8 +322,8 @@ def verificar(texto: str, *, pergunta: str | None = None,
     if not t.strip():
         return Veredicto(False, ("vazio",), "", ())
 
-    fr = fracao_lingua(t, idioma)
-    if fr < min_fracao_pt:
+    if lingua_errada(t, idioma, min_fracao_pt):
+        fr = fracao_lingua(t, idioma)
         motivos.append(f"idioma improvável (fracção {idioma.value} {fr:.3f})")
 
     if not e_verso(t):

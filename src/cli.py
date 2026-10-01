@@ -226,11 +226,17 @@ def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,
     t0 = time.perf_counter()
     primeiro: float | None = None
     # Streaming e validação estão em tensão: imprimir à medida significa
-    # imprimir antes de poder validar. O eco da pergunta — observado: à
-    # pergunta «o que vês quando olhas para uma árvore?» o modelo começou com
-    # «O que vejo quando olho para uma árvore» — é sempre o primeiro verso,
-    # logo resolve-se retendo só até à primeira mudança de linha. Custa o
-    # tempo de gerar uma linha (~2 s a 6 tok/s), não os 42 s de não streaming.
+    # imprimir antes de poder validar. O que é removível está sempre no início —
+    # o eco da pergunta (observado: a «o que vês quando olhas para uma árvore?»
+    # o modelo começou com «O que vejo quando olho para uma árvore») e o
+    # preâmbulo (observado: «Aqui está um poema novo, seguindo as instruções:»)
+    # —, logo resolve-se retendo linhas até sobrar uma que seja verso. Custa o
+    # tempo de gerar essas linhas (~2 s cada a 6 tok/s), não os 42 s de não
+    # streaming.
+    #
+    # Retém-se **enquanto a linha limpa sair vazia**, e não só a primeira: o
+    # preâmbulo e o eco podem vir em linhas separadas, e com uma só linha de
+    # retenção o segundo escapava.
     buffer: list[str] = []
     a_reter = True
     try:
@@ -240,12 +246,11 @@ def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,
                     primeiro = time.perf_counter() - t0
                 if a_reter:
                     buffer.append(item)
-                    if "\n" not in "".join(buffer):
+                    retido, a_reter = _limpar_inicio("".join(buffer), pergunta)
+                    if a_reter:
+                        buffer = [retido] if retido else []
                         continue
-                    a_reter = False
-                    from .guard import remover_eco_da_pergunta, remover_cercas
-                    retido = remover_eco_da_pergunta(
-                        remover_cercas("".join(buffer)), pergunta)
+                    buffer = []
                     sys.stdout.write(f"{VERDE}{retido}{FIM}")
                     sys.stdout.flush()
                     continue
@@ -272,6 +277,27 @@ def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,
         typer.secho(f"\n{e}", fg="red", err=True)
     except KeyboardInterrupt:
         typer.echo(_cinza("\n  (interrompido)"))
+
+
+def _limpar_inicio(acumulado: str, pergunta: str) -> tuple[str, bool]:
+    """Descasca as linhas de enquadramento do início do fluxo.
+
+    Devolve `(texto_a_imprimir, continuar_a_reter)`. Retém enquanto não houver
+    uma linha completa que sobreviva à limpeza: o preâmbulo e o eco da pergunta
+    são ambos removíveis e podem vir em linhas separadas.
+    """
+    from .guard import (remover_cercas, remover_eco_da_pergunta,
+                        remover_preambulo)
+    if "\n" not in acumulado:
+        return acumulado, True
+    linha, resto = acumulado.split("\n", 1)
+    limpa = remover_eco_da_pergunta(
+        remover_preambulo(remover_cercas(linha)), pergunta)
+    if not limpa.strip():
+        # Linha descartada por inteiro. O resto pode já trazer outra completa,
+        # logo volta-se a tentar em vez de a dar por boa.
+        return _limpar_inicio(resto, pergunta) if "\n" in resto else (resto, True)
+    return f"{limpa}\n{resto}", False
 
 
 def _rodape(turno, primeiro: float | None) -> None:

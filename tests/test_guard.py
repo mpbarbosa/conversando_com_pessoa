@@ -5,8 +5,10 @@ caso inventado.
 """
 import pytest
 
+from src.corpus.models import Lang
 from src.guard import (brasileirismos, corrigir_brasileirismos, e_verso,
-                       fracao_pt, remover_cercas, remover_preambulo, verificar)
+                       fracao_pt, lingua_errada, remover_cercas,
+                       remover_preambulo, verificar)
 
 # Amostras reais, de docs/fase-0/05-teste-voz.md e 05b-teste-voz-cego.md
 LATIM = """Vitam brevis, spem longum; nec metuamus,
@@ -64,6 +66,81 @@ def test_latim_e_rejeitado():
     v = verificar(LATIM)
     assert not v
     assert any("idioma" in m for m in v.motivos), v.motivos
+
+
+#: Observado no CLI a «qual é o futuro de portugal?»: português inequívoco
+#: («silêncio», «raízes», «descalços») mas telegráfico, sem artigos nem
+#: preposições. Deu fracção pt de 0,077 e foi rejeitado, custando 38 s de
+#: regeneração. O limiar absoluto media registo, não língua.
+TELEGRAFICO = """os passos ecoam
+silêncio envolve
+vogais cantam
+pés descalços ligam terra ar
+brotam esperanças
+raízes aprofundam
+futuro brota
+presente toca
+tempo suspira"""
+
+
+def test_verso_telegrafico_em_portugues_nao_e_rejeitado():
+    assert fracao_pt(TELEGRAFICO) < 0.12, "o caso perdeu a sua razão de ser"
+    assert not lingua_errada(TELEGRAFICO, Lang.PT)
+    v = verificar(TELEGRAFICO, lexico=False)
+    assert not any("idioma" in m for m in v.motivos), v.motivos
+
+
+def test_o_piso_continua_a_apanhar_o_latim():
+    """Só o teste relativo não bastaria: o latim pontua ~zero em ambas."""
+    assert lingua_errada(LATIM, Lang.PT)
+
+
+def test_resposta_em_ingles_quando_se_pediu_portugues():
+    ingles = ("I watch the river flowing to the sea,\n"
+              "and in its water nothing of my thought\n"
+              "is carried, for the water does not think.")
+    assert lingua_errada(ingles, Lang.PT)
+    assert not lingua_errada(ingles, Lang.EN)
+
+
+def test_resposta_em_portugues_quando_se_pediu_ingles():
+    assert lingua_errada(BOM, Lang.EN)
+    assert not lingua_errada(BOM, Lang.PT)
+
+
+def test_lingua_indeterminada_nao_e_julgada():
+    """`fracao_lingua` caía no português por omissão, e a guarda dava quatro
+    poemas reais por língua errada — entre eles «Iniguais pertencemos.»"""
+    assert not lingua_errada("Iniguais pertencemos.", Lang.INDETERMINADO)
+    assert not lingua_errada(LATIM, Lang.INDETERMINADO)
+
+
+def test_so_o_poema_frances_do_corpus_e_dado_por_lingua_errada():
+    """Um único positivo em 2058 poemas, e é verdadeiro.
+
+    `poem_561` — «Elle est si belle, / La petite rebelle» — é francês, rotulado
+    como português no corpus. É o único: medido com palavras funcionais
+    francesas, nenhum outro poema tem o francês a dominar (fr=0,460 contra
+    pt=0,046). A guarda tem razão e a etiqueta do corpus é que está errada.
+
+    O que esta medição apanhou nas versões anteriores: o limiar absoluto
+    rejeitava mais dois poemas portugueses (`poem_3649`, `poem_4396`, ambos a
+    0,118), e a primeira versão do teste relativo rejeitava quatro de língua
+    indeterminada.
+    """
+    from collections import defaultdict
+    from src.corpus.build import load
+    _, chunks = load()
+    por = defaultdict(list)
+    for c in chunks:
+        por[c.poem_id].append(c)
+    maus = []
+    for pid, cs in por.items():
+        cs.sort(key=lambda c: c.chunk_ix)
+        texto = "\n".join(c.text for c in cs)
+        if lingua_errada(texto, cs[0].language):
+            maus.append(pid)
+    assert maus == ["poem_561"], maus
 
 
 # --- persona ---------------------------------------------------------------
