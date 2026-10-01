@@ -31,16 +31,27 @@ _RE_PONT = re.compile(r"[^\w\s]")
 _RE_ESP = re.compile(r"\s+")
 
 
-def tokenizar(texto: str) -> list[str]:
+def tokenizar(texto: str, normalizacao: bool = True) -> list[str]:
+    """Tokeniza para o BM25.
+
+    `normalizacao=True` expande elisões e funde a alternância ou/oi **antes** de
+    remover a pontuação. Sem isso, `p'ra` reduz-se ao token `ra`, que é lixo, e
+    `cousa` nunca casa com `coisa`. O interruptor existe para medir o efeito —
+    ver docs/fase-2.
+    """
+    if normalizacao:
+        from .normalize import normalizar
+        texto = normalizar(texto)
     t = _RE_ESP.sub(" ", _RE_PONT.sub(" ", texto.lower())).strip()
     return [p for p in t.split() if p not in STOPWORDS and len(p) > 1]
 
 
 class IndiceLexical:
-    def __init__(self, chunks: Sequence[Chunk]):
+    def __init__(self, chunks: Sequence[Chunk], normalizacao: bool = True):
         from rank_bm25 import BM25Okapi
         self.chunks = list(chunks)
-        corpus = [tokenizar(c.text) for c in self.chunks]
+        self.normalizacao = normalizacao
+        corpus = [tokenizar(c.text, normalizacao) for c in self.chunks]
         # Chunks que ficam sem termos depois das stopwords quebrariam o BM25.
         self._vazios = {i for i, d in enumerate(corpus) if not d}
         self._bm25 = BM25Okapi([d or ["\x00"] for d in corpus])
@@ -48,7 +59,7 @@ class IndiceLexical:
     def search(self, consulta: str, top_k: int = 10,
                voz: Voice | None = None,
                idioma: Lang | None = Lang.PT) -> list[tuple[Chunk, float]]:
-        termos = tokenizar(consulta)
+        termos = tokenizar(consulta, self.normalizacao)
         if not termos:
             return []
         import numpy as np

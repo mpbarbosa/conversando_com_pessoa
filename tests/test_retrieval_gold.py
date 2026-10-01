@@ -12,6 +12,10 @@ que contam **0** por omissão.
 top-5, julgar os candidatos que surgirem pela primeira vez, e só então comparar.
 Sem isso, qualquer sistema novo é penalizado por construção.
 
+Foi executado na Fase 2: a fusão RRF trouxe **33 candidatos** nunca julgados em
+17 das 20 perguntas, **12 com nota 2**. Sem os julgar, o resultado negativo da
+fusão teria sido um artefacto em vez de um facto.
+
 **Este é o instrumento que autoriza ou veta as Fases 2 e 3.** Ambas existem
 exclusivamente para melhorar um número, e é este.
 
@@ -122,7 +126,11 @@ def test_linha_de_base_do_denso(denso, perguntas, gabarito):
     r = avaliar(denso, perguntas, gabarito)
     print(f"\ndenso: {r}")
     assert r.n_perguntas >= 20
-    assert r.ndcg5 >= 0.65, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,719)"
+    # Baixado de 0,65 para 0,62: o gabarito cresceu de 176 para 209 candidatos
+    # quando a Fase 2 agrupou e julgou os 33 que só a fusão trazia, e 12 têm
+    # nota 2. Um ideal mais completo dá nDCG mais baixo e mais verdadeiro —
+    # o denso passou de 0,719 para 0,677 sem nada mudar no denso.
+    assert r.ndcg5 >= 0.62, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,677)"
     assert r.apt3 >= 0.85, f"regressão: apt@3 = {r.apt3:.0%} (medido 95%)"
 
 
@@ -130,7 +138,7 @@ def test_linha_de_base_do_lexical(lexical, perguntas, gabarito):
     r = avaliar(lexical, perguntas, gabarito)
     print(f"\nBM25: {r}")
     assert r.n_perguntas >= 20
-    assert r.ndcg5 >= 0.40, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,488)"
+    assert r.ndcg5 >= 0.40, f"regressão: nDCG@5 = {r.ndcg5:.3f} (medido 0,464)"
 
 
 def test_filtro_de_voz_e_respeitado(denso, perguntas):
