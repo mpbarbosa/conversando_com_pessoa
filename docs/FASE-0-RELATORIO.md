@@ -392,3 +392,34 @@ sobre os ficheiros em bruto. Sobre o corpo limpo e normalizado são **3 pares
 exactos**, e há **18 grupos de variantes** — esboços, revisões, transcrições
 divergentes e contenção (`poem_12` tem 26 versos, todos presentes nos 47 de
 `poem_619`). No total, **21 poemas** são duplicados de outro.
+
+
+---
+
+# Correcção de premissa (2026-10-01): a iGPU existe e é utilizável
+
+Este relatório diz «CPU-only» em §1 e em todas as decisões que dela derivam.
+**A premissa estava incompleta.**
+
+Concluí «sem GPU» de `nvidia-smi` ausente. Vi o `lspci` reportar «Intel
+Corporation Meteor Lake-P [Intel Graphics]» e tratei-o como irrelevante **sem
+verificar**. O Ollama 0.35.0 detecta-a por Vulkan e desliga-a por omissão.
+
+Medido com `OLLAMA_IGPU_ENABLE=1`:
+
+| | CPU | iGPU | razão |
+|---|---|---|---|
+| prefill (421 tok, pt) | 14,2 tok/s | **89,1 tok/s** | **6,28x** |
+| prefill (360 tok, en) | 16,6 tok/s | **85,8 tok/s** | 5,20x |
+| **decode** | 5,2–7,1 tok/s | **3,30 tok/s** | **0,55x** |
+
+**Nenhuma decisão deste relatório muda.** Na carga real o decode domina — a iGPU
+ganha 21 s na primeira pergunta de cada voz e perde 20 s em todas as outras, e o
+cache de prefixo faz com que quase todas sejam «outras». A CPU continua certa, e
+é por isso que o Ollama a prefere por omissão.
+
+**Mas o §7.1 desta fase rejeitou o contexto de 1500 tokens por causa de 84 s de
+prefill, e na iGPU seriam ~17 s.** Se o contexto voltar a ser o constrangimento,
+essa rejeição deve ser reavaliada.
+
+Detalhe e reprodução: [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md).

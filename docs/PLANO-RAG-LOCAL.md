@@ -18,9 +18,17 @@ Tudo nesta seção foi medido nesta máquina e neste corpus, não estimado.
 |---|---|
 | CPU | Intel Core Ultra 5 135U (Meteor Lake-P), 12 núcleos / 14 threads, série U (15–28 W) |
 | Extensões | AVX2, FMA, F16C. **Sem AVX-512, sem AMX** |
-| GPU | Intel Graphics integrada. **Sem NVIDIA, sem CUDA** |
+| GPU | Intel Graphics integrada. **Sem NVIDIA, sem CUDA** — mas **a iGPU é utilizável por Vulkan**, ver nota abaixo |
 | RAM | 30 GB total, ~19 GB disponíveis |
 | Disco | 157 GB livres |
+
+> **Correcção de 2026-10-01.** «Sem GPU» estava **incompleto**. Concluí-o de
+> `nvidia-smi` ausente e não verifiquei a iGPU. O Ollama detecta-a por Vulkan e
+> desliga-a por omissão; com `OLLAMA_IGPU_ENABLE=1` ela **acelera o prefill 6x
+> (14,2 → 89,1 tok/s) e trava o decode para 0,55x (6,0 → 3,30 tok/s)**. Na carga
+> real o decode domina, logo a CPU continua a ser a escolha certa — mas o
+> contexto deixa de ser o constrangimento que esta secção assume. Medição em
+> [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md).
 
 **Consequência:** inferência em CPU, obrigatoriamente com pesos quantizados.
 Nada de fp16, nada de `device_map="auto"` sobre GPU, nada de modelos acima de

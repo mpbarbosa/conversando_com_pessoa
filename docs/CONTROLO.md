@@ -57,7 +57,7 @@ Nenhuma destas é preferência: todas têm medição por trás.
 
 | Decisão | Valor | Vem de |
 |---|---|---|
-| Hardware | **CPU-only**, sem GPU NVIDIA | `lscpu`, `nvidia-smi` ausente |
+| Hardware | **CPU para gerar** — a iGPU existe e é 6x no prefill, 0,55x no decode | `lscpu`; [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) |
 | Threads | **10**, `taskset -c 0-11` | varredura monotónica; LP-E a 2100 MHz excluídos |
 | Python | **3.12** via `uv` | 3.14 sem wheels de torch/faiss |
 | Gerador | **`qwen2.5:7b-instruct-q4_K_M`** | 7,0 às cegas vs 6,5 do llama3.1:8b |
@@ -105,6 +105,7 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 8 | Há 1 par de duplicados exactos | **3 pares** + 18 grupos de variantes = 21 poemas | idem |
 | 9 | `poem_12`/`poem_619` não são variantes | **São**: contenção. Diagnostiquei lendo 320 caracteres | §Passo 2 |
 | 10 | A extrapolação de rerank falhou por atenção quadrática | Explicação **errada**, tirada de resultados parciais. A estimativa era optimista por 1,9x | `FASE-3-PASSO-1.md` |
+| 11 | Esta máquina não tem GPU utilizável | **Tem**: Intel Arc por Vulkan. Concluí de `nvidia-smi` ausente, vi o `lspci` dizer «Intel Graphics» e não verifiquei | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -205,6 +206,7 @@ avaliados, e ambos existem exclusivamente para melhorar um número.
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
 | [`FASE-3.md`](FASE-3.md) · [`FASE-3-PASSO-1.md`](FASE-3-PASSO-1.md) | rerank e latência medida |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
+| [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | `fase-3/` | latência dos rerankers e script |
 
 ### Código
@@ -375,3 +377,45 @@ ligados ao pipeline** — não desligados por configuração, porque um componen
 desligado por omissão é dívida. O que os limita é mensurável e pode mudar:
 julgar as 20 perguntas restantes, agrupar a top-10, ou um orçamento de contexto
 maior que 300 tokens.
+
+
+---
+
+## Correcção: «sem GPU» era incompleto
+
+A Fase 0 concluiu **CPU-only** de `nvidia-smi` ausente. Vi o `lspci` reportar
+«Intel Corporation Meteor Lake-P [Intel Graphics]» e não verifiquei. O Ollama
+0.35.0 **detecta a iGPU por Vulkan e desliga-a por omissão**, com uma linha de
+log que diz exactamente como a ligar:
+
+```
+msg="dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1"
+library=Vulkan name=Vulkan0 description="Intel(R) Graphics (MTL)"
+```
+
+Ligada, reporta `type=iGPU total="22.5 GiB" available="11.4 GiB"`.
+
+| | CPU | iGPU | razão |
+|---|---|---|---|
+| prefill (421 tok, Caeiro pt) | 34,3 s · 14,2 tok/s | **5,5 s · 89,1 tok/s** | **6,28x** |
+| prefill (360 tok, Search en) | 25,2 s · 16,6 tok/s | **4,9 s · 85,8 tok/s** | 5,20x |
+| **decode** | 5,2–7,1 tok/s | **3,30 tok/s** (n=3) | **0,55x** |
+
+**Nenhuma decisão fechada muda.** Para ~700 tokens de prompt e 150 de saída:
+CPU a frio 74,3 s, iGPU a frio 53,3 s, **CPU a quente 25,7 s**, iGPU a quente
+46,1 s. A iGPU ganha 21 s na primeira pergunta de cada voz e perde 20 s em todas
+as seguintes — e com `keep_alive` de 30 min quase todas são «seguintes». A linha
+«CPU-only» da §3 passa a «CPU para gerar», que é a afirmação que as medições
+sustentam.
+
+**O que isto reabre é o orçamento de contexto.** A Fase 0 rejeitou 1500 tokens
+porque custavam 84 s de prefill; na iGPU custariam ~17 s. Se a Fase 4 precisar de
+contexto maior — metadado enriquecido, por exemplo — a rejeição tem de ser
+reavaliada, não herdada.
+
+Dois avisos sobre esta medição: a iGPU foi medida com o pacote a 52–60 °C, mais
+frio que a CPU nos seus próprios testes, o que a favorece; e nunca se testou o
+desenho que ninguém considerou, **prefill na iGPU e decode na CPU**
+(`llama.cpp --n-gpu-layers` parcial), que é onde os dois números apontam.
+
+Detalhe e reprodução: [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md).
