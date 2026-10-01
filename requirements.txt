@@ -2,5 +2,6 @@ torch
 transformers
 sentence-transformers
 faiss-cpu
+numpy
 langchain
 python-dotenv

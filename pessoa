@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+# Arranca o PessoaBot sem precisar de activar o venv.
+#
+# Existe porque `source .venv/bin/activate && python -m src.cli` não funciona
+# com `setopt correct` no zsh: o zsh verifica a ortografia da linha inteira
+# ANTES de executar qualquer parte dela, logo o `python` é analisado enquanto o
+# PATH é ainda o antigo, e o zsh oferece-se para o corrigir para `python3`.
+# Um `rehash` na mesma cadeia não ajuda, pela mesma razão.
+set -e
+raiz=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+py="$raiz/.venv/bin/python"
+
+if [ ! -x "$py" ]; then
+    echo "venv não encontrado em $raiz/.venv" >&2
+    echo "criar com: uv venv --python 3.12 .venv" >&2
+    exit 1
+fi
+
+exec "$py" -m src.cli "$@"

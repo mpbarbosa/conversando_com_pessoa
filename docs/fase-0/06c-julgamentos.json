@@ -1,0 +1,62 @@
+{
+ "_metodo": "Pooling estilo TREC: top-3 de cada encoder, deduplicado, ordenado por id para nao revelar o ranking de nenhum modelo. Julgado sobre o conteudo do poema. 2 = responde bem; 1 = tematicamente adjacente, aproveitavel; 0 = nao serve.",
+ "_avaliador": "unico (Claude), sessao de 2026-10-01. Nao e medicao intersubjectiva.",
+ "_cobertura": "10 das 13 perguntas do conjunto de fumo. As 3 restantes (poem_1046, poem_1440, poem_116) nao foram julgadas e ficam fora da metrica recalculada.",
+
+ "quando acordamos, o sítio prometido desaparece e fica só água": {
+  "poem_100": 2, "poem_1662": 2, "poem_4242": 2,
+  "poem_1274": 1, "poem_2046": 1, "poem_208": 1, "poem_230": 1, "poem_2552": 1,
+  "poem_2783": 1, "poem_3391": 1, "poem_4257": 1, "poem_869": 1,
+  "poem_1033": 0, "poem_135": 0, "poem_1794": 0, "poem_3664": 0},
+
+ "depois de gostar de alguém, as coisas em volta ficaram mais nítidas": {
+  "poem_1000": 2, "poem_2649": 2,
+  "poem_3302": 1, "poem_3788": 1,
+  "poem_133": 0, "poem_1368": 0, "poem_1789": 0, "poem_205": 0, "poem_2110": 0,
+  "poem_3306": 0, "poem_4288": 0, "poem_465": 0, "poem_872": 0, "poem_934": 0,
+  "poem_942": 0},
+
+ "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe": {
+  "poem_135": 2, "poem_1794": 2, "poem_2443": 2, "poem_2547": 2, "poem_350": 2,
+  "poem_1401": 1, "poem_158": 1, "poem_3230": 1, "poem_835": 1,
+  "poem_2994": 0},
+
+ "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido": {
+  "poem_163": 2, "poem_2567": 2, "poem_2438": 2, "poem_562": 2, "poem_844": 2,
+  "poem_1536": 1, "poem_165": 1, "poem_214": 1, "poem_2795": 1, "poem_2508": 1,
+  "poem_3538": 1,
+  "poem_1017": 0, "poem_4372": 0, "poem_636": 0},
+
+ "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual": {
+  "poem_17": 2, "poem_23": 2,
+  "poem_1062": 1, "poem_1250": 1, "poem_2508": 1, "poem_3848": 1, "poem_4012": 1,
+  "poem_4372": 1,
+  "poem_125": 0, "poem_2282": 0, "poem_2677": 0, "poem_2922": 0, "poem_2944": 0},
+
+ "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa": {
+  "poem_1866": 2, "poem_2254": 2,
+  "poem_172": 1, "poem_263": 1, "poem_3135": 1, "poem_1957": 1, "poem_991": 1,
+  "poem_175": 1, "poem_4242": 1, "poem_584": 1,
+  "poem_2915": 0, "poem_545": 0, "poem_1242": 0, "poem_2282": 0},
+
+ "por que é que as pessoas acham melancólico o fim do dia? é só o fim do dia": {
+  "poem_1019": 2,
+  "poem_1323": 1, "poem_2532": 1, "poem_3373": 1, "poem_357": 1, "poem_430": 1,
+  "poem_344": 1, "poem_2424": 1, "poem_2371": 1,
+  "poem_1174": 0, "poem_228": 0, "poem_4146": 0},
+
+ "o que fazemos não deixa marca; tudo continua igual depois de passarmos": {
+  "poem_1093": 2, "poem_1096": 2, "poem_1809": 2, "poem_2805": 2,
+  "poem_2435": 1, "poem_2985": 1, "poem_373": 1, "poem_4383": 1, "poem_3142": 1,
+  "poem_3173": 0, "poem_548": 0},
+
+ "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela": {
+  "poem_2566": 2, "poem_356": 2,
+  "poem_1132": 1, "poem_4369": 1, "poem_2208": 1,
+  "poem_1017": 0, "poem_1833": 0, "poem_3350": 0, "poem_3454": 0, "poem_3778": 0,
+  "poem_4227": 0, "poem_4315": 0, "poem_465": 0},
+
+ "queria parar de me sentir existir e ser apenas aquilo que os outros vêem": {
+  "poem_2677": 2, "poem_2438": 2, "poem_3254": 2,
+  "poem_1136": 1, "poem_174": 1, "poem_214": 1, "poem_2695": 1}
+}

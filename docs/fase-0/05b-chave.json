@@ -1,0 +1,182 @@
+{
+ "A01": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 1,
+  "segundos": 14.9
+ },
+ "A02": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 2,
+  "segundos": 21.5
+ },
+ "A03": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 2,
+  "segundos": 10.6
+ },
+ "A04": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 1,
+  "segundos": 34.6
+ },
+ "A05": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 1,
+  "segundos": 24.7
+ },
+ "A06": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "1_caeiro",
+  "amostra": 2,
+  "segundos": 5.7
+ },
+ "A07": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 2,
+  "segundos": 45.7
+ },
+ "A08": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 1,
+  "segundos": 38.0
+ },
+ "A09": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 2,
+  "segundos": 46.4
+ },
+ "A10": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 2,
+  "segundos": 21.5
+ },
+ "A11": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 1,
+  "segundos": 51.0
+ },
+ "A12": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "2_campos",
+  "amostra": 1,
+  "segundos": 23.3
+ },
+ "A13": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 1,
+  "segundos": 20.5
+ },
+ "A14": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 1,
+  "segundos": 25.9
+ },
+ "A15": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 2,
+  "segundos": 19.2
+ },
+ "A16": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 1,
+  "segundos": 14.0
+ },
+ "A17": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 2,
+  "segundos": 16.3
+ },
+ "A18": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "3_reis",
+  "amostra": 2,
+  "segundos": 13.1
+ },
+ "A19": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 2,
+  "segundos": 32.2
+ },
+ "A20": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 1,
+  "segundos": 44.5
+ },
+ "A21": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 1,
+  "segundos": 9.7
+ },
+ "A22": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 1,
+  "segundos": 30.4
+ },
+ "A23": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 2,
+  "segundos": 9.6
+ },
+ "A24": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "4_ortonimo",
+  "amostra": 2,
+  "segundos": 24.6
+ },
+ "A25": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 2,
+  "segundos": 16.6
+ },
+ "A26": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 1,
+  "segundos": 5.9
+ },
+ "A27": {
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 1,
+  "segundos": 18.2
+ },
+ "A28": {
+  "modelo": "qwen2.5:3b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 2,
+  "segundos": 6.4
+ },
+ "A29": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 2,
+  "segundos": 23.2
+ },
+ "A30": {
+  "modelo": "qwen2.5:7b-instruct-q4_K_M",
+  "prompt": "5_pt_pt",
+  "amostra": 1,
+  "segundos": 15.5
+ }
+}

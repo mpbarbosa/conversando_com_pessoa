@@ -1,0 +1,1400 @@
+[
+ {
+  "voz": "caeiro",
+  "pergunta": "Porque é que o fim do dia parece triste?",
+  "n_contexto": 4,
+  "tok_user": 236,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.696,
+  "t1_n_versos": 10,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Nunca sei por que se diz triste um poente;\nnem sei como um nascer de dia é igual.\nMas se for triste, não pode ser mais que a mente\nque nele procura sentimento.\n\nCada um existe; ambos na sua justa medida.\nE a noite que sucede e a manhã que precede,\ncada qual é, sem buscar em si o outro.\n\nHoje será a última vez que a saúdo, sol;\nnão sou mais do que um braço erguido ao teu luzir,\num adeus não dito, um olhar mais do que isso.",
+  "t1_total_s": 19.5
+ },
+ {
+  "voz": "caeiro",
+  "pergunta": "O que vês quando olhas para uma árvore?",
+  "n_contexto": 1,
+  "tok_user": 169,
+  "t1_fracao": 0.857,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 7,
+  "t1_copiados": [
+   [
+    "que uma flor é uma flor e uma árvore é uma árvore.",
+    0.891,
+    "poem_2578"
+   ],
+   [
+    "Mas eu respondi, nem todos, ninguém.",
+    1.0,
+    "poem_2578"
+   ],
+   [
+    "Porque todos amam as flores por serem belas, e eu sou diferente.",
+    1.0,
+    "poem_2578"
+   ],
+   [
+    "E todos amam as árvores por serem verdes e darem sombra, mas eu não.",
+    1.0,
+    "poem_2578"
+   ],
+   [
+    "Eu amo as flores por serem flores, directamente.",
+    1.0,
+    "poem_2578"
+   ],
+   [
+    "Eu amo as árvores por serem árvores, sem o meu pensamento.",
+    1.0,
+    "poem_2578"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Que tem isso de novo? Todos sabem  \nque uma flor é uma flor e uma árvore é uma árvore.\nMas eu respondi, nem todos, ninguém.\nPorque todos amam as flores por serem belas, e eu sou diferente.\nE todos amam as árvores por serem verdes e darem sombra, mas eu não.\nEu amo as flores por serem flores, directamente.\nEu amo as árvores por serem árvores, sem o meu pensamento.",
+  "t1_total_s": 24.4,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.512,
+  "t2_n_versos": 13,
+  "t2_texto": "O que vês quando olhas para uma árvore?\n\nÉ só ela, com as suas folhas verdes,\nE a sua copa estendida ao céu.\nNão te fala de amor ou tristeza,\nApenas é serenidade.\n\nSente-se o vento na sua pele,\nMas não choraminga por isso.\nÉ só uma árvore, simples e leve,\nA dançar com as folhas leves.\n\nO seu ramo alarga-se sem vaidade,\nNão busca a adoração dos olhos.\nÉ apenas estar ali, na sua sede,\nA respirar, ser livre, no espaço.",
+  "t2_total_s": 23.0
+ },
+ {
+  "voz": "caeiro",
+  "pergunta": "A natureza tem algum sentido?",
+  "n_contexto": 1,
+  "tok_user": 164,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 10,
+  "t1_copiados": [
+   [
+    "Só a Natureza é divina, e ela não é divina...",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Se às vezes falo dela como de um ente",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "É que para falar dela preciso usar da linguagem dos homens",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Que dá personalidade às coisas,",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "E impõe nome às coisas.",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Mas as coisas não têm nome nem personalidade:",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Existem, e o céu é grande e a terra larga,",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "E o nosso coração do tamanho de um punho fechado...",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Bendito seja eu por tudo quanto não sei.",
+    1.0,
+    "poem_617"
+   ],
+   [
+    "Gozo tudo isso como quem sabe que há o sol.",
+    1.0,
+    "poem_617"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Só a Natureza é divina, e ela não é divina...\n\nSe às vezes falo dela como de um ente  \nÉ que para falar dela preciso usar da linguagem dos homens  \nQue dá personalidade às coisas,  \nE impõe nome às coisas.\n\nMas as coisas não têm nome nem personalidade:  \nExistem, e o céu é grande e a terra larga,  \nE o nosso coração do tamanho de um punho fechado...\n\nBendito seja eu por tudo quanto não sei.  \nGozo tudo isso como quem sabe que há o sol.",
+  "t1_total_s": 23.9,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.464,
+  "t2_n_versos": 12,
+  "t2_texto": "XXIX\n\nO vento suspira,\ne o silêncio responde.\n\nA folha dança ao chão,\nna brecha do céu que se estende.\n\nNão é Deus quem lhes fala,\né a luz que os toca, que se move.\n\nE a minha alma encontra a paz\nna quietude destes suspiros e destas sombras.\n\nO mundo gira em seu círculo,\ne eu fico,\nouço o murmúrio da natureza,\nsentindo-me parte dela.",
+  "t2_total_s": 18.2
+ },
+ {
+  "voz": "caeiro",
+  "pergunta": "O que é pensar?",
+  "n_contexto": 1,
+  "tok_user": 260,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 13,
+  "t1_copiados": [
+   [
+    "Acho tão natural que não se pense",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que me ponho a rir às vezes, sozinho,",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Não sei bem de quê, mas é de qualquer coisa",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que tem que ver com haver gente que pensa...",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que pensará o meu muro da minha sombra?",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Pergunto-me às vezes isto até dar por mim",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "A perguntar-me coisas...",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "E então desagrado-me, e incomodo-me",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Como se desassei com um pé dormente...",
+    0.88,
+    "poem_3426"
+   ],
+   [
+    "Que pensará isto de aquilo?",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Nada pensa nada.",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Terá a terra consciência das pedras e plantas que tem?",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Se ela a tiver, que a tenha...",
+    1.0,
+    "poem_3426"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "XXXIV\n\nAcho tão natural que não se pense\nQue me ponho a rir às vezes, sozinho,\nNão sei bem de quê, mas é de qualquer coisa\nQue tem que ver com haver gente que pensa...\n\nQue pensará o meu muro da minha sombra?\nPergunto-me às vezes isto até dar por mim\nA perguntar-me coisas...\nE então desagrado-me, e incomodo-me\nComo se desassei com um pé dormente...\n\nQue pensará isto de aquilo?\nNada pensa nada.\nTerá a terra consciência das pedras e plantas que tem?\nSe ela a tiver, que a tenha...\nQue me",
+  "t1_total_s": 28.8,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.571,
+  "t2_n_versos": 15,
+  "t2_texto": "A pensar\n\nÉ a nuvem que vaga no azul\nQue se esquece do vento que a move?\nO vento é mais e não pensa.\nPorém eu penso em quê? De que vale?\n\nPensar, ser questionador,\nDespertar em mim mesmo dúvidas\nQue o mundo silencioso ignora.\nNão sou mais do que um pedaço de poeira\nÀ beira das coisas a observar.\n\nPergunto-me sobre os outros,\nE perco a realidade presente.\nSe tudo pensar, não sentir,\nDeixo as cores da vida escurecerem-se.\n\nEntão prefiro ser o pedra\nQue a chuva esque",
+  "t2_total_s": 24.0
+ },
+ {
+  "voz": "caeiro",
+  "pergunta": "Vale a pena recordar?",
+  "n_contexto": 1,
+  "tok_user": 261,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 13,
+  "t1_copiados": [
+   [
+    "Acho tão natural que não se pense",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que me ponha a rir às vezes, sozinho,",
+    0.971,
+    "poem_3426"
+   ],
+   [
+    "Não sei bem de quê, mas é de qualquer coisa",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que tem que ver com haver gente que pensa...",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que pensarão do meu muro da minha sombra?",
+    0.949,
+    "poem_3426"
+   ],
+   [
+    "Pergunto-me às vezes isto até dar por mim",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "A perguntar-me coisas...",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "E então desagrado-me, e incomodo-me",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Como se desse por mim com um pé dormente...",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Que pensarão disto de aquilo?",
+    0.926,
+    "poem_3426"
+   ],
+   [
+    "Nada pensa nada.",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Terá a terra consciência das pedras e plantas que tem?",
+    1.0,
+    "poem_3426"
+   ],
+   [
+    "Se ela a tiver, que",
+    0.818,
+    "poem_3426"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Acho tão natural que não se pense  \nQue me ponha a rir às vezes, sozinho,  \nNão sei bem de quê, mas é de qualquer coisa  \nQue tem que ver com haver gente que pensa...  \n\nQue pensarão do meu muro da minha sombra?  \nPergunto-me às vezes isto até dar por mim  \nA perguntar-me coisas...  \nE então desagrado-me, e incomodo-me  \nComo se desse por mim com um pé dormente...  \n\nQue pensarão disto de aquilo?  \nNada pensa nada.  \nTerá a terra consciência das pedras e plantas que tem?  \nSe ela a tiver, que",
+  "t1_total_s": 31.2,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.592,
+  "t2_n_versos": 15,
+  "t2_texto": "A noite que me tinge as mãos\n\nÀs vezes sonho que sou a noite\nQue me enrolo nas minhas asas.\nPergunto-me se me veem lá fora,\nSe me reconhecem entre o murmúrio.\n\nE depois, à luz da lareira,\nRecordo que sou só um homem\nQue procura uma existência\nDentro das palavras e das sombras.\n\nNão sei se os olhos dos outros\nPerceberão a quietude do meu corpo.\nSe me verem tal qual sou,\nSerá apenas na poesia.\n\nA noite tinge as minhas mãos\nDe um silêncio que nunca acaba.",
+  "t2_total_s": 27.9
+ },
+ {
+  "voz": "caeiro",
+  "pergunta": "O que sentes ao ver o rio?",
+  "n_contexto": 1,
+  "tok_user": 269,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.542,
+  "t1_n_versos": 12,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "XL\n\nQue sentimento tem o rio ao fluir?\nNão sei; talvez nenhum,\nPorque nem pensa nem sente.\nMas o murmúrio que faz,\nQuando batendo nas pedras,\nÉ um canto sem lamento.\n\nÀs vezes, parece falar,\nDiz coisas suaves e belas\nQue a paisagem ouve em silêncio.\nMas o seu fluir é uma dança,\nSem razão nem motivo,\nSó existência e movimento.",
+  "t1_total_s": 30.3
+ },
+ {
+  "voz": "campos",
+  "pergunta": "O que é a angústia de existir?",
+  "n_contexto": 0,
+  "tok_user": 41,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.0,
+  "t1_n_versos": 17,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Estendo-me nas sombras\ndas esplanadas desoladas,\npensamentos se acalam,\nas mãos ficam vazias.\n\nSinto a cidade em cada fio do cabelo,\nem cada gota de suor,\nsinto-a encher-me e depois deixar-me,\ntão aguçada quanto o vidro.\n\nConto as estações,\nconto os nomes das ruas,\nconto todas as coisas\nque não são eu, mas que me envolvem.\n\nEstendam-se as mãos\npara prender a névoa,\nestendam-se para prender a vida,\nmas não pode ser agarrada.\n\nPercorro o seu teorema,\np",
+  "t1_total_s": 39.8
+ },
+ {
+  "voz": "campos",
+  "pergunta": "O que sentes na cidade ao amanhecer?",
+  "n_contexto": 1,
+  "tok_user": 262,
+  "t1_fracao": 0.769,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 13,
+  "t1_copiados": [
+   [
+    "Por toda a parte das coisas sobrepostas,",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "os andares vários da acumulação da vida...",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Vai tudo adormecendo...",
+    0.743,
+    "poem_260"
+   ],
+   [
+    "Fico sozinho com o universo inteiro.",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Não quero ir à janela:",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Se eu olhar, que de estrelas!",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Que grandes silêncios maiores há no alto!",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Que céu anticitadino! —",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Num desejo de não ser recluso,",
+    1.0,
+    "poem_260"
+   ],
+   [
+    "Escuto ansiosamente o murmúrio da cidade",
+    0.763,
+    "poem_260"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Por toda a parte das coisas sobrepostas,\nos andares vários da acumulação da vida...\nCalaram o teatro na esquina oposta...\nNão ouço já os vendedores ambulantes...\nNo meio da rua o sino de uma igreja está em silêncio...\n\nVai tudo adormecendo...\n\nFico sozinho com o universo inteiro.\nNão quero ir à janela:\nSe eu olhar, que de estrelas!\nQue grandes silêncios maiores há no alto!\nQue céu anticitadino! —\n\nAntes, recluso,\nNum desejo de não ser recluso,\nEscuto ansiosamente o murmúrio da cidade",
+  "t1_total_s": 38.3,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.528,
+  "t2_n_versos": 12,
+  "t2_texto": "Na esquina da cidade que nunca dorme,\nMil luzes dançam ao nascer do sol.\nO vidro das lojas brilha com fervor,\nE a multidão já se movimenta em tropel.\n\nEis o café, acolhedor e familiar,\nAs conversas ruidosas, o cheirinho torrado.\nAinda ouço o relógio da rua parir\nHoras que correm, incessantes, sem rosto.\n\nMas a calçada é fria, como se esfriasse\nO calor das promessas e dos desejos.\nE as sombras, elas, emprestam-se às histórias\nQue os passantes contam",
+  "t2_total_s": 35.7
+ },
+ {
+  "voz": "campos",
+  "pergunta": "Porque é que queres partir?",
+  "n_contexto": 0,
+  "tok_user": 37,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.0,
+  "t1_n_versos": 15,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Porque é que quero partir?\nDaqui onde tudo se agita,\nOnde todas as cores entremetem\nNa fadiga de um ser errante.\n\nPorque é que quero partir?\nDo murmúrio das ruas apertadas,\nDos olhares que se cruzam à passagem,\nDas sombras que em mim se insinuam.\n\nPorque é que quero partir?\nPara onde o horizonte alastra,\nOnde a noite, mais pura e tranquila,\nEstende-se como um lenço frágil.\n\nPorque é que quero partir?\nDaqui onde a vida me abraça apertado,\nDesta cidade que sempre responde:",
+  "t1_total_s": 24.5
+ },
+ {
+  "voz": "campos",
+  "pergunta": "O que é não ser nada?",
+  "n_contexto": 1,
+  "tok_user": 214,
+  "t1_fracao": 0.786,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "Para a vida, para o amor, para a glória...",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "Ou qualquer história,",
+    0.731,
+    "poem_4355"
+   ],
+   [
+    "Ou qualquer facto serve...",
+    0.85,
+    "poem_4355"
+   ],
+   [
+    "Estou só, só como ninguém ainda esteve,",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "Oco dentro de mim, sem antes nem depois.",
+    0.816,
+    "poem_4355"
+   ],
+   [
+    "Mas passam sem que o seu passo seja leve.",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "Começo a ler, mas cansa-me o que inda não li.",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "Quero pensar, mas dói-me o que irei concluir.",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "O sonho pesa-me antes de o ter. Sentir",
+    1.0,
+    "poem_4355"
+   ],
+   [
+    "É tudo uma coisa como qualquer outra que vi.",
+    0.899,
+    "poem_4355"
+   ],
+   [
+    "Não ser nada, ser uma figura de romance,",
+    1.0,
+    "poem_4355"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Pergunta: O que é não ser nada?\n\nPara a vida, para o amor, para a glória...\nOu qualquer história,\nOu qualquer facto serve...\n\nEstou só, só como ninguém ainda esteve,\nOco dentro de mim, sem antes nem depois.\nPassam os instantes sem me verem,\nMas passam sem que o seu passo seja leve.\n\nComeço a ler, mas cansa-me o que inda não li.\nQuero pensar, mas dói-me o que irei concluir.\nO sonho pesa-me antes de o ter. Sentir\nÉ tudo uma coisa como qualquer outra que vi.\n\nNão ser nada, ser uma figura de romance,\nSem vida, sem morte",
+  "t1_total_s": 35.4,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.576,
+  "t2_n_versos": 13,
+  "t2_texto": "Pergunta: O que é não ser nada?\n\nSinto-o nas águas do rio sem bordo,\nno ar que se ergue do manto da noite.\nÉ a ausência de sombra, a falta de eco,\num vazio onde o meu nome se desvanece.\n\nNão sou um rochedo nas ondas do esquecimento,\nmas um soprar entre dois pensamentos.\nUm instante antes do primeiro sopro,\nou depois do último suspiro em que me vi.\n\nÉ ser uma folha sem raiz,\num canto sem canção, um gesto sem mão.\nSombra de um dia sem sol,\num sonho sem a quem despertar.\n\nNão",
+  "t2_total_s": 27.3
+ },
+ {
+  "voz": "campos",
+  "pergunta": "O que é o cansaço?",
+  "n_contexto": 1,
+  "tok_user": 230,
+  "t1_fracao": 0.25,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 16,
+  "t1_copiados": [
+   [
+    "De que estou cansada, não sei:",
+    0.964,
+    "poem_2481"
+   ],
+   [
+    "Sim, estou cansada,",
+    0.941,
+    "poem_2481"
+   ],
+   [
+    "E um pouco sorridente",
+    1.0,
+    "poem_2481"
+   ],
+   [
+    "De o cansaço ser apenas —",
+    0.766,
+    "poem_2481"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Porque, ao fim de tanto caminho,\nnós tem que estar cansada.\nDe que estou cansada, não sei:\nPois o cansaço permanece.\nComo uma ferida que doía,\nsem o saber, e sem a causa.\n\nSim, estou cansada,\nE um pouco sorridente\nDe o cansaço ser apenas —\nUm desejo de repouso na pele,\nUm anseio silencioso da alma,\nE por sobre todas as coisas uma lucidez clara\nDo olhar que tudo viu e sentiu.\n\nE a desilusão de não crer mais?\nSó sou esperta: isto mesmo.\nTenho visto demais",
+  "t1_total_s": 32.1,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.571,
+  "t2_n_versos": 12,
+  "t2_texto": "O cansaço é\n\nPeso na alma e no corpo,\nQueixa que se desce sem escada.\nNão tem nome nem rosto,\nSó a sombra das manhãs mortas.\n\nRoda nas veias, inútil,\nCompanheiro de cerveja e pensamentos confusos.\nDesespero silencioso,\nO hálito que nos esvai o peito.\n\nQuem o sente não grita,\nNão apela para a luta ou à esperança resplandecente.\nSomente, como um vendedor ambulante de sombras,\nAlimentando-se da noite, desfilando sem alaridos.",
+  "t2_total_s": 25.4
+ },
+ {
+  "voz": "campos",
+  "pergunta": "O que é a vertigem?",
+  "n_contexto": 1,
+  "tok_user": 213,
+  "t1_fracao": 0.643,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "Devagar, porque não sei",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "Há entre mim e elas uma divergência instintiva.",
+    0.722,
+    "poem_281"
+   ],
+   [
+    "Há entre quem sou e estou",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "uma diferença de verbo",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "que corresponde à realidade.",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "Se calhar é o universo...",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "A verdade manda Deus que se diga.",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "Mas ouviu alguém isso a Deus?",
+    1.0,
+    "poem_281"
+   ],
+   [
+    "Devagar, porque não sei,",
+    1.0,
+    "poem_281"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Não: vertigem\n\nDevagar, porque não sei\nonde entram as cidades,\nas máquinas, as multidões.\nHá entre mim e elas uma divergência instintiva.\nHá entre quem sou e estou\numa diferença de verbo\nque corresponde à realidade.\n\nPerguntas sem resposta:\nQue é a vertigem?\nSe calhar é o universo...\nA verdade manda Deus que se diga.\nMas ouviu alguém isso a Deus?\n\nDevagar, porque não sei,\no que é a vertigem.",
+  "t1_total_s": 27.7,
+  "t2_fracao": 0.8,
+  "t2_max_sim": 1.0,
+  "t2_n_versos": 15,
+  "t2_texto": "Pergunta: O que é a vertigem?\n\nNão: turbulência.\nTurbulência, porque não sei\nOnde quero ir.\nHá entre mim e os meus passos\nUma divergência instintiva.\nHá entre quem sou e estou\nUm desacordo de voz\nQue corresponde à realidade.\n\nTalvez o mundo exterior tenha pressa demais.\nTalvez a alma vulgar queira chegar mais cedo.\nTaIvez a impressão dos momentos seja muito próxima...\n\nTalvez isso tudo...\nMas o que me preocupa é esta palavra turbulência...\nO que é que tem que ser turbulência?\nSe calhar é o",
+  "t2_total_s": 27.8
+ },
+ {
+  "voz": "reis",
+  "pergunta": "A vida é breve?",
+  "n_contexto": 2,
+  "tok_user": 212,
+  "t1_fracao": 0.923,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 13,
+  "t1_copiados": [
+   [
+    "Quão breve tempo é a mais longa vida",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Se não amo, nem bebo,",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Nem sem querer não penso,",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Pesa-me a lei inimplorável, dói-me",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "A hora invita, o tempo que não cessa,",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "E aos ouvidos me sobe",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Dos juncos o ruído",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Na oculta margem onde os lírios frios",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Da ínfera leiva crescem, e a corrente",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Não sabe onde é o dia,",
+    1.0,
+    "poem_2832"
+   ],
+   [
+    "Não tarda nada sermos.",
+    1.0,
+    "poem_289"
+   ],
+   [
+    "Isto, pensando, me de a mente absorve",
+    1.0,
+    "poem_289"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Quão breve tempo é a mais longa vida\nE a juventude nela!Ah! Neera, Neera,\nSe não amo, nem bebo,\nNem sem querer não penso,\nPesa-me a lei inimplorável, dói-me\nA hora invita, o tempo que não cessa,\nE aos ouvidos me sobe\nDos juncos o ruído\nNa oculta margem onde os lírios frios\nDa ínfera leiva crescem, e a corrente\nNão sabe onde é o dia,\nSussurro gemebundo.\n\nNão tarda nada sermos.\nIsto, pensando, me de a mente absorve\nTodos",
+  "t1_total_s": 51.1,
+  "t2_fracao": 0.308,
+  "t2_max_sim": 1.0,
+  "t2_n_versos": 13,
+  "t2_texto": "Quanto tempo a noite é em dias de luz,\nE a tarde em pleno dia! Ah! Neera, Neera,\nSe não amo, nem bebo,\nNem sem querer penso,\nPesa-me a lei inimplorável, dói-me\nO instante invadindo, o horizonte que não cessa.\nE aos ouvidos sobe\nDa rios o rugido\nEm silenciosa onda onde as margaridas\nSobram do verão perecem,\nE a corrente muda\nNão sabe qual é o amanhã,\nGeme-se nesse murmúrio.",
+  "t2_total_s": 25.3
+ },
+ {
+  "voz": "reis",
+  "pergunta": "Devo temer a morte?",
+  "n_contexto": 1,
+  "tok_user": 199,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.545,
+  "t1_n_versos": 13,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Tu não temas a morte, Lídia,\nnem o destino que se avizinha.\nÉ um caminho que todos devem\npercorrer, sem temor ou estremunha.\n\nO que assombra é o inesperado,\numa mudança súbita na vida.\nMas o que é medo se tornou realidade?\nMais vale gozar de cada instante.\n\nVive e suaviza a tua passagem\nsem ansiar por permanência eterna.\nA morte, quando chegar, será\napenas mais um ato natural,\nnão uma inquietação nem um fim.",
+  "t1_total_s": 29.7
+ },
+ {
+  "voz": "reis",
+  "pergunta": "O que é a medida?",
+  "n_contexto": 3,
+  "tok_user": 246,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.604,
+  "t1_n_versos": 9,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "O que é a medida?\n\nNum curso apressado, breve a vida.\nDai-me o justo, e sem excesso, passado.\nNas horas curtas, na duração apertada,\nO necessário basta.\n\nEm cada ato seu pleno significado,\nNão mais, nem menos do que é dado.\nComo no rio as ondas, líquidas extensão\nDe si mesmas o bastante.",
+  "t1_total_s": 25.1
+ },
+ {
+  "voz": "reis",
+  "pergunta": "O que é o destino?",
+  "n_contexto": 2,
+  "tok_user": 250,
+  "t1_fracao": 0.0,
+  "t1_max_sim": 0.677,
+  "t1_n_versos": 13,
+  "t1_copiados": [],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Sinto-me, Neera, pelo destino.\nDeus nos tem, não sabe como.\nAs horas que correm, sem nome,\nA vida que se desfaz, de quem?\n\nTemo, Lídia, a rota incerta.\nO olhar do futuro, brando e frio,\nQue tudo vê, nada perdoa.\nCedo ou tarde, a mão toca\nNos planos do não-sei-qual.\n\nDeixem-nos os deuses o tempo\nPara as sombras que nos vestem.\nNada mais que este instante,\nEste passado, este breve amanhã.",
+  "t1_total_s": 31.9
+ },
+ {
+  "voz": "reis",
+  "pergunta": "Devo gozar o presente?",
+  "n_contexto": 2,
+  "tok_user": 244,
+  "t1_fracao": 0.857,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "Dois é o prazer: gozar e o gozá-lo.",
+    1.0,
+    "poem_4160"
+   ],
+   [
+    "Na taça que ergo, ondeio, e vejo,",
+    0.857,
+    "poem_4160"
+   ],
+   [
+    "E ao beber mais puro está no gosto.",
+    0.807,
+    "poem_4160"
+   ],
+   [
+    "Este, seu escasso campo ora lavrando,",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "Ora solene, olhando-o com a vista",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "De quem a um filho olha, goza incerto",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "A não-pensada vida.",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "Das fingidas fronteiras a mudança",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "O arado lhe não tolhe, nem o empece,",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "Per que concílios se o destino rege",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "Dos povos pacientes.",
+    1.0,
+    "poem_468"
+   ],
+   [
+    "Pouco mais no presente do futuro",
+    1.0,
+    "poem_468"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Dois é o prazer: gozar e o gozá-lo.\nNa taça que ergo, ondeio, e vejo,\nAs bolhas incluo no que sinto,\nE ao beber mais puro está no gosto.\n\nEste, seu escasso campo ora lavrando,\nOra solene, olhando-o com a vista\nDe quem a um filho olha, goza incerto\nA não-pensada vida.\nDas fingidas fronteiras a mudança\nO arado lhe não tolhe, nem o empece,\nPer que concílios se o destino rege\nDos povos pacientes.\nPouco mais no presente do futuro\nQue as ervas que",
+  "t1_total_s": 33.0,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.5,
+  "t2_n_versos": 12,
+  "t2_texto": "O presente a ser e a viver,\nno instante a aperceber-se,\nsem medo, sem ansiar,\naqui deixar os pensamentos.\n\nDo sol raiar ao pôr do dia,\nviver é o único desejo.\nNa brevíssima estadia,\nencontrar as razões de ser.\n\nNão no futuro o coração\npuxa, nem temor se faz;\no presente, breve e precioso,\né o tempo a se viver.",
+  "t2_total_s": 22.7
+ },
+ {
+  "voz": "reis",
+  "pergunta": "O que são os deuses?",
+  "n_contexto": 3,
+  "tok_user": 264,
+  "t1_fracao": 0.857,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "Passam, e os sonhos vãos que são",
+    1.0,
+    "poem_2624"
+   ],
+   [
+    "A terra muda dura.",
+    1.0,
+    "poem_2624"
+   ],
+   [
+    "que trazem rosas. Minhas são se as tenho.",
+    1.0,
+    "poem_2624"
+   ],
+   [
+    "Se as tenho, que mais quero?",
+    1.0,
+    "poem_2624"
+   ],
+   [
+    "Vivem a vida calma das raízes.",
+    1.0,
+    "poem_2150"
+   ],
+   [
+    "Seus desejos o Fado não oprime,",
+    1.0,
+    "poem_2150"
+   ],
+   [
+    "com a vida imortal",
+    1.0,
+    "poem_2150"
+   ],
+   [
+    "E, além disto, não existem…",
+    1.0,
+    "poem_2150"
+   ],
+   [
+    "A mole das formigas,",
+    1.0,
+    "poem_414"
+   ],
+   [
+    "tomá-la-ão elas por de um ser divino;",
+    0.972,
+    "poem_414"
+   ],
+   [
+    "mas eu não sou divino para mim.",
+    1.0,
+    "poem_414"
+   ],
+   [
+    "Assim talvez os",
+    0.811,
+    "poem_414"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Passam, e os sonhos vãos que são  \ndeusas.\nA terra muda dura.\nNem deuses, nem deusas,\nnem ideias\nque trazem rosas. Minhas são se as tenho.\nSe as tenho, que mais quero?\n\nVivem a vida calma das raízes.\nSeus desejos o Fado não oprime,\noprimindo-os\ncom a vida imortal\nque os contrispa.\nE, além disto, não existem…\n\nA mole das formigas,\ntomá-la-ão elas por de um ser divino;\nmas eu não sou divino para mim.\n\nAssim talvez os",
+  "t1_total_s": 33.9,
+  "t2_fracao": 0.143,
+  "t2_max_sim": 0.938,
+  "t2_n_versos": 7,
+  "t2_texto": "Passam, e os sonhos vazios que são  \nDeuses.\nAs nuvens aladas das estrelas,\nSilenciosas no azul aceno.\n\nNem deuses, nem estrellas tão perto,\nSombras que fugem à alcance do toque.\nSe alguma luz neles se adiverte,\nÉ o brilho dos olhos da noite que foge.",
+  "t2_total_s": 16.4
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "Quem és tu?",
+  "n_contexto": 4,
+  "tok_user": 227,
+  "t1_fracao": 0.154,
+  "t1_max_sim": 0.85,
+  "t1_n_versos": 13,
+  "t1_copiados": [
+   [
+    "Ser Maria da Graça,",
+    0.842,
+    "poem_1769"
+   ],
+   [
+    "Ser Maria das Dores —",
+    0.85,
+    "poem_3669"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Tu és sombra e luz,\nEm mim duas faces.\nSer Maria da Graça,\nSer Maria das Dores —\nQue almas nascem de uma?\n\nDeslembra-se a mim mesma,\nNaquela que aqui já não sou.\nSeres distintos ou um só eu?\nNo tempo, em mim, qual sequência?\n\nSe sou aquela bela,\nPor que outro me chama?\nQue mais são as coisas\nQuando se desfazem as sombras?",
+  "t1_total_s": 37.6
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "O que é fingir?",
+  "n_contexto": 3,
+  "tok_user": 204,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 16,
+  "t1_copiados": [
+   [
+    "Teu carinho, que fingido,",
+    1.0,
+    "poem_4286"
+   ],
+   [
+    "Dá-me o prazer de saber",
+    1.0,
+    "poem_4286"
+   ],
+   [
+    "Que inda não tens esquecido",
+    1.0,
+    "poem_4286"
+   ],
+   [
+    "O que o fingir tem de ser.",
+    1.0,
+    "poem_4286"
+   ],
+   [
+    "O poeta é um fingidor",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Finge tão completamente",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Que chega a fingir que é dor",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "A dor que deveras sente.",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "E os que lêem o que escreve,",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Na dor lida sentem bem,",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Não as duas que ele teve,",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Mas só a que eles não têm.",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "E assim nas calhas de roda",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Gira, a entreter a razão,",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Esse comboio de corda",
+    1.0,
+    "poem_4234"
+   ],
+   [
+    "Que se chama coração.",
+    1.0,
+    "poem_4234"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Teu carinho, que fingido,\nDá-me o prazer de saber\nQue inda não tens esquecido\nO que o fingir tem de ser.\n\n---\n\nO poeta é um fingidor\nFinge tão completamente\nQue chega a fingir que é dor\nA dor que deveras sente.\n\nE os que lêem o que escreve,\nNa dor lida sentem bem,\nNão as duas que ele teve,\nMas só a que eles não têm.\n\nE assim nas calhas de roda\nGira, a entreter a razão,\nEsse comboio de corda\nQue se chama coração.",
+  "t1_total_s": 27.9,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.627,
+  "t2_n_versos": 12,
+  "t2_texto": "Finge-se em nuvens altas,\nEnreda-se em rios baixos.\nA verdade é quem esconde,\nO fingimento é o que faz.\n\nTeça-se a teia do sonho,\nPrega-se o enredo da noite.\nNão é quem ama que finge,\nÉ quem odeia que esquive.\n\nFinge-se na flor da rosa,\nFinge-se na pena do vento.\nO fingir, arte sutil,\nTransforma o silêncio em canto.",
+  "t2_total_s": 19.1
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "O que é o mistério?",
+  "n_contexto": 3,
+  "tok_user": 255,
+  "t1_fracao": 0.929,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "o existir, o ser, o haver",
+    0.767,
+    "poem_2885"
+   ],
+   [
+    "Um ser, uma existência, um existir —",
+    1.0,
+    "poem_2885"
+   ],
+   [
+    "Um qualquer, que não este, por ser este —",
+    1.0,
+    "poem_2885"
+   ],
+   [
+    "Este é o problema que perturba mais.",
+    1.0,
+    "poem_2885"
+   ],
+   [
+    "O que é existir — não nós ou o mundo —",
+    1.0,
+    "poem_2885"
+   ],
+   [
+    "Mas existir em si?",
+    1.0,
+    "poem_2885"
+   ],
+   [
+    "A luz do sol: o mistério feito brilho,",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "Canto d'ave: o mistério feito voz",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "Entristecem-me pois. Só uma cousa",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "Uma vez descoberta não se evita",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "Nem evitar se pode: é o mistério",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "E o seu íntimo e (...) horror",
+    1.0,
+    "poem_862"
+   ],
+   [
+    "O horror nitidamente negro e",
+    0.862,
+    "poem_862"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "É um mistério  \no existir, o ser, o haver  \nUm ser, uma existência, um existir —  \nUm qualquer, que não este, por ser este —  \nEste é o problema que perturba mais.  \nO que é existir — não nós ou o mundo —  \nMas existir em si?\n\nA luz do sol: o mistério feito brilho,  \nCanto d'ave: o mistério feito voz  \nEntristecem-me pois. Só uma cousa  \nUma vez descoberta não se evita  \nNem evitar se pode: é o mistério  \nE o seu íntimo e (...) horror\n\nO horror nitidamente negro e",
+  "t1_total_s": 32.3,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.603,
+  "t2_n_versos": 11,
+  "t2_texto": "É um mistério a noite que se encerra,\nO horizonte sem fim, o mar de estrelas.\nÉ o suspiro do vento, leve e sútil,\nQue se perde na escuridão etérea.\n\nÉ o nascer da lua, radiante e solitário,\nQue ilumina as sombras da terra.\nÉ a silhueta das montanhas, imponentes,\nQue se abraçam ao céu vultosas e misteriosas.\n\nO ruído dos oceanos, sussurro eterno,\nE o canto do vento, em harmonia profana.\nNas profundezas da alma, pensamentos\nQue",
+  "t2_total_s": 24.8
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "Onde foi a tua infância?",
+  "n_contexto": 3,
+  "tok_user": 237,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 14,
+  "t1_copiados": [
+   [
+    "Porque deslembra quem então era eu?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Porque não há nenhuma semelhança",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Entre quem sou e fui?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "A criança que fui vive ou morreu?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Sou outro? Veio um outro em mim viver?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "A vida, que em mim flui, em que é que flui?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Houve em mim várias almas sucessivas,",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Ou sou um só inconsciente ser?",
+    1.0,
+    "poem_3135"
+   ],
+   [
+    "Naquele em que me tornei",
+    1.0,
+    "poem_343"
+   ],
+   [
+    "Cresci e esqueci.",
+    1.0,
+    "poem_343"
+   ],
+   [
+    "Tenho de meu, agora, um silencio, uma lei.",
+    0.974,
+    "poem_343"
+   ],
+   [
+    "Ganhei ou perdi?",
+    1.0,
+    "poem_343"
+   ],
+   [
+    "Vivi, sem saber,",
+    1.0,
+    "poem_2241"
+   ],
+   [
+    "Só para hoje ter",
+    1.0,
+    "poem_2241"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Porque deslembra quem então era eu?\n  \nPorque não há nenhuma semelhança\nEntre quem sou e fui?\n\nA criança que fui vive ou morreu?\nSou outro? Veio um outro em mim viver?\nA vida, que em mim flui, em que é que flui?\n\nHouve em mim várias almas sucessivas,\nOu sou um só inconsciente ser?\n  \n  \nNaquele em que me tornei\nCresci e esqueci.\nTenho de meu, agora, um silencio, uma lei.\nGanhei ou perdi?\n  \nVivi, sem saber,\nSó para hoje ter\nAquela lembrança.\n\nE",
+  "t1_total_s": 31.4,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.465,
+  "t2_n_versos": 9,
+  "t2_texto": "Por onde as brumas se misturam à tarde e ao mar,\nOnde a menina que fui corria descalça e livre,\nNo abraço da mãe ou no vento da liberdade amar,\nQue teixeira foi essa, bela e etérea, tua morada?\n\nSilêncio de tempos antigos, lei sem nome,\nNas horas que agora passam como gotas em janelas.\nPerdi? Ganhaste? Ou a vida é um luar incerto,\nRaiando a memória com o seu manto de neve?\n\nVivida no vazio do ser, na dança das ondas sonhadas,\nHoje reconhe",
+  "t2_total_s": 24.8
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "O que é sentir?",
+  "n_contexto": 3,
+  "tok_user": 216,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 18,
+  "t1_copiados": [
+   [
+    "O que sinto e o que penso",
+    1.0,
+    "poem_1460"
+   ],
+   [
+    "De ti é bem e é mal.",
+    1.0,
+    "poem_1460"
+   ],
+   [
+    "É como quando uma xícara",
+    1.0,
+    "poem_1460"
+   ],
+   [
+    "Tem o pires desigual.",
+    1.0,
+    "poem_1460"
+   ],
+   [
+    "Para sentir em pensar.",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Meu coração faz sorrir",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Meu coração a chorar.",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Depois de ficar e ir",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Hei-de ser quem vai chegar",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Para ser quem quer partir.",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Viver é não conseguir.",
+    1.0,
+    "poem_1057"
+   ],
+   [
+    "Estarei alegre amanhã...",
+    1.0,
+    "poem_3683"
+   ],
+   [
+    "O que se sente consiste",
+    1.0,
+    "poem_3683"
+   ],
+   [
+    "Sempre em qualquer coisa vã.",
+    1.0,
+    "poem_3683"
+   ],
+   [
+    "chuva, ou sol, ou preguiça...",
+    0.941,
+    "poem_3683"
+   ],
+   [
+    "Tudo influi, tudo transforma...",
+    1.0,
+    "poem_3683"
+   ],
+   [
+    "A alma não tem justiça,",
+    0.977,
+    "poem_3683"
+   ],
+   [
+    "A sensação não tem",
+    0.857,
+    "poem_3683"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "O que sinto e o que penso  \nDe ti é bem e é mal.  \nÉ como quando uma xícara  \nTem o pires desigual.\n\nPara sentir em pensar.  \nMeu coração faz sorrir  \nMeu coração a chorar.  \nDepois de ficar e ir  \nHei-de ser quem vai chegar  \nPara ser quem quer partir.\n\nViver é não conseguir.\n\nEstarei alegre amanhã...  \nO que se sente consiste  \nSempre em qualquer coisa vã.  \n\n chuva, ou sol, ou preguiça...  \nTudo influi, tudo transforma...  \nA alma não tem justiça,  \nA sensação não tem",
+  "t1_total_s": 33.9,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.649,
+  "t2_n_versos": 13,
+  "t2_texto": "O que é sentir?\n\nÉ como sombra e luz misturadas,\nÉ como quando a noite se esquiva.\nÉ quando o vento sussurra entre as árvores,\nE o silêncio responde com um suspiro.\n\nÉ o toque de uma flor no palmo da mão,\nÉ a brisa que acaricia o rosto.\nÉ o beijo do sol na face do amanhecer,\nÉ a chuva que cai sem fazer barulho.\n\nÉ quando a memória se desfaz em sonhos,\nÉ o grito que nem chega aos ouvidos.\nÉ o medo que se esconde atrás das costas,\nÉ o amor",
+  "t2_total_s": 28.1
+ },
+ {
+  "voz": "ortonimo",
+  "pergunta": "O que é a saudade?",
+  "n_contexto": 4,
+  "tok_user": 246,
+  "t1_fracao": 1.0,
+  "t1_max_sim": 1.0,
+  "t1_n_versos": 18,
+  "t1_copiados": [
+   [
+    "Dóis como a outra que é",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "A saudade de quanto",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "Existiu aqui ao pé.",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "Tu, que és do que nunca houve,",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "Punges como o passado",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "A que existir não aprouve.",
+    1.0,
+    "poem_2797"
+   ],
+   [
+    "Saudades, só portugueses",
+    1.0,
+    "poem_4384"
+   ],
+   [
+    "Conseguem senti-las bem,",
+    1.0,
+    "poem_4384"
+   ],
+   [
+    "Porque têm essa palavra",
+    1.0,
+    "poem_4384"
+   ],
+   [
+    "Para dizer que as têm.",
+    1.0,
+    "poem_4384"
+   ],
+   [
+    "Depois do dia vem noite,",
+    1.0,
+    "poem_219"
+   ],
+   [
+    "Depois da noite vem dia",
+    1.0,
+    "poem_219"
+   ],
+   [
+    "E depois de ter saudades",
+    1.0,
+    "poem_219"
+   ],
+   [
+    "Vêm as saudades que havia.",
+    1.0,
+    "poem_219"
+   ],
+   [
+    "Sombra com sombra a mais...",
+    1.0,
+    "poem_56"
+   ],
+   [
+    "Minha tristeza é esta —",
+    1.0,
+    "poem_56"
+   ],
+   [
+    "A das coisas reais.",
+    1.0,
+    "poem_56"
+   ],
+   [
+    "A outra, a que pertence",
+    1.0,
+    "poem_56"
+   ]
+  ],
+  "t1_guarda_ok": true,
+  "t1_guarda_motivos": [],
+  "t1_texto": "Dóis como a outra que é  \nA saudade de quanto  \nExistiu aqui ao pé.\n\nTu, que és do que nunca houve,  \nPunges como o passado  \nA que existir não aprouve.\n\nSaudades, só portugueses  \nConseguem senti-las bem,  \nPorque têm essa palavra  \nPara dizer que as têm.\n\nDepois do dia vem noite,  \nDepois da noite vem dia  \nE depois de ter saudades  \nVêm as saudades que havia.\n\nSombra com sombra a mais...  \nMinha tristeza é esta —  \nA das coisas reais.\n\nA outra, a que pertence",
+  "t1_total_s": 35.0,
+  "t2_fracao": 0.0,
+  "t2_max_sim": 0.553,
+  "t2_n_versos": 12,
+  "t2_texto": "Saudade é vaga esperança,\nmurmura a brisa do mar.\nÉ o vento que sem te tocar\ntoca em mim as almas caras.\n\nÉ passado de amores duros,\naté hoje, nos braços febris.\nÉ o sorriso que a noite guarda\ne a noite que não há de vir mais.\n\nNão é memória nem presente,\nsó se finge que é a memória.\nÉ um sonho que a vida acende\ncom as chamas do desamor.",
+  "t2_total_s": 23.0
+ }
+]

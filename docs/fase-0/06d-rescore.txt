@@ -1,0 +1,23 @@
+# Fase 0 / Passo 6 - reavaliacao com gabarito agrupado
+
+n = 10 perguntas julgadas (das 13 do conjunto de fumo)
+Metricas sobre o top-3 de cada encoder:
+  apt@3   = n de perguntas com >=1 candidato de nota 2 no top-3
+  util@3  = n de perguntas com >=1 candidato de nota >=1 no top-3
+  ganho@3 = soma das notas do top-3, normalizada pelo maximo (6 por pergunta)
+
+encoder                                      maxlen    p/s |  R@1  R@5 |  apt@3  util@3  ganho@3
+--------------------------------------------------------------------------------------------------------
+bge-m3                                         8192    1.2 |    3    5 |   6/10    9/10    56.7%
+multilingual-e5-base                            512    7.1 |    2    3 |   5/10    9/10    50.0%
+paraphrase-multilingual-MiniLM-L12-v2           128   43.8 |    1    4 |   6/10   10/10    50.0%
+serafim-335m-portuguese-pt-sentence-encoder     128    3.7 |    0    2 |   6/10    8/10    48.3%
+all-MiniLM-L6-v2                                256   59.3 |    0    0 |   2/10    9/10    35.0%
+
+## Comparacao: metrica antiga vs. nova
+A metrica antiga (R@k, gabarito de 1 poema) contra a nova (gabarito agrupado).
+  bge-m3                                       R@1=3/13 ( 23%)  ->  util@3=9/10 ( 90%)
+  multilingual-e5-base                         R@1=2/13 ( 15%)  ->  util@3=9/10 ( 90%)
+  paraphrase-multilingual-MiniLM-L12-v2        R@1=1/13 (  8%)  ->  util@3=10/10 (100%)
+  serafim-335m-portuguese-pt-sentence-encoder  R@1=0/13 (  0%)  ->  util@3=8/10 ( 80%)
+  all-MiniLM-L6-v2                             R@1=0/13 (  0%)  ->  util@3=9/10 ( 90%)

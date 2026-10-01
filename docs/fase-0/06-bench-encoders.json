@@ -1,0 +1,802 @@
+[
+ {
+  "modelo": "PORTULAN/serafim-335m-portuguese-pt-sentence-encoder-ir",
+  "dim": 1024,
+  "max_seq_length": 128,
+  "load_s": 152.9,
+  "embed_corpus_s": 566.1,
+  "poemas_por_s": 3.7,
+  "rss_pico_mb": 1887.0,
+  "rss_delta_mb": 1480.0,
+  "indice_mb": 8.5,
+  "smoke_r1": 0,
+  "smoke_r5": 2,
+  "smoke_r10": 3,
+  "smoke_n": 13,
+  "detalhe": [
+   {
+    "voz": "ortonimo",
+    "q": "quando acordamos, o sítio prometido desaparece e fica s",
+    "esperado": "poem_100",
+    "posicao": null,
+    "top3": [
+     "poem_1662",
+     "poem_2552",
+     "poem_208"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram ",
+    "esperado": "poem_1000",
+    "posicao": null,
+    "top3": [
+     "poem_3302",
+     "poem_2649",
+     "poem_3306"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia ",
+    "esperado": "poem_135",
+    "posicao": 5,
+    "top3": [
+     "poem_3230",
+     "poem_2443",
+     "poem_350"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego ",
+    "esperado": "poem_163",
+    "posicao": null,
+    "top3": [
+     "poem_214",
+     "poem_2567",
+     "poem_1536"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; quer",
+    "esperado": "poem_17",
+    "posicao": null,
+    "top3": [
+     "poem_2944",
+     "poem_2922",
+     "poem_2282"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "já fui criança e não sabia da morte; agora que sei, há ",
+    "esperado": "poem_1866",
+    "posicao": null,
+    "top3": [
+     "poem_2254",
+     "poem_991",
+     "poem_2282"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "por que é que as pessoas acham melancólico o fim do dia",
+    "esperado": "poem_1019",
+    "posicao": null,
+    "top3": [
+     "poem_2424",
+     "poem_1323",
+     "poem_3373"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "o que fazemos não deixa marca; tudo continua igual depo",
+    "esperado": "poem_1093",
+    "posicao": 9,
+    "top3": [
+     "poem_4383",
+     "poem_2805",
+     "poem_1096"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que m",
+    "esperado": "poem_2566",
+    "posicao": null,
+    "top3": [
+     "poem_4369",
+     "poem_4315",
+     "poem_2208"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "queria parar de me sentir existir e ser apenas aquilo q",
+    "esperado": "poem_2677",
+    "posicao": null,
+    "top3": [
+     "poem_4369",
+     "poem_3298",
+     "poem_440"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "uma brisa leve faz-me querer partir para outro lugar se",
+    "esperado": "poem_1046",
+    "posicao": null,
+    "top3": [
+     "poem_3923",
+     "poem_77",
+     "poem_2439"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é defini",
+    "esperado": "poem_1440",
+    "posicao": 4,
+    "top3": [
+     "poem_932",
+     "poem_1363",
+     "poem_4320"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperado": "poem_116",
+    "posicao": null,
+    "top3": [
+     "poem_3040",
+     "poem_280",
+     "poem_2649"
+    ]
+   }
+  ]
+ },
+ {
+  "modelo": "intfloat/multilingual-e5-base",
+  "dim": 768,
+  "max_seq_length": 512,
+  "load_s": 118.1,
+  "embed_corpus_s": 293.1,
+  "poemas_por_s": 7.1,
+  "rss_pico_mb": 2180.0,
+  "rss_delta_mb": 1534.0,
+  "indice_mb": 6.4,
+  "smoke_r1": 2,
+  "smoke_r5": 3,
+  "smoke_r10": 5,
+  "smoke_n": 13,
+  "detalhe": [
+   {
+    "voz": "ortonimo",
+    "q": "quando acordamos, o sítio prometido desaparece e fica s",
+    "esperado": "poem_100",
+    "posicao": null,
+    "top3": [
+     "poem_2046",
+     "poem_4242",
+     "poem_4257"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram ",
+    "esperado": "poem_1000",
+    "posicao": null,
+    "top3": [
+     "poem_3788",
+     "poem_133",
+     "poem_1368"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia ",
+    "esperado": "poem_135",
+    "posicao": 1,
+    "top3": [
+     "poem_135",
+     "poem_1794",
+     "poem_350"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego ",
+    "esperado": "poem_163",
+    "posicao": null,
+    "top3": [
+     "poem_4372",
+     "poem_1017",
+     "poem_2795"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; quer",
+    "esperado": "poem_17",
+    "posicao": 7,
+    "top3": [
+     "poem_4372",
+     "poem_23",
+     "poem_2677"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "já fui criança e não sabia da morte; agora que sei, há ",
+    "esperado": "poem_1866",
+    "posicao": null,
+    "top3": [
+     "poem_1242",
+     "poem_1957",
+     "poem_4242"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "por que é que as pessoas acham melancólico o fim do dia",
+    "esperado": "poem_1019",
+    "posicao": 7,
+    "top3": [
+     "poem_1174",
+     "poem_1323",
+     "poem_2532"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "o que fazemos não deixa marca; tudo continua igual depo",
+    "esperado": "poem_1093",
+    "posicao": 1,
+    "top3": [
+     "poem_1093",
+     "poem_2435",
+     "poem_1809"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que m",
+    "esperado": "poem_2566",
+    "posicao": null,
+    "top3": [
+     "poem_465",
+     "poem_4227",
+     "poem_1017"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "queria parar de me sentir existir e ser apenas aquilo q",
+    "esperado": "poem_2677",
+    "posicao": 2,
+    "top3": [
+     "poem_2438",
+     "poem_2677",
+     "poem_3254"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "uma brisa leve faz-me querer partir para outro lugar se",
+    "esperado": "poem_1046",
+    "posicao": null,
+    "top3": [
+     "poem_3923",
+     "poem_430",
+     "poem_2439"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é defini",
+    "esperado": "poem_1440",
+    "posicao": null,
+    "top3": [
+     "poem_2589",
+     "poem_2087",
+     "poem_3837"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperado": "poem_116",
+    "posicao": null,
+    "top3": [
+     "poem_3906",
+     "poem_2312",
+     "poem_3040"
+    ]
+   }
+  ]
+ },
+ {
+  "modelo": "BAAI/bge-m3",
+  "dim": 1024,
+  "max_seq_length": 8192,
+  "load_s": 268.5,
+  "embed_corpus_s": 1807.6,
+  "poemas_por_s": 1.2,
+  "rss_pico_mb": 2838.0,
+  "rss_delta_mb": 1766.0,
+  "indice_mb": 8.5,
+  "smoke_r1": 3,
+  "smoke_r5": 5,
+  "smoke_r10": 5,
+  "smoke_n": 13,
+  "detalhe": [
+   {
+    "voz": "ortonimo",
+    "q": "quando acordamos, o sítio prometido desaparece e fica s",
+    "esperado": "poem_100",
+    "posicao": null,
+    "top3": [
+     "poem_1794",
+     "poem_2783",
+     "poem_135"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram ",
+    "esperado": "poem_1000",
+    "posicao": null,
+    "top3": [
+     "poem_872",
+     "poem_465",
+     "poem_4288"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia ",
+    "esperado": "poem_135",
+    "posicao": 3,
+    "top3": [
+     "poem_1794",
+     "poem_2443",
+     "poem_135"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego ",
+    "esperado": "poem_163",
+    "posicao": null,
+    "top3": [
+     "poem_562",
+     "poem_636",
+     "poem_844"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; quer",
+    "esperado": "poem_17",
+    "posicao": 2,
+    "top3": [
+     "poem_23",
+     "poem_17",
+     "poem_3848"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "já fui criança e não sabia da morte; agora que sei, há ",
+    "esperado": "poem_1866",
+    "posicao": null,
+    "top3": [
+     "poem_175",
+     "poem_263",
+     "poem_172"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "por que é que as pessoas acham melancólico o fim do dia",
+    "esperado": "poem_1019",
+    "posicao": null,
+    "top3": [
+     "poem_344",
+     "poem_2371",
+     "poem_4146"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "o que fazemos não deixa marca; tudo continua igual depo",
+    "esperado": "poem_1093",
+    "posicao": 1,
+    "top3": [
+     "poem_1093",
+     "poem_2985",
+     "poem_2435"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que m",
+    "esperado": "poem_2566",
+    "posicao": 1,
+    "top3": [
+     "poem_2566",
+     "poem_1833",
+     "poem_356"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "queria parar de me sentir existir e ser apenas aquilo q",
+    "esperado": "poem_2677",
+    "posicao": 1,
+    "top3": [
+     "poem_2677",
+     "poem_2438",
+     "poem_1136"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "uma brisa leve faz-me querer partir para outro lugar se",
+    "esperado": "poem_1046",
+    "posicao": null,
+    "top3": [
+     "poem_3923",
+     "poem_430",
+     "poem_1053"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é defini",
+    "esperado": "poem_1440",
+    "posicao": null,
+    "top3": [
+     "poem_4320",
+     "poem_2253",
+     "poem_2589"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperado": "poem_116",
+    "posicao": null,
+    "top3": [
+     "poem_1183",
+     "poem_3906",
+     "poem_280"
+    ]
+   }
+  ]
+ },
+ {
+  "modelo": "paraphrase-multilingual-MiniLM-L12-v2",
+  "dim": 384,
+  "max_seq_length": 128,
+  "load_s": 49.9,
+  "embed_corpus_s": 47.5,
+  "poemas_por_s": 43.8,
+  "rss_pico_mb": 1740.0,
+  "rss_delta_mb": 559.0,
+  "indice_mb": 3.2,
+  "smoke_r1": 1,
+  "smoke_r5": 4,
+  "smoke_r10": 7,
+  "smoke_n": 13,
+  "detalhe": [
+   {
+    "voz": "ortonimo",
+    "q": "quando acordamos, o sítio prometido desaparece e fica s",
+    "esperado": "poem_100",
+    "posicao": null,
+    "top3": [
+     "poem_3664",
+     "poem_1033",
+     "poem_230"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram ",
+    "esperado": "poem_1000",
+    "posicao": null,
+    "top3": [
+     "poem_1789",
+     "poem_3302",
+     "poem_942"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia ",
+    "esperado": "poem_135",
+    "posicao": 5,
+    "top3": [
+     "poem_1794",
+     "poem_1401",
+     "poem_835"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego ",
+    "esperado": "poem_163",
+    "posicao": 8,
+    "top3": [
+     "poem_214",
+     "poem_2438",
+     "poem_562"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; quer",
+    "esperado": "poem_17",
+    "posicao": 5,
+    "top3": [
+     "poem_1062",
+     "poem_1250",
+     "poem_2508"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "já fui criança e não sabia da morte; agora que sei, há ",
+    "esperado": "poem_1866",
+    "posicao": null,
+    "top3": [
+     "poem_2915",
+     "poem_2254",
+     "poem_175"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "por que é que as pessoas acham melancólico o fim do dia",
+    "esperado": "poem_1019",
+    "posicao": null,
+    "top3": [
+     "poem_228",
+     "poem_4146",
+     "poem_430"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "o que fazemos não deixa marca; tudo continua igual depo",
+    "esperado": "poem_1093",
+    "posicao": 3,
+    "top3": [
+     "poem_2805",
+     "poem_373",
+     "poem_1093"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que m",
+    "esperado": "poem_2566",
+    "posicao": 1,
+    "top3": [
+     "poem_2566",
+     "poem_3778",
+     "poem_356"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "queria parar de me sentir existir e ser apenas aquilo q",
+    "esperado": "poem_2677",
+    "posicao": 9,
+    "top3": [
+     "poem_2438",
+     "poem_4369",
+     "poem_214"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "uma brisa leve faz-me querer partir para outro lugar se",
+    "esperado": "poem_1046",
+    "posicao": null,
+    "top3": [
+     "poem_3625",
+     "poem_3362",
+     "poem_457"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é defini",
+    "esperado": "poem_1440",
+    "posicao": 6,
+    "top3": [
+     "poem_4320",
+     "poem_2789",
+     "poem_2589"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperado": "poem_116",
+    "posicao": null,
+    "top3": [
+     "poem_280",
+     "poem_4096",
+     "poem_949"
+    ]
+   }
+  ]
+ },
+ {
+  "modelo": "all-MiniLM-L6-v2",
+  "dim": 384,
+  "max_seq_length": 256,
+  "load_s": 13.8,
+  "embed_corpus_s": 35.1,
+  "poemas_por_s": 59.3,
+  "rss_pico_mb": 1418.0,
+  "rss_delta_mb": 122.0,
+  "indice_mb": 3.2,
+  "smoke_r1": 0,
+  "smoke_r5": 0,
+  "smoke_r10": 0,
+  "smoke_n": 13,
+  "detalhe": [
+   {
+    "voz": "ortonimo",
+    "q": "quando acordamos, o sítio prometido desaparece e fica s",
+    "esperado": "poem_100",
+    "posicao": null,
+    "top3": [
+     "poem_869",
+     "poem_1274",
+     "poem_3391"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "depois de gostar de alguém, as coisas em volta ficaram ",
+    "esperado": "poem_1000",
+    "posicao": null,
+    "top3": [
+     "poem_205",
+     "poem_2110",
+     "poem_934"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "ver uma embarcação a entrar de manhã enche-me de ânsia ",
+    "esperado": "poem_135",
+    "posicao": null,
+    "top3": [
+     "poem_2994",
+     "poem_158",
+     "poem_2547"
+    ]
+   },
+   {
+    "voz": "campos",
+    "q": "sinto que não sou ninguém e ao mesmo tempo que carrego ",
+    "esperado": "poem_163",
+    "posicao": null,
+    "top3": [
+     "poem_3538",
+     "poem_2508",
+     "poem_165"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "tenho medo de qualquer mudança, mesmo para melhor; quer",
+    "esperado": "poem_17",
+    "posicao": null,
+    "top3": [
+     "poem_23",
+     "poem_4012",
+     "poem_125"
+    ]
+   },
+   {
+    "voz": "reis",
+    "q": "já fui criança e não sabia da morte; agora que sei, há ",
+    "esperado": "poem_1866",
+    "posicao": null,
+    "top3": [
+     "poem_584",
+     "poem_3135",
+     "poem_545"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "por que é que as pessoas acham melancólico o fim do dia",
+    "esperado": "poem_1019",
+    "posicao": null,
+    "top3": [
+     "poem_357",
+     "poem_2532",
+     "poem_1323"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "o que fazemos não deixa marca; tudo continua igual depo",
+    "esperado": "poem_1093",
+    "posicao": null,
+    "top3": [
+     "poem_3142",
+     "poem_548",
+     "poem_3173"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "olho a paisagem sem sentir nada por ela, e é isso que m",
+    "esperado": "poem_2566",
+    "posicao": null,
+    "top3": [
+     "poem_3350",
+     "poem_3454",
+     "poem_1132"
+    ]
+   },
+   {
+    "voz": "caeiro",
+    "q": "queria parar de me sentir existir e ser apenas aquilo q",
+    "esperado": "poem_2677",
+    "posicao": null,
+    "top3": [
+     "poem_821",
+     "poem_2695",
+     "poem_174"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "uma brisa leve faz-me querer partir para outro lugar se",
+    "esperado": "poem_1046",
+    "posicao": null,
+    "top3": [
+     "poem_3350",
+     "poem_2189",
+     "poem_3923"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "um gesto pequeno à mesa diz-me que a despedida é defini",
+    "esperado": "poem_1440",
+    "posicao": null,
+    "top3": [
+     "poem_3837",
+     "poem_2872",
+     "poem_1855"
+    ]
+   },
+   {
+    "voz": "ortonimo",
+    "q": "ofereço-lhe o meu afecto e ela nem repara",
+    "esperado": "poem_116",
+    "posicao": null,
+    "top3": [
+     "poem_574",
+     "poem_2264",
+     "poem_3019"
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,65 @@
+# Fase 0 / Passo 4 - analise de latencia
+
+## Varredura de threads (qwen2.5:7b @ 1500 tok)
+
+ threads  prefill tok/s  decode tok/s
+       4           15.1           5.3
+       6           19.5           5.9
+       8           21.6           6.4
+      10           22.8           6.7
+
+-> monotonico: mais threads e melhor ate 10. A exclusao dos LP-E (12-13)
+   foi correcta, mas dentro de 0-11 nao ha ponto de saturacao.
+
+
+## Grelha a threads=10: tempo de espera decomposto
+
+modelo                         ctx  prefill s  decode s  total s  % prefill
+llama3.1:8b-instruct-q4_K_M    500       28.1      15.7     43.8        64%
+llama3.1:8b-instruct-q4_K_M   1500       83.4      21.1    104.5        80%
+llama3.1:8b-instruct-q4_K_M   3000      192.1      32.3    224.4        86%
+qwen2.5:3b-instruct-q4_K_M     500       10.0       6.1     16.1        62%
+qwen2.5:3b-instruct-q4_K_M    1500       31.4      13.2     44.6        70%
+qwen2.5:3b-instruct-q4_K_M    3000       75.7      14.1     89.8        84%
+qwen2.5:7b-instruct-q4_K_M     500       25.4      18.6     44.0        58%
+qwen2.5:7b-instruct-q4_K_M    1500       84.1      23.5    107.6        78%
+qwen2.5:7b-instruct-q4_K_M    3000      170.3      20.6    190.9        89%
+
+
+## Contra o orcamento de latencia (FASE-0.md §7.1)
+
+Alvo: prefill<8s, total<20s | Toleravel: prefill<20s, total<45s | Inutilizavel: prefill>40s, total>90s
+
+modelo                         ctx   prefill    total  veredicto
+llama3.1:8b-instruct-q4_K_M    500     28.1s    43.8s  marginal
+llama3.1:8b-instruct-q4_K_M   1500     83.4s   104.5s  INUTILIZAVEL
+llama3.1:8b-instruct-q4_K_M   3000    192.1s   224.4s  INUTILIZAVEL
+qwen2.5:3b-instruct-q4_K_M     500     10.0s    16.1s  toleravel
+qwen2.5:3b-instruct-q4_K_M    1500     31.4s    44.6s  marginal
+qwen2.5:3b-instruct-q4_K_M    3000     75.7s    89.8s  INUTILIZAVEL
+qwen2.5:7b-instruct-q4_K_M     500     25.4s    44.0s  marginal
+qwen2.5:7b-instruct-q4_K_M    1500     84.1s   107.6s  INUTILIZAVEL
+qwen2.5:7b-instruct-q4_K_M    3000    170.3s   190.9s  INUTILIZAVEL
+
+
+## Estimativa do plano vs. medicao (contexto 1500)
+
+                      decode estimado   medido |  prefill estimado   medido
+3-4B                      15-22 tok/s     15.2 |            8-15 s     31 s
+7-8B                        6-9 tok/s      6.7 |           20-45 s     84 s
+
+-> decode: estimativa por largura de banda de memoria ACERTOU.
+-> prefill: estimativa 2-4x OPTIMISTA. Causa provavel: assumi que o
+   prefill, sendo compute-bound, aproveitaria 14 threads AVX2; mas este
+   e um chip U de 15-28 W com apenas 2 P-cores.
+
+-> previsao central do plano ('o prefill domina a espera'): CONFIRMADA,
+   e mais forte do que previsto (78% da espera no 7B @1500).
+
+
+## Ressalva sobre a flag de throttling
+
+A flag 'throttling_suspeito' dispara quando o prefill cai monotonicamente
+entre repeticoes. Reduzi REPS de 3 para 2, logo 'monotonico' passou a
+significar apenas 'rep2 < rep1' -- 50% de probabilidade por puro ruido.
+A flag e NAO-INFORMATIVA nesta corrida. Ignorar.

@@ -1,0 +1,40 @@
+[
+ {"q": "quando acordamos, o sítio prometido desaparece e fica só água",
+  "esperado": ["poem_100"], "voz": "ortonimo", "nota": "AS ILHAS AFORTUNADAS"},
+
+ {"q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+  "esperado": ["poem_1000"], "voz": "caeiro", "nota": "Quando eu nao te tinha"},
+
+ {"q": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe",
+  "esperado": ["poem_135"], "voz": "campos", "nota": "ODE MARITIMA"},
+
+ {"q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+  "esperado": ["poem_163"], "voz": "campos", "nota": "TABACARIA"},
+
+ {"q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+  "esperado": ["poem_17"], "voz": "reis", "nota": "Sofro, Lidia, do medo do destino"},
+
+ {"q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+  "esperado": ["poem_1866"], "voz": "reis", "nota": "Como este infante que alourado dorme"},
+
+ {"q": "por que é que as pessoas acham melancólico o fim do dia? é só o fim do dia",
+  "esperado": ["poem_1019"], "voz": "caeiro", "nota": "Nunca sei como e que se pode achar um poente triste"},
+
+ {"q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+  "esperado": ["poem_1093"], "voz": "caeiro", "nota": "XLII - Passou a diligencia"},
+
+ {"q": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+  "esperado": ["poem_2566"], "voz": "caeiro", "nota": "Pouco a pouco o campo se alarga"},
+
+ {"q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+  "esperado": ["poem_2677"], "voz": "caeiro", "nota": "Eu queria ter o tempo e o sossego"},
+
+ {"q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+  "esperado": ["poem_1046"], "voz": "ortonimo", "nota": "O PESO DE HAVER O MUNDO"},
+
+ {"q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+  "esperado": ["poem_1440"], "voz": "ortonimo", "nota": "O guardanapo dobrado"},
+
+ {"q": "ofereço-lhe o meu afecto e ela nem repara",
+  "esperado": ["poem_116"], "voz": "ortonimo", "nota": "Tens um livro que nao les"}
+]

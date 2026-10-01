@@ -1,0 +1,44 @@
+[
+ {
+  "n_poemas": 1,
+  "tok_user": 168,
+  "tok_total": 481,
+  "frio_prefill_s": 31.36,
+  "quente_prefill_s": 10.67,
+  "decode_s": 23.1,
+  "decode_tok": 137,
+  "decode_tps": 5.9,
+  "total_frio_s": 39.6,
+  "total_quente_s": 33.7,
+  "temp_c": 60.0,
+  "frio_min_max": [
+   27.92,
+   32.06
+  ],
+  "quente_min_max": [
+   10.21,
+   10.86
+  ]
+ },
+ {
+  "n_poemas": 3,
+  "tok_user": 448,
+  "tok_total": 761,
+  "frio_prefill_s": 45.02,
+  "quente_prefill_s": 27.69,
+  "decode_s": 26.0,
+  "decode_tok": 150,
+  "decode_tps": 5.8,
+  "total_frio_s": 67.8,
+  "total_quente_s": 53.7,
+  "temp_c": 61.0,
+  "frio_min_max": [
+   36.05,
+   45.79
+  ],
+  "quente_min_max": [
+   24.7,
+   28.05
+  ]
+ }
+]

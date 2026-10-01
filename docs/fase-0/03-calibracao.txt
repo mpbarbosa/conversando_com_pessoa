@@ -1,0 +1,45 @@
+# Fase 0 - Passo 3: calibracao da sessao de medicao
+data       2026-09-30T23:26:20-03:00
+
+## energia
+na tomada (1=sim): 1
+perfil de energia: performance
+governor         : powersave
+EPP              : performance
+
+## cpu
+CPU(s):                                  14
+Model name:                              Intel(R) Core(TM) Ultra 5 135U
+CPU(s) scaling MHz:                      57%
+CPU max MHz:                             4400,0000
+CPU min MHz:                             400,0000
+
+## topologia (P=4400, E=3600, LP-E=2100)
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE    MAXMHZ   MINMHZ       MHZ
+  0    0      0    0 8:8:2:0          yes 4400,0000 400,0000 1200,0000
+  1    0      0    0 8:8:2:0          yes 4400,0000 400,0000 1212,0940
+  2    0      0    1 12:12:3:0        yes 4400,0000 400,0000 2385,8091
+  3    0      0    1 12:12:3:0        yes 4400,0000 400,0000  400,0000
+  4    0      0    2 0:0:0:0          yes 3600,0000 400,0000 3160,0510
+  5    0      0    3 2:2:0:0          yes 3600,0000 400,0000 3158,2041
+  6    0      0    4 4:4:0:0          yes 3600,0000 400,0000 2900,0530
+  7    0      0    5 6:6:0:0          yes 3600,0000 400,0000 3195,2439
+  8    0      0    6 1:0              yes 3600,0000 400,0000 3137,2561
+  9    0      0    7 10:10:1:0        yes 3600,0000 400,0000 2091,8101
+ 10    0      0    8 1:0              yes 3600,0000 400,0000 1509,0090
+ 11    0      0    9 14:14:1:0        yes 3600,0000 400,0000  400,0000
+ 12    0      0   10 64:64:8          yes 2100,0000 400,0000  400,0000
+ 13    0      0   11 66:66:8          yes 2100,0000 400,0000  400,0000
+
+## memoria
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi        11Gi       948Mi       1,4Gi        19Gi        18Gi
+Swap:          2,0Gi       943Mi       1,1Gi
+
+## temperatura inicial
+coretemp-isa-0000
+Package id 0:  +55.0°C  (high = +110.0°C, crit = +110.0°C)
+Core 0:        +52.0°C  (high = +110.0°C, crit = +110.0°C)
+
+## disco
+/dev/nvme0n1p5  441G  264G  155G  63% /

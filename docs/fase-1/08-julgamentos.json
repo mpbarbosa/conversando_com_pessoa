@@ -1,0 +1,251 @@
+{
+ "_meta": {
+  "escala": "2 = responde bem, seria boa base para o chatbot; 1 = serviria SE NADA MELHOR HOUVESSE; 0 = não serve",
+  "aperto": "A nota 1 é deliberadamente mais estrita que na Fase 0, onde fui permissivo e a métrica saturou (o controlo inglês fez 9/10 em util@3).",
+  "avaliador": "único (Claude), 2026-10-01. Não é medição intersubjectiva.",
+  "metodo": "Pooling TREC: top-5 do encoder denso + top-5 do BM25, deduplicado por grupo, ordenado por id para não revelar o ranking de nenhum.",
+  "cobertura": "ver _progresso",
+  "pool_completado": "7 gabaritos do conjunto de fumo da Fase 0 não entraram no pool (top-5 de cada recuperador) e foram acrescentados à mão, todos confirmados como nota 2. Diagnóstico das posições reais em 08-RELATORIO.md §3."
+ },
+ "_progresso": {
+  "julgadas": [
+   "q01",
+   "q02",
+   "q03",
+   "q04",
+   "q05",
+   "q11",
+   "q12",
+   "q13",
+   "q14",
+   "q15",
+   "q21",
+   "q22",
+   "q23",
+   "q24",
+   "q25",
+   "q31",
+   "q32",
+   "q33",
+   "q34",
+   "q35"
+  ],
+  "total_perguntas": 40
+ },
+ "q01": {
+  "poem_1019": 2,
+  "poem_3458": 2,
+  "poem_2589": 1,
+  "poem_3364": 1,
+  "poem_3369": 1,
+  "poem_1027": 0,
+  "poem_1108": 0,
+  "poem_1487": 0,
+  "poem_3339": 0
+ },
+ "q02": {
+  "poem_1093": 2,
+  "poem_1096": 2,
+  "poem_991": 2,
+  "poem_367": 1,
+  "poem_2655": 0,
+  "poem_3256": 0,
+  "poem_3327": 0,
+  "poem_3455": 0
+ },
+ "q03": {
+  "poem_2649": 2,
+  "poem_3214": 2,
+  "poem_356": 2,
+  "poem_1463": 1,
+  "poem_1482": 1,
+  "poem_3364": 1,
+  "poem_1456": 0,
+  "poem_3236": 0,
+  "poem_3248": 0,
+  "poem_3534": 0,
+  "poem_2566": 2
+ },
+ "q04": {
+  "poem_2677": 2,
+  "poem_2659": 2,
+  "poem_3214": 1,
+  "poem_1177": 0,
+  "poem_3458": 0,
+  "poem_348": 0,
+  "poem_367": 0
+ },
+ "q05": {
+  "poem_643": 2,
+  "poem_2649": 2,
+  "poem_1463": 1,
+  "poem_1093": 0,
+  "poem_2566": 0,
+  "poem_2589": 0,
+  "poem_3507": 0,
+  "poem_3518": 0,
+  "poem_598": 0,
+  "poem_606": 0,
+  "poem_629": 2
+ },
+ "q11": {
+  "poem_1053": 2,
+  "poem_135": 2,
+  "poem_948": 2,
+  "poem_4415": 1,
+  "poem_1245": 0,
+  "poem_2552": 0
+ },
+ "q12": {
+  "poem_2567": 2,
+  "poem_81": 2,
+  "poem_208": 1,
+  "poem_2579": 1,
+  "poem_4398": 1,
+  "poem_20": 0,
+  "poem_224": 0,
+  "poem_553": 0,
+  "poem_163": 2
+ },
+ "q13": {
+  "poem_2459": 2,
+  "poem_1053": 1,
+  "poem_135": 1,
+  "poem_2868": 1,
+  "poem_3005": 1,
+  "poem_930": 0
+ },
+ "q14": {
+  "poem_2481": 2,
+  "poem_1120": 1,
+  "poem_2269": 1,
+  "poem_28": 1,
+  "poem_924": 1,
+  "poem_934": 1,
+  "poem_3560": 0,
+  "poem_4439": 0
+ },
+ "q15": {
+  "poem_3440": 2,
+  "poem_2428": 2,
+  "poem_3338": 2,
+  "poem_779": 2,
+  "poem_3132": 1,
+  "poem_1032": 0,
+  "poem_1115": 0,
+  "poem_135": 0,
+  "poem_2579": 0,
+  "poem_3326": 0
+ },
+ "q21": {
+  "poem_17": 2,
+  "poem_23": 2,
+  "poem_2716": 2,
+  "poem_2596": 1,
+  "poem_4189": 1,
+  "poem_468": 1,
+  "poem_1957": 0,
+  "poem_3996": 0
+ },
+ "q22": {
+  "poem_1866": 2,
+  "poem_3993": 2,
+  "poem_2141": 1,
+  "poem_2702": 1,
+  "poem_378": 1,
+  "poem_397": 1,
+  "poem_1957": 0,
+  "poem_4366": 0,
+  "poem_782": 0
+ },
+ "q23": {
+  "poem_2815": 2,
+  "poem_2729": 2,
+  "poem_402": 2,
+  "poem_2733": 1,
+  "poem_3427": 1,
+  "poem_3437": 1,
+  "poem_4394": 1,
+  "poem_640": 1,
+  "poem_2702": 0
+ },
+ "q24": {
+  "poem_2150": 2,
+  "poem_396": 2,
+  "poem_2161": 1,
+  "poem_2599": 1,
+  "poem_3411": 1,
+  "poem_414": 1,
+  "poem_763": 1,
+  "poem_619": 0
+ },
+ "q25": {
+  "poem_2596": 2,
+  "poem_2629": 2,
+  "poem_4055": 2,
+  "poem_2592": 1,
+  "poem_2805": 1,
+  "poem_2832": 1,
+  "poem_2945": 1,
+  "poem_3408": 1,
+  "poem_3427": 1
+ },
+ "q31": {
+  "poem_4257": 2,
+  "poem_1370": 1,
+  "poem_2046": 1,
+  "poem_2486": 1,
+  "poem_4303": 1,
+  "poem_582": 1,
+  "poem_1536": 0,
+  "poem_219": 0,
+  "poem_873": 0,
+  "poem_100": 2
+ },
+ "q32": {
+  "poem_2197": 2,
+  "poem_2439": 2,
+  "poem_3923": 2,
+  "poem_430": 2,
+  "poem_3038": 1,
+  "poem_3470": 1,
+  "poem_1406": 0,
+  "poem_3280": 0,
+  "poem_4289": 0,
+  "poem_4447": 0,
+  "poem_1046": 2
+ },
+ "q33": {
+  "poem_3837": 2,
+  "poem_3834": 2,
+  "poem_3544": 2,
+  "poem_4320": 2,
+  "poem_202": 2,
+  "poem_2506": 1,
+  "poem_2548": 1,
+  "poem_2010": 0,
+  "poem_2087": 0,
+  "poem_2384": 0,
+  "poem_1440": 2
+ },
+ "q34": {
+  "poem_3040": 2,
+  "poem_2312": 2,
+  "poem_2273": 1,
+  "poem_949": 1,
+  "poem_2293": 0,
+  "poem_3651": 0,
+  "poem_3809": 0,
+  "poem_852": 0,
+  "poem_116": 2
+ },
+ "q35": {
+  "poem_4250": 2,
+  "poem_1879": 2,
+  "poem_2329": 2,
+  "poem_2048": 1,
+  "poem_340": 1,
+  "poem_62": 1,
+  "poem_850": 1
+ }
+}

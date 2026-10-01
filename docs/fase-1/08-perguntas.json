@@ -1,0 +1,52 @@
+{
+ "_meta": {
+  "n": 40,
+  "nota": "10 por voz. As marcadas com origem=fumo vêm do smoke-set.json da Fase 0 e já têm julgamentos parciais em 06c-julgamentos.json. As perguntas parafraseiam o tema sem reutilizar frases dos poemas, para não medir correspondência lexical.",
+  "aviso": "O gabarito é de relevância GRADUADA (0/1/2) sobre candidatos agrupados, não um poema esperado por pergunta. A redundância temática do corpus invalida gabarito único — ver FASE-0-RELATORIO.md §correcção."
+ },
+ "perguntas": [
+  {"id": "q01", "voz": "caeiro", "q": "por que é que as pessoas acham melancólico o fim do dia?", "origem": "fumo"},
+  {"id": "q02", "voz": "caeiro", "q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos", "origem": "fumo"},
+  {"id": "q03", "voz": "caeiro", "q": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela", "origem": "fumo"},
+  {"id": "q04", "voz": "caeiro", "q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem", "origem": "fumo"},
+  {"id": "q05", "voz": "caeiro", "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas", "origem": "fumo"},
+  {"id": "q06", "voz": "caeiro", "q": "as coisas não escondem nenhum sentido por baixo de si"},
+  {"id": "q07", "voz": "caeiro", "q": "pensar estraga o que se está a ver"},
+  {"id": "q08", "voz": "caeiro", "q": "um rebanho a passar numa encosta, e nada mais do que isso"},
+  {"id": "q09", "voz": "caeiro", "q": "quando eu morrer o mundo continua exactamente como está"},
+  {"id": "q10", "voz": "caeiro", "q": "aprender a ver é mais difícil do que aprender a pensar"},
+
+  {"id": "q11", "voz": "campos", "q": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe", "origem": "fumo"},
+  {"id": "q12", "voz": "campos", "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido", "origem": "fumo"},
+  {"id": "q13", "voz": "campos", "q": "o ruído das máquinas dá-me uma espécie de febre"},
+  {"id": "q14", "voz": "campos", "q": "estou cansado de ser tanta coisa ao mesmo tempo"},
+  {"id": "q15", "voz": "campos", "q": "a infância está perdida e isso dói mais que tudo"},
+  {"id": "q16", "voz": "campos", "q": "queria ser todas as pessoas e todos os lugares de uma só vez"},
+  {"id": "q17", "voz": "campos", "q": "a cidade acorda e eu não consigo acompanhar"},
+  {"id": "q18", "voz": "campos", "q": "náusea de viajar, e ao mesmo tempo necessidade de partir"},
+  {"id": "q19", "voz": "campos", "q": "fumo e olho pela janela e nada tem remédio"},
+  {"id": "q20", "voz": "campos", "q": "sou uma série de sensações sem nada por baixo que as una"},
+
+  {"id": "q21", "voz": "reis", "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual", "origem": "fumo"},
+  {"id": "q22", "voz": "reis", "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa", "origem": "fumo"},
+  {"id": "q23", "voz": "reis", "q": "colher as flores antes que murchem, sem lhes pedir mais nada"},
+  {"id": "q24", "voz": "reis", "q": "os deuses não se importam connosco e isso é um alívio"},
+  {"id": "q25", "voz": "reis", "q": "não vale a pena querer mais do que o que cabe num dia"},
+  {"id": "q26", "voz": "reis", "q": "sentar-me à beira do rio e deixar passar o que passa"},
+  {"id": "q27", "voz": "reis", "q": "o destino é o mesmo para quem o procura e para quem o espera"},
+  {"id": "q28", "voz": "reis", "q": "ser senhor de si é mais do que ser senhor do mundo"},
+  {"id": "q29", "voz": "reis", "q": "nada fica de nós depois, nem das obras que deixamos"},
+  {"id": "q30", "voz": "reis", "q": "beber o vinho sem pensar no fim da taça"},
+
+  {"id": "q31", "voz": "ortonimo", "q": "quando acordamos, o sítio prometido desaparece e fica só água", "origem": "fumo"},
+  {"id": "q32", "voz": "ortonimo", "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê", "origem": "fumo"},
+  {"id": "q33", "voz": "ortonimo", "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva", "origem": "fumo"},
+  {"id": "q34", "voz": "ortonimo", "q": "ofereço-lhe o meu afecto e ela nem repara", "origem": "fumo"},
+  {"id": "q35", "voz": "ortonimo", "q": "o que escrevo deixa de ser meu no momento em que o escrevo"},
+  {"id": "q36", "voz": "ortonimo", "q": "finjo tão bem que já não sei o que sinto de verdade"},
+  {"id": "q37", "voz": "ortonimo", "q": "há em mim mais do que uma pessoa e nenhuma é a verdadeira"},
+  {"id": "q38", "voz": "ortonimo", "q": "lembro-me de ser criança e não reconheço quem era"},
+  {"id": "q39", "voz": "ortonimo", "q": "o mar e o destino de um povo que partiu e não voltou"},
+  {"id": "q40", "voz": "ortonimo", "q": "há um mistério nas coisas que nunca se deixa dizer"}
+ ]
+}

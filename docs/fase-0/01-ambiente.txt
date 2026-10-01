@@ -1,0 +1,10 @@
+# Fase 0 - Passo 1: ambiente
+data       2026-09-30T23:25:08
+plataforma Linux-7.0.0-34-generic-x86_64-with-glibc2.43
+python     3.12.3
+torch      2.14.1+cpu | cuda: False
+transformers 5.18.0
+sentence-transformers 6.1.0
+numpy      2.5.3
+torch threads 12
+OK - todas as asserções passaram

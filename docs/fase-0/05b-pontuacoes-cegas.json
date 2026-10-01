@@ -1,0 +1,9 @@
+{
+ "_metodo": "Pontuado SEM abrir 05b-chave.json. Rubrica FASE-0.md §5.3, 0-2 por criterio: verso, PT-PT, voz, forma, poema. Max 10. Nas amostras do prompt 5_pt_pt o criterio 'voz' nao se aplica e o maximo e 8.",
+ "_cobertura": "25 de 30 amostras. Nao lidas: A11, A12, A17, A18, A24.",
+ "A01": 7, "A02": 7, "A03": 10, "A04": 10, "A05": 8, "A06": 3,
+ "A07": 7, "A08": 6, "A09": 9, "A10": 3,
+ "A13": 2, "A14": 6, "A15": 7, "A16": 5,
+ "A19": 5, "A20": 7, "A21": 5, "A22": 4, "A23": 4,
+ "A25": 3, "A26": 3, "A27": 6, "A28": 7, "A29": 5, "A30": 7
+}

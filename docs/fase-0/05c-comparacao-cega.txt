@@ -1,0 +1,44 @@
+# Correccoes 1 e 2 - teste de voz as cegas, com repeat_penalty=1.1
+
+Pontuadas 25 de 30 amostras, sem acesso a chave.
+
+id     nota  modelo                         prompt            s
+A01       7  qwen2.5:3b-instruct-q4_K_M     1_caeiro       14.9
+A02       7  llama3.1:8b-instruct-q4_K_M    1_caeiro       21.5
+A03      10  qwen2.5:7b-instruct-q4_K_M     1_caeiro       10.6
+A04      10  llama3.1:8b-instruct-q4_K_M    1_caeiro       34.6
+A05       8  qwen2.5:7b-instruct-q4_K_M     1_caeiro       24.7
+A06       3  qwen2.5:3b-instruct-q4_K_M     1_caeiro        5.7
+A07       7  qwen2.5:7b-instruct-q4_K_M     2_campos       45.7
+A08       6  qwen2.5:7b-instruct-q4_K_M     2_campos       38.0
+A09       9  llama3.1:8b-instruct-q4_K_M    2_campos       46.4
+A10       3  qwen2.5:3b-instruct-q4_K_M     2_campos       21.5
+A13       2  qwen2.5:7b-instruct-q4_K_M     3_reis         20.5
+A14       6  llama3.1:8b-instruct-q4_K_M    3_reis         25.9
+A15       7  qwen2.5:7b-instruct-q4_K_M     3_reis         19.2
+A16       5  qwen2.5:3b-instruct-q4_K_M     3_reis         14.0
+A19       5  llama3.1:8b-instruct-q4_K_M    4_ortonimo     32.2
+A20       7  llama3.1:8b-instruct-q4_K_M    4_ortonimo     44.5
+A21       5  qwen2.5:3b-instruct-q4_K_M     4_ortonimo      9.7
+A22       4  qwen2.5:7b-instruct-q4_K_M     4_ortonimo     30.4
+A23       4  qwen2.5:3b-instruct-q4_K_M     4_ortonimo      9.6
+A25       3  llama3.1:8b-instruct-q4_K_M    5_pt_pt        16.6
+A26       3  qwen2.5:3b-instruct-q4_K_M     5_pt_pt         5.9
+A27       6  llama3.1:8b-instruct-q4_K_M    5_pt_pt        18.2
+A28       7  qwen2.5:3b-instruct-q4_K_M     5_pt_pt         6.4
+A29       5  qwen2.5:7b-instruct-q4_K_M     5_pt_pt        23.2
+A30       7  qwen2.5:7b-instruct-q4_K_M     5_pt_pt        15.5
+
+## Medianas às cegas
+
+modelo                             n  mediana   media  min  max
+qwen2.5:7b-instruct-q4_K_M         9      7.0     6.2    2   10
+llama3.1:8b-instruct-q4_K_M        8      6.5     6.6    3   10
+qwen2.5:3b-instruct-q4_K_M         8      4.5     4.6    3    7
+
+## Comparacao com a avaliacao ENVIESADA (ronda 1, sem repeat_penalty)
+
+modelo                            enviesada  as cegas  delta
+llama3.1:8b-instruct-q4_K_M               7       6.5   -0.5
+qwen2.5:7b-instruct-q4_K_M                7       7.0   +0.0
+qwen2.5:3b-instruct-q4_K_M                5       4.5   -0.5

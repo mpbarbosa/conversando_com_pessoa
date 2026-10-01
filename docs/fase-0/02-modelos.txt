@@ -1,0 +1,10 @@
+# Fase 0 - Passo 2: modelos de geracao
+data 2026-09-30T23:53:53-03:00
+ollama 0.35.0 (tarball, espaco de utilizador, sem sudo/systemd)
+
+NAME                           ID              SIZE      MODIFIED       
+llama3.1:8b-instruct-q4_K_M    46e0c10c039e    4.9 GB    10 seconds ago    
+qwen2.5:7b-instruct-q4_K_M     845dbda0ea48    4.7 GB    13 minutes ago    
+qwen2.5:3b-instruct-q4_K_M     357c53fb659c    1.9 GB    20 minutes ago    
+
+disco: 11G

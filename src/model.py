@@ -3,8 +3,12 @@ import torch
 
 
 class PessoaModel:
-    def __init__(self, model_name="google/flan-t5-large"):
+    def __init__(self, model_name="google/flan-t5-large", max_input_tokens=512):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+        # Exposed so the prompt builder can fit the context to the budget
+        # instead of letting the tokenizer cut the tail off the prompt.
+        self.max_input_tokens = max_input_tokens
 
         # Load a seq2seq model (Flan-T5). Use dtype (updated argument name)
         dtype = torch.float16 if torch.cuda.is_available() else torch.float32
@@ -14,13 +18,27 @@ class PessoaModel:
             device_map="auto"
         )
 
+    def count_tokens(self, text):
+        return len(self.tokenizer(text, add_special_tokens=False).input_ids)
+
+    def fit_to_tokens(self, text, max_tokens):
+        """Cut `text` down to at most `max_tokens` tokens."""
+        if max_tokens <= 0:
+            return ""
+        ids = self.tokenizer(text, add_special_tokens=False).input_ids
+        if len(ids) <= max_tokens:
+            return text
+        return self.tokenizer.decode(ids[:max_tokens], skip_special_tokens=True)
+
     def generate(self, prompt, max_tokens=256):
-        # Tokenize input (encoder inputs)
+        # Tokenize input (encoder inputs). truncation stays on as a backstop,
+        # but build_prompt() is responsible for keeping the prompt inside
+        # max_input_tokens so nothing meaningful reaches this cut.
         inputs = self.tokenizer(
             prompt,
             return_tensors="pt",
             truncation=True,
-            max_length=512,
+            max_length=self.max_input_tokens,
         )
 
         # Try to place tensors on the same device as the model parameters.

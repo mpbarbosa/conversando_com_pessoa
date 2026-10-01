@@ -187,6 +187,16 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file. However, if you prefer, 
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!*.code-workspace
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 # Ruff stuff:
 .ruff_cache/
@@ -205,3 +215,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# PessoaBot build artifacts: derivados de data/pessoa_poems/ pelo pipeline de
+# ingestao (src/corpus/build.py) e pelo indice (src/retrieval/index.py).
+# Reconstruiveis: corpus.jsonl em ~40s, index.npy em ~6,4min.
+data/corpus.jsonl
+data/index.npy
+data/index.manifest.json
+data/index.faiss
+
+# Folhas de julgamento: contem os poemas INTEIROS (34.384 palavras, ~16% do
+# corpo do corpus) porque um avaliador humano precisa de os ler para dar nota.
+# Fora do repositorio publico enquanto os termos de uso do Arquivo Pessoa nao
+# estiverem confirmados -- ver data/README.md, secao "Situacao de direitos".
+# Reconstruiveis: docs/fase-0/pool_julgamento.py e docs/fase-1/pool_dourado.py
+# geram-nas a partir do corpus local. As NOTAS (ids + graus) ficam publicadas
+# em 06c-julgamentos.json e 08-julgamentos.json, que nao contem texto.
+docs/fase-1/08-folha-julgamento.md
+docs/fase-0/06b-folha-julgamento.md

@@ -1,0 +1,17 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+# Correccao 3 - remedicao do e5-base sem contencao
+data 2026-10-01T06:43:00
+maquina sossegada: 52 C em repouso, sem downloads em curso
+
+corpus: 2083 poemas
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3673.77it/s]
+load (do cache local): 4.4s
+  batch_size=  8:  194.2s  ( 10.7 poemas/s)
+  batch_size= 16:  278.5s  (  7.5 poemas/s)
+  batch_size= 32:  304.8s  (  6.8 poemas/s)
+  batch_size= 64:  312.8s  (  6.7 poemas/s)
+
+indice: 6.4 MB, dim=768
+
+## Comparacao
+  medicao original (com contencao):  293.1s  ( 7.1 poemas/s)
