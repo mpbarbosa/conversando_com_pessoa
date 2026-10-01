@@ -1,7 +1,19 @@
+# Dependências reais, verificadas contra os imports de `src/` em 2026-10-01.
+numpy
+sentence-transformers
 torch
 transformers
-sentence-transformers
-faiss-cpu
-numpy
-langchain
-python-dotenv
+rank-bm25
+requests
+typer
+
+# Desenvolvimento
+pytest
+
+# Removidos nesta revisão, com motivo:
+# - `langchain`: estava declarado e usado em **zero linhas** (docs/CONTROLO.md §3).
+# - `faiss-cpu`: o índice é `numpy`, por decisão medida — 2290 × 768 = 7,0 MB,
+#   busca em 5,57 ms. O único `import faiss` que resta está em `src/retriever.py`,
+#   código anterior já substituído por `src/retrieval/`; para o correr, instale
+#   `faiss-cpu` à parte.
+# - `python-dotenv`: sem uso. O gerador fala com o Ollama local, sem credenciais.

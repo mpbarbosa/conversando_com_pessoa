@@ -295,3 +295,45 @@ precisaria de persona própria, guardas conscientes da língua e do dicionário
 Fica como trabalho identificado, não como defeito escondido. É a decisão de
 produto mais substantiva em aberto: um PessoaBot que não fala a língua em que
 Pessoa publicou os *35 Sonnets* é um PessoaBot incompleto.
+
+### Suporte a inglês implementado
+
+Em resposta à correcção acima. **44 testes novos**, total 164.
+
+| camada | alteração |
+|---|---|
+| `voices.py` | `PERSONAS` indexado por `(Voice, Lang)`; 6 personas, 2 novas: **Alexander Search** (EN) e **ortónimo em inglês** (EN) |
+| `voices.py` | `REGRAS_LINGUA`, `REGRAS_SAIDA`, `REGRAS_NAO_COPIAR` por língua |
+| `guard.py` | `fracao_lingua(texto, idioma)` com stopwords EN **incluindo as arcaicas** (`thy`, `thou`, `doth`, `hath`) — sem elas um soneto à maneira de Pessoa reprovaria na língua em que foi escrito |
+| `guard.py` | brasileirismos e colocação pronominal só se aplicam a PT; preâmbulos meta em EN |
+| `lexico.py` | dicionário `en` do aspell + vocabulário inglês do corpus (3784 tipos) |
+| `plagio.py` | `REFORCO_EN` |
+| `pipeline.py` | idioma atravessa `recuperar`, `responder`, `responder_em_fluxo`, `Turno` |
+| `cli.py` | `--idioma`, comandos `/pt` `/en` `/search`; voz de língua única força a sua |
+
+#### O mesmo padrão em inglês
+
+O dicionário moderno desconhece `giveth` e `storiless`, que Pessoa **usa**, e o
+corpus salva-os — exactamente como o `acção` e o `nocturno` em português. A
+palavra inventada `danceth`, produzida na primeira resposta real do Search, foi
+apanhada: formada por analogia com `giveth` e `doth`, não existe no corpus nem
+no dicionário.
+
+#### O inglês **não** é mais lento
+
+A primeira corrida mostrou prefill de 41,4 s e 52,1 s, contra 7,8–20 s em
+português, e eu suspeitei da língua. **Medido: é o contrário.**
+
+| caso | prefill a frio | a quente |
+|---|---|---|
+| pt Caeiro (421 tok) | 34,3 s = 14,2 tok/s | 0,7 s |
+| en Search (360 tok) | 25,2 s = **16,6 tok/s** | 0,7 s |
+| en ortónimo (410 tok) | 30,3 s = **15,5 tok/s** | 0,7 s |
+
+Duas causas, nenhuma linguística: o chip estava a **82 °C** após horas de carga,
+e cada pergunta em inglês era a **primeira daquela persona**, logo sem cache.
+
+**Consequência a registar: o orçamento de 45 s assume a máquina fria.** A frio
+agora dá 14–17 tok/s contra os ~21 tok/s da Fase 0, e a mesma configuração sai
+do orçamento sem nada ter mudado no código. Os números do plano são de uma
+máquina em repouso.

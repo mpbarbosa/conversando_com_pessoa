@@ -1,5 +1,16 @@
 # PessoaBot Development Roadmap
 
+> ⚠️ **Documento histórico (Outubro de 2025).** Descreve o objectivo **anterior**
+> deste repositório — um chatbot CLI com RAG sobre FAISS e um modelo gratuito
+> (Flan-T5) — e o «✅ Ready for Production» abaixo está correcto **para esse
+> escopo**. O sistema actual é outro: encoder `multilingual-e5-base`, índice denso
+> em `numpy` com manifesto de integridade, BM25, avaliação por nDCG@5 e geração em
+> Ollama. **Para o estado actual, leia [`docs/CONTROLO.md`](docs/CONTROLO.md)** —
+> o índice-mestre — ou o [`README.md`](README.md).
+>
+> Mantido por valer como registo: as secções «Common Setup Issues» e «Alternative
+> Free Models» documentam problemas reais e as suas soluções.
+
 ## Current Status (October 2025)
 - ✅ **Project Setup Complete**: Virtual environment, dependencies installed, accelerate added
 - ✅ **Import Issues Resolved**: Fixed relative import paths in `main.py`
