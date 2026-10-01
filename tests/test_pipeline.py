@@ -54,7 +54,9 @@ def _pipeline(chunks, gerador) -> Pipeline:
     p.gerador = gerador
     p.n_tokens = lambda t: int(len(t.split()) * 1.32) + 1
     p.top_k = 5
-    p.recuperar = lambda pergunta, voz, idioma=Lang.PT: (list(chunks), 1.0)
+    # `recuperar` devolve `(chunks, ms, ms_rerank)` desde a Fase 3B; `None` no
+    # terceiro é «sem reordenação», que é o que estes testes exercitam.
+    p.recuperar = lambda pergunta, voz, idioma=Lang.PT: (list(chunks), 1.0, None)
     return p
 
 
@@ -119,3 +121,77 @@ def test_contexto_mantem_se_quando_tudo_seria_descartado(chunks_caeiro):
     p.responder("o que é a natureza?", Voice.CAEIRO)
     assert um[0].text in g.prompts[1], "ficou sem contexto nenhum"
     assert REFORCO.strip() in g.prompts[1]
+
+
+# --- reordenação opcional — Fase 3B ---------------------------------------
+#
+# O contrato que importa: sem reranker o pipeline pede `top_k` ao índice e não
+# paga nada; com reranker pede `N_RERANK` e deixa o cross-encoder escolher
+# quais `top_k` sobrevivem. Dar-lhe só `top_k` candidatos não lhe deixava nada
+# para reordenar — era o defeito mais fácil de introduzir aqui.
+
+class _IndiceEspiao:
+    """Registo do `top_k` que o pipeline pediu."""
+
+    def __init__(self, chunks):
+        self._chunks = chunks
+        self.pedidos: list[int] = []
+
+    def search(self, vector, top_k=10, voz=None, idioma=None):
+        self.pedidos.append(top_k)
+        return [(c, 1.0 - i / 100) for i, c in enumerate(self._chunks[:top_k])]
+
+
+class _EncoderFalso:
+    def encode_queries(self, textos):
+        import numpy as np
+        return np.zeros((len(textos), 4), dtype="float32")
+
+
+class _RerankerInverso:
+    """Devolve os candidatos ao contrário: basta para ver se foi aplicado."""
+
+    def __init__(self):
+        self.vistos: list[int] = []
+
+    def rerank(self, consulta, candidatos, top_k=None):
+        self.vistos.append(len(candidatos))
+        ordenados = [(c, float(i)) for i, c in enumerate(reversed(list(candidatos)))]
+        return ordenados[:top_k] if top_k else ordenados
+
+
+def _pipeline_espiao(chunks, reranker=None):
+    from src.pipeline import Pipeline
+    idx = _IndiceEspiao(chunks)
+    p = Pipeline(idx, _EncoderFalso(), gerador=None,
+                 n_tokens=lambda t: len(t.split()), top_k=3,
+                 reranker=reranker)
+    return p, idx
+
+
+def test_sem_reranker_pede_top_k_e_nao_cobra_nada(chunks_caeiro):
+    p, idx = _pipeline_espiao(chunks_caeiro)
+    res, ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
+    assert idx.pedidos == [3]
+    assert ms_rr is None
+    assert len(res) == 3
+
+
+def test_com_reranker_pede_n_rerank_e_nao_top_k(chunks_caeiro):
+    """Se pedisse `top_k`, o reranker não teria nada para reordenar."""
+    from src.retrieval.rerank import N_RERANK
+    rr = _RerankerInverso()
+    p, idx = _pipeline_espiao(chunks_caeiro, reranker=rr)
+    res, ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
+    assert idx.pedidos == [N_RERANK]
+    assert rr.vistos == [min(N_RERANK, len(chunks_caeiro))]
+    assert ms_rr is not None and ms_rr >= 0
+    assert len(res) == 3, "o reranker corta de novo para top_k"
+
+
+def test_a_ordem_do_reranker_e_a_que_vale(chunks_caeiro):
+    rr = _RerankerInverso()
+    p, _ = _pipeline_espiao(chunks_caeiro, reranker=rr)
+    com, _, _ = p.recuperar("pergunta", Voice.CAEIRO)
+    sem, _, _ = _pipeline_espiao(chunks_caeiro)[0].recuperar("pergunta", Voice.CAEIRO)
+    assert [c.poem_id for c in com] != [c.poem_id for c in sem]

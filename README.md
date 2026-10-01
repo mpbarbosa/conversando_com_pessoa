@@ -52,7 +52,7 @@ híbrida da Fase 2. Relatório: [`docs/fase-1/08-RELATORIO.md`](docs/fase-1/08-R
 | índice | 7,0 MB · busca em **5,57 ms** |
 | construção do corpus · do índice | ~40 s · 383 s |
 | latência de resposta | ~44 s a 500 tokens de contexto (CPU) |
-| testes | **230, todos a passar** |
+| testes | **237, todos a passar** |
 
 ---
 
@@ -124,14 +124,15 @@ grava-os em `data/`; nas seguintes carrega-os, se o manifesto os aceitar. Use
 `--verboso` para ver o progresso.
 
 Dentro da conversa: `/auto` deixa o roteador propor a voz a cada pergunta
-(72% de acerto, +0,5 s); `/caeiro` `/campos` `/reis` `/pessoa` `/search` trocam de voz
+(72% de acerto, +0,5 s); `/rerank` reordena os candidatos por cross-encoder
+(+0,090 de nDCG@5, +2,6 s); `/caeiro` `/campos` `/reis` `/pessoa` `/search` trocam de voz
 e desligam o roteador,
 `/pt` `/en` de língua, `/sair` sai. Cada resposta imprime as **fontes** usadas e os
 tempos — o *prefill* domina a espera (58–89%), e mostrá-lo ensina o custo em vez de
 o esconder.
 
 ```bash
-pytest          # 230 testes, ~2 min
+pytest          # 237 testes, ~2 min
 ```
 
 ---

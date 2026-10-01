@@ -28,6 +28,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **1 — Pipeline** | [`FASE-1.md`](FASE-1.md) | ✅ **completa** (9 de 9) |
 | **2 — Busca híbrida** | [`FASE-2.md`](FASE-2.md) · [relatório](FASE-2-RELATORIO.md) | ✅ **negativo**: +0,004 é ruído; `apt@3` cai 95%→90% |
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
+| **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
 | **5 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
@@ -45,7 +46,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | 8 | **Conjunto dourado** | ✅ | `src/avaliacao.py` · `src/retrieval/lexical.py` · `tests/test_retrieval_gold.py` · 8 testes |
 | 9 | CLI | ✅ | `src/cli.py` · `pipeline.responder_em_fluxo` · 7 testes |
 
-**230 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
+**237 testes a passar.** `src/main.py`, `src/model.py` e `src/retriever.py`
 (280 linhas, o código antigo corrigido no início da sessão) continuam no
 repositório e serão substituídos no Passo 9.
 
@@ -78,6 +79,10 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | `temperature` do roteador | **0,0** | um classificador tem de ser determinista; os 0,9 são para verso |
 | O roteador **propõe** | não decide | a 72%, 1 em 4 iria à voz errada; em silêncio custa 30 s, à vista custa uma tecla |
 | Enriquecimento offline | **não se faz** | 88% da falta do nDCG@5 é reordenação; o enriquecimento ataca 12% por 3,2–7,5 h |
+| Reranker | **`bge-reranker-v2-m3`** | +0,090 contra +0,018 do MiniLM, no pool fechado |
+| Candidatos a reordenar | **8, truncados a 120 tok** | n=20 dá +0,124, mas a diferença é +0,033 com IC95% [−0,017, +0,081] |
+| Reordenação ligada? | **por escolha, `/rerank`** | 2,6 s em ~30 s é uma troca, e a troca é do utilizador |
+| Fronteira de profundidade | **top-20** | é até onde o gabarito está completo; mais fundo volta a pontuar não julgados |
 
 ### Números do sistema
 
@@ -86,11 +91,13 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | poemas | 2083 (2062 após deduplicação) |
 | chunks indexados | **2290** |
 | índice | 7,0 MB · busca 5,57 ms |
-| recuperação | **nDCG@5 = 0,638** (denso) · apt@3 = 95% · oráculo@20 = **0,956** |
+| recuperação | **nDCG@5 = 0,606** (denso) · **0,696** com rerank · apt@3 = 95% · oráculo@20 = **0,980** |
+| conjunto dourado | **433 julgamentos**, 125 de nota 2, top-20 denso fechado |
 | corpus.jsonl | 3,0 MB · build em ~40 s |
 | construção do índice | 383 s (6,4 min) |
 | latência de resposta prevista | ~44 s a 500 tokens de contexto |
 | roteador de voz (`/auto`) | +0,5 s por pergunta, e ~20 s uma vez a aquecer |
+| reordenação (`/rerank`) | +2,6 s por pergunta, e ~4,8 s na primeira |
 
 ---
 
@@ -166,34 +173,30 @@ requisito de reprodutibilidade e continua pendente.
 > Passo 5 da Fase 1 e ficou para trás quatro fases seguidas; o que estava aqui
 > é agora história e vive nos relatórios por fase.
 
-### Imediato — a reordenação, que a Fase 4 reabriu com um número
+### Feito — a reordenação, que a Fase 4 reabriu e a 3B decidiu
 
-A Fase 4 mediu que o oráculo sobre o top-20 dá `nDCG@5 = 0,956` contra os 0,640
-do denso: **88% da falta está em reordenar o que o índice já traz**. A Fase 3
-mediu *um* reranker (MiniLM-L12) contra um portão de latência de 6 s e deu-o por
-inconclusivo — e eu li isso como «não há ganho a capturar», o que a decomposição
-desmente.
+A Fase 4 mediu a folga (oráculo@20 contra o denso) e a [Fase 3B](FASE-3B-RELATORIO.md)
+foi buscá-la. O que a desbloqueou não foi modelo nem máquina: foi **fechar o
+pool de candidatos**, julgando os 142 poemas do top-20 do denso que faltavam.
 
-O que mudou desde a Fase 3, e que torna isto diferente de repetir o mesmo:
+> As três razões que dei aqui para reabrir isto estavam duas erradas, e o
+> relatório da Fase 3 já o dizia: «**a latência não é o obstáculo**». A iGPU nem
+> se aplica — os 6x são do backend Vulkan do Ollama e um cross-encoder corre em
+> PyTorch. O obstáculo era o instrumento. Ver [`FASE-3B.md`](FASE-3B.md) §1.
 
-1. **A premissa da iGPU estava errada.** O prefill é 6x mais rápido nela
-   ([`fase-0/07`](fase-0/07-igpu-vulkan.md)), e um cross-encoder é prefill puro —
-   é a carga em que a iGPU ganha, ao contrário do decode do gerador.
-2. **O orçamento de latência pode mudar de forma.** O portão de 6 s da Fase 3
-   vinha de somar o rerank aos 44 s do gerador em CPU.
-3. **O ganho está quantificado.** A Fase 3 decidia às cegas se valia a pena; há
-   agora um tecto de 0,316 para comparar com o custo.
+Resultado: **+0,090 de nDCG@5** com 16 das 20 perguntas a melhorar (p=0,012),
+por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 
 ### Depois, em ordem
 
 | | Passo | Desbloqueia |
 |---|---|---|
-| 1 | **Reordenação, segunda tentativa** — reranker capaz, prefill na iGPU | os 0,316 de nDCG@5 que o oráculo@20 mostra |
-| 2 | A pergunta aberta desde a Fase 1 Passo 7: **a voz gerada é a voz pedida?** | a rubrica de geração do §6.2 do plano |
+| 1 | **A voz gerada é a voz pedida?** — a pergunta aberta desde a Fase 1 Passo 7 | a rubrica de geração do §6.2 do plano |
+| 2 | Julgar as outras 20 perguntas, ou um segundo avaliador | a magnitude dos Δ, que a n=20 fica em IC95% de 0,17 de largura |
 | 3 | Fase 5 — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
 
-O **Passo 2 continua a ser o que importa mais**, e nenhuma das Fases 2, 3 e 4
-mexeu nele: todas mediram recuperação, e o produto é verso.
+O **Passo 1 é o que importa mais**, e nenhuma das Fases 2, 3, 3B e 4 mexeu nele:
+todas mediram recuperação, e o produto é verso.
 
 ### Pendências de limpeza
 
@@ -206,6 +209,8 @@ mexeu nele: todas mediram recuperação, e o produto é verso.
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
 [ ] num_predict=220 corta o versiculo longo de Campos (visto 2x na Fase 4)
 [ ] registar a origem dos 2083 ficheiros (reprodutibilidade, §5)
+[ ] poem_224 esta indexado com mojibake e e recuperavel (visto no top-20 de q11)
+[ ] um segundo avaliador para o conjunto dourado: 433 julgamentos sao todos meus
 ```
 
 ---
@@ -221,11 +226,13 @@ mexeu nele: todas mediram recuperação, e o produto é verso.
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
 | [`FASE-3.md`](FASE-3.md) · [`FASE-3-PASSO-1.md`](FASE-3-PASSO-1.md) | rerank e latência medida |
 | [`FASE-4.md`](FASE-4.md) · [`FASE-4-RELATORIO.md`](FASE-4-RELATORIO.md) | roteador de voz, e o veto ao enriquecimento |
+| [`FASE-3B.md`](FASE-3B.md) · [`FASE-3B-RELATORIO.md`](FASE-3B-RELATORIO.md) | fechar o pool de candidatos, e a reordenação a entrar |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
 | `fase-3/` | latência dos rerankers e script |
 | `fase-4/` | 7 bancos de roteador, o conjunto adversarial pré-registado, e a decomposição do tecto |
+| `fase-3b/` | a folha dos 142 julgamentos, o pool fechado, e a análise de significância |
 
 ### Código
 

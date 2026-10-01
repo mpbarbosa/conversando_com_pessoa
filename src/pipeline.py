@@ -27,10 +27,16 @@ from .guard import Veredicto, verificar
 from .plagio import REFORCO, REFORCO_EN, Analise, analisar
 from .retrieval.encoder import Encoder
 from .retrieval.index import Index
+from .retrieval.rerank import N_RERANK
 from .voices import persona
 
 TOP_K = 6
 MAX_TENTATIVAS = 2
+
+#: A fronteira do pool fechado da Fase 3B é o **top-20** do denso: o gabarito
+#: cobre-o por inteiro. Um reranker que vá mais fundo volta a pontuar documentos
+#: não julgados, e o Δ medido deixa de valer — daí `N_RERANK` ser 8 e nunca
+#: mais de 20.
 
 
 @dataclass(frozen=True)
@@ -45,6 +51,9 @@ class Turno:
     plagio: Analise
     tentativas: int
     recuperacao_ms: float
+    #: `None` quando não há reranker. Separado do `recuperacao_ms` porque é a
+    #: parcela que o utilizador paga por uma escolha que pode desligar.
+    rerank_ms: float | None = None
 
     @property
     def texto(self) -> str:
@@ -60,20 +69,43 @@ class Turno:
 
 class Pipeline:
     def __init__(self, index: Index, encoder: Encoder, gerador: Generator,
-                 n_tokens: Callable[[str], int], top_k: int = TOP_K):
+                 n_tokens: Callable[[str], int], top_k: int = TOP_K,
+                 reranker=None, n_rerank: int = N_RERANK):
         self.index = index
         self.encoder = encoder
         self.gerador = gerador
         self.n_tokens = n_tokens
         self.top_k = top_k
+        #: `None` desliga a reordenação, e é o que o CLI faz por omissão até
+        #: alguém a pedir. O reranker custa ~2,7 s medidos, e a Fase 3B mediu
+        #: que vale +0,090 de nDCG@5 — é uma troca, logo é uma escolha.
+        self.reranker = reranker
+        self.n_rerank = n_rerank
 
     def recuperar(self, pergunta: str, voz: Voice,
-                  idioma: Lang = Lang.PT) -> tuple[list[Chunk], float]:
+                  idioma: Lang = Lang.PT) -> tuple[list[Chunk], float, float | None]:
+        """Recupera e, se houver reranker, reordena.
+
+        Devolve `(chunks, ms_de_recuperação, ms_de_rerank)`. Os dois tempos são
+        separados porque o segundo é opcional e o utilizador paga-o por escolha.
+
+        Com reranker, pede ao índice `n_rerank` candidatos em vez de `top_k`: é
+        o reranker que escolhe quais `top_k` sobrevivem, e dar-lhe só `top_k`
+        candidatos não lhe deixava nada para reordenar.
+        """
         import time
         t0 = time.perf_counter()
         qv = self.encoder.encode_queries([pergunta])[0]
-        res = self.index.search(qv, top_k=self.top_k, voz=voz, idioma=idioma)
-        return [c for c, _ in res], (time.perf_counter() - t0) * 1000
+        quantos = self.n_rerank if self.reranker is not None else self.top_k
+        res = self.index.search(qv, top_k=quantos, voz=voz, idioma=idioma)
+        chunks = [c for c, _ in res]
+        ms = (time.perf_counter() - t0) * 1000
+        if self.reranker is None:
+            return chunks, ms, None
+        t1 = time.perf_counter()
+        chunks = [c for c, _ in self.reranker.rerank(pergunta, chunks,
+                                                     top_k=self.top_k)]
+        return chunks, ms, (time.perf_counter() - t1) * 1000
 
     def _repetir_sem(self, pergunta: str, voz: Voice, idioma: Lang,
                      recuperados: list[Chunk], copiados: set[str],
@@ -106,7 +138,7 @@ class Pipeline:
 
     def responder(self, pergunta: str, voz: Voice, idioma: Lang = Lang.PT,
                   max_tentativas: int = MAX_TENTATIVAS) -> Turno:
-        recuperados, ms = self.recuperar(pergunta, voz, idioma)
+        recuperados, ms, ms_rr = self.recuperar(pergunta, voz, idioma)
         p = montar(pergunta, recuperados, persona(voz, idioma), self.n_tokens)
 
         # Os versos são comparados contra **tudo o que já foi mostrado** neste
@@ -120,7 +152,7 @@ class Pipeline:
             a = analisar(v.texto, tuple(mostrados))
             if not a.plagiou or tentativa == max_tentativas:
                 return Turno(pergunta, voz, idioma, tuple(recuperados),
-                             p.chunks_usados, r, v, a, tentativa, ms)
+                             p.chunks_usados, r, v, a, tentativa, ms, ms_rr)
             p = self._repetir_sem(pergunta, voz, idioma, recuperados,
                                   {x.poema for x in a.copiados}, p)
             mostrados.extend(c for c in p.chunks_usados if c not in mostrados)
@@ -142,7 +174,7 @@ class Pipeline:
         os ~28 s que a repetição custa.
         """
         import time
-        recuperados, ms = self.recuperar(pergunta, voz, idioma)
+        recuperados, ms, ms_rr = self.recuperar(pergunta, voz, idioma)
         p = montar(pergunta, recuperados, persona(voz, idioma), self.n_tokens)
 
         mostrados: list[Chunk] = list(p.chunks_usados)
@@ -160,7 +192,7 @@ class Pipeline:
             v = verificar(resposta.texto, pergunta=pergunta, idioma=idioma)
             a = analisar(v.texto, tuple(mostrados))
             turno = Turno(pergunta, voz, idioma, tuple(recuperados),
-                          p.chunks_usados, resposta, v, a, tentativa, ms)
+                          p.chunks_usados, resposta, v, a, tentativa, ms, ms_rr)
             yield turno
             if turno.aprovado or tentativa == max_tentativas:
                 return

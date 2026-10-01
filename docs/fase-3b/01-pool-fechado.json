@@ -1,0 +1,304 @@
+{
+ "q01": {
+  "voz": "caeiro",
+  "q": "por que é que as pessoas acham melancólico o fim do dia?",
+  "unicos": 20,
+  "ja_julgados": 13,
+  "novos": [
+   "poem_1117",
+   "poem_1188",
+   "poem_1482",
+   "poem_3334",
+   "poem_344",
+   "poem_636",
+   "poem_909"
+  ]
+ },
+ "q02": {
+  "voz": "caeiro",
+  "q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+  "unicos": 20,
+  "ja_julgados": 13,
+  "novos": [
+   "poem_1482",
+   "poem_2587",
+   "poem_2659",
+   "poem_3217",
+   "poem_348",
+   "poem_3534",
+   "poem_636"
+  ]
+ },
+ "q03": {
+  "voz": "caeiro",
+  "q": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+  "unicos": 18,
+  "ja_julgados": 12,
+  "novos": [
+   "poem_1188",
+   "poem_1487",
+   "poem_2659",
+   "poem_3351",
+   "poem_3426",
+   "poem_348"
+  ]
+ },
+ "q04": {
+  "voz": "caeiro",
+  "q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+  "unicos": 20,
+  "ja_julgados": 10,
+  "novos": [
+   "poem_1011",
+   "poem_1193",
+   "poem_1463",
+   "poem_1487",
+   "poem_2582",
+   "poem_2655",
+   "poem_3339",
+   "poem_3364",
+   "poem_636",
+   "poem_986"
+  ]
+ },
+ "q05": {
+  "voz": "caeiro",
+  "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+  "unicos": 20,
+  "ja_julgados": 14,
+  "novos": [
+   "poem_1027",
+   "poem_2578",
+   "poem_2666",
+   "poem_3327",
+   "poem_3344",
+   "poem_3455"
+  ]
+ },
+ "q11": {
+  "voz": "campos",
+  "q": "ver uma embarcação a entrar de manhã enche-me de ânsia de ir para longe",
+  "unicos": 7,
+  "ja_julgados": 5,
+  "novos": [
+   "poem_224",
+   "poem_693"
+  ]
+ },
+ "q12": {
+  "voz": "campos",
+  "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+  "unicos": 17,
+  "ja_julgados": 10,
+  "novos": [
+   "poem_1010",
+   "poem_135",
+   "poem_2236",
+   "poem_2478",
+   "poem_2854",
+   "poem_60",
+   "poem_827"
+  ]
+ },
+ "q13": {
+  "voz": "campos",
+  "q": "o ruído das máquinas dá-me uma espécie de febre",
+  "unicos": 14,
+  "ja_julgados": 7,
+  "novos": [
+   "poem_1032",
+   "poem_1135",
+   "poem_1196",
+   "poem_1237",
+   "poem_3264",
+   "poem_827",
+   "poem_831"
+  ]
+ },
+ "q14": {
+  "voz": "campos",
+  "q": "estou cansado de ser tanta coisa ao mesmo tempo",
+  "unicos": 20,
+  "ja_julgados": 13,
+  "novos": [
+   "poem_1253",
+   "poem_216",
+   "poem_235",
+   "poem_2438",
+   "poem_2861",
+   "poem_3113",
+   "poem_4427"
+  ]
+ },
+ "q15": {
+  "voz": "campos",
+  "q": "a infância está perdida e isso dói mais que tudo",
+  "unicos": 19,
+  "ja_julgados": 14,
+  "novos": [
+   "poem_208",
+   "poem_2985",
+   "poem_3453",
+   "poem_827",
+   "poem_952"
+  ]
+ },
+ "q21": {
+  "voz": "reis",
+  "q": "tenho medo de qualquer mudança, mesmo para melhor; queria que a minha vida fosse sempre igual",
+  "unicos": 20,
+  "ja_julgados": 11,
+  "novos": [
+   "poem_1972",
+   "poem_2130",
+   "poem_2635",
+   "poem_289",
+   "poem_3999",
+   "poem_4347",
+   "poem_4353",
+   "poem_4366",
+   "poem_503"
+  ]
+ },
+ "q22": {
+  "voz": "reis",
+  "q": "já fui criança e não sabia da morte; agora que sei, há que aproveitar depressa",
+  "unicos": 20,
+  "ja_julgados": 13,
+  "novos": [
+   "poem_1812",
+   "poem_1832",
+   "poem_2724",
+   "poem_289",
+   "poem_421",
+   "poem_4347",
+   "poem_4365"
+  ]
+ },
+ "q23": {
+  "voz": "reis",
+  "q": "colher as flores antes que murchem, sem lhes pedir mais nada",
+  "unicos": 20,
+  "ja_julgados": 10,
+  "novos": [
+   "poem_1633",
+   "poem_2810",
+   "poem_2974",
+   "poem_3414",
+   "poem_3480",
+   "poem_3494",
+   "poem_4212",
+   "poem_4225",
+   "poem_4395",
+   "poem_768"
+  ]
+ },
+ "q24": {
+  "voz": "reis",
+  "q": "os deuses não se importam connosco e isso é um alívio",
+  "unicos": 20,
+  "ja_julgados": 12,
+  "novos": [
+   "poem_2619",
+   "poem_2959",
+   "poem_305",
+   "poem_402",
+   "poem_421",
+   "poem_4430",
+   "poem_7",
+   "poem_772"
+  ]
+ },
+ "q25": {
+  "voz": "reis",
+  "q": "não vale a pena querer mais do que o que cabe num dia",
+  "unicos": 20,
+  "ja_julgados": 14,
+  "novos": [
+   "poem_2723",
+   "poem_2737",
+   "poem_3484",
+   "poem_4347",
+   "poem_498",
+   "poem_768"
+  ]
+ },
+ "q31": {
+  "voz": "ortonimo",
+  "q": "quando acordamos, o sítio prometido desaparece e fica só água",
+  "unicos": 20,
+  "ja_julgados": 13,
+  "novos": [
+   "poem_2184",
+   "poem_2460",
+   "poem_3281",
+   "poem_3451",
+   "poem_3558",
+   "poem_3929",
+   "poem_4242"
+  ]
+ },
+ "q32": {
+  "voz": "ortonimo",
+  "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+  "unicos": 20,
+  "ja_julgados": 11,
+  "novos": [
+   "poem_1937",
+   "poem_2460",
+   "poem_270",
+   "poem_2952",
+   "poem_3350",
+   "poem_3382",
+   "poem_3864",
+   "poem_3874",
+   "poem_860"
+  ]
+ },
+ "q33": {
+  "voz": "ortonimo",
+  "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+  "unicos": 20,
+  "ja_julgados": 11,
+  "novos": [
+   "poem_1550",
+   "poem_1784",
+   "poem_1855",
+   "poem_2059",
+   "poem_2254",
+   "poem_3674",
+   "poem_4190",
+   "poem_4242",
+   "poem_551"
+  ]
+ },
+ "q34": {
+  "voz": "ortonimo",
+  "q": "ofereço-lhe o meu afecto e ela nem repara",
+  "unicos": 15,
+  "ja_julgados": 12,
+  "novos": [
+   "poem_1343",
+   "poem_2787",
+   "poem_971"
+  ]
+ },
+ "q35": {
+  "voz": "ortonimo",
+  "q": "o que escrevo deixa de ser meu no momento em que o escrevo",
+  "unicos": 20,
+  "ja_julgados": 10,
+  "novos": [
+   "poem_1434",
+   "poem_1721",
+   "poem_2376",
+   "poem_2491",
+   "poem_3135",
+   "poem_3374",
+   "poem_3657",
+   "poem_3711",
+   "poem_83",
+   "poem_929"
+  ]
+ }
+}

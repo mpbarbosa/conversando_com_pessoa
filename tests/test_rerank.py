@@ -101,7 +101,43 @@ def test_sem_truncagem_mantem():
 
 
 def test_modelo_medido_como_melhor_e_o_bge_m3():
-    """bge-m3 n=8 trunc=120 deu +0,074 no gabarito ampliado e −0,048 no
-    original. O PADRAO fica no MiniLM porque nada foi integrado."""
-    assert PADRAO == MINILM
-    assert "bge-reranker-v2-m3" in BGE_M3
+    """O `PADRAO` passou do MiniLM para o bge-m3 na Fase 3B.
+
+    Na Fase 3 o bge-m3 dava +0,074 no gabarito ampliado e −0,048 no original, e
+    o `PADRAO` ficou no MiniLM porque nada foi integrado. Com o pool fechado —
+    os 142 candidatos do top-20 julgados — o bge-m3 dá **+0,090 com IC95%
+    [+0,005, +0,171]** e 16 de 20 perguntas a melhorar, e o MiniLM fica em
+    +0,018.
+    """
+    assert PADRAO == BGE_M3
+    assert PADRAO != MINILM, "o MiniLM é o controlo negativo, não o padrão"
+
+
+def test_configuracao_medida_e_a_mais_barata_que_se_distingue():
+    """n=8 e 120 tokens, não a de melhor Δ.
+
+    `n=20 trunc80` dá +0,124 contra +0,090, mas emparelhado a diferença é
+    +0,033 com IC95% [−0,017, +0,081] — não se distingue de zero. Pagar 2 s por
+    um ganho que a medição não vê seria o erro que a Fase 2 evitou ao rejeitar
+    +0,004 por ruído.
+    """
+    from src.retrieval.rerank import N_RERANK, TRUNCAR_TOKENS, padrao
+    assert N_RERANK == 8
+    assert TRUNCAR_TOKENS == 120
+    r = padrao()
+    assert r.modelo == BGE_M3
+    assert r.truncar_tokens == TRUNCAR_TOKENS
+
+
+def test_padrao_nao_aquece_porque_aquecer_nao_funciona():
+    """O aquecimento foi tentado e removido.
+
+    Em isolamento funcionava (1.ª reordenação 2,56 s em vez de 4,77 s), mas com
+    o encoder e5 carregado antes — que é sempre o caso no CLI — volta a 4,56 s.
+    Custava ~4 s de arranque e não tirava os 2,3 s da 1.ª pergunta. Este teste
+    existe para que ninguém o volte a acrescentar sem voltar a medir.
+    """
+    from src.retrieval import rerank as mod
+    assert not hasattr(mod.Reranker, "aquecer")
+    import inspect
+    assert "aquecer" not in inspect.signature(mod.padrao).parameters

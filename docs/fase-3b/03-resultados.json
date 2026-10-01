@@ -1,0 +1,68 @@
+{
+ "n_julgamentos": 433,
+ "n_perguntas": 20,
+ "n_nota2": 125,
+ "denso": {
+  "ndcg5": 0.606,
+  "apt3": 0.95
+ },
+ "oraculo20": 0.98,
+ "rerankers": {
+  "bge-m3 n=8 trunc120": {
+   "ndcg5": 0.696,
+   "delta": 0.09,
+   "apt3": 0.95,
+   "latencia_mediana_s": 2.57,
+   "fraccao_do_tecto": 0.242
+  },
+  "bge-m3 n=8 trunc256": {
+   "ndcg5": 0.678,
+   "delta": 0.072,
+   "apt3": 0.95,
+   "latencia_mediana_s": 5.44,
+   "fraccao_do_tecto": 0.193
+  },
+  "bge-m3 n=20 trunc120": {
+   "ndcg5": 0.733,
+   "delta": 0.127,
+   "apt3": 0.95,
+   "latencia_mediana_s": 8.43,
+   "fraccao_do_tecto": 0.34
+  },
+  "bge-base n=20 trunc120": {
+   "ndcg5": 0.604,
+   "delta": -0.002,
+   "apt3": 0.85,
+   "latencia_mediana_s": 1.9,
+   "fraccao_do_tecto": -0.005
+  },
+  "MiniLM n=20 trunc120": {
+   "ndcg5": 0.624,
+   "delta": 0.018,
+   "apt3": 0.95,
+   "latencia_mediana_s": 0.58,
+   "fraccao_do_tecto": 0.047
+  },
+  "bge-m3 n=12 trunc120": {
+   "ndcg5": 0.71,
+   "delta": 0.103,
+   "apt3": 0.95,
+   "latencia_mediana_s": 3.71,
+   "fraccao_do_tecto": 0.277
+  },
+  "bge-m3 n=16 trunc120": {
+   "ndcg5": 0.738,
+   "delta": 0.132,
+   "apt3": 0.95,
+   "latencia_mediana_s": 6.3,
+   "fraccao_do_tecto": 0.352
+  },
+  "bge-m3 n=20 trunc80": {
+   "ndcg5": 0.73,
+   "delta": 0.124,
+   "apt3": 0.95,
+   "latencia_mediana_s": 4.66,
+   "fraccao_do_tecto": 0.331
+  }
+ }
+}

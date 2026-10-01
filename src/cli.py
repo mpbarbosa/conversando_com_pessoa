@@ -18,6 +18,11 @@ de nada e depois verso a aparecer.
 mostrar o custo de cada pergunta ensina-o ao utilizador em vez de o esconder.
 
 **Fontes citadas.** O sistema é RAG: ver de onde veio o contexto é o mínimo.
+
+**Reordenação por escolha**, em `/rerank`. A Fase 3B mediu +0,090 de nDCG@5 por
+2,57 s, com o pool de candidatos fechado para que o número não dependa de quem
+construiu o gabarito. Fica desligada por omissão porque é uma troca — 2,57 s
+num total de ~30 s — e uma troca é do utilizador.
 """
 from __future__ import annotations
 
@@ -75,6 +80,11 @@ COMANDOS_IDIOMA = {"/pt": Lang.PT, "/en": Lang.EN,
 #: português e as quatro vozes roteáveis também, logo propor em inglês seria
 #: propor fora do que foi medido.
 COMANDOS_AUTO = {"/auto", "/manual"}
+
+#: Liga e desliga a reordenação por cross-encoder. O modelo tem 568M e é
+#: carregado na primeira vez que se liga, não no arranque: quem não a pede não
+#: paga o carregamento.
+COMANDOS_RERANK = {"/rerank", "/sem-rerank"}
 SAIR = {"/sair", "/exit", "/quit", "sair"}
 
 VERDE, CINZA, NEGRITO, FIM = "\033[32m", "\033[90m", "\033[1m", "\033[0m"
@@ -149,6 +159,8 @@ def main(
     modelo: str = typer.Option(None, "--modelo", "-m", help="modelo do Ollama"),
     auto: bool = typer.Option(False, "--auto",
                               help="roteador propõe a voz a cada pergunta"),
+    rerank: bool = typer.Option(False, "--rerank",
+                                help="reordena os candidatos (+0,090 nDCG@5, +2,6 s)"),
     verboso: bool = typer.Option(False, "--verboso", help="mostra progresso de construção"),
 ) -> None:
     chave = f"/{voz.lower().lstrip('/')}"
@@ -174,12 +186,16 @@ def main(
     typer.echo(_cinza("vozes: /caeiro /campos /reis /pessoa /search · língua: /pt /en"))
     typer.echo(_cinza("/auto para o roteador propor a voz "
                       "(72% de acerto, +0,5 s por pergunta)"))
+    typer.echo(_cinza("/rerank para reordenar os candidatos "
+                      "(+0,090 nDCG@5, +2,6 s por pergunta)"))
     typer.echo(_cinza("/sair para sair"))
     typer.echo(_cinza("uma resposta leva ~30 s em CPU; os versos aparecem à medida"))
     typer.echo()
 
     if auto:
         _aquecer_roteador(pipeline)
+    if rerank:
+        _ligar_rerank(pipeline)
 
     while True:
         try:
@@ -206,6 +222,13 @@ def main(
             auto = False
             typer.echo(_cinza(f"voz: {p.nome} ({p.idioma.value})"
                               + (" · roteador desligado" if desligou else "")))
+            continue
+        if linha.lower() in COMANDOS_RERANK:
+            if linha.lower() == "/rerank":
+                _ligar_rerank(pipeline)
+            else:
+                pipeline.reranker = None
+                typer.echo(_cinza("reordenação desligada"))
             continue
         if linha.lower() in COMANDOS_AUTO:
             auto, lingua_antes = linha.lower() == "/auto", lingua
@@ -256,6 +279,32 @@ def _ajustar_lingua(voz: Voice, pedida: Lang, avisar: bool = False) -> Lang:
                                   f"{', '.join(l.value for l in disponiveis)}"))
             return disponiveis[0]
     return pedida
+
+
+def _ligar_rerank(pipeline: Pipeline) -> None:
+    """Carrega o cross-encoder e liga-o ao pipeline.
+
+    O modelo tem 568M e o carregamento é visível, logo é anunciado. Quem não
+    pede a reordenação não paga nem o carregamento nem os ~2,6 s por pergunta.
+
+    A primeira reordenação custa ~4,8 s em vez de 2,6 s, e isso **não** se
+    resolve com aquecimento — tentei, e `rerank.py` tem a medição que mostra
+    porque não. Anuncia-se.
+    """
+    if pipeline.reranker is not None:
+        typer.echo(_cinza("reordenação já estava ligada"))
+        return
+    from .retrieval.rerank import N_RERANK, padrao
+
+    typer.echo(_cinza("  a carregar o reranker (568M, uma vez)..."), nl=False)
+    t0 = time.perf_counter()
+    pipeline.reranker = padrao()
+    typer.echo(_cinza(f" {time.perf_counter() - t0:.1f} s"))
+    typer.echo(_cinza(f"reordenação ligada: {N_RERANK} candidatos, "
+                      f"+0,090 nDCG@5 medido, ~2,6 s por pergunta"))
+    # Medido a correr isto: 4,8 s na primeira e 2,5 s nas seguintes. Um
+    # aquecimento não o resolve (ver `rerank.py`), logo anuncia-se.
+    typer.echo(_cinza("  a primeira custa ~4,8 s; as seguintes ~2,6 s"))
 
 
 def _aquecer_roteador(pipeline: Pipeline) -> None:
@@ -396,6 +445,10 @@ def _rodape(turno, primeiro: float | None) -> None:
     fontes = ", ".join(c.poem_id for c in turno.usados) or "nenhuma"
     typer.echo(_cinza(f"  fontes: {fontes}"))
     partes = [f"{turno.recuperacao_ms:.0f} ms recuperação"]
+    # Separado da recuperação de propósito: é a parcela que o utilizador paga
+    # por uma escolha e pode desligar com /sem-rerank.
+    if turno.rerank_ms is not None:
+        partes.append(f"{turno.rerank_ms/1000:.1f} s reordenação")
     if primeiro is not None:
         partes.append(f"{primeiro:.1f} s até ao 1.º verso")
     partes.append(turno.resposta.resumo())

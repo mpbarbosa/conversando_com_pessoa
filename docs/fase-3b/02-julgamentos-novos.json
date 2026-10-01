@@ -1,0 +1,31 @@
+{
+ "_meta": {
+  "passo": "A3B / Passo 1 — fechar o pool no top-20 do denso",
+  "n": 142,
+  "rubrica": "A mesma da Fase 1 Passo 8: 2 = responde bem e seria boa base para o chatbot; 1 = serviria se nada melhor houvesse; 0 = não serve.",
+  "criterio_operacional": "Para manter a nota 1 apertada, apliquei a regra: 2 se o ASSUNTO CENTRAL do poema é o assunto da pergunta; 1 se partilha a postura ou um assunto adjacente; 0 caso contrário. A doutrina que fundamenta a resposta não é a resposta — p.ex. «as coisas não têm sentido oculto» dado «por que é melancólico o fim do dia?» é 1, não 2.",
+  "cegueira": "Julgado sobre a folha 01-folha-julgamento.md, ordenada por id dentro de cada pergunta, sem a posição no ranking do denso e sem saber que sistema proporia qual. A maioria destes candidatos vem das posições 6-20, que nenhum sistema promoveu ainda.",
+  "avaliador": "um só, e é o mesmo das Fases 1 a 4. A Fase 3 §4 nomeou isto como limitação e continua a não estar resolvido.",
+  "separado_de_proposito": "Fica em ficheiro próprio em vez de fundido em 08-julgamentos.json para que a proveniência de cada julgamento seja recuperável: 291 vêm do pooling aberto das Fases 1-3, estes 142 de fechar o top-20."
+ },
+ "q01": {"poem_1117": 1, "poem_1188": 1, "poem_1482": 1, "poem_3334": 0, "poem_344": 0, "poem_636": 0, "poem_909": 1},
+ "q02": {"poem_1482": 0, "poem_2587": 1, "poem_2659": 0, "poem_3217": 1, "poem_348": 1, "poem_3534": 0, "poem_636": 0},
+ "q03": {"poem_1188": 1, "poem_1487": 0, "poem_2659": 1, "poem_3351": 2, "poem_3426": 1, "poem_348": 0},
+ "q04": {"poem_1011": 1, "poem_1193": 2, "poem_1463": 1, "poem_1487": 0, "poem_2582": 0, "poem_2655": 1, "poem_3339": 0, "poem_3364": 1, "poem_636": 0, "poem_986": 0},
+ "q05": {"poem_1027": 0, "poem_2578": 1, "poem_2666": 0, "poem_3327": 0, "poem_3344": 0, "poem_3455": 1},
+ "q11": {"poem_224": 0, "poem_693": 1},
+ "q12": {"poem_1010": 1, "poem_135": 0, "poem_2236": 0, "poem_2478": 2, "poem_2854": 1, "poem_60": 2, "poem_827": 2},
+ "q13": {"poem_1032": 0, "poem_1135": 0, "poem_1196": 1, "poem_1237": 2, "poem_3264": 0, "poem_827": 0, "poem_831": 2},
+ "q14": {"poem_1253": 1, "poem_216": 1, "poem_235": 1, "poem_2438": 2, "poem_2861": 1, "poem_3113": 1, "poem_4427": 2},
+ "q15": {"poem_208": 1, "poem_2985": 2, "poem_3453": 0, "poem_827": 0, "poem_952": 1},
+ "q21": {"poem_1972": 1, "poem_2130": 2, "poem_2635": 0, "poem_289": 1, "poem_3999": 0, "poem_4347": 0, "poem_4353": 1, "poem_4366": 0, "poem_503": 2},
+ "q22": {"poem_1812": 1, "poem_1832": 1, "poem_2724": 2, "poem_289": 1, "poem_421": 2, "poem_4347": 0, "poem_4365": 0},
+ "q23": {"poem_1633": 2, "poem_2810": 0, "poem_2974": 1, "poem_3414": 2, "poem_3480": 2, "poem_3494": 1, "poem_4212": 2, "poem_4225": 1, "poem_4395": 2, "poem_768": 1},
+ "q24": {"poem_2619": 2, "poem_2959": 1, "poem_305": 1, "poem_402": 2, "poem_421": 2, "poem_4430": 2, "poem_7": 1, "poem_772": 2},
+ "q25": {"poem_2723": 2, "poem_2737": 2, "poem_3484": 2, "poem_4347": 0, "poem_498": 2, "poem_768": 1},
+ "q31": {"poem_2184": 2, "poem_2460": 2, "poem_3281": 1, "poem_3451": 2, "poem_3558": 2, "poem_3929": 0, "poem_4242": 2},
+ "q32": {"poem_1937": 0, "poem_2460": 0, "poem_270": 0, "poem_2952": 0, "poem_3350": 1, "poem_3382": 2, "poem_3864": 0, "poem_3874": 0, "poem_860": 1},
+ "q33": {"poem_1550": 0, "poem_1784": 1, "poem_1855": 2, "poem_2059": 2, "poem_2254": 1, "poem_3674": 2, "poem_4190": 2, "poem_4242": 1, "poem_551": 0},
+ "q34": {"poem_1343": 0, "poem_2787": 0, "poem_971": 1},
+ "q35": {"poem_1434": 0, "poem_1721": 2, "poem_2376": 2, "poem_2491": 1, "poem_3135": 1, "poem_3374": 0, "poem_3657": 1, "poem_3711": 0, "poem_83": 1, "poem_929": 2}
+}

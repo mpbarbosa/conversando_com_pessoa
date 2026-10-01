@@ -1,5 +1,73 @@
 """Reordenação por cross-encoder.
 
+## A decisão, e o que a sustenta
+
+**`bge-reranker-v2-m3`, 8 candidatos, truncados a 120 tokens: +0,090 de nDCG@5
+por 2,57 s.** Ligado por escolha (`--rerank`), não por omissão.
+
+A Fase 3 mediu isto e não conseguiu decidir, porque o mesmo reranker dava
+−0,048, +0,001 ou +0,074 conforme o gabarito — um poema não julgado conta 0, e
+o pool crescia com cada sistema testado. A Fase 3B **fechou o pool**: julgados
+os 142 candidatos que faltavam, o top-20 do denso está coberto por inteiro, e
+nenhum documento que este reranker promova pode contar 0 por falta de
+julgamento. Gabarito: 433 julgamentos, 125 de nota 2.
+
+| | nDCG@5 | Δ | IC95% do Δ | sinais | latência |
+|---|---|---|---|---|---|
+| denso | 0,606 | — | — | — | — |
+| **n=8 trunc120** | **0,696** | **+0,090** | [+0,005, +0,171] | **+16/−4** (p=0,012) | **2,57 s** |
+| n=12 trunc120 | 0,710 | +0,103 | [+0,020, +0,185] | +15/−5 (p=0,041) | 3,71 s |
+| n=20 trunc80 | 0,730 | +0,124 | [+0,027, +0,218] | +15/−5 (p=0,041) | 4,66 s |
+| n=20 trunc120 | 0,733 | +0,127 | [+0,031, +0,221] | +14/−5 (p=0,064) | 8,43 s |
+| oráculo@20 | 0,980 | +0,374 | — | — | — |
+
+### Por que a mais barata, e não a melhor
+
+**Nenhuma destas configurações se distingue das outras.** Emparelhado, `n=20
+trunc80 − n=8 trunc120` dá +0,033 com IC95% [−0,017, +0,081] e 12/−5 no teste
+de sinais (p=0,14). Escolher a de cima por mais 0,033 que a medição não
+distingue de zero, pagando mais 2 s, seria o erro que a Fase 2 evitou ao
+rejeitar +0,004 **por ser ruído a n=20**.
+
+A n=8 é também a que tem o sinal mais forte (16 de 20 perguntas melhoram) e a
+mais barata. Não há troca a fazer.
+
+### O custo: 2,6 s por pergunta, e ~4,8 s na primeira
+
+Os 2,57 s do banco são o caso **quente** — descartei uma chamada de aquecimento
+e medi da 2.ª em diante. A correr o CLI: **4,8 s** na primeira reordenação, 2,7
+e 2,5 s nas seguintes.
+
+**Tentei eliminar o custo único com um aquecimento, e não funciona.** Em
+isolamento funciona — aquecido, a 1.ª reordenação custa 2,56 s em vez de 4,77 s.
+Mas o processo real tem o encoder e5 carregado antes, e aí o aquecimento deixa
+de valer:
+
+| | 1.ª reordenação | seguintes |
+|---|---|---|
+| isolado, sem aquecer | 4,77 s | 2,5 s |
+| isolado, aquecido | **2,56 s** | 2,5 s |
+| **com o e5 carregado antes, aquecido** | **4,56 s** | 2,5 s |
+| no CLI (tem o e5 carregado) | 4,8 s | 2,5 s |
+
+Duas tentativas minhas de explicar isto falharam — primeiro aqueci com um par
+de duas palavras e atribuí a falha à forma do lote; depois aqueci com a forma
+real, continuou a falhar, e atribuí-o a contenção com o Ollama. A terceira
+medição mostra que é a presença do e5 em memória, e **nenhuma das duas
+primeiras explicações era verdade**.
+
+O aquecimento foi **removido**: custava ~4 s de arranque e não tirava os 2,3 s
+da primeira pergunta. O custo único fica anunciado em vez de escondido.
+
+### O que isto não é
+
+Os +0,090 capturam **24% dos 0,374** que o oráculo@20 mostra estarem lá. O
+limite inferior do IC95% é +0,005, logo a magnitude é incerta; o que está
+estabelecido é o **sinal**, por 16 de 20 perguntas.
+
+E o `apt@3` fica em 95%, como ficou em todas as medições desde a Fase 2 — este
+reranker muda **qual** das respostas certas aparece primeiro, não **se** aparece.
+
 ## O que a Fase 3 Passo 1 mediu
 
 | reranker | params | 3100 tokens | tokens/s |
@@ -32,7 +100,23 @@ MINILM = "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"
 BGE_BASE = "BAAI/bge-reranker-base"
 BGE_M3 = "BAAI/bge-reranker-v2-m3"
 
-PADRAO = MINILM
+#: O `MINILM` era o padrão quando a latência parecia ser o constrangimento. É
+#: mau em poesia portuguesa e está medido: +0,018, e dada «o que vês numa
+#: árvore?» põe o poema das árvores em último. Fica como controlo negativo.
+PADRAO = BGE_M3
+
+#: Candidatos a reordenar. 8 é a escolha medida — ver o cabeçalho.
+N_RERANK = 8
+
+#: Truncar **melhora** a qualidade, não só a velocidade, e está reproduzido em
+#: três truncagens e dois modelos: a n=20, 120 tokens dá +0,127 e 256 dá menos.
+#: A abertura do chunk carrega o tema; a cauda acrescenta ruído ao cross-encoder.
+TRUNCAR_TOKENS = 120
+
+
+def padrao() -> "Reranker":
+    """O reranker na configuração que a Fase 3B mediu e escolheu."""
+    return Reranker(PADRAO, truncar_tokens=TRUNCAR_TOKENS)
 
 
 class Reranker:
