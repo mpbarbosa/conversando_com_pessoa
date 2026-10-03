@@ -1,7 +1,7 @@
 # Documento de controlo — PessoaBot
 
 Estado do projecto, decisões tomadas, correcções feitas e próximos passos.
-**Actualizado em 2026-10-01.**
+**Actualizado em 2026-10-03.**
 
 Este é o índice-mestre. Os detalhes estão nos documentos por fase; aqui está o
 que está feito, o que falta, e o que mudou de ideias pelo caminho.
@@ -30,7 +30,8 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
 | **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
-| **5 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
+| **5 — A voz** | [`FASE-5.md`](FASE-5.md) | 🔄 **protocolo pré-registado**, a medir |
+| **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
 
@@ -191,12 +192,19 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 
 | | Passo | Desbloqueia |
 |---|---|---|
-| 1 | **A voz gerada é a voz pedida?** — a pergunta aberta desde a Fase 1 Passo 7 | a rubrica de geração do §6.2 do plano |
+| 1 | **A voz gerada é a voz pedida?** — a pergunta aberta desde a Fase 1 Passo 7 | 🔄 a **Fase 5**, com protocolo em [`FASE-5.md`](FASE-5.md) |
 | 2 | Julgar as outras 20 perguntas, ou um segundo avaliador | a magnitude dos Δ, que a n=20 fica em IC95% de 0,17 de largura |
-| 3 | Fase 5 — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
+| 3 | **Fase 6** — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
 
 O **Passo 1 é o que importa mais**, e nenhuma das Fases 2, 3, 3B e 4 mexeu nele:
 todas mediram recuperação, e o produto é verso.
+
+É agora a **Fase 5**, e a interface passa a Fase 6 — a renumeração está
+declarada no topo de [`FASE-5.md`](FASE-5.md). A hipótese que vai a medição é a
+que está na tabela de perguntas abertas do §5: o contexto recuperado explica e
+atribui significado, e isso é o que Caeiro proíbe. Mede-se por **ablação
+emparelhada** nas 20 perguntas já julgadas, com e sem contexto, às cegas, com os
+portões escritos antes de existir qualquer amostra.
 
 ### Pendências de limpeza
 
