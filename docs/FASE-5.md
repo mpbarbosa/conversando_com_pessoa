@@ -6,6 +6,18 @@ Fase 1 Passo 7, e é o Passo 1 da lista «[depois, em ordem](CONTROLO.md)».
 **Objectivo:** decidir, por medição, se o contexto recuperado afasta a geração
 da voz pedida — e, se afastar, autorizar a intervenção no prompt que o corrija.
 
+> **Emenda de 2026-10-03, declarada.** Este protocolo foi commitado em
+> `c72f3a0` com **um** instrumento. Enquanto as amostras estavam a ser geradas
+> descobriu-se que uma **sessão paralela** media a mesma pergunta aberta por
+> outro caminho — identificabilidade da voz, com controlo de poemas reais e
+> juízes mecânicos — e o utilizador decidiu **juntar os dois**. O §9 é esse
+> segundo instrumento, e o desenho dele não é meu (ver o cabeçalho do §9).
+>
+> O que a emenda **não** toca: o conjunto fixo, a rubrica, as âncoras e os
+> portões G0–G4 do Instrumento I, todos escritos antes de existir amostra e
+> inalterados. A emenda **acrescenta** um instrumento e nada afrouxa — e
+> nenhuma amostra havia sido julgada quando foi escrita.
+
 > **Renumeração.** O §5 do [plano](PLANO-RAG-LOCAL.md) chama «Fase 5» à interface
 > e ao backend remoto; essa passa a **Fase 6**. A ordem não é capricho: o
 > `CONTROLO.md` §6 já a tinha escrito assim, e construir interface para uma voz
@@ -88,10 +100,11 @@ lá; mantê-la mediria um prompt defeituoso em vez da ausência de contexto.
 |---|---|---|
 | gerador | `qwen2.5:7b-instruct-q4_K_M` | o de serviço (`src/generation/ollama.py`) |
 | opções | `temperature=0,9` · `repeat_penalty=1,1` · `num_predict=220` | as de serviço; mudá-las mediria um sistema que ninguém usa |
+| recuperação | `TOP_K`=6 de `N_RERANK`=8 candidatos |
 | reordenação | **ligada** | é a melhor recuperação medida (Fase 3B, +0,090 nDCG@5). Se a voz falhar com o melhor contexto que temos, a culpa não é da recuperação |
 | pipeline em A | **completo, com repetição por plágio** | é o que o utilizador recebe. O número de tentativas fica registado por amostra |
 | amostras por célula | **1** | ver §8, ameaça declarada |
-| semente | `20261003 + índice da pergunta`, igual em A e B | reprodutibilidade |
+| semente | `20261003 + índice da pergunta`, igual em A e B | reprodutibilidade. O gerador de serviço **não** aceita semente (`OllamaGenerator._opcoes`); o harness injecta-a, e é o único desvio ao de serviço |
 
 ---
 
@@ -165,9 +178,9 @@ O último caso é precisamente o que H prevê, e por isso está escrito como
 
 ### 5.4 Critério 5 em ambas as condições
 
-`plagio.analisar` compara a resposta contra **os mesmos cinco chunks** nas duas
-condições: os recuperados para aquela pergunta — em A estiveram no prompt, em B
-não. Sobreposição em B não é cópia do contexto, é **memorização do modelo**, e
+`plagio.analisar` compara a resposta contra **o mesmo conjunto de chunks** nas
+duas condições: os `TOP_K`=6 recuperados para aquela pergunta — em A estiveram
+no prompt (os que couberam no orçamento), em B nenhum esteve. Sobreposição em B não é cópia do contexto, é **memorização do modelo**, e
 mede-se com o mesmo instrumento por ser o mesmo risco para o utilizador.
 
 Plágio contra o corpus inteiro (2083 poemas) **não** é medido aqui.
@@ -199,6 +212,11 @@ Aqui a mecânica impede-o:
   §6.2, e fica para a Fase 5B.
 - As âncoras são de **mim para mim**. Qualquer pessoa que repita isto deve
   esperar desacordo nas fronteiras 1/2.
+
+O **Instrumento II (§9) não tem nenhuma destas ameaças**: os juízes são
+mecânicos e cegos por construção. Não substitui a rubrica — mede outra coisa —
+mas dá à mesma hipótese H um teste que não passa pelo meu juízo, e é por isso
+que a leitura robusta desta fase é a **concordância dos dois instrumentos**.
 
 ---
 
@@ -243,7 +261,116 @@ como se fosse resultado.
 
 ---
 
-## 9. Entregáveis
+## 9. Instrumento II — identificabilidade da voz, por juízes mecânicos
+
+> **O desenho deste instrumento não é meu.** Veio de uma sessão paralela que
+> media a mesma pergunta aberta por outro caminho, num `docs/FASE-VOZ.md` que
+> nunca foi commitado; a corrida dela morreu a 12 de 24 gerações sem persistir
+> nada, logo não há dados dela nesta fase — só o desenho, as armadilhas que ele
+> evita e as predições do §9.4, que ela escreveu antes de existir amostra.
+> Os ficheiros originais foram removidos na fusão, e é por isso que o desenho
+> está transcrito aqui e no cabeçalho de `fase-5/identificar.py`.
+
+### 9.1 O que este instrumento acrescenta ao primeiro
+
+O Instrumento I **auto-calibra-se**: compara duas condições do mesmo sistema,
+logo não precisa de saber quanto vale um 2 em absoluto. A identificabilidade
+**não** se auto-calibra. Se um juiz identificar a voz pedida em 55% das
+amostras, isso é bom ou mau? Não se sabe — falta saber quantas vezes identifica
+Pessoa **autêntico**.
+
+E não é hipotético neste projecto: a Fase 4 Passo A1c mediu o centróide de
+embedding sobre poemas **reais** tirados do índice e obteve **42–46%**
+(34/80 por centróide, 37/80 por sonda). Para esse instrumento, 45% sobre
+gerados é **indistinguível de Pessoa verdadeiro**. Sem controlo, 45% seria
+chamado falhanço — e seria medir o instrumento em vez do sistema. É a mesma
+lição do `util@3` da Fase 0, que saturou até o controlo inglês fazer 9/10.
+
+**Reporta-se a diferença, nunca o nível.**
+
+### 9.2 O que corre
+
+| grupo | n | o que é |
+|---|---|---|
+| **A, com contexto** | 20 | as amostras da condição A do Instrumento I |
+| **B, sem contexto** | 20 | as da condição B |
+| **real** | 40 | poemas do corpus, 10 por voz, **excluindo** tudo o que entrou no prompt de alguma geração |
+
+Correr os juízes sobre as **duas** condições é o que a fusão acrescenta ao
+desenho original, que só tinha o pipeline completo: a identificabilidade fica
+emparelhada por pergunta, e dá um teste **mecânico** da mesma hipótese H.
+
+Dois juízes, de propósito com defeitos opostos:
+
+| juiz | força | defeito |
+|---|---|---|
+| **centróide de embedding** | não pode memorizar: só vê geometria de estilo | fraco — 42–46% em poemas reais, contra um piso de 25% |
+| **qwen2.5:7b** | forte, e é conhecimento real de Pessoa | pode ter **memorizado** os reais do pré-treino |
+
+### 9.3 As três armadilhas, e como são evitadas
+
+1. **O centróide exclui os poemas de controlo.** Um poema real está no índice;
+   deixá-lo no centróide da sua própria voz é pedir ao juiz que reconheça o que
+   já viu, não que classifique por estilo.
+2. **Os três grupos enfrentam um juiz idêntico.** Os centróides calculam-se
+   **uma vez**, já sem os controlos, e usam-se nos três grupos. Excluir os reais
+   só quando se julgam reais daria instrumentos diferentes a grupos diferentes,
+   e a diferença deixaria de significar nada.
+3. **O prompt do juiz LLM é novo.** O da Fase 4 classifica *perguntas* («qual
+   voz responderia a isto?»); este classifica *poemas* («quem escreveu isto?»).
+   Os 72% **não transferem**, e é o controlo de reais que calibra este prompt.
+
+E três confundidores, que ficam declarados por não serem evitáveis:
+
+- **Os vectores do índice levam «Autor — Título» à cabeça**
+  (`Chunk.indexed_text`), logo os centróides carregam o nome do heterónimo. Os
+  três grupos são julgados como verso puro contra esses centróides, logo isto
+  deprime o **nível** dos três por igual e deixa a **diferença** interpretável.
+  O nível só é comparável com os 42–46% da Fase 4, que partilham o defeito.
+- **A memorização dos reais pelo juiz LLM** infla os reais, logo **alarga** a
+  diferença real-vs-gerado: agrava a conclusão em vez de a inventar.
+- **As descrições de voz do juiz LLM são quase as personas do gerador**, e isso
+  empurra no sentido contrário: um poema gerado foi escrito *para* casar com
+  aquela descrição, logo o juiz favorece os gerados e **encurta** a diferença.
+  Os dois confundidores do LLM têm sinais opostos e não se somam — mais uma
+  razão para a leitura robusta ser a concordância com o centróide, que não tem
+  nenhum dos dois.
+
+### 9.4 Predições, da sessão paralela, escritas antes de existir amostra
+
+1. **O centróide não distingue gerados de reais.** Reais 42–46% (já medido);
+   gerados em ±8 pontos disso, logo um instrumento **sem potência** para esta
+   pergunta — e nesse caso serve de controlo negativo do juiz, não de medida.
+2. **O LLM acerta mais em reais que em gerados.** Reais acima de 60%, gerados
+   abaixo. É a predição central: a diferença **é** o défice de voz.
+3. **Campos é o mais identificável; Reis e o ortónimo os mais confundidos.** O
+   versículo longo é assinatura de superfície; a Fase 4 viu o Reis a 0,5 e o
+   roteador a trocar Reis por ortónimo e por Caeiro.
+4. **O critério 2 falha com frequência** — a `FASE-1.md` registou «PT-BR
+   persiste apesar do few-shot».
+5. **O critério 5 quase não falha** — a regra preventiva levou a mediana de
+   versos copiados de 82% para 0%.
+
+As duas primeiras são as que valem; são as que a sessão paralela assinalou como
+tal, e são as únicas em que este instrumento tem alguma potência.
+
+### 9.5 Portões do Instrumento II
+
+| | portão | condição | o que autoriza |
+|---|---|---|---|
+| **G5** | **a voz não se vê** | A − real ≥ 0, ou dentro do ruído, nos **dois** juízes | a voz gerada é tão identificável quanto Pessoa autêntico neste instrumento. O esforço sai da voz e vai para outro critério |
+| **G6** | **H, pela via mecânica** | pares discordantes desequilibrados a favor de **B** nos dois juízes | corrobora H independentemente da minha rubrica; soma-se a G1 |
+| **G7** | **discordância** | os dois instrumentos apontam em sentidos contrários | **nada se decide.** A rubrica à mão fica em suspeita, como a Fase 3 ficou inconclusiva, e o desempate é um segundo avaliador humano |
+
+**Potência, declarada antes de medir:** 20 por condição e 5 por voz por
+condição. Por voz lê-se **direcção**, nunca significância, e os pares
+discordantes a n=20 raramente dão significância — este instrumento é
+**corroborativo**, não decisivo. Ter controlo de n igual é o que torna a leitura
+possível; sem ele seria comparar contra um absoluto inventado.
+
+---
+
+## 10. Entregáveis
 
 ```
 docs/fase-5/gerar_amostras.py     harness das duas condições
@@ -251,11 +378,14 @@ docs/fase-5/01-amostras.md        40 amostras, embaralhadas, cegas
 docs/fase-5/01-chave.json         o mapa — não abrir antes de 02
 docs/fase-5/01-amostras.json      texto cru, métricas automáticas, tentativas
 docs/fase-5/02-pontuacoes.json    3a, 3b, 4 à mão
+docs/fase-5/01-cru.jsonl          diário de bordo, uma linha por amostra
 docs/fase-5/03-resultados.json    sinais, IC95% bootstrap, medianas
+docs/fase-5/identificar.py        Instrumento II: controlo real + dois juízes
+docs/fase-5/04-identificacao.json matrizes, diferenças, pares discordantes
 docs/FASE-5-RELATORIO.md          o que os portões decidiram
 ```
 
-## 10. Checklist do protocolo
+## 11. Checklist do protocolo
 
 ```
 [ ] A1  este documento commitado ANTES de qualquer amostra existir
@@ -266,5 +396,11 @@ docs/FASE-5-RELATORIO.md          o que os portões decidiram
 [ ] B2  pontuações commitadas antes de a chave ser aberta
 [ ] C1  sinais, bootstrap e medianas calculados
 [ ] C2  portão aplicado, e qual disparou declarado
-[ ] C3  relatório, com as ameaças do §6 repetidas e não escondidas
+[ ] D1  controlo de 40 poemas reais, sem sobreposição com o que entrou no prompt
+[ ] D2  centróides calculados UMA vez, sem os controlos, para os três grupos
+[ ] D3  matrizes de confusão dos dois juízes nos três grupos
+[ ] D4  diferenças A−real, B−real, A−B, e os pares discordantes por juiz
+[ ] D5  as cinco predições do §9.4 confrontadas uma a uma
+[ ] C3  relatório, com as ameaças do §6 repetidas e não escondidas, e a
+        concordância (ou não) dos dois instrumentos como leitura final
 ```
