@@ -30,7 +30,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
 | **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
-| **5 — A voz** | [`FASE-5.md`](FASE-5.md) | 🔄 **protocolo pré-registado**, a medir |
+| **5 — A voz** | [`FASE-5.md`](FASE-5.md) | 🔄 **pré-registado**, a medir. Dois instrumentos: ablação com/sem contexto (à mão, às cegas) e identificabilidade por dois juízes mecânicos, contra controlo de poemas reais |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -205,6 +205,14 @@ que está na tabela de perguntas abertas do §5: o contexto recuperado explica e
 atribui significado, e isso é o que Caeiro proíbe. Mede-se por **ablação
 emparelhada** nas 20 perguntas já julgadas, com e sem contexto, às cegas, com os
 portões escritos antes de existir qualquer amostra.
+
+Em cima disso entrou, por **emenda declarada**, um segundo instrumento vindo de
+uma sessão paralela que media a mesma pergunta por outro caminho: a voz gerada é
+tão identificável quanto Pessoa autêntico? Essa pergunta **não se auto-calibra**
+— é o controlo de poemas reais que a torna legível, e a Fase 4 A1c já mediu o
+nível a bater (42–46% em poemas reais). Os juízes são mecânicos, logo esse
+instrumento não tem a ameaça de avaliador único que a rubrica à mão tem. A
+leitura final é a **concordância dos dois**; discordarem não decide nada.
 
 ### Pendências de limpeza
 
