@@ -31,6 +31,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
 | **5 — A voz** | [`FASE-5.md`](FASE-5.md) · [relatório](FASE-5-RELATORIO.md) | ✅ **completa. H rejeitada** pelos dois instrumentos. O contexto não degrada a poética (4 pares contra 4); o Caeiro falha a **0,0 nas duas condições** e é identificado ao nível do Caeiro **real** — logo identificabilidade e poética divergem, e o défice está na persona |
+| **5B — A persona do Caeiro** | [`FASE-5B.md`](FASE-5B.md) · [relatório](FASE-5B-RELATORIO.md) | ✅ **inconclusivo por potência (G4)**, nos dois avaliadores. O desfecho **saturou no chão**: 22 dos 30 pares empataram em 0–0, e H5B ficou **sem teste** — nem confirmada nem refutada. O que fica medido: o **0,0 do Caeiro reproduz-se a n=10**, a 60 amostras, 3 repetições por célula e um segundo avaliador cego ao desenho |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -246,13 +247,27 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 
 | | passo | porquê |
 |---|---|---|
-| 1 | **A persona do Caeiro, feita de interdições** | é a única voz a 0,0 na poética, e a única cuja persona é «não atribuas», «recusa», «não personifiques». Um 7B a cumprir interdições negativas é hipótese concreta e barata |
-| 2 | **Um segundo avaliador, ou o LLM-juiz da rubrica** | a lacuna mais séria da Fase 5: a rubrica teve avaliador único. E o juiz de identificação **não** serve para isto — as descrições dele derivam das personas, logo é circular |
+| 1 | ~~**A persona do Caeiro, feita de interdições**~~ — **medida, e sem veredicto** | [Fase 5B](FASE-5B-RELATORIO.md): a ablação correu com 60 amostras e dois avaliadores, e o portão **G4** disparou nos dois. O critério 3a não tem resolução onde era preciso, logo a hipótese continua aberta — ver o passo 5 |
+| 2 | ~~**Um segundo avaliador**~~ — **feito** na Fase 5B | R2 foi cego ao **desenho** e não só à condição: não soube que havia dois braços nem qual era a hipótese. κ=0,301 em 3a com 81,7% de concordância exacta, e nenhuma discordância acima de 1 ponto em 60 amostras. Ressalva: são sessões do mesmo modelo a ler as mesmas âncoras, logo pode ser **erro correlacionado** |
 | 3 | **`num_predict` para Campos** | 3 truncaturas em 40, pendência já conhecida desde a Fase 4 |
 | 4 | A sombra lexical do Caeiro, com a regra de selecção vinda de fora da amostra | ver o §11 do [relatório](FASE-5-RELATORIO.md): a defesa não é «escrevi antes», é «a regra não pode ver o que vai medir» |
+| 5 | **Um desfecho com resolução no chão do Caeiro** — pré-requisito de tudo o resto | a âncora de 0 funde «uma volta a mais que 1» com «filosofa de ponta a ponta». Uma **contagem de voltas interpretativas** por poema, ou a fracção de versos que atribuem significado, dá escala contínua onde esta dá um ponto — e valida-se contra os **113 poemas reais** de Caeiro, que devem pontuar no extremo oposto |
+| 6 | **Medir o plágio por amostra, e não só como critério de aprovação** | ver o §4 do [relatório da 5B](FASE-5B-RELATORIO.md): as três únicas amostras que chegaram a 3a=2 tinham, as três, um poema real de Caeiro **no prompt**, e uma delas é uma transposição com 33% dos versos copiados. Onde a poética chegou ao topo, chegou por cópia |
 
-O **Passo 1 é o que importa mais**, e nenhuma das Fases 2, 3, 3B e 4 mexeu nele:
-todas mediram recuperação, e o produto é verso.
+O **Passo 1 era o que importava mais**, e a Fase 5B foi medi-lo. Voltou sem
+veredicto, e a razão é instrutiva: o instrumento com que se ia medir — o
+critério 3a, com as âncoras da Fase 5 — **está saturado no mínimo nesta voz**, e
+uma ablação emparelhada sobre um desfecho saturado é inconclusiva por
+construção. O que falta agora não é mais uma corrida; é um desfecho com
+resolução no chão.
+
+> **A lição, e é geral.** Antes de pré-registar uma ablação emparelhada,
+> **verificar que o desfecho tem variância na condição de controlo**. A Fase 5
+> já tinha publicado que o Caeiro dá 0,0 de mediana em 3a, e a Fase 5B desenhou
+> 60 amostras sobre esse critério de qualquer maneira. Um piloto de seis
+> amostras tinha mostrado a saturação em vinte minutos, por 1/10 do custo.
+> Nenhuma das outras defesas do protocolo — âncoras herdadas, dois avaliadores,
+> piso de potência, portão de especificidade — compensa esta falta.
 
 É agora a **Fase 5**, e a interface passa a Fase 6 — a renumeração está
 declarada no topo de [`FASE-5.md`](FASE-5.md). A hipótese que vai a medição é a
@@ -308,12 +323,14 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`FASE-3.md`](FASE-3.md) · [`FASE-3-PASSO-1.md`](FASE-3-PASSO-1.md) | rerank e latência medida |
 | [`FASE-4.md`](FASE-4.md) · [`FASE-4-RELATORIO.md`](FASE-4-RELATORIO.md) | roteador de voz, e o veto ao enriquecimento |
 | [`FASE-3B.md`](FASE-3B.md) · [`FASE-3B-RELATORIO.md`](FASE-3B-RELATORIO.md) | fechar o pool de candidatos, e a reordenação a entrar |
+| [`FASE-5B.md`](FASE-5B.md) · [`FASE-5B-RELATORIO.md`](FASE-5B-RELATORIO.md) | a persona do Caeiro feita de interdições, e o desfecho que saturou |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
 | `fase-3/` | latência dos rerankers e script |
 | `fase-4/` | 7 bancos de roteador, o conjunto adversarial pré-registado, e a decomposição do tecto |
 | `fase-3b/` | a folha dos 142 julgamentos, o pool fechado, e a análise de significância |
+| `fase-5b/` | as 60 amostras dos dois braços, as duas pontuações cegas, a variante afirmativa e a verificação da regra que a produziu |
 
 ### Código
 

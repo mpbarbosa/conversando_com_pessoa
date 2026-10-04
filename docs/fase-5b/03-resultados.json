@@ -1,0 +1,371 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5B.md §7",
+  "bootstrap_B": 10000,
+  "semente": 3,
+  "piso_discordantes": 8,
+  "avaliadores": [
+   "R1",
+   "R2"
+  ]
+ },
+ "por_avaliador": {
+  "R1": {
+   "n_pares": 30,
+   "por_criterio": {
+    "c3a_poetica": {
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "media_C": 0.167,
+     "media_P": 0.267,
+     "delta_medio": 0.1,
+     "ic95": [
+      -0.133,
+      0.333
+     ],
+     "sinais_pro_P": 4,
+     "sinais_pro_C": 3,
+     "empates": 23,
+     "discordantes": 7,
+     "p_binomial": 1.0
+    },
+    "c3b_forma": {
+     "mediana_C": 1.0,
+     "mediana_P": 1.0,
+     "media_C": 1.033,
+     "media_P": 1.1,
+     "delta_medio": 0.067,
+     "ic95": [
+      -0.2,
+      0.333
+     ],
+     "sinais_pro_P": 7,
+     "sinais_pro_C": 6,
+     "empates": 17,
+     "discordantes": 13,
+     "p_binomial": 1.0
+    },
+    "c4_responde": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.867,
+     "media_P": 1.967,
+     "delta_medio": 0.1,
+     "ic95": [
+      -0.033,
+      0.233
+     ],
+     "sinais_pro_P": 4,
+     "sinais_pro_C": 1,
+     "empates": 25,
+     "discordantes": 5,
+     "p_binomial": 0.375
+    },
+    "c1_verso": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 2.0,
+     "media_P": 2.0,
+     "delta_medio": 0.0,
+     "ic95": [
+      0.0,
+      0.0
+     ],
+     "sinais_pro_P": 0,
+     "sinais_pro_C": 0,
+     "empates": 30,
+     "discordantes": 0,
+     "p_binomial": 1.0
+    },
+    "c2_pt": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.833,
+     "media_P": 1.933,
+     "delta_medio": 0.1,
+     "ic95": [
+      -0.067,
+      0.3
+     ],
+     "sinais_pro_P": 4,
+     "sinais_pro_C": 2,
+     "empates": 24,
+     "discordantes": 6,
+     "p_binomial": 0.6875
+    },
+    "c5_plagio": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.933,
+     "media_P": 1.8,
+     "delta_medio": -0.133,
+     "ic95": [
+      -0.4,
+      0.133
+     ],
+     "sinais_pro_P": 1,
+     "sinais_pro_C": 3,
+     "empates": 26,
+     "discordantes": 4,
+     "p_binomial": 0.625
+    }
+   },
+   "portoes_disparados": [
+    "G4"
+   ],
+   "portao_principal": "G4",
+   "estratos": {
+    "q01-q05": {
+     "n_pares": 15,
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "delta_medio": 0.067,
+     "sinais_pro_P": 1,
+     "sinais_pro_C": 1,
+     "empates": 13
+    },
+    "q06-q10": {
+     "n_pares": 15,
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "delta_medio": 0.133,
+     "sinais_pro_P": 3,
+     "sinais_pro_C": 2,
+     "empates": 10
+    }
+   },
+   "variancia_na_celula": {
+    "C": {
+     "desvio_medio": 0.189,
+     "celulas_com_3_notas_iguais": 6,
+     "n_celulas": 10
+    },
+    "P": {
+     "desvio_medio": 0.189,
+     "celulas_com_3_notas_iguais": 7,
+     "n_celulas": 10
+    }
+   },
+   "amplitude_na_celula": {
+    "C": [
+     0,
+     1
+    ],
+    "P": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "R2": {
+   "n_pares": 30,
+   "por_criterio": {
+    "c3a_poetica": {
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "media_C": 0.1,
+     "media_P": 0.167,
+     "delta_medio": 0.067,
+     "ic95": [
+      -0.1,
+      0.233
+     ],
+     "sinais_pro_P": 4,
+     "sinais_pro_C": 2,
+     "empates": 24,
+     "discordantes": 6,
+     "p_binomial": 0.6875
+    },
+    "c3b_forma": {
+     "mediana_C": 1.0,
+     "mediana_P": 1.0,
+     "media_C": 1.0,
+     "media_P": 1.067,
+     "delta_medio": 0.067,
+     "ic95": [
+      -0.167,
+      0.3
+     ],
+     "sinais_pro_P": 5,
+     "sinais_pro_C": 4,
+     "empates": 21,
+     "discordantes": 9,
+     "p_binomial": 1.0
+    },
+    "c4_responde": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.667,
+     "media_P": 1.9,
+     "delta_medio": 0.233,
+     "ic95": [
+      0.067,
+      0.4
+     ],
+     "sinais_pro_P": 8,
+     "sinais_pro_C": 1,
+     "empates": 21,
+     "discordantes": 9,
+     "p_binomial": 0.0391
+    },
+    "c1_verso": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 2.0,
+     "media_P": 2.0,
+     "delta_medio": 0.0,
+     "ic95": [
+      0.0,
+      0.0
+     ],
+     "sinais_pro_P": 0,
+     "sinais_pro_C": 0,
+     "empates": 30,
+     "discordantes": 0,
+     "p_binomial": 1.0
+    },
+    "c2_pt": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.833,
+     "media_P": 1.933,
+     "delta_medio": 0.1,
+     "ic95": [
+      -0.067,
+      0.3
+     ],
+     "sinais_pro_P": 4,
+     "sinais_pro_C": 2,
+     "empates": 24,
+     "discordantes": 6,
+     "p_binomial": 0.6875
+    },
+    "c5_plagio": {
+     "mediana_C": 2.0,
+     "mediana_P": 2.0,
+     "media_C": 1.933,
+     "media_P": 1.8,
+     "delta_medio": -0.133,
+     "ic95": [
+      -0.4,
+      0.133
+     ],
+     "sinais_pro_P": 1,
+     "sinais_pro_C": 3,
+     "empates": 26,
+     "discordantes": 4,
+     "p_binomial": 0.625
+    }
+   },
+   "portoes_disparados": [
+    "G3",
+    "G4"
+   ],
+   "portao_principal": "G4",
+   "estratos": {
+    "q01-q05": {
+     "n_pares": 15,
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "delta_medio": 0.067,
+     "sinais_pro_P": 2,
+     "sinais_pro_C": 1,
+     "empates": 12
+    },
+    "q06-q10": {
+     "n_pares": 15,
+     "mediana_C": 0.0,
+     "mediana_P": 0.0,
+     "delta_medio": 0.067,
+     "sinais_pro_P": 2,
+     "sinais_pro_C": 1,
+     "empates": 12
+    }
+   },
+   "variancia_na_celula": {
+    "C": {
+     "desvio_medio": 0.141,
+     "celulas_com_3_notas_iguais": 7,
+     "n_celulas": 10
+    },
+    "P": {
+     "desvio_medio": 0.189,
+     "celulas_com_3_notas_iguais": 6,
+     "n_celulas": 10
+    }
+   },
+   "amplitude_na_celula": {
+    "C": [
+     0,
+     1
+    ],
+    "P": [
+     0,
+     1
+    ]
+   }
+  }
+ },
+ "concordancia": {
+  "n_amostras": 60,
+  "c3a_poetica": {
+   "kappa": 0.301,
+   "kappa_ponderado_linear": 0.4,
+   "concordancia_exacta": 0.817,
+   "discordancia_maxima": 1,
+   "media_R1": 0.217,
+   "media_R2": 0.133
+  },
+  "c3b_forma": {
+   "kappa": 0.706,
+   "kappa_ponderado_linear": 0.721,
+   "concordancia_exacta": 0.9,
+   "discordancia_maxima": 1,
+   "media_R1": 1.067,
+   "media_R2": 1.033
+  },
+  "c4_responde": {
+   "kappa": 0.337,
+   "kappa_ponderado_linear": 0.375,
+   "concordancia_exacta": 0.833,
+   "discordancia_maxima": 1,
+   "media_R1": 1.917,
+   "media_R2": 1.783
+  },
+  "portao_R1": "G4",
+  "portao_R2": "G4",
+  "G5_discordam": false
+ },
+ "instrumento_II": {
+  "nota": "sem portão. Ver o §7.1: P não contém estas palavras por construção, e este instrumento não separa eco de priming.",
+  "C": {
+   "n_amostras": 30,
+   "total_ocorrencias": 11,
+   "amostras_com_pelo_menos_uma": 8,
+   "media_por_amostra": 0.367,
+   "por_palavra": {
+    "tristeza": 3,
+    "espelho": 3,
+    "sentido": 2,
+    "oculta": 1,
+    "oculto": 1,
+    "significado": 1
+   }
+  },
+  "P": {
+   "n_amostras": 30,
+   "total_ocorrencias": 7,
+   "amostras_com_pelo_menos_uma": 6,
+   "media_por_amostra": 0.233,
+   "por_palavra": {
+    "sentido": 2,
+    "tristeza": 2,
+    "oculta": 1,
+    "moral": 1,
+    "espelho": 1
+   }
+  },
+  "delta_total": -4
+ }
+}
