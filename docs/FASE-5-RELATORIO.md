@@ -26,6 +26,17 @@ A pergunta aberta há quatro fases fecha-se assim: não com uma correcção ao
 prompt do contexto, que era o que eu esperava autorizar, mas com a eliminação do
 suspeito que eu próprio tinha nomeado.
 
+**E os dois instrumentos concordam.** O Instrumento II, com juízes mecânicos que
+não passam pelo meu juízo, também não corrobora H — o indício que tem aponta ao
+contrário, e não atinge significância. O portão G7, que reservava a decisão para
+o caso de discordarem, não dispara.
+
+O que o Instrumento II acrescenta é uma distinção que o primeiro não podia ver:
+**a voz gerada é tão identificável quanto Pessoa autêntico** (G5 dispara, +3
+pontos no juiz com potência) **e ao mesmo tempo não cumpre a poética** (o Caeiro
+a 0,0). Identificabilidade e poética não são a mesma coisa, e esta fase mede as
+duas e mostra-as a divergir.
+
 ---
 
 ## 2. O número
@@ -193,21 +204,127 @@ sustenta nada; fica registado para o caso de voltar.
 
 ---
 
-## 7. Instrumento II — identificabilidade
+## 7. Instrumento II — identificabilidade, por juízes mecânicos
 
-> **A correr.** Os dois juízes mecânicos sobre as três condições — A, B e 40
-> poemas reais de controlo — estão em fila atrás da remedição dos centróides da
-> Fase 4, que ocupa a CPU. Esta secção fica aberta e é preenchida quando a
-> corrida fechar; a leitura final da fase depende dela, porque o portão G7 diz
-> que se os dois instrumentos apontarem em sentidos contrários **nada se
-> decide**.
+Três configurações de juiz sobre três grupos: as 20 amostras de A, as 20 de B, e
+40 poemas reais do corpus, com os 55 poemas que entraram em algum prompt
+excluídos do controlo. Os centróides calculam-se uma vez, já sem os controlos, e
+servem os três grupos.
 
-Uma coisa já se pode dizer, e é uma ressalva que pertence ao corpo do relatório
-e não às pendências: a diferença real-vs-gerado que esse instrumento vai
-reportar está **encurtada por construção**. As descrições de voz do juiz LLM são
-quase as personas do gerador, e um poema gerado foi escrito *para* casar com
-aquela descrição. O confundidor empurra ao contrário da memorização dos reais, e
-os dois não se cancelam de forma conhecida. Ver [`FASE-5.md`](FASE-5.md) §9.3.
+| juiz | A | B | real | A−real | B−real | A−B |
+|---|---|---|---|---|---|---|
+| centróide `com_nome` (a pré-registada) | 35% | 40% | **45%** | −10 | −5 | −5 |
+| centróide `sem_nome` (a corrigida) | **65%** | 40% | **62%** | **+3** | **−22** | **+25** |
+| qwen2.5:7b | 65% | 65% | **45%** | **+20** | **+20** | 0 |
+
+### 7.1 O teste emparelhado, e o que ele recusa
+
+As 20 perguntas são as mesmas nas duas condições, logo a identificação é
+emparelhada. Teste de sinais exacto sobre os pares discordantes:
+
+| juiz | só A acerta | só B acerta | n discordantes | p (1 lado) | p (2 lados) |
+|---|---|---|---|---|---|
+| centróide `com_nome` | 2 | 3 | 5 | 0,500 | 1,000 |
+| centróide `sem_nome` | **7** | 2 | 9 | **0,090** | 0,180 |
+| qwen2.5:7b | 3 | 3 | 6 | 0,656 | 1,000 |
+
+**Nada atinge significância.** Os 25 pontos de diferença do centróide corrigido
+assentam em **nove** pares discordantes, sete deles a favor de A, e sete de nove
+dá p=0,090 a um lado. É direcção, não é resultado — e o §9.5 do protocolo
+escreveu-o antes de existir número: «os pares discordantes a n=20 raramente dão
+significância — este instrumento é **corroborativo**, não decisivo».
+
+### 7.2 Os portões
+
+**G6 não dispara.** Exigia pares discordantes desequilibrados a favor de **B**
+nos dois juízes. Nenhum juiz os dá: o corrigido aponta ao contrário (7 contra
+2), o LLM empata 3-3, e o contaminado dá 2 contra 3 em cinco pares. **H não é
+corroborada pela via mecânica**, e o indício que existe é contra ela.
+
+**G7 não dispara, e os dois instrumentos concordam.** O portão cobria «os dois
+instrumentos apontam em sentidos contrários». Não apontam: o Instrumento I não
+encontrou diferença na poética (4 contra 4) e o Instrumento II não encontra
+diferença significativa na identificabilidade (p=0,18). Os dois **rejeitam H**,
+e o segundo acrescenta, sem o estabelecer, um indício de que o contexto **ajuda**
+em vez de prejudicar.
+
+**G5 dispara — e a acção que eu lhe prescrevi não se segue.** A condição era
+«A − real ≥ 0, ou dentro do ruído, nos dois juízes», e cumpre-se: +3 no centróide
+corrigido e +20 no LLM. **A voz gerada é tão identificável quanto Pessoa
+autêntico.** Mas o que eu escrevi que isso autorizaria — «o esforço sai da voz e
+vai para outro critério» — **está errado**, e é esta fase que produz a prova:
+
+> o Instrumento I mede o Caeiro a **0,0 de mediana na poética**, a pior das
+> quatro vozes, e o Instrumento II identifica-o **ao nível do Caeiro real**.
+
+Quando escrevi G5 estava a tratar identificabilidade como substituto de «a voz
+está certa». Não é. Um poema pode exibir todos os marcadores de superfície de
+uma voz e violar o que essa voz pode dizer. O portão disparou e a prescrição
+dele não vale: **o que sai é a identificabilidade como medida de voz, não o
+esforço na voz.**
+
+### 7.3 O juiz LLM está saturado pelo confundidor, e o nível dele não se usa
+
+O confundidor declarado no §9.3 — as descrições do juiz são quase as personas do
+gerador — não é ressalva de margem: **domina o resultado**. O juiz dá 65% aos
+gerados nas duas condições e **45% a Pessoa autêntico**. Ordena a imitação 20
+pontos acima do original, porque os poemas gerados foram escritos *para* casar
+com a descrição que ele tem à frente.
+
+Um juiz assim não tem resolução para comparar duas imitações, e 65% nas duas
+condições, idêntico, é o que a saturação parece. **A leitura de A-vs-B é a do
+centróide corrigido**, e a razão não é dar o resultado que convém: o juiz LLM tem
+um confundidor identificado, quantificado em +20 pontos e com mecanismo, e o
+centróide não tem nenhum dos dois confundidores que lhe foram atribuídos.
+
+O que isto deixa como regra, e é o que vale para fora desta fase: **um juiz cujas
+descrições derivam das personas do gerador não mede cumprimento de persona em
+nenhuma direcção, porque é circular.**
+
+### 7.4 Por voz, com o n à vista
+
+Centróide corrigido, A contra real, ao lado da poética do Instrumento I:
+
+| voz | gerado (A) | real | Δ | poética (Instr. I) |
+|---|---|---|---|---|
+| caeiro | 2/5 = 40% | 7/10 = 70% | −30 | **0,0** |
+| campos | 4/5 = 80% | 10/10 = 100% | −20 | 1,0 |
+| **reis** | 4/5 = 80% | 4/10 = 40% | **+40** | **2,0** |
+| ortónimo | 3/5 = 60% | 4/10 = 40% | +20 | 1,0 |
+
+**A coluna não ordena nada.** Se um défice de poética aparecesse como défice de
+identificabilidade, o Reis — a voz que o gerador cumpre melhor, 2,0 — não estaria
+no topo com +40. E **a n=5 uma amostra vale 20 pontos**: os −30 do Caeiro são
+uma amostra e meia, e nenhum destes Δ sobrevive a trocar um poema.
+
+Uma primeira versão desta tabela aqui tinha **duas** linhas — Caeiro e o juiz
+LLM — e sugeria que o centróide é mais sensível ao défice do Caeiro do que o LLM.
+Com as quatro vozes à vista isso não se sustenta, e a correcção é da sessão
+paralela, que verificou os números em vez de os aceitar.
+
+### 7.5 Uma replicação independente
+
+O centróide corrigido dá **62%** em 40 poemas reais aqui; a remedição da Fase 4
+deu **64%** em 80 poemas, noutra sessão, com outro conjunto e outra semente. A
+correcção dos centróides reproduz-se, e isso vale mais do que qualquer dos dois
+números sozinho.
+
+E o contrário também fecha: a variante `com_nome` dá **45%** em reais, dentro dos
+42–46% que a Fase 4 publicou. O instrumento contaminado reproduz o número
+contaminado — que é a confirmação de que o diagnóstico do defeito estava certo.
+
+### 7.6 As cinco predições do §9.4, confrontadas
+
+Escritas pela sessão paralela antes de existir amostra, que é o que as torna
+refutáveis em vez de leitura retrospectiva.
+
+| | predição | veredicto |
+|---|---|---|
+| 1 | o centróide não distingue gerados de reais, por não ter potência | **refutada em parte**: distingue B de real por −22 pontos, mas não A de real (+3). Tem potência, e tem-na só numa das condições |
+| 2 | o LLM acerta mais em reais que em gerados; reais >60%, gerados <60% | **refutada e invertida**: reais 45%, gerados 65% nas duas condições |
+| 3 | Campos o mais identificável; Reis e ortónimo os mais confundidos | **confirmada**: Campos 10/10 em real, Reis e ortónimo 4/10 cada |
+| 4 | o critério 2 falha com frequência | **refutada pelo instrumento**, qualitativamente certa — ver §5 |
+| 5 | o critério 5 quase não falha | **confirmada**: zero em 40 |
 
 ---
 
@@ -256,13 +373,13 @@ os dois não se cancelam de forma conhecida. Ver [`FASE-5.md`](FASE-5.md) §9.3.
 [x] B2  pontuações commitadas antes de a chave ser aberta (7bcbbdb)
 [x] C1  sinais, bootstrap e medianas calculados
 [x] C2  portão aplicado: **G2**, e a hipótese H cai
-[ ] D1  controlo de 40 poemas reais                          (a correr)
-[ ] D2  centróides uma vez, sem os controlos, para os três grupos
-[ ] D3  matrizes de confusão dos dois juízes nos três grupos
-[ ] D4  diferenças A−real, B−real, A−B, e pares discordantes
-[ ] D5  as cinco predições do §9.4 confrontadas
-[~] C3  relatório: as ameaças repetidas; a concordância dos dois instrumentos
-        fica pendente do Instrumento II
+[x] D1  controlo de 40 poemas reais, 55 ids excluídos por terem entrado no prompt
+[x] D2  centróides uma vez, sem os controlos, para os três grupos
+[x] D3  matrizes de confusão dos três juízes nos três grupos
+[x] D4  diferenças A−real, B−real, A−B, e pares discordantes com teste de sinais
+[x] D5  as cinco predições do §9.4 confrontadas uma a uma
+[x] C3  relatório: ameaças repetidas, e os dois instrumentos **concordam** —
+        G5 dispara, G6 e G7 não
 ```
 
 Fora do protocolo, e registado por ter aparecido pelo caminho: a conclusão da
@@ -290,10 +407,51 @@ pergunta sem nenhum fundamento em Pessoa, e 17 empates dizem exactamente que
 este critério não distingue as duas coisas. Medir o fundamento é outro
 instrumento, e esta fase não o tem.
 
-**O que a medição aponta** é que o défice de voz está na **persona** ou no
-**modelo**, e o Caeiro é o caso a atacar primeiro: é o único a 0,0, e é o único
-cuja persona é uma lista de **interdições** («não lhes atribuis significado
-oculto», «recusas a metafísica», «não personificas») em vez de uma lista de
-indicações. Um modelo de 7B a seguir interdições negativas é uma hipótese
-concreta, barata de testar, e é a entrada natural para uma Fase 5B — depois de
-pré-registada, e com o segundo avaliador que esta fase não teve.
+**Não autoriza o que o portão G5 dizia que autorizaria.** G5 disparou — a voz
+gerada é tão identificável quanto Pessoa autêntico — e eu tinha escrito que isso
+mandava o esforço «sair da voz e ir para outro critério». Não manda, e a prova é
+desta fase: o Caeiro é identificado ao nível do Caeiro real **e** tem 0,0 de
+mediana na poética. Ao escrever G5 tratei identificabilidade como substituto de
+«a voz está certa», e os dois instrumentos juntos mostram que não é. O que sai é
+a identificabilidade como medida de voz.
+
+**O que a medição aponta** é que o défice está na **persona** ou no **modelo**, e
+o Caeiro é o caso a atacar primeiro: é o único a 0,0, e é o único cuja persona é
+uma lista de **interdições** («não lhes atribuis significado oculto», «recusas a
+metafísica», «não personificas») em vez de indicações. Um 7B a cumprir
+interdições negativas é uma hipótese concreta e barata de testar, e é a entrada
+natural para uma Fase 5B — pré-registada, e com o segundo avaliador que esta
+fase não teve.
+
+### A hipótese da sombra lexical, e a defesa que ela precisa
+
+Fica **declarada como hipótese**, não como achado: se o centróide separa o
+Caeiro gerado do real (−30 pontos, a n=5) sem verificar proposição nenhuma,
+talvez a interdição deixe rasto **lexical** — «entrelinhas», «sentido»,
+«destino», «não-ser» movem o vector mesmo que o embedding não julgue o que o
+poema afirma.
+
+É falsificável por ablação de palavras, com os centróides em cache, e **não foi
+corrida nesta fase por potência**: são 5 poemas de Caeiro, e mover a
+identificação de 2/5 para 1/5 ou 3/5 não distingue a hipótese de nada. Pelo
+critério desta casa — a Fase 2 rejeitou +0,004 por ser ruído a n=20 — aceitar
+±20 pontos a n=5 seria incoerente.
+
+Para ter potência precisa das **10** perguntas de Caeiro do conjunto dourado,
+repetições por célula, e uma regra de selecção das palavras com uma propriedade
+que não é a óbvia:
+
+> **A lista não pode ser derivada dos poemas gerados, nem por contraste com os
+> reais.** Se as palavras-alvo forem «as que aparecem no Caeiro gerado e não no
+> real», a ablação move o vector na direcção certa **por construção** e o teste
+> confirma-se a si mesmo. Pré-registar essa lista não defende nada: o vício não
+> é ver os resultados, é a **regra de selecção olhar para o contraste que é o
+> resultado.** A lista tem de vir de fora da amostra — do vocabulário de
+> atribuição de significado que os **113 poemas reais** de Caeiro
+> caracteristicamente **negam**, e que estão fora do conjunto de teste.
+
+É o mesmo princípio das duas defesas que esta fase já usou: o controlo de poemas
+reais vem de fora do tratamento, e os centróides excluem os controlos. Nos três
+casos o que protege a medição não é a ordem temporal, é a **independência entre
+a regra e a quantidade medida**. Formulação da sessão paralela, e é a parte
+reutilizável de toda esta troca.

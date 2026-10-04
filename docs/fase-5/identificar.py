@@ -162,7 +162,7 @@ def resumo(nome: str, pares: list[tuple[Voice, Voice | None]]) -> dict:
     pv = {v.value: f"{sum(1 for e, p in pares if e is v and p is v)}/"
                    f"{sum(1 for e, _ in pares if e is v)}" for v in VOZES}
     print(f"\n--- {nome}: {certos}/{len(pares)} = {certos/len(pares):.0%}   {pv}")
-    print(matriz(pares))
+    print(matriz(pares), flush=True)
     return {"exactidao": round(certos / len(pares), 3), "certos": certos,
             "n": len(pares), "por_voz": pv}
 
@@ -288,12 +288,18 @@ def main() -> None:
     for juiz in JUIZES:
         pa = previsoes[f"{juiz}_A_com_contexto"]
         pb = previsoes[f"{juiz}_B_sem_contexto"]
-        so_a = so_b = 0
-        for d_a, d_b, x, y in zip(ger["A"], ger["B"], pa, pb):
-            assert d_a["pergunta_id"] == d_b["pergunta_id"], "pares desalinhados"
-            ca, cb = (x == d_a["voz"]), (y == d_b["voz"])
-            so_a += ca and not cb
-            so_b += cb and not ca
+        # `ger[...]` vem da lista embaralhada, logo as duas condições **não**
+        # estão na mesma ordem: emparelha-se por `pergunta_id`, nunca por
+        # posição. (A primeira versão disto emparelhava por posição e abortou
+        # na asserção que o verificava, que é o que a asserção existia para
+        # fazer.)
+        acerto = {c: {d["pergunta_id"]: (prev == d["voz"])
+                      for d, prev in zip(ger[c], previsoes[f"{juiz}_{g}"])}
+                  for c, g in (("A", "A_com_contexto"), ("B", "B_sem_contexto"))}
+        qs = sorted(acerto["A"])
+        assert set(qs) == set(acerto["B"]) and len(qs) == 20, "perguntas desalinhadas"
+        so_a = sum(1 for q in qs if acerto["A"][q] and not acerto["B"][q])
+        so_b = sum(1 for q in qs if acerto["B"][q] and not acerto["A"][q])
         saida[f"discordantes_{juiz}"] = {"so_A_acerta": so_a, "so_B_acerta": so_b,
                                          "concordantes": 20 - so_a - so_b}
         print(f"  {juiz:20s} só A acerta {so_a} · só B acerta {so_b} · "

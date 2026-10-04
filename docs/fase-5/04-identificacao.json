@@ -1,0 +1,639 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5.md §Instrumento II",
+  "desenho": "de uma sessão paralela; fusão decidida pelo utilizador",
+  "n_controlo_por_voz": 10,
+  "semente": 7
+ },
+ "controlo": [
+  {
+   "id": "R01",
+   "voz": "caeiro",
+   "poem_id": "poem_3421",
+   "texto": "XXXIII\n\nPobres das flores nos canteiros dos jardins regulares.\nParecem ter medo da polícia...\nMas tão boas que florescem do mesmo modo\nE têm o mesmo sorriso antigo\nQue tiveram para o primeiro olhar do primeiro homem\nQue as viu aparecidas e lhes tocou levemente\nPara ver se elas falavam..."
+  },
+  {
+   "id": "R02",
+   "voz": "caeiro",
+   "poem_id": "poem_364",
+   "texto": "Nunca fizeram crescer uma erva ou nascer uma flor.\nToda a sabedoria a respeito das coisas\nNunca foi coisa em que pudesse pegar, como nas coisas.\nSe a ciência quer ser verdadeira,\nQue ciência mais verdadeira que a das coisas sem ciência?\nFecho os olhos e a terra dura sobre que me deito\nTem uma realidade tão real que até as minhas costas a sentem.\nNão preciso de raciocínio onde tenho espáduas."
+  },
+  {
+   "id": "R03",
+   "voz": "caeiro",
+   "poem_id": "poem_353",
+   "texto": "Mas o sentido de morrer não me ocorre [?],\nLembra-me que morrer não deve ter sentido.\nIsto de viver e morrer são classificações como as das plantas.\nQue folhas ou que flores tem uma classificação?\nQue vida tem a vida ou que morte a morte?\nTudo são termos nada se define. A única diferença é um contorno, uma paragem, uma cor que destinge, uma (...)\n...mas o Universo existe mesmo sem o Universo.\nEsta verdade capital é falsa só quando é dita."
+  },
+  {
+   "id": "R04",
+   "voz": "caeiro",
+   "poem_id": "poem_3555",
+   "texto": "XX\n\nO Tejo é mais belo que o rio que corre pela minha aldeia,\nMas o Tejo não é mais belo que o rio que corre pela minha aldeia\nPorque o Tejo não é o rio que corre pela minha aldeia,\n\nO Tejo tem grandes navios\nE navega nele ainda,\nPara aqueles que vêem em tudo o que lá não está,\nA memória das naus.\n\nO Tejo desce de Espanha\nE o Tejo entra no mar em Portugal.\nToda a gente sabe isso.\nMas poucos sabem qual é o rio da minha aldeia\nE para onde ele vai\nE donde ele vem.\nE por isso, porque pertence a menos gente,\nÉ mais livre e maior o rio da minha aldeia.\n\nPelo Tejo vai-se para o Mundo.\nPara além do Tejo há a América\nE a fortuna daqueles que a encontram.\nNinguém nunca pensou no que há para além\nDo rio da minha aldeia.\n\nO rio da minha aldeia não faz pensar em nada\nQuem está ao pé dele está só ao pé dele."
+  },
+  {
+   "id": "R05",
+   "voz": "caeiro",
+   "poem_id": "poem_3369",
+   "texto": "Talvez já não me encontre no mundo.\nGostava agora de poder julgar que a Primavera é gente\nPara poder supor que ela choraria,\nVendo que perdera o seu único amigo.\nMas a Primavera nem sequer é uma coisa:\nÉ uma maneira de dizer.\nNem mesmo as flores tornam, ou as folhas verdes.\nHá novas flores, novas folhas verdes.\nHá outros dias suaves.\nNada torna, nada se repete, porque tudo é real."
+  },
+  {
+   "id": "R06",
+   "voz": "caeiro",
+   "poem_id": "poem_2585",
+   "texto": "Sim: existo dentro do meu corpo.\nNão trago o sol nem a lua na algibeira.\nNão quero conquistar mundos porque dormi mal,\nNem almoçar a terra por causa do estômago.\nIndiferente?\nNão: natural da terra, que se der um salto, está em falso,\nUm momento no ar que não é para nós,\nE só contente quando os pés lhe batem outra vez na terra,\nTraz! na realidade que não falta!"
+  },
+  {
+   "id": "R07",
+   "voz": "caeiro",
+   "poem_id": "poem_374",
+   "texto": "A minha vida viveu-se sem que eu quisesse ou não quisesse.\nSó quis ver como se não tivesse alma\nSó quis ver como se fosse eterno."
+  },
+  {
+   "id": "R08",
+   "voz": "caeiro",
+   "poem_id": "poem_1108",
+   "texto": "XLVII\n\nNum dia excessivamente nítido,\nDia em que dava a vontade de ter trabalhado muito\nPara nele não trabalhar nada,\nEntrevi, como uma estrada por entre as árvores,\nO que talvez seja o Grande Segredo,\nAquele Grande Mistério de que os poetas falsos falam.\n\nVi que não há Natureza,\nQue Natureza não existe,\nQue há montes, vales, planícies,\nQue há árvores, flores, ervas,\nQue há rios e pedras,\nMas que não há um todo a que isso pertença,\nQue um conjunto real e verdadeiro\nÉ uma doença das nossas ideias.\n\nA Natureza é partes sem um todo.\nIsto e talvez o tal mistério de que falam.\n\nFoi isto o que sem pensar nem parar,\nAcertei que devia ser a verdade\nQue todos andam a achar e que não acham,\nE que só eu, porque a não fui achar, achei."
+  },
+  {
+   "id": "R09",
+   "voz": "caeiro",
+   "poem_id": "poem_1485",
+   "texto": "VI\n\nPensar em Deus é desobedecer a Deus,\nPorque Deus quis que o não conhecêssemos,\nPor isso se nos não mostrou...\n\nSejamos simples e calmos,\nComo os regatos e as árvores,\nE Deus amar-nos-á fazendo de nós\nBelos como as árvores e os regatos,\nE dar-nos-á verdor na sua primavera,\nE um rio aonde ir ter quando acabemos!..."
+  },
+  {
+   "id": "R10",
+   "voz": "caeiro",
+   "poem_id": "poem_3447",
+   "texto": "XXXVIII\n\nBendito seja o mesmo sol de outras terras\nQue faz meus irmãos todos os homens\nPorque todos os homens, um momento no dia, o olham como eu,\nE nesse puro momento\nTodo limpo e sensível\nRegressam lacrimosamente\nE com um suspiro que mal sentem\nAo Homem verdadeiro e primitivo\nQue via o Sol nascer e ainda o não adorava.\nPorque isso é natural — mais natural\nQue adorar o ouro e Deus\nE a arte e a moral..."
+  },
+  {
+   "id": "R11",
+   "voz": "campos",
+   "poem_id": "poem_2866",
+   "texto": "Que obra-prima para um pintor possível em cada cara que existe!\nQue expressões em todas, em tudo!\nQue maravilhosos perfis todos os perfis!\nVista de frente, que cara qualquer cara!\nOs gestos humanos de cada qual, que humanos os gestos!"
+  },
+  {
+   "id": "R12",
+   "voz": "campos",
+   "poem_id": "poem_4367",
+   "texto": "De luz subitamente tão acesa,\nDe noite e ausência tão rapidamente volvida,\nNa noite, no convés, que consequências aflitas!\nMágoa última dos despedidos,\nFicção de pensar...\n\nFaróis distantes...\nIncerteza da vida...\nVoltou crescendo a luz acesa avançadamente,\nNo acaso do olhar perdido...\n\nFaróis distantes...\nA vida de nada serve...\nPensar na vida de nada serve...\nPensar de pensar na vida de nada serve...\n\nVamos para longe e a luz que vem grande vem menos grande.\nFaróis distantes..."
+  },
+  {
+   "id": "R13",
+   "voz": "campos",
+   "poem_id": "poem_2433",
+   "texto": "Agora tenho eu que estar à uma menos cinco\nNa Estação do Rossio, tabuleiro superior — despedida\nDo amigo que vai no «Sud Express» de toda a gente\nPara onde toda a gente vai, o Paris...\n\nTenho que lá estar\nE acreditem, o cansaço antecipado é tão grande\nQue, se o «Sud Express» soubesse, descarrilava...\n\nBrincadeira de crianças?\nNão, descarrilava a valer...\nQue leve a minha vida dentro, arre, quando descarrile!...\n\nTenho desejo forte,\nE o meu desejo, porque é forte, entra na substância do mundo."
+  },
+  {
+   "id": "R14",
+   "voz": "campos",
+   "poem_id": "poem_232",
+   "texto": "As forças todas do universo,\nEu cuja reflexão emotiva e sacudida\nMinuto a minuto, emoção a emoção,\nCoisas antagónicas e absurdas se sucedem —\nEu o foco inútil de todas as realidades,\nEu o fantasma nascido de todas as sensações,\nEu o abstracto, eu o projectado noécran,\nEu a mulher legítima e triste do Conjunto,\nEu sofro ser eu através disto tudo como ter sede sem ser de água."
+  },
+  {
+   "id": "R15",
+   "voz": "campos",
+   "poem_id": "poem_943",
+   "texto": "Numa grande marcha guerreira a indústria e comércio e ócio,\n\nNuma grande corrida, numa grande subida, numa grande descida\nEstrondeando, pulando, e tudo pulando comigo,\nSalto a saudar-te,\nBerro a saudar-te,\nDesencadeio-me a saudar-te, aos pinotes, aos pinos, aos guinchos!\nHé-lá\n\nAve, salve, viva!...\n\nArregimento!\nComigo, coisas!\nSigam-me, gentes!\nMáquinas. artes, letras, [...] — comigo!\nVós, que ele tanto amou, coisas que são a terra:\nÁrvores sem sentido salvo verde,\nFlores com a cor na alma,\n(...)\nEscura brancura das águas,\nRio fora dos rios,\nPaz dos campos porque não são as cidades\nSeiva lenta ao emergir da avareza das crostas"
+  },
+  {
+   "id": "R16",
+   "voz": "campos",
+   "poem_id": "poem_952",
+   "texto": "SAUDAÇÃO\n\nUm comboio de criança movido a corda, puxado a cordel\nTem mais movimento real do que os nossos versos...\nOs nossos versos que não têm rodas\nOs nossos versos que não se deslocam\nOs nossos versos que, nunca lidos, não saem para fora do papel.\n(Estou farto — farto da vida, farto da arte —,\nFarto de não ter coisas, a menos ou a medo —\nRabo-leva da minha respiração chagando a minha vida,\nFantoche absurdo de feira da minha ideia de mim.\nQuando é que parte o último comboio?)\n\nSei que cantar-te assim não é cantar-te — mas que importa?\nSei que é cantar tudo, mas cantar tudo é cantar-te,\nSei que é cantar-me a mim — mas cantar-me a mim é cantar-te a ti\nSei que dizer que não posso cantar é cantar-te, WaIt, ainda..."
+  },
+  {
+   "id": "R17",
+   "voz": "campos",
+   "poem_id": "poem_2478",
+   "texto": "Eu, cheio de todos os cansaços\nQuantos o mundo pode dar.—\nEu...\nAfinal tudo, porque tudo é eu,\nE até as estrelas, ao que parece,\nMe saíram da algibeira para deslumbrar crianças...\nQue crianças não sei...\nEu...\nImperfeito? Incógnito? Divino?\nNão sei...\nEu...\nTive um passado? Sem dúvida...\nTenho um presente? Sem dúvida...\nTerei um futuro? Sem dúvida...\nA vida que pare de aqui a pouco...\nMas eu, eu...\nEu sou eu,\nEu fico eu,\nEu..."
+  },
+  {
+   "id": "R18",
+   "voz": "campos",
+   "poem_id": "poem_238",
+   "texto": "O mesmoTeucro duce et auspice Teucro\nÉ sempreeras —amanhã — que nos faremos ao mar.\n\nSossega, coração inútil, sossega!\nSossega, porque nada há que esperar,\nE por isso nada que desesperar também...\nSossega... Por cima do muro da quinta\nSobe longínquo o olival alheio.\nAssim na infância vi outro que não era este:\nNão sei se foram os mesmos olhos da mesma alma que o viram.\nAdiamos tudo, até que a morte chegue.\nAdiamos tudo e o entendimento de tudo,\nCom um cansaço antecipado de tudo,\nCom uma saudade prognóstica e vazia."
+  },
+  {
+   "id": "R19",
+   "voz": "campos",
+   "poem_id": "poem_3113",
+   "texto": "De escrever um poema extenso!\nHá anos...\n\nPerdi a virtude do desenvolvimento rítmico\nEm que a ideia e a forma,\nNuma unidade de corpo com alma,\nUnanimemente se moviam...\nPerdi tudo que me fazia consciente\nDe uma certeza qualquer no meu ser...\nHoje o que me resta?\nO sol que está sem que eu o chamasse...\nO dia que me não custou esforço...\nUma brisa, com a festa de uma brisa\nQue me dão uma consciência do ar...\nE o egoísmo doméstico de não querer mais nada\n\nMas, ah!, minhaOde Triunfal,\nO teu movimento rectilíneo!\nAh, minhaOde Marítima\n\nA tua estrutura geral em estrofe antiestrofe e epodo!\nE os meus  planos, então, os meus planos —\nEsses é que eram as grandes odes.\nE aquela aúltima a suprema a impossível!"
+  },
+  {
+   "id": "R20",
+   "voz": "campos",
+   "poem_id": "poem_3509",
+   "texto": "Se é! Quantos vinhos que julguei melhores bebi!\nA água de aqui — a verdade!\nA verdade não — a melhor aparência dela...\n\nQuando, em grandes praças de eu distra[ído],\nApregoam em torno de mim os jornais todos e eu durm[o]"
+  },
+  {
+   "id": "R21",
+   "voz": "reis",
+   "poem_id": "poem_1998",
+   "texto": "A vária primavera, e o verão vasto,\nE os campos são de alegres.\nMas dorme em cada campo o outono dele\nO inverno cresce com as folhas verdes\nTudo será esquecido."
+  },
+  {
+   "id": "R22",
+   "voz": "reis",
+   "poem_id": "poem_397",
+   "texto": "E o passado é o presente na lembrança.\nQuem fui é alguém que amo\nPorém somente em sonho.\nE a saudade que me aflige a mente\nNão é de mim nem do passado visto,\nSenão de quem habito\nPor trás dos olhos cegos.\nNada, senão o instante, me conhece.\nMinha mesma lembrança é nada, e sinto\nQue quem sou e quem fui\nSão sonhos diferentes."
+  },
+  {
+   "id": "R23",
+   "voz": "reis",
+   "poem_id": "poem_1681",
+   "texto": "Que eu haja de aprender. O Crucifixo\nSem amor e sem ódio\nDo meu (...) afasto.\n\nQue tenho eu com as crenças que o Cristo\nCurvado o torso a mim, latino, morra?\nMais com o sol me entendo\nQue com essas verdades.\n\nQue o sejam... Deus a mim não só foi dado\nQue uma visão das cousas que há na terra\nE uma razão incerta,\nE um saber que há deuses..."
+  },
+  {
+   "id": "R24",
+   "voz": "reis",
+   "poem_id": "poem_493",
+   "texto": "O que de si há nele, ou é suposto.\nNada te pese que não te amem. Sentem-te\nQuem és, e és estrangeiro.\nCura de ser quem és, amam-te ou nunca.\nFirme contigo, sofrerás avaro\nDe penas."
+  },
+  {
+   "id": "R25",
+   "voz": "reis",
+   "poem_id": "poem_296",
+   "texto": "A nós, nos dá o mundo.\nE a tudo, alheios, nos acrescentamos,\nPensando e interpretando.\nA próxima erva a que não chega basta,\nO que há é o melhor."
+  },
+  {
+   "id": "R26",
+   "voz": "reis",
+   "poem_id": "poem_2144",
+   "texto": "Na sua consciência do Universo\nE palmo a palmo ganha\nO domínio dos deuses.\nPorque quanto mais certas vê as cousas\nMais por seu par os deuses o consentem\nAté sentir seu corpo\nRoçar corpos eternos.\nDeixa, (...) meu, a ambição tua\nDe entre os homens por duque seres tido:\nDeixa luzir p'ra outros\nAs lanças e as espadas\nDe pelo gládio à glória e à (...) vires .\nE a confiança em (...)\nA glória onde te leva\nMais que a onde não há glória?"
+  },
+  {
+   "id": "R27",
+   "voz": "reis",
+   "poem_id": "poem_2301",
+   "texto": "Nudez vestir os campos.\nAs lareiras serão as nossas pátrias\nE os contos que contarmos\nAssentados ao pé do seu calor\nValerão as canções\nCom que outrora entre as verdes ervas rijas\nDizíamos ao sol\nO ave atque vale triste e alegre,\nSolenes e carpindo.\nPor ora o outono está connosco ainda.\nSe ele nos não agrada\nA memória do estio cotejemos\nCom a esperança hiemal.\nE entre essas dádivas memoradas\nComo um rio passemos."
+  },
+  {
+   "id": "R28",
+   "voz": "reis",
+   "poem_id": "poem_7",
+   "texto": "Sem um suspiro abandonemos Cristo\nE a febre de buscarmos\nUm deus dos dualismos.\n\nE longe da cristã sensualidade\nQue a casta calma da beleza antiga\nNos restitua o antigo\nSentimento da vida."
+  },
+  {
+   "id": "R29",
+   "voz": "reis",
+   "poem_id": "poem_2701",
+   "texto": "Passageiros como eu, vivo uma vida\nQue não quero nem amo,\nMinha porque sou ela,\n\nNo ergástulo de ser quem sou, contudo,\nDe em mim pensar me livro, olhando no alto\nOs astros que dominam\nSubmissos de os ver brilhar.\n\nVastidão vã que finge de infinito\n(Como se o infinito se pudesse ver!) —\nDá-me ela a liberdade?\nComo, se ela a não tem?"
+  },
+  {
+   "id": "R30",
+   "voz": "reis",
+   "poem_id": "poem_482",
+   "texto": "Palavras são ideias.\nMúrmuro, o rio passa, e o que não passa,\nQue é nosso, não do rio.\nAssim quisesse o verso: meu e alheio\nE por mim mesmo lido."
+  },
+  {
+   "id": "R31",
+   "voz": "ortonimo",
+   "poem_id": "poem_2890",
+   "texto": "Oca de conter‑me\nComo a hora dói!\nPérfida de ter-me\nComo me destrói\nO meu ser inerme!\n\nÓ meu ser sombrio!\nÓ minha alma tal\nComo se pelo rio\nDo meu ser igual\nSempre a mim, e frio\n\nDe nocturno e meu,\nPassasse, cantando,\nUma louca, olhando\nDum barco para o brando\nSilêncio do céu."
+  },
+  {
+   "id": "R32",
+   "voz": "ortonimo",
+   "poem_id": "poem_3337",
+   "texto": "Um só momento em mim,\nNão só o olhar, também o pensamento.\nQue a vida tenha fim\nNesse momento!\n\nNo olhar a alma também\nOlhando-me, e eu a ver\nTudo quanto de ti teu olhar tem.\nA ver até esquecer\nQue tu és tu também.\n\nSó tua alma sem tu\nSó o teu pensamento\nE eu onde, alma sem eu. Tudo o que sou\nFicou com o momento\nE o momento parou."
+  },
+  {
+   "id": "R33",
+   "voz": "ortonimo",
+   "poem_id": "poem_284",
+   "texto": "Sol, que dá nas ruas, não dá\nNo meu carinho.\nA felicidade quando virá?\nPor que caminho?\n\nHoras e horas por fim são meses\nDe ansiado bem.\nEu penso em ti indecisas vezes,\nE tu ninguém!\nNão tenho barco para a outra margem,\nNem sei do rio\nAh! E envelheceu já tua imagem\nE eu sinto frio.\n\nNão me resigno, não me decido,\nChoro querer...\nSempre eu! Ó sorte, dá-me o olvido\nDe pertencer!\n\nEnterrei hoje outra vez meu sonho\nAmanhã virá\nTornar-me triste por ser risonho,\nE não ser já."
+  },
+  {
+   "id": "R34",
+   "voz": "ortonimo",
+   "poem_id": "poem_963",
+   "texto": "Nela o mistério em mim, nem venha nela\nOu o acabar-me, ou o continuar-me,\nQue em qualquer cousa horrenda de diversa,\nPara um pávido outro-eu me transmigrando,\nMe anule para um Mais que me apavora.\nNão. Não é na minha alma que os sineiros\nRebatem medos pelo que hei-de ser\nÉ a minha carne que em minha alma grita\nHorror à morte, carnalmente o grita,\nGrita-o sem consciência e sem propósito,\nGrita-o sem outro modo do que o medo,\nUm pavor corporado, um pavor frio\nComo uma névoa, um pavor de todo eu\nSubindo à tona intelectual de mim.\n\nNão temo a morte como qualquer cousa\nQue eu veja ou ouça, mas como quem teme\nQuando não sabe o que é que teme, e teme."
+  },
+  {
+   "id": "R35",
+   "voz": "ortonimo",
+   "poem_id": "poem_2346",
+   "texto": "Não lhe conheço a intenção,\nNão sei que palavras são.\n\nÉ um canto desligado\nDe tudo que o canto tem.\nÉ algum canto de alguém.\n\nVem na noite independente\nDo que diz bem ou mal.\nVem absurdo e natural.\n\nJá não me lembro que penso.\nOutro; é um canto a pairar\nComo o vento sobre o mar."
+  },
+  {
+   "id": "R36",
+   "voz": "ortonimo",
+   "poem_id": "poem_1356",
+   "texto": "E fala aos constelados céus\nDe trás das mágoas e das grades\nTalvez com sonhos como os meus...\nTalvez, meu Deus!, com que verdades!\n\nAs grades de uma cela estreita\nSeparam-no de céu e terra...\nÀs grades mãos humanas deita\nE com voz não humana berra..."
+  },
+  {
+   "id": "R37",
+   "voz": "ortonimo",
+   "poem_id": "poem_229",
+   "texto": "Beija-me na fronte...\nMinha vida é escombros,\nA minha alma insonte.\n\nEu não sei porquê,\nMeu desde onde venho,\nSou o ser que vê,\nE vê tudo estranho.\n\nPõe a tua mão\nSobre o meu cabelo...\nTudo é ilusão.\nSonhar é sabê-lo."
+  },
+  {
+   "id": "R38",
+   "voz": "ortonimo",
+   "poem_id": "poem_2546",
+   "texto": "Teve medo,\nA brisa ganhou alma, à flor\nDo arvoredo.\n\nPrimeiro, os ramos ajeitaram\nAs folhas que há,\nDepois, cinzentas, oscilaram,\nE depois já\n\nToda a árvore era um movimento\nE o fresco viera.\nMedita sem ter pensamento!\nIgnora e espera!"
+  },
+  {
+   "id": "R39",
+   "voz": "ortonimo",
+   "poem_id": "poem_1040",
+   "texto": "Como só fingindo ser\nPor entre o vento que passa\nE altas nuvens a correr.\n\nMal se sabe se existiu,\nSe foi erro tê-la visto,\nSombra de sombra fluiu\nEntre tudo de onde disto.\n\nNem me resta uma memória.\nÉ como se alguém confuso\nSe não lembrasse da história."
+  },
+  {
+   "id": "R40",
+   "voz": "ortonimo",
+   "poem_id": "poem_2674",
+   "texto": "Um dia, vero ou falso, as rosas vãs\nEntre que em sonhos mortos fui achar-me\nNo alvorecer de incógnitas manhãs.\nNão tenho que sonhar o que renego\nAntes do sonho e o recusar a ter,\nSou no que sou como na vida é um cego\nA quem causou horror o poder ver.\nIsto, ou quase isto... Só do sonho morto\nMe fica uma imprecisa hesitação —\nComo se a nau  [...]"
+  }
+ ],
+ "centroide_com_nome_A_com_contexto": {
+  "exactidao": 0.35,
+  "certos": 7,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "2/5",
+   "campos": "4/5",
+   "reis": "1/5",
+   "ortonimo": "0/5"
+  }
+ },
+ "centroide_com_nome_B_sem_contexto": {
+  "exactidao": 0.4,
+  "certos": 8,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "3/5",
+   "campos": "5/5",
+   "reis": "0/5",
+   "ortonimo": "0/5"
+  }
+ },
+ "centroide_com_nome_real": {
+  "exactidao": 0.45,
+  "certos": 18,
+  "n": 40,
+  "por_voz": {
+   "caeiro": "7/10",
+   "campos": "10/10",
+   "reis": "1/10",
+   "ortonimo": "0/10"
+  }
+ },
+ "centroide_sem_nome_A_com_contexto": {
+  "exactidao": 0.65,
+  "certos": 13,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "2/5",
+   "campos": "4/5",
+   "reis": "4/5",
+   "ortonimo": "3/5"
+  }
+ },
+ "centroide_sem_nome_B_sem_contexto": {
+  "exactidao": 0.4,
+  "certos": 8,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "1/5",
+   "campos": "5/5",
+   "reis": "1/5",
+   "ortonimo": "1/5"
+  }
+ },
+ "centroide_sem_nome_real": {
+  "exactidao": 0.625,
+  "certos": 25,
+  "n": 40,
+  "por_voz": {
+   "caeiro": "7/10",
+   "campos": "10/10",
+   "reis": "4/10",
+   "ortonimo": "4/10"
+  }
+ },
+ "llm_A_com_contexto": {
+  "exactidao": 0.65,
+  "certos": 13,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "5/5",
+   "campos": "3/5",
+   "reis": "3/5",
+   "ortonimo": "2/5"
+  }
+ },
+ "llm_B_sem_contexto": {
+  "exactidao": 0.65,
+  "certos": 13,
+  "n": 20,
+  "por_voz": {
+   "caeiro": "5/5",
+   "campos": "4/5",
+   "reis": "2/5",
+   "ortonimo": "2/5"
+  }
+ },
+ "llm_real": {
+  "exactidao": 0.45,
+  "certos": 18,
+  "n": 40,
+  "por_voz": {
+   "caeiro": "8/10",
+   "campos": "3/10",
+   "reis": "1/10",
+   "ortonimo": "6/10"
+  }
+ },
+ "previsoes": {
+  "centroide_com_nome_A_com_contexto": [
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "campos",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "reis",
+   "caeiro"
+  ],
+  "centroide_com_nome_B_sem_contexto": [
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "campos",
+   "campos",
+   "reis",
+   "campos",
+   "caeiro"
+  ],
+  "centroide_com_nome_real": [
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "reis",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "campos",
+   "campos",
+   "reis",
+   "campos",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos"
+  ],
+  "centroide_sem_nome_A_com_contexto": [
+   "reis",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "reis",
+   "ortonimo",
+   "caeiro",
+   "campos",
+   "ortonimo",
+   "reis",
+   "campos",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "campos",
+   "reis",
+   "campos"
+  ],
+  "centroide_sem_nome_B_sem_contexto": [
+   "ortonimo",
+   "campos",
+   "ortonimo",
+   "caeiro",
+   "ortonimo",
+   "campos",
+   "campos",
+   "ortonimo",
+   "ortonimo",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "caeiro",
+   "campos",
+   "reis",
+   "reis",
+   "campos",
+   "campos"
+  ],
+  "centroide_sem_nome_real": [
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "ortonimo",
+   "caeiro",
+   "reis",
+   "caeiro",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "reis",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "reis",
+   "campos",
+   "reis",
+   "reis",
+   "campos",
+   "caeiro",
+   "campos",
+   "ortonimo",
+   "campos",
+   "campos",
+   "campos",
+   "campos",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "campos"
+  ],
+  "llm_A_com_contexto": [
+   "ortonimo",
+   "caeiro",
+   "caeiro",
+   "reis",
+   "ortonimo",
+   "campos",
+   "reis",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "ortonimo",
+   "caeiro",
+   "campos",
+   "campos",
+   "ortonimo",
+   "caeiro",
+   "reis",
+   "campos"
+  ],
+  "llm_B_sem_contexto": [
+   "ortonimo",
+   "ortonimo",
+   "caeiro",
+   "ortonimo",
+   "caeiro",
+   "caeiro",
+   "ortonimo",
+   "reis",
+   "caeiro",
+   "campos",
+   "campos",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "caeiro",
+   "campos",
+   "reis",
+   "caeiro",
+   "ortonimo",
+   "caeiro"
+  ],
+  "llm_real": [
+   "reis",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "caeiro",
+   "ortonimo",
+   "campos",
+   "ortonimo",
+   "campos",
+   "ortonimo",
+   "campos",
+   "ortonimo",
+   null,
+   "reis",
+   "reis",
+   "caeiro",
+   "campos",
+   "ortonimo",
+   "caeiro",
+   "ortonimo",
+   "caeiro",
+   "caeiro",
+   "campos",
+   "reis",
+   "ortonimo",
+   "caeiro",
+   "caeiro",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "caeiro",
+   "campos",
+   "ortonimo",
+   "ortonimo",
+   "ortonimo",
+   "reis"
+  ]
+ },
+ "diferencas_centroide_com_nome": {
+  "A_menos_real": -0.1,
+  "B_menos_real": -0.05,
+  "A_menos_B": -0.05
+ },
+ "diferencas_centroide_sem_nome": {
+  "A_menos_real": 0.025,
+  "B_menos_real": -0.225,
+  "A_menos_B": 0.25
+ },
+ "diferencas_llm": {
+  "A_menos_real": 0.2,
+  "B_menos_real": 0.2,
+  "A_menos_B": 0.0
+ },
+ "discordantes_centroide_com_nome": {
+  "so_A_acerta": 2,
+  "so_B_acerta": 3,
+  "concordantes": 15
+ },
+ "discordantes_centroide_sem_nome": {
+  "so_A_acerta": 7,
+  "so_B_acerta": 2,
+  "concordantes": 11
+ },
+ "discordantes_llm": {
+  "so_A_acerta": 3,
+  "so_B_acerta": 3,
+  "concordantes": 14
+ }
+}
