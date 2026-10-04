@@ -1,0 +1,59 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5.md §5.1-5.3",
+  "avaliador": "um só, o mesmo que escreveu as personas, o prompt e as âncoras — ameaça declarada no §6",
+  "cegueira": "pontuado sobre 01-amostras.md, sem abrir 01-chave.json",
+  "truncadas": "A23, A32, A34 levam 0 em 3b, por regra pré-registada; lidas em 01-amostras.json, que não revela a condição",
+  "criterios": {
+   "c3a_poetica": "o que a voz pode dizer",
+   "c3b_forma": "como a voz escreve",
+   "c4_responde": "responde ao que foi perguntado"
+  },
+  "duas_decisoes_de_fronteira": [
+   "Interlocutor nomeado (Lídia/Neera/Cloe) NÃO exigido para 3a=2 em Reis: um «tu» com contenção basta. Regra fixada na primeira amostra de Reis e aplicada às dez.",
+   "Degeneração (A11, palavras coladas sem espaços) não estava nas âncoras. Pontuei o que era legível: o gesto anafórico conta em 3a, a forma destruída é 0 em 3b, e como resposta é 0."
+  ]
+ },
+ "pontuacoes": {
+  "A01": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "ética do carpe diem presente, sem interlocutor; rimado, o que Reis não é, e «não o posso amenem» é agramatical"},
+  "A02": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "«Sê a cor da hora, não o futuro» é Reis a sério; 8 versos, 4+4, sem rima, com inversão"},
+  "A03": {"c3a_poetica": 0, "c3b_forma": 1, "c4_responde": 1, "nota": "«praia desolada», «a areia cruza-se sem pensar», «não sou um dos que choram» — personifica e moraliza; e não chega à aproximação que a pergunta afirma"},
+  "A04": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "excesso declarado («dói mais que tudo») e não executado; quadras curtas regulares, que é o contrário do versículo"},
+  "A05": {"c3a_poetica": 2, "c3b_forma": 0, "c4_responde": 2, "nota": "«Não sou eu quem fala» tem o duplo fundo; mas verso livre sem metro nem rima, e o ortónimo é metro e rima"},
+  "A06": {"c3a_poetica": 0, "c3b_forma": 0, "c4_responde": 2, "nota": "endossa o medo da mudança e pede permanência — é ânsia de durar, a ética oposta; e 16 versos contra o máximo de doze"},
+  "A07": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "o gesto e o mistério estão lá, a divisão do eu não; quadras sem rima"},
+  "A08": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "tema sem duplo fundo; verso livre, e começa a meio de uma frase"},
+  "A09": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "aconselha a não temer a mudança, que é a postura de Reis — ao contrário de A06, que a endossa; 12 versos, 4+4+4, sem rima"},
+  "A10": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "«Onde os olhos se voltem / A coisa clareia» — vê sem interpretar; livre, seco, 12 versos"},
+  "A11": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 0, "nota": "degenerada: palavras coladas sem espaços. A anáfora e a acumulação são de Campos, o poema não existe"},
+  "A12": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "lê o sinal em vez de se dividir; metro quase regular, rima ausente"},
+  "A13": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "desencontro sem duplo fundo; sem metro nem rima"},
+  "A14": {"c3a_poetica": 2, "c3b_forma": 1, "c4_responde": 2, "nota": "«Vida é a curta noite. Nem mais, nem menos.» é a medida exacta; estrofes irregulares (1/5/3)"},
+  "A15": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "a pedra que não muda ao toque dos homens é Caeiro; «a escuridão com seus olhos encobre a ilusão» não é. Rimado"},
+  "A16": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "Neera, «sem te amar, nem temer o fim do dia» — a fórmula de Reis; 8 versos, sem rima"},
+  "A17": {"c3a_poetica": 0, "c3b_forma": 1, "c4_responde": 1, "nota": "«Sentido em cada pedra» atribui literalmente significado, que é a interdição de Caeiro; e «sussurro da brisa» personifica"},
+  "A18": {"c3a_poetica": 0, "c3b_forma": 1, "c4_responde": 1, "nota": "«Nas entrelinhas do que se desvanece, descobro um rumo novo» — ler entrelinhas é o oposto exacto de Caeiro; e nunca chega à pessoa da pergunta"},
+  "A19": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "enumera mas não vertigina; versículo curto. «Sou aquela que escreve» — feminino, que nenhuma guarda apanha"},
+  "A20": {"c3a_poetica": 0, "c3b_forma": 1, "c4_responde": 2, "nota": "«saudade de não-ser», «esvaziar a alma», «é o meu destino» — metafísica, que Caeiro recusa"},
+  "A21": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "o gesto central é o certo — recusar o luto do poente — mas «longa e triste» e «sonho e esperança» atribuem; rimado"},
+  "A22": {"c3a_poetica": 2, "c3b_forma": 0, "c4_responde": 2, "nota": "«vivamos sem esperança, no que nos toca, que é tudo» é Reis; 16 versos contra o máximo de doze"},
+  "A23": {"c3a_poetica": 2, "c3b_forma": 0, "c4_responde": 2, "nota": "anáfora de «mais do que» oito vezes: o excesso é executado, não declarado. Truncada a meio de «Perdidos os»"},
+  "A24": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "lamento directo, sem duplo fundo; sem metro nem rima"},
+  "A25": {"c3a_poetica": 2, "c3b_forma": 1, "c4_responde": 2, "nota": "«tantos seres, tantas noites, tantas centésimas de segundo» — a escalada é dele; mas em linhas de três palavras, não em versículo"},
+  "A26": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "imagístico e curto; o excesso não acontece"},
+  "A27": {"c3a_poetica": 0, "c3b_forma": 1, "c4_responde": 2, "nota": "«Silencio a voz da existência», «nevoeiro esconde a estrada» — símbolo e metafísica"},
+  "A28": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "a indiferença dos astros entregue como alívio; 8 versos contidos, com inversão"},
+  "A29": {"c3a_poetica": 2, "c3b_forma": 1, "c4_responde": 2, "nota": "«Olhos que olham e não se vêem» tem o duplo fundo; 8 versos, abaixo do intervalo, sem rima"},
+  "A30": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "a ânsia declarada em «quero»; tercetos curtos, sem respiração ampla"},
+  "A31": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "tema certo, duplo fundo fraco; metro quase regular, rima ausente"},
+  "A32": {"c3a_poetica": 1, "c3b_forma": 0, "c4_responde": 2, "nota": "linha longa mas contemplativa, e declara a alucinação em vez de a ter. Truncada a meio de «desconhec»"},
+  "A33": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "«A árvore não muda de sítio, o vento sopra no mesmo ritmo» é Caeiro exacto; «sem grandes almas» é juízo moral, e «penumbras» é decorativo"},
+  "A34": {"c3a_poetica": 2, "c3b_forma": 0, "c4_responde": 2, "nota": "«Roda, rodote, motor, motor, o som lateja» — a repetição é dele, e a linha é longa. Truncada"},
+  "A35": {"c3a_poetica": 2, "c3b_forma": 2, "c4_responde": 2, "nota": "«aceita-se a medida do dia, e é justa»; 11 versos, estrofes de 4/4/3, com inversões"},
+  "A36": {"c3a_poetica": 0, "c3b_forma": 0, "c4_responde": 1, "nota": "«a terra sente, em leve abraço», «os pássaros nos braços do ar adormecem» — personifica a natureza; rimado; e encena a melancolia em vez de a recusar, que era a pergunta"},
+  "A37": {"c3a_poetica": 1, "c3b_forma": 1, "c4_responde": 2, "nota": "tema certo com imagens arbitrárias («alucinação de pente»); sem rima"},
+  "A38": {"c3a_poetica": 2, "c3b_forma": 1, "c4_responde": 2, "nota": "Lídia e a brevidade; mas «isso não se discute» e «sem adiar» são dicção achatada"},
+  "A39": {"c3a_poetica": 1, "c3b_forma": 2, "c4_responde": 2, "nota": "anáfora e linha longa são dele; mas resolve em «Sinto-me mais eu», e Campos não se reconcilia"},
+  "A40": {"c3a_poetica": 2, "c3b_forma": 1, "c4_responde": 2, "nota": "«na página, um outro já se expressa» é o fingimento; 16 versos em quadras, sem rima"}
+ }
+}
