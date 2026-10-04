@@ -159,6 +159,25 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | Recolha do corpus não reproduzível | nenhum script no histórico | registado em `data/README.md` |
 | `src/main.py` e companhia ainda no repo | Dois sistemas em paralelo | até ao Passo 9 |
 
+### Uma ressalva à conclusão da Fase 4, encontrada na Fase 5
+
+O Passo A1c da Fase 4 concluiu que **«o espaço do e5 não separa estas vozes»**,
+dos 42–46% obtidos a rotear poemas reais. O instrumento estava handicapado:
+`fase-4/bench_roteador_c.py:91–95` encoda os poemas de teste como `query` a
+partir de `chunk.text` — verso puro — contra centróides construídos de
+`indexed_text`, que leva **«Autor — Título»** à cabeça. O nome do heterónimo é o
+indício mais discriminativo da tarefa, está no centróide e não está em consulta
+nenhuma; os 42–46% saem **subestimados**.
+
+**A decisão aguenta-se, a afirmação não.** Usar o roteador por LLM continua
+certo — 72% contra ≤52,5%, e todas as variantes de embedding partilham o
+handicap, logo a ordenação entre elas mantém-se. O que não se aguenta é a frase
+sobre o espaço, e a remedição (centróides sobre `c.text`) está pendente. Para a
+Fase 5 o defeito é inócuo: os três grupos do Instrumento II partilham-no e o que
+se reporta é a diferença. Ver [`FASE-5.md`](FASE-5.md) §9.3.
+
+---
+
 ### Sobre direitos
 
 Fernando Pessoa morreu em 1935; obra em domínio público em Portugal e no Brasil

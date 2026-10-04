@@ -327,6 +327,21 @@ E três confundidores, que ficam declarados por não serem evitáveis:
   três grupos são julgados como verso puro contra esses centróides, logo isto
   deprime o **nível** dos três por igual e deixa a **diferença** interpretável.
   O nível só é comparável com os 42–46% da Fase 4, que partilham o defeito.
+
+  **E o defeito é maior do que a comparabilidade de nível.** No Passo A1c da
+  Fase 4 (`fase-4/bench_roteador_c.py:91–95`) os poemas de teste são encodados
+  como `query` a partir de `chunk.text` — verso puro — contra centróides
+  construídos de `indexed_text`, que leva o **nome do heterónimo** à cabeça. O
+  nome é o indício mais discriminativo que existe para esta tarefa, está no
+  centróide e não está em consulta nenhuma: o instrumento estava handicapado e
+  os 42–46% saem **subestimados**. Para esta fase não há problema — os três
+  grupos partilham o handicap e o que se reporta é a diferença — mas a conclusão
+  que a Fase 4 tirou daquele número, «o espaço do e5 não separa estas vozes»,
+  **está mais forte do que a evidência permite**. A decisão de usar o roteador
+  por LLM aguenta-se (72% contra ≤52,5%, e todas as variantes de embedding
+  partilham o handicap, logo a ordenação entre elas mantém-se); a afirmação
+  sobre o espaço não. Achado de uma sessão paralela, verificado aqui no código;
+  a correcção pertence à Fase 4 e não a esta.
 - **A memorização dos reais pelo juiz LLM** infla os reais, logo **alarga** a
   diferença real-vs-gerado: agrava a conclusão em vez de a inventar.
 - **As descrições de voz do juiz LLM são quase as personas do gerador**, e isso
