@@ -30,7 +30,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
 | **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
-| **5 — A voz** | [`FASE-5.md`](FASE-5.md) | 🔄 **pré-registado**, a medir. Dois instrumentos: ablação com/sem contexto (à mão, às cegas) e identificabilidade por dois juízes mecânicos, contra controlo de poemas reais |
+| **5 — A voz** | [`FASE-5.md`](FASE-5.md) · [relatório](FASE-5-RELATORIO.md) | 🔄 **Instrumento I fechado: H rejeitada** pelo portão G2 — 4 pares contra 4, IC95%[−0,25,+0,50]. O contexto não degrada a poética, e o Caeiro falha a 0,0 **nas duas condições**. Instrumento II a correr |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -150,7 +150,7 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | Avaliação de voz com **um só avaliador** | Não é medição intersubjectiva | assumido |
 | Throttling térmico até 101 °C | Latências com precisão menor que as casas decimais sugerem | ressalva registada |
 | Qualidade do reranker em PT-PT desconhecida | Pode piorar o ranking | mede-se no Passo 2 da Fase 3 |
-| **Sem copiar, nem sempre é a voz pedida** | os versos originais explicam e atribuem significado, o que Caeiro proíbe | pergunta aberta principal; Passo 8 |
+| ~~**Sem copiar, nem sempre é a voz pedida**~~ | **medido na Fase 5**: é verdade que nem sempre é — o Caeiro dá 0,0 de mediana em poética. Mas a explicação estava **errada**: ele quebra a interdição **sem contexto nenhum**, e a ablação dá 4 pares contra 4 | ✅ fechada, e o suspeito absolvido |
 | Alguns poemas são atractores (`poem_3426`, `poem_2832`) | muito recuperados e muito copiados | pode exigir MMR na recuperação |
 | **Streaming imprime antes de validar** | só o 1.º verso é retido; brasileirismos a meio só são avisados | aceite; buffer total custaria o streaming |
 | Enviesamento de pooling | sistema novo é penalizado por construção | procedimento escrito no topo de `test_retrieval_gold.py` |
@@ -211,7 +211,7 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 
 | | Passo | Desbloqueia |
 |---|---|---|
-| 1 | **A voz gerada é a voz pedida?** — a pergunta aberta desde a Fase 1 Passo 7 | 🔄 a **Fase 5**, com protocolo em [`FASE-5.md`](FASE-5.md) |
+| 1 | ~~**A voz gerada é a voz pedida?**~~ — **medida**: não é, e o contexto não é a causa | ✅ [Fase 5](FASE-5-RELATORIO.md). Fecha a pergunta aberta desde a Fase 1 Passo 7 |
 | 2 | Julgar as outras 20 perguntas, ou um segundo avaliador | a magnitude dos Δ, que a n=20 fica em IC95% de 0,17 de largura |
 | 3 | **Fase 6** — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
 
