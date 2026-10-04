@@ -38,8 +38,24 @@ diferença entre eles deixaria de significar nada.
 logo os centróides carregam o nome do heterónimo. Os três grupos são julgados
 como **verso puro** contra esses centróides, logo o confundidor deprime o
 **nível** dos três por igual e deixa a **diferença** — que é o que se reporta —
-interpretável. O nível não é comparável com nada fora desta corrida, excepto os
-42–46% da Fase 4 A1c, que o partilham.
+interpretável.
+
+**E o defeito foi entretanto quantificado: vale 23 pontos.** A remedição da Fase
+4 mediu o mesmo classificador com centróides construídos de `c.text` em vez de
+`indexed_text` e obteve 64-69% em poemas, contra os 42-46% publicados. Isso
+esvazia a razão pela qual este módulo usava `idx.vectores`: era
+«comparabilidade com os 42-46% da Fase 4», e esse número é agora conhecido como
+artefacto.
+
+Logo correm-se **duas variantes de centróide**, e reportam-se as duas:
+
+| variante | centróides | porquê |
+|---|---|---|
+| `com_nome` | `idx.vectores` = `encode_passages(indexed_text)` | é o que estava pré-registado, e o que foi pré-registado não se apaga |
+| `sem_nome` | `encode_passages(c.text)` | é o instrumento a funcionar, 23 pontos mais forte, e é onde há potência |
+
+A emenda não toca nos portões G5-G7, que são sobre **diferenças** entre grupos e
+não sobre o nível: um juiz mais forte mede a mesma diferença com menos ruído.
 
 **O juiz LLM pode ter memorizado os reais** do pré-treino. Isso infla os reais,
 logo **alarga** a diferença real-vs-gerado: o defeito agrava a conclusão em vez
@@ -57,6 +73,8 @@ from __future__ import annotations
 import json
 import os
 import sys
+import tempfile
+import time
 
 import numpy as np
 import requests
@@ -69,6 +87,11 @@ from src.retrieval.encoder import Encoder
 from src.retrieval.index import Index
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+
+#: A re-codificação do corpus não é artefacto de fase: são 6,4 MB de float32
+#: deriváveis em 6 min. Fica fora do repositório.
+CACHE_DIR = os.environ.get(
+    "FASE5_CACHE", os.path.join(tempfile.gettempdir(), "fase5-cache"))
 
 VOZES = (Voice.CAEIRO, Voice.CAMPOS, Voice.REIS, Voice.ORTONIMO)
 
@@ -178,14 +201,38 @@ def main() -> None:
     print(f"controlo: {len(reais)} poemas reais · "
           f"{len(no_contexto)} ids excluídos por terem entrado no prompt")
 
-    # --- centróides, UMA vez, sem os poemas de controlo -----------------
-    cent = _norm(np.vstack([
-        idx.vectores[[i for i, c in enumerate(idx.chunks)
-                      if c.voice is v and c.language is Lang.PT
-                      and i not in ix_controlo]].mean(axis=0)
-        for v in VOZES]))
+    # --- centróides, UMA vez por variante, sem os poemas de controlo ----
+    pt = [i for i, c in enumerate(idx.chunks) if c.language is Lang.PT]
+    treino = {v: [i for i in pt if idx.chunks[i].voice is v
+                  and i not in ix_controlo] for v in VOZES}
 
-    def julgar_centroide(textos: list[str]) -> list[Voice]:
+    # `encode_passages(c.text)` sobre o corpus PT custa ~6 min, logo fica em
+    # cache fora do repositório: 6,4 MB de float32 derivaveis nao sao artefacto.
+    cache = os.path.join(CACHE_DIR, "passagens-text-pt.npy")
+    if os.path.exists(cache):
+        passagens = np.load(cache)
+        print(f"re-codificação lida da cache {passagens.shape}", flush=True)
+    else:
+        print(f"a re-encodar {len(pt)} chunks como passagem sobre c.text "
+              f"(~6 min, uma vez)...", flush=True)
+        t0 = time.perf_counter()
+        passagens = enc.encode_passages([idx.chunks[i].text for i in pt])
+        print(f"  {time.perf_counter()-t0:.0f} s", flush=True)
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        np.save(cache, passagens)
+    pos = {i: k for k, i in enumerate(pt)}
+
+    def centroides(fonte) -> np.ndarray:
+        # `None` usa `idx.vectores`; senão indexa a re-codificação por `pos`.
+        return _norm(np.vstack([
+            (idx.vectores[treino[v]] if fonte is None
+             else fonte[[pos[i] for i in treino[v]]]).mean(axis=0)
+            for v in VOZES]))
+
+    CENTROIDES = {"com_nome": centroides(None),
+                  "sem_nome": centroides(passagens)}
+
+    def julgar_centroide(textos: list[str], cent: np.ndarray) -> list[Voice]:
         qs = enc.encode_queries(textos)
         return [VOZES[int(np.argmax(cent @ q))] for q in qs]
 
@@ -204,12 +251,13 @@ def main() -> None:
     }, "controlo": reais}
     previsoes: dict[str, list] = {}
 
-    print("\n=== juiz: centróide de embedding (não memoriza, pouca potência) ===")
-    for nome, (esperadas, textos) in grupos.items():
-        prev = julgar_centroide(textos)
-        previsoes[f"centroide_{nome}"] = [p.value for p in prev]
-        saida[f"centroide_{nome}"] = resumo(f"centróide · {nome}",
-                                            list(zip(esperadas, prev)))
+    for var, cent in CENTROIDES.items():
+        print(f"\n=== juiz: centróide `{var}` (não memoriza) ===")
+        for nome, (esperadas, textos) in grupos.items():
+            prev = julgar_centroide(textos, cent)
+            previsoes[f"centroide_{var}_{nome}"] = [p.value for p in prev]
+            saida[f"centroide_{var}_{nome}"] = resumo(
+                f"centróide {var} · {nome}", list(zip(esperadas, prev)))
 
     print("\n=== juiz: qwen2.5:7b (forte; dois confundidores de sinal contrário) ===")
     for nome, (esperadas, textos) in grupos.items():
@@ -221,14 +269,15 @@ def main() -> None:
 
     # --- as diferenças, que são a resposta -------------------------------
     print("\n=== diferenças por juiz ===")
-    for juiz in ("centroide", "llm"):
+    JUIZES = ("centroide_com_nome", "centroide_sem_nome", "llm")
+    for juiz in JUIZES:
         a = saida[f"{juiz}_A_com_contexto"]["exactidao"]
         b = saida[f"{juiz}_B_sem_contexto"]["exactidao"]
         r = saida[f"{juiz}_real"]["exactidao"]
         saida[f"diferencas_{juiz}"] = {
             "A_menos_real": round(a - r, 3), "B_menos_real": round(b - r, 3),
             "A_menos_B": round(a - b, 3)}
-        print(f"  {juiz:10s} A {a:.0%} · B {b:.0%} · real {r:.0%}   "
+        print(f"  {juiz:20s} A {a:.0%} · B {b:.0%} · real {r:.0%}   "
               f"A−real {a-r:+.0%}  B−real {b-r:+.0%}  A−B {a-b:+.0%}")
 
     # --- o teste emparelhado, por pergunta -------------------------------
@@ -236,7 +285,7 @@ def main() -> None:
     # emparelhada: contam-se os pares discordantes, que é o que a hipótese H
     # prevê desequilibrados a favor de B.
     print("\n=== pares discordantes, por juiz (H prevê B>A) ===")
-    for juiz in ("centroide", "llm"):
+    for juiz in JUIZES:
         pa = previsoes[f"{juiz}_A_com_contexto"]
         pb = previsoes[f"{juiz}_B_sem_contexto"]
         so_a = so_b = 0
@@ -247,7 +296,7 @@ def main() -> None:
             so_b += cb and not ca
         saida[f"discordantes_{juiz}"] = {"so_A_acerta": so_a, "so_B_acerta": so_b,
                                          "concordantes": 20 - so_a - so_b}
-        print(f"  {juiz:10s} só A acerta {so_a} · só B acerta {so_b} · "
+        print(f"  {juiz:20s} só A acerta {so_a} · só B acerta {so_b} · "
               f"concordam {20-so_a-so_b}")
 
     with open(os.path.join(AQUI, "04-identificacao.json"), "w",

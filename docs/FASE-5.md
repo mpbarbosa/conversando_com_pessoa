@@ -342,6 +342,21 @@ E três confundidores, que ficam declarados por não serem evitáveis:
   partilham o handicap, logo a ordenação entre elas mantém-se); a afirmação
   sobre o espaço não. Achado de uma sessão paralela, verificado aqui no código;
   a correcção pertence à Fase 4 e não a esta.
+
+  **Emenda de 2026-10-03, depois de as 40 amostras existirem e antes de o
+  Instrumento II correr.** A remedição da Fase 4 quantificou o defeito: com
+  centróides de `c.text` em vez de `indexed_text`, a exactidão sobre poemas sobe
+  de 42–46% para **64–69%**. O defeito valia **23 pontos**, e a afirmação da
+  Fase 4 está **refutada**, não só enfraquecida — o espaço do e5 separa estas
+  vozes. Isso **esvazia a razão** que este protocolo deu para usar
+  `idx.vectores`: era a comparabilidade com os 42–46%, e esse número é agora
+  um artefacto conhecido. O Instrumento II passa a correr **duas variantes de
+  centróide** — `com_nome` (a pré-registada, que não se apaga) e `sem_nome` (a
+  corrigida, 23 pontos mais forte) — e reportam-se as duas. Os portões G5–G7
+  **não mudam**: são sobre diferenças entre grupos, e um juiz mais forte mede a
+  mesma diferença com menos ruído. A predição 1 do §9.4 — «o centróide não
+  distingue gerados de reais, por não ter potência» — passa a ser testável com
+  um instrumento que tem potência, e é o que ela merecia.
 - **A memorização dos reais pelo juiz LLM** infla os reais, logo **alarga** a
   diferença real-vs-gerado: agrava a conclusão em vez de a inventar.
 - **As descrições de voz do juiz LLM são quase as personas do gerador**, e isso
