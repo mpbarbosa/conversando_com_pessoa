@@ -383,8 +383,18 @@ refutáveis em vez de leitura retrospectiva.
 ```
 
 Fora do protocolo, e registado por ter aparecido pelo caminho: a conclusão da
-Fase 4 sobre o espaço do e5 está mais forte do que a medição que a sustenta
-(`6099e86`), e a remedição está a correr noutra sessão.
+Fase 4 sobre o espaço do e5 saiu de um instrumento handicapado (`6099e86`). A
+remedição, feita na sessão paralela (`a259b24`), fechou: o defeito valia **23
+pontos** em perguntas e 22 em poemas, e a afirmação «o espaço do e5 não separa
+estas vozes» está **refutada** — separa-as a 68% em perguntas e 64–69% em
+poemas. O colapso no Caeiro que a Fase 4 observou era artefacto do nome: 19
+erros passam a 1.
+
+Para esta fase o defeito foi inócuo na diferença, mas não no desenho: foi por
+causa dele que o Instrumento II passou a correr **duas** variantes de centróide
+em vez da contaminada sozinha, e é a variante corrigida que tem potência (§7).
+A variante contaminada reproduz aqui os 45% da Fase 4, o que fecha o diagnóstico
+pelos dois lados.
 
 ---
 

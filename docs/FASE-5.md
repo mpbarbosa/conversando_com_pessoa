@@ -408,12 +408,20 @@ docs/fase-5/01-amostras.md        40 amostras, embaralhadas, cegas
 docs/fase-5/01-chave.json         o mapa — não abrir antes de 02
 docs/fase-5/01-amostras.json      texto cru, métricas automáticas, tentativas
 docs/fase-5/02-pontuacoes.json    3a, 3b, 4 à mão
-docs/fase-5/01-cru.jsonl          diário de bordo, uma linha por amostra
+docs/fase-5/01-cru.jsonl          diário de bordo (só em re-corridas: ver nota)
 docs/fase-5/03-resultados.json    sinais, IC95% bootstrap, medianas
 docs/fase-5/identificar.py        Instrumento II: controlo real + dois juízes
 docs/fase-5/04-identificacao.json matrizes, diferenças, pares discordantes
 docs/FASE-5-RELATORIO.md          o que os portões decidiram
 ```
+
+**Nota sobre o `01-cru.jsonl`:** não existe para esta corrida, e a razão fica
+registada em vez de corrigida. A persistência incremental foi acrescentada ao
+harness **durante** a geração das 40 amostras, depois de a sessão paralela
+perder 12 gerações por só serializar no fim; o processo já a correr tinha o
+código antigo em memória e escreveu só os ficheiros finais. O diário serve
+re-corridas e retomas, não esta. Os tempos e o diagnóstico por amostra estão no
+`01-chave.json`.
 
 ## 11. Checklist do protocolo
 
