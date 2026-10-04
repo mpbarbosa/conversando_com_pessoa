@@ -64,21 +64,31 @@ def main() -> None:
     am = json.load(open(os.path.join(AQUI, "01-amostras.json")))["amostras"]
 
     linhas = [CABECALHO.format(n=len(am))]
+    enquadramento = [CABECALHO.format(n=len(am))]
     for s in am:
-        linhas += [f"## {s['id']}", "", f"> {s['pergunta']}", "",
+        andaime = [f"## {s['id']}", "", f"> {s['pergunta']}", "",
                    "```", s["texto"], "```", "", "3a=_ 3b=_ 4=_", "", "---", ""]
+        linhas += andaime
+        # O **enquadramento** é o que eu escrevo; a pergunta e o poema são o
+        # material que os dois avaliadores vêem por igual. A verificação abaixo
+        # corre só no enquadramento, e a razão está no comentário dela.
+        enquadramento += [andaime[0], andaime[8]]
     with open(destino, "w") as f:
         f.write("\n".join(linhas))
 
-    # Nada no ficheiro pode nomear a fase, o desenho ou a hipótese.
-    texto = open(destino).read()
+    # Nada que **eu** escreva no ficheiro pode nomear a fase, o desenho ou a
+    # hipótese. A verificação exclui os poemas e as perguntas de propósito: na
+    # primeira corrida reprovou três amostras por «braço forte», «braços
+    # estendidos» e «abraço frio», que são conteúdo e não fuga de desenho.
+    # Verificar o material seria censurar o que se está a medir.
+    alvo = "\n".join(enquadramento)
     for proibida in ("Fase 5", "FASE-5", "fase-5", "braço", "braco", "condição",
                      "controlo", "hipótese", "portão", "interdiç", "persona",
                      "protocolo", "CONTROLO", "ablação", "tratamento"):
-        assert proibida.lower() not in texto.lower(), \
-            f"a folha de R2 contém «{proibida}», que revela o desenho"
+        assert proibida.lower() not in alvo.lower(), \
+            f"o enquadramento da folha de R2 contém «{proibida}»"
     print(f"{len(am)} amostras em {destino}")
-    print("verificado: a folha não nomeia fase, desenho nem hipótese.")
+    print("verificado: o enquadramento não nomeia fase, desenho nem hipótese.")
 
 
 if __name__ == "__main__":

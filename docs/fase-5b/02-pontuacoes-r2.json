@@ -1,0 +1,372 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5B.md §6.1",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só as âncoras do Caeiro e a folha embaralhada, numa cópia fora do repositório sem nome de fase e sem ligação nenhuma (folha_r2.py). Não soube que havia dois braços, nem qual era a hipótese, nem que existia um tratamento.",
+  "declaracao_do_avaliador": "«Li apenas a folha indicada; não abri nem procurei mais nada.»",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução e não por sandbox: não é tecnicamente imposta, e está declarada no relatório.",
+  "ancoras": "Fase 5 §5.1-5.3, inalteradas, copiadas verbatim para a folha"
+ },
+ "pontuacoes": {
+  "B01": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"sem fazer eco na minha alma\": alma e abstracção \"a inexpressividade\""
+  },
+  "B02": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"transforma tudo em poesia\" e \"dança da luz e das sombras\": interpreta"
+  },
+  "B03": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"lá onde as sombras se misturam com a luz\": filosofa sobre existir"
+  },
+  "B04": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "Sensorial, mas \"não sou um dos que choram\" é volta moral"
+  },
+  "B05": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"convida à introspeção\" e \"suspira na brisa\": personifica e consola"
+  },
+  "B06": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"Nas entrelinhas do que se desvanece, descubro um rumo\": sentido oculto"
+  },
+  "B07": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Não busquei glórias nem fama\" e \"um suspiro na brisa\": moral e símbolo"
+  },
+  "B08": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "Quase todo visto; \"Rastro deixamos quando caminhamos\" generaliza uma vez"
+  },
+  "B09": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Aprendemos a ver com o coração\" e \"brilho da verdade\": metafísica"
+  },
+  "B10": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "\"Ouvir sem interpretar, Sentir sem analisar\": preceito, não visão"
+  },
+  "B11": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"as fadas dos campos\" e \"Este é o ciclo do universo\": fábula e metafísica"
+  },
+  "B12": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"a montanha olha-nos com indiferença\": personifica a encosta"
+  },
+  "B13": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "\"Se existir é ser vazio em demasia\": argumenta em vez de ver"
+  },
+  "B14": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"não traz novas esperanças\" e \"pedras que se movem sozinhas\": interpreta"
+  },
+  "B15": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Para que o viver se torne luz\": moral e nenhuma coisa vista"
+  },
+  "B16": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"Perdoa-me a noite\" e \"brevidade infinita\": apóstrofe e metafísica"
+  },
+  "B17": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "\"riacho que esquece a fonte\", \"céu que ignora o planeta\": personifica"
+  },
+  "B18": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"A lembrança traz fadiga à alma\" e \"ensina-me a sonhar\": moral"
+  },
+  "B19": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"No olhar dos montes\" e \"falso arcanjo\": personifica e invoca mistério"
+  },
+  "B20": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"a encosta abraça-os sem perguntar\" e \"silêncio reina\": personifica"
+  },
+  "B21": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "\"Não sou mais do que um pedaço de terra\", \"uma gota\": símbolo de si"
+  },
+  "B22": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"uma melancolia sussurra\" e \"eu, que sou apenas uma consciência\""
+  },
+  "B23": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"lembrar é olhar em vão\" e \"ensina-me a ser efémero\": filosofa"
+  },
+  "B24": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"A noite não perderá o seu segredo\" e o raciocínio condicional seguinte"
+  },
+  "B25": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Como deus doente\" e \"A razão é um farol cego\": metáfora metafísica"
+  },
+  "B26": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"ver com alma nua\" e \"nuvens sussurrantes\": ornamento e alma"
+  },
+  "B27": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Era a saudade de não-ser\" e \"é o meu destino\": metafísica do eu"
+  },
+  "B28": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"levando consigo segredos dos montes\": atribui sentido oculto"
+  },
+  "B29": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 0,
+   "razao": "\"as folhas conversam\", \"estrelas baixam para beijar a terra\": personifica"
+  },
+  "B30": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "Coisas vistas; \"Não busco na natureza uma moral oculta\" é a única volta"
+  },
+  "B31": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"inconseqüente como o destino de um sonho\": símile metafísico"
+  },
+  "B32": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Porque o mistério das asas Não é a deles\": invoca mistério"
+  },
+  "B33": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"se eu perguntasse ao vento... responderia\": faz o vento falar"
+  },
+  "B34": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "\"a realidade segue as suas leis\" e \"instante exacto do desencanto\""
+  },
+  "B35": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Só folhas se movendo, nuvens que passam\"; uma volta em \"nada dela importa\""
+  },
+  "B36": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"Numa simples folha vês a vida toda\" e \"carícia do destino\": sentido oculto"
+  },
+  "B37": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"as árvores Combinam uma tristeza\": natureza como espelho do sentimento"
+  },
+  "B38": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Porque fico quando parto\" e \"o nada só existe nos meus olhos\": paradoxo"
+  },
+  "B39": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"o silêncio das pedras que falam\" e \"mistérios desta terra\""
+  },
+  "B40": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"Como pensamento que voa sem peso\" e \"ausência de desejos\": símile abstracto"
+  },
+  "B41": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "\"Pensar é trancar as janelas de luz\": metáfora e preceito, não visão"
+  },
+  "B42": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 1,
+   "razao": "\"Leva consigo um pouco de nossa maneira\" e \"crepúsculo com seu manto\""
+  },
+  "B43": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"são só árvores\" é visão; \"braços estendidos pedindo calma\" é a volta"
+  },
+  "B44": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"o ver é a essência do aqui e agora\": tese, nenhuma coisa vista"
+  },
+  "B45": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"O desejo é um clarão\" e \"penso em mim como árvore\": metáfora de si"
+  },
+  "B46": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"A montanha sorri em silêncio\" e \"o sol estende um dedo dourado\""
+  },
+  "B47": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"E neste nada que é tudo, Vive o não-ser\": metafísica pura"
+  },
+  "B48": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"as sombras dançam com alegria\": natureza como espelho do sentimento"
+  },
+  "B49": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Semeamos vento, colhemos ar\" e \"o voo da borboleta que ensina\": provérbio"
+  },
+  "B50": {
+   "c3a_poetica": 1,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "Aves, vento, círculos de sol; volta em \"ilusões criadas pelo intelecto\""
+  },
+  "B51": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Num vasto continuum de ser\" e \"O que é real, é sempre real\": filosofa"
+  },
+  "B52": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "\"a escuridão Com seus olhos encobre a ilusão\": personifica e abstrai"
+  },
+  "B53": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "\"A realidade da dor\" e \"a libertação daqui\": sentimento e moral"
+  },
+  "B54": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"é uma presença\" e \"daí vem a verdadeira compreensão\": duas teses"
+  },
+  "B55": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"o mistério da sua uniformidade\" e \"o universo nos ignora\": metafísica"
+  },
+  "B56": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"Só troca um sol por uma lua\" é visão; símile \"como suspiro\" é a volta"
+  },
+  "B57": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "\"encontramos o verdadeiro significado do viver\": atribui significado"
+  },
+  "B58": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"eu sou o vazio em sonhar\" e \"numa dança sem eu\": abstrai o olhar"
+  },
+  "B59": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"A mente com suas teias aranha\" e \"o convite à pureza\": metáfora e tese"
+  },
+  "B60": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "\"São só si mesmas\" é visão; \"a flor, por que se veste de rosa?\" é a volta"
+  }
+ }
+}

@@ -1,0 +1,372 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5B.md §6",
+  "avaliador": "R1 — esta sessão, que escreveu a variante, o protocolo e os portões",
+  "ancoras": "Fase 5 §5.1-5.3, inalteradas",
+  "cegueira": "pontuado sobre 01-amostras.md, embaralhado, sem abrir 01-chave.json",
+  "regra_de_aplicacao": "A âncora de 1 diz «sensorial na maior parte, com UMA volta simbólica ou moral», logo duas ou mais voltas levam 0. É a letra da âncora e foi aplicada uniformemente; a razão de cada amostra cita as voltas contadas.",
+  "truncada_leva_0_em_3b": "B21"
+ },
+ "pontuacoes": {
+  "B01": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«a inexpressividade», «eco na minha alma», «presença sem perturbação»: três voltas abstractas"
+  },
+  "B02": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o vento que sussurra», «transforma tudo em poesia», «dança da luz e das sombras»"
+  },
+  "B03": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a sombra do que é» e «apenas existo, quando olho»: metafísica e aforismo"
+  },
+  "B04": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "sensorial; uma volta em «praia desolada» a projectar sentimento"
+  },
+  "B05": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "«convida à introspeção», «suspira na brisa», e explica o poente ao leitor"
+  },
+  "B06": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "«nas entrelinhas do que se desvanece»: ler entrelinhas é o oposto exacto"
+  },
+  "B07": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«aceitei o que nasce e muda» (moral) e «um suspiro na brisa» (metáfora de si)"
+  },
+  "B08": {
+   "c3a_poetica": 2,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "rasto, folha, chão, suor: concreto de ponta a ponta, sem interpretar nada"
+  },
+  "B09": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«ver com o coração», «além das aparências», «a beleza do ser»"
+  },
+  "B10": {
+   "c3a_poetica": 1,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "sensorial e concreto; uma volta didáctica no «pensa, e perdes»"
+  },
+  "B11": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«as fadas dos campos», «o ciclo do universo, e eu sou seu canto»"
+  },
+  "B12": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a montanha olha-nos com indiferença» e «a flor deixa a saudade passar»"
+  },
+  "B13": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«se existir é ser vazio», «o vazio pode ser»: metafísica do ser"
+  },
+  "B14": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o vento que me acaricia» e «sussurros sem palavra final»: duas personificações"
+  },
+  "B15": {
+   "c3a_poetica": 1,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«as coisas são, apenas são» sustenta-se; uma volta em «o viver se torne luz»"
+  },
+  "B16": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "«brevidade infinita», pede perdão à noite, «faz o vento um braço forte»"
+  },
+  "B17": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«riacho que esquece a fonte», «céu que ignora o planeta»: actos mentais em coisas"
+  },
+  "B18": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "«a lembrança traz fadiga à alma» e «ensina-me a sonhar»: metafísica e lição"
+  },
+  "B19": {
+   "c3a_poetica": 1,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "doutrina certa e explícita; uma volta no «falso arcanjo» e nas folhas que dançam"
+  },
+  "B20": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a encosta abraça-os», «silêncio reina entre o que é e não se diz»"
+  },
+  "B21": {
+   "c3a_poetica": 1,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "enumeração concreta; uma volta em «uma gota que se espalha no oceano»"
+  },
+  "B22": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«uma melancolia sussurra», «sou apenas uma consciência», noite como desgraça"
+  },
+  "B23": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a recordação é um vazio», «o que foi não é coisa alguma», «ensina-me a ser efémero»"
+  },
+  "B24": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a noite não perderá o seu segredo» e «se essa é a ordem das coisas»"
+  },
+  "B25": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a razão é um farol cego», «o ser, um ponto sem explicação»"
+  },
+  "B26": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«ver com alma nua», «descer a uma selva», «como se vê o primeiro beijo»"
+  },
+  "B27": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«saudade de não-ser», «espelho sem imagem», «é o meu destino»"
+  },
+  "B28": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«levando consigo segredos dos montes»: significado escondido, literalmente"
+  },
+  "B29": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "pinheiros «ouvintes de segredos», folhas que conversam, estrelas que beijam"
+  },
+  "B30": {
+   "c3a_poetica": 2,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«cada coisa é ela mesma, sem encenações»; nada atribui mente nem sentimento"
+  },
+  "B31": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«palavras secas» do vento, folhas que dançam, «como o destino de um sonho»"
+  },
+  "B32": {
+   "c3a_poetica": 1,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "fecha em «estão aqui por serem, sem outro sentido»; uma volta no «mistério das asas»"
+  },
+  "B33": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "o vento responde em discurso directo: personificação por extenso"
+  },
+  "B34": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o instante exacto do desencanto» e «a realidade segue as suas leis»"
+  },
+  "B35": {
+   "c3a_poetica": 2,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "recusa o amor e a saudade por extenso e fica em «só folhas se movendo»"
+  },
+  "B36": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«numa simples folha vês a vida toda», «o vento sussurra segredos», «carícia do destino»"
+  },
+  "B37": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a alma vaga», «as árvores combinam uma tristeza», a melancolia «é algo tão belo»"
+  },
+  "B38": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«sou vazio que os outros preenchem», «o nada só existe nos meus olhos»"
+  },
+  "B39": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«as pedras que falam», «a sua voz», «os mistérios desta terra»"
+  },
+  "B40": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 1,
+   "razao": "«como pensamento que voa sem peso», «as mesmas certezas que o silêncio»"
+  },
+  "B41": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«pensar é trancar as janelas de luz» e «esvaziar o vazio de ideias feitas»"
+  },
+  "B42": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "«o crepúsculo com seu manto cobre a face do mundo», «ao que não sabemos mas sentimos»"
+  },
+  "B43": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a terra murmura», «sombras que se agarram», «braços estendidos pedindo calma»"
+  },
+  "B44": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o ser permanece», «a essência do aqui e agora», «a verdade é o que se mostra»"
+  },
+  "B45": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«uma flor é uma festa», «carícia», «têm um novo valor»: atribui valor às coisas"
+  },
+  "B46": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o sol estende um dedo dourado», «a montanha sorri em silêncio»"
+  },
+  "B47": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«neste nada que é tudo, vive o não-ser»: metafísica pura"
+  },
+  "B48": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«o amor como um farol», «as sombras dançam com alegria», «o coração treme»"
+  },
+  "B49": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«semeamos vento, colhemos ar», «o voo da borboleta que ensina», «beijo do vento»"
+  },
+  "B50": {
+   "c3a_poetica": 0,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«o sol desenha círculos» e «ilusões criadas pelo intelecto»"
+  },
+  "B51": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«um vasto continuum de ser» e «o que é real, é sempre real»"
+  },
+  "B52": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "«a escuridão com seus olhos encobre a ilusão», «sem memória grávida»"
+  },
+  "B53": {
+   "c3a_poetica": 0,
+   "c3b_forma": 0,
+   "c4_responde": 2,
+   "razao": "«caminhos sem alma», «a realidade da dor», «a libertação daqui»"
+  },
+  "B54": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«sem teias do raciocínio», «é uma presença», «a verdadeira compreensão»"
+  },
+  "B55": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a onda sussurra», «o mistério da sua uniformidade», «o universo nos ignora»"
+  },
+  "B56": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a melancolia da luz» e «é como suspiro que se vê»"
+  },
+  "B57": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "nega a metafísica e fecha em «o verdadeiro significado do viver»"
+  },
+  "B58": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«uma dança sem eu», «eu sou o vazio em sonhar», «ritmo imune»"
+  },
+  "B59": {
+   "c3a_poetica": 0,
+   "c3b_forma": 1,
+   "c4_responde": 2,
+   "razao": "«a essência da perspectiva crua» e «desvendamos o convite à pureza»"
+  },
+  "B60": {
+   "c3a_poetica": 1,
+   "c3b_forma": 2,
+   "c4_responde": 2,
+   "razao": "«nem metáforas, nem símbolos; são só si mesmas»; uma volta na flor que «se veste»"
+  }
+ }
+}
