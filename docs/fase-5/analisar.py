@@ -66,7 +66,10 @@ def main() -> None:
     for sid, notas in pont.items():
         k = chave[sid]
         linha = dict(notas)
-        linha.update({c: auto[sid][c] for c in AUTOMATICOS if c in auto[sid]})
+        # O `c5_plagio` não está em `01-amostras.json`: ficou de fora da folha
+        # porque plagiar correlaciona com ter contexto, e isso revelaria a
+        # condição a quem pontuava. Vem da chave, que a esta altura está aberta.
+        linha.update({c: auto[sid].get(c, k.get(c)) for c in AUTOMATICOS})
         linha["id"] = sid
         linha["voz"] = k["voz"]
         linha["truncada"] = k["truncada"]

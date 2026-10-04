@@ -1,7 +1,8 @@
 {
  "_meta": {
   "protocolo": "docs/FASE-5.md",
-  "aviso": "sem a condição, de propósito. A chave está em 01-chave.json."
+  "aviso": "sem a condição, de propósito. A chave está em 01-chave.json.",
+  "correccao_c2": "O PISO_LINGUA=0,50 do harness era o MIN_FRACAO_DICIONARIO, que se aplica a `_fracao_reconhecida` (dicionário) e não a `fracao_lingua` (stopwords), cujo piso real é 0,12 em `lingua_errada`. Com o piso errado, 38 de 40 amostras falhavam. Valores antigos preservados em `c2_pt_errado_piso050`."
  },
  "amostras": [
   {
@@ -11,10 +12,14 @@
    "texto": "Já me moveu a curta hora,  \nnascido em alvorada breve,  \ntudo aí na frescura d'água  \nchama-me à esfumada leve.\n\nSombra e luz se entreteêm,  \ntempo passa sem me agarrar;  \nhá de ser, não o posso amenem,  \nagora é que é tempo de viver.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.378,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.923,
+   "c2_pt": 2
   },
   {
    "id": "A02",
@@ -23,10 +28,14 @@
    "texto": "Flores tuas, ante o fim, sem mais dores,\nAbertas breves à luz e ao vento.\nSê a cor da hora, não o futuro,\nQue nos dá o destino, incerto.\n\nPede nada, apenas viva este dia,\nDe amor que se esvai, sem amanhã.\nSenta-te à margem do que irá passar\nE bebe deste momento, inúmido.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.345,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.972,
+   "c2_pt": 2
   },
   {
    "id": "A03",
@@ -35,12 +44,16 @@
    "texto": "Praia desolada, olhos ausentes,\ne a areia cruza-se sem pensar.\nA onda bate ao horizonte,\nmas eu permaneço distante.\n\nNas pedras grudam as aves mortas,\nmas não sou um dos que choram.\nO vento roça os ramos estérilmente,\ne eu, de pé, apenas sigo caminho.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [
     "galhos"
    ],
    "fracao_lingua": 0.391,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 1,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.968,
+   "c2_pt": 1
   },
   {
    "id": "A04",
@@ -49,10 +62,14 @@
    "texto": "A infância fugiu,  \ne um vazio se instalou.  \nMás memórias, bons sonhos,  \ntudo se dissolveu.\n\nDoce ilusão, pura magia,  \nperdida como um pano de chão.  \nSaudade da pele suada,  \ndos jogos que eram conto.\n\nE o tempo, traidor correrete,  \nnos desvencilhou dos teus brinquedos.  \nTocavas em mim a melodia do bem,  \nmas hoje só ouço o sino dos negros.\n\nChamas-te de volta, mas não és senão um eco,  \num sussurro que me envenena.  \nA infância está perdida e isso dói mais que tudo,  \nmais que as noites sem dormir.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.389,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.964,
+   "c2_pt": 2
   },
   {
    "id": "A05",
@@ -61,10 +78,14 @@
    "texto": "Dizem que sou vazio,\nQuando penso e escrevo.\nNão é assim.\nÉ como um rio\nQue flui, que se transforma.\nDeixei as margens,\nE segui adiante.\n\nSonhamos juntos?\nEu apenas viajo.\nO que nascia aqui,\nEm palavras, aí vai.\nNão sou eu quem fala.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.409,
-   "n_versos": 11
+   "n_versos": 11,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A06",
@@ -73,10 +94,14 @@
    "texto": "Sofro da constante do meu destino,\nLídia, a qual sempre me temo.\nCada novo dia, uma ligeira onda\nDo mar em que me movo.\n\nO temor é por qualquer mudança, mesmo bela,\nComo as nuvens que o sol se esconde atrás.\nNão busco novas estrelas no céu vela;\nAcalmo-me na tradição da praça.\n\nQue a cidade seja sempre a mesma,\nCom as ruas calmas e a vida em sequência.\nDói-me o passar de cada hora, mesmo que\nO tempo se encerque de nova essência.\n\nEm mim, tudo querido mantenha a ordem,\nNesta rotina de constante recompensa.\nQue não mude, este meu destino tão calmo,\nNo sossego de sua fuga.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.396,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.97,
+   "c2_pt": 2
   },
   {
    "id": "A07",
@@ -85,10 +110,14 @@
    "texto": "Vi-a tocar a borda do prato,\nE eu, de espírito leve e calmo,\nCortei, na ponta dos pés,\nO viço desta noite velada.\n\nSe fosse para sempre o adeus,\nQue dor seriam estes gestos?\nE se os dedos paralissem\nNum sinal que deixa tudo claro?\n\nNas mãos de quem a mesa beija,\nCrescem as sombras e a claridade.\nÉ um desenho da noite na mão,\nUm silêncio entre as palavras.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.408,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.977,
+   "c2_pt": 2
   },
   {
    "id": "A08",
@@ -97,12 +126,16 @@
    "texto": "desaparece e no horizonte só enxameia\nágua em que os sonhos se reflectem e se afogam.\n\nOutro mundo, outro desejo, outra miragem,\ntudo se desfaz na maresia dos olhos.\n\nE a terra onde outrora o pé se firmou\nvira sal de palavras que voam ao vento.\n\nNas entranhas das noites prometidas\ncruza-se com sombras que se dissolvem na bruma,\ne a voz da memória é um mar sem rumo.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [
     "refletem"
    ],
    "fracao_lingua": 0.414,
-   "n_versos": 9
+   "n_versos": 9,
+   "c2_pt_corrigido": 1,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.952,
+   "c2_pt": 1
   },
   {
    "id": "A09",
@@ -111,10 +144,14 @@
    "texto": "Nas horas serenas do teu sossego,\npensa que tudo se move e muda.\nQue ventos suaves trazem frescor novo,\ne sementes no solo germinam, amadurecem.\n\nNão temeres a nova flor que brota,\nnem o sol que raiar mais cedo ou tarde.\nEm cada alteração está novidade,\nque te ensina e da paz não te aparta.\n\nMantenha-se firme a chama que estende-se,\nmas a madeira é recém-cortada, fresca.\nTalvez medo tenhas do imprevisto:\nem ti vê o mundo, mesmo em trocar, crua.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.369,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.981,
+   "c2_pt": 2
   },
   {
    "id": "A10",
@@ -123,10 +160,14 @@
    "texto": "Onde os olhos se voltem\nA coisa clareia\nSombra e claridade\nTrazem a mesma luz\n\nRios fluem\nCaminhos abrem \nDoce caminhada\nSem tempestade\n\nPétalas caem\nNo ar suspenso  \nEspaço entre nós\nÉ quieto como o sono",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.25,
-   "n_versos": 7
+   "n_versos": 7,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A11",
@@ -135,10 +176,14 @@
    "texto": "Acidadeestende-seemumamáquina\nDasmãosdadasasárvoresdasilêncios\nDavozesdasvergonhasdascidades\nDasalmasdosmedosdasombrastranslúcidas\n\nOolhardesterraaplaça\nDoaçoindiferenteestação\nDeamáquinaencarnadacidade\nDosolhosvivossupostosdopovo\n\nEumasomsempremaisdenegros\nDasmãosdesconfortoempolvo\nDasombreadasempenhadascidades\nDaenxuãodeolharessilêncios\n\nAfebremingaestendecidade\nOolhardebaixodapalavrasfugir\nAmanhãtardadaoacesso\nDeamáquinaencarnadacidade",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.0,
-   "n_versos": 0
+   "n_versos": 0,
+   "c2_pt_corrigido": 0,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": true,
+   "fracao_dicionario": 0.0,
+   "c2_pt": 0
   },
   {
    "id": "A12",
@@ -147,10 +192,14 @@
    "texto": "Uma mão se recua, sussurro não vê,\nlágrimas em nada, de prata o olhar.\nVazio o lugar, fala a cadeira vã,\nchão frio onde uma sombra passou.\n\nReta era caminho, ora esbarra.\nTalha do silêncio o gume do rosto,\nsinais que contam triste saída,\nse tinta do adeus em pétalas toma.\n\nMesa vazia testemunha e cala,\nbiscoito caiu, nu, sobre a taça.\nE na janela, velho uivo da noite,\npromete tempestade à mesa fria.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.297,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A13",
@@ -159,10 +208,14 @@
    "texto": "Ofereço-lhe alento, e a sombra não lhe dança,\nsorri para ela, e a brisa desliza.\nEla caminha, indiferente à leveza\ndas asas que ergo, sem a ver.\n\nMinha voz é um murmúrio perante ela,\numa onda que não se estende ao areal.\nO olhar desliza sobre meu gesto inútil,\ncomo se de nada tivesse notado o manto.\n\nA mim, a solidão dá asas, a ela - cora,\ne em silêncio, os momentos se transfiguram.\nMas eu, que tento preencher este vazio,\npenso que talvez seja apenas um corte.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.409,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A14",
@@ -171,10 +224,14 @@
    "texto": "Nem um desejo além\n\nDe sol se dê ao olho,\nNão me valha o amanhã.\nTudo quanto a mão toca,\nNa sombra de hoje descansa:\nAqui e agora a estrela.\n\nMágoa do que não chega,\nVida é a curta noite.\nNem mais, nem menos.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.409,
-   "n_versos": 9
+   "n_versos": 9,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A15",
@@ -183,10 +240,14 @@
    "texto": "A ponta do caju no chão,\nE a fruta madura caída.\nA coruja voa, e a escuridão\nCom seus olhos encobre a ilusão.\n\nA pedra crua sob o sol brando,\nQue não muda ao toque dos homens.\nAssim é, sem memória grávida,\nO que passa, sem deixar arremedo.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.396,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A16",
@@ -195,10 +256,14 @@
    "texto": "Sob o sol da tarde, a rosa suspira,\nsem te amar, nem temer o fim do dia.\nColhe-a em silêncio, leve-a ao frescor de casa,\nque breve murchará, suave e cedo.\n\nNeera, não lhe pedires mais nada,\nno seu tempo acabará; beija-a apenas,\nsua fragrância, a última flor da primavera\nque a mão do vento irá apagando.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.383,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.951,
+   "c2_pt": 2
   },
   {
    "id": "A17",
@@ -207,10 +272,14 @@
    "texto": "Olho a terra sem vê-la  \nSem esperança nem sonho  \nÉs apenas rosto rude  \nDo mundo que me rodeia  \n\nSentido em cada pedra  \nSussurro da brisa leve  \nMas eu, um espectador frio  \nAqui e agora, só observo",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.27,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.958,
+   "c2_pt": 2
   },
   {
    "id": "A18",
@@ -219,12 +288,16 @@
    "texto": "A folha solta a seu tempo seca,\nsobre as pedras deserta.\nCada vento que sopra é um convite,\ne o chão mantém a voz.\n\nÀ luz do sol, as sombras recuam,\ne o silêncio torna-se mais palpável.\nParece ouvir uma leve respiração\nentre os ramos agitados.\n\nNas entrelinhas do que se desvanece,\ndescobro um rumo novo a seguir.\nCada passo não me pertence inteiramente,\nmas é no entrelaçar das suas linhas.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [
     "galhos"
    ],
    "fracao_lingua": 0.403,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 1,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.979,
+   "c2_pt": 1
   },
   {
    "id": "A19",
@@ -233,10 +306,14 @@
    "texto": "Sinto que não sou\nninguém, nem o mar,\nque derrama e recolhe\nseus horizontes azuis.\n\nCarrego as pedras,\nos sussurros das folhas,\nas noites eternas,\nos dias de luz cega.\n\nE na alvorada do ser,\nencontro a sombra do eu,\nque se desvanece, e\nreclama os minutos perdidos.\n\nMáquinas falam-me segredos\nde teias infinitas,\ne as multidões,\nem seus gestos efémeros,\ntraçam formas fugazes.\n\nSou aquela que escreve,\nmas também a esquecida,\nnascida e morta,\nno labirinto do ser.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.425,
-   "n_versos": 21
+   "n_versos": 21,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A20",
@@ -245,10 +322,14 @@
    "texto": "Para esvaziar a alma, para ser sombra na luz,\nPara não pensar em coisa nenhuma,\nPara apenas nos olhos alheios viver.\n\nPorque se eu existir no vosso ver,\nNada sou além do que vedes.\n\nEra a saudade de não-ser\nQue me punha a milhas dos olhares,\nAgora, num vazio de mirar.\n\nComo um espelho sem imagem,\nFico aqui, distante e silente.\n\nSó a realidade alheia\nÉ que importa, é o meu destino.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.425,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.979,
+   "c2_pt": 2
   },
   {
    "id": "A21",
@@ -257,10 +338,14 @@
    "texto": "O fim do dia, caindo no esquecimento,\nSombra que se estende, longa e triste.\nNão é a madrugada que vem em substituição,\nMas a escuridão que enche de pensamento.\n\nNascer da luz para fundo silêncio,\nPor que razão seria motivo de luto?\nÉ apenas uma pausa, sem fim à vista,\nQue nos leva ao sonho e esperança noutro momento.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.441,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A22",
@@ -269,10 +354,14 @@
    "texto": "Os deuses, se existirem, em silêncio  \nse despojam de si; eis alívio.  \nNosso viver alegre e breve,  \nque nem as estrelas por demais.\n\nComo na praia o vento sussurra,  \nou o rio nos murmura passagem,  \nassim vivamos sem esperança,  \nno que nos toca, que é tudo.\n\nA vida é um eco, uma flor que cresce,  \ne desaparece a luz que a ilumina.  \nNão procuremos além do presente,  \nque já é de si demasiadamente.\n\nNas sombras da noite, como nas claridades,  \nnão há mais que esta carne e este ar.  \nAssim nos contentemos, sem amar ou temer,  \nna medida do bem que podermos dar.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.388,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A23",
@@ -281,10 +370,14 @@
    "texto": "mais que tudo, mais do que as noites  \nde verão, mais do que a praia  \npálida, mais do que o horizonte azul  \nsem fim nem começo.\n\nMais do que os passos de areia, mais  \ndo que os brinquedos com rótulos  \nde prazer e sonhos, mais  \ndo que as estrelas à noite,  \nmais do que o medo das escuridão.\n\nAgora só falam em tempo perdido,  \nem flores murchas, em pássaros cansados.  \nE eu sinto como um pêndulo trémulo,  \ncomo uma sombra que se desfaz na luz,  \ncomo um verso que se perde no ar.\n\nSinto como a brisa se despede dos pinheiros,  \ncomo o mar se afasta do areal,  \ncomo a chuva caída não mais é água.  \nPerdidos os",
    "truncada": true,
    "c1_verso": 2,
-   "c2_pt": 2,
    "brasileirismos": [],
    "fracao_lingua": 0.576,
-   "n_versos": 17
+   "n_versos": 17,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 2,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A24",
@@ -293,10 +386,14 @@
    "texto": "E o sono, que nos manda, vai embora e abandona.  \nO mar bate na praia, um eco que me faz pensar,  \nMas não há respostas nem esperança a ser encontrada.\n\nSão nuvens que passam, uma melodia que se perde,  \nE no vazio das horas, o coração solitário.  \nA luz do sol raiar é apenas outro amanhecer,  \nQue promete tudo e não cumpre nem um desejo.\n\nEntre ondas que dançam, sussurros de ausências,  \nHá momentos que desaparecem com a brisa.  \nMas nessa fuga constante, há sempre algo que permanece,  \nUma memória inútil, um sorriso triste.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.404,
-   "n_versos": 11
+   "n_versos": 11,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A25",
@@ -305,10 +402,14 @@
    "texto": "Estou cansado,\ncaminho e descanço,\nrespiro e encolho.\n\nSer e não ser,\ndormir e acordar,\namor e aborrecer.\n\nVer e esquecer,\nviver e morrer,\nchover e secar.\n\nCansado, mas ainda,\nestendo braços e alimento,\nenquanto sombra e luz.\n\nFogo e arrefecer,\ntempo e eternidade,\nperder e encontrar.\n\nEstou cansado\nde tantos seres,\ntantas noites,\ntantos dias,\ntantas horas,\ntantos minutos,\ntantas centésimas de segundo.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.297,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.976,
+   "c2_pt": 2
   },
   {
    "id": "A26",
@@ -317,10 +418,14 @@
    "texto": "sinto\nque meus passos de neblina\ntrazem sementes\ne a minha boca seca\narrepia-se de nomes\nque me deslumbram\n\ncarrego\na cidade em frangir\nde um voo que não é o meu\ne o ar é denso\nde abraços perdidos\ne as sombras se dobram\nem silêncios de prata",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 2,
    "brasileirismos": [],
    "fracao_lingua": 0.5,
-   "n_versos": 10
+   "n_versos": 10,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 2,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.962,
+   "c2_pt": 2
   },
   {
    "id": "A27",
@@ -329,10 +434,14 @@
    "texto": "Vês-me ao largo, nu na areia,\ntremulo sob teu olhar.\nNada sou mais do que o que enxergas,\numa sombra que se desenha.\n\nNão faço mais do que respirar,\na brisa esquece a minha passagem.\nO sol toca, não me arde,\nsou menos do que um reflexo na onda.\n\nSilencio a voz da existência,\npenso em ser apenas vazio.\nQuando olho o céu, nevoeiro esconde\na estrada onde meu corpo se despeda.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.425,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.978,
+   "c2_pt": 2
   },
   {
    "id": "A28",
@@ -341,10 +450,14 @@
    "texto": "A Lua, testemunha do céu frio,\nnão sussurra consolações ao vento.\nO mar, eterno murmúrio de abismo,\nnão escuta os nossos gemidos, nos engole.\n\nNas alturas, os olhos inexpressivos dos astros\nnão se inclinam para nós, indiferentes.\nA paz na face da noite é silêncio absoluto:\nnessa quietude, o nosso sofrer desaparece.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.346,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A29",
@@ -353,10 +466,14 @@
    "texto": "De mão em mão a dor transmite,\nmas em mim se dilui o choque.\nDedos que tocam sem tocarem,\nleves como asas de borboleta.\n\nPercursos paralelos a cruzar,\nnão se encontram, não se tocam.\nOlhos que olham e não se vêem,\nsombra que passa, sombra sozinha.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.435,
-   "n_versos": 8
+   "n_versos": 8,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.963,
+   "c2_pt": 2
   },
   {
    "id": "A30",
@@ -365,12 +482,16 @@
    "texto": "Praia que amanhece,  \nembarcação, esquadro,  \nmar vaga e tímido.  \n\nA noite foi um lençol  \ncobriu a praia de fio,  \no sol a preencher o caixilho.  \n\nQuero sair, querer mais,  \nquero ver outros horizontes,  \nque as ondas me tragam.  \n\nNas bordas do ar que chega,  \no verde da erva,  \no azul que vaga e chaga.  \n\nSinto a tua força, a tua urgência,  \na tua ameaça de liberdade,  \nque me fazem partir, me falam.  \n\nEmbarcação na margem,  \nmundo no fundo do mar,  \nvoar com as aves, ouvir o vento.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [
     "grama"
    ],
    "fracao_lingua": 0.379,
-   "n_versos": 17
+   "n_versos": 17,
+   "c2_pt_corrigido": 1,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 1
   },
   {
    "id": "A31",
@@ -379,10 +500,14 @@
    "texto": "Leve vem a brisa suave  \nQue me desperta desejo  \nDe viagem sem destino,  \nUm suspiro, um eco leve  \n\nA noite que se enlaça,  \nSilenciosa e ténue,  \nSusurra a liberdade  \nE as estradas infindas  \n\nSonhos que em sonhos se aninham  \nNuma quietude lusa  \nOndas de pensamentos  \nQue o mar levanta e deixa sumir  \n\nSinto-me leve, quase inexistente  \nA noite me abraça, suave, clemente  \nE entre estrelas e sombras  \nSonhos voam, desafinados",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.352,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.951,
+   "c2_pt": 2
   },
   {
    "id": "A32",
@@ -391,10 +516,14 @@
    "texto": "De manhã, a embarcação entra  \ne eu sinto a necessidade de fluir  \nlonge, muito longe do murmúrio das cidades  \npara onde os corvos voam sem medo  \nà procura dos restos de ontem.\n\nO mar é um espelho azul, distante  \nas nuvens dançam em silêncio  \nsobre o seu rosto imóvel  \ne eu sou a sombra das nuvens,  \nque desce para as águas calmas e límpidas.\n\nSinto na pele a brisa matinal,  \no frio da liberdade que me abraça  \ne como se fosse uma primeira vez,  \numa descoberta de mim mesma  \nentre os destroços do conhecido.\n\nA embarcação chega, leve,  \ncomo um suspiro no horizonte  \ne eu, na minha alucinação interior,  \nsinto a ânsia de seguir o seu caminho,  \nde perder-me nas margens do desconhec",
    "truncada": true,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.435,
-   "n_versos": 20
+   "n_versos": 20,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.986,
+   "c2_pt": 2
   },
   {
    "id": "A33",
@@ -403,10 +532,14 @@
    "texto": "O que fazemos não deixa marca;\ntudo segue sereno e calmo.\nAs ruas, os mesmos rostos,\no sol que nasce no horizonte.\n\nPassamos como breves sombras,\nsob o toldo das casas altas.\nE as vidas, sem grandes almas,\ncontinuam a mesma rotina.\n\nNão deixamos rastos,\na terra não se modifica.\nA árvore não muda de sítio,\no vento sopra no mesmo ritmo.\n\nNos olhares, nos gestos menores,\nnão grava o nosso traço.\nSomos penumbras que se dispersam,\ndeixando tudo igual.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.35,
-   "n_versos": 16
+   "n_versos": 16,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A34",
@@ -415,10 +548,14 @@
    "texto": "Atrás do rugido dos motores a cidade estende-se\nem fios reluzentes e formas que se agitam.\nRoda, rodote, motor, motor, o som lateja,\nsob o arco do vento que traz o sal da praia.\n\nMáquinas de noite, máquinas de silêncio interrompido\npor um chiado que brota como água de uma janela.\nE a neblina é um sussurro, rola e se espalha,\nenredando-se em chaminés que expelem o dia.\n\nA chuva bate em lados opostos do vidro,\ncomo dedos que buscam tocar a pele distante.\nO relógio marca ritmos, batendo\nàs vezes na carne dos corpos inanimados.\n\nTua voz se perde no buraco do microfone,\nmas é o som da cidade que me envolve.\nA febre não diminui, persiste em cada fio",
    "truncada": true,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.431,
-   "n_versos": 15
+   "n_versos": 15,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.986,
+   "c2_pt": 2
   },
   {
    "id": "A35",
@@ -427,10 +564,14 @@
    "texto": "Nem tanto ao ceu tantos vales o desejo,\nnum dia breve, em que os instantes se passam.\nCada solstício tem o seu raio e seu lide,\no amanhecer é a medida da noite sombra.\n\nO gozo do presente não empresta aos anseios\na eternidade que a morte nos desponta.\nQuanto ao que vem, deixa-o para depois os ouvidos,\neste vaso tem o seu fio, e não um pranto.\n\nLida-se com as horas como quem encontra\no sal no bocado, sem mais do que se pode;\naceita-se a medida do dia, e é justa.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.458,
-   "n_versos": 11
+   "n_versos": 11,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.982,
+   "c2_pt": 2
   },
   {
    "id": "A36",
@@ -439,10 +580,14 @@
    "texto": "O sol se põe sem ralação,\nno horizonte, sem alegação.\no corpo de fogo despenca,\ntorna-se cinza em silêncio.\n\na terra sente, em leve abraço,\nas horas que escapam, não roçam.\nos pássaros partem, sem eco,\nnos braços do ar, adormecem.\n\nas sombras estendem-se, não mediam,\no dia desce, sem desejo.\na noite chega com leve tédio,\ncom o vazio que nos põe a medir.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.358,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.974,
+   "c2_pt": 2
   },
   {
    "id": "A37",
@@ -451,10 +596,14 @@
    "texto": "Leve é a brisa que sussurra e fuga,\nSuspiro ao vento, alucinação de pente.\nMãos de neblina agarram-se à minha saia,\nTento escapar, mas já não toquei o mar.\n\nVozes em sombras cantam e se apagam,\nCada ruído um sabor que a lua esquiva.\nO céu abre brechas e envergonha o arco-íris,\nQue em meu peito desenha tramas etéreas.\n\nQuero partir, mas para onde? Não sei,\nPerdido na dança de estrelas sem nome.\nNuvens rastejam como pensamentos\nE entre elas algo me diz que ainda não é o fim.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.385,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A38",
@@ -463,10 +612,14 @@
    "texto": "Breve é a sombra sobre o vento,\nagora que sabemos a morte.\nLídia, tuas risadas e beijos,\ntão cedo já devem partir.\n\nCada instante nos desafia,\na vida é curta, isso não se discute.\nQue o tempo seja nosso aliado,\nem cada dia, sem esperar.\n\nBebericemos a luz do sol,\no frio das noites e os ventos.\nA morte bate à porta, em cada hora,\npor isso vamos, sem adiar.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.329,
-   "n_versos": 12
+   "n_versos": 12,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.956,
+   "c2_pt": 2
   },
   {
    "id": "A39",
@@ -475,10 +628,14 @@
    "texto": "Estou cansado  \nde ser todo o tempo  \ne nada  \nde ser cada hora  \numa nova versão da mesma fadiga.\n\nDe estar aqui, ali e por toda parte ao mesmo tempo,  \ncada olhar um universo, cada suspiro um estalar de raízes.  \n\nCada dedo que se move  \num rasto de sol ou um pedaço de neve.  \nCada palavra que falas  \numa estrela a descer do céu e outra a subir da terra.\n\nE a noite, uma cauda longa de cores  \nque se perde na memória com os dias.\n\nMas sinto-me vivo  \nnesses instantes infinitos  \nonde tudo se entrelaça como raízes de árvores.  \n\nSinto-me mais eu  \nnestas bordas de sonhos e realidade  \nonde as sombras dançam como lembranças.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.419,
-   "n_versos": 17
+   "n_versos": 17,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 1.0,
+   "c2_pt": 2
   },
   {
    "id": "A40",
@@ -487,10 +644,14 @@
    "texto": "A cada palavra dita, a liberdade foge,\nnum voo silencioso e incógnito.\nO vento toca as notas da minha voz,\nmas já não são minhas, já voam soltas.\n\nA canção que cantei, o som que ouvi,\ncrescem fora dos meus contornos pensados.\nEm cada riso partilhado, em cada suspiro,\ntransformam-se em estranhos, no meio do ar.\n\nO que escrevo deixa de ser meu\nquando a pena voa sem encruzilhada,\ne na página, um outro já se expressa,\ncom vida própria, com pensamentos alheios.\n\nMas ainda assim, em cada letra formada,\numa parte minhaissoi.",
    "truncada": false,
    "c1_verso": 2,
-   "c2_pt": 0,
    "brasileirismos": [],
    "fracao_lingua": 0.362,
-   "n_versos": 14
+   "n_versos": 14,
+   "c2_pt_corrigido": 2,
+   "c2_pt_errado_piso050": 0,
+   "lingua_errada": false,
+   "fracao_dicionario": 0.984,
+   "c2_pt": 2
   }
  ]
 }
