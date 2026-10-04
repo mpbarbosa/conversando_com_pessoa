@@ -169,9 +169,23 @@ partir de `chunk.text` — verso puro — contra centróides construídos de
 indício mais discriminativo da tarefa, está no centróide e não está em consulta
 nenhuma; os 42–46% saem **subestimados**.
 
-**Remedido: o defeito valia 23 pontos, e a afirmação está refutada.** Com
-centróides de `c.text`, a exactidão sobre poemas vai de 42–46% para **64–69%**,
-e em perguntas de 45% para 68%. O espaço do e5 **separa** estas vozes.
+**Remedido: o defeito valia 23 pontos em perguntas e 22 em poemas, e a afirmação
+está refutada.** Com centróides de `c.text`, as perguntas vão de 45% para **68%**
+e os poemas de 42% para **64%**. O espaço do e5 **separa** estas vozes.
+
+E o **colapso no Caeiro era artefacto do nome**: nas perguntas, os erros a
+apontar para o Caeiro caem de **19 para 1**, e o que sobra colapsa no ortónimo
+(12), que é a classe maior — o comportamento banal que a tabela de riscos da
+Fase 4 previa e que não se observou, porque o nome produzia o inverso.
+
+**Mas a tabela de coerência sobrevive**, e é aqui que está a lição mais fina
+desta correcção. Sem o nome, as quatro vozes continuam iguais entre si
+(0,928–0,930 contra 0,934–0,939). A observação «as quatro vozes têm coerência
+interna igual» **não** era artefacto; artefacto era o **facto que ela
+explicava** — o colapso no Caeiro. Ficou uma medição correcta a explicar um
+fenómeno que não existe, o que é um modo de falha diferente de «o número estava
+errado», e mais difícil de apanhar: a medição resiste a toda a verificação, e é
+a pergunta que ela responde que não existe.
 
 E a decisão fica em dúvida, ao contrário do que eu escrevi aqui primeiro. O
 roteador por LLM faz 72%: contra 45% eram +27 pontos, contra 68% são **+4**, e
@@ -179,7 +193,11 @@ roteador por LLM faz 72%: contra 45% eram +27 pontos, contra 68% são **+4**, e
 preferir a configuração mais barata. O roteador não está **estabelecido** como
 melhor — o que não é o mesmo que estar refutado: o LLM foi medido num conjunto
 adversarial e numa ablação de indícios, e o centróide não, logo a robustez não
-está comparada. A correcção vive na Fase 4; aqui fica o ponteiro.
+está comparada. **O que decidiria** está nomeado: correr o centróide `sem_nome`
+nas 12 perguntas adversariais e nas 40 abladas. O 7B aguentou 72%→70% com os
+substantivos-assinatura removidos, e um centróide que vive de superfície lexical
+é precisamente o que deveria desabar nesse teste. A correcção vive na Fase 4;
+aqui fica o ponteiro.
 
 Para a Fase 5 o defeito era inócuo na **diferença**, e é por isso que o
 Instrumento II passou a correr as duas variantes de centróide em vez de só a
@@ -253,6 +271,8 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
 [ ] num_predict=220 corta o versiculo longo de Campos (visto 2x na Fase 4)
 [x] remedir os centroides da Fase 4 A1c sem o nome do heteronimo: +23 pontos
+[ ] correr o centroide sem_nome nas 12 adversariais e nas 40 abladas da Fase 4:
+    e o que decide se o roteador LLM se mantem (68% vs 72% e so no benigno)
 [ ] detector de proclise brasileira em guard.py: «Uma mao se recua» escapa a
     lista de 14 palavras. Pede medicao contra os 2083 poemas antes de entrar,
     como o lingua_errada teve (0,12 rejeita 3 de 1906) -- «se recua a mao» e
