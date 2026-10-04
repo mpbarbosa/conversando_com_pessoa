@@ -169,12 +169,21 @@ partir de `chunk.text` — verso puro — contra centróides construídos de
 indício mais discriminativo da tarefa, está no centróide e não está em consulta
 nenhuma; os 42–46% saem **subestimados**.
 
-**A decisão aguenta-se, a afirmação não.** Usar o roteador por LLM continua
-certo — 72% contra ≤52,5%, e todas as variantes de embedding partilham o
-handicap, logo a ordenação entre elas mantém-se. O que não se aguenta é a frase
-sobre o espaço, e a remedição (centróides sobre `c.text`) está pendente. Para a
-Fase 5 o defeito é inócuo: os três grupos do Instrumento II partilham-no e o que
-se reporta é a diferença. Ver [`FASE-5.md`](FASE-5.md) §9.3.
+**Remedido: o defeito valia 23 pontos, e a afirmação está refutada.** Com
+centróides de `c.text`, a exactidão sobre poemas vai de 42–46% para **64–69%**,
+e em perguntas de 45% para 68%. O espaço do e5 **separa** estas vozes.
+
+E a decisão fica em dúvida, ao contrário do que eu escrevi aqui primeiro. O
+roteador por LLM faz 72%: contra 45% eram +27 pontos, contra 68% são **+4**, e
++4 a n=40 não se distinguem de zero pelo mesmo critério que a Fase 3B usou para
+preferir a configuração mais barata. O roteador não está **estabelecido** como
+melhor — o que não é o mesmo que estar refutado: o LLM foi medido num conjunto
+adversarial e numa ablação de indícios, e o centróide não, logo a robustez não
+está comparada. A correcção vive na Fase 4; aqui fica o ponteiro.
+
+Para a Fase 5 o defeito era inócuo na **diferença**, e é por isso que o
+Instrumento II passou a correr as duas variantes de centróide em vez de só a
+contaminada — ver [`FASE-5.md`](FASE-5.md) §9.3.
 
 ---
 
@@ -243,7 +252,12 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 [ ] remover langchain do requirements.txt
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
 [ ] num_predict=220 corta o versiculo longo de Campos (visto 2x na Fase 4)
-[ ] remedir os centroides da Fase 4 A1c sem o nome do heteronimo (ver ressalva)
+[x] remedir os centroides da Fase 4 A1c sem o nome do heteronimo: +23 pontos
+[ ] detector de proclise brasileira em guard.py: «Uma mao se recua» escapa a
+    lista de 14 palavras. Pede medicao contra os 2083 poemas antes de entrar,
+    como o lingua_errada teve (0,12 rejeita 3 de 1906) -- «se recua a mao» e
+    portugues correcto, e o corpus esta cheio de inversoes. Desenho da sessao
+    paralela; fase propria, pequena
 [ ] variante do juiz LLM da Fase 5 com descricoes tiradas do corpus (frequencias
     de forma) em vez das personas: separa o confundidor do §9.3 da memorizacao
 [ ] registar a origem dos 2083 ficheiros (reprodutibilidade, §5)
