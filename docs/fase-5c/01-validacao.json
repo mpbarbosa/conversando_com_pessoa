@@ -1,0 +1,428 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5C.md",
+  "semente": 3,
+  "bootstrap_B": 10000,
+  "permutacoes": 10000
+ },
+ "corpos": {
+  "caeiro_limpos": 78,
+  "contraste_pt": 1758,
+  "contaminados_excluidos": 41,
+  "derivacao": [
+   39,
+   879
+  ],
+  "retidos": [
+   39,
+   879
+  ]
+ },
+ "lista": [
+  {
+   "palavra": "coração",
+   "log_odds": 3.063,
+   "caeiro": 0,
+   "outros": 148
+  },
+  {
+   "palavra": "amor",
+   "log_odds": 2.73,
+   "caeiro": 0,
+   "outros": 106
+  },
+  {
+   "palavra": "teu",
+   "log_odds": 2.711,
+   "caeiro": 0,
+   "outros": 104
+  },
+  {
+   "palavra": "horror",
+   "log_odds": 2.652,
+   "caeiro": 0,
+   "outros": 98
+  },
+  {
+   "palavra": "morte",
+   "log_odds": 2.359,
+   "caeiro": 0,
+   "outros": 73
+  },
+  {
+   "palavra": "fim",
+   "log_odds": 2.346,
+   "caeiro": 0,
+   "outros": 72
+  },
+  {
+   "palavra": "tua",
+   "log_odds": 2.332,
+   "caeiro": 0,
+   "outros": 71
+  },
+  {
+   "palavra": "mistério",
+   "log_odds": 2.318,
+   "caeiro": 0,
+   "outros": 70
+  },
+  {
+   "palavra": "fui",
+   "log_odds": 2.229,
+   "caeiro": 0,
+   "outros": 64
+  },
+  {
+   "palavra": "alegria",
+   "log_odds": 2.229,
+   "caeiro": 0,
+   "outros": 64
+  },
+  {
+   "palavra": "talvez",
+   "log_odds": 2.213,
+   "caeiro": 0,
+   "outros": 63
+  },
+  {
+   "palavra": "além",
+   "log_odds": 2.131,
+   "caeiro": 0,
+   "outros": 58
+  },
+  {
+   "palavra": "numa",
+   "log_odds": 2.078,
+   "caeiro": 0,
+   "outros": 55
+  },
+  {
+   "palavra": "vai",
+   "log_odds": 2.003,
+   "caeiro": 0,
+   "outros": 51
+  },
+  {
+   "palavra": "sob",
+   "log_odds": 2.003,
+   "caeiro": 0,
+   "outros": 51
+  },
+  {
+   "palavra": "frio",
+   "log_odds": 1.984,
+   "caeiro": 0,
+   "outros": 50
+  },
+  {
+   "palavra": "alto",
+   "log_odds": 1.984,
+   "caeiro": 0,
+   "outros": 50
+  },
+  {
+   "palavra": "mão",
+   "log_odds": 1.964,
+   "caeiro": 0,
+   "outros": 49
+  },
+  {
+   "palavra": "poder",
+   "log_odds": 1.964,
+   "caeiro": 0,
+   "outros": 49
+  },
+  {
+   "palavra": "dia",
+   "log_odds": 1.923,
+   "caeiro": 1,
+   "outros": 142
+  },
+  {
+   "palavra": "qual",
+   "log_odds": 1.901,
+   "caeiro": 0,
+   "outros": 46
+  },
+  {
+   "palavra": "abismo",
+   "log_odds": 1.88,
+   "caeiro": 0,
+   "outros": 45
+  },
+  {
+   "palavra": "sentido",
+   "log_odds": 1.857,
+   "caeiro": 0,
+   "outros": 44
+  },
+  {
+   "palavra": "entre",
+   "log_odds": 1.78,
+   "caeiro": 1,
+   "outros": 123
+  },
+  {
+   "palavra": "razão",
+   "log_odds": 1.713,
+   "caeiro": 0,
+   "outros": 38
+  },
+  {
+   "palavra": "sonho",
+   "log_odds": 1.713,
+   "caeiro": 1,
+   "outros": 115
+  },
+  {
+   "palavra": "teus",
+   "log_odds": 1.686,
+   "caeiro": 0,
+   "outros": 37
+  },
+  {
+   "palavra": "somos",
+   "log_odds": 1.659,
+   "caeiro": 0,
+   "outros": 36
+  },
+  {
+   "palavra": "futuro",
+   "log_odds": 1.631,
+   "caeiro": 0,
+   "outros": 35
+  },
+  {
+   "palavra": "calma",
+   "log_odds": 1.631,
+   "caeiro": 0,
+   "outros": 35
+  },
+  {
+   "palavra": "pelo",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "rua",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "inda",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "passar",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "tristeza",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "pois",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "feliz",
+   "log_odds": 1.603,
+   "caeiro": 0,
+   "outros": 34
+  },
+  {
+   "palavra": "outro",
+   "log_odds": 1.553,
+   "caeiro": 1,
+   "outros": 98
+  },
+  {
+   "palavra": "sonhar",
+   "log_odds": 1.543,
+   "caeiro": 0,
+   "outros": 32
+  },
+  {
+   "palavra": "tens",
+   "log_odds": 1.543,
+   "caeiro": 0,
+   "outros": 32
+  }
+ ],
+ "V1": {
+  "auc_retida": 0.5444,
+  "ic95": [
+   0.4458,
+   0.6288
+  ],
+  "p_permutacao": 0.57294,
+  "auc_in_sample": 0.8687,
+  "mediana_caeiro_retido": 0.1333,
+  "mediana_contraste_retido": 0.1667,
+  "passa": false
+ },
+ "V3": {
+  "rho_3a": {
+   "R1": 0.0147,
+   "R2": 0.0414
+  },
+  "passa": false
+ },
+ "V4": {
+  "rho_n_versos": 0.0101,
+  "passa": true
+ },
+ "resolucao_nas_geradas": {
+  "valores_distintos": 25,
+  "mediana": 0.125,
+  "media": 0.1369,
+  "iqr": [
+   0.05,
+   0.1875
+  ],
+  "max": 0.4375,
+  "zeros": 15
+ },
+ "D1_variante_ortonimo": {
+  "auc_retida": 0.5676,
+  "rho_3a": {
+   "R1": 0.0387,
+   "R2": 0.0787
+  },
+  "palavras_comuns": 35,
+  "lista": [
+   "coração",
+   "horror",
+   "teu",
+   "amor",
+   "mistério",
+   "fim",
+   "morte",
+   "tua",
+   "além",
+   "alegria",
+   "vai",
+   "mão",
+   "talvez",
+   "fui",
+   "poder",
+   "frio",
+   "entre",
+   "sonho",
+   "sentido",
+   "sonhar",
+   "tristeza",
+   "qual",
+   "sob",
+   "vago",
+   "dia",
+   "alto",
+   "feliz",
+   "fausto",
+   "razão",
+   "teus",
+   "rei",
+   "inda",
+   "profundo",
+   "passar",
+   "abismo",
+   "numa",
+   "pois",
+   "pelo",
+   "maria",
+   "calma"
+  ]
+ },
+ "E1_exploratorio": {
+  "mediana_C": 0.125,
+  "mediana_P": 0.1667,
+  "media_C": 0.1163,
+  "media_P": 0.1574,
+  "delta_medio": 0.041,
+  "ic95": [
+   -0.0142,
+   0.0926
+  ],
+  "pro_P": 10,
+  "pro_C": 18,
+  "empates": 2,
+  "discordantes": 28,
+  "desvio_das_diferencas": 0.1508,
+  "d_de_cohen": 0.2721,
+  "n_pares_para_80pc": 106,
+  "aviso": "NÃO decide H5B. Estimativa para dimensionar a Fase 5D; ver o §7 do protocolo."
+ },
+ "fas_por_amostra": {
+  "B01": 0.0,
+  "B02": 0.1,
+  "B03": 0.0,
+  "B04": 0.0,
+  "B05": 0.125,
+  "B06": 0.0833,
+  "B07": 0.1538,
+  "B08": 0.25,
+  "B09": 0.1667,
+  "B10": 0.0769,
+  "B11": 0.1875,
+  "B12": 0.1818,
+  "B13": 0.0,
+  "B14": 0.125,
+  "B15": 0.0,
+  "B16": 0.0,
+  "B17": 0.1667,
+  "B18": 0.1111,
+  "B19": 0.3846,
+  "B20": 0.1818,
+  "B21": 0.1765,
+  "B22": 0.2308,
+  "B23": 0.0,
+  "B24": 0.1429,
+  "B25": 0.125,
+  "B26": 0.1429,
+  "B27": 0.0833,
+  "B28": 0.2857,
+  "B29": 0.0625,
+  "B30": 0.125,
+  "B31": 0.25,
+  "B32": 0.1818,
+  "B33": 0.4375,
+  "B34": 0.05,
+  "B35": 0.1667,
+  "B36": 0.3333,
+  "B37": 0.3125,
+  "B38": 0.0,
+  "B39": 0.0,
+  "B40": 0.1667,
+  "B41": 0.0,
+  "B42": 0.25,
+  "B43": 0.25,
+  "B44": 0.0,
+  "B45": 0.0,
+  "B46": 0.0,
+  "B47": 0.1667,
+  "B48": 0.3077,
+  "B49": 0.0769,
+  "B50": 0.0588,
+  "B51": 0.0625,
+  "B52": 0.125,
+  "B53": 0.1667,
+  "B54": 0.2273,
+  "B55": 0.125,
+  "B56": 0.375,
+  "B57": 0.2857,
+  "B58": 0.1667,
+  "B59": 0.0,
+  "B60": 0.0
+ }
+}
