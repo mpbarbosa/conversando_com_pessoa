@@ -1,0 +1,41 @@
+{
+ "protocolo": "docs/FASE-5B.md §4.2",
+ "C": {
+  "caracteres": 282,
+  "negativas": {
+   "não": 4,
+   "nem": 1,
+   "recusas": 1
+  },
+  "total_negativas": 6,
+  "referentes": {
+   "significado": 1,
+   "oculto": 1,
+   "metafísica": 1,
+   "simbologia": 1,
+   "moral": 1,
+   "espelho": 1,
+   "tristeza": 1
+  }
+ },
+ "P": {
+  "caracteres": 296,
+  "negativas": {},
+  "total_negativas": 0,
+  "referentes": {}
+ },
+ "razao_comprimento": 1.05,
+ "forma_igual": true,
+ "resto_do_system_igual": true,
+ "regras_cumpridas": {
+  "regra 2 · zero partículas negativas em P": true,
+  "regra 3 · comprimento em [0,80; 1,20]": true,
+  "regra 5 · resto do system byte a byte igual": true,
+  "C tem interdições (senão não há contraste)": true,
+  "forma byte a byte igual": true
+ },
+ "nao_mecanizaveis": [
+  "regra 1 · cláusula a cláusula com o mesmo referente (§4.3)",
+  "regra 4 · nenhum conteúdo poético novo"
+ ]
+}
