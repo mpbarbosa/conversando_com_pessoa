@@ -30,7 +30,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **3 — Rerank** | [`FASE-3.md`](FASE-3.md) · [P1](FASE-3-PASSO-1.md) · [relatório](FASE-3-RELATORIO.md) | ✅ **inconclusivo**: sinal inverte com o gabarito; `apt@3` inalterado |
 | **3B — Rerank, 2.ª tentativa** | [`FASE-3B.md`](FASE-3B.md) · [relatório](FASE-3B-RELATORIO.md) | ✅ **integrado** em `/rerank`: +0,090 nDCG@5 (16/20 perguntas, p=0,012) por 2,6 s, com o pool de candidatos **fechado** |
 | **4 — Enriquecimento e roteador** | [`FASE-4.md`](FASE-4.md) · [relatório](FASE-4-RELATORIO.md) | ✅ **roteador integrado** (`/auto`, 72% · 92% com etiqueta múltipla); **enriquecimento vetado** por medição |
-| **5 — A voz** | [`FASE-5.md`](FASE-5.md) · [relatório](FASE-5-RELATORIO.md) | 🔄 **Instrumento I fechado: H rejeitada** pelo portão G2 — 4 pares contra 4, IC95%[−0,25,+0,50]. O contexto não degrada a poética, e o Caeiro falha a 0,0 **nas duas condições**. Instrumento II a correr |
+| **5 — A voz** | [`FASE-5.md`](FASE-5.md) · [relatório](FASE-5-RELATORIO.md) | ✅ **completa. H rejeitada** pelos dois instrumentos. O contexto não degrada a poética (4 pares contra 4); o Caeiro falha a **0,0 nas duas condições** e é identificado ao nível do Caeiro **real** — logo identificabilidade e poética divergem, e o défice está na persona |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -241,6 +241,15 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 1 | ~~**A voz gerada é a voz pedida?**~~ — **medida**: não é, e o contexto não é a causa | ✅ [Fase 5](FASE-5-RELATORIO.md). Fecha a pergunta aberta desde a Fase 1 Passo 7 |
 | 2 | Julgar as outras 20 perguntas, ou um segundo avaliador | a magnitude dos Δ, que a n=20 fica em IC95% de 0,17 de largura |
 | 3 | **Fase 6** — FastAPI, Gradio, histórico, `AnthropicRemote` | — |
+
+### Depois da Fase 5, o que ela deixou nomeado
+
+| | passo | porquê |
+|---|---|---|
+| 1 | **A persona do Caeiro, feita de interdições** | é a única voz a 0,0 na poética, e a única cuja persona é «não atribuas», «recusa», «não personifiques». Um 7B a cumprir interdições negativas é hipótese concreta e barata |
+| 2 | **Um segundo avaliador, ou o LLM-juiz da rubrica** | a lacuna mais séria da Fase 5: a rubrica teve avaliador único. E o juiz de identificação **não** serve para isto — as descrições dele derivam das personas, logo é circular |
+| 3 | **`num_predict` para Campos** | 3 truncaturas em 40, pendência já conhecida desde a Fase 4 |
+| 4 | A sombra lexical do Caeiro, com a regra de selecção vinda de fora da amostra | ver o §11 do [relatório](FASE-5-RELATORIO.md): a defesa não é «escrevi antes», é «a regra não pode ver o que vai medir» |
 
 O **Passo 1 é o que importa mais**, e nenhuma das Fases 2, 3, 3B e 4 mexeu nele:
 todas mediram recuperação, e o produto é verso.
