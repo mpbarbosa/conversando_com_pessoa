@@ -189,6 +189,57 @@ mesmo sendo ligeiramente pior.
 
 ---
 
+## 4.1 E um segundo confundidor, que eu declarei a menos
+
+Veio da mesma troca, e do achado que a sessão paralela fez no seu próprio juiz:
+as descrições de voz que o juiz lê **derivam das personas do gerador**, logo um
+poema escrito para casar com a persona casa com a descrição, e o juiz premeia a
+imitação. Na Fase 5 isso foi medido e **domina**: o juiz dá 65% aos poemas
+gerados e **45%** a Pessoa autêntico.
+
+A Fase 4 tem o mesmo laço, numa forma mais fraca e que eu não declarei por
+inteiro. O §5 do protocolo diz que **as perguntas e as etiquetas** são da mesma
+pessoa. Mas o `SYSTEM` do roteador também é meu, e saiu das mesmas personas —
+logo **três** coisas partilham autor:
+
+| | |
+|---|---|
+| o conjunto de 40 perguntas | escrito por mim, 10 por voz |
+| as etiquetas de voz | minhas |
+| as descrições que o roteador-juiz lê | minhas, derivadas das personas |
+
+**Consequência:** os 72% e os 92% do conjunto adversarial medem concordância
+**dentro de uma cabeça só**. Não é o mesmo vício da Fase 5 — as perguntas de um
+utilizador real não são escritas para casar com as descrições, enquanto os
+poemas gerados são —, mas as perguntas *do conjunto dourado* foram escritas por
+quem escreveu as descrições, e isso basta para inflacionar.
+
+A **ablação de indícios** (72% → 70%) é a única das minhas medições que ataca
+isto, e ataca pouco: remove substantivos-assinatura, não a concepção partilhada
+de cada voz.
+
+**O que quebraria o laço**, e não foi feito: descrições derivadas do **corpus** —
+estatísticas de forma, como comprimento de verso, rima, anáfora — em vez das
+personas; ou um conjunto de perguntas rotulado por outra pessoa.
+
+O princípio geral é o que a Fase 5 acabou por registar, e aplica-se às três
+defesas desta casa: **a protecção não é a ordem temporal, é a independência
+entre a regra e a quantidade medida.** Pré-registar uma regra que olha para o
+que vai medir só documenta o vício com data.
+
+---
+
+## 4.2 A correcção replicou-se noutra sessão
+
+A Fase 5 mediu o centróide `sem_nome` em **40** poemas reais e obteve **62%**;
+esta remedição obteve **64%** em **80**, com outro conjunto, outra semente e
+noutra sessão. E o contrário também fecha: a variante `com_nome` dá **45%** em
+reais, dentro dos 42–46% que a Fase 4 publicou — **o instrumento contaminado
+reproduz o número contaminado**, que é a confirmação de que o diagnóstico do
+defeito estava certo.
+
+---
+
 ## 5. Como reproduzir
 
 ```bash
