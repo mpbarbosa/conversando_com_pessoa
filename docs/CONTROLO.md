@@ -243,6 +243,9 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 [ ] remover langchain do requirements.txt
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
 [ ] num_predict=220 corta o versiculo longo de Campos (visto 2x na Fase 4)
+[ ] remedir os centroides da Fase 4 A1c sem o nome do heteronimo (ver ressalva)
+[ ] variante do juiz LLM da Fase 5 com descricoes tiradas do corpus (frequencias
+    de forma) em vez das personas: separa o confundidor do §9.3 da memorizacao
 [ ] registar a origem dos 2083 ficheiros (reprodutibilidade, §5)
 [ ] poem_224 esta indexado com mojibake e e recuperavel (visto no top-20 de q11)
 [ ] um segundo avaliador para o conjunto dourado: 433 julgamentos sao todos meus
