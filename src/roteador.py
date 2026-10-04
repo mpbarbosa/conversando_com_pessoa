@@ -2,25 +2,47 @@
 
 ## O que foi medido, e o que foi descartado
 
-| roteador | 40 perguntas | custo |
-|---|---|---|
-| centróide de embedding | **45%** | microssegundos |
-| vizinho mais próximo | 52,5% | 6 ms |
-| voto@20 sobre o top-20 | 50% | 6 ms |
-| centróide centrado (anisotropia) | 32% | microssegundos |
-| regressão logística sobre os chunks | 42% | microssegundos |
-| BM25, voz com mais pontos no top-20 | 45% | ~20 ms |
-| **chamada ao qwen2.5:7b** | **72%** | **1,2 s** |
-| chamada ao qwen2.5:3b | 42% | 0,6 s |
+Os valores são os **publicados em 2026-10-01** e ficam como foram medidos; a
+coluna da direita diz quais não são de confiança, e porquê.
 
-Nenhum método de embedding passa dos 52,5%, e o Passo A1c mostrou que **não é
-um problema de registo**: poemas usados como consulta roteiam tão mal como
-perguntas (42–46%). A tabela de similaridades do e5 vive toda entre 0,801 e
-0,807 — **o espaço não separa estas vozes**, e é o §2 do plano a cobrar-se («a
-similaridade semântica é o objectivo errado para recuperar poesia»).
+| roteador | 40 perguntas | custo | contaminado? |
+|---|---|---|---|
+| centróide de embedding | **45%** | microssegundos | **sim → 68%** |
+| vizinho mais próximo | 52,5% | 6 ms | **sim**, não remedido |
+| voto@20 sobre o top-20 | 50% | 6 ms | **sim**, não remedido |
+| centróide centrado (anisotropia) | 32% | microssegundos | **sim**, não remedido |
+| regressão logística sobre os chunks | 42% | microssegundos | **sim → 60%** |
+| BM25, voz com mais pontos no top-20 | 45% | ~20 ms | não, é lexical |
+| **chamada ao qwen2.5:7b** | **72%** | **1,2 s** | não |
+| chamada ao qwen2.5:3b | 42% | 0,6 s | não |
 
-O 3B a 42% contra o 7B a 72% diz o que isto é: uma tarefa de **conhecimento**,
-não de padrão. O 3B não sabe quem é Ricardo Reis.
+### A correcção de 2026-10-03
+
+Cinco das oito linhas usam `idx.vectores`, que são `encode_passages` de
+`Chunk.indexed_text` — e esse leva **«Autor — Título» à cabeça**
+(`corpus/chunk.py:23`), enquanto as consultas são verso puro. Os centróides
+carregavam o **nome do heterónimo**, e a exactidão saiu subestimada em ~23
+pontos. Remedidas duas das cinco; as outras três partilham o defeito e **não
+foram re-medidas**, logo os seus números não valem em nenhum sentido.
+
+**A frase que aqui estava — «nenhum método de embedding passa dos 52,5%, o
+espaço não separa estas vozes» — está refutada.** O centróide corrigido faz
+**68%** em perguntas e **64%** em poemas, contra 72% do 7B. A vantagem do LLM
+cai de +27 para **+4 pontos**, que a n=40 não se distinguem de zero: **o
+roteador LLM não está estabelecido como melhor** que um centróide corrigido.
+
+O que decidiria, e não foi medido: o centróide nunca correu no conjunto
+adversarial (onde o 7B fez 92%) nem na ablação de indícios (72% → 70%), e um
+classificador que depende de superfície lexical é o que deveria desabar aí. Ver
+[`docs/fase-4/08-RELATORIO-REMEDICAO.md`](../docs/fase-4/08-RELATORIO-REMEDICAO.md).
+
+O que **sobrevive** da leitura original: o Passo A1c continua a refutar a
+hipótese do registo, porque poemas e perguntas andam juntos depois da correcção
+(64% contra 68%, antes 42% contra 45%).
+
+E isto não leva ressalva, porque não toca em `idx.vectores`: o 3B a 42% contra o
+7B a 72% diz o que a tarefa é — **conhecimento**, não padrão. O 3B não sabe quem
+é Ricardo Reis.
 
 ## Por que `temperature=0`
 

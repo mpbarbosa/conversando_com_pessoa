@@ -1,0 +1,84 @@
+{
+ "coerencia": {
+  "caeiro": {
+   "n": 107,
+   "com_nome": 0.9341,
+   "sem_nome": 0.9299,
+   "ao_centro": 0.9943
+  },
+  "campos": {
+   "n": 435,
+   "com_nome": 0.9382,
+   "sem_nome": 0.9304,
+   "ao_centro": 0.9943
+  },
+  "reis": {
+   "n": 226,
+   "com_nome": 0.9387,
+   "sem_nome": 0.9301,
+   "ao_centro": 0.9965
+  },
+  "ortonimo": {
+   "n": 1230,
+   "com_nome": 0.9359,
+   "sem_nome": 0.9281,
+   "ao_centro": 0.9993
+  }
+ },
+ "confusao": {
+  "original_perguntas": {
+   "exactidao": 0.45,
+   "erros_para": {
+    "campos": 3,
+    "caeiro": 19
+   },
+   "por_voz": {
+    "caeiro": 0.9,
+    "campos": 0.6,
+    "reis": 0.2,
+    "ortonimo": 0.1
+   }
+  },
+  "original_poemas": {
+   "exactidao": 0.425,
+   "erros_para": {
+    "campos": 34,
+    "caeiro": 12
+   },
+   "por_voz": {
+    "caeiro": 0.65,
+    "campos": 0.8,
+    "reis": 0.2,
+    "ortonimo": 0.05
+   }
+  },
+  "sem_nome_perguntas": {
+   "exactidao": 0.675,
+   "erros_para": {
+    "ortonimo": 12,
+    "caeiro": 1
+   },
+   "por_voz": {
+    "caeiro": 0.8,
+    "campos": 0.5,
+    "reis": 0.5,
+    "ortonimo": 0.9
+   }
+  },
+  "sem_nome_poemas": {
+   "exactidao": 0.637,
+   "erros_para": {
+    "ortonimo": 7,
+    "campos": 18,
+    "caeiro": 3,
+    "reis": 1
+   },
+   "por_voz": {
+    "caeiro": 0.7,
+    "campos": 0.85,
+    "reis": 0.45,
+    "ortonimo": 0.55
+   }
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "_meta": {
+  "n_perguntas": 40,
+  "n_poemas": 80,
+  "semente": 4,
+  "defeito": "idx.vectores = encode_passages(indexed_text), que leva «Autor — Título» à cabeça; as consultas são verso puro"
+ },
+ "original": {
+  "centroide_perguntas": 0.45,
+  "centroide_poemas": 0.425,
+  "probe_perguntas": 0.45,
+  "probe_poemas": 0.463,
+  "erros_por_voz_prevista_poemas": {
+   "campos": 34,
+   "caeiro": 12
+  }
+ },
+ "sem_nome": {
+  "centroide_perguntas": 0.675,
+  "centroide_poemas": 0.637,
+  "probe_perguntas": 0.6,
+  "probe_poemas": 0.613,
+  "erros_por_voz_prevista_poemas": {
+   "ortonimo": 7,
+   "campos": 18,
+   "caeiro": 3,
+   "reis": 1
+  }
+ },
+ "sem_nome_nem_assimetria": {
+  "centroide_perguntas": 0.3,
+  "centroide_poemas": 0.688,
+  "probe_perguntas": 0.475,
+  "probe_poemas": 0.775,
+  "erros_por_voz_prevista_poemas": {
+   "ortonimo": 13,
+   "campos": 7,
+   "caeiro": 3,
+   "reis": 2
+  }
+ }
+}

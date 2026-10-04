@@ -58,6 +58,11 @@ uma espécie de febre» é de Campos porque foi escrita para Campos, e traz os
 indícios de Campos no vocabulário. Um roteador acerta nela sem saber nada de
 Pessoa.
 
+> **Correcção de 2026-10-03:** os números de embedding deste protocolo e do seu
+> relatório foram medidos com centróides contaminados com o nome do heterónimo.
+> O centróide faz **68%**, não 45%. Ver
+> [`fase-4/08-RELATORIO-REMEDICAO.md`](fase-4/08-RELATORIO-REMEDICAO.md).
+
 **A exactidão neste conjunto é um limite superior, não uma estimativa.** Usá-la
 como aceite é legítimo — é o aceite escrito — mas publicá-la sem a ressalva seria
 o mesmo erro que o `util@3` saturado da Fase 0, em que até o controlo inglês fez

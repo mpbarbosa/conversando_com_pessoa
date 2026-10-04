@@ -2,6 +2,35 @@
 
 Executada em 2026-10-01. Protocolo em [`FASE-4.md`](FASE-4.md).
 
+> ### ⚠️ Correcção de 2026-10-03: os centróides estavam contaminados
+>
+> Todos os números de embedding deste relatório foram medidos com centróides
+> construídos sobre `Chunk.indexed_text`, que leva **«Autor — Título» à cabeça**,
+> enquanto as consultas eram verso puro. Corrigido:
+>
+> | | publicado | corrigido |
+> |---|---|---|
+> | centróide, 40 perguntas | 45% | **68%** |
+> | centróide, 80 poemas reais | 42% | **64%** |
+> | probe, 80 poemas reais | 46% | **61%** |
+>
+> **Três consequências, e duas atingem conclusões deste relatório:**
+>
+> 1. A afirmação «**o espaço do e5 não separa estas vozes**» (§1.2) está
+>    **refutada**. Separa-as a 68%.
+> 2. A vantagem do roteador LLM cai de **+27 para +4 pontos**, que a n=40 não se
+>    distinguem de zero. **O LLM não está estabelecido como melhor** que um
+>    centróide corrigido — ver a ressalva no §1.1 e o que falta medir.
+> 3. O «**colapso no Caeiro**» (§1.2) era artefacto: 19 erros a apontar-lhe
+>    passam a 1, e o atractor que resta é o ortónimo, a classe maior.
+>
+> O que **sobrevive**: a refutação da hipótese do registo (poemas roteiam tão
+> bem como perguntas, 64% contra 68%), a tabela de coerência igual entre vozes,
+> o 3B contra o 7B, o conjunto adversarial e a ablação de indícios.
+>
+> Detalhe, dados e o que decidiria:
+> [`fase-4/08-RELATORIO-REMEDICAO.md`](fase-4/08-RELATORIO-REMEDICAO.md).
+
 **Resumo em três linhas.** O roteador de voz existe, está integrado em `/auto`, e
 custa +0,5 s por pergunta. O enriquecimento offline **não se faz**, e a razão é
 um número: 88% da falta do `nDCG@5` está em reordenar o que o índice já traz, e
@@ -21,7 +50,7 @@ Portão do plano: 80%.
 |---|---|---|---|
 | acaso (4 classes equilibradas) | 25% | — | — |
 | **o que o sistema fazia** (`--voz pessoa`, ortónimo sempre) | **25%** | 0 | — |
-| centróide de embedding por voz | **45%** | µs | [`01`](fase-4/01-roteador.json) |
+| centróide de embedding por voz | **45%** → **68%** corrigido | µs | [`01`](fase-4/01-roteador.json) · [remedição](fase-4/08-RELATORIO-REMEDICAO.md) |
 | vizinho mais próximo | **52,5%** | 6 ms | [`01`](fase-4/01-roteador.json) |
 | voto@20 ponderado | 50% | 6 ms | [`01`](fase-4/01-roteador.json) |
 | centróide com a média global subtraída | **32%** | µs | [`01b`](fase-4/01b-roteador.json) |
@@ -47,9 +76,15 @@ Medido, não é isso:
 | reis | 246 | 0,9386 | 0,9817 |
 | ortónimo | 1250 | 0,9359 | **0,9969** |
 
-As quatro são **igualmente coerentes**. E um classificador supervisionado com
-pesos equilibrados — que não assume que a média é a direcção que separa —
-colapsa no Caeiro do mesmo modo (20 de 23 erros).
+As quatro são **igualmente coerentes** — e isto sobrevive à correcção de
+2026-10-03: sem o nome dão 0,9299 / 0,9304 / 0,9301 / 0,9281, iguais entre si.
+E um classificador supervisionado com pesos equilibrados colapsa no Caeiro do
+mesmo modo (20 de 23 erros).
+
+> **Mas o colapso que isto explicava era artefacto.** Sem o nome nos centróides,
+> os erros que apontavam ao Caeiro caem de 19 para 1 nas perguntas. Fica uma
+> medição correcta e uma inferência válida a explicar **um fenómeno que não
+> existe** — ver [a remedição](fase-4/08-RELATORIO-REMEDICAO.md) §2.4.
 
 **«É a travessia de registo: as perguntas são prosa chã, que é o registo do
 Caeiro.»** Hipótese bonita, e testável: usar **poemas** como consulta em vez de
@@ -60,11 +95,14 @@ perguntas. Se o embedding soubesse distinguir as vozes, acertaria nos poemas.
 | 80 poemas, retirados do índice antes de treinar | **42%** | **46%** |
 | as 40 perguntas | 45% | 42% |
 
-**Poemas roteiam tão mal como perguntas.** Não é o registo da pergunta: é o
-espaço. A tabela de similaridade média de uma pergunta aos chunks de cada voz
-vive toda entre **0,801 e 0,807** — seis milésimas a separar as quatro vozes de
-Pessoa. É o §2 do plano a cobrar-se: «similaridade semântica é o objectivo
-errado para recuperar poesia», e vale igualmente para *classificar* poesia.
+**Poemas roteiam tão mal como perguntas.** Não é o registo da pergunta.
+
+> **Corrigido em 2026-10-03.** A conclusão **relativa** sobrevive e é o que este
+> passo existia para testar: corrigidos os centróides, poemas dão 64% e
+> perguntas 68% — continuam a andar juntos, logo a hipótese do registo
+> continua refutada. O que **não** se segue, e eu escrevi aqui, é que a culpa
+> seja «do espaço»: o espaço separa as vozes a 68%, e os 42–46% mediam o nome do
+> heterónimo nos centróides, não a geometria do estilo.
 
 **O 3B a 42% contra o 7B a 72% diz o que isto é.** Não é uma tarefa de padrão
 que um modelo pequeno apanhe com mais dados: é uma tarefa de **conhecimento**. O
