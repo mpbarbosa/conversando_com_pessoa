@@ -1,0 +1,644 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5G.md §5",
+  "bootstrap_B": 10000,
+  "semente": 3,
+  "piso_discordantes": 8,
+  "primario": "estimativa conjunta",
+  "potencia_pre_registada": {
+   "dp_grupo_gerado_5F": 0.657,
+   "pares": 30,
+   "delta_detectavel_80pc": 0.5,
+   "delta_nao_detectavel": 0.375,
+   "fonte": "docs/FASE-5G.md §3.2"
+  }
+ },
+ "concordancia": {
+  "kappa_ponderado_linear_3a": 0.3341,
+  "concordancia_exacta_3a": 0.4833,
+  "discordancia_maxima_3a": 2,
+  "media_R1_3a": 0.483,
+  "media_R2_3a": 1.067
+ },
+ "por_leitura": {
+  "conjunta": {
+   "c3a": {
+    "etiqueta": "3a' — conjunta",
+    "mediana_C": 0.75,
+    "mediana_P": 0.5,
+    "media_C": 0.8,
+    "media_P": 0.75,
+    "delta_medio": -0.05,
+    "ic95": [
+     -0.3,
+     0.1833
+    ],
+    "sinais_pro_P": 9,
+    "sinais_pro_C": 8,
+    "empates": 13,
+    "discordantes": 17,
+    "p_binomial": 1.0,
+    "dp_das_diferencas": 0.674
+   },
+   "c3b": {
+    "etiqueta": "3b — conjunta",
+    "mediana_C": 1.0,
+    "mediana_P": 1.0,
+    "media_C": 1.0667,
+    "media_P": 1.1,
+    "delta_medio": 0.0333,
+    "ic95": [
+     -0.1333,
+     0.2
+    ],
+    "sinais_pro_P": 6,
+    "sinais_pro_C": 5,
+    "empates": 19,
+    "discordantes": 11,
+    "p_binomial": 1.0,
+    "dp_das_diferencas": 0.4722
+   },
+   "portoes_disparados": [
+    "G2"
+   ],
+   "portao_principal": "G2"
+  },
+  "R1": {
+   "c3a": {
+    "etiqueta": "3a' — R1",
+    "mediana_C": 0.0,
+    "mediana_P": 0.0,
+    "media_C": 0.5333,
+    "media_P": 0.4333,
+    "delta_medio": -0.1,
+    "ic95": [
+     -0.4333,
+     0.2333
+    ],
+    "sinais_pro_P": 4,
+    "sinais_pro_C": 8,
+    "empates": 18,
+    "discordantes": 12,
+    "p_binomial": 0.3877,
+    "dp_das_diferencas": 0.9595
+   },
+   "c3b": {
+    "etiqueta": "3b — R1",
+    "mediana_C": 1.0,
+    "mediana_P": 1.0,
+    "media_C": 1.0667,
+    "media_P": 1.1,
+    "delta_medio": 0.0333,
+    "ic95": [
+     -0.1,
+     0.1667
+    ],
+    "sinais_pro_P": 3,
+    "sinais_pro_C": 2,
+    "empates": 25,
+    "discordantes": 5,
+    "p_binomial": 1.0,
+    "dp_das_diferencas": 0.4138
+   },
+   "portoes_disparados": [
+    "G2"
+   ],
+   "portao_principal": "G2"
+  },
+  "R2": {
+   "c3a": {
+    "etiqueta": "3a' — R2",
+    "mediana_C": 1.0,
+    "mediana_P": 1.0,
+    "media_C": 1.0667,
+    "media_P": 1.0667,
+    "delta_medio": 0.0,
+    "ic95": [
+     -0.3,
+     0.3
+    ],
+    "sinais_pro_P": 7,
+    "sinais_pro_C": 6,
+    "empates": 17,
+    "discordantes": 13,
+    "p_binomial": 1.0,
+    "dp_das_diferencas": 0.871
+   },
+   "c3b": {
+    "etiqueta": "3b — R2",
+    "mediana_C": 1.0,
+    "mediana_P": 1.0,
+    "media_C": 1.0667,
+    "media_P": 1.1,
+    "delta_medio": 0.0333,
+    "ic95": [
+     -0.2,
+     0.2667
+    ],
+    "sinais_pro_P": 6,
+    "sinais_pro_C": 4,
+    "empates": 20,
+    "discordantes": 10,
+    "p_binomial": 0.75391,
+    "dp_das_diferencas": 0.6687
+   },
+   "portoes_disparados": [
+    "G0",
+    "G2"
+   ],
+   "portao_principal": "G2"
+  }
+ },
+ "G5_avaliadores_discordam": false,
+ "veredicto": {
+  "portao_da_conjunta": "G2",
+  "portoes_por_avaliador": {
+   "R1": "G2",
+   "R2": "G2"
+  },
+  "G5_dispara": false,
+  "autoriza": false
+ },
+ "notas_por_amostra": {
+  "G01": {
+   "braco": "C",
+   "pergunta": "q03",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G02": {
+   "braco": "P",
+   "pergunta": "q05",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G03": {
+   "braco": "P",
+   "pergunta": "q10",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G04": {
+   "braco": "C",
+   "pergunta": "q03",
+   "rep": 0,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "G05": {
+   "braco": "C",
+   "pergunta": "q01",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G06": {
+   "braco": "C",
+   "pergunta": "q05",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G07": {
+   "braco": "P",
+   "pergunta": "q09",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G08": {
+   "braco": "P",
+   "pergunta": "q02",
+   "rep": 0,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G09": {
+   "braco": "P",
+   "pergunta": "q10",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "G10": {
+   "braco": "P",
+   "pergunta": "q07",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G11": {
+   "braco": "C",
+   "pergunta": "q09",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G12": {
+   "braco": "C",
+   "pergunta": "q08",
+   "rep": 0,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G13": {
+   "braco": "P",
+   "pergunta": "q04",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G14": {
+   "braco": "C",
+   "pergunta": "q03",
+   "rep": 1,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G15": {
+   "braco": "C",
+   "pergunta": "q10",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G16": {
+   "braco": "C",
+   "pergunta": "q07",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G17": {
+   "braco": "C",
+   "pergunta": "q06",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "G18": {
+   "braco": "P",
+   "pergunta": "q02",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G19": {
+   "braco": "C",
+   "pergunta": "q06",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G20": {
+   "braco": "P",
+   "pergunta": "q08",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G21": {
+   "braco": "C",
+   "pergunta": "q09",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G22": {
+   "braco": "C",
+   "pergunta": "q01",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G23": {
+   "braco": "C",
+   "pergunta": "q02",
+   "rep": 1,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G24": {
+   "braco": "P",
+   "pergunta": "q09",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G25": {
+   "braco": "C",
+   "pergunta": "q04",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G26": {
+   "braco": "C",
+   "pergunta": "q10",
+   "rep": 0,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G27": {
+   "braco": "C",
+   "pergunta": "q04",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G28": {
+   "braco": "P",
+   "pergunta": "q08",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G29": {
+   "braco": "C",
+   "pergunta": "q05",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G30": {
+   "braco": "P",
+   "pergunta": "q06",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G31": {
+   "braco": "P",
+   "pergunta": "q03",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G32": {
+   "braco": "P",
+   "pergunta": "q06",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G33": {
+   "braco": "C",
+   "pergunta": "q01",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G34": {
+   "braco": "C",
+   "pergunta": "q09",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G35": {
+   "braco": "P",
+   "pergunta": "q06",
+   "rep": 2,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G36": {
+   "braco": "P",
+   "pergunta": "q05",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G37": {
+   "braco": "P",
+   "pergunta": "q01",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G38": {
+   "braco": "P",
+   "pergunta": "q04",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G39": {
+   "braco": "P",
+   "pergunta": "q03",
+   "rep": 1,
+   "R1": 2,
+   "R2": 1,
+   "conj": 1.5
+  },
+  "G40": {
+   "braco": "C",
+   "pergunta": "q08",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G41": {
+   "braco": "P",
+   "pergunta": "q07",
+   "rep": 0,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G42": {
+   "braco": "P",
+   "pergunta": "q01",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G43": {
+   "braco": "P",
+   "pergunta": "q08",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G44": {
+   "braco": "P",
+   "pergunta": "q10",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G45": {
+   "braco": "C",
+   "pergunta": "q05",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G46": {
+   "braco": "C",
+   "pergunta": "q08",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G47": {
+   "braco": "P",
+   "pergunta": "q04",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G48": {
+   "braco": "P",
+   "pergunta": "q05",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G49": {
+   "braco": "P",
+   "pergunta": "q02",
+   "rep": 2,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "G50": {
+   "braco": "C",
+   "pergunta": "q07",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G51": {
+   "braco": "P",
+   "pergunta": "q09",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G52": {
+   "braco": "C",
+   "pergunta": "q02",
+   "rep": 0,
+   "R1": 1,
+   "R2": 0,
+   "conj": 0.5
+  },
+  "G53": {
+   "braco": "C",
+   "pergunta": "q04",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G54": {
+   "braco": "P",
+   "pergunta": "q07",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G55": {
+   "braco": "C",
+   "pergunta": "q02",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "G56": {
+   "braco": "P",
+   "pergunta": "q01",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "G57": {
+   "braco": "C",
+   "pergunta": "q10",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G58": {
+   "braco": "P",
+   "pergunta": "q03",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "G59": {
+   "braco": "C",
+   "pergunta": "q07",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "G60": {
+   "braco": "C",
+   "pergunta": "q06",
+   "rep": 1,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  }
+ }
+}

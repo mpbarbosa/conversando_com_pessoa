@@ -36,6 +36,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5D — A contagem de voltas** | [`FASE-5D.md`](FASE-5D.md) · [relatório](FASE-5D-RELATORIO.md) | ✅ **instrumento não aceite (V4 falha)**, mas **a resolução resolve-se**: 38 valores distintos contra os 3 do 3a. E devolve um achado que põe em dúvida a cadeia toda — o **Caeiro real não cumpre a âncora de 3a** (`poem_1485`, «Pensar em Deus é desobedecer a Deus», dá 0,700 nos dois contadores), e o Caeiro gerado **não é distinguível** dele |
 | **5E — Medir a âncora** | [`FASE-5E.md`](FASE-5E.md) · [relatório](FASE-5E-RELATORIO.md) | ✅ **W1 dispara, W2 falha** — a célula pré-registada como «o pior caso para as quatro fases». A âncora de 3a dá a nota máxima a **3 de 20** poemas **autênticos** de Caeiro, e reprova «Vi que não há Natureza» por filosofar. Com W3 e W4 a passar (AUC 0,811 · κ 0,784), e os três avaliadores a coincidir. **Autoriza recalibrar a âncora** |
 | **5F — Endireitar a régua** | [`FASE-5F.md`](FASE-5F.md) · [relatório](FASE-5F-RELATORIO.md) | ✅ **os três portões passam: a âncora recalibrada é aceite**. Premeia **16 de 24** poemas autênticos retidos (67%, contra os 15% da antiga) e a discriminação **melhorou** (AUC 0,913 contra 0,811). E, sem portão, a pergunta aberta desde a Fase 5 tem resposta: **AUC(gerado < real) passa de 0,655 (p=0,112) para 0,851 (p=0,0003)** |
+| **5G — A 5B remedida** | [`FASE-5G.md`](FASE-5G.md) · [relatório](FASE-5G-RELATORIO.md) | ✅ **G2 nas três leituras: H5B cai.** E a medição **correu**: `d` passou de **7** (5B) para **17**, com os mesmos n, perguntas e harness — a diferença foi a régua. IC95% do Δ em **[−0,30; +0,18]**, contra uma distância real-para-gerado de **0,93**: as interdições explicam no máximo um quinto disso |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -260,9 +261,11 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 7 | ~~**Pontuar os poemas REAIS de Caeiro com a âncora de 3a**~~ — **feito, e a âncora reprova-os** | [Fase 5E](FASE-5E-RELATORIO.md): 3 de 20 autênticos com a nota máxima (15%), 7 de 20 a **zero** nos dois avaliadores, e o único item **gerado** a atingir o máximo é a amostra que a 5B §4 apanhou a copiar 33% dos versos. A âncora é um bom **filtro negativo** (ortónimo a 19/20 zeros) e uma má **medida positiva** |
 | 8 | ~~**A regra 2 tem de decidir sobre a tautologia deflacionária**~~ — **decidido** | a âncora da [5F](FASE-5F.md) §2.1 regra 2 fixa-o: **a tautologia deflacionária é a assinatura do Caeiro, não um defeito**. «As coisas são só o que são» conta **para** a nota máxima |
 | 9 | ~~**Recalibrar a âncora de 3a do Caeiro**~~ — **feito, e aceite** | [Fase 5F](FASE-5F-RELATORIO.md): a âncora passa a medir a **direcção** do movimento e não a sua presença — o Caeiro filosofa para **fechar a porta**, o ortónimo para a abrir. Validada em **24 poemas retidos** que eu nunca li, com os três portões a passar nos três avaliadores |
-| 10 | **Repetir a Fase 5B com a âncora nova** — é agora o passo que importa mais | o harness, os dois braços e a regra de reescrita estão escritos e verificados desde a [5B](FASE-5B.md); o que faltava era a régua. O desfecho tem agora mediana **2,0** no original e **0,75** no gerado, logo há folga para medir uma intervenção em qualquer direcção — exactamente o que o G4 da 5B não teve |
+| 10 | ~~**Repetir a Fase 5B com a âncora nova**~~ — **feita, e H5B cai** | [Fase 5G](FASE-5G-RELATORIO.md): G2 nas três leituras, G5 não dispara. A âncora nova entregou o que a sequência de instrumentação prometia — 17 pares discordantes contra os 7 da 5B |
 | 11 | **Replicar, com portão, a separação gerado/real** | a [5F](FASE-5F-RELATORIO.md) §2 deu AUC 0,851 com p=0,0003, mas foi pré-registada **sem portão** porque a 5E tinha mostrado falta de potência a n=20. Um resultado forte onde a potência era baixa pede replicação |
-| 12 | **Apertar a âncora onde os dois avaliadores divergiram 2 pontos** | 4 dos 64 itens, e a fonte é a generosidade de R2 com as amostras **geradas** — 8 com nota máxima contra zero minhas. A fronteira está identificada e é pequena |
+| 12 | **Apertar a âncora na fronteira 1/2** — passa de desejável a **necessário** | repetiu-se em duas fases independentes: R2 pontuou o dobro de R1 em média (5F: 30 notas máximas contra 16; 5G: 25 contra 7), e na 5G o κ caiu a **0,334** com 48,3% de concordância exacta. R2 nomeou a fronteira de dentro da cegueira: «quando a personificação era incidental e o fecho era deflacionário, dei 1 em vez de 0». A âncora não diz qual ganha |
+| 13 | **Trocar o modelo e remedir com a âncora 3a′** — é agora o passo que importa mais | por eliminação medida e não suposta: cai o contexto ([Fase 5](FASE-5-RELATORIO.md) G2), cai a forma interdictiva da persona ([5G](FASE-5G-RELATORIO.md) G2), e o chão não era real ([5E](FASE-5E-RELATORIO.md)). Do défice de **0,93 pontos** entre o Caeiro real e o gerado sobra o **conteúdo** da persona ou o **modelo**. É o primeiro teste de modelo desta sequência a começar com instrumento validado |
+| 14 | O terceiro braço: **negação que não nomeia** | desfaz a fusão que a [5B §2.1](FASE-5B.md) declarou e a 5G herdou — a variante afirmativa inverte a polaridade **e** deixa de nomear os referentes, e nenhuma das duas fases separou as duas coisas |
 
 O **Passo 1 era o que importava mais**, e a Fase 5B foi medi-lo. Voltou sem
 veredicto, e a razão é instrutiva: o instrumento com que se ia medir — o
@@ -364,6 +367,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`FASE-5D.md`](FASE-5D.md) · [`FASE-5D-RELATORIO.md`](FASE-5D-RELATORIO.md) | a contagem de voltas, e o Caeiro real a não cumprir a âncora |
 | [`FASE-5E.md`](FASE-5E.md) · [`FASE-5E-RELATORIO.md`](FASE-5E-RELATORIO.md) | a âncora medida contra o original, e a autorização de a recalibrar |
 | [`FASE-5F.md`](FASE-5F.md) · [`FASE-5F-RELATORIO.md`](FASE-5F-RELATORIO.md) | a âncora recalibrada, aceite em dados retidos — **é esta a âncora a usar** |
+| [`FASE-5G.md`](FASE-5G.md) · [`FASE-5G-RELATORIO.md`](FASE-5G-RELATORIO.md) | a hipótese das interdições, finalmente medida — e rejeitada |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
@@ -375,6 +379,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | `fase-5d/` | a folha dos três grupos, as duas contagens verso a verso, e os portões |
 | `fase-5e/` | a folha de 60 itens frescos, as duas pontuações com a âncora, e os portões W1–W4 |
 | `fase-5f/` | a folha de 64 itens com os 24 retidos, as duas pontuações, e os portões X1–X3 |
+| `fase-5g/` | as 60 amostras novas dos dois braços, as duas pontuações com a âncora 3a′, e os portões G0–G5 |
 
 ### Código
 
