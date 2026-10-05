@@ -34,6 +34,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5B — A persona do Caeiro** | [`FASE-5B.md`](FASE-5B.md) · [relatório](FASE-5B-RELATORIO.md) | ✅ **inconclusivo por potência (G4)**, nos dois avaliadores. O desfecho **saturou no chão**: 22 dos 30 pares empataram em 0–0, e H5B ficou **sem teste** — nem confirmada nem refutada. O que fica medido: o **0,0 do Caeiro reproduz-se a n=10**, a 60 amostras, 3 repetições por célula e um segundo avaliador cego ao desenho |
 | **5C — O instrumento** | [`FASE-5C.md`](FASE-5C.md) · [relatório](FASE-5C-RELATORIO.md) | ✅ **instrumento rejeitado**: V1 e V3 falham. A AUC cai de **0,869 in-sample para 0,544 retida** — todo o sinal era sobreajustamento. O diagnóstico localiza a causa: **78 poemas limpos de Caeiro não bastam** para derivar uma lista lexical que generalize. Fecha a via lexical, e com ela o passo 4 |
 | **5D — A contagem de voltas** | [`FASE-5D.md`](FASE-5D.md) · [relatório](FASE-5D-RELATORIO.md) | ✅ **instrumento não aceite (V4 falha)**, mas **a resolução resolve-se**: 38 valores distintos contra os 3 do 3a. E devolve um achado que põe em dúvida a cadeia toda — o **Caeiro real não cumpre a âncora de 3a** (`poem_1485`, «Pensar em Deus é desobedecer a Deus», dá 0,700 nos dois contadores), e o Caeiro gerado **não é distinguível** dele |
+| **5E — Medir a âncora** | [`FASE-5E.md`](FASE-5E.md) · [relatório](FASE-5E-RELATORIO.md) | ✅ **W1 dispara, W2 falha** — a célula pré-registada como «o pior caso para as quatro fases». A âncora de 3a dá a nota máxima a **3 de 20** poemas **autênticos** de Caeiro, e reprova «Vi que não há Natureza» por filosofar. Com W3 e W4 a passar (AUC 0,811 · κ 0,784), e os três avaliadores a coincidir. **Autoriza recalibrar a âncora** |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -255,8 +256,9 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 4 | ~~A sombra lexical do Caeiro~~ — **respondido, e negativo** | [Fase 5C](FASE-5C-RELATORIO.md): a regra foi construída como o §11 pedia e **reprovou na validação retida** (AUC 0,544). Não fica pendente. Bónus: a lista vinda do **corpus** correlaciona ρ≈−0,28 com o 3a e a vinda da **persona** ρ≈0, o que dá o primeiro número ao princípio do §11 |
 | 5 | ~~**Um desfecho com resolução**~~ — **resolvido na 5D**, e não é o que falta | a [Fase 5D](FASE-5D-RELATORIO.md) deu 38 valores distintos contra 3, sem confundidor de comprimento (V3 e V5 passam nos dois contadores). O instrumento é rejeitado por **validade** (V4), não por resolução — e o que o bloqueia agora é o passo 7, não a escala |
 | 6 | **Medir o plágio por amostra, e não só como critério de aprovação** | ver o §4 do [relatório da 5B](FASE-5B-RELATORIO.md): as três únicas amostras que chegaram a 3a=2 tinham, as três, um poema real de Caeiro **no prompt**, e uma delas é uma transposição com 33% dos versos copiados. Onde a poética chegou ao topo, chegou por cópia |
-| 7 | **Pontuar os poemas REAIS de Caeiro com a âncora de 3a** — e é agora o passo que importa mais | ver o §3 do [relatório da 5D](FASE-5D-RELATORIO.md). Quatro fases julgaram a geração contra uma âncora derivada da **persona**, e a persona é uma idealização: o Caeiro real teologiza («Pensar em Deus é desobedecer a Deus»), moraliza («É preciso ser de vez em quando infeliz») e chama-se «**intérprete da Natureza**». Se o real tirar 0 e 1 com a mesma frequência que o gerado, as Fases 5 e 5B mediram **o instrumento** e não o modelo. É barato: as 20 amostras reais estão seleccionadas e a âncora existe |
+| 7 | ~~**Pontuar os poemas REAIS de Caeiro com a âncora de 3a**~~ — **feito, e a âncora reprova-os** | [Fase 5E](FASE-5E-RELATORIO.md): 3 de 20 autênticos com a nota máxima (15%), 7 de 20 a **zero** nos dois avaliadores, e o único item **gerado** a atingir o máximo é a amostra que a 5B §4 apanhou a copiar 33% dos versos. A âncora é um bom **filtro negativo** (ortónimo a 19/20 zeros) e uma má **medida positiva** |
 | 8 | **A regra 2 tem de decidir sobre a tautologia deflacionária** | foi a fronteira que moveu a AUC da 5D em **0,21** entre contadores com ICC de 0,671, e é a razão única pela qual V4 falhou. «As coisas são só o que são» é negação da atribuição ou afirmação sobre o ser? |
+| 9 | **Recalibrar a âncora de 3a do Caeiro** — é agora o passo que importa mais, e o primeiro com condição de aceitação medível | a [Fase 5E](FASE-5E-RELATORIO.md) §8 autoriza-o. A âncora nova tem de **premiar o Caeiro real**: mediana ≥ 1 e fracção substancial de 2 nos poemas autênticos, medido no corpus e não na opinião de quem a escreve. Os 40 poemas já pontuados (20 da 5D + 20 da 5E) servem de derivação e os **24 elegíveis restantes** de conjunto retido — que é a defesa que a 5C ensinou |
 
 O **Passo 1 era o que importava mais**, e a Fase 5B foi medi-lo. Voltou sem
 veredicto, e a razão é instrutiva: o instrumento com que se ia medir — o
@@ -288,6 +290,16 @@ resolução no chão.
 > avaliador. E a causa foi **uma** fronteira que a definição não decidiu, o que
 > é o argumento para escrever as definições pelos **casos difíceis** e não pelos
 > fáceis.
+
+> **E o terceiro, da Fase 5E, que é o mais caro de todos.** Um critério derivado
+> do **tratamento** mede a proximidade ao tratamento, e não à coisa. A Fase 5
+> mediu isto no seu juiz LLM — que dava 65% ao gerado e 45% a Pessoa autêntico —
+> escreveu a prescrição certa («as descrições têm de vir de outra fonte que as
+> personas») e aplicou-a ao juiz e **não à sua própria rubrica manual**, que tem
+> a mesma origem. Quatro fases mediram a geração contra uma idealização da
+> persona. **Antes de usar um critério para julgar uma imitação, pontuar o
+> original com ele.** Custou três fases de instrumentação descobri-lo e é uma
+> linha de protocolo.
 
 É agora a **Fase 5**, e a interface passa a Fase 6 — a renumeração está
 declarada no topo de [`FASE-5.md`](FASE-5.md). A hipótese que vai a medição é a
@@ -346,6 +358,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`FASE-5B.md`](FASE-5B.md) · [`FASE-5B-RELATORIO.md`](FASE-5B-RELATORIO.md) | a persona do Caeiro feita de interdições, e o desfecho que saturou |
 | [`FASE-5C.md`](FASE-5C.md) · [`FASE-5C-RELATORIO.md`](FASE-5C-RELATORIO.md) | o desfecho lexical, e a validação retida que o reprovou |
 | [`FASE-5D.md`](FASE-5D.md) · [`FASE-5D-RELATORIO.md`](FASE-5D-RELATORIO.md) | a contagem de voltas, e o Caeiro real a não cumprir a âncora |
+| [`FASE-5E.md`](FASE-5E.md) · [`FASE-5E-RELATORIO.md`](FASE-5E-RELATORIO.md) | a âncora medida contra o original, e a autorização de a recalibrar |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
@@ -355,6 +368,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | `fase-5b/` | as 60 amostras dos dois braços, as duas pontuações cegas, a variante afirmativa e a verificação da regra que a produziu |
 | `fase-5c/` | o FAS, a lista derivada por log-odds, e os números da sua própria rejeição |
 | `fase-5d/` | a folha dos três grupos, as duas contagens verso a verso, e os portões |
+| `fase-5e/` | a folha de 60 itens frescos, as duas pontuações com a âncora, e os portões W1–W4 |
 
 ### Código
 
