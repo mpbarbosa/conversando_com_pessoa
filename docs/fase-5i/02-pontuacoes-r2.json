@@ -1,0 +1,312 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5I.md §7",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só as duas escalas e as seis regras, e a folha embaralhada, numa cópia fora do repositório. Não soube que havia dois braços, nem que o **comprimento** era a variável manipulada, nem a hipótese.",
+  "declaracao_do_avaliador": "«60 poemas pontuados, todos validados com valores 0/1/2.»",
+  "convergencia_nas_truncaturas": "R2 identificou as mesmas sete truncaturas que R1 (I03, I27, I32, I34, I46, I47, I53) e deu-lhes 0 em 3b, mais o I17 por ser prosa corrida. R1 deu também 0 ao I25 (prosa misturada com verso); é a única divergência nos zeros de forma.",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox."
+ },
+ "pontuacoes": {
+  "I01": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba na tautologia «as coisas sao mais coisas»; 9 versos, fora do intervalo."
+  },
+  "I02": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Acaba no «deserto de mim», eu metaforico; 8 versos e imagem densa."
+  },
+  "I03": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "Acaba a perguntar o que ha alem da vida; truncado a meio do verso final."
+  },
+  "I04": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "Fecha na luz que esta ali, mas a alma-sombra fica de pe; imagem decorativa do espirito."
+  },
+  "I05": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba no vento e na serra no mesmo lugar; so 5 versos."
+  },
+  "I06": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em «E uma arvore», tautologia pura; 11 versos livres e nus."
+  },
+  "I07": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "Natureza com falta de paciencia, mantida, e acaba na beleza que lhe falta."
+  },
+  "I08": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Montanhas mais altas pelo seu afecto: natureza a sentir por ele; 7 versos."
+  },
+  "I09": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Atribuicoes negadas e acaba em «coisas apenas coisas»; 11 versos secos."
+  },
+  "I10": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Fica no visivel de ponta a ponta, pes e pedra; 7 versos, fora do intervalo."
+  },
+  "I11": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "Deflaciona a lua mas acaba no tecido preto com fios de ouro; 8 versos e ornamento."
+  },
+  "I12": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «madeixas de cabelo», deflacao; 7 versos, fora do intervalo."
+  },
+  "I13": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Moral de aceitar o que esta: encontrara as coisas como estao; 11 versos limpos."
+  },
+  "I14": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba a negar significado oculto; 11 versos livres, imagem funcional."
+  },
+  "I15": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "Nega sombra da alma e manda ver, mas a alma no corpo fica afirmada; 15 versos."
+  },
+  "I16": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "O rio esquece-se e ja viu: personificacao posta e mantida; forma correcta, 13 versos."
+  },
+  "I17": {
+   "c3a": 2,
+   "c3b": 0,
+   "razao": "Acaba em «apenas existia, como antes»; e prosa corrida, nao verso."
+  },
+  "I18": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba na indiferenca do tempo, na coisa; 8 versos e linhas longas."
+  },
+  "I19": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba nas palavras que dizem o que significam; 13 versos curtos e nus."
+  },
+  "I20": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "A moita sente o peso do fruto, personificacao mantida; 8 versos e imagem ornamental."
+  },
+  "I21": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Memoria negada ao rio e acaba no rasto vao; 10 versos livres e sobrios."
+  },
+  "I22": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba nos dias sem razao de mais um, na coisa; so 5 versos."
+  },
+  "I23": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em «as coisas sao coisas, e nao mais nada»; 13 versos, imagem negada."
+  },
+  "I24": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba no mundo que segue igual sem ele; 9 versos, fora do intervalo."
+  },
+  "I25": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Moral que manda deixar as coisas por si: fecha; abre com paragrafo em prosa."
+  },
+  "I26": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «existem, e isso e o suficiente»; 7 versos, fora do intervalo."
+  },
+  "I27": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "Eu dissolvido em rio-sombra sem corpo, alem da coisa; truncado a meio da frase."
+  },
+  "I28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Vento sem tristeza, acaba em «agora nao ha nada»; 10 versos curtos."
+  },
+  "I29": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em sol-luz, vento-vento, rio-agua; 16 versos livres e sem rima."
+  },
+  "I30": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em «as pedras continuam a serem pedras»; 14 versos livres."
+  },
+  "I31": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Voz dela na brisa e o mundo como grande porta: acaba alem; imagem ornamental."
+  },
+  "I32": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "Afirma o que ha dentro das coisas que ninguem ve; truncado a meio da frase."
+  },
+  "I33": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «nao ha mais nada» no alto da colina; so 3 versos."
+  },
+  "I34": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "Tautologia das estrelas mas a alma fica afirmada e localizada; truncado em «Vemos uma»."
+  },
+  "I35": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "Aceita o rosto existir ou nao, mas fica de pe um eu invisivel; 12 versos limpos."
+  },
+  "I36": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «Quase nada», no olival visivel; 7 versos espacados."
+  },
+  "I37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Acaba na sombra de tudo como ausencia de si, alem da coisa; so 5 versos."
+  },
+  "I38": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Atribuicoes todas negadas, acaba no rebanho e nada alem; 11 versos."
+  },
+  "I39": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Acaba na alma como lugar vazio; 8 versos e imagens decorativas."
+  },
+  "I40": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em «so quero que elas sejam»; 10 versos curtos e sem ornamento."
+  },
+  "I41": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Sol como luz branca, coisas sempre as mesmas, sem porta aberta; 8 versos."
+  },
+  "I42": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "Acaba numa ausencia e num vazio que nao sabe nomear; 7 versos."
+  },
+  "I43": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "Nega misterio e manda nao precisar de mais, mas afirma a propria alma; 13 versos."
+  },
+  "I44": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba na luz igual em todo o lugar, sem valor nem falta; 9 versos."
+  },
+  "I45": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Alma negada, imagem sem significado adquirido; 8 versos e comparacao decorativa."
+  },
+  "I46": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "Corpo sem alma, mascara e sombra em pergunta aberta; truncado em «eu nao me»."
+  },
+  "I47": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "Tautologia do morro, mas o coracao desliza no interior do ceu; truncado em «Os»."
+  },
+  "I48": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba nas maos sujas de terra, no visivel; 8 versos, fora do intervalo."
+  },
+  "I49": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em ocupar espaco e tempo, sem proposito; 14 versos livres."
+  },
+  "I50": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Acaba em nao deixar marca do seu estar aqui; 11 versos livres sem rima."
+  },
+  "I51": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba nas coisas mais simples quando os homens vao; 9 versos."
+  },
+  "I52": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Poe penitentes e retira-as; acaba em coisas sem outro nome; 15 versos."
+  },
+  "I53": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "Nega poente triste mas fica o fio da meada desprezivel; truncado em «Nunca vejo»."
+  },
+  "I54": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba no mundo que segue sem ele nele ser; 8 versos, fora do intervalo."
+  },
+  "I55": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «Nada alem disto», sem relacao com o olhar; 8 versos."
+  },
+  "I56": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Nuvens sem mensagem, apenas cinzentas; 9 versos, fora do intervalo."
+  },
+  "I57": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "Memorias negadas, acaba em «estou aqui para ver as coisas»; 13 versos."
+  },
+  "I58": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em «so e um canto de janela», verdade profunda negada; 8 versos."
+  },
+  "I59": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "Licao sobre ouvir o mundo, mas acaba em estrelas como diamantes; 8 versos e similes."
+  },
+  "I60": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "Acaba em coisas para serem vistas e desaparecerem; fragmento de 2 versos."
+  }
+ }
+}

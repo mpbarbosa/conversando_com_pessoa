@@ -1,0 +1,326 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5I.md §4",
+  "avaliador": "R1 — esta sessão, que escreveu o protocolo, a âncora 3a' e a forma reforçada",
+  "escalas": "3a' da Fase 5F §2 · 3b da Fase 5 §5.2, inalterada",
+  "cegueira": "pontuado sobre 01-itens.md, embaralhado, sem abrir 01-chave.json",
+  "ameaca_declarada": "§7 do protocolo: o comprimento é visível e é a variável manipulada, logo um avaliador que conte versos — e tem de contar, para 3b — pode inferir o braço. O risco real está em 3a', julgado na mesma passagem. Registo o que senti: a folha tem claramente dois regimes de comprimento, e as amostras longas truncam com frequência — mas não tenho confiança em dizer, amostra a amostra, de que braço é, porque o braço A da 5H já produzia 9 de 30 dentro do intervalo sem reforço nenhum.",
+  "truncaturas_que_levaram_0_em_3b": [
+   "I03",
+   "I27",
+   "I32",
+   "I34",
+   "I46",
+   "I47",
+   "I53"
+  ],
+  "outros_0_em_3b": {
+   "I17": "prosa corrida, sem versos",
+   "I25": "prosa misturada com verso"
+  },
+  "regra_de_aplicacao": "Pela âncora de 3a', 1 é «fecha a porta mas deixa UMA aberta», logo duas ou mais levam 0. Contei como porta aberta só o que cai nas categorias da âncora, e não qualquer figura de estilo. Em 3b apliquei a regra do protocolo: truncado leva 0, e é pontuado normalmente em 3a'.",
+  "observacao": "A I47 repete a mesma estrofe duas vezes verbatim antes de truncar — degeneração por repetição, modo de falha que a Fase 0 observou e que o repeat_penalty=1,1 devia conter. É a primeira vez que reaparece nesta sequência."
+ },
+ "pontuacoes": {
+  "I01": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«as coisas são mais coisas» fecha; abre «podem me lembrar da sua cara»"
+  },
+  "I02": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«sou o mar onde se afunda a tua praia», «o deserto de mim»: metáfora de si"
+  },
+  "I03": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "acaba a perguntar «o que está além do meu conhecimento». 3b=0: truncado"
+  },
+  "I04": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«não há nada além da luz» fecha; abre «os corredores do meu espírito»"
+  },
+  "I05": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«está apenas a soprar», «só ele e a serra estão no mesmo lugar»"
+  },
+  "I06": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«a árvore não percebe, nem precisa saber» e fecha em «é uma árvore»"
+  },
+  "I07": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«uma falta de paciência que a natureza tem» e «sou infiel à beleza das coisas»"
+  },
+  "I08": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "a ausência dela faz os rios correr mais rápido: projecção mantida"
+  },
+  "I09": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«a árvore é uma árvore», «não há lágrimas nos pinheiros», «sem mais nada além»"
+  },
+  "I10": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "pés sujos, pedra na mão, olhos atentos: nada atribuído"
+  },
+  "I11": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«é apenas a luz da lua» fecha; abre «um tecido preto com fios de ouro»"
+  },
+  "I12": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«os ramos não são pensamentos», «são apenas umas madeixas de cabelo»"
+  },
+  "I13": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«tudo está bem tal como está» manda aceitar (regra 6); abre o paradoxo inicial"
+  },
+  "I14": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "a cortina é posta e retirada (regra 4), e fecha em «não têm significado oculto»"
+  },
+  "I15": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«o vento não é a voz de Deus» e as negações; abre «a alma está no corpo»"
+  },
+  "I16": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "deflação do rio e do pino; abre «o mesmo velho rio que já viu»"
+  },
+  "I17": {
+   "c3a": 2,
+   "c3b": 0,
+   "razao": "«apenas existia, como antes e como agora». 3b=0: é prosa corrida"
+  },
+  "I18": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«a terra continua a ser feita de terra» e nenhuma atribuição"
+  },
+  "I19": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«o que é, é», «nenhum sentido secreto», «as palavras dizem o que significam»"
+  },
+  "I20": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a loura da moita sente o peso do seu fruto» e «um canto deserta o ar»"
+  },
+  "I21": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "as negações fecham; abre «o mundo está feito para ser esquecido»"
+  },
+  "I22": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nada se acrescenta, nada se subtrai», e «ela não sentirá a minha falta»"
+  },
+  "I23": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«o poente é um poente», e nega espírito, alma, palavra secreta, verso a verso"
+  },
+  "I24": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "deflação seca, e fecha em «não me lembro de ter visto um mundo sem mim»"
+  },
+  "I25": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«deixem que as coisas falem por si». 3b=0: prosa misturada com verso"
+  },
+  "I26": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as coisas não escondem nem mostram, mas existem, e isso é o suficiente»"
+  },
+  "I27": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "identificação simbólica inteira: «eu sou um rio sem curso». 3b=0: truncado"
+  },
+  "I28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«o vento não está suspirando, não está triste ou alegre, está simplesmente soprando»"
+  },
+  "I29": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«o vento é um vento e não um poeta»; abre «as cordas do espírito»"
+  },
+  "I30": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "fecha em «as pedras continuam a serem pedras»; abre o verso das palavras que o levantam"
+  },
+  "I31": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«uma imagem da sua face em cada pedra» e «as árvores têm palavras que só elas ouvem»"
+  },
+  "I32": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«ninguém se lembra do que há dentro das coisas». 3b=0: truncado"
+  },
+  "I33": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "mancha negra sobre relevo cinzento, e no alto não há mais nada"
+  },
+  "I34": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«onde vai a alma quando se vê uma árvore» e o labirinto. 3b=0: truncado"
+  },
+  "I35": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«sou aquilo que não é visto e se sente»: metafísica de si"
+  },
+  "I36": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as árvores não têm nome para serem» e «quase nada»"
+  },
+  "I37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«falta-lhe um lado do que vê» e «a sombra de tudo é a ausência de mim»"
+  },
+  "I38": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "nega mãos às árvores, olhos aos rios, música ao vento, verso a verso"
+  },
+  "I39": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a ausência dela desenha as árvores» e «a minha alma: um lugar vazio»"
+  },
+  "I40": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«as coisas não têm significação: têm existência», «só quero que elas sejam»"
+  },
+  "I41": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«as coisas são sempre as mesmas»; abre «onde eu pode não ser eu»"
+  },
+  "I42": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "acaba em «uma ausência, um vazio» e no dia que nunca mais volta"
+  },
+  "I43": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«sou eu que sofro, não as coisas» retira a projecção; abre «a minh' alma»"
+  },
+  "I44": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as coisas são como elas são, sem valor ou falta de valor»"
+  },
+  "I45": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«nenhuma alma lá está» nega; abre «por estar dentro e fora de mim»"
+  },
+  "I46": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«o meu rosto é uma máscara», «sem vida dentro de mim». 3b=0: truncado"
+  },
+  "I47": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "«o morro é um morro» e «dou-lhos eu à realidade»; abre o coração que desliza. 3b=0: truncado e com estrofe repetida"
+  },
+  "I48": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "fecha nas mãos sujas de terra; abre «o tempo não me pertence, nem a mim mesmo»"
+  },
+  "I49": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "o livro é posto e retirado (regra 4): «a lua não é símbolo, é uma bola de pedra»"
+  },
+  "I50": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«o sol não brilha mais forte», «a água não é mais fria porque tocou em mim»"
+  },
+  "I51": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«só os homens são tristes com o poente» retira; abre «espectáculo que se pinta»"
+  },
+  "I52": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "põe as penitentes e retira-as (regra 4), e fecha em «as coisas coisas, sem outro nome»"
+  },
+  "I53": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "«o poente não é triste» fecha; abre «um corpo sem alma». 3b=0: truncado"
+  },
+  "I54": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«os pássaros cantam para eles mesmos e não para mim»"
+  },
+  "I55": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nenhuma relação entre a chuva e o meu olhar», «nada além disto»"
+  },
+  "I56": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as nuvens não trazem mensagens; são apenas nuvens cinzentas»"
+  },
+  "I57": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«o seu canto não tem história; é apenas um som», e o vento sem memória"
+  },
+  "I58": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«não esconde nenhuma verdade profunda, só é um canto de janela»"
+  },
+  "I59": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«quem ouve o seu coração não ouve o mundo» e «como diamantes de ninguém»"
+  },
+  "I60": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as coisas são apenas para serem vistas e desaparecerem»"
+  }
+ }
+}
