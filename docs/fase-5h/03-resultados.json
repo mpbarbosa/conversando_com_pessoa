@@ -1,0 +1,725 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5H.md §5",
+  "bootstrap_B": 10000,
+  "semente": 3,
+  "piso_discordantes": 8,
+  "primario": "estimativa conjunta",
+  "potencia_pre_registada": {
+   "dp_das_diferencas_5G": 0.674,
+   "pares": 30,
+   "delta_detectavel_80pc": 0.4,
+   "referencia_real_menos_gerado_5F": 0.929,
+   "fonte": "docs/FASE-5H.md §6"
+  }
+ },
+ "concordancia": {
+  "kappa_ponderado_linear_3a": 0.5476,
+  "concordancia_exacta_3a": 0.6,
+  "discordancia_maxima_3a": 2,
+  "media_R1_3a": 0.883,
+  "media_R2_3a": 1.317
+ },
+ "automaticos_por_braco": {
+  "Q": {
+   "c2_zeros": 2,
+   "plagio": 1,
+   "nao_verso": 0,
+   "truncadas": 1,
+   "segundos_mediana": 35.5,
+   "versos_mediana": 13.5
+  },
+  "L": {
+   "c2_zeros": 0,
+   "plagio": 1,
+   "nao_verso": 1,
+   "truncadas": 0,
+   "segundos_mediana": 25.1,
+   "versos_mediana": 7.5
+  }
+ },
+ "por_leitura": {
+  "conjunta": {
+   "c3a": {
+    "etiqueta": "3a' — conjunta",
+    "mediana_Q": 0.5,
+    "mediana_L": 1.5,
+    "media_Q": 0.75,
+    "media_L": 1.45,
+    "delta_medio": 0.7,
+    "ic95": [
+     0.4167,
+     0.9833
+    ],
+    "sinais_pro_L": 19,
+    "sinais_pro_Q": 2,
+    "empates": 9,
+    "discordantes": 21,
+    "p_binomial": 0.00022,
+    "dp_das_diferencas": 0.7944
+   },
+   "c3b": {
+    "etiqueta": "3b — conjunta",
+    "mediana_Q": 1.25,
+    "mediana_L": 1.0,
+    "media_Q": 1.3833,
+    "media_L": 1.2,
+    "delta_medio": -0.1833,
+    "ic95": [
+     -0.3667,
+     -0.0167
+    ],
+    "sinais_pro_L": 4,
+    "sinais_pro_Q": 9,
+    "empates": 17,
+    "discordantes": 13,
+    "p_binomial": 0.26685,
+    "dp_das_diferencas": 0.4822
+   },
+   "portoes_disparados": [
+    "M1",
+    "M3"
+   ],
+   "portao_principal": "M1"
+  },
+  "R1": {
+   "c3a": {
+    "etiqueta": "3a' — R1",
+    "mediana_Q": 0.0,
+    "mediana_L": 1.0,
+    "media_Q": 0.5,
+    "media_L": 1.2667,
+    "delta_medio": 0.7667,
+    "ic95": [
+     0.4333,
+     1.0667
+    ],
+    "sinais_pro_L": 18,
+    "sinais_pro_Q": 2,
+    "empates": 10,
+    "discordantes": 20,
+    "p_binomial": 0.0004,
+    "dp_das_diferencas": 0.8976
+   },
+   "c3b": {
+    "etiqueta": "3b — R1",
+    "mediana_Q": 1.0,
+    "mediana_L": 1.0,
+    "media_Q": 1.3333,
+    "media_L": 1.1,
+    "delta_medio": -0.2333,
+    "ic95": [
+     -0.4333,
+     -0.0333
+    ],
+    "sinais_pro_L": 2,
+    "sinais_pro_Q": 9,
+    "empates": 19,
+    "discordantes": 11,
+    "p_binomial": 0.06543,
+    "dp_das_diferencas": 0.5683
+   },
+   "portoes_disparados": [
+    "M1",
+    "M3"
+   ],
+   "portao_principal": "M1"
+  },
+  "R2": {
+   "c3a": {
+    "etiqueta": "3a' — R2",
+    "mediana_Q": 1.0,
+    "mediana_L": 2.0,
+    "media_Q": 1.0,
+    "media_L": 1.6333,
+    "delta_medio": 0.6333,
+    "ic95": [
+     0.3667,
+     0.9
+    ],
+    "sinais_pro_L": 15,
+    "sinais_pro_Q": 1,
+    "empates": 14,
+    "discordantes": 16,
+    "p_binomial": 0.00052,
+    "dp_das_diferencas": 0.8087
+   },
+   "c3b": {
+    "etiqueta": "3b — R2",
+    "mediana_Q": 1.0,
+    "mediana_L": 1.0,
+    "media_Q": 1.4333,
+    "media_L": 1.3,
+    "delta_medio": -0.1333,
+    "ic95": [
+     -0.3,
+     0.0333
+    ],
+    "sinais_pro_L": 2,
+    "sinais_pro_Q": 6,
+    "empates": 22,
+    "discordantes": 8,
+    "p_binomial": 0.28906,
+    "dp_das_diferencas": 0.5074
+   },
+   "portoes_disparados": [
+    "M1",
+    "M3"
+   ],
+   "portao_principal": "M1"
+  }
+ },
+ "M5_avaliadores_discordam": false,
+ "veredicto": {
+  "portao_da_conjunta": "M1",
+  "portoes_por_avaliador": {
+   "R1": "M1",
+   "R2": "M1"
+  },
+  "M3_condiciona": true,
+  "M5_dispara": false,
+  "autoriza_investigar_a_troca": true
+ },
+ "notas_por_amostra": {
+  "H01": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H02": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H03": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H04": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H05": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H06": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H07": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H08": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H09": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H10": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H11": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H12": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H13": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H14": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H15": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H16": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H17": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H18": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H19": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H20": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 0,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H21": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H22": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 0,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H23": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H24": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H25": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H26": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H27": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H28": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 0,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H29": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H30": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H31": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 0,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "H32": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 1,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H33": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H34": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H35": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H36": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 0,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H37": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H38": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 2,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H39": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 0,
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "H40": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H41": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H42": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q03",
+   "rep": 0,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H43": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H44": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H45": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 2,
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "H46": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H47": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H48": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q04",
+   "rep": 1,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H49": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q01",
+   "rep": 1,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H50": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 0,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H51": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q05",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H52": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q02",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H53": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 0,
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "H54": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 2,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H55": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 1,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H56": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q07",
+   "rep": 0,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H57": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q06",
+   "rep": 1,
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "H58": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q09",
+   "rep": 2,
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "H59": {
+   "braco": "Q",
+   "modelo": "qwen2.5:7b-instruct-q4_K_M",
+   "pergunta": "q08",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "H60": {
+   "braco": "L",
+   "modelo": "llama3.1:8b-instruct-q4_K_M",
+   "pergunta": "q10",
+   "rep": 2,
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  }
+ }
+}
