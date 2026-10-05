@@ -1,0 +1,433 @@
+{
+ "_meta": {
+  "aviso": "NÃO ABRIR antes de 02-pontuacoes.json e 02-pontuacoes-r2.json estarem commitados.",
+  "protocolo": "docs/FASE-5F.md §4",
+  "grupo_R": "os 24 retidos — nunca usados em folha anterior"
+ },
+ "chave": [
+  {
+   "id": "X01",
+   "grupo": "G",
+   "origem": "B15",
+   "texto": "Aprendemos a pensar em segredo,\nEnquanto olhamos, sem ouvirmos.\nÉ mais difícil aprender a ver,\nDo que enganar-nos nos caminhos.\nAs coisas são, apenas são,\nE o essencial é vê-las assim.\nNão em nós mesmos buscá-las,\nMas delas, simplesmente as ter.\nA mente desaprende a arte,\nDe um olhar não pensante preencher.\nLibertemos o que nos cinge,\nPara que o viver se torne luz.",
+   "braco_5b": "C",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "X02",
+   "grupo": "G",
+   "origem": "B51",
+   "texto": "Quando eu por aqui ficar,\nAs ondas do mar seguirão seu curso.\nE os montes erguer-se-ão como sempre.\nO sol se levantará, não há quem lhe impida.\nSei que o mundo continuará seu caminho\nNão menos brilhante nem menos cinzento.\nA lua chegará, a noite cerrará,\nSem a minha interrupção ou consentimento.\nÉ assim e basta-me saber:\nO que é real, é sempre real.\nNão sou mais do que um instante\nNum vasto continuum de ser.\nEntão, quando eu me curvar para o sono final,\nOs mares seguirão seu caminho, os montes sua altura.\nE a noite cegará como se eu não estivesse aqui.\nPorque este é o seu ritmo e eu sou apenas um entre mil.",
+   "braco_5b": "P",
+   "pergunta_5b": "q09"
+  },
+  {
+   "id": "X03",
+   "grupo": "R",
+   "origem": "poem_2669",
+   "texto": "Leram-me e pasmei.\nComo é que um homem que gostava tanto das coisas,\nNunca olhava para elas, não sabia o que elas eram?\nPara que havia de chamar minha irmã à água, se ela não é minha irmã?\nPara a sentir melhor?\nSinto-a melhor bebendo-a do que chamando-lhe qualquer coisa.\nIrmã, ou mãe, ou filha.\nA água é a água e é bela por isso.\nSe eu lhe chamar minha irmã,\nAo chamar-lhe minha irmã, vejo que o não é\nE que se ela é a água o melhor é chamar-lhe água;\nOu, melhor ainda, não lhe chamar coisa nenhuma,\nMas bebê-la, senti-la nos pulsos, olhar para ela\nE isto sem nome nenhum."
+  },
+  {
+   "id": "X04",
+   "grupo": "R",
+   "origem": "poem_622",
+   "texto": "Acordo de noite subitamente,\nE o meu relógio ocupa a noite toda.\nNão sinto a Natureza lá fora.\nO meu quarto é uma coisa escura com paredes vagamente brancas.\nLá fora há um sossego como se nada existisse.\nSó o relógio prossegue o seu ruído.\nE esta pequena coisa de engrenagens que está em cima da minha mesa\nAbafa toda a existência da terra e do céu...\nQuase que me perco a pensar o que isto significa,\nMas volto-me, e sinto-me sorrir na noite com os cantos da boca,\nPorque a única coisa que o meu relógio simboliza ou significa\nEnchendo com a sua pequenez a noite enorme\nÉ a curiosa sensação de encher a noite enorme\nCom a sua pequenez...\nE esta sensação é curiosa porque só para mim é que ele enche a noite\nCom a sua pequenez..."
+  },
+  {
+   "id": "X05",
+   "grupo": "G",
+   "origem": "B04",
+   "texto": "Praia desolada, olhos ausentes,\ne a areia cruza-se sem pensar.\nA onda bate ao horizonte,\nmas eu permaneço distante.\nNas pedras grudam as aves mortas,\nmas não sou um dos que choram.\nO vento roça os ramos estérilmente,\ne eu, de pé, apenas sigo caminho.",
+   "braco_5b": "C",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X06",
+   "grupo": "R",
+   "origem": "poem_3555",
+   "texto": "O Tejo é mais belo que o rio que corre pela minha aldeia,\nMas o Tejo não é mais belo que o rio que corre pela minha aldeia\nPorque o Tejo não é o rio que corre pela minha aldeia,\nO Tejo tem grandes navios\nE navega nele ainda,\nPara aqueles que vêem em tudo o que lá não está,\nA memória das naus.\nO Tejo desce de Espanha\nE o Tejo entra no mar em Portugal.\nToda a gente sabe isso.\nMas poucos sabem qual é o rio da minha aldeia\nE para onde ele vai\nE donde ele vem.\nE por isso, porque pertence a menos gente,\nÉ mais livre e maior o rio da minha aldeia.\nPelo Tejo vai-se para o Mundo.\nPara além do Tejo há a América\nE a fortuna daqueles que a encontram.\nNinguém nunca pensou no que há para além\nDo rio da minha aldeia.\nO rio da minha aldeia não faz pensar em nada\nQuem está ao pé dele está só ao pé dele."
+  },
+  {
+   "id": "X07",
+   "grupo": "G",
+   "origem": "B39",
+   "texto": "Olho ao horizonte sem vontade de tocá-lo\nE é isso que me une à paisagem vasta\nNão busco ligação com as nuvens vagas\nNem a sensação do vento sobre mim\nÉ o vazio que preencho\nCom o silêncio das pedras que falam\nO mar, ali sempre quieto\nNão alça ondas nem me faz ouvir a sua voz\nEu sou apenas um espectador\nDos mistérios desta terra sem desejo de conhecê-los",
+   "braco_5b": "P",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X08",
+   "grupo": "O",
+   "origem": "poem_3889",
+   "texto": "Quando era jovem, eu a mim dizia:\nComo passam os dias, dia a dia,\nE nada conseguido ou intentado!\nMais velho, digo, com igual enfado:\nComo, dia após dia, os dias vão,\nSem nada feito e nada na intenção!\nAssim, naturalmente, envelhecido,\nDirei, e com igual voz e sentido:\nUm dia virá o dia em que já não\nDirei mais nada.\nQuem nada foi nem é não dirá nada."
+  },
+  {
+   "id": "X09",
+   "grupo": "G",
+   "origem": "B47",
+   "texto": "Para a escuridão me fundir e ser\nSomente o vazio onde olhos se miram,  \nPara nebulosa desaparecer  \nE existir apenas nos teus reflectem.\nNão queira ser mais do que  \nUm sussurro no espaço da memória.  \nOu uma sombra na tua curvatura,  \nQue desvanece quando a luz se apaga.\nSente-se então, no limiar dos sonhos,  \nApenas um instante antes de desvanecer.  \nE neste nada que é tudo,  \nVive o não-ser.",
+   "braco_5b": "P",
+   "pergunta_5b": "q04"
+  },
+  {
+   "id": "X10",
+   "grupo": "R",
+   "origem": "poem_3223",
+   "texto": "Perguntas-me porque os gozo.\nPorque os gozo, respondo.\nGozar uma flor é estar ao pé dela inconscientemente\nE ter uma noção do seu perfume nas nossas ideias mais apagadas.\nQuando reparo, não gozo: vejo.\nFecho os olhos, e o meu corpo, que está entre a erva,\nPertence inteiramente ao exterior de quem fecha os olhos —\nÀ dureza fresca da terra cheirosa e irregular;\nE alguma coisa dos ruídos indistintos das coisas a existir,\nE só uma sombra encarnada de luz me carrega levemente nas órbitas,\nE só um resto de vida ouve."
+  },
+  {
+   "id": "X11",
+   "grupo": "G",
+   "origem": "B48",
+   "texto": "Depois de gostar\nAndo por caminhos novos,\nCada coisa mais crua, mais viva.\nO amor como um farol claro,\nQue ilumina sem despertar.\nNão sei andar sozinho agora,\nPois ela fez-me companhia.\nUm sorriso em cada flor,\nE as sombras dançam com alegria.\nSe não a vejo, penso nela,\nForça que me fortifica.\nMas se a vejo, o coração,\nTreme num gesto de temor.",
+   "braco_5b": "P",
+   "pergunta_5b": "q05"
+  },
+  {
+   "id": "X12",
+   "grupo": "O",
+   "origem": "poem_941",
+   "texto": "Um corpo de mulher, mas fixo e grave\nE feito em tudo transcendentalmente.\nO pensamento impede-me e confrange-me\nDo terror de ter perto e comungar\nEm sensação ou ser com outro corpo.\nGelada mão misteriosa cai\nSobre a imaginação que nem em si\nMe pode amante conceber.\nÓ corpo! Amante, entrega-te! Talvez\nTe salves entregando-te e amando!\nMas não! A consciência do mistério\nMantém-me isolado e em horror\nPerante tudo.\nAh não poder\nArrancar de mim a consciência!"
+  },
+  {
+   "id": "X13",
+   "grupo": "O",
+   "origem": "poem_4317",
+   "texto": "O céu, azul de luz quieta,\nAs ondas brandas a quebrar,\nNa praia lúcida e completa —\nPontos de dedos a brincar.\nNo piano anónimo da praia\nTocam nenhuma melodia\nDe cujo ritmo por fim saia\nTodo o sentido deste dia.\nQue bom, se isto satisfizesse!\nQue certo, se eu pudesse crer\nQue esse mar e essas ondas e esse\nCéu têm vida e têm ser."
+  },
+  {
+   "id": "X14",
+   "grupo": "R",
+   "origem": "poem_3546",
+   "texto": "Quem me dera que eu fosse o pó da estrada\nE que os pés dos pobres me estivessem pisando...\nQuem me dera que eu fosse os rios que correm\nE que as lavadeiras estivessem à minha beira...\nQuem me dera que eu fosse os choupos à margem do rio\nE tivesse só o céu por cima e a água por baixo...\nQuem me dera que eu fosse o burro do moleiro\nE que ele me batesse e me estimasse...\nAntes isso que ser o que atravessa a vida\nOlhando para trás de si e tendo pena..."
+  },
+  {
+   "id": "X15",
+   "grupo": "G",
+   "origem": "B58",
+   "texto": "Olho a floresta que se extende e é estranha.\nNenhuma emoção m'abraça, e isto aproxima-me dela.\nCada tronco, cada folha numa dança sem eu.\nEla é silêncio, e eu sou o vazio em sonhar.\nRios murmúrias deslizam ao sol, mas não ouço.\nEstão lá, presentes, e no meu olhar são ausentes.\nO caminho se escoa, mas a terra permanece.\nNão sou grão na paisagem, nem ela em mim mescla.\nPássaros voam sem me despertarem,\nE o vento sopra com seu ritmo imune.\nPerto ou longe, esta quietude não muda.\nÉ assim que nos fundimos ou nos mantemos fora.",
+   "braco_5b": "P",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X16",
+   "grupo": "R",
+   "origem": "poem_2587",
+   "texto": "Também sei fazer conjecturas.\nHá em cada coisa aquilo que ela é que a anima.\nNa planta está por fora e é uma ninfa pequena.\nNo animal é um ser interior longínquo.\nNo homem é a alma que vive com ele e é já ele.\nNos deuses tem o mesmo tamanho\nE o mesmo espaço que o corpo\nE é a mesma coisa que o corpo.\nPor isso se diz que os deuses nunca morrem.\nPor isso os deuses não têm corpo e alma\nMas só corpo e são perfeitos.\nO corpo é que lhes é alma\nE têm a consciência na própria carne divina."
+  },
+  {
+   "id": "X17",
+   "grupo": "R",
+   "origem": "poem_3248",
+   "texto": "E vendo-a sempre de maneiras diferentes do que a encontro a ela.\nFaço pensamentos com a recordação do que ela é quando me fala,\nE em cada pensamento ela varia de acordo com a sua semelhança.\nAmar é pensar.\nE eu quase que me esqueço de sentir só de pensar nela.\nNão sei bem o que quero, mesmo dela, e eu não penso senão nela.\nTenho uma grande distracção animada.\nQuando desejo encontrá-la\nQuase que prefiro não a encontrar,\nPara não ter que a deixar depois.\nNão sei bem o que quero, nem quero saber o que quero. Quero só\nPensar nela.\nNão peço nada a ninguém, nem a ela, senão pensar."
+  },
+  {
+   "id": "X18",
+   "grupo": "O",
+   "origem": "poem_340",
+   "texto": "Só dá passagem legalmente.\nEscrevo ao sabor quente da hora\nBaldadamente.\nNão saber bem o que se diz\nÉ um pouco sol e um pouco alma.\nAh, quem me dera ser feliz.\nTeria isto, mais a calma.\nBom campo, estrada com cadastro,\nLegislação entre erva nata.\nVai atar a alma com um nastro\nSó para ver quem ma desata."
+  },
+  {
+   "id": "X19",
+   "grupo": "G",
+   "origem": "B31",
+   "texto": "O vento sussurra palavras secas,\ne eu ouço-as como quem não presta atenção.\nEntre as folhas que dançam, encontro-me ausente.\nE são elas que me aproximam, por falta de sentimento.\nA rocha ergue-se na encosta,\nestrangeira e próxima, como se fosse estranha.\nNela descanso a vista, sem ansiar nada,\ne é esse abandono que me une à pedra.\nO rio murmura entre as pedras,\ninconseqüente como o destino de um sonho.\nEle flui, eu vejo; uma brevíssima intersecção.\nÉ a ausência de propósito que me aproxima dele.",
+   "braco_5b": "P",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X20",
+   "grupo": "G",
+   "origem": "B45",
+   "texto": "O desejo é um clarão que não brilha sem ela\nAndo agora a ver mais do que antes,\nMas tudo se vê melhor quando ela vem.\nUma simples flor é uma festa,\nE um canto de pássaro, uma canção.\nSe ausente, penso em mim como árvore,\nE, só assim, consigo suportar a espera.\nQuando estou com ela, meus olhos brilham,\nMas se me desvia, sinto a noite cerrar-se.\nA estrada continua, mas agora é mais bela,\nNão por ela caminhar nele, mas por pensar nela.\nCada pedra, cada folha, cada sombra\nTêm um novo valor quando eu vejo com os seus olhos.",
+   "braco_5b": "C",
+   "pergunta_5b": "q05"
+  },
+  {
+   "id": "X21",
+   "grupo": "O",
+   "origem": "poem_471",
+   "texto": "EPITALÂMIO\nO noivo anseia pelo fim de tudo isto no cio\nDe conhecer essas entranhas em chupados sorvos,\nDe pôr primeira mão nesse cabelo do ventre\nE apalpar o fojo labiado,\nA fortaleza feita para ser tomada, e pela qual\nSente o aríete engrossar e doer de desejo.\nA trémula alegre noiva sente todo o calor do dia\nNesse lugar ainda enclaustrado\nOnde a sua virginal mão nocturna fingia\nUm vazio lucro de prazer.\nE dos outros a maior parte é disto que segredará,\nSabendo o rápido trabalho que é;\nE as crianças, que observam com ávidos olhos,\nAgora antegozam de saber\nDa carne, e com homens e mulheres crescidos fazer\nO acto coceguento e líquido\nPor cujo sabor em cantos escusos tentam\nO que mal sabem como é seco ainda."
+  },
+  {
+   "id": "X22",
+   "grupo": "R",
+   "origem": "poem_629",
+   "texto": "Amava a Natureza como um monge calmo a Cristo...\nAgora amo a Natureza\nComo um monge calmo à Virgem Maria,\nReligiosamente, a meu modo, como dantes,\nMas de outra maneira mais como vida e próxima.\nVejo melhor os rios quando vou contigo\nPelos campos até à beira dos rios;\nSentado a teu lado reparando nas nuvens reparo nelas melhor —\nTu não me tiraste a Natureza...\nTu mudaste a Natureza...\nTrouxeste-me a Natureza para o pé de mim,\nPor tu existires vejo-a melhor, mas a mesma,\nPor tu me amares, amo-a do mesmo modo, mas mais,\nPor tu me escolheres para te ter e te amar,\nOs meus olhos fitaram-na mais demoradamente\nSobre todas as coisas.\nNão me arrependo do que fui outrora\nPorque ainda o sou."
+  },
+  {
+   "id": "X23",
+   "grupo": "O",
+   "origem": "poem_183",
+   "texto": "AUTO DAS BACANTES\nQual é, senhor, a melhor sorte?\nMais vale a vida ou mais querer?\nHá, além do portal da morte,\nMelhor viver?\nSerá melhor viver amando\nE buscar o amor entre a vida,\nOu, inda que chorando,\nBuscar o amor\nOnde tudo é a sombra e o vago,\nE o guarda negro a fauce estende\nPor sobre o desolado lago\nHaverá escondida margem,\nOculta região feliz,\nOnde outra mais (...) aragem\nBanhe um amor como se quis?"
+  },
+  {
+   "id": "X24",
+   "grupo": "R",
+   "origem": "poem_3242",
+   "texto": "E as ovelhas tresmalharam-se pela encosta,\nE, de tanto pensar, nem tocou a flauta que trouxe para tocar.\nNinguém lhe apareceu ou desapareceu. Nunca mais encontrou o cajado.\nOutros, praguejando contra ele, recolheram-lhe as ovelhas.\nNinguém o tinha amado, afinal.\nQuando se ergueu da encosta e da verdade falsa, viu tudo;\nOs grandes vales cheios dos mesmos verdes de sempre,\nAs grandes montanhas longe, mais reais que qualquer sentimento,\nA realidade toda, com o céu e o ar e os campos que existem, estão presentes.\n(E de novo o ar, que lhe faltara tanto tempo, lhe entrou fresco nos pulmões)\nE sentiu que de novo o ar lhe abria, mas com dor, uma liberdade no peito."
+  },
+  {
+   "id": "X25",
+   "grupo": "R",
+   "origem": "poem_2652",
+   "texto": "Apanho-te do chão e, de perto, contemplo-te de longe.\nNão há rosas no meu quintal: que vento te trouxe?\nMas chego de longe de repente. Estive doente um momento.\nNenhum vento te trouxeagora.\nAgora estás aqui.\nO que foste não és tu, se não toda a rosa estava aqui."
+  },
+  {
+   "id": "X26",
+   "grupo": "G",
+   "origem": "B40",
+   "texto": "Estende-se um horizonte, curvo e sem fim,\nE uma sombra que se alonga na tarde.\nPisa-se terra mole sob os passos, leve,\nComo pensamento que voa sem peso.\nRola a pedra suave sobre a paisagem,\nSilêncio que quebraria se gritasse.\nNão há nenhum eco da sua rota,\nNem recordações de qualquer trajecto.\nPassa assim, simples, indiferente ao mundo,\nCom as mesmas certezas que o silêncio,\nSem perguntas, sem expectativas,\nSó movimento e ausência de desejos.",
+   "braco_5b": "C",
+   "pergunta_5b": "q08"
+  },
+  {
+   "id": "X27",
+   "grupo": "G",
+   "origem": "B12",
+   "texto": "e nada mais do que isso.  \nPastores não há, nem sombras da voz,  \nsó o gado em movimento, pacífico.  \nMamados no vazio do horizonte,  \ncada cabeça baixa em silêncio.  \nAqui e ali, um cascalho reluz,  \nou uma flor deixa a saudade passar.  \nNenhuma mão estende-se, nem se toca,  \nsó os corpos nus do pasto, encostados.  \nE a montanha olha-nos com indiferença,  \nsua silhueta contra o céu é só um contorno.",
+   "braco_5b": "C",
+   "pergunta_5b": "q08"
+  },
+  {
+   "id": "X28",
+   "grupo": "R",
+   "origem": "poem_1041",
+   "texto": "Porque para o meu ser adequado à existência das coisas\nO natural é o agradável só por ser natural.\nAceito as dificuldades da vida porque são o destino,\nComo aceito o frio excessivo no alto do Inverno—\nCalmamente, sem me queixar, como quem meramente aceita,\nE encontra uma alegria no facto de aceitar—\nNo facto sublimemente científico e difícil de aceitar o natural inevitável.\nQue são para mim as doenças que tenho e o mal que me acontece\nSenão o Inverno da minha pessoa e da minha vida?\nO Inverno irregular, cujas leis de aparecimento desconheço,\nMas que existe para mim em virtude da mesma fatalidade sublime,\nDa mesma inevitável exterioridade a mim,\nQue o calor da terra no alto do Verão\nE o frio da terra no cimo do Inverno.\nAceito por personalidade.\nNasci sujeito como os outros a erros e a defeitos,\nMas nunca ao erro de querer compreender demais,\nNunca ao erro de querer compreender só com a inteligência.\nNunca ao defeito de exigir do Mundo\nQue fosse qualquer coisa que não fosse o Mundo."
+  },
+  {
+   "id": "X29",
+   "grupo": "O",
+   "origem": "poem_2435",
+   "texto": "Uma razão (?) singular:\nÉ que não é o que queremos.\nFaz-se porque nós vivemos,\nE viver é não pensar.\nSe alguém pensasse na vida,\nMorria de pensamento.\nPor isso a vida vivida\nÉ essa coisa esquecida\nEntre um momento e um momento.\nMas nada importa que o seja\nOu que até deixe de o ser:\nMal é que a moral nos reja,\nBom é que ninguém nos veja;\nEntre isso fica viver."
+  },
+  {
+   "id": "X30",
+   "grupo": "G",
+   "origem": "B01",
+   "texto": "A noite desce pelos círculos das ruas.\nOlho-a sem movê-la, ela é só um olhar.\nE eu sou só quem observa, nenhum desejo,\nNenhuma emoção, nenhuma resposta —\nÉ isso mesmo que nos une: a inexpressividade.\nA chuva esvazia-se pelas janelas vazias.\nNão lhe dou vida, ela não tem substância.\nE assim permanecemos, distanciados,\nMas ligados pela mesma indiferença.\nO voo de um pássaro corta o horizonte.\nEu o vejo como um estranho\nQue passa sem fazer eco na minha alma —\nE é isso que nos aproxima: a presença sem perturbação.",
+   "braco_5b": "C",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X31",
+   "grupo": "O",
+   "origem": "poem_4203",
+   "texto": "Soam vãos, dolorido epicurista,\nOs versos teus, que a minha dor despreza;\nJá tive a alma sem descrença presa\nDesse teu sonho, que perturba a vista.\nDa Perfeição segui em vã conquista,\nMas vi depressa, já sem a alma acesa,\nQue a própria ideia em nós dessa beleza\nUm infinito de nós mesmos dista.\nNem à nossa alma definir podemos\nA Perfeição em cuja estrada a vida,\nAchando-a intérmina, a chorar perdemos.\nO mar tem fim, o céu talvez o tenha,\nMas não a ânsia de Coisa indefinida\nQue o ser indefinida faz tamanha."
+  },
+  {
+   "id": "X32",
+   "grupo": "R",
+   "origem": "poem_3518",
+   "texto": "Os pastores de Virgílio tocavam avenas e outras coisas\nE cantavam de amor literariamente.\n(Depois — eu nunca li Virgílio.\nPara que o havia eu de ler?)\nMas os pastores de Virgílio, coitados, são Virgílio,\nE a Natureza é bela e antiga."
+  },
+  {
+   "id": "X33",
+   "grupo": "R",
+   "origem": "poem_3436",
+   "texto": "E há poetas que são artistas\nE trabalham nos seus versos\nComo um carpinteiro nas tábuas!...\nQue triste não saber florir!\nTer que pôr verso sobre verso, como quem constrói um muro\nE ver se está bem, e tirar se não está!...\nQuando a única casa artística é a Terra toda\nQue varia e está sempre bem e é sempre a mesma.\nPenso nisto, não como quem pensa, mas como quem respira.\nE olho para as flores e sorrio...\nNão sei se elas me compreendem\nNem se eu as compreendo a elas,\nMas sei que a verdade está nelas e em mim\nE na nossa comum divindade\nDe nos deixarmos ir e viver pela Terra\nE levar ao colo pelas Estações contentes\nE deixar que o vento cante para adormecermos\nE não termos sonhos no nosso sono."
+  },
+  {
+   "id": "X34",
+   "grupo": "O",
+   "origem": "poem_2445",
+   "texto": "Amiséria do meu ser,\nDo ser que tenho a viver,\nTornou-se uma coisa vista.\nSou nesta vida um qualquer\nQue roda fora da pista.\nNinguém conhece quem sou\nNem eu mesmo me conheço\nE, se me conheço, esqueço,\nPorque não vivo onde estou.\nRodo, e o meu rodar apresso.\nÉ uma carreira invisível,\nSalvo onde caio e sou visto,\nPorque cair é sensível\nPelo ruído imprevisto...\nSou assim. Mas isto é crível?"
+  },
+  {
+   "id": "X35",
+   "grupo": "G",
+   "origem": "B55",
+   "texto": "Vaga pelo campo a onda sussurra,\nE a planície, ainda, é tão plana.\nDeixamos um suspiro e vamos;\nO vento, depois, espalha a brisa.\nA ponte ergue-se no rio largo,\nE o rio, em tanto vê-lo, não muda.\nPassamos e desaparecemos;\nE a água flui em seu silêncio, imutável.\nTambém a floresta é sempre idêntica,\nNão importando se passaram carros.\nA sombra se estende, e então arqueia-se,\nMantendo o mistério da sua uniformidade.\nNas montanhas, rochas permanecem;\nE nas praias, ondas se quebram.\nVamos e voltamos ao invisível,\nEnquanto o universo nos ignora.",
+   "braco_5b": "C",
+   "pergunta_5b": "q02"
+  },
+  {
+   "id": "X36",
+   "grupo": "O",
+   "origem": "poem_1275",
+   "texto": "É o que nunca aconteceu.\nMeu coração, quem o entristece?\nQuem o faz meu?\nNa nuvem vem o que escurece\nO grande campo sob o céu.\nMemórias? Tudo é o que esquece.\nA vida é quanto se perdeu.\nE há gente que não enlouquece!\nAi do que em mim me chamo eu!"
+  },
+  {
+   "id": "X37",
+   "grupo": "O",
+   "origem": "poem_586",
+   "texto": "Às vezes sou o Deus que trago em mim\nE então eu sou o Deus e o crente e a prece\nE a imagem de marfim\nEm que esse deus se esquece.\nÀs vezes não sou mais do que um ateu\nDesse deus meu que eu sou quando me exalto.\nOlho em mim todo um céu\nE é um mero oco céu alto."
+  },
+  {
+   "id": "X38",
+   "grupo": "R",
+   "origem": "poem_3327",
+   "texto": "Aquele cego ali na estrada também conhece estas palavras.\nEstou sentado num degrau alto e tenho as mãos apertadas\nSobre o mais alto dos joelhos cruzados.\nBem: verdade, mentira, certeza, incerteza o que são?\nO cego pára na estrada,\nDesliguei as mãos de cima do joelho.\nVerdade, mentira, certeza, incerteza são as mesmas?\nQualquer coisa mudou numa parte da realidade — os meus joelhos e as minhas mãos.\nQual é a ciência que tem conhecimento para isto?\nO cego continua o seu caminho e eu não faço mais gestos.\nJá não é a mesma hora, nem a mesma gente, nem nada igual.\nSer real é isto."
+  },
+  {
+   "id": "X39",
+   "grupo": "G",
+   "origem": "B02",
+   "texto": "Era como se o céu tivesse aberto um clarão   \nPelas ruas, pelas pedras, pelo vento que sussurra\nOlho para cada flor que abre, acreditando na beleza\nQue só agora se desenha perante os meus olhos\nE mesmo sem ela aqui presente, a memória dela    \nFaz-me viver cada momento com mais força\nComo o sol nascente, ou o crepúsculo que se afasta  \nTodo eu é uma dança da luz e das sombras\nNem sempre sei bem como desejar, mas sinto\nQue a presença dela transforma tudo em poesia",
+   "braco_5b": "P",
+   "pergunta_5b": "q05"
+  },
+  {
+   "id": "X40",
+   "grupo": "R",
+   "origem": "poem_996",
+   "texto": "Não há nada mais simples.\nTem só duas datas—a da minha nascença e a da minha morte.\nEntre uma e outra coisa todos os dias são meus.\nSou fácil de definir.\nVi como um danado.\nAmei as coisas sem sentimentalidade nenhuma.\nNunca tive um desejo que não pudesse realizar, porque nunca ceguei.\nMesmo ouvir nunca foi para mim senão um acompanhamento de ver.\nCompreendi que as coisas são reais e todas diferentes umas das outras;\nCompreendi isto com os olhos, nunca com o pensamento.\nCompreender isto com o pensamento seria achá-las todas iguais.\nUm dia deu-me o sono como a qualquer criança.\nFechei os olhos e dormi.\nAlém disso, fui o único poeta da Natureza."
+  },
+  {
+   "id": "X41",
+   "grupo": "G",
+   "origem": "B14",
+   "texto": "Olho ao rio que se estende,\nsem alegria nele vejo.\nA água que ele transporta,\nnão traz novas esperanças.\nPraia onde os passos não marcam,\npedras que se movem sozinhas.\nO vento que me acaricia,\nsussurros sem palavra final.",
+   "braco_5b": "C",
+   "pergunta_5b": "q03"
+  },
+  {
+   "id": "X42",
+   "grupo": "G",
+   "origem": "B44",
+   "texto": "Aprendo a ver,\nmas a visão esbarrará em pensamentos que se negam.\nPensa e desaparece;\nolha e o ser permanece.\nNão na mente, mas no olhar,\na realidade ergue-se diante de mim.\nPensar é um caminho para longe,\no ver é a essência do aqui e agora.\nEspelho da luz que brilha,\nignora pensamentos que erram.\nA verdade é o que se mostra,\ne não os erros dos que sonham.",
+   "braco_5b": "P",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "X43",
+   "grupo": "R",
+   "origem": "poem_2582",
+   "texto": "Querem campos mais verdes que estes!\nQuerem flores mais belas que estas que vejo!\nA mim este sol, estes campos, estas flores contentam-me.\nMas, se acaso me descontento,\nO que quero é um sol mais sol que o sol,\nO que quero é campos mais campos que estes prados,\nO que quero é flores mais estas flores que estas flores —\nTudo mais ideal do que é do mesmo modo e da mesma maneira!\nAquela coisa que está ali estava mais ali que ali está!\nSim, choro às vezes o corpo perfeito que não existe.\nMas o corpo perfeito é o corpo mais corpo que pode haver,\nE o resto são os sonhos dos homens,\nA miopia de quem vê pouco,\nE o desejo de estar sentado de quem não sabe estar de pé.\nTodo o cristianismo é um sonho de cadeiras.\nE como a alma é aquilo que não aparece,\nA alma mais perfeita é aquela que não apareça nunca —\nA alma que está feita com o corpo\nO absoluto corpo das coisas,\nA existência absolutamente real sem sombras nem erros\nA coincidência exacta (e inteira) de uma coisa consigo mesma."
+  },
+  {
+   "id": "X44",
+   "grupo": "O",
+   "origem": "poem_462",
+   "texto": "A que ninguém viu sem amar\nE que já o coração endeusa\nSó com somente a adivinhar.\nPor fim magnânima aparece\nNaquela perfeição que é\nUma estátua que a vida aquece\nE faz da mesma vida fé.\nAh, verdadeiramente aquela\nCom que no túmulo do mundo\nO morto sonha, como a estrela\nQue há-de surgir no céu profundo."
+  },
+  {
+   "id": "X45",
+   "grupo": "R",
+   "origem": "poem_2585",
+   "texto": "Sim: existo dentro do meu corpo.\nNão trago o sol nem a lua na algibeira.\nNão quero conquistar mundos porque dormi mal,\nNem almoçar a terra por causa do estômago.\nIndiferente?\nNão: natural da terra, que se der um salto, está em falso,\nUm momento no ar que não é para nós,\nE só contente quando os pés lhe batem outra vez na terra,\nTraz! na realidade que não falta!"
+  },
+  {
+   "id": "X46",
+   "grupo": "O",
+   "origem": "poem_2434",
+   "texto": "Mas é já frio o céu.\nDo vento o ocioso açoite\nEnvolve o tédio meu.\nQue vitórias perdidas\nPor não as ter querido!\nQuantas perdidas vidas!\nE o sonho sem ter sido...\nErgue-te, ó vento, do ermo\nDa noite que aparece!\nHá um silêncio sem termo\nPor trás do que estremece...\nPranto dos sonhos fúteis,\nQue a memória acordou,\nInúteis, tão inúteis —\nQuem me dirá quem sou?"
+  },
+  {
+   "id": "X47",
+   "grupo": "R",
+   "origem": "poem_1182",
+   "texto": "Às vezes, em dias de luz perfeita e exacta,\nEm que as coisas têm toda a realidade que podem ter,\nPergunto a mim próprio devagar\nPorque sequer atribuo eu\nBeleza às coisas.\nUma flor acaso tem beleza?\nTem beleza acaso um fruto?\nNão: têm cor e forma\nE existência apenas.\nA beleza é o nome de qualquer coisa que não existe\nQue eu dou às coisas em troca do agrado que me dão.\nNão significa nada.\nEntão porque digo eu das coisas: são belas?\nSim, mesmo a mim, que vivo só de viver,\nInvisíveis, vêm ter comigo as mentiras dos homens\nPerante as coisas,\nPerante as coisas que simplesmente existem.\nQue difícil ser próprio e não ver senão o visível!"
+  },
+  {
+   "id": "X48",
+   "grupo": "G",
+   "origem": "B07",
+   "texto": "Quando eu partir,\nO rio continuará a correr no seu caminho,\nE as nuvens passarão no céu sem pensar em mim.\nA vida segue, indiferente ao meu fim.\nNão busquei glórias nem fama,\nMas aceitei o que nasce e muda.\nSeja o vento que sopra ou a folha que cai,\nO mundo será exatamente como sempre foi.\nNas sombras do poente,\nA lua se revelará ao amanhecer,\nE as estrelas seguirão o seu curso imutável.\nNão sou mais que um suspiro na brisa,\nUm murmúrio entre os ramos da noite.",
+   "braco_5b": "P",
+   "pergunta_5b": "q09"
+  },
+  {
+   "id": "X49",
+   "grupo": "G",
+   "origem": "B26",
+   "texto": "O que aprendemos é mais difícil do que ver  \nVer sem aprender, olhar sem se encantar  \nNão é pensar, mas sim sentir-se ar —  \nDor ou prazer, isto bate no coração\nÉ mais simples açoitar os raios de sol  \nQue lhes dar um sentido a preceito, luto  \nEntender o que vemos, este mudo salto  \nDo olho para a mente, é o que nos pertuba\nMas se ver com alma nua, sem leitura,  \nÉ descer a uma selva onde tudo flui —  \nOs sons de um rio, as sombras num abrigo  \nE as nuvens, sussurrantes em formação\nEntão aprendemos, mas não para aprender  \nAprendermos a ver como se vê o primeiro beijo",
+   "braco_5b": "C",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "X50",
+   "grupo": "O",
+   "origem": "poem_2876",
+   "texto": "Peguei no meu coração\nE pu‑lo na minha mão,\nOlhei‑o como quem olha\nGrãos de areia ou uma folha.\nOlhei‑o pávido e absorto\nComo quem sabe estar morto;\nCom a alma só comovida\nDo sonho e pouco da vida."
+  },
+  {
+   "id": "X51",
+   "grupo": "G",
+   "origem": "B41",
+   "texto": "Pensar estraga  \no que se está a ver  \ncobre as cores  \ndo que passa aqui.\nNão pensando, só  \nolhando o caminho,  \no sol nasce  \ne esquecem-se os pensamentos.  \nÉ preciso  \nnão ter consciência  \nda sombra na parede,  \nsó dela.  \nPensar é trancar  \nas janelas de luz,  \nesvaziar o vazio  \nde ideias feitas.",
+   "braco_5b": "P",
+   "pergunta_5b": "q07"
+  },
+  {
+   "id": "X52",
+   "grupo": "R",
+   "origem": "poem_2578",
+   "texto": "O que ouviu os meus versos disse-me: Que tem isso de novo?\nTodos sabem que uma flor é uma flor e uma árvore é uma árvore.\nMas eu respondi, nem todos, ninguém.\nPorque todos amam as flores por serem belas, e eu sou diferente.\nE todos amam as árvores por serem verdes e darem sombra, mas eu não.\nEu amo as flores por serem flores, directamente.\nEu amo as árvores por serem árvores, sem o meu pensamento."
+  },
+  {
+   "id": "X53",
+   "grupo": "O",
+   "origem": "poem_4217",
+   "texto": "Nem defini-la, nem achá-la, a ela —\nA Beleza. No mundo não existe.\nAi de quem com a alma inda mais triste\nNos seres transitórios quer colhê-la!\nAcanhe-se a alma porque não conquiste\nMais que o banal de cada coisa bela,\nOu saiba que ao ardor de querer havê-la\nÀ Perfeição — só a desgraça assiste.\nSó quem da vida bebeu todo o vinho,\nDum trago ou não, mas sendo até o fundo,\nSabe (mas sem remédio) o bom caminho;\nConhece o tédio extremo da desgraça,\nQue olha estupidamente o nauseabundo\nCristal inútil da vazia taça."
+  },
+  {
+   "id": "X54",
+   "grupo": "R",
+   "origem": "poem_598",
+   "texto": "Quem me dera que a minha vida fosse um carro de bois\nQue vem a chiar, manhaninha cedo, pela estrada,\nE que para de onde veio volta depois\nQuase à noitinha pela mesma estrada.\nEu não tinha que ter esperanças — tinha só que ter rodas...\nA minha velhice não tinha rugas nem cabelo branco...\nQuando eu já não servia, tiravam-me as rodas\nE eu ficava virado e partido no fundo de um barranco.\nOu então faziam de mim qualquer coisa diferente\nE eu não sabia nada do que de mim faziam...\nMas eu não sou um carro, sou diferente\nMas em que sou realmente diferente nunca me diriam."
+  },
+  {
+   "id": "X55",
+   "grupo": "O",
+   "origem": "poem_819",
+   "texto": "Crepúsculo na noite..., e é triste ver,\nEm vez da límpida amplitude nua\nDo céu, a noite e o céu a escurecer.\nA noite é húmida de conhecer,\nSem que humidade de água seja sua.\n[...]"
+  },
+  {
+   "id": "X56",
+   "grupo": "R",
+   "origem": "poem_3421",
+   "texto": "Pobres das flores nos canteiros dos jardins regulares.\nParecem ter medo da polícia...\nMas tão boas que florescem do mesmo modo\nE têm o mesmo sorriso antigo\nQue tiveram para o primeiro olhar do primeiro homem\nQue as viu aparecidas e lhes tocou levemente\nPara ver se elas falavam..."
+  },
+  {
+   "id": "X57",
+   "grupo": "O",
+   "origem": "poem_4276",
+   "texto": "Braços cruzados, sem pensar nem crer,\nFiquemos pois sem mágoas nem desejos.\nDeixemos beijos, pois o que são beijos ?\nA vida é só o esperar morrer.\nLonge da dor e longe do prazer,\nConheçamos no sono os benfazejos\nPoderes únicos; sem urzes, brejos,\nA sua estrada sabe apetecer.\nCoroado de papoilas e trazendo\nArtes porque com sono tira sonhos,\nVenha Morfeu, que as almas envolvendo,\nFaça a felicidade ao mundo vir\nNum nada onde sentimo-nos risonhos\nSó de sentirmos nada já sentir."
+  },
+  {
+   "id": "X58",
+   "grupo": "R",
+   "origem": "poem_1011",
+   "texto": "Brilha a luz duma janela.\nVejo-a, e sinto-me humano dos pés à cabeça.\nÉ curioso que toda a vida do indivíduo que ali mora, e que não sei quem é,\nAtrai-me só por essa luz vista de longe.\nSem dúvida que a vida dele é real e ele tem cara, gestos, família e profissão.\nMas agora só me importa a luz da janela dele.\nApesar de a luz estar ali por ele a ter acendido,\nA luz é a realidade imediata para mim.\nEu nunca passo para além da realidade imediata.\nPara além da realidade imediata não há nada.\nSe eu, de onde estou, só vejo aquela luz,\nEm relação à distância onde estou há só aquela luz.\nO homem e a família dele são reais do lado de lá da janela.\nEu estou do lado de cá, a uma grande distância.\nA luz apagou-se.\nQue me importa que o homem continue a existir?"
+  },
+  {
+   "id": "X59",
+   "grupo": "R",
+   "origem": "poem_364",
+   "texto": "Nunca fizeram crescer uma erva ou nascer uma flor.\nToda a sabedoria a respeito das coisas\nNunca foi coisa em que pudesse pegar, como nas coisas.\nSe a ciência quer ser verdadeira,\nQue ciência mais verdadeira que a das coisas sem ciência?\nFecho os olhos e a terra dura sobre que me deito\nTem uma realidade tão real que até as minhas costas a sentem.\nNão preciso de raciocínio onde tenho espáduas."
+  },
+  {
+   "id": "X60",
+   "grupo": "O",
+   "origem": "poem_2279",
+   "texto": "Que jaz no abismo sob o mar que se ergue?\nNós, Portugal, o poder ser.\nQue inquietação do fundo nos soergue?\nO desejar poder querer.\nIsto, e o mistério de que a noite é o fausto...\nMas súbito, onde o vento ruge,\nO relâmpago, farol de Deus, um hausto\nBrilha, e o mar escuro estruge."
+  },
+  {
+   "id": "X61",
+   "grupo": "R",
+   "origem": "poem_1469",
+   "texto": "Ao entardecer, debruçado pela janela,\nE sabendo de soslaio que há campos em frente.\nLeio até me arderem os olhos\nO livro de Cesário Verde.\nQue pena que tenho dele! Ele era um camponês\nQue andava preso em liberdade pela cidade.\nMas o modo como olhava para as casas,\nE o modo como reparava nas ruas,\nE a maneira como dava pelas coisas,\nÉ o de quem olha para árvores,\nE de quem desce os olhos pela estrada por onde vai andando\nE anda a reparar nas flores que há pelos campos...\nPor isso ele tinha aquela grande tristeza\nQue ele nunca disse bem que tinha,\nMas andava na cidade como quem anda no campo\nE triste como esmagar flores em livros\nE pôr plantas em jarros..."
+  },
+  {
+   "id": "X62",
+   "grupo": "O",
+   "origem": "poem_1765",
+   "texto": "Dóis-me no coração.\nTeu mal é o meu mal\nPor imaginação.\nTão fraco, tão doente,\nE com a boa cor\nQue a tísica põe quente\nNa cara, o exterior.\nMeu pobre e magro povo\nA quem deram, às peças,\nUm fato em estado novo\nPara que o não pareças!\nTens a cara lavada,\nUm fato de se ver\nMas não te deram nada,\nCoitado, que comer.\nE aí, nessa cadeira,\nJazes, apresentável.\n(…)\nO transeunte amável."
+  },
+  {
+   "id": "X63",
+   "grupo": "G",
+   "origem": "B42",
+   "texto": "Nas horas da tarde, quando a sombra alonga,\nO olhar procura no horizonte, longa,\nAquieta-se alma que se cansou do dia,\nNa espera do sol que a outra face acija.\nPorque a luz que se vai, suavemente,\nLeva consigo um pouco de nossa maneira.\nE o crepúsculo, com seu manto finamente,\nCobre a face do mundo e o seu silêncio.\nNão é tristeza do fim ser visível,\nÉ apenas um momento onde nos abrimos\nAo que não sabemos, mas sentimos.\nNa paz do encerramento, uma luz se esvai.",
+   "braco_5b": "P",
+   "pergunta_5b": "q01"
+  },
+  {
+   "id": "X64",
+   "grupo": "O",
+   "origem": "poem_96",
+   "texto": "Triste de quem vive em casa,\nContente com o seu lar,\nSem que um sonho, no erguer de asa,\nFaça até mais rubra a brasa\nDa lareira a abandonar!\nTriste de quem é feliz!\nVive porque a vida dura.\nNada na alma lhe diz\nMais que a lição da raiz —\nTer por vida a sepultura.\nEras sobre eras se somem\nNo tempo que em eras vem.\nSer descontente é ser homem.\nQue as forças cegas se domem\nPela visão que a alma tem!\nE assim, passados os quatro\nTempos do ser que sonhou,\nA terra será teatro\nDo dia claro, que no atro\nDa erma noite começou.\nGrécia, Roma, Cristandade,\nEuropa — os quatro se vão\nPara onde vai toda idade.\nQuem vem viver a verdade\nQue morreu D. Sebastião?"
+  }
+ ]
+}

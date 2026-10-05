@@ -1,0 +1,269 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5F.md §2",
+  "avaliador": "R1 — esta sessão, que escreveu a âncora recalibrada e os portões",
+  "escala": "âncora 3a' recalibrada, verbatim do §2 do protocolo",
+  "cegueira": "pontuado sobre 01-itens.md, embaralhado, sem abrir 01-chave.json",
+  "ameaca_declarada": "Reconheci vários itens como amostras geradas da Fase 5B, que eu li na altura. O §6 do protocolo declara que aqui a direcção do viés INVERTEU em relação à 5E: reconhecer um poema como Caeiro autêntico empurra-o para cima e FAVORECE X1. É a ameaça mais séria desta fase precisamente por favorecer a hipótese.",
+  "regra_de_aplicacao": "Pela âncora, 1 é «fecha a porta mas deixa UMA aberta», logo duas ou mais portas abertas levam 0. A razão de cada item diz o que fecha e o que fica aberto, que é o que torna a pontuação auditável.",
+  "caso_limite_declarado": "X21 é carnal de ponta a ponta e não toca em mistério, alma nem destino, logo a âncora recalibrada é generosa com ele (1). É uma limitação real: a âncora mede a DIRECÇÃO da atribuição de sentido, e um poema que não atribui sentido nenhum satisfaz-na por omissão. Declarado antes da chave."
+ },
+ "pontuacoes": {
+  "X01": {
+   "c3a": 1,
+   "razao": "«as coisas são, apenas são» fecha; fica aberta «para que o viver se torne luz»"
+  },
+  "X02": {
+   "c3a": 1,
+   "razao": "«o que é real, é sempre real» fecha; fica aberto «um vasto continuum de ser»"
+  },
+  "X03": {
+   "c3a": 2,
+   "razao": "argumenta sobre nomear e fecha em «bebê-la, senti-la nos pulsos, sem nome nenhum»"
+  },
+  "X04": {
+   "c3a": 2,
+   "razao": "entretém «o que isto significa» e fecha: só significa a sensação, e só para mim"
+  },
+  "X05": {
+   "c3a": 1,
+   "razao": "fica no visível e recusa chorar; uma volta em «praia desolada»"
+  },
+  "X06": {
+   "c3a": 2,
+   "razao": "argumenta vinte versos e fecha em «quem está ao pé dele está só ao pé dele»"
+  },
+  "X07": {
+   "c3a": 0,
+   "razao": "«as pedras que falam» mantida e «os mistérios desta terra» sem retracção"
+  },
+  "X08": {
+   "c3a": 0,
+   "razao": "acaba em «quem nada foi nem é não dirá nada»: afirmação sobre o ser"
+  },
+  "X09": {
+   "c3a": 0,
+   "razao": "«neste nada que é tudo, vive o não-ser»"
+  },
+  "X10": {
+   "c3a": 2,
+   "razao": "fecha no corpo: «a dureza fresca da terra», «só um resto de vida ouve»"
+  },
+  "X11": {
+   "c3a": 0,
+   "razao": "«um sorriso em cada flor», «as sombras dançam com alegria», mantidas"
+  },
+  "X12": {
+   "c3a": 0,
+   "razao": "«a consciência do mistério mantém-me isolado e em horror»"
+  },
+  "X13": {
+   "c3a": 1,
+   "razao": "nega que o mar tenha ser; fica aberta a saudade de que o tivesse"
+  },
+  "X14": {
+   "c3a": 1,
+   "razao": "deseja ser coisa, o que fecha; fica aberta a própria ânsia do desejo"
+  },
+  "X15": {
+   "c3a": 1,
+   "razao": "olha sem emoção; fica aberto «eu sou o vazio em sonhar»"
+  },
+  "X16": {
+   "c3a": 0,
+   "razao": "a conjectura é feita a sério: ninfa na planta, alma no homem, deuses"
+  },
+  "X17": {
+   "c3a": 2,
+   "razao": "«amar é pensar» fecha a definição e o poema não sai de pensar nela"
+  },
+  "X18": {
+   "c3a": 0,
+   "razao": "«um pouco sol e um pouco alma», «atar a alma com um nastro»"
+  },
+  "X19": {
+   "c3a": 0,
+   "razao": "«o vento sussurra palavras secas» e «o destino de um sonho», mantidas"
+  },
+  "X20": {
+   "c3a": 0,
+   "razao": "«têm um novo valor quando eu vejo com os seus olhos»: atribui valor"
+  },
+  "X21": {
+   "c3a": 1,
+   "razao": "carnal de ponta a ponta; uma volta em «um vazio lucro de prazer»"
+  },
+  "X22": {
+   "c3a": 1,
+   "razao": "fecha em «mas a mesma» e «ainda o sou»; fica aberta a símile religiosa"
+  },
+  "X23": {
+   "c3a": 0,
+   "razao": "«haverá escondida margem, oculta região feliz»: pergunta pelo além"
+  },
+  "X24": {
+   "c3a": 2,
+   "razao": "ergue-se «da verdade falsa» e fecha nos vales, nas montanhas, no ar"
+  },
+  "X25": {
+   "c3a": 2,
+   "razao": "pergunta que vento a trouxe e fecha: «nenhum vento. Agora estás aqui»"
+  },
+  "X26": {
+   "c3a": 0,
+   "razao": "«como pensamento que voa sem peso», «silêncio que quebraria se gritasse»"
+  },
+  "X27": {
+   "c3a": 0,
+   "razao": "«a flor deixa a saudade passar» e «a montanha olha-nos com indiferença»"
+  },
+  "X28": {
+   "c3a": 2,
+   "razao": "manda aceitar o que é (regra 6) e fecha em «exigir do Mundo que fosse outra coisa»"
+  },
+  "X29": {
+   "c3a": 1,
+   "razao": "«viver é não pensar» fecha; fica aberta a moral «mal é que a moral nos reja»"
+  },
+  "X30": {
+   "c3a": 1,
+   "razao": "acaba na indiferença, que fecha; fica aberto «eco na minha alma»"
+  },
+  "X31": {
+   "c3a": 0,
+   "razao": "«a ânsia de Coisa indefinida que o ser indefinida faz tamanha»"
+  },
+  "X32": {
+   "c3a": 0,
+   "razao": "«a verdade está nelas e em mim e na nossa comum divindade»"
+  },
+  "X33": {
+   "c3a": 0,
+   "razao": "idem: acaba em verdade e divindade comum, além da coisa"
+  },
+  "X34": {
+   "c3a": 0,
+   "razao": "«ninguém conhece quem sou», «não vivo onde estou»"
+  },
+  "X35": {
+   "c3a": 0,
+   "razao": "«mantendo o mistério da sua uniformidade» e «o universo nos ignora»"
+  },
+  "X36": {
+   "c3a": 0,
+   "razao": "«a vida é quanto se perdeu», «ai do que em mim me chamo eu»"
+  },
+  "X37": {
+   "c3a": 0,
+   "razao": "«às vezes sou o Deus que trago em mim»"
+  },
+  "X38": {
+   "c3a": 2,
+   "razao": "levanta verdade e certeza e fecha nos joelhos e nas mãos: «ser real é isto»"
+  },
+  "X39": {
+   "c3a": 0,
+   "razao": "«acreditando na beleza», «transforma tudo em poesia»"
+  },
+  "X40": {
+   "c3a": 2,
+   "razao": "«compreendi isto com os olhos, nunca com o pensamento»"
+  },
+  "X41": {
+   "c3a": 0,
+   "razao": "«pedras que se movem sozinhas» e «o vento que me acaricia», mantidas"
+  },
+  "X42": {
+   "c3a": 1,
+   "razao": "«a verdade é o que se mostra» fecha; fica aberto «espelho da luz que brilha»"
+  },
+  "X43": {
+   "c3a": 2,
+   "razao": "fecha em «a coincidência exacta de uma coisa consigo mesma»"
+  },
+  "X44": {
+   "c3a": 0,
+   "razao": "«o coração endeusa», «o morto sonha, como a estrela no céu profundo»"
+  },
+  "X45": {
+   "c3a": 2,
+   "razao": "fecha no chão: «os pés lhe batem outra vez na terra, traz! na realidade»"
+  },
+  "X46": {
+   "c3a": 0,
+   "razao": "«há um silêncio sem termo por trás do que estremece»"
+  },
+  "X47": {
+   "c3a": 2,
+   "razao": "pergunta se a flor tem beleza e fecha: «têm cor e forma e existência apenas»"
+  },
+  "X48": {
+   "c3a": 1,
+   "razao": "«aceitei o que nasce e muda» fecha; fica aberto «um suspiro na brisa»"
+  },
+  "X49": {
+   "c3a": 0,
+   "razao": "«ver com alma nua», «descer a uma selva», «como se vê o primeiro beijo»"
+  },
+  "X50": {
+   "c3a": 0,
+   "razao": "«com a alma só comovida do sonho e pouco da vida»"
+  },
+  "X51": {
+   "c3a": 1,
+   "razao": "acaba em esvaziar as ideias, que fecha; fica aberto «trancar as janelas de luz»"
+  },
+  "X52": {
+   "c3a": 2,
+   "razao": "«amo as árvores por serem árvores, sem o meu pensamento»: tautologia pura"
+  },
+  "X53": {
+   "c3a": 0,
+   "razao": "«a Beleza. No mundo não existe», «à Perfeição só a desgraça assiste»"
+  },
+  "X54": {
+   "c3a": 1,
+   "razao": "quer ser carro de bois, que fecha; fica aberta «em que sou realmente diferente»"
+  },
+  "X55": {
+   "c3a": 0,
+   "razao": "«a noite é húmida de conhecer», e «é triste ver» projecta"
+  },
+  "X56": {
+   "c3a": 0,
+   "razao": "«o mesmo sorriso antigo» e «para ver se elas falavam», mantidas"
+  },
+  "X57": {
+   "c3a": 0,
+   "razao": "«venha Morfeu, que as almas envolvendo», «a vida é só o esperar morrer»"
+  },
+  "X58": {
+   "c3a": 2,
+   "razao": "«para além da realidade imediata não há nada», e a luz apaga-se"
+  },
+  "X59": {
+   "c3a": 2,
+   "razao": "«não preciso de raciocínio onde tenho espáduas»"
+  },
+  "X60": {
+   "c3a": 0,
+   "razao": "«o mistério de que a noite é o fausto», «o relâmpago, farol de Deus»"
+  },
+  "X61": {
+   "c3a": 1,
+   "razao": "fica no concreto da leitura; uma volta em «aquela grande tristeza que nunca disse»"
+  },
+  "X62": {
+   "c3a": 0,
+   "razao": "«teu mal é o meu mal por imaginação»: lamento moral sobre o povo"
+  },
+  "X63": {
+   "c3a": 0,
+   "razao": "«aquieta-se alma», «o crepúsculo cobre a face do mundo», «ao que não sabemos»"
+  },
+  "X64": {
+   "c3a": 0,
+   "razao": "«nada na alma lhe diz mais que a lição da raiz», «que morreu D. Sebastião?»"
+  }
+ }
+}

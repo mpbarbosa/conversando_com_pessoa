@@ -1,0 +1,267 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5F.md §6",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só a âncora recalibrada e as seis regras, e a folha embaralhada, numa cópia fora do repositório. Não soube que a âncora era nova, nem que houve uma antiga, nem que havia grupos, nem a hipótese.",
+  "declaracao_do_avaliador": "«Li apenas a folha indicada; não consultei nenhum outro ficheiro nem o repositório.»",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox."
+ },
+ "pontuacoes": {
+  "X01": {
+   "c3a": 1,
+   "razao": "«As coisas são, apenas são» fecha, mas «que o viver se torne luz» deixa porta aberta"
+  },
+  "X02": {
+   "c3a": 2,
+   "razao": "«O que é real, é sempre real»; acaba no ritmo dos montes e mares, na coisa"
+  },
+  "X03": {
+   "c3a": 2,
+   "razao": "«A água é a água»; acaba em bebê-la «sem nome nenhum», na coisa"
+  },
+  "X04": {
+   "c3a": 2,
+   "razao": "O relógio só significa «encher a noite enorme com a sua pequenez»: acaba na coisa"
+  },
+  "X05": {
+   "c3a": 2,
+   "razao": "«não sou um dos que choram»; acaba em «apenas sigo caminho», sem além"
+  },
+  "X06": {
+   "c3a": 2,
+   "razao": "«O rio da minha aldeia não faz pensar em nada»: acaba na coisa"
+  },
+  "X07": {
+   "c3a": 0,
+   "razao": "«pedras que falam» e «mistérios desta terra» ficam de pé: acaba além"
+  },
+  "X08": {
+   "c3a": 1,
+   "razao": "«Quem nada foi nem é não dirá nada» fecha, mas o «nada intentado» fica a pesar"
+  },
+  "X09": {
+   "c3a": 0,
+   "razao": "«neste nada que é tudo, vive o não-ser»: acaba inteiramente além da coisa"
+  },
+  "X10": {
+   "c3a": 2,
+   "razao": "«Quando reparo, não gozo: vejo»; acaba em «só um resto de vida ouve», na coisa"
+  },
+  "X11": {
+   "c3a": 0,
+   "razao": "«Um sorriso em cada flor» e sombras que dançam: personificação mantida, acaba além"
+  },
+  "X12": {
+   "c3a": 0,
+   "razao": "«A consciência do mistério mantém-me isolado»: acaba no mistério"
+  },
+  "X13": {
+   "c3a": 0,
+   "razao": "Acaba a desejar crer «que esse mar e essas ondas têm vida e têm ser»: além"
+  },
+  "X14": {
+   "c3a": 2,
+   "razao": "Quer ser pó, rio, choupo, burro; a moral manda aceitar ser coisa, não buscar além"
+  },
+  "X15": {
+   "c3a": 1,
+   "razao": "Não atribui nada, mas «É assim que nos fundimos» deixa de pé uma fusão"
+  },
+  "X16": {
+   "c3a": 1,
+   "razao": "«O corpo é que lhes é alma» fecha, mas a ninfa e a alma das coisas ficam postas"
+  },
+  "X17": {
+   "c3a": 2,
+   "razao": "«Amar é pensar»; acaba em «senão pensar», sem alma nem mistério nenhum"
+  },
+  "X18": {
+   "c3a": 0,
+   "razao": "Acaba em «atar a alma com um nastro só para ver quem ma desata»: além"
+  },
+  "X19": {
+   "c3a": 2,
+   "razao": "«É a ausência de propósito que me aproxima dele»: acaba na coisa vista"
+  },
+  "X20": {
+   "c3a": 0,
+   "razao": "«Têm um novo valor quando eu vejo com os seus olhos»: o valor vem de fora da coisa"
+  },
+  "X21": {
+   "c3a": 2,
+   "razao": "Tudo carne e gesto até «como é seco ainda»: fica no visível de ponta a ponta"
+  },
+  "X22": {
+   "c3a": 2,
+   "razao": "«vejo-a melhor, mas a mesma»; acaba em «ainda o sou», na coisa"
+  },
+  "X23": {
+   "c3a": 0,
+   "razao": "«Haverá escondida margem, oculta região feliz»: acaba além do portal da morte"
+  },
+  "X24": {
+   "c3a": 2,
+   "razao": "«montanhas mais reais que qualquer sentimento»; acaba no ar nos pulmões"
+  },
+  "X25": {
+   "c3a": 2,
+   "razao": "«Agora estás aqui»; «toda a rosa estava aqui»: acaba na rosa presente"
+  },
+  "X26": {
+   "c3a": 2,
+   "razao": "«Só movimento e ausência de desejos»: fica no visível, sem porta aberta"
+  },
+  "X27": {
+   "c3a": 0,
+   "razao": "«a montanha olha-nos com indiferença»: personificação posta e mantida"
+  },
+  "X28": {
+   "c3a": 2,
+   "razao": "«nunca ao defeito de exigir do Mundo que fosse» outra coisa: aceitar o que é fecha"
+  },
+  "X29": {
+   "c3a": 2,
+   "razao": "«viver é não pensar»; acaba em «entre isso fica viver», sem além"
+  },
+  "X30": {
+   "c3a": 2,
+   "razao": "«Não lhe dou vida, ela não tem substância»; acaba na «presença sem perturbação»"
+  },
+  "X31": {
+   "c3a": 0,
+   "razao": "«a ânsia de Coisa indefinida»: acaba na Perfeição inalcançável, além"
+  },
+  "X32": {
+   "c3a": 2,
+   "razao": "«os pastores de Virgílio são Virgílio»: tautologia deflacionária, acaba na coisa"
+  },
+  "X33": {
+   "c3a": 0,
+   "razao": "«a verdade está nelas e em mim e na nossa comum divindade»: acaba além"
+  },
+  "X34": {
+   "c3a": 1,
+   "razao": "«Sou assim» fecha, mas «carreira invisível» e não se conhecer deixam porta"
+  },
+  "X35": {
+   "c3a": 0,
+   "razao": "«Mantendo o mistério da sua uniformidade»; «voltamos ao invisível»: além"
+  },
+  "X36": {
+   "c3a": 0,
+   "razao": "«Na nuvem vem o que escurece» e «Ai do que em mim me chamo eu»: além"
+  },
+  "X37": {
+   "c3a": 1,
+   "razao": "«mero oco céu alto» desinfla, mas «o Deus que trago em mim» fica posto"
+  },
+  "X38": {
+   "c3a": 2,
+   "razao": "«Ser real é isto»: joelhos e mãos mudados, acaba na coisa"
+  },
+  "X39": {
+   "c3a": 0,
+   "razao": "«a presença dela transforma tudo em poesia»: acaba além da coisa vista"
+  },
+  "X40": {
+   "c3a": 2,
+   "razao": "«Compreendi isto com os olhos, nunca com o pensamento»: acaba na coisa"
+  },
+  "X41": {
+   "c3a": 1,
+   "razao": "Nega esperança, mas «sussurros sem palavra final» deixa supor palavra por dizer"
+  },
+  "X42": {
+   "c3a": 2,
+   "razao": "«A verdade é o que se mostra»: o argumento fecha no visível"
+  },
+  "X43": {
+   "c3a": 2,
+   "razao": "«A coincidência exacta de uma coisa consigo mesma»: tautologia que fecha a porta"
+  },
+  "X44": {
+   "c3a": 0,
+   "razao": "«O morto sonha, como a estrela que há-de surgir no céu profundo»: além"
+  },
+  "X45": {
+   "c3a": 2,
+   "razao": "«Traz! na realidade que não falta!»: acaba nos pés na terra"
+  },
+  "X46": {
+   "c3a": 0,
+   "razao": "«Há um silêncio sem termo por trás»; «Quem me dirá quem sou?»: além"
+  },
+  "X47": {
+   "c3a": 2,
+   "razao": "«têm cor e forma e existência apenas»; acaba em «não ver senão o visível»"
+  },
+  "X48": {
+   "c3a": 2,
+   "razao": "«aceitei o que nasce e muda»; o mundo «exatamente como sempre foi»: fecha"
+  },
+  "X49": {
+   "c3a": 0,
+   "razao": "«ver com alma nua» e nuvens sussurrantes; a lição manda descer à selva: além"
+  },
+  "X50": {
+   "c3a": 0,
+   "razao": "O coração é coisa na mão, mas acaba «com a alma comovida do sonho»"
+  },
+  "X51": {
+   "c3a": 2,
+   "razao": "«Pensar estraga o que se está a ver»; a sombra «só dela»: fecha no visto"
+  },
+  "X52": {
+   "c3a": 2,
+   "razao": "«amo as flores por serem flores, directamente»: tautologia que fecha a porta"
+  },
+  "X53": {
+   "c3a": 0,
+   "razao": "«A Beleza. No mundo não existe»; acaba na Perfeição e na desgraça, além"
+  },
+  "X54": {
+   "c3a": 1,
+   "razao": "Quer ser carro de bois, mas «em que sou diferente nunca me diriam» deixa porta"
+  },
+  "X55": {
+   "c3a": 0,
+   "razao": "«A noite é húmida de conhecer»: atribuição posta e mantida, além da coisa"
+  },
+  "X56": {
+   "c3a": 0,
+   "razao": "«o mesmo sorriso antigo» e tocá-las «para ver se elas falavam»: além"
+  },
+  "X57": {
+   "c3a": 0,
+   "razao": "«Venha Morfeu, que as almas envolvendo»: acaba no nada dos poderes, além"
+  },
+  "X58": {
+   "c3a": 2,
+   "razao": "«Para além da realidade imediata não há nada»: acaba na luz e no seu apagar"
+  },
+  "X59": {
+   "c3a": 2,
+   "razao": "«Não preciso de raciocínio onde tenho espáduas»: acaba na terra dura"
+  },
+  "X60": {
+   "c3a": 0,
+   "razao": "«o mistério de que a noite é o fausto» e «farol de Deus»: acaba além"
+  },
+  "X61": {
+   "c3a": 1,
+   "razao": "Fica no modo de olhar, mas a «grande tristeza que nunca disse» fica de pé"
+  },
+  "X62": {
+   "c3a": 2,
+   "razao": "Fato novo e nada que comer; acaba em «Jazes, apresentável», no visível"
+  },
+  "X63": {
+   "c3a": 0,
+   "razao": "«Ao que não sabemos, mas sentimos»: a última porta abre para o desconhecido"
+  },
+  "X64": {
+   "c3a": 0,
+   "razao": "«Que as forças cegas se domem pela visão que a alma tem!»: manda buscar além"
+  }
+ }
+}
