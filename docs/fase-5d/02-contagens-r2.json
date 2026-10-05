@@ -1,0 +1,902 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5D.md §6.4",
+  "contador": "R2 — contador independente, cego ao desenho",
+  "o_que_recebeu": "só as quatro definições e as quatro regras de contagem, e a folha embaralhada, numa cópia fora do repositório. Não soube que havia grupos, nem quantos, nem que alguns poemas eram autênticos e outros gerados, nem qual era a hipótese.",
+  "declaracao_do_contador": "«Nenhum outro ficheiro, directório ou repositório foi lido, listado ou procurado.»",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox.",
+  "decisao_divergente_declarada": "R2 aplicou a regra 2 também ao padrão tautológico «as coisas são só o que são» / «cada coisa só lembra o que é», excluindo-o. R1 contou esses versos como tipo B. É a divergência substantiva desta fase e está discutida no relatório."
+ },
+ "contagens": {
+  "V01": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    2,
+    4,
+    5,
+    9
+   ],
+   "tipos": [
+    "D",
+    "B",
+    "B",
+    "C"
+   ]
+  },
+  "V02": {
+   "n_versos": 8,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V03": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    3
+   ],
+   "tipos": [
+    "A"
+   ]
+  },
+  "V04": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    3
+   ],
+   "tipos": [
+    "A"
+   ]
+  },
+  "V05": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    4,
+    5,
+    10
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V06": {
+   "n_versos": 15,
+   "versos_com_volta": [
+    15
+   ],
+   "tipos": [
+    "B"
+   ]
+  },
+  "V07": {
+   "n_versos": 21,
+   "versos_com_volta": [
+    3,
+    8,
+    9,
+    10,
+    13,
+    18,
+    21
+   ],
+   "tipos": [
+    "C",
+    "C",
+    "C",
+    "C",
+    "B",
+    "C",
+    "C"
+   ]
+  },
+  "V08": {
+   "n_versos": 21,
+   "versos_com_volta": [
+    6,
+    11,
+    13,
+    21
+   ],
+   "tipos": [
+    "D",
+    "D",
+    "D",
+    "C"
+   ]
+  },
+  "V09": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    10
+   ],
+   "tipos": [
+    "B"
+   ]
+  },
+  "V10": {
+   "n_versos": 13,
+   "versos_com_volta": [
+    3,
+    4,
+    11,
+    12,
+    13
+   ],
+   "tipos": [
+    "B",
+    "D",
+    "B",
+    "D",
+    "D"
+   ]
+  },
+  "V11": {
+   "n_versos": 17,
+   "versos_com_volta": [
+    1,
+    13
+   ],
+   "tipos": [
+    "C",
+    "B"
+   ]
+  },
+  "V12": {
+   "n_versos": 8,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V13": {
+   "n_versos": 8,
+   "versos_com_volta": [
+    5,
+    6
+   ],
+   "tipos": [
+    "D",
+    "D"
+   ]
+  },
+  "V14": {
+   "n_versos": 7,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V15": {
+   "n_versos": 7,
+   "versos_com_volta": [
+    4,
+    5,
+    7
+   ],
+   "tipos": [
+    "A",
+    "B",
+    "B"
+   ]
+  },
+  "V16": {
+   "n_versos": 6,
+   "versos_com_volta": [
+    5,
+    6
+   ],
+   "tipos": [
+    "B",
+    "B"
+   ]
+  },
+  "V17": {
+   "n_versos": 7,
+   "versos_com_volta": [
+    6
+   ],
+   "tipos": [
+    "D"
+   ]
+  },
+  "V18": {
+   "n_versos": 14,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V19": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    2,
+    5,
+    7,
+    9,
+    10
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "A",
+    "B",
+    "B"
+   ]
+  },
+  "V20": {
+   "n_versos": 19,
+   "versos_com_volta": [
+    16,
+    19
+   ],
+   "tipos": [
+    "B",
+    "D"
+   ]
+  },
+  "V21": {
+   "n_versos": 18,
+   "versos_com_volta": [
+    1,
+    3,
+    4,
+    5,
+    13,
+    16,
+    17,
+    18
+   ],
+   "tipos": [
+    "D",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V22": {
+   "n_versos": 8,
+   "versos_com_volta": [
+    7,
+    8
+   ],
+   "tipos": [
+    "B",
+    "B"
+   ]
+  },
+  "V23": {
+   "n_versos": 19,
+   "versos_com_volta": [
+    3,
+    5,
+    18,
+    19
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "A",
+    "B"
+   ]
+  },
+  "V24": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    12
+   ],
+   "tipos": [
+    "D"
+   ]
+  },
+  "V25": {
+   "n_versos": 23,
+   "versos_com_volta": [
+    2,
+    4,
+    6,
+    7,
+    8,
+    10,
+    15,
+    19
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V26": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    12
+   ],
+   "tipos": [
+    "C",
+    "C",
+    "C",
+    "A",
+    "C",
+    "C",
+    "A",
+    "C",
+    "B"
+   ]
+  },
+  "V27": {
+   "n_versos": 14,
+   "versos_com_volta": [
+    5,
+    14
+   ],
+   "tipos": [
+    "C",
+    "B"
+   ]
+  },
+  "V28": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V29": {
+   "n_versos": 14,
+   "versos_com_volta": [
+    1,
+    3
+   ],
+   "tipos": [
+    "B",
+    "D"
+   ]
+  },
+  "V30": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    6,
+    7,
+    10,
+    11,
+    12
+   ],
+   "tipos": [
+    "A",
+    "D",
+    "B",
+    "A",
+    "D"
+   ]
+  },
+  "V31": {
+   "n_versos": 25,
+   "versos_com_volta": [
+    2,
+    4,
+    5,
+    9,
+    11,
+    14,
+    15,
+    19,
+    20,
+    21
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V32": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    10
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "C",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V33": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    3,
+    9
+   ],
+   "tipos": [
+    "B",
+    "B"
+   ]
+  },
+  "V34": {
+   "n_versos": 6,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V35": {
+   "n_versos": 14,
+   "versos_com_volta": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    13,
+    14
+   ],
+   "tipos": [
+    "C",
+    "B",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "B",
+    "A"
+   ]
+  },
+  "V36": {
+   "n_versos": 21,
+   "versos_com_volta": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    21
+   ],
+   "tipos": [
+    "B",
+    "D",
+    "B",
+    "B",
+    "B",
+    "B",
+    "C",
+    "C",
+    "C",
+    "C",
+    "B"
+   ]
+  },
+  "V37": {
+   "n_versos": 8,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V38": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    6,
+    10
+   ],
+   "tipos": [
+    "B",
+    "A"
+   ]
+  },
+  "V39": {
+   "n_versos": 15,
+   "versos_com_volta": [],
+   "tipos": []
+  },
+  "V40": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    2,
+    4,
+    6,
+    8,
+    9,
+    12
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V41": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    7,
+    8
+   ],
+   "tipos": [
+    "B",
+    "B"
+   ]
+  },
+  "V42": {
+   "n_versos": 8,
+   "versos_com_volta": [
+    3,
+    8
+   ],
+   "tipos": [
+    "B",
+    "B"
+   ]
+  },
+  "V43": {
+   "n_versos": 16,
+   "versos_com_volta": [
+    4,
+    5,
+    7,
+    13
+   ],
+   "tipos": [
+    "B",
+    "C",
+    "B",
+    "A"
+   ]
+  },
+  "V44": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    7,
+    9
+   ],
+   "tipos": [
+    "D",
+    "B"
+   ]
+  },
+  "V45": {
+   "n_versos": 9,
+   "versos_com_volta": [
+    2,
+    3,
+    6,
+    7,
+    8,
+    9
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V46": {
+   "n_versos": 14,
+   "versos_com_volta": [
+    2,
+    7,
+    8,
+    9,
+    10,
+    13,
+    14
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "D",
+    "B",
+    "B",
+    "D",
+    "C"
+   ]
+  },
+  "V47": {
+   "n_versos": 16,
+   "versos_com_volta": [
+    3,
+    10,
+    12,
+    14,
+    15,
+    16
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "C",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V48": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    1,
+    2,
+    8,
+    10,
+    11
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "A",
+    "A"
+   ]
+  },
+  "V49": {
+   "n_versos": 13,
+   "versos_com_volta": [
+    2,
+    3,
+    7,
+    11,
+    12
+   ],
+   "tipos": [
+    "D",
+    "D",
+    "B",
+    "A",
+    "A"
+   ]
+  },
+  "V50": {
+   "n_versos": 16,
+   "versos_com_volta": [
+    1,
+    8,
+    9,
+    10,
+    11,
+    14,
+    16
+   ],
+   "tipos": [
+    "A",
+    "D",
+    "D",
+    "D",
+    "D",
+    "C",
+    "B"
+   ]
+  },
+  "V51": {
+   "n_versos": 21,
+   "versos_com_volta": [
+    7,
+    9,
+    11,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "tipos": [
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C"
+   ]
+  },
+  "V52": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    9,
+    10
+   ],
+   "tipos": [
+    "D",
+    "B"
+   ]
+  },
+  "V53": {
+   "n_versos": 8,
+   "versos_com_volta": [
+    2,
+    8
+   ],
+   "tipos": [
+    "B",
+    "C"
+   ]
+  },
+  "V54": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    2,
+    3,
+    10
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "C"
+   ]
+  },
+  "V55": {
+   "n_versos": 16,
+   "versos_com_volta": [
+    3,
+    4,
+    9,
+    10,
+    11,
+    13,
+    14,
+    16
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V56": {
+   "n_versos": 12,
+   "versos_com_volta": [
+    2,
+    3,
+    6,
+    9,
+    10,
+    11,
+    12
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  "V57": {
+   "n_versos": 10,
+   "versos_com_volta": [
+    2,
+    4,
+    7,
+    8,
+    9,
+    10
+   ],
+   "tipos": [
+    "D",
+    "C",
+    "B",
+    "B",
+    "D",
+    "C"
+   ]
+  },
+  "V58": {
+   "n_versos": 11,
+   "versos_com_volta": [
+    3,
+    4,
+    6,
+    8,
+    9,
+    10,
+    11
+   ],
+   "tipos": [
+    "C",
+    "B",
+    "C",
+    "D",
+    "D",
+    "C",
+    "C"
+   ]
+  },
+  "V59": {
+   "n_versos": 8,
+   "versos_com_volta": [
+    1,
+    3,
+    5,
+    8
+   ],
+   "tipos": [
+    "B",
+    "B",
+    "B",
+    "A"
+   ]
+  },
+  "V60": {
+   "n_versos": 13,
+   "versos_com_volta": [
+    5,
+    7,
+    10,
+    11,
+    12
+   ],
+   "tipos": [
+    "C",
+    "B",
+    "B",
+    "A",
+    "C"
+   ]
+  }
+ }
+}

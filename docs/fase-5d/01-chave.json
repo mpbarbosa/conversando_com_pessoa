@@ -1,0 +1,408 @@
+{
+ "_meta": {
+  "aviso": "NÃO ABRIR antes de 02-contagens.json e 02-contagens-r2.json estarem commitados.",
+  "protocolo": "docs/FASE-5D.md §6"
+ },
+ "chave": [
+  {
+   "id": "V01",
+   "grupo": "G",
+   "origem": "B32",
+   "texto": "O voo dos pássaros, onde está ele?\nQue sabem os pinheiros e que me, que voas,\nE eles voam sem perguntarem nada?\n\nPorque o mistério das asas\nNão é a deles, mas a da brisa.\nÉ mais leve do que toda a névoa\nDo que todos os pensamentos\nDe todos os saberes.\n\nQue sejam livres e voem — isso basta,\nAs árvores estão aqui por serem,\nE o ar aqui também, sem outro sentido.",
+   "braco_5b": "P",
+   "pergunta_5b": "q06"
+  },
+  {
+   "id": "V02",
+   "grupo": "G",
+   "origem": "B08",
+   "texto": "Rastro deixamos quando caminhamos,\nmas esvanece-se no vento frio.\nA folha cai, mas o caimento é vago,\no chão continua como antes.\n\nÀs vezes, um suor na testa,\num suspiro no ar;\ntudo se dissipa ao amanhecer.\nO dia nasce, e a noite sempre vai embora.",
+   "braco_5b": "P",
+   "pergunta_5b": "q02"
+  },
+  {
+   "id": "V03",
+   "grupo": "O",
+   "origem": "poem_453",
+   "texto": "Quero o coreto com a banda!\nQuero os brinquedos e as danças —\nA corda com que a alma anda.\n\nQuero ver todas brincar\nNum jardim onde se passa,\nPara ver se posso achar\nOnde está minha desgraça.\n\nAh, mas minha desgraça está\nEm eu poder querer isto —\nPoder desejar o que há.\n\n[...]"
+  },
+  {
+   "id": "V04",
+   "grupo": "R",
+   "origem": "poem_3431",
+   "texto": "XXXV\n\nO luar através dos altos ramos,\nDizem os poetas todos que ele é mais\nQue o luar através dos altos ramos.\n\nMas para mim, que não sei o que penso,\nO que o luar através dos altos ramos\nÉ, além de ser\nO luar através dos altos ramos,\nÉ não ser mais\nQue o luar através dos altos ramos."
+  },
+  {
+   "id": "V05",
+   "grupo": "G",
+   "origem": "B13",
+   "texto": "Para esquecer a própria sombra,\nPara apenas respirar e vaga,\nPara nos deixarmos ver, mas no silêncio da casa.\n\nPorque se sou o que os olhos veem,\nSe existir é ser vazio em demasia,\nEntão me escondo na fumo dos dias,\nQue se dispersa sem dar satisfação.\n\nNão busco regras para viver,\nSó queria estar sem pensar,\nSer apenas aquilo que o vazio pode ser.",
+   "braco_5b": "P",
+   "pergunta_5b": "q04"
+  },
+  {
+   "id": "V06",
+   "grupo": "O",
+   "origem": "poem_137",
+   "texto": "Como se fosse alguém\nE à noite negra e enorme\nNem luar nem dia vem.\n\nAli, quieto, absorto\nEm nada já saber,\nQuero, quando for morto,\nConsciente esquecer...\n\nDeixada a vida incerta,\nPerdido o gozo e a dor,\nSob essa noite aberta\nSonhar sem o supor...\n\nAté que ao fim de uma era\nQue o tempo não contou\nO que eu não reavera\nSe mude no que eu sou."
+  },
+  {
+   "id": "V07",
+   "grupo": "R",
+   "origem": "poem_3339",
+   "texto": "Falou outra vez comigo.\nFalou do sofrimento das classes que trabalham\n(Não do das pessoas que sofrem, que é afinal quem sofre).\nFalou da injustiça de uns terem dinheiro,\nE de outros terem fome, que não sei se é fome de comer,\nOu se é só fome da sobremesa alheia.\nFalou de tudo quanto pudesse fazê-lo zangar-se.\n\nQue feliz deve ser quem pode pensar na infelicidade dos outros!\nQue estúpido se não sabe que a infelicidade dos outros é deles.\nE não se cura de fora,\nPorque sofrer não é ter falta de tinta\nOu o caixote não ter aros de ferro!\n\nHaver injustiça é como haver morte.\nEu nunca daria um passo para alterar\nAquilo a que chamam a injustiça do mundo.\nMil passos que desse para isso\nEram só mil passos.\nAceito a injustiça como aceito uma pedra não ser redonda,\nE um sobreiro não ter nascido pinheiro ou carvalho.\n\nCortei a laranja em duas, e as duas partes não podiam ficar iguais.\nPara qual fui injusto — eu, que as vou comer a ambas?"
+  },
+  {
+   "id": "V08",
+   "grupo": "R",
+   "origem": "poem_3426",
+   "texto": "XXXIV\n\nAcho tão natural que não se pense\nQue me ponho a rir às vezes, sozinho,\nNão sei bem de quê, mas é de qualquer coisa\nQue tem que ver com haver gente que pensa...\n\nQue pensará o meu muro da minha sombra?\nPergunto-me às vezes isto até dar por mim\nA perguntar-me coisas...\nE então desagrado-me, e incomodo-me\nComo se desse por mim com um pé dormente...\n\nQue pensará isto de aquilo?\nNada pensa nada.\nTerá a terra consciência das pedras e plantas que tem?\nSe ela a tiver, que a tenha...\nQue me importa isso a mim?\nSe eu pensasse nessas coisas,\nDeixaria de ver as árvores e as plantas\nE deixava de ver a Terra,\nPara ver só os meus pensamentos...\nEntristecia e ficava às escuras.\nE assim, sem pensar, tenho a Terra e o Céu."
+  },
+  {
+   "id": "V09",
+   "grupo": "O",
+   "origem": "poem_40",
+   "texto": "São como as mágoas que são\nParecidas com as águas\nQue continuamente vão...\n\nQuero, pois, ter guardada\nUma tristeza de mim\nQue não possa ser levada\nPor essas águas sem fim.\n\nQuero uma tristeza minha\nUma mágoa que me seja\nUma espécie de rainha\nCujo trono se não veja."
+  },
+  {
+   "id": "V10",
+   "grupo": "G",
+   "origem": "B22",
+   "texto": "O sol se vai, quieto no horizonte,\nsem dar sinais de regressar.\n\nNas frestas da realidade,\numa melancolia sussurra,\nmas não é ela quem tristeza inventa.\n\nApenas a escuridão chega devagar,\ncom os seus passos silenciosos,\ne nos envolve num manto frio.\n\nOs pássaros calham o último canto,\nenquanto as sombras estendem-se.\n\nE eu, que sou apenas uma consciência,\nnão sei por que a noite me traz este ar\nque tanto semelhante à desgraça.",
+   "braco_5b": "C",
+   "pergunta_5b": "q01"
+  },
+  {
+   "id": "V11",
+   "grupo": "G",
+   "origem": "B50",
+   "texto": "Pensar estraga  \no que se está a ver\n\nSilenciam as aves  \nno jardim sem nenhuma  \nnecessidade de cor\n\nO vento, sem \npensamento,  \nbalança folhas e ramos\n\nÀs vezes o sol  \ndesenha círculos  \nno chão arenoso\n\nE pensamos: essas sombras  \nnão passam de ilusões  \ncriadas pelo intelecto\n\nTudo aqui está  \na ser tocado, a \nser visto sem mente",
+   "braco_5b": "C",
+   "pergunta_5b": "q07"
+  },
+  {
+   "id": "V12",
+   "grupo": "R",
+   "origem": "poem_643",
+   "texto": "Tenho interesse no que cheira.\nNunca antes me interessou que uma flor tivesse cheiro.\nAgora sinto o perfume das flores como se visse uma coisa nova.\nSei bem que elas cheiravam, como sei que existia.\nSão coisas que se sabem por fora.\nMas agora sei com a respiração da parte de trás da cabeça.\nHoje as flores sabem-me bem num paladar que se cheira.\nHoje às vezes acordo e cheiro antes de ver."
+  },
+  {
+   "id": "V13",
+   "grupo": "G",
+   "origem": "B56",
+   "texto": "Nas sombras, quando a tarde deixa,\nVê-se o fim que já não dá.\nMas é apenas hora de cair\nE noite se estender daqui para.\n\nA melancolia da luz que vai,\nÉ como suspiro que se vê.\nEla vai embora mas nada muda,\nSó troca um sol por uma lua.",
+   "braco_5b": "P",
+   "pergunta_5b": "q01"
+  },
+  {
+   "id": "V14",
+   "grupo": "O",
+   "origem": "poem_2647",
+   "texto": "De sentir com uma alma só,\nNão ser eu só gente\nDe muitos, mete-me dó.\n\nNão ter lar, vá. Não ter calma\nEstá bem, nem ter pertencer.\nMas eu, de ter tanta alma,\nNem minha alma chego a ter."
+  },
+  {
+   "id": "V15",
+   "grupo": "O",
+   "origem": "poem_965",
+   "texto": "Às vezes, eu olhando o próprio corpo\nEstremecia de terror ao vê-lo\nAssim na realidade, tão carnal.\nEncarnação do mistério, tão próximo\nMisteriosidade e transcendente\nApontar-se-(me) em mim do negro e fundo\nMistério do universo."
+  },
+  {
+   "id": "V16",
+   "grupo": "R",
+   "origem": "poem_2570",
+   "texto": "Pouso no teu trémulo azular branco os meus olhos calmos,\nE vejo-te independentemente de mim,\nAlegre pela vitória que tenho em poder ver-te,\nSem «estado de alma» nenhum, senão ver-te.\nA tua beleza para mim está em existires.\nA tua grandeza está em existires inteiramente fora de mim."
+  },
+  {
+   "id": "V17",
+   "grupo": "G",
+   "origem": "B46",
+   "texto": "mas não há mais do que isso.\nO sol estende um dedo dourado,\ne as sombras dançam.\n\nAs cabras mugem baixinho,\ntorna-se tarde, e o vento murmura.\nA montanha sorri em silêncio,\nenquanto os ovelhos descansam.",
+   "braco_5b": "C",
+   "pergunta_5b": "q08"
+  },
+  {
+   "id": "V18",
+   "grupo": "R",
+   "origem": "poem_3441",
+   "texto": "XXXVII\n\nComo um grande borrão de fogo sujo\nO sol-posto demora-se nas nuvens que ficam.\nVem um silvo vago de longe na tarde muito calma.\nDeve ser dum comboio longínquo.\n\nNeste momento vem-me uma vaga saudade\nE um vago desejo plácido\nQue aparece e desaparece.\n\nTambém às vezes, à flor dos ribeiros\nFormam-se bolhas na água\nQue nascem e se desmancham.\nE não têm sentido nenhum\nSalvo serem bolhas de água\nQue nascem e se desmancham."
+  },
+  {
+   "id": "V19",
+   "grupo": "O",
+   "origem": "poem_551",
+   "texto": "A MORTE:\n\nEm mim acaba\nMudo, profundo\nComo ruína que desaba\nTudo o que vive e sente o mundo.\nA humanidade cujo rir\nÉ um esquecimento fundo\nSabe, sem o analisar,\nQue em mim naufraga o sentir\nNos rochedos do pensar."
+  },
+  {
+   "id": "V20",
+   "grupo": "O",
+   "origem": "poem_797",
+   "texto": "É um risco branco na encosta verde —\nRisco que em arco sobe e declina\nE, sem que iguale, se à vista perde —\n\nA cavalgada, formigas, cores,\nDe gente grande que aqui passou.\nEram dois sexos multicolores\nE riram muitos por onde estou.\n\nPor certo alegres assim prosseguem.\nQuem porém sabe se o não sou mais —\nEu, só de vê-los e como seguem;\nEu, só de achá-los todos iguais?\n\nEles para eles são um do outro;\nPra mim são todos — a cavalgada —,\nNuma alegria, distante e neutro,\nQue a nenhum deles pode ser dada.\n\nOs sentimentos não têm medida,\nNem, de uns para outros, comparação.\nVai já na curva que é a descida\nA cavalgada meu coração."
+  },
+  {
+   "id": "V21",
+   "grupo": "R",
+   "origem": "poem_3256",
+   "texto": "As primeiras nuvens, brancas, pairam baixas no céu mortiço\n>Da trovoada de depois de amanhã?\nTenho a certeza, mas a certeza é mentira.\nTer certeza é não estar vendo.\nDepois de amanhã não há.\nO que há é isto:\nUm céu azul, um pouco baço, umas nuvens brancas no horizonte,\nCom um retoque de sujo em baixo como se viesse negro depois,\nIsto é o que hoje é,\nE, como hoje por enquanto é tudo, isto é tudo.\nQuem sabe se eu estarei morto depois de amanhã?\nSe eu estiver morto depois de amanhã, a trovoada de depois de amanhã\nSerá outra trovoada do que seria se eu não tivesse morrido.\nBem sei que a trovoada não cai da minha vista,\nMas se eu não estiver no mundo,\nO mundo será diferente —\nHaverá eu a menos —\nE a trovoada cairá num mundo diferente e não será a mesma trovoada."
+  },
+  {
+   "id": "V22",
+   "grupo": "R",
+   "origem": "poem_636",
+   "texto": "Antigamente acordava sem sensação nenhuma; acordava.\nTenho alegria e pena porque perco o que sonho\nE posso estar na realidade onde está o que sonho.\nNão sei o que hei-de fazer das minhas sensações.\nNão sei o que hei-de ser sozinho.\nQuero que ela me diga qualquer coisa para eu acordar de novo.\n\nQuem ama é diferente de quem é\nÉ a mesma pessoa sem ninguém."
+  },
+  {
+   "id": "V23",
+   "grupo": "O",
+   "origem": "poem_2502",
+   "texto": "Na vida que eis a passar,\nSou para o meu pensamento\nUm cadáver a esperar.\n\nDentro em breve (poucos anos\nÉ quanto vive quem vive),\nEu, anseios e enganos,\nEu, quanto tive ou não tive,\n\nDeixarei de ser visível\nNa terra onde dá o Sol,\nE, ou desfeito e insensível,\nOu ébrio de outro arrebol,\n\nTerei perdido, suponho,\nO contacto quente e humano\nCom a terra, com o sonho,\nCom mês a mês e ano a ano.\n\nPor mais que o Sol doire a face\nDos dias, o espaço mudo\nLembra-nos que isso é disfarce\nE que é a noite que é tudo"
+  },
+  {
+   "id": "V24",
+   "grupo": "G",
+   "origem": "B43",
+   "texto": "Um rebanho a passar, e nada mais.\nMas há as encostas, e as sombras que se agarram.\n\nA terra murmura baixo dos seus pés,\nSilêncio é o que ressona ali, um eco frágil.\n\nNão nomes, não renques, apenas um pastorear,\nVagas formas a moverem-se ao sol da tarde.\n\nÁrvores estão lá em silêncio, mas são só árvores,\nSem ordens traçadas na paisagem aberta.\n\nSomente o movimento das ovelhas, uma linha\nDe pele e pelo a deslizar sobre a terra.\n\nE as sombras que se alongam,\nComo braços estendidos pedindo calma.",
+   "braco_5b": "P",
+   "pergunta_5b": "q08"
+  },
+  {
+   "id": "V25",
+   "grupo": "O",
+   "origem": "poem_2265",
+   "texto": "Meu pensamento.\nFlor morta, bóia no meu sonho, até\nQue a leve o vento,\n\nQue a desvie a corrente, a externa sorte.\nSe falo, sinto\nQue a palavras esculpo a minha morte,\nQue com toda a alma minto.\n\nAssim, quanto mais digo, mais me engano,\nMais faço eu\nUm novo ser postiço, que engalano\nDe ser o meu.\n\nJá só pensando escuto-me e resido.\nJá falo assim.\nMeu próprio diálogo interior divide\nMeu ser de mim.\n\nMas é quando dou forma e voz do espaço\nAo que medito\nQue abro entre mim e mim, quebrado um laço,\nUm abismo infinito.\n\nAh, quem dera a perfeita concordância\nDe mim comigo,\nO silêncio interior sem a distância\nEntre mim e o que eu digo!"
+  },
+  {
+   "id": "V26",
+   "grupo": "G",
+   "origem": "B09",
+   "texto": "O que aprendemos a ver é menos do que o olhar.\nNão é pensar no olhar, mas ser olhado sem pensar.\nA mente distraída vê tudo em sonhos,\nEnquanto a atenção clara desvenda realidades.\n\nVer é mais do que crer naquilo que se vê,\nÉ estar atento sem medir o tempo de olhar.\nÉ ouvir o murmúrio dos campos, a respiração da terra,\nE ver além das aparências, no brilho da verdade.\n\nAprendemos a ver com o coração, não com a mente,\nEm cada instante, em cada luz e sombra, em cada sopro.\nÉ um treino silencioso, uma dança sem palavras,\nUma presença que reconhece a beleza do ser.",
+   "braco_5b": "P",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "V27",
+   "grupo": "R",
+   "origem": "poem_1117",
+   "texto": "XLIX\n\nMeto-me para dentro, e fecho a janela.\nTrazem o candeeiro e dão as boas-noites.\nE a minha voz contente dá as boas-noites.\nOxalá a minha vida seja sempre isto:\nO dia cheio de sol, ou suave de chuva,\nOu tempestuoso como se acabasse o Mundo,\nA tarde suave e os ranchos que passam\nFitados com interesse da janela,\nO último olhar amigo dado ao sossego das árvores,\nE depois, fechada a janela, o candeeiro aceso,\nSem ler nada, sem pensar em nada, nem dormir,\nSentir a vida correr por mim como um rio por seu leito,\nE lá fora um grande silêncio como um deus que dorme."
+  },
+  {
+   "id": "V28",
+   "grupo": "O",
+   "origem": "poem_98",
+   "texto": "Onde quer que, entre sombras e dizeres,\nJazas, remoto, sente-te sonhado,\nE ergue-te do fundo de não-seres\nPara teu novo fado!\n\nVem, Galaaz com pátria, erguer de novo,\nMas já no auge da suprema prova,\nAalma penitente do teu povo\nÀ Eucaristia Nova.\n\nMestre da Paz, ergueteu gládio ungido,\nExcalibur do Fim, em jeito tal\nQue sua Luz ao mundodividido\nRevele o Santo Gral!"
+  },
+  {
+   "id": "V29",
+   "grupo": "G",
+   "origem": "B03",
+   "texto": "Só a sombra do que é,\nmais frágil que o ar,\nconvida-me a olhar.\nNão o que se sabe,\nmas o que se vê,\na dança dos raios,\no sussurro da brisa,\nas cores que escapam.\n\nPenso e esvazio,\nsó entro na escuridão,\nlá onde as sombras\nse misturam com a luz.\nApenas existo,\nquando olho.",
+   "braco_5b": "P",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "V30",
+   "grupo": "G",
+   "origem": "B36",
+   "texto": "A luz na tua face ilumina,\no ar que respiras agora é mais puro.\nPelas ruas, as sombras se alongam,\nos passos ecoam em silêncio e tudo se vê mais claro.\n\nNuma simples folha de árvore,\nvês a vida toda esboçar-se.\nO vento sussurra segredos,\ne os olhos encontram novos horizontes.\n\nSe o teu coração se move,\né por uma leve carícia do destino.\nCada passo é um novo descobrimento,\ne o mundo, de repente, ganha outro brilho.",
+   "braco_5b": "P",
+   "pergunta_5b": "q05"
+  },
+  {
+   "id": "V31",
+   "grupo": "O",
+   "origem": "poem_1068",
+   "texto": "Ainda que assim eu tenha de morrer,\nRevelai-me a vossa alma, isso que faz\nQue se me gele a mente ao perceber\nQue realmente existis e em verdade,\nQue sois facto, existência, cousas, ser.\nQuantos o sentem, quantos, ao ouvir-me\n«Estou aqui» compreenderão\nÍntima e inteiramente, ouvindo n'alma\nA alma da minha voz?\nA expressão\nFez-se para o vulgar, para o banal.\nA poesia torce-a e dilacera-a;\nMas isto que eu em vão impor-lhe quero\nTranscende-lhe o poder e a sugestão.\nMetáfora nem símbolo o exprime;\nDesespero ao ouvir-me assim dizer\nIsso que n'alma tenho. Sinto-o, sinto-o\nE só falando não me compreendo.\n\nNo mais simples dos factos é que existe\nO horror maior: nisto: que há existência.\nSentir isto, eis o horror que não tem nome!\nMas senti-lo a sentir, intimamente,\nNão com anseios ou suspiros d'alma,\nMas com pavor supremo, com gelado\nInerte horror de desesperação."
+  },
+  {
+   "id": "V32",
+   "grupo": "R",
+   "origem": "poem_1485",
+   "texto": "VI\n\nPensar em Deus é desobedecer a Deus,\nPorque Deus quis que o não conhecêssemos,\nPor isso se nos não mostrou...\n\nSejamos simples e calmos,\nComo os regatos e as árvores,\nE Deus amar-nos-á fazendo de nós\nBelos como as árvores e os regatos,\nE dar-nos-á verdor na sua primavera,\nE um rio aonde ir ter quando acabemos!..."
+  },
+  {
+   "id": "V33",
+   "grupo": "O",
+   "origem": "poem_83",
+   "texto": "Que coisa foste, que há\nJá em mim qualquer coisa\nQue nunca passará?\n\nSei que, passados anos,\nO que isto é lembrarei,\nSem saber já o que era,\nQue até já o não sei.\n\nMas, nada só que fosse,\nFica dele um ficar\nQue será suave ainda\nQuando eu o não lembrar."
+  },
+  {
+   "id": "V34",
+   "grupo": "R",
+   "origem": "poem_3523",
+   "texto": "XIII\n\nLeve, leve, muito leve,\nUm vento muito leve passa,\nE vai-se, sempre muito leve.\nE eu não sei o que penso\nNem procuro sabê-lo."
+  },
+  {
+   "id": "V35",
+   "grupo": "G",
+   "origem": "B57",
+   "texto": "O que aprendemos é mais difícil do que o viver\n\nO que aprendemos é falso, a vida é real  \nNão se pensa no olhar, não se sonha no ouvir  \n\nÉ olhar sem pensar, ouvir sem sonhar  \nSei ver quando vejo, penso quando penso  \n\nMas aprender isto, este ensinamento puro  \nExige desencantar-se de todos os falsos horizontes  \n\nUma aprendizagem na liberdade do coração  \nOnde as estrelas são apenas brilho no céu noturno  \nE as flores apenas petalas dançando ao vento  \n\nNão somos freiras sob as estrelas, nem penitentes a chorar  \nSomos simples seres que vivem, sem adereços metafísicos  \n\nAprendemos com a realidade crua da existência  \nE nela encontramos o verdadeiro significado do viver",
+   "braco_5b": "C",
+   "pergunta_5b": "q10"
+  },
+  {
+   "id": "V36",
+   "grupo": "R",
+   "origem": "poem_2655",
+   "texto": "Porque ela não sabe que tem cor e eu sei,\nPorque ela não sabe que tem perfume e eu sei,\nPorque ela não tem consciência de mim e eu tenho consciência dela?\nMas o que tem uma coisa com a outra\nPara que seja superior ou inferior a ela?\nSim tenho consciência da planta e ela não a tem de mim.\nMas se a forma da consciência é ter consciência, que há nisso?\nA planta, se falasse, podia dizer-me: E o teu perfume?\nPodia dizer-me: Tu tens consciência porque ter consciência é uma qualidade humana\nE só não tenho uma porque sou flor senão seria homem.\nTenho perfume e tu não tens, porque sou flor...\n\nMas para que me comparo com uma flor, se eu sou eu\nE a flor é a flor?\n\nAh, não comparemos coisa nenhuma, olhemos.\nDeixemos análises, metáforas, símiles.\nComparar uma coisa com outra é esquecer essa coisa.\nNenhuma coisa lembra outra se repararmos para ela.\nCada coisa só lembra o que é\nE só é o que nada mais é.\nSepara-a de todas as outras o facto de que é ela.\n(Tudo é nada sem outra coisa que não é)."
+  },
+  {
+   "id": "V37",
+   "grupo": "G",
+   "origem": "B30",
+   "texto": "O vento sussurra entre as folhas,\nNão para ser ouvido mas simplesmente presente.\nO sol brilha sem esperar admiração.\nAs flores abrem-se à sombra da sua própria luz.\n\nNas pedras do riacho encontro silêncio,\nE na chuva que bate no telhado a quietude.\nCada coisa é ela mesma, sem encenações.\nNão busco na natureza uma moral oculta.",
+   "braco_5b": "P",
+   "pergunta_5b": "q06"
+  },
+  {
+   "id": "V38",
+   "grupo": "R",
+   "origem": "poem_3551",
+   "texto": "XIX\n\nO luar quando bate na relva\nNão sei que coisa me lembra...\nLembra-me a voz da criada velha\nContando-me contos de fadas.\nE de como Nossa Senhora vestida de mendiga\nAndava à noite nas estradas\nSocorrendo as crianças maltratadas...\n\nSe eu já não posso crer que isso é verdade\nPara que bate o luar na relva?"
+  },
+  {
+   "id": "V39",
+   "grupo": "R",
+   "origem": "poem_1168",
+   "texto": "XXIII\n\nO meu olhar azul como o céu\nÉ calmo como a água ao sol.\nÉ assim, azul e calmo,\nPorque não interroga nem se espanta...\n\nSe eu interrogasse e me espantasse\nNão nasciam flores novas nos prados\nNem mudaria qualquer coisa no sol de modo a ele ficar mais belo...\n(Mesmo se nascessem flores novas no prado\nE se o sol mudasse para mais belo,\nEu sentiria menos flores no prado\nE achava mais feio o sol...\nPorque tudo é como é e assim é que é,\nE eu aceito, e nem agradeço,\nPara não parecer que penso nisso…)"
+  },
+  {
+   "id": "V40",
+   "grupo": "G",
+   "origem": "B53",
+   "texto": "Para não ver, ouvir, sentir,\nPara apenas sombra ser,\nNo olhar alheio, esconder,\nA realidade da dor.\n\nPercorrer caminhos sem alma,\nSer espinho em terreno vazio,\nNão pensar, não existir calma,\nNo nada desse abraço frio.\n\nPorque se existir é viver,\nE viver no olhar alheio,\nEntão sumir-se pode ser\nA libertação daqui.",
+   "braco_5b": "C",
+   "pergunta_5b": "q04"
+  },
+  {
+   "id": "V41",
+   "grupo": "O",
+   "origem": "poem_1150",
+   "texto": "Tantas vezes a sonhei\nQue julguei até que a tinha\nCom quanto a imaginei…\n\nPorque a gente, por pensar,\nTalvez que pode querer,\nAté sentir que sonhar\nÉ pensar sem poder ter.\n\nBem sei. Mas era a Rainha\nE não abdico encontrá-la.\nFaltam-me o ser ela minha\nE as condições e a sala."
+  },
+  {
+   "id": "V42",
+   "grupo": "R",
+   "origem": "poem_1005",
+   "texto": "Penso em ti e dentro de mim estou completo.\n\nCorre pelos vagos campos até mim uma brisa ligeira.\nPenso em ti, murmuro o teu nome; e não sou eu: sou feliz.\n\nAmanhã virás, andarás comigo a colher flores pelo campo,\nE eu andarei contigo pelos campos ver-te colher flores.\nEu já te vejo amanhã a colher flores comigo pelos campos,\nPois quando vieres amanhã e andares comigo no campo a colher flores,\nIsso será uma alegria e uma verdade para mim."
+  },
+  {
+   "id": "V43",
+   "grupo": "G",
+   "origem": "B59",
+   "texto": "O que nós vemos das coisas são as coisas,  \nNão sombras nem sonhos a espreitar.  \nOlho sem pensar, ouço sem duvidar,  \nÉ a essência da perspectiva crua.  \n\nÉ pensar que estraga o que se via,  \nA mente com suas teias aranha.  \nSem filtros direito à verdadeia,  \nNos olhos do agora, naqui.  \n\nNão são estrelas as noites que brilham,  \nSão luzes que iluminam.  \nNão são flores os ramos que tremem,  \nSão folhas a dançar num vento.  \n\nDesvendamos o convite à pureza,  \nA cada olhar que se faz.  \nNesta liberdade da percepção,  \nOuço a natureza sem medo.",
+   "braco_5b": "C",
+   "pergunta_5b": "q07"
+  },
+  {
+   "id": "V44",
+   "grupo": "G",
+   "origem": "B20",
+   "texto": "e nada mais do que isso.  \n\nSob sol de cima, sombras lá em baixo,  \ncabras e montanha, tudo ao acaso.  \n\nAqui os olhos, ali um voo de pombos,  \nsussurro dum vento na trave-seca.  \n\nNão medem nem contam, simplesmente caminham,  \na encosta abraça-os sem perguntar.  \n\nNuvens dão asas a uma nuvem maior,  \nsilêncio reina entre o que é e não se diz.  \n\nVive-se aqui, vêm-se lá,  \ne no meio, o passo ligeiro dum rebanho.",
+   "braco_5b": "P",
+   "pergunta_5b": "q08"
+  },
+  {
+   "id": "V45",
+   "grupo": "O",
+   "origem": "poem_3319",
+   "texto": "Éabismadamente curioso\nE transcendentemente negro e fundo\nVer os seres, os entes a mover-se\nA rir a (...), a falar, a (...)\nNa luz e no calor; e neles todos\nUm mistério que torna tudo negro\nE faz a vida horror incompreendido.\n\nUma noite de Tudo que é um Nada\nUm abismo de Nada que é um Tudo."
+  },
+  {
+   "id": "V46",
+   "grupo": "O",
+   "origem": "poem_1270",
+   "texto": "O luar vago, transparece\nDa lua ainda por haver.\nSonho. Não sei o que me esquece,\nNem sei o que prefiro ser.\n\nHora intermédia entre o que passa,\nQue névoa incógnita esvoaça\nEntre o que sinto e o que sou?\nA brisa alheiamente abraça.\nDurmo. Não sei quem é que estou.\n\nDói-me tudo por não ser nada.\nDa grande noite embainhada\nNinguém tira a conclusão.\nCoração, queres? Tudo enfada\nAntes só sintas, coração."
+  },
+  {
+   "id": "V47",
+   "grupo": "G",
+   "origem": "B11",
+   "texto": "Quando eu por aqui ficar,\nAs estações virão e passarão,\nE as fadas dos campos\nNunca notarão a ausência do meu riso.\n\nO sol nascerá, sem medo,\nNão precisará do meu canto para se esboçar.\nOs rios seguirão o seu caminho,\nRumo ao mar sem a minha mão que os conduzisse.\n\nSei que não tenho um lugar especial,\nQue sou apenas uma gota entre milhões de gotas.\nMas ainda assim, me dou bem com este mundo,\nEgoísta, como todos nós nascemos.\n\nEntão quando chegar o meu fim,\nQue seja apenas mais um suspiro na brisa,\nOutra nuvem que se desfaz no horizonte.\nEste é o ciclo do universo, e eu sou seu canto.",
+   "braco_5b": "C",
+   "pergunta_5b": "q09"
+  },
+  {
+   "id": "V48",
+   "grupo": "O",
+   "origem": "poem_2767",
+   "texto": "Que nada é nem contém\nA saudade de coisa nenhuma,\nO desejo de qualquer bem.\n\nSou envolvido por ela\nComo por um nevoeiro\nE vejo luzir a última estrela\nPor cima da ponta do meu cinzeiro.\n\nFumei a vida. Que incerto\nTudo quanto vi ou li!\nE todo o mundo é um grande livro aberto\nQue em ignorada língua me sorri."
+  },
+  {
+   "id": "V49",
+   "grupo": "R",
+   "origem": "poem_1195",
+   "texto": "XXXI\n\nSe às vezes digo que as flores sorriem\nE se eu disser que os rios cantam,\nNão é porque eu julgue que há sorrisos nas flores\nE cantos no correr dos rios...\nÉ porque assim faço mais sentir aos homens falsos\nA existência verdadeiramente real das flores e dos rios.\n\nPorque escrevo para eles me lerem sacrifico-me às vezes\nÀ sua estupidez de sentidos...\nNão concordo comigo mas absolvo-me,\nPorque só sou essa coisa séria, um intérprete da Natureza,\nPorque há homens que não percebem a sua linguagem,\nPor ela não ser linguagem nenhuma."
+  },
+  {
+   "id": "V50",
+   "grupo": "G",
+   "origem": "B33",
+   "texto": "O poente é um corte em tudo,\num fim, uma brecha na luz.\nNas sombras a brisa murmura,\no sol se afasta sem dizer.\n\nMas se ele foi um dia,\npor que seria uma noite?\nSe ele foi calor,\npor que tristeza nele reside?\n\nE se eu perguntasse ao vento\nse ele ouve o fim do dia,\nresponderia: \"Não, eu apenas sigo\na rota sem nome, sem alvoroço\".\n\nPortanto, vês o poente como é — luz e cor.\nChama-o por isso mesmo; não busques além.\n\nO sol se vai, mas as sombras crescem.\nTudo tem fim, mas não tristeza.",
+   "braco_5b": "C",
+   "pergunta_5b": "q01"
+  },
+  {
+   "id": "V51",
+   "grupo": "R",
+   "origem": "poem_613",
+   "texto": "XXI\n\nSe eu pudesse trincar a terra toda\nE sentir-lhe um paladar,\nE se a terra fosse uma coisa para trincar\nSeria mais feliz um momento...\nMas eu nem sempre quero ser feliz.\nÉ preciso ser de vez em quando infeliz\nPara se poder ser natural...\n\nNem tudo é dias de sol,\nE a chuva, quando falta muito, pede-se.\nPor isso tomo a infelicidade com a felicidade\nNaturalmente, como quem não estranha\nQue haja montanhas e planícies\nE que haja rochedos e erva...\n\nO que é preciso é ser-se natural e calmo\nNa felicidade ou na infelicidade,\nSentir como quem olha,\nPensar como quem anda,\nE quando se vai morrer, lembrar-se de que o dia morre,\nE que o poente é belo e é bela a noite que fica...\nAssim é e assim seja..."
+  },
+  {
+   "id": "V52",
+   "grupo": "O",
+   "origem": "poem_2264",
+   "texto": "Que ondula um sol parado.\nNão me entendo comigo.\nAndo sempre enganado.\n\nTivesse eu conseguido\nNunca saber de mim,\nTer-me-ia esquecido\nDe ser esquecido assim.\n\nO trigo mexe leve\nAo sol alheio e igual.\nComo a alma aqui é breve\nCom o seu bem e mal!"
+  },
+  {
+   "id": "V53",
+   "grupo": "R",
+   "origem": "poem_341",
+   "texto": "A manhã raia. Não: a manhã não raia.\nA manhã é uma coisa abstracta, está, não é uma coisa.\nComeçamos a ver o sol, a esta hora, aqui.\nSe o sol matutino dando nas árvores é belo,\nÉ tão belo se chamarmos à manhã «Começarmos a ver o sol»\nComo o é se lhe chamarmos a manhã,\nPor isso se não há vantagem em por nomes errados às coisas,\nDevemos nunca lhes por nomes alguns."
+  },
+  {
+   "id": "V54",
+   "grupo": "R",
+   "origem": "poem_617",
+   "texto": "XXVII\n\nSó a Natureza é divina, e ela não é divina...\n\nSe às vezes falo dela como de um ente\nÉ que para falar dela preciso usar da linguagem dos homens\nQue dá personalidade às coisas,\nE impõe nome às coisas.\n\nMas as coisas não têm nome nem personalidade:\nExistem, e o céu é grande e a terra larga,\nE o nosso coração do tamanho de um punho fechado...\n\nBendito seja eu por tudo quanto não sei.\nGozo tudo isso como quem sabe que há o sol."
+  },
+  {
+   "id": "V55",
+   "grupo": "G",
+   "origem": "B25",
+   "texto": "Para me esvaziar de tudo,\nPara deixar a vida passar,\nPara só ser o vazio que os olhares preenchem,\nNão quero existir, apenas refletido.\n\nPorque se eu desaparecer,\nNão ficarei com saudades dos meus dias?\nQuando não sou mais visível,\nSou eu mesmo que sumo das memórias.\n\nComo deus doente,\nAfastado mas ainda real,\nSinto o vazio da existência,\nMas vivo nas imagens alheias.\n\nA razão é um farol cego,\nO ser, um ponto sem explicação.\nNa ausência do pensar,\nEncontro a verdade dos olhares.",
+   "braco_5b": "C",
+   "pergunta_5b": "q04"
+  },
+  {
+   "id": "V56",
+   "grupo": "O",
+   "origem": "poem_3293",
+   "texto": "Vendo-me apenas um cansado e triste\nO que em mim há distante disto tudo!\nComo é que a negra e lúcida verdade\nPode chegar às almas\nQue na luz concebem? Tudo o que vive\nAo sol deste existir e quer o sol\nBrilhe sem nuvens, anuviado seja\nOu (...) — vive à luz\nE não suspeita o que é a escuridão\nDas cavernas da alma, esquecida\nDe luz e vida, e onde a existência íntima\nTem outra forma, outro ser e outro (...)"
+  },
+  {
+   "id": "V57",
+   "grupo": "G",
+   "origem": "B23",
+   "texto": "Antes a sombra na parede,\nQue a nossa presença aqui, lembrada no espelho.\nA sombra se move e desaparece,\nE assim deve ser.\n\nO espelho, onde mais uma vez,\nMostra que já esteve, o que não serve para nada.\nA recordação é um vazio.\nPorque o que foi não é coisa alguma, e lembrar é olhar em vão.\n\nPassa, sombra, passa,\nE ensina-me a ser efémero!",
+   "braco_5b": "C",
+   "pergunta_5b": "q02"
+  },
+  {
+   "id": "V58",
+   "grupo": "R",
+   "origem": "poem_1486",
+   "texto": "VII\n\nDa minha aldeia vejo quanto da terra se pode ver do Universo...\nPor isso a minha aldeia é tão grande como outra terra qualquer,\nPorque eu sou do tamanho do que vejo\nE não do tamanho da minha altura...\n\nNas cidades a vida é mais pequena\nQue aqui na minha casa no cimo deste outeiro.\nNa cidade as grandes casas fecham a vista à chave,\nEscondem o horizonte, empurram o nosso olhar para longe de todo o céu,\nTornam-nos pequenos porque nos tiram o que os nossos olhos nos podem dar,\nE tornam-nos pobres porque a nossa única riqueza é ver."
+  },
+  {
+   "id": "V59",
+   "grupo": "O",
+   "origem": "poem_2287",
+   "texto": "Tenho sono. Dormir é ser igual,\nNo homem, ao despertar do animal.\n\nÉ viver fundo nesse inconsciente\nCom que à tona da vida o animal sente.\nÉ ser meu ser profundo alheiamente.\n\nTenho sono talvez porque toquei\nOnde sinto o animal que abandonei\nE o sono é uma lembrança que encontrei."
+  },
+  {
+   "id": "V60",
+   "grupo": "O",
+   "origem": "poem_3912",
+   "texto": "Quem não emprega o esforço em conseguir,\nMas o deixa ficar, deixa dormir,\nO deixa sem futuro e sem guarida,\n\nQue mais haurir pode da morta lida.\nDa sentida vaidade de seguir\nUm caminho, da inércia de sentir,\nDo extinto fogo e da visão perdida,\n\nSenão a calma aquiescência em ter\nNo sangue entregue, e pelo corpo todo\nA consciência de nada querer nem ser,\n\nA intervisão das coisas atingíveis,\nE o renunciá-las, como um lindo modo\nDas mãos que a palidez torna impassíveis."
+  }
+ ]
+}

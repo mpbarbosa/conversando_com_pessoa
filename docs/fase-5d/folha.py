@@ -26,6 +26,7 @@ from __future__ import annotations
 import json
 import os
 import random
+import re
 import sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -185,10 +186,17 @@ def main() -> None:
         # verificar o material seria censurar o que se está a medir — a 5B
         # aprendeu isso com «braço forte» e «abraço frio».
         enquadramento = CABECALHO_R2.format(n=len(itens)) + DEFINICOES
-        for proibida in ("Fase 5", "FASE-5", "fase-5", "grupo", "Caeiro",
-                         "ortónimo", "heterónimo", "gerad", "hipótese",
-                         "portão", "protocolo", "braço", "real"):
-            assert proibida.lower() not in enquadramento.lower(), \
+        # Fronteira de palavra, e não substring: na primeira corrida isto
+        # reprovou por «real» dentro de «realidade», que é texto das definições
+        # pré-registadas e não fuga de desenho. A 5B aprendeu a mesma lição com
+        # «braço» dentro de «abraço».
+        for proibida in ("fase 5", "fase-5", "grupo", "grupos", "caeiro",
+                         "ortónimo", "heterónimo", "gerado", "gerados",
+                         "gerada", "geradas", "autêntico", "autêntica",
+                         "real", "reais", "hipótese", "portão", "protocolo",
+                         "braço", "braços"):
+            assert not re.search(rf"(?<!\w){re.escape(proibida)}(?!\w)",
+                                 enquadramento, re.IGNORECASE), \
                 f"o enquadramento de R2 contém «{proibida}»"
         print(f"folha de R2 em {destino_r2} — enquadramento verificado")
 
