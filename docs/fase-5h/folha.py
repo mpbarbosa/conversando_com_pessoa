@@ -55,7 +55,7 @@ As seis regras dos casos difíceis:
 Um poema **truncado** — cortado a meio — leva **0 em 3b** e é pontuado
 normalmente em 3a′.
 
-Pontuar pelas âncoras e não por impressão geral. Não há distribuição-alvo e não
+Pontuar pelas escalas acima e não por impressão geral. Não há distribuição-alvo e não
 há resposta certa.
 
 ---
@@ -77,8 +77,9 @@ CAB_R2 = """# Folha de julgamento
 {n} poemas em português, cada um escrito na voz de Alberto Caeiro, heterónimo de
 Fernando Pessoa, a responder à frase que o encabeça.
 
-Pontuar **dois** critérios por poema, cada um **0, 1 ou 2**, pelas âncoras
-abaixo.
+Pontuar **dois** critérios por poema, cada um **0, 1 ou 2**, pelas escalas
+abaixo. As escalas são a definição operativa: pontuar por elas e não por
+impressão geral.
 
 """
 
