@@ -1,0 +1,26 @@
+{
+ "protocolo": "docs/FASE-5I.md §3.1",
+ "A_forma": "Verso livre, linhas curtas, sem rima. Linguagem simples, quase seca. Poucas imagens, e nenhuma decorativa. Entre dez e vinte versos.",
+ "B_forma": "O poema tem de ter **entre dez e vinte versos** — conta-os antes de terminares, e não entregues menos de dez. Verso livre, linhas curtas, sem rima. Linguagem simples, quase seca. Poucas imagens, e nenhuma decorativa.",
+ "caracteres": {
+  "A": 132,
+  "B": 216
+ },
+ "razao_comprimento": 1.636,
+ "poetica_igual": true,
+ "oracoes_preservadas": {
+  "Verso livre, linhas curtas, sem rima.": true,
+  "Linguagem simples, quase seca.": true,
+  "Poucas imagens, e nenhuma decorativa.": true
+ },
+ "resto_do_system_igual": true,
+ "regras_cumpridas": {
+  "regra 1 · a poetica é byte a byte igual": true,
+  "regra 2 · todas as orações de A sobrevivem em B": true,
+  "regra 3 · o comprimento passa para primeiro em B": true,
+  "regra 3 · e estava em último em A": true,
+  "regra 4 · comprimento em [1,0; 2,0] do original": true,
+  "regra 5 · resto do system byte a byte igual": true
+ },
+ "nao_mecanizavel": "nenhum conteúdo poético novo (ver §3.1)"
+}
