@@ -1,0 +1,252 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5E.md §3",
+  "avaliador": "R1 — esta sessão, que escreveu o protocolo e os portões",
+  "escala": "âncora de 3a do Caeiro, verbatim da Fase 5 §5.1, inalterada",
+  "cegueira": "pontuado sobre 01-itens.md, embaralhado, sem abrir 01-chave.json",
+  "ameaca_de_reconhecimento_declarada": "Reconheci cerca de 18 itens como amostras geradas da Fase 5B, que eu li na altura, e pontuei-os de forma consistente com o que lhes dei então. O §6 do protocolo declara que a direcção deste viés é CONSERVADORA para W: reconhecer uma amostra como gerada empurra-a para baixo, o que favorece a conclusão antiga e dificulta W1 e W2.",
+  "regra_de_aplicacao": "A âncora de 1 diz «sensorial na maior parte, com UMA volta simbólica ou moral», logo duas ou mais voltas levam 0 — a mesma regra que apliquei na Fase 5B, para que os números sejam comparáveis. A razão de cada item cita as voltas contadas."
+ },
+ "pontuacoes": {
+  "W01": {
+   "c3a": 0,
+   "razao": "a nuvem é alegoria do pensamento: «alta vai a intuição», «só vejo alma»"
+  },
+  "W02": {
+   "c3a": 0,
+   "razao": "«falso e estrangeiro» e «a sua verdadeira realidade»: duas interpretações"
+  },
+  "W03": {
+   "c3a": 0,
+   "razao": "«há um sentido que me diz», «é só a sombra do que é», «tudo é vão»"
+  },
+  "W04": {
+   "c3a": 0,
+   "razao": "«onde o nada foi», «entre o pensar e o ser»: metafísica de ponta a ponta"
+  },
+  "W05": {
+   "c3a": 1,
+   "razao": "base concreta (caju, coruja, pedra); uma volta em «a escuridão com seus olhos encobre a ilusão»"
+  },
+  "W06": {
+   "c3a": 1,
+   "razao": "sensorial e recusa perceber; uma volta moral em «é meu dever senti-lo»"
+  },
+  "W07": {
+   "c3a": 0,
+   "razao": "«o instante exacto do desencanto» e «a realidade segue as suas leis»"
+  },
+  "W08": {
+   "c3a": 0,
+   "razao": "«o que em minha alma habita», «entre quem estou e sou»"
+  },
+  "W09": {
+   "c3a": 0,
+   "razao": "o dia como «traje de viúva», «minha alma, já fria»"
+  },
+  "W10": {
+   "c3a": 0,
+   "razao": "argumenta de ponta a ponta e fecha em maldição moral: «ai de ti e de todos»"
+  },
+  "W11": {
+   "c3a": 1,
+   "razao": "o misticismo é recusa de saber; uma volta em «a minha alma é simples»"
+  },
+  "W12": {
+   "c3a": 0,
+   "razao": "«tronco de Ser», «a Consciência de existir me esmaga»: metafísica pura"
+  },
+  "W13": {
+   "c3a": 1,
+   "razao": "recusa o recado dos símbolos e fica nos olhos; uma volta em «vale mais a pena»"
+  },
+  "W14": {
+   "c3a": 0,
+   "razao": "«nas entrelinhas do que se desvanece» e «o chão mantém a voz»"
+  },
+  "W15": {
+   "c3a": 0,
+   "razao": "«tudo tem outro sentido, ó alma, mesmo o ter-um-sentido»"
+  },
+  "W16": {
+   "c3a": 0,
+   "razao": "«saudade de não-ser», «espelho sem imagem», «é o meu destino»"
+  },
+  "W17": {
+   "c3a": 0,
+   "razao": "«que sei eu de haver ser ou estar», «à alma entregar-se a nada»"
+  },
+  "W18": {
+   "c3a": 1,
+   "razao": "doutrina certa e explícita; uma volta no «falso arcanjo» e nas folhas que dançam"
+  },
+  "W19": {
+   "c3a": 0,
+   "razao": "«um sonho meio sonhado» e «este mundo é um largo onde ladram cães»"
+  },
+  "W20": {
+   "c3a": 0,
+   "razao": "filosofa sobre as próprias canções e fecha em «a paisagem da minha alma»"
+  },
+  "W21": {
+   "c3a": 0,
+   "razao": "«as nações todas são mistérios», «Deus fadou», «todo vivo é eterno infante»"
+  },
+  "W22": {
+   "c3a": 0,
+   "razao": "«a lembrança traz fadiga à alma» e «ensina-me a sonhar»"
+  },
+  "W23": {
+   "c3a": 0,
+   "razao": "«entre o mundo e o nada me perdi», «minha alma é um ser que a verdade engana»"
+  },
+  "W24": {
+   "c3a": 0,
+   "razao": "«a alma vaga», «as árvores combinam uma tristeza», a melancolia «é algo tão belo»"
+  },
+  "W25": {
+   "c3a": 0,
+   "razao": "«semeamos vento, colhemos ar», «o voo da borboleta que ensina», «beijo do vento»"
+  },
+  "W26": {
+   "c3a": 0,
+   "razao": "«verdades absolutamente verdadeiras», «vadios da nossa realidade», «fora dela porque estamos aqui»"
+  },
+  "W27": {
+   "c3a": 1,
+   "razao": "enumeração concreta; uma volta em «uma gota que se espalha no oceano vasto»"
+  },
+  "W28": {
+   "c3a": 0,
+   "razao": "«riacho que esquece a fonte» e «céu que ignora o planeta»: actos mentais em coisas"
+  },
+  "W29": {
+   "c3a": 2,
+   "razao": "gargalhada, montes, sol, casa, o ruído do sangue: vê e não interpreta nada"
+  },
+  "W30": {
+   "c3a": 0,
+   "razao": "«como um sonho mau num sono», «o que eu sonhei, morri-o»"
+  },
+  "W31": {
+   "c3a": 1,
+   "razao": "as bolas são o que parecem; uma volta em «são translucidamente uma filosofia toda»"
+  },
+  "W32": {
+   "c3a": 0,
+   "razao": "pinheiros «ouvintes de segredos», folhas que conversam, «nas entrelinhas da noite»"
+  },
+  "W33": {
+   "c3a": 1,
+   "razao": "concreto e sem interpretar; uma volta em «assim tem sido sempre a minha vida»"
+  },
+  "W34": {
+   "c3a": 0,
+   "razao": "argumento moral inteiro: «o defeito dos homens é chamarem saúde à sua doença»"
+  },
+  "W35": {
+   "c3a": 2,
+   "razao": "recusa o amor e a saudade por extenso e fica em «só folhas se movendo»"
+  },
+  "W36": {
+   "c3a": 1,
+   "razao": "fecha em «nem metáforas, nem símbolos, são só si mesmas»; uma volta na flor que «se veste»"
+  },
+  "W37": {
+   "c3a": 2,
+   "razao": "a borboleta é apenas borboleta; deflação sem metafísica nem moral"
+  },
+  "W38": {
+   "c3a": 0,
+   "razao": "metáfora contínua: «a missa é um automóvel que passa»"
+  },
+  "W39": {
+   "c3a": 0,
+   "razao": "«se verdadeira dimensão é a realidade», «ser real é a única coisa verdadeira do mundo»"
+  },
+  "W40": {
+   "c3a": 0,
+   "razao": "«a simplicidade divina» e as símiles sobre a própria poesia"
+  },
+  "W41": {
+   "c3a": 0,
+   "razao": "«baixa uma beleza», «meu sonho conduz minha inatenção»"
+  },
+  "W42": {
+   "c3a": 0,
+   "razao": "símile explícita da natureza como espelho: «assim agora em minha pávida alma»"
+  },
+  "W43": {
+   "c3a": 0,
+   "razao": "«sem teias do raciocínio», «é uma presença», «a verdadeira compreensão»"
+  },
+  "W44": {
+   "c3a": 0,
+   "razao": "«ao Homem verdadeiro e primitivo», e a moral contra «o ouro e Deus e a arte»"
+  },
+  "W45": {
+   "c3a": 0,
+   "razao": "«às praias do amor», «as estrelas nos vêm escutar»: símbolo e exortação"
+  },
+  "W46": {
+   "c3a": 0,
+   "razao": "«acabar com tudo, causa, efeito, ser», «ideias vãs que a imaginação gera»"
+  },
+  "W47": {
+   "c3a": 0,
+   "razao": "«levando consigo segredos dos montes»: significado escondido, literalmente"
+  },
+  "W48": {
+   "c3a": 0,
+   "razao": "«as minhas irmãs as plantas», «as santas a quem ninguém reza», «Terra-Mãe»"
+  },
+  "W49": {
+   "c3a": 0,
+   "razao": "«quem é que em nós ambos é o mesmo alguém», «erguer os deuses mortos»"
+  },
+  "W50": {
+   "c3a": 0,
+   "razao": "«a noite não perderá o seu segredo» e «se essa é a ordem das coisas»"
+  },
+  "W51": {
+   "c3a": 1,
+   "razao": "comparação sensorial do piano com os rios; uma volta moral em «o melhor é»"
+  },
+  "W52": {
+   "c3a": 0,
+   "razao": "«no intervalo entre o que sou e estou», «assim é o mundo: um movimento regular de olvido»"
+  },
+  "W53": {
+   "c3a": 0,
+   "razao": "«sou vazio que os outros preenchem», «o nada só existe nos meus olhos»"
+  },
+  "W54": {
+   "c3a": 0,
+   "razao": "«convida à introspeção», «suspira na brisa fria», e explica o poente ao leitor"
+  },
+  "W55": {
+   "c3a": 0,
+   "razao": "«o Grande Segredo», «o Grande Mistério», «uma doença das nossas ideias», «a verdade»"
+  },
+  "W56": {
+   "c3a": 0,
+   "razao": "«como um trigo de Império», «a voz da terra ansiando pelo mar»"
+  },
+  "W57": {
+   "c3a": 0,
+   "razao": "«brevidade infinita», pede perdão à noite, «faz o vento um braço forte»"
+  },
+  "W58": {
+   "c3a": 0,
+   "razao": "«esse é o destino dos versos», «passo e fico, como o Universo»"
+  },
+  "W59": {
+   "c3a": 1,
+   "razao": "sensorial e concreto; uma volta didáctica no «pensa, e perdes»"
+  },
+  "W60": {
+   "c3a": 2,
+   "razao": "«copio a Natureza e não a interrogo»: nenhuma metafísica, símbolo nem moral"
+  }
+ }
+}

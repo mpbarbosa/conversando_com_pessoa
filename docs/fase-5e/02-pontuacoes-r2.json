@@ -1,0 +1,252 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5E.md §5",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só a âncora de 3a e a folha embaralhada, numa cópia fora do repositório. Não soube que havia grupos, nem que alguns poemas eram autênticos e outros gerados, nem qual era a hipótese. Nunca viu as amostras da Fase 5B.",
+  "declaracao_do_avaliador": "«Cada entrada cita o verso ou expressão que decidiu a nota.»",
+  "criterio_declarado": "«Tratei como 0 tudo o que argumenta ou atribui sentido, incluindo poemas cuja tese é anti-metafísica — a escala pune o filosofar, não só o misticismo.»",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox."
+ },
+ "pontuacoes": {
+  "W01": {
+   "c3a": 0,
+   "razao": "Nuvem convertida em alegoria: «Assim no pensamento / Alta vai a intuição»."
+  },
+  "W02": {
+   "c3a": 1,
+   "razao": "Olha sem opinião, mas afirma «a sua verdadeira realidade» sob as ideias."
+  },
+  "W03": {
+   "c3a": 0,
+   "razao": "Significado oculto explícito: «É só a sombra do que é»."
+  },
+  "W04": {
+   "c3a": 0,
+   "razao": "Metafísica pura: «entre o pensar e o ser / Senti a vida passar»."
+  },
+  "W05": {
+   "c3a": 1,
+   "razao": "Imagens concretas, mas fecha a generalizar: «Assim é... o que passa»."
+  },
+  "W06": {
+   "c3a": 1,
+   "razao": "Sensação defendida contra o perceber, com volta moral: «é que é meu dever senti-lo»."
+  },
+  "W07": {
+   "c3a": 0,
+   "razao": "Termina em tese: «a natureza tem o seu rumo / e a realidade segue as suas leis»."
+  },
+  "W08": {
+   "c3a": 0,
+   "razao": "Interioridade abstracta: «Entre quem estou e sou, / Durmo numa descida»."
+  },
+  "W09": {
+   "c3a": 0,
+   "razao": "Dia lido como luto e alma: «um traje de viúva», «minha alma, já fria»."
+  },
+  "W10": {
+   "c3a": 0,
+   "razao": "Argumentação e moral: «Ai de ti e de todos que levam a vida»."
+  },
+  "W11": {
+   "c3a": 1,
+   "razao": "Credo sensorial com uma afirmação sobre a alma: «A minha alma é simples e não pensa»."
+  },
+  "W12": {
+   "c3a": 0,
+   "razao": "Metafísica declarada: «A Consciência de existir me esmaga»."
+  },
+  "W13": {
+   "c3a": 1,
+   "razao": "Criança vista sem símbolos, mas com máxima: «Vale mais a pena ver... pela primeira vez»."
+  },
+  "W14": {
+   "c3a": 0,
+   "razao": "Sentido oculto e personificação: «o chão mantém a voz», «descubro um rumo novo»."
+  },
+  "W15": {
+   "c3a": 0,
+   "razao": "Além-Deus e apóstrofe à alma: «Tudo tem outro sentido, ó alma»."
+  },
+  "W16": {
+   "c3a": 0,
+   "razao": "Alma, destino e espelho: «Como um espelho sem imagem», «é o meu destino»."
+  },
+  "W17": {
+   "c3a": 0,
+   "razao": "Pergunta ontológica: «Que sei eu de haver ser ou estar?»."
+  },
+  "W18": {
+   "c3a": 1,
+   "razao": "Recusa o sentido oculto, mas personifica: «No olhar dos montes», folhas «dançavam»."
+  },
+  "W19": {
+   "c3a": 1,
+   "razao": "Tarde e fragrância sensoriais, com volta final: «É um largo onde ladram cães»."
+  },
+  "W20": {
+   "c3a": 0,
+   "razao": "Discurso sobre doença e alma: «a paisagem da minha alma de noite»."
+  },
+  "W21": {
+   "c3a": 0,
+   "razao": "Simbolismo pátrio e prece: «Ó mãe de reis e avó de impérios»."
+  },
+  "W22": {
+   "c3a": 1,
+   "razao": "Cão observado, mas feito mestre: «Passa, cão, passa, e ensina-me a sonhar!»."
+  },
+  "W23": {
+   "c3a": 0,
+   "razao": "Labirinto do eu: «Minha alma é um ser que a verdade engana»."
+  },
+  "W24": {
+   "c3a": 0,
+   "razao": "Natureza como espelho do sentir: árvores «combinam uma tristeza»."
+  },
+  "W25": {
+   "c3a": 0,
+   "razao": "Lição tirada das coisas: «É o passo do voo da borboleta que ensina»."
+  },
+  "W26": {
+   "c3a": 1,
+   "razao": "Braço e toque exactos, mas reflexão final: «vivemos vadios da nossa realidade»."
+  },
+  "W27": {
+   "c3a": 0,
+   "razao": "Eu convertido em símbolo: «Uma gota que se espalha no oceano vasto»."
+  },
+  "W28": {
+   "c3a": 0,
+   "razao": "Personifica apesar do lema: «riacho que esquece a fonte», «céu que ignora o planeta»."
+  },
+  "W29": {
+   "c3a": 2,
+   "razao": "Só som e corpo: «o ruído calado do sangue... dos dois lados da cabeça»."
+  },
+  "W30": {
+   "c3a": 0,
+   "razao": "Outono como espelho do eu: «Eu já não sou quem era; / O que eu sonhei, morri-o»."
+  },
+  "W31": {
+   "c3a": 1,
+   "razao": "Bolas vistas sem mais, mas ditas «translucidamente uma filosofia toda»."
+  },
+  "W32": {
+   "c3a": 0,
+   "razao": "Personificação constante: folhas «conversam», estrelas «baixam para beijar a terra»."
+  },
+  "W33": {
+   "c3a": 1,
+   "razao": "Vento concreto, uma volta emblemática: «Assim tem sido sempre a minha vida»."
+  },
+  "W34": {
+   "c3a": 0,
+   "razao": "Moral sobre os homens: «É chamarem saúde à sua doença»."
+  },
+  "W35": {
+   "c3a": 2,
+   "razao": "Recusa saudade e razão: «Só folhas se movendo, nuvens que passam»."
+  },
+  "W36": {
+   "c3a": 1,
+   "razao": "Nega metáforas mas personifica: «a flor, por que se veste de rosa?»."
+  },
+  "W37": {
+   "c3a": 2,
+   "razao": "Coisa reduzida a si: «A borboleta é apenas borboleta / E a flor é apenas flor»."
+  },
+  "W38": {
+   "c3a": 0,
+   "razao": "Equivalências metafóricas: «A missa é um automóvel que passa»."
+  },
+  "W39": {
+   "c3a": 0,
+   "razao": "Tese ontológica: «Ser real é a única coisa verdadeira do mundo»."
+  },
+  "W40": {
+   "c3a": 1,
+   "razao": "Comparação sensorial com uma nota de transcendência: «a simplicidade divina»."
+  },
+  "W41": {
+   "c3a": 0,
+   "razao": "Luz posta ao serviço do sonho: «Meu sonho conduz / Minha inatenção»."
+  },
+  "W42": {
+   "c3a": 0,
+   "razao": "Nuvem como espelho da alma: «Assim agora em minha pávida alma»."
+  },
+  "W43": {
+   "c3a": 0,
+   "razao": "Promete sentido escondido no esperar: «daí vem a verdadeira compreensão»."
+  },
+  "W44": {
+   "c3a": 1,
+   "razao": "Sol partilhado, com volta moral: «mais natural / Que adorar o ouro e Deus»."
+  },
+  "W45": {
+   "c3a": 0,
+   "razao": "Exortação e personificação: «as estrelas... / Nos vêm escutar»."
+  },
+  "W46": {
+   "c3a": 0,
+   "razao": "Abstracção total: «Mas com tudo, causa, efeito, ser...»."
+  },
+  "W47": {
+   "c3a": 0,
+   "razao": "Atribui segredo às coisas: «levando consigo segredos dos montes»."
+  },
+  "W48": {
+   "c3a": 0,
+   "razao": "Mito e parentesco: «As minhas irmãs as plantas», «exigem à Terra-Mãe»."
+  },
+  "W49": {
+   "c3a": 0,
+   "razao": "Identidade oculta com o imperador: «Quero outra vez erguer os deuses mortos»."
+  },
+  "W50": {
+   "c3a": 0,
+   "razao": "Ordem metafísica e segredo: «A noite não perderá o seu segredo»."
+  },
+  "W51": {
+   "c3a": 1,
+   "razao": "Comparação concreta com preceito final: «O melhor é ter ouvidos / E amar a Natureza»."
+  },
+  "W52": {
+   "c3a": 0,
+   "razao": "Sentença sobre o mundo: «Um movimento regular de olvido»."
+  },
+  "W53": {
+   "c3a": 0,
+   "razao": "Ontologia do vazio: «Não penso, sou vazio que os outros preenchem»."
+  },
+  "W54": {
+   "c3a": 0,
+   "razao": "Interpreta o poente: «é novo despertar», «convida à introspeção»."
+  },
+  "W55": {
+   "c3a": 0,
+   "razao": "Tese filosófica explícita: «A Natureza é partes sem um todo»."
+  },
+  "W56": {
+   "c3a": 0,
+   "razao": "Pinhal como símbolo imperial: «É a voz da terra ansiando pelo mar»."
+  },
+  "W57": {
+   "c3a": 0,
+   "razao": "Apóstrofe e personificação: «Perdoa-me a noite», «faz o vento um braço forte»."
+  },
+  "W58": {
+   "c3a": 0,
+   "razao": "Destino e analogia cósmica: «Passo e fico, como o Universo»."
+  },
+  "W59": {
+   "c3a": 1,
+   "razao": "Lista de sentidos fechada por preceito: «Pensa, e perdes. / Apenas vês, e percebes»."
+  },
+  "W60": {
+   "c3a": 2,
+   "razao": "Nenhum símbolo nem moral: «Copio a Natureza e não a interrogo»."
+  }
+ }
+}
