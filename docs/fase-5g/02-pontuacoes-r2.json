@@ -1,0 +1,311 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5G.md §6",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só as duas âncoras e as seis regras, e a folha embaralhada, numa cópia fora do repositório. Não soube que a âncora de 3a era nova, nem que houve uma antiga, nem que havia dois braços, nem qual era a hipótese.",
+  "correccao_de_identificadores": "a folha foi reemitida a meio com os ids corrigidos de B01-B60 para G01-G60 — o harness veio da Fase 5B e herdou o prefixo, que colidia com a chave daquela fase. Só os identificadores mudaram; os poemas, a ordem e as âncoras ficaram iguais, e R2 foi avisado.",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox."
+ },
+ "pontuacoes": {
+  "G01": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nao me toca nem faz deslumbrar»: atribuicoes negadas, acaba na coisa; 8 versos."
+  },
+  "G02": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a estrada esqueceu-se» personificada e mantida; acaba alem da coisa."
+  },
+  "G03": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«A alma encarnada» e «ensino profundo»: acaba alem, na alma; rimado."
+  },
+  "G04": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "«percebo sua verdade crua» e «a natureza se afirma» deixam uma porta aberta; rimado."
+  },
+  "G05": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«nuvens, como lagrimas velhas, / Chamam ao mar»: natureza a sentir, acaba alem."
+  },
+  "G06": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o mar, que me ensina tudo sem palavras»: licao que manda alem da coisa."
+  },
+  "G07": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«na superficie das coisas» fecha, mas «oceano da eternidade» fica aberto."
+  },
+  "G08": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«mas e apenas agua e pedra»: tautologia deflacionaria, acaba na coisa."
+  },
+  "G09": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«Nos olhos do ver, a verdade reside»: fecha mas afirma uma verdade; «Brilhar e sua missao»."
+  },
+  "G10": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "manda receber o instante, mas «estancam a essencia» deixa a profundidade de pe."
+  },
+  "G11": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Nao preciso de existir / Para que a mudanca ocorra»: acaba na coisa, sem porta."
+  },
+  "G12": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«o sol, que nada mais diz»: atribuicao negada, acaba na coisa; so 3 versos."
+  },
+  "G13": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«So presenca no nada, sombra do que foi» e «a minha essencia»: acaba alem."
+  },
+  "G14": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Livre e indiferente, como eu»: a indiferenca e que une; acaba na coisa; 8 versos."
+  },
+  "G15": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«aprende a ver a luz que se esconde»: moral que manda buscar alem; rimado."
+  },
+  "G16": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«a luz e mais quando deixamos ver» fecha, mas a «sinfonia» da mente fica de pe."
+  },
+  "G17": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«invisiveis a qualquer interpretacao» fecha; «deserto da existencia» abre uma porta."
+  },
+  "G18": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«a agua nao fica triste» e «Aqui e agora, e tudo que temos»: acaba na coisa."
+  },
+  "G19": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Para mim, elas sao apenas nuvens»: tautologia; acaba no «terreno vivo»."
+  },
+  "G20": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«pedras guardam segredos sem fim»: sentido oculto mantido, acaba alem."
+  },
+  "G21": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nao me importo com este fim»: acaba na indiferenca da coisa; rima final."
+  },
+  "G22": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o desejo de mais» e «um vazio que parece preenchido»: acaba alem da coisa."
+  },
+  "G23": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nao semeamos esperanca; passamos»: acaba na coisa; 8 versos e um «XLIV» solto."
+  },
+  "G24": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«E apenas um sussurro sobre a realidade» fecha, mas «o rio que canta» fica de pe."
+  },
+  "G25": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«O meu ser, um misterio sem nome»: misterio mantido, acaba alem."
+  },
+  "G26": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«ver sem raciocinar, sem misterio»; acaba «na nudez da vista», na coisa."
+  },
+  "G27": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "acaba em «ser e se ver», mas «De onde extraio a minha essencia?» fica aberta."
+  },
+  "G28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«os rebanhos sao apenas rebanhos»: tautologia deflacionaria, acaba na coisa."
+  },
+  "G29": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«E qualquer coisa / que me toca e desaparece»: algo invisivel fica de pe; 9 versos."
+  },
+  "G30": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nao ha; sao as ondas apenas»: pergunta pelo oculto e nega-o, acaba na coisa."
+  },
+  "G31": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nao e amizade» retira a atribuicao; «apenas se moverem» acaba na coisa."
+  },
+  "G32": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«E apenas aguas agitadas pelo vento»: tautologia, acaba na coisa."
+  },
+  "G33": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«Num cofre onde so a memoria guarda» e a solidao a dizer o que todos sentem: alem."
+  },
+  "G34": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«Guardando as suas verdades» fica aberta, embora feche em «sera real»."
+  },
+  "G35": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Sao apenas agua e rochas»: nega conselhos ocultos, acaba na coisa."
+  },
+  "G36": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "acaba «mais nitido do que antes», mas «Guardando segredos em cada esquina» fica."
+  },
+  "G37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Quase que se sente / A dor de um corpo»: natureza a sentir, acaba alem."
+  },
+  "G38": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«no amago do vazio» e «numa tela invisivel»: acaba alem da coisa; 7 versos."
+  },
+  "G39": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«Nao busco nela um sentido» fecha, mas «como a esperanca que carrego» abre."
+  },
+  "G40": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«um murmurio que se espalha sem nome»: acaba no rebanho a seguir caminho; 7 versos."
+  },
+  "G41": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Se as flores soubessem o que sao, / Seriam menos do que sao»: fecha na coisa."
+  },
+  "G42": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Como almas cansadas» e lagrimas levadas «para alem do horizonte»: alem."
+  },
+  "G43": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«silencioso testemunho de tempos passados» fica de pe; fecha na borboleta."
+  },
+  "G44": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«Ilumina-se com seu segredo» e «Descobre mundos novos»: alem; rimado."
+  },
+  "G45": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Cada petala oculta seu segredo» e «nunca vissemos alem do horizonte»: alem."
+  },
+  "G46": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Somente cabras... o nome nao sao coisas»: fecha contra a classificacao; 7 versos."
+  },
+  "G47": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«no olhar dos outros reside a verdade»: verdade posta alem da coisa."
+  },
+  "G48": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a presenca dela nunca sairia inteira / dessas coisas»: acaba alem da coisa."
+  },
+  "G49": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«toda impressao se dilui»: acaba na coisa, sem profundidade a sobrar."
+  },
+  "G50": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«a pedra e pura, a folha e verde»; a moral «vive» manda aceitar o que e."
+  },
+  "G51": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Veo-o apenas como um dos dias»: fecha em «Este mundo continua, sem mim»."
+  },
+  "G52": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "acaba em «a lua e sempre fiel a noite»: personificacao mantida no ultimo verso."
+  },
+  "G53": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«entre o visivel e o invisivel... uma ponta de fumo»: acaba alem da coisa."
+  },
+  "G54": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«A flor e ela mesma»: acaba no «desamparo da clareza», na coisa vista."
+  },
+  "G55": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«sem se lembrar do que houve anteontem»: atribuicao negada, acaba na coisa."
+  },
+  "G56": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«e apenas o comeco do fim» fecha, mas «a terra, cansada, respira» fica de pe."
+  },
+  "G57": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Talvez seja triste o espirito» e «aprende a despertar»: acaba alem da coisa."
+  },
+  "G58": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«sem alimento para o espirito» nega; acaba no proprio distanciamento; 6 versos."
+  },
+  "G59": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«troncos que erguem sua voz» e «quieta / Verdade»: acaba alem da coisa."
+  },
+  "G60": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nao vejo mais do que e» e «nao buscando alem do que ve»: fecha na coisa."
+  }
+ }
+}

@@ -1,11 +1,12 @@
 {
  "_meta": {
   "aviso": "NÃO ABRIR antes de 02-pontuacoes.json e 02-pontuacoes-r2.json estarem commitados.",
-  "protocolo": "docs/FASE-5B.md §6.2"
+  "protocolo": "docs/FASE-5B.md §6.2",
+  "ids_renomeados": "B01-B60 -> G01-G60: o harness veio da Fase 5B e herdou o prefixo, que colidia com os identificadores da chave daquela fase. Renomeado antes de qualquer pontuação existir."
  },
  "chave": [
   {
-   "id": "B01",
+   "id": "G01",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -45,7 +46,7 @@
    "n_versos": 8
   },
   {
-   "id": "B02",
+   "id": "G02",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -84,7 +85,7 @@
    "n_versos": 11
   },
   {
-   "id": "B03",
+   "id": "G03",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -122,7 +123,7 @@
    "n_versos": 16
   },
   {
-   "id": "B04",
+   "id": "G04",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -161,7 +162,7 @@
    "n_versos": 8
   },
   {
-   "id": "B05",
+   "id": "G05",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -200,7 +201,7 @@
    "n_versos": 11
   },
   {
-   "id": "B06",
+   "id": "G06",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -242,7 +243,7 @@
    "n_versos": 13
   },
   {
-   "id": "B07",
+   "id": "G07",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -282,7 +283,7 @@
    "n_versos": 12
   },
   {
-   "id": "B08",
+   "id": "G08",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -322,7 +323,7 @@
    "n_versos": 16
   },
   {
-   "id": "B09",
+   "id": "G09",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -360,7 +361,7 @@
    "n_versos": 16
   },
   {
-   "id": "B10",
+   "id": "G10",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -398,7 +399,7 @@
    "n_versos": 13
   },
   {
-   "id": "B11",
+   "id": "G11",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -436,7 +437,7 @@
    "n_versos": 18
   },
   {
-   "id": "B12",
+   "id": "G12",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -474,7 +475,7 @@
    "n_versos": 3
   },
   {
-   "id": "B13",
+   "id": "G13",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -514,7 +515,7 @@
    "n_versos": 16
   },
   {
-   "id": "B14",
+   "id": "G14",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -554,7 +555,7 @@
    "n_versos": 8
   },
   {
-   "id": "B15",
+   "id": "G15",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -592,7 +593,7 @@
    "n_versos": 16
   },
   {
-   "id": "B16",
+   "id": "G16",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -630,7 +631,7 @@
    "n_versos": 12
   },
   {
-   "id": "B17",
+   "id": "G17",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",
@@ -671,7 +672,7 @@
    "n_versos": 13
   },
   {
-   "id": "B18",
+   "id": "G18",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -711,7 +712,7 @@
    "n_versos": 12
   },
   {
-   "id": "B19",
+   "id": "G19",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",
@@ -750,7 +751,7 @@
    "n_versos": 15
   },
   {
-   "id": "B20",
+   "id": "G20",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -790,7 +791,7 @@
    "n_versos": 12
   },
   {
-   "id": "B21",
+   "id": "G21",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -828,7 +829,7 @@
    "n_versos": 12
   },
   {
-   "id": "B22",
+   "id": "G22",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -867,7 +868,7 @@
    "n_versos": 12
   },
   {
-   "id": "B23",
+   "id": "G23",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -907,7 +908,7 @@
    "n_versos": 8
   },
   {
-   "id": "B24",
+   "id": "G24",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -947,7 +948,7 @@
    "n_versos": 16
   },
   {
-   "id": "B25",
+   "id": "G25",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -987,7 +988,7 @@
    "n_versos": 12
   },
   {
-   "id": "B26",
+   "id": "G26",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -1025,7 +1026,7 @@
    "n_versos": 15
   },
   {
-   "id": "B27",
+   "id": "G27",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -1064,7 +1065,7 @@
    "n_versos": 12
   },
   {
-   "id": "B28",
+   "id": "G28",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -1102,7 +1103,7 @@
    "n_versos": 11
   },
   {
-   "id": "B29",
+   "id": "G29",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -1141,7 +1142,7 @@
    "n_versos": 9
   },
   {
-   "id": "B30",
+   "id": "G30",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",
@@ -1180,7 +1181,7 @@
    "n_versos": 12
   },
   {
-   "id": "B31",
+   "id": "G31",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -1219,7 +1220,7 @@
    "n_versos": 12
   },
   {
-   "id": "B32",
+   "id": "G32",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",
@@ -1258,7 +1259,7 @@
    "n_versos": 11
   },
   {
-   "id": "B33",
+   "id": "G33",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -1297,7 +1298,7 @@
    "n_versos": 20
   },
   {
-   "id": "B34",
+   "id": "G34",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -1335,7 +1336,7 @@
    "n_versos": 16
   },
   {
-   "id": "B35",
+   "id": "G35",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",
@@ -1376,7 +1377,7 @@
    "n_versos": 14
   },
   {
-   "id": "B36",
+   "id": "G36",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -1415,7 +1416,7 @@
    "n_versos": 16
   },
   {
-   "id": "B37",
+   "id": "G37",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -1454,7 +1455,7 @@
    "n_versos": 10
   },
   {
-   "id": "B38",
+   "id": "G38",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -1494,7 +1495,7 @@
    "n_versos": 7
   },
   {
-   "id": "B39",
+   "id": "G39",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -1532,7 +1533,7 @@
    "n_versos": 12
   },
   {
-   "id": "B40",
+   "id": "G40",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -1570,7 +1571,7 @@
    "n_versos": 7
   },
   {
-   "id": "B41",
+   "id": "G41",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -1608,7 +1609,7 @@
    "n_versos": 16
   },
   {
-   "id": "B42",
+   "id": "G42",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -1647,7 +1648,7 @@
    "n_versos": 11
   },
   {
-   "id": "B43",
+   "id": "G43",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -1687,7 +1688,7 @@
    "n_versos": 9
   },
   {
-   "id": "B44",
+   "id": "G44",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -1725,7 +1726,7 @@
    "n_versos": 16
   },
   {
-   "id": "B45",
+   "id": "G45",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -1763,7 +1764,7 @@
    "n_versos": 15
   },
   {
-   "id": "B46",
+   "id": "G46",
    "pergunta_id": "q08",
    "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
    "voz": "caeiro",
@@ -1801,7 +1802,7 @@
    "n_versos": 7
   },
   {
-   "id": "B47",
+   "id": "G47",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -1840,7 +1841,7 @@
    "n_versos": 12
   },
   {
-   "id": "B48",
+   "id": "G48",
    "pergunta_id": "q05",
    "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
    "voz": "caeiro",
@@ -1879,7 +1880,7 @@
    "n_versos": 16
   },
   {
-   "id": "B49",
+   "id": "G49",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -1919,7 +1920,7 @@
    "n_versos": 12
   },
   {
-   "id": "B50",
+   "id": "G50",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -1957,7 +1958,7 @@
    "n_versos": 14
   },
   {
-   "id": "B51",
+   "id": "G51",
    "pergunta_id": "q09",
    "pergunta": "quando eu morrer o mundo continua exactamente como está",
    "voz": "caeiro",
@@ -1995,7 +1996,7 @@
    "n_versos": 16
   },
   {
-   "id": "B52",
+   "id": "G52",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -2035,7 +2036,7 @@
    "n_versos": 5
   },
   {
-   "id": "B53",
+   "id": "G53",
    "pergunta_id": "q04",
    "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
    "voz": "caeiro",
@@ -2076,7 +2077,7 @@
    "n_versos": 12
   },
   {
-   "id": "B54",
+   "id": "G54",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -2114,7 +2115,7 @@
    "n_versos": 12
   },
   {
-   "id": "B55",
+   "id": "G55",
    "pergunta_id": "q02",
    "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
    "voz": "caeiro",
@@ -2154,7 +2155,7 @@
    "n_versos": 7
   },
   {
-   "id": "B56",
+   "id": "G56",
    "pergunta_id": "q01",
    "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
    "voz": "caeiro",
@@ -2193,7 +2194,7 @@
    "n_versos": 16
   },
   {
-   "id": "B57",
+   "id": "G57",
    "pergunta_id": "q10",
    "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
    "voz": "caeiro",
@@ -2231,7 +2232,7 @@
    "n_versos": 16
   },
   {
-   "id": "B58",
+   "id": "G58",
    "pergunta_id": "q03",
    "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
    "voz": "caeiro",
@@ -2271,7 +2272,7 @@
    "n_versos": 6
   },
   {
-   "id": "B59",
+   "id": "G59",
    "pergunta_id": "q07",
    "pergunta": "pensar estraga o que se está a ver",
    "voz": "caeiro",
@@ -2309,7 +2310,7 @@
    "n_versos": 13
   },
   {
-   "id": "B60",
+   "id": "G60",
    "pergunta_id": "q06",
    "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
    "voz": "caeiro",

@@ -1,0 +1,313 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5G.md §4",
+  "avaliador": "R1 — esta sessão, que escreveu o protocolo, a âncora 3a' e os portões",
+  "escalas": "3a' da Fase 5F §2 (recalibrada) · 3b da Fase 5 §5.2 (inalterada)",
+  "cegueira": "pontuado sobre 01-itens.md, embaralhado, sem abrir 01-chave.json",
+  "ameaca_declarada": "Eu escrevi a âncora 3a' na Fase 5F e sou um dos avaliadores desta fase, e aqui não há retenção possível porque o que se mede são amostras e não a âncora (§6.1 do protocolo). R2 aplica a mesma âncora sem saber que é nova, nem que há braços, nem a hipótese.",
+  "regra_de_aplicacao": "Pela âncora, 1 é «fecha a porta mas deixa UMA aberta», logo duas ou mais levam 0. Contei como porta aberta só o que cai nas categorias da âncora — mistério, alma, destino, verdade oculta, moral que manda buscar, ou a natureza a sentir pelo poeta — e NÃO qualquer figura de estilo: uma símile que não atribui sentido oculto não abre porta. A razão de cada amostra diz o que fecha e o que fica aberto.",
+  "observacao_fora_do_protocolo": "A amostra G23 traz um numeral romano solto («XLIV») no meio do poema, que é vocabulário de estrutura do corpus a vazar para a geração. Não afecta 3a'; pesou em 3b como defeito de forma."
+ },
+ "pontuacoes": {
+  "G01": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "acaba sem contacto, que fecha; fica aberta «nas folhas dança sem esperança»"
+  },
+  "G02": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«braços abertos do crepúsculo», «a estrada esqueceu-se»: personificações mantidas"
+  },
+  "G03": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "acaba em «a alma encarnada» e «a pureza do vazio lhe oferece a visão»"
+  },
+  "G04": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "as negações fecham; fica aberta «a natureza se afirma». Rimado, logo 0 em 3b"
+  },
+  "G05": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«vê-se adormecer», «as nuvens como lágrimas velhas chamam ao mar»"
+  },
+  "G06": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«no olhar que por ela reza encontra-se a vida» e «o mar que me ensina tudo»"
+  },
+  "G07": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«é um mistério morrer» e «uma gota no oceano da eternidade»"
+  },
+  "G08": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«é apenas água e pedra» fecha, mas «no ar ainda pairamos» e «o tempo embeleza» abrem"
+  },
+  "G09": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "as coisas sem planos nem intenções fecham; fica aberta «brilhar é sua missão»"
+  },
+  "G10": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«estancam a essência» e «este presente é sempre novo nascimento»"
+  },
+  "G11": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«não preciso de existir para que a mudança ocorra» fecha; abre «a mesma paz»"
+  },
+  "G12": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "três versos no visível, e «o sol, que nada mais diz» nega sem atribuir"
+  },
+  "G13": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a minha essência», «uma sombra entre as luas», «presença no nada»"
+  },
+  "G14": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«trilhos invisíveis» e «uma ponta de terra» como figura de si"
+  },
+  "G15": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«aprende a ver a luz que se esconde»: luz oculta é o oposto exacto"
+  },
+  "G16": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "executa o pensamento que diz estragar: «pensei em liberdade infinita»"
+  },
+  "G17": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«invisíveis a qualquer interpretação» fecha; abre «no deserto da existência»"
+  },
+  "G18": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«e assim deve ser» manda aceitar (regra 6) e «aqui e agora é tudo que temos» fecha"
+  },
+  "G19": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«para mim, elas são apenas nuvens» é a deflação pura; abre «árvores crescem onde querem»"
+  },
+  "G20": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«pedras guardam segredos sem fim» e «silêncio reina sobre tudo»"
+  },
+  "G21": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "a natureza indiferente fecha; abre «o universo viverá mesmo assim»"
+  },
+  "G22": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a escuridão, velha amiga, sussurra tristezas» e «o desejo de mais»"
+  },
+  "G23": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vento sopra e esquece» e «a tarde se derrama»: personificações mantidas"
+  },
+  "G24": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a lua se calar» e «o rio que canta»: mantidas, sem retracção"
+  },
+  "G25": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«sombra sem alma», «o meu ser, um mistério sem nome»"
+  },
+  "G26": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«tudo vira e volta em espírito», «o essencial», «o olhar verdadeiro»"
+  },
+  "G27": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«de onde extraio a minha essência» e «que realidade é o agora»"
+  },
+  "G28": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«os rebanhos são apenas rebanhos» é deflação; abre «a terra inquieta, lambendo»"
+  },
+  "G29": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o desejo é um arco» e «sou um cego que acerta no alvo»"
+  },
+  "G30": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "levanta o sentido oculto quatro vezes e fecha sempre: «não há; são as ondas apenas»"
+  },
+  "G31": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "põe e retira a atribuição (regra 4: «não é amizade»); abre «um salto à nada»"
+  },
+  "G32": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "as atribuições são postas e negadas; fica aberta «vivem e morrem»"
+  },
+  "G33": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o sol ajoelha-se», «como se soubesse do seu fim», «a solidão tenta dizer»"
+  },
+  "G34": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«os sonhos dos campos» e «guardando as suas verdades»"
+  },
+  "G35": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "nega segredos e conselhos, mas mantém «um diálogo sem fim» e «brincadeira do vazio»"
+  },
+  "G36": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«guardando segredos em cada esquina» e «o desejo é uma estação que chove»"
+  },
+  "G37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a tarde é uma cama desfaçada» e «a dor de um corpo que se encolhe»"
+  },
+  "G38": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«no âmago do vazio», «os olhos dos outros a formarem esta realidade»"
+  },
+  "G39": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "detalhe concreto, «não busco nela um sentido», e acaba na mirada vazia"
+  },
+  "G40": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "concreto e áspero; fica aberto «sob o olhar inerte do sol cego»"
+  },
+  "G41": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a alma adormecida anseia por significados», «entrelaça-se aos seus demónios»"
+  },
+  "G42": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«como almas cansadas», «as luzes são lágrimas», «canto de despedida»"
+  },
+  "G43": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«pensamentos no ventre» e «silencioso testemunho de tempos passados»"
+  },
+  "G44": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a lua ilumina-se com seu segredo» e «a noite sob o horizonte desdenha»"
+  },
+  "G45": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«cada pétala oculta seu segredo» e a moral sobre «perfeições na imperfeição»"
+  },
+  "G46": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«a coisa e o nome não são coisas», e a lamentação manda ficar na coisa (regra 6)"
+  },
+  "G47": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«no olhar dos outros reside a verdade»"
+  },
+  "G48": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«era como se ela estivesse em cada folha» e «a presença dela nunca sairia»"
+  },
+  "G49": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«nada é eterno, tudo se transforma» e «no mar das horas»"
+  },
+  "G50": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«não há tristeza no pedregulho» nega sem atribuir, e «vive» manda ficar (regra 6)"
+  },
+  "G51": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«não vejo meu fim como sinal» fecha; abre «o vento levanta o meu nome em fuga»"
+  },
+  "G52": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«nada tomamos e nada deixamos» fecha; abre «a lua é sempre fiel à noite»"
+  },
+  "G53": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vazio não sabe meu nome», «uma face sem rosto», «uma ponta de fumo»"
+  },
+  "G54": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«a flor é ela mesma» é deflação; fica aberto «no desamparo da clareza»"
+  },
+  "G55": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«sem se lembrar» nega sem atribuir, e fecha em «passam e se vão sem deixar rasto»"
+  },
+  "G56": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o dia, sonhador, deita-se», «a terra, cansada, respira», «alguém chora nas alturas»"
+  },
+  "G57": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«talvez seja triste o espírito» e «os sonhos que lhe fizeram prisioneiro»"
+  },
+  "G58": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«sem alimento para o espírito» nega; fica aberta «vivem-lhes as luzes»"
+  },
+  "G59": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«um mar que canta», «troncos que erguem sua voz», «quieta verdade»"
+  },
+  "G60": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«pedra espera», «seu não-ser», «nas mãos frias da noite»"
+  }
+ }
+}

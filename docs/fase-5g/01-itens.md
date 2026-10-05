@@ -44,7 +44,7 @@ há resposta certa.
 ---
 
 
-## B01
+## G01
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -64,7 +64,7 @@ Não me toca nem faz deslumbrar.
 
 ---
 
-## B02
+## G02
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -88,7 +88,7 @@ Porque o teu corpo foi-me companhia.
 
 ---
 
-## B03
+## G03
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -118,7 +118,7 @@ Lhe oferece a visão.
 
 ---
 
-## B04
+## G04
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -138,7 +138,7 @@ e eu percebo sua verdade crua.
 
 ---
 
-## B05
+## G05
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -163,7 +163,7 @@ Chamam ao mar para cair.
 
 ---
 
-## B06
+## G06
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -189,7 +189,7 @@ e vejo as nossas pegadas agora sombra.
 
 ---
 
-## B07
+## G07
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -214,7 +214,7 @@ Só uma gota no oceano da eternidade.
 
 ---
 
-## B08
+## G08
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -244,7 +244,7 @@ que o tempo embeleza.
 
 ---
 
-## B09
+## G09
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -276,7 +276,7 @@ A si mesma, livre das alçadas do pensamento
 
 ---
 
-## B10
+## G10
 
 > pensar estraga o que se está a ver
 
@@ -302,7 +302,7 @@ Este presente é sempre novo nascimento.
 
 ---
 
-## B11
+## G11
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -335,7 +335,7 @@ Se passa por si só.
 
 ---
 
-## B12
+## G12
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -349,7 +349,7 @@ e o sol, que nada mais diz.
 
 ---
 
-## B13
+## G13
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -379,7 +379,7 @@ Só presença no nada, sombra do que foi.
 
 ---
 
-## B14
+## G14
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -399,7 +399,7 @@ E é isso que une o horizonte ao meu ser.
 
 ---
 
-## B15
+## G15
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -430,7 +430,7 @@ Para ler nas páginas azuis da poesia.
 
 ---
 
-## B16
+## G16
 
 > pensar estraga o que se está a ver
 
@@ -455,7 +455,7 @@ E a luz é mais quando deixamos ver.
 
 ---
 
-## B17
+## G17
 
 > as coisas não escondem nenhum sentido por baixo de si
 
@@ -482,7 +482,7 @@ uma linha traçada no deserto da existência.
 
 ---
 
-## B18
+## G18
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -507,7 +507,7 @@ Deixam apenas um eco suave.
 
 ---
 
-## B19
+## G19
 
 > as coisas não escondem nenhum sentido por baixo de si
 
@@ -536,7 +536,7 @@ apenas o terreno vivo.
 
 ---
 
-## B20
+## G20
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -561,7 +561,7 @@ silêncio reina sobre tudo.
 
 ---
 
-## B21
+## G21
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -585,7 +585,7 @@ Pois o universo viverá mesmo assim.
 
 ---
 
-## B22
+## G22
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -610,7 +610,7 @@ Um vazio que, de repente, parece preenchido.
 
 ---
 
-## B23
+## G23
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -632,7 +632,7 @@ Não semeamos esperança; passamos e adormecemos.
 
 ---
 
-## B24
+## G24
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -662,7 +662,7 @@ O vazio das palavras não me toca,
 
 ---
 
-## B25
+## G25
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -687,7 +687,7 @@ Só me veem, não me sentem, nem sei.
 
 ---
 
-## B26
+## G26
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -718,7 +718,7 @@ Na simplicidade, na nudez da vista.
 
 ---
 
-## B27
+## G27
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -743,7 +743,7 @@ Sem mais do que ser e se ver.
 
 ---
 
-## B28
+## G28
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -767,7 +767,7 @@ lá no silêncio verde.
 
 ---
 
-## B29
+## G29
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -791,7 +791,7 @@ que me toca e desaparece
 
 ---
 
-## B30
+## G30
 
 > as coisas não escondem nenhum sentido por baixo de si
 
@@ -816,7 +816,7 @@ Não há; são as ondas apenas, o sussurro da água.
 
 ---
 
-## B31
+## G31
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -840,7 +840,7 @@ E elas não vibrar, apenas se moverem.
 
 ---
 
-## B32
+## G32
 
 > as coisas não escondem nenhum sentido por baixo de si
 
@@ -864,7 +864,7 @@ vivem e morrem sem esperar aplausos.
 
 ---
 
-## B33
+## G33
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -899,7 +899,7 @@ Num cofre onde só a memória guarda.
 
 ---
 
-## B34
+## G34
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -929,7 +929,7 @@ Mas o que for, será real.
 
 ---
 
-## B35
+## G35
 
 > as coisas não escondem nenhum sentido por baixo de si
 
@@ -957,7 +957,7 @@ São trejeitos da lua, brincadeira do vazio.
 
 ---
 
-## B36
+## G36
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -987,7 +987,7 @@ Tudo torna-se mais nítido do que antes.
 
 ---
 
-## B37
+## G37
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -1008,7 +1008,7 @@ Para quando os olhos já não vêem.
 
 ---
 
-## B38
+## G38
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -1027,7 +1027,7 @@ E eu a apenas refletir, numa tela invisível.
 
 ---
 
-## B39
+## G39
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -1052,7 +1052,7 @@ Minha mirada está vazia, como a esperança que carrego.
 
 ---
 
-## B40
+## G40
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -1073,7 +1073,7 @@ o rebanho segue caminho sem fim.
 
 ---
 
-## B41
+## G41
 
 > pensar estraga o que se está a ver
 
@@ -1103,7 +1103,7 @@ Seriam menos do que são.
 
 ---
 
-## B42
+## G42
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -1135,7 +1135,7 @@ O fim do dia, como um eco distante,
 
 ---
 
-## B43
+## G43
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -1159,7 +1159,7 @@ um dente-de-leão trema na brisa que sopra.
 
 ---
 
-## B44
+## G44
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -1189,7 +1189,7 @@ Descobre mundos novos na casa.
 
 ---
 
-## B45
+## G45
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -1217,7 +1217,7 @@ E talvez nunca vissemos além do horizonte.
 
 ---
 
-## B46
+## G46
 
 > um rebanho a passar numa encosta, e nada mais do que isso
 
@@ -1236,7 +1236,7 @@ simplista e mais azul do que isso!
 
 ---
 
-## B47
+## G47
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -1261,7 +1261,7 @@ Que no olhar dos outros reside a verdade.
 
 ---
 
-## B48
+## G48
 
 > depois de gostar de alguém, as coisas em volta ficaram mais nítidas
 
@@ -1291,7 +1291,7 @@ dessas coisas que o vento mostra a todos.
 
 ---
 
-## B49
+## G49
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -1316,7 +1316,7 @@ toda impressão se dilui.
 
 ---
 
-## B50
+## G50
 
 > pensar estraga o que se está a ver
 
@@ -1350,7 +1350,7 @@ vive.
 
 ---
 
-## B51
+## G51
 
 > quando eu morrer o mundo continua exactamente como está
 
@@ -1380,7 +1380,7 @@ Este mundo continua, sem mim.
 
 ---
 
-## B52
+## G52
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -1396,7 +1396,7 @@ e a lua é sempre fiel à noite que vem.
 
 ---
 
-## B53
+## G53
 
 > queria parar de me sentir existir e ser apenas aquilo que os outros vêem
 
@@ -1421,7 +1421,7 @@ Não sou mais do que uma ponta de fumo.
 
 ---
 
-## B54
+## G54
 
 > pensar estraga o que se está a ver
 
@@ -1450,7 +1450,7 @@ no desamparo da clareza.
 
 ---
 
-## B55
+## G55
 
 > o que fazemos não deixa marca; tudo continua igual depois de passarmos
 
@@ -1469,7 +1469,7 @@ sem se lembrar do que houve anteontem.
 
 ---
 
-## B56
+## G56
 
 > por que é que as pessoas acham melancólico o fim do dia?
 
@@ -1499,7 +1499,7 @@ E as chamas do novo já apetecem.
 
 ---
 
-## B57
+## G57
 
 > aprender a ver é mais difícil do que aprender a pensar
 
@@ -1529,7 +1529,7 @@ Aos sonhos que lhe fizeram prisioneiro
 
 ---
 
-## B58
+## G58
 
 > olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela
 
@@ -1546,7 +1546,7 @@ E é esse mesmo o distanciamento.
 
 ---
 
-## B59
+## G59
 
 > pensar estraga o que se está a ver
 
@@ -1573,7 +1573,7 @@ Verdade, senão do alvoroço.
 
 ---
 
-## B60
+## G60
 
 > as coisas não escondem nenhum sentido por baixo de si
 
