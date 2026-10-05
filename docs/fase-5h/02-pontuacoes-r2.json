@@ -1,0 +1,312 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5H.md §7",
+  "avaliador": "R2 — avaliador independente, cego ao desenho",
+  "o_que_recebeu": "só as duas escalas e as seis regras, e a folha embaralhada, numa cópia fora do repositório. **Não soube que havia dois modelos** — o enquadramento foi verificado por fronteira de palavra contra «modelo», «gerador», «qwen», «llama» e «ollama», além dos termos de desenho.",
+  "declaracao_do_avaliador": "«Li apenas a folha indicada; não consultei mais nada.»",
+  "nota_do_avaliador_sobre_3b": "«3b não tem nenhum 0 porque nenhum poema é rimado, prosa com enters, nem truncado; a maioria dos 1 vem de ficar fora do intervalo 10–20 versos (muitos têm 4 a 9 versos).»",
+  "ameaca_residual": "a restrição de leitura foi dada por instrução, não por sandbox."
+ },
+ "pontuacoes": {
+  "H01": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«apenas um vazio que eles preenchem»: fecha, mas fica de pe o vazio interior."
+  },
+  "H02": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nao tem segredo nenhum»: acaba na coisa, atribuicao negada."
+  },
+  "H03": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«as coisas sao sempre iguais por dentro»: poe um dentro e deixa-o de pe."
+  },
+  "H04": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«senao a do vento»: nega tudo, mas mantem a palavra do vento aberta."
+  },
+  "H05": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«no vazio encontro uma certa paz»: acaba num estado interior, alem da coisa."
+  },
+  "H06": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«agua e agua, ceu e ceu» e «o olhar nao busca o alem»: acaba na coisa."
+  },
+  "H07": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Tudo o resto esta no lugar em que estava»: acaba na coisa."
+  },
+  "H08": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Nada mudara, porque tudo esta feito assim»: acaba na coisa."
+  },
+  "H09": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«a luz vai-se sem olhar para tras»: personificacao mantida ao lado do deflacionar."
+  },
+  "H10": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«O mundo e sempre igual; o sofrer e so eu»: retira a atribuicao, fica na coisa."
+  },
+  "H11": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Terra seca sem historia nem fado»: so atribuicoes negadas, acaba na coisa."
+  },
+  "H12": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«a procura do essencial»: poe um essencial e acaba em licao sobre a mente."
+  },
+  "H13": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a cidade murmura respostas escondidas»: sentido oculto mantido, acaba alem da coisa."
+  },
+  "H14": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«sempre renovando o seu esplendor»: poente senhor da sombra, acaba alem da coisa."
+  },
+  "H15": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«ja nao mais ter consciencia da diferenca»: especulacao de identidade fica de pe."
+  },
+  "H16": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«que o esquecimento logo anula»: nada fica, acaba na coisa."
+  },
+  "H17": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«dentro da minha alma a tristeza se instala»: alma e penas, alem da coisa."
+  },
+  "H18": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nao achou que era um momento importante»: sussurro do vento retirado, fica na coisa."
+  },
+  "H19": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Um olhar e um olhar, e nao um desejo»: tautologia deflacionaria, acaba na coisa."
+  },
+  "H20": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nem uma visao sublime, nem um poema, mas o sono»: acaba na coisa."
+  },
+  "H21": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«A chuva cai de forma desdenhosa»: personificacao mantida deixa uma porta aberta."
+  },
+  "H22": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«suja com a sujeira que ela carrega»: tautologia pura, acaba na coisa."
+  },
+  "H23": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«Onde esta a liricidade pura?»: acaba em licao sobre o que sou capaz."
+  },
+  "H24": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as coisas continuarao a ser o que sao»: tautologia, acaba na coisa."
+  },
+  "H25": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Dao testemunho da minha alheacao»: natureza a sentir pelo poeta, alem da coisa."
+  },
+  "H26": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«no vazio do meu ser, desapareco»: afirmacao de interioridade fica de pe."
+  },
+  "H27": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nada mais do que isso»: acaba na coisa."
+  },
+  "H28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«nao sao o simbolo do amor» e «E isso»: acaba na coisa."
+  },
+  "H29": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«posso ver o que estava escondido»: verdade oculta revelada, alem da coisa."
+  },
+  "H30": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«bencao do instante»: deflaciona tudo mas sacraliza o instante no fim."
+  },
+  "H31": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«passamos, mas nao ficamos»: a ordem do que e nao muda, fica na coisa."
+  },
+  "H32": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«a sua imagem esta nas formas da cidade»: projeccao mantida, mas acaba nos momentos simples."
+  },
+  "H33": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«Ve-se a morte ao espreitar»: almas e penumbra, acaba alem da coisa."
+  },
+  "H34": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«as estrelas sao apenas luz»: atribuicoes negadas, moral de aceitar, na coisa."
+  },
+  "H35": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«deixo-me ser uma coisa, como os montes sao coisas»: acaba na coisa."
+  },
+  "H36": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«O vazio e um espectro»: metafora de interioridade fica de pe no fim."
+  },
+  "H37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«porque o destino ja anuncia»: destino e essencia, acaba alem da coisa."
+  },
+  "H38": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a noite mostra o que o dia escondeu»: oculto revelado, acaba alem da coisa."
+  },
+  "H39": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«contento sou com meu destino»: moral de aceitar o que e, fica na coisa."
+  },
+  "H40": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Nao buscam simbolos nem sonhos, somente os passos»: acaba na coisa."
+  },
+  "H41": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Uma arvore e uma arvore; um poente e um poente»: acaba nos montes, na coisa."
+  },
+  "H42": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«o fundo, que nao sei se existe»: duvida e o eu que faz a paisagem deixam porta aberta."
+  },
+  "H43": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«a unica chave do seu misterio»: nega enigmas mas mantem o misterio de pe."
+  },
+  "H44": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«no cortejo do eterno»: o eterno fica de pe apesar do fecho na lua igual."
+  },
+  "H45": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«Aqui o ser e ausencia de querer»: acaba numa abstraccao do ser, nao na coisa."
+  },
+  "H46": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Somos apenas uma sombra que passeia»: sol sem se preocupar, acaba na coisa."
+  },
+  "H47": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«quando se ve uma arvore, nao ha mais que ver»: acaba na coisa."
+  },
+  "H48": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«Nas profundezas do vazio»: acaba em paradoxo de presenca e ausencia, alem da coisa."
+  },
+  "H49": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a esperanca e apenas um sonho perdido»: melancolia posta e mantida, alem da coisa."
+  },
+  "H50": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«sem prometer nada alem da luz»: atribuicoes negadas, acaba na coisa."
+  },
+  "H51": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«ouvia os seus suspiros nas respiracoes da brisa»: natureza a sentir por ele."
+  },
+  "H52": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Nao somos rastro, nem sonho, somente os passos»: acaba na coisa."
+  },
+  "H53": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«Descubro que ela tambem pensa»: nuvem que pensa, personificacao mantida."
+  },
+  "H54": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Ninguem lhe pos nome a montanha. Ela e a montanha»: acaba na coisa."
+  },
+  "H55": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«a dor de ter os dentes trincados»: a alma reduzida a sensacao, acaba na coisa."
+  },
+  "H56": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Nao perturba a paz das coisas»: alma deflacionada a folha caida, na coisa."
+  },
+  "H57": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«Nada alem disso, nao ha misterios»: acaba na coisa."
+  },
+  "H58": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«Nada esta mais fechado do que o abismo»: depois do real, abre o abismo."
+  },
+  "H59": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«Somente o pastar e o passar numa encosta sem nome»: acaba na coisa."
+  },
+  "H60": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«nao ha pousada para onde se va, so um terreno»: acaba no terreno, na coisa."
+  }
+ }
+}

@@ -1,0 +1,313 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5H.md §4",
+  "avaliador": "R1 — esta sessão, que escreveu o protocolo e a âncora 3a'",
+  "escalas": "3a' da Fase 5F §2 · 3b da Fase 5 §5.2, inalterada",
+  "cegueira": "pontuado sobre 01-itens.md, embaralhado, sem abrir 01-chave.json",
+  "ameaca_declarada": "§7.1 do protocolo: li ~240 amostras do qwen nesta sequência e conheço-lhe os tiques, logo posso reconhecer o braço pelo estilo — e nesta fase isso é mais provável do que em qualquer anterior. Ao contrário das outras fases, a direcção do viés NÃO é previsível: não tenho preferência declarada entre os dois modelos. A impressão que tive a pontuar foi de que havia dois registos distintos na folha, um mais curto e mais seco; não sei de que braço é.",
+  "regra_de_aplicacao": "Pela âncora, 1 é «fecha a porta mas deixa UMA aberta», logo duas ou mais levam 0. Contei como porta aberta só o que cai nas categorias da âncora — mistério, alma, destino, verdade oculta, moral que manda buscar, ou a natureza a sentir pelo poeta — e não qualquer figura de estilo.",
+  "artefactos_observados": "Três amostras trazem lixo de formato que a guarda não apanhou: H57 começa com «Pergunta:», H25 tem um «---» solto a meio, e H17 tem uma linha de título. Pesaram em 3b, não em 3a'. E H41 repete «Uma árvore é uma árvore; um poente é um poente» VERBATIM da persona, o que viola o REGRAS_SAIDA («não uses as palavras destas instruções no poema») — registado aqui, porque é um defeito de guarda e não de poética."
+ },
+ "pontuacoes": {
+  "H01": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«vão do tempo sem corpo» e «um vazio que eles preenchem»: acaba além"
+  },
+  "H02": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«a chuva cai sem significado», «não têm segredo nenhum»: fecha a porta"
+  },
+  "H03": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "fecha em «as coisas não mudam»; abre «são sempre iguais por dentro»"
+  },
+  "H04": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "nega tudo (o vento não chora, as estrelas não cantam); abre «senão a do vento»"
+  },
+  "H05": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "negações e indiferença fecham; abre «o seu movimento, meu vazio»"
+  },
+  "H06": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«uma nuvem é apenas uma nuvem», «água é água»; fecha em «o olhar não busca o além»"
+  },
+  "H07": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«tudo o resto está no lugar em que estava» fecha; abre «para além da linha»"
+  },
+  "H08": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "deflação do mundo que segue; abre «o vento sussurra a mesma música»"
+  },
+  "H09": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a luz dócil», «um grande vazio que se sente», «um suspiro que se desfaz»"
+  },
+  "H10": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«o sofrer é só eu» retira a projecção; fica «o vento faz comigo o que quer»"
+  },
+  "H11": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "litania de negações puras: sem saudade, sem história, sem sentimento, sem fado"
+  },
+  "H12": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«o essencial» e «a trama da realidade»: acaba na cegueira da mente"
+  },
+  "H13": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«olhos que contêm universos desconhecidos», «segredos do céu», «respostas escondidas»"
+  },
+  "H14": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o poente, senhor da sombra» e «sempre renovando o seu esplendor»"
+  },
+  "H15": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "metafísica da identidade: «ser eu e ser outro, em si»"
+  },
+  "H16": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "deflação dos passos e das pedras; abre «o esquecimento logo anula»"
+  },
+  "H17": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«dentro da minha alma a tristeza se instala» e «me lembro das penas»"
+  },
+  "H18": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«não achou que era um momento importante» fecha; abre «o vento sussurrou no seu ouvido»"
+  },
+  "H19": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«um beijo é um beijo», «um olhar é um olhar»: tautologia deflacionária"
+  },
+  "H20": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "fecha em «nem uma visão sublime, nem um poema, mas o sono»"
+  },
+  "H21": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«estranho ao teatro em que está», «a chuva desdenhosa», «as janelas do meu silêncio»"
+  },
+  "H22": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "tautologia pura: a água está suja com a sujeira que carrega, e nada mais"
+  },
+  "H23": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a liricidade pura», «os sonhos deixam-no em pedaços», «eis que me deslumbro»"
+  },
+  "H24": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«as coisas continuarão a ser o que são» e «é só isso»"
+  },
+  "H25": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«dão testemunho da minha alheação» e «o vazio que me preenche»"
+  },
+  "H26": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«sou apenas um eco da vista», «no vazio do meu ser, desapareço»"
+  },
+  "H27": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "descrição concreta e fecho em «nada mais do que isso»"
+  },
+  "H28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«as coisas não são o simbolo do amor, nem o símbolo da morte», e fecha em «é isso»"
+  },
+  "H29": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "acaba em «agora posso ver o que estava escondido»: o oposto exacto"
+  },
+  "H30": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«boca da tarde», «sussurro no ouvido», «bênção do instante»"
+  },
+  "H31": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«caminha a noite sobre as ruas» e «o horizonte esquecido»"
+  },
+  "H32": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "concreto e fecha em «saboreio-os como sempre»; abre «a sua imagem está nas formas da cidade»"
+  },
+  "H33": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«nas almas assombra uma penumbra», «vê-se a morte ao espreitar»"
+  },
+  "H34": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«não buscar um sentido oculto», «as estrelas são apenas luz», «não damos a elas um destino»"
+  },
+  "H35": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«deixo-me ser uma coisa. Como os montes, as árvores e o rio são coisas»"
+  },
+  "H36": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vazio é um espectro», «reflexo fugaz no espelho alheio»"
+  },
+  "H37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o destino já anuncia» e «cada instante vive a sua própria essência»"
+  },
+  "H38": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«a noite mostra o que o dia escondeu» e «as folhas caem e anunciam»"
+  },
+  "H39": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«é vasto demais para se importar com um morto» e «contento sou com meu destino»"
+  },
+  "H40": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«nenhuma ordem, nenhum nome», «não buscam símbolos nem sonhos»"
+  },
+  "H41": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«uma árvore é uma árvore» e fecha em «um facto é que tudo existiu»"
+  },
+  "H42": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«sem pensar no fundo, que não sei se existe» fecha; abre «sou eu quem faz a paisagem»"
+  },
+  "H43": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o ar que suspira», «cada pedra é um rumor», e fecha nomeando «o seu mistério»"
+  },
+  "H44": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«no cortejo do eterno» e «o mundo girará igual a uma lua perfeita»"
+  },
+  "H45": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«não em dança espiritual mas sussurro» retira (regra 4); abre «sua voz própria»"
+  },
+  "H46": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«o Sol continua pontual, sem se preocupar»: atribuição negada, e nada além"
+  },
+  "H47": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«quando se vê uma árvore, não há mais que ver»"
+  },
+  "H48": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«nas profundezas do vazio», «na ausência sou presença irrelevante»"
+  },
+  "H49": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "explica a melancolia e acaba em «a esperança é apenas um sonho perdido»"
+  },
+  "H50": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«não murmura segredos», «não teima em mensagens», «sem prometer nada além da luz»"
+  },
+  "H51": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«ela era como uma melodia em cada farfalho» e «os seus suspiros na brisa»"
+  },
+  "H52": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«não somos rastro, nem sonho, somente os passos que se perdem»"
+  },
+  "H53": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "acaba em «descubro que ela também pensa»: atribui pensamento à nuvem"
+  },
+  "H54": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«ninguém lhes pôs um nome à montanha. Ela é a montanha»"
+  },
+  "H55": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "reduz a alma a um sopro de ar frio ou a dor de dentes; abre «um vazio onde nada morre»"
+  },
+  "H56": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "deflaciona a alma a «uma folha caída, um vaso de barro»; abre «a paz das coisas»"
+  },
+  "H57": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«é apenas uma roupa azul e um homem na praça», «não há mistérios»"
+  },
+  "H58": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vento sussurra ao ouvido dos campos» e acaba em «nada mais fechado do que o abismo»"
+  },
+  "H59": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«o sol brilha no seu brilhar» e «nem sonhos nem desejos têm»; abre «voces sussurram»"
+  },
+  "H60": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«não é em nada de bom nem de feio» fecha; abre «caminhar até que mais ninguém esteja»"
+  }
+ }
+}
