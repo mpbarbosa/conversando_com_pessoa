@@ -1,0 +1,661 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5F.md §5",
+  "permutacoes": 10000,
+  "semente": 3,
+  "primario": "estimativa conjunta (média dos dois)",
+  "sem_numeros_in_sample": true,
+  "marco_ancora_antiga": {
+   "fraccao_de_2": 0.15,
+   "mediana": 0.5,
+   "n": 20,
+   "fonte": "docs/FASE-5E-RELATORIO.md §2"
+  }
+ },
+ "X3": {
+  "kappa_ponderado_linear": 0.6204,
+  "concordancia_exacta": 0.6875,
+  "discordancia_maxima": 2,
+  "media_R1": 0.734,
+  "media_R2": 1.078,
+  "passa": true
+ },
+ "conjunta": {
+  "etiqueta": "estimativa conjunta — PRIMÁRIA",
+  "n": {
+   "R": 24,
+   "O": 20,
+   "G": 20
+  },
+  "medianas": {
+   "R": 2.0,
+   "O": 0.0,
+   "G": 0.75
+  },
+  "medias": {
+   "R": 1.604,
+   "O": 0.3,
+   "G": 0.675
+  },
+  "distribuicao": {
+   "R": {
+    "0.0": 2,
+    "0.5": 1,
+    "1.0": 3,
+    "1.5": 2,
+    "2.0": 16
+   },
+   "O": {
+    "0.0": 13,
+    "0.5": 4,
+    "1.0": 1,
+    "1.5": 2
+   },
+   "G": {
+    "0.0": 9,
+    "0.5": 1,
+    "1.0": 4,
+    "1.5": 6
+   }
+  },
+  "X2": {
+   "auc_O_abaixo_de_R": 0.9135,
+   "ic95": [
+    0.8156,
+    0.9854
+   ],
+   "p": 0.0001,
+   "passa": true
+  },
+  "X1": {
+   "mediana_retidos": 2.0,
+   "n_com_2": 16,
+   "de": 24,
+   "fraccao_de_2": 0.6667,
+   "ic95_fraccao": [
+    0.4583,
+    0.8333
+   ],
+   "passa": true
+  },
+  "sem_portao_G": {
+   "auc_G_abaixo_de_R": 0.851,
+   "p": 0.0003
+  }
+ },
+ "por_avaliador": {
+  "R1": {
+   "etiqueta": "R1, sem decidir",
+   "n": {
+    "R": 24,
+    "O": 20,
+    "G": 20
+   },
+   "medianas": {
+    "R": 2.0,
+    "O": 0.0,
+    "G": 0.0
+   },
+   "medias": {
+    "R": 1.5,
+    "O": 0.15,
+    "G": 0.4
+   },
+   "distribuicao": {
+    "R": {
+     "0": 4,
+     "1": 4,
+     "2": 16
+    },
+    "O": {
+     "0": 17,
+     "1": 3
+    },
+    "G": {
+     "0": 12,
+     "1": 8
+    }
+   },
+   "X2": {
+    "auc_O_abaixo_de_R": 0.8917,
+    "ic95": [
+     0.7957,
+     0.9729
+    ],
+    "p": 0.0001,
+    "passa": true
+   },
+   "X1": {
+    "mediana_retidos": 2.0,
+    "n_com_2": 16,
+    "de": 24,
+    "fraccao_de_2": 0.6667,
+    "ic95_fraccao": [
+     0.4583,
+     0.8333
+    ],
+    "passa": true
+   },
+   "sem_portao_G": {
+    "auc_G_abaixo_de_R": 0.85,
+    "p": 0.0003
+   }
+  },
+  "R2": {
+   "etiqueta": "R2, sem decidir",
+   "n": {
+    "R": 24,
+    "O": 20,
+    "G": 20
+   },
+   "medianas": {
+    "R": 2.0,
+    "O": 0.0,
+    "G": 1.0
+   },
+   "medias": {
+    "R": 1.708,
+    "O": 0.45,
+    "G": 0.95
+   },
+   "distribuicao": {
+    "R": {
+     "0": 2,
+     "1": 3,
+     "2": 19
+    },
+    "O": {
+     "0": 14,
+     "1": 3,
+     "2": 3
+    },
+    "G": {
+     "0": 9,
+     "1": 3,
+     "2": 8
+    }
+   },
+   "X2": {
+    "auc_O_abaixo_de_R": 0.8583,
+    "ic95": [
+     0.7354,
+     0.9542
+    ],
+    "p": 0.0001,
+    "passa": true
+   },
+   "X1": {
+    "mediana_retidos": 2.0,
+    "n_com_2": 19,
+    "de": 24,
+    "fraccao_de_2": 0.7917,
+    "ic95_fraccao": [
+     0.625,
+     0.9583
+    ],
+    "passa": true
+   },
+   "sem_portao_G": {
+    "auc_G_abaixo_de_R": 0.7177,
+    "p": 0.0051
+   }
+  }
+ },
+ "veredicto": {
+  "X3_piso_de_concordancia": true,
+  "X2_discriminacao_sobrevive": true,
+  "X1_a_ancora_premeia_o_real": true,
+  "legivel": true,
+  "ancora_aceite": true
+ },
+ "notas_por_item": {
+  "X01": {
+   "grupo": "G",
+   "origem": "B15",
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "X02": {
+   "grupo": "G",
+   "origem": "B51",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X03": {
+   "grupo": "R",
+   "origem": "poem_2669",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X04": {
+   "grupo": "R",
+   "origem": "poem_622",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X05": {
+   "grupo": "G",
+   "origem": "B04",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X06": {
+   "grupo": "R",
+   "origem": "poem_3555",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X07": {
+   "grupo": "G",
+   "origem": "B39",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X08": {
+   "grupo": "O",
+   "origem": "poem_3889",
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "X09": {
+   "grupo": "G",
+   "origem": "B47",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X10": {
+   "grupo": "R",
+   "origem": "poem_3223",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X11": {
+   "grupo": "G",
+   "origem": "B48",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X12": {
+   "grupo": "O",
+   "origem": "poem_941",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X13": {
+   "grupo": "O",
+   "origem": "poem_4317",
+   "R1": 1,
+   "R2": 0,
+   "conj": 0.5
+  },
+  "X14": {
+   "grupo": "R",
+   "origem": "poem_3546",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X15": {
+   "grupo": "G",
+   "origem": "B58",
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "X16": {
+   "grupo": "R",
+   "origem": "poem_2587",
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "X17": {
+   "grupo": "R",
+   "origem": "poem_3248",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X18": {
+   "grupo": "O",
+   "origem": "poem_340",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X19": {
+   "grupo": "G",
+   "origem": "B31",
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "X20": {
+   "grupo": "G",
+   "origem": "B45",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X21": {
+   "grupo": "O",
+   "origem": "poem_471",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X22": {
+   "grupo": "R",
+   "origem": "poem_629",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X23": {
+   "grupo": "O",
+   "origem": "poem_183",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X24": {
+   "grupo": "R",
+   "origem": "poem_3242",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X25": {
+   "grupo": "R",
+   "origem": "poem_2652",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X26": {
+   "grupo": "G",
+   "origem": "B40",
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "X27": {
+   "grupo": "G",
+   "origem": "B12",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X28": {
+   "grupo": "R",
+   "origem": "poem_1041",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X29": {
+   "grupo": "O",
+   "origem": "poem_2435",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X30": {
+   "grupo": "G",
+   "origem": "B01",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X31": {
+   "grupo": "O",
+   "origem": "poem_4203",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X32": {
+   "grupo": "R",
+   "origem": "poem_3518",
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "X33": {
+   "grupo": "R",
+   "origem": "poem_3436",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X34": {
+   "grupo": "O",
+   "origem": "poem_2445",
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "X35": {
+   "grupo": "G",
+   "origem": "B55",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X36": {
+   "grupo": "O",
+   "origem": "poem_1275",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X37": {
+   "grupo": "O",
+   "origem": "poem_586",
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "X38": {
+   "grupo": "R",
+   "origem": "poem_3327",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X39": {
+   "grupo": "G",
+   "origem": "B02",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X40": {
+   "grupo": "R",
+   "origem": "poem_996",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X41": {
+   "grupo": "G",
+   "origem": "B14",
+   "R1": 0,
+   "R2": 1,
+   "conj": 0.5
+  },
+  "X42": {
+   "grupo": "G",
+   "origem": "B44",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X43": {
+   "grupo": "R",
+   "origem": "poem_2582",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X44": {
+   "grupo": "O",
+   "origem": "poem_462",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X45": {
+   "grupo": "R",
+   "origem": "poem_2585",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X46": {
+   "grupo": "O",
+   "origem": "poem_2434",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X47": {
+   "grupo": "R",
+   "origem": "poem_1182",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X48": {
+   "grupo": "G",
+   "origem": "B07",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X49": {
+   "grupo": "G",
+   "origem": "B26",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X50": {
+   "grupo": "O",
+   "origem": "poem_2876",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X51": {
+   "grupo": "G",
+   "origem": "B41",
+   "R1": 1,
+   "R2": 2,
+   "conj": 1.5
+  },
+  "X52": {
+   "grupo": "R",
+   "origem": "poem_2578",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X53": {
+   "grupo": "O",
+   "origem": "poem_4217",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X54": {
+   "grupo": "R",
+   "origem": "poem_598",
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "X55": {
+   "grupo": "O",
+   "origem": "poem_819",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X56": {
+   "grupo": "R",
+   "origem": "poem_3421",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X57": {
+   "grupo": "O",
+   "origem": "poem_4276",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X58": {
+   "grupo": "R",
+   "origem": "poem_1011",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X59": {
+   "grupo": "R",
+   "origem": "poem_364",
+   "R1": 2,
+   "R2": 2,
+   "conj": 2.0
+  },
+  "X60": {
+   "grupo": "O",
+   "origem": "poem_2279",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X61": {
+   "grupo": "R",
+   "origem": "poem_1469",
+   "R1": 1,
+   "R2": 1,
+   "conj": 1.0
+  },
+  "X62": {
+   "grupo": "O",
+   "origem": "poem_1765",
+   "R1": 0,
+   "R2": 2,
+   "conj": 1.0
+  },
+  "X63": {
+   "grupo": "G",
+   "origem": "B42",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  },
+  "X64": {
+   "grupo": "O",
+   "origem": "poem_96",
+   "R1": 0,
+   "R2": 0,
+   "conj": 0.0
+  }
+ }
+}
