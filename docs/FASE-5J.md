@@ -195,6 +195,14 @@ mesmas sete, cegos e em separado) e não há campo gravado; para a 5H aplico a
 regra declarada **«a última linha não termina em `.`, `!`, `?`, `:`, `;` nem
 `…`»** e reporto a contagem que ela dá, com os textos, para ser verificável.
 
+> **Corrigido a meio da fase, e este parágrafo está errado.** **Há** campo
+> gravado: `truncada`, de `done_reason == "length"`
+> ([`ollama.py:107`](../src/generation/ollama.py)). A regra heurística que
+> declarei aqui acertou **zero** — marcou 4 amostras, nenhuma truncada, e deixou
+> passar a única que era —, porque em verso livre acabar sem pontuação é
+> **estilo**. O primário passou a ser o campo gravado e a heurística ficou como
+> contra-verificação. Ver o §5 do [relatório](FASE-5J-RELATORIO.md).
+
 Com 30 por braço, o J2 é uma **demonstração de existência** sobre **dois**
 modelos, não um teste sobre uma população de modelos. Estabelece que o instrumento
 **pode** inverter a ordenação, não com que frequência inverte. Escrito agora para
