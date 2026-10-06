@@ -1,0 +1,583 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5J.md §3-4",
+  "semente": 20261005,
+  "B": 10000,
+  "definicao_verso": "plagio._versos (MIN_PALAVRAS=3)",
+  "gera_amostras": false
+ },
+ "J1": {
+  "por_voz": {
+   "caeiro": {
+    "intervalo": [
+     10,
+     20
+    ],
+    "um_lado": false,
+    "pt": {
+     "n": 118,
+     "dentro": 46,
+     "fraccao": 0.3898,
+     "wilson95": [
+      0.3066,
+      0.48
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 11.5,
+     "abaixo": 50,
+     "acima": 22,
+     "min": 1,
+     "max": 161
+    },
+    "pt__versos_min3": {
+     "n": 118,
+     "dentro": 46,
+     "fraccao": 0.3898,
+     "wilson95": [
+      0.3066,
+      0.48
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 11.5,
+     "abaixo": 50,
+     "acima": 22,
+     "min": 1,
+     "max": 161
+    },
+    "pt__nao_vazias": {
+     "n": 118,
+     "dentro": 51,
+     "fraccao": 0.4322,
+     "wilson95": [
+      0.3464,
+      0.5223
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 12.0,
+     "abaixo": 42,
+     "acima": 25,
+     "min": 1,
+     "max": 165
+    },
+    "todas__versos_min3": {
+     "n": 118,
+     "dentro": 46,
+     "fraccao": 0.3898,
+     "wilson95": [
+      0.3066,
+      0.48
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 11.5,
+     "abaixo": 50,
+     "acima": 22,
+     "min": 1,
+     "max": 161
+    },
+    "todas__nao_vazias": {
+     "n": 118,
+     "dentro": 51,
+     "fraccao": 0.4322,
+     "wilson95": [
+      0.3464,
+      0.5223
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 12.0,
+     "abaixo": 42,
+     "acima": 25,
+     "min": 1,
+     "max": 165
+    }
+   },
+   "campos": {
+    "intervalo": [
+     15,
+     30
+    ],
+    "um_lado": false,
+    "pt": {
+     "n": 245,
+     "dentro": 78,
+     "fraccao": 0.3184,
+     "wilson95": [
+      0.2632,
+      0.3791
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 14,
+     "abaixo": 125,
+     "acima": 42,
+     "min": 1,
+     "max": 877
+    },
+    "pt__versos_min3": {
+     "n": 245,
+     "dentro": 78,
+     "fraccao": 0.3184,
+     "wilson95": [
+      0.2632,
+      0.3791
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 14,
+     "abaixo": 125,
+     "acima": 42,
+     "min": 1,
+     "max": 877
+    },
+    "pt__nao_vazias": {
+     "n": 245,
+     "dentro": 88,
+     "fraccao": 0.3592,
+     "wilson95": [
+      0.3017,
+      0.421
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 15,
+     "abaixo": 113,
+     "acima": 44,
+     "min": 1,
+     "max": 904
+    },
+    "todas__versos_min3": {
+     "n": 248,
+     "dentro": 79,
+     "fraccao": 0.3185,
+     "wilson95": [
+      0.2637,
+      0.3789
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 14.0,
+     "abaixo": 127,
+     "acima": 42,
+     "min": 1,
+     "max": 877
+    },
+    "todas__nao_vazias": {
+     "n": 248,
+     "dentro": 89,
+     "fraccao": 0.3589,
+     "wilson95": [
+      0.3017,
+      0.4203
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 15.0,
+     "abaixo": 115,
+     "acima": 44,
+     "min": 1,
+     "max": 904
+    }
+   },
+   "reis": {
+    "intervalo": [
+     1,
+     12
+    ],
+    "um_lado": true,
+    "pt": {
+     "n": 225,
+     "dentro": 165,
+     "fraccao": 0.7333,
+     "wilson95": [
+      0.672,
+      0.7868
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 10,
+     "abaixo": 0,
+     "acima": 60,
+     "min": 1,
+     "max": 104
+    },
+    "pt__versos_min3": {
+     "n": 225,
+     "dentro": 165,
+     "fraccao": 0.7333,
+     "wilson95": [
+      0.672,
+      0.7868
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 10,
+     "abaixo": 0,
+     "acima": 60,
+     "min": 1,
+     "max": 104
+    },
+    "pt__nao_vazias": {
+     "n": 225,
+     "dentro": 160,
+     "fraccao": 0.7111,
+     "wilson95": [
+      0.6487,
+      0.7664
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 11,
+     "abaixo": 0,
+     "acima": 65,
+     "min": 1,
+     "max": 104
+    },
+    "todas__versos_min3": {
+     "n": 226,
+     "dentro": 165,
+     "fraccao": 0.7301,
+     "wilson95": [
+      0.6687,
+      0.7838
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 10.0,
+     "abaixo": 1,
+     "acima": 60,
+     "min": 0,
+     "max": 104
+    },
+    "todas__nao_vazias": {
+     "n": 226,
+     "dentro": 161,
+     "fraccao": 0.7124,
+     "wilson95": [
+      0.6502,
+      0.7675
+     ],
+     "falha_o_intervalo": false,
+     "mediana": 11.0,
+     "abaixo": 0,
+     "acima": 65,
+     "min": 1,
+     "max": 104
+    }
+   },
+   "ortonimo": {
+    "intervalo": [
+     12,
+     20
+    ],
+    "um_lado": false,
+    "pt": {
+     "n": 1055,
+     "dentro": 268,
+     "fraccao": 0.254,
+     "wilson95": [
+      0.2287,
+      0.2812
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 9,
+     "abaixo": 686,
+     "acima": 101,
+     "min": 1,
+     "max": 226
+    },
+    "pt__versos_min3": {
+     "n": 1055,
+     "dentro": 268,
+     "fraccao": 0.254,
+     "wilson95": [
+      0.2287,
+      0.2812
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 9,
+     "abaixo": 686,
+     "acima": 101,
+     "min": 1,
+     "max": 226
+    },
+    "pt__nao_vazias": {
+     "n": 1055,
+     "dentro": 271,
+     "fraccao": 0.2569,
+     "wilson95": [
+      0.2314,
+      0.2841
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 10,
+     "abaixo": 671,
+     "acima": 113,
+     "min": 1,
+     "max": 240
+    },
+    "todas__versos_min3": {
+     "n": 1143,
+     "dentro": 322,
+     "fraccao": 0.2817,
+     "wilson95": [
+      0.2564,
+      0.3085
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 10,
+     "abaixo": 711,
+     "acima": 110,
+     "min": 1,
+     "max": 361
+    },
+    "todas__nao_vazias": {
+     "n": 1143,
+     "dentro": 323,
+     "fraccao": 0.2826,
+     "wilson95": [
+      0.2572,
+      0.3094
+     ],
+     "falha_o_intervalo": true,
+     "mediana": 11,
+     "abaixo": 696,
+     "acima": 124,
+     "min": 1,
+     "max": 362
+    }
+   }
+  },
+  "vozes_que_falham": [
+   "caeiro",
+   "campos",
+   "ortonimo"
+  ],
+  "n_falham": 3,
+  "dispara": true,
+  "sensibilidades": {
+   "pt__versos_min3": [
+    "caeiro",
+    "campos",
+    "ortonimo"
+   ],
+   "pt__nao_vazias": [
+    "campos",
+    "ortonimo"
+   ],
+   "todas__versos_min3": [
+    "caeiro",
+    "campos",
+    "ortonimo"
+   ],
+   "todas__nao_vazias": [
+    "campos",
+    "ortonimo"
+   ]
+  },
+  "dispara_em_todas_as_sensibilidades": false
+ },
+ "J2": {
+  "n_reais": 118,
+  "mediana_real": 11.5,
+  "regra_truncatura": "campo gravado `truncada` (done_reason == 'length')",
+  "correccao_ao_protocolo": "o §4.4 dizia que nao havia campo gravado e dizia mal; a heuristica declarada fica como contra-verificacao",
+  "contra_verificacao_heuristica": {
+   "marcadas_pela_heuristica": 4,
+   "gravadas": 1,
+   "falsos_positivos_da_heuristica": 4,
+   "falsos_negativos_da_heuristica": 1
+  },
+  "truncadas": {
+   "Q": {
+    "n": 1,
+    "ids": [
+     "q05r0"
+    ],
+    "versos": [
+     17
+    ]
+   },
+   "L": {
+    "n": 0,
+    "ids": [],
+    "versos": []
+   }
+  },
+  "cenarios": {
+   "sem_truncadas": {
+    "bracos": {
+     "Q": {
+      "modelo": "qwen2.5",
+      "n": 29,
+      "conformidade": 0.8276,
+      "conformidade_wilson95": [
+       0.6545,
+       0.924
+      ],
+      "dentro": 24,
+      "mediana": 13,
+      "ks_ao_real": 0.2881
+     },
+     "L": {
+      "modelo": "llama3.1",
+      "n": 30,
+      "conformidade": 0.3,
+      "conformidade_wilson95": [
+       0.1666,
+       0.4788
+      ],
+      "dentro": 9,
+      "mediana": 7.5,
+      "ks_ao_real": 0.3475
+     }
+    },
+    "conformidade_L_menor": true,
+    "ks_L_menor": false,
+    "dif_ks_Q_menos_L": -0.0594,
+    "ic95_agrupado_na_pergunta": [
+     -0.2057,
+     0.1168
+    ],
+    "ic95_ingenuo": [
+     -0.2073,
+     0.1078
+    ],
+    "ic_exclui_zero": false,
+    "dispara": false
+   },
+   "com_truncadas": {
+    "bracos": {
+     "Q": {
+      "modelo": "qwen2.5",
+      "n": 30,
+      "conformidade": 0.8333,
+      "conformidade_wilson95": [
+       0.6644,
+       0.9266
+      ],
+      "dentro": 25,
+      "mediana": 13.5,
+      "ks_ao_real": 0.2881
+     },
+     "L": {
+      "modelo": "llama3.1",
+      "n": 30,
+      "conformidade": 0.3,
+      "conformidade_wilson95": [
+       0.1666,
+       0.4788
+      ],
+      "dentro": 9,
+      "mediana": 7.5,
+      "ks_ao_real": 0.3475
+     }
+    },
+    "conformidade_L_menor": true,
+    "ks_L_menor": false,
+    "dif_ks_Q_menos_L": -0.0594,
+    "ic95_agrupado_na_pergunta": [
+     -0.2153,
+     0.1198
+    ],
+    "ic95_ingenuo": [
+     -0.2113,
+     0.1107
+    ],
+    "ic_exclui_zero": false,
+    "dispara": false
+   }
+  },
+  "tecto_do_harness": {
+   "num_predict": 150,
+   "maximo_observado": {
+    "Q": 17,
+    "L": 15
+   },
+   "amostras_acima_de_20": {
+    "Q": 0,
+    "L": 0
+   },
+   "reais_acima_de_20": 22,
+   "fraccao_real_acima_de_20": 0.1864
+  }
+ },
+ "J3": {
+  "por_voz": {
+   "caeiro": {
+    "n_excluidos": 1,
+    "mediana_excluidos": 8,
+    "mediana_retidos": 11.5,
+    "excluidos_sao_mais_curtos": null,
+    "sem_filtro_falha_o_intervalo": true,
+    "com_filtro_falha_o_intervalo": true
+   },
+   "campos": {
+    "n_excluidos": 70,
+    "mediana_excluidos": 23.5,
+    "mediana_retidos": 14,
+    "excluidos_sao_mais_curtos": false,
+    "sem_filtro_falha_o_intervalo": true,
+    "com_filtro_falha_o_intervalo": true
+   },
+   "reis": {
+    "n_excluidos": 20,
+    "mediana_excluidos": 11.0,
+    "mediana_retidos": 10,
+    "excluidos_sao_mais_curtos": false,
+    "sem_filtro_falha_o_intervalo": false,
+    "com_filtro_falha_o_intervalo": false
+   },
+   "ortonimo": {
+    "n_excluidos": 143,
+    "mediana_excluidos": 18,
+    "mediana_retidos": 9,
+    "excluidos_sao_mais_curtos": false,
+    "sem_filtro_falha_o_intervalo": true,
+    "com_filtro_falha_o_intervalo": true
+   }
+  },
+  "conclusao_estavel": true,
+  "vozes_informativas": [
+   "campos",
+   "reis",
+   "ortonimo"
+  ],
+  "vozes_com_excluidos_mais_curtos": [],
+  "dispara": true
+ },
+ "J4": {
+  "consequencia_sobre_as_amostras": {
+   "qwen2.5": {
+    "n": 30,
+    "dentro_do_novo": 30,
+    "conformidade_nova": 1.0,
+    "conformidade_antiga": 0.8333
+   },
+   "llama3.1": {
+    "n": 30,
+    "dentro_do_novo": 30,
+    "conformidade_nova": 1.0,
+    "conformidade_antiga": 0.3
+   }
+  },
+  "cobertura_retida_real_vs_modelos": "o intervalo novo premeia os modelos ACIMA do poeta se conformidade_nova > cobertura_retida",
+  "semente": 20261005,
+  "n_derivar": 59,
+  "n_retida": 59,
+  "percentis_na_metade_de_derivacao": {
+   "p10": 4.8,
+   "p90": 30.6
+  },
+  "intervalo_derivado": [
+   4,
+   31
+  ],
+  "cobertura_in_sample": 0.8136,
+  "cobertura_retida": 0.8644,
+  "cobertura_retida_wilson95": [
+   0.7546,
+   0.9297
+  ],
+  "intervalo_antigo": [
+   10,
+   20
+  ],
+  "cobertura_retida_do_antigo": 0.4237,
+  "ganho_na_retida": 0.4407,
+  "dispara": true
+ },
+ "J5": {
+  "dispara": true,
+  "leitura": "o J2 le-se como «nao se mostrou que a distancia difere»"
+ }
+}
