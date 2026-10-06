@@ -1,0 +1,116 @@
+{
+ "_meta": {
+  "porque_existe": "a 5I publicou um numero calculado ad hoc e sem script; ver FASE-5J.md §2.1",
+  "nota": "docs/FASE-5L.md §2",
+  "intervalos_avaliados": "a ancora ORIGINAL, Fase 5 §5.2 ate 2026-10-06",
+  "definicao_verso": "plagio._versos (MIN_PALAVRAS=3)"
+ },
+ "invertibilidade": {
+  "caeiro": {
+   "intervalo": [
+    10,
+    20
+   ],
+   "n_real": 118,
+   "conformidade_real": 0.3898,
+   "conformidade_bracos": {
+    "llama3.1": 0.3,
+    "qwen2.5": 0.8333
+   },
+   "bracos_acima_do_poeta": [
+    "qwen2.5"
+   ],
+   "invertivel": true
+  },
+  "campos": {
+   "intervalo": [
+    15,
+    30
+   ],
+   "n_real": 245,
+   "conformidade_real": 0.3184,
+   "conformidade_bracos": {
+    "llama3.1": 0.0667,
+    "qwen2.5": 0.4667
+   },
+   "bracos_acima_do_poeta": [
+    "qwen2.5"
+   ],
+   "invertivel": true
+  },
+  "reis": {
+   "intervalo": [
+    1,
+    12
+   ],
+   "n_real": 225,
+   "conformidade_real": 0.7333,
+   "conformidade_bracos": {
+    "llama3.1": 0.8333,
+    "qwen2.5": 0.4667
+   },
+   "bracos_acima_do_poeta": [
+    "llama3.1"
+   ],
+   "invertivel": true
+  },
+  "ortonimo": {
+   "intervalo": [
+    12,
+    20
+   ],
+   "n_real": 1055,
+   "conformidade_real": 0.254,
+   "conformidade_bracos": {
+    "llama3.1": 0.1667,
+    "qwen2.5": 0.7
+   },
+   "bracos_acima_do_poeta": [
+    "qwen2.5"
+   ],
+   "invertivel": true
+  },
+  "_todos_invertiveis": true
+ },
+ "compatibilidade": {
+  "por_fase": {
+   "fase-5g": {
+    "fora_3b0": 1,
+    "fora_3b1": 12,
+    "dentro_3b1": 41,
+    "dentro_3b2": 6
+   },
+   "fase-5h": {
+    "fora_3b1": 25,
+    "fora_3b2": 1,
+    "dentro_3b1": 22,
+    "dentro_3b2": 12
+   },
+   "fase-5i": {
+    "fora_3b0": 2,
+    "fora_3b1": 28,
+    "dentro_3b0": 7,
+    "dentro_3b1": 2,
+    "dentro_3b2": 21
+   }
+  },
+  "fora_do_intervalo": {
+   "0": 3,
+   "1": 65,
+   "2": 1
+  },
+  "dentro_do_intervalo": {
+   "0": 7,
+   "1": 65,
+   "2": 39
+  },
+  "n_total": 180,
+  "n_fora": 69,
+  "fora_com_tecto_em_1_ou_menos": 68,
+  "fora_que_ainda_levaram_2": 1,
+  "clausula_vinculativa": "68 de 69 itens fora do intervalo ficaram em <=1",
+  "limite_superior_de_notas_que_mudariam": 65,
+  "fraccao_que_poderia_mudar": 0.3611,
+  "nota": "limite SUPERIOR: um item podia estar em 1 por razao qualitativa tambem, e isso so se sabe repontuando"
+ }
+}

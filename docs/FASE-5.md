@@ -156,6 +156,42 @@ avaliador único: o que conta como 0 não pode ser decidido depois de ler o text
 
 ### 5.2 Âncoras de 3b — forma, por voz
 
+> **Alterada em 2026-10-06 pela [Fase 5L](FASE-5L.md) (passo 22): saíram as
+> contagens de versos por poema.** A versão original está logo abaixo, e a nota
+> de compatibilidade no §3 da 5L — **as pontuações de 3b anteriores a essa data
+> não são comparáveis com as posteriores**, porque a cláusula retirada tinha sido
+> aplicada em 68 de 69 casos aplicáveis.
+>
+> Autorização: [5J §1](FASE-5J-RELATORIO.md) (o intervalo é descritivamente falso
+> em 3 das 4 vozes), [5K §3](FASE-5K-RELATORIO.md) (como detector está
+> **invertido**: AUC = 0,000 no Caeiro) e [5L §2.1](FASE-5L.md) (os **quatro**
+> intervalos premeiam acima do poeta uma distribuição que não é a dele —
+> inclusive o do Reis, que está descritivamente correcto).
+>
+> **O comprimento do poema continua a ser medido**, ao nível do **conjunto** e não
+> da amostra: ver o passo 21 e a calibração da [5K](FASE-5K-RELATORIO.md).
+
+| voz | 2 | 1 | 0 |
+|---|---|---|---|
+| **Caeiro** | verso livre, linhas curtas, sem rima, pouca imagem | livre mas com imagem decorativa | rimado, ou prosa com enters, ou ornamentado |
+| **Campos** | versículo longo, respiração ampla, enumeração, anáfora | versículo presente mas curto, ou sem anáfora nem enumeração | verso curto regular, ou **truncado** antes de fechar |
+| **Reis** | ode breve, estrofes de 3–4 versos, sem rima, sintaxe latinizante | estrofes irregulares, ou dicção achatada | versículo longo, ou **em latim** |
+| **Ortónimo** | metro regular **e** rima, quadras ou quintilhas | rima ou metro inconsistentes | verso livre sem metro nem rima |
+
+Uma amostra **truncada** leva **0 em 3b** e é pontuada normalmente nos outros
+critérios. Truncar é falha de **fecho** — a amostra está incompleta —, e não um
+juízo de intervalo; detecta-se sem juízo pelo campo `truncada`
+(`done_reason == "length"`, ver [5J §2.3](FASE-5J-RELATORIO.md)). É a **única**
+regra mecânica de comprimento que fica no 3b.
+
+**O que fica e não está testado:** os limiares de **estrofe** (`3–4 versos`,
+`quadras ou quintilhas`) e de **verso** (`linhas curtas`, `versículo longo`) são
+comprimentos de estrofe e de linha, não de poema, e a 5J mediu só o poema. Pela
+mesma lógica podem ter o mesmo defeito — está nomeado como passo aberto.
+
+<details>
+<summary><b>A âncora original (Fase 5, 2026-10-03) — para ler as pontuações até 2026-10-06</b></summary>
+
 | voz | 2 | 1 | 0 |
 |---|---|---|---|
 | **Caeiro** | verso livre, linhas curtas, sem rima, pouca imagem, 10–20 versos | livre mas com imagem decorativa, ou fora do intervalo | rimado, ou prosa com enters, ou longo e ornamentado |
@@ -166,6 +202,8 @@ avaliador único: o que conta como 0 não pode ser decidido depois de ler o text
 Uma amostra **truncada** (`num_predict` esgotado) leva **0 em 3b** e é pontuada
 normalmente nos outros critérios. Truncar é falha de forma, e já foi observada
 duas vezes em Campos na Fase 4.
+
+</details>
 
 ### 5.3 Âncoras de 4 — responde à pergunta
 
