@@ -62,8 +62,11 @@ def main() -> None:
     # 1. `setdefault(c.poem_id, c)` contava o **primeiro chunk** e não o poema;
     # 2. juntar os chunks com `"\n".join(...)` conta a mais, porque
     #    `chunk.py` tem **`SOBREPOSICAO = 1`** e repete **uma estrofe** em cada
-    #    fronteira. No `poem_1487` (5 chunks, 4 fronteiras) isso duplica 23
-    #    ocorrências de linha e dá 181 em vez de 161.
+    #    fronteira. No `poem_1487` (5 chunks, 4 fronteiras) a sobreposição
+    #    acrescenta **21** linhas — medido pela diferença de multiconjuntos
+    #    entre o texto juntado e o `body`, com zero em falta — e dá 181 em vez
+    #    de 161. Contar as repetições *dentro* do juntado dá 23 e está errado:
+    #    a linha «……» aparece três vezes no próprio poema.
     #
     # O `body` é o texto do poema antes de ser partido para indexação, e é a
     # única fonte que não tem nenhum dos dois problemas.

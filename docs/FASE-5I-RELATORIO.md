@@ -248,9 +248,16 @@ Está medido em que ordem, que é o que eu tinha errado.
    > de `contar_versos.py` contava o **primeiro chunk** de cada poema
    > (`setdefault(c.poem_id, c)`); a segunda juntou os chunks, e **isso conta a
    > mais**, porque `chunk.py` tem `SOBREPOSICAO = 1` e repete **uma estrofe em
-   > cada fronteira`. No `poem_1487` (5 chunks) são 23 ocorrências de linha
-   > duplicadas, e o máximo sai 181 em vez de 161. As duas foram apanhadas pela
-   > sessão do passo 19.
+   > cada fronteira`. No `poem_1487` (5 chunks, 4 fronteiras) a sobreposição
+   > acrescenta **21** linhas e não tira nenhuma, e o máximo sai 181 em vez de
+   > 161. As duas foram apanhadas pela sessão do passo 19.
+   >
+   > *(Eu tinha escrito 23, contando as ocorrências repetidas **dentro** do
+   > texto juntado. São duas a mais, e a diferença é instrutiva: a linha «……»
+   > aparece **três vezes no próprio poema**, logo esse método credita ao
+   > chunker duas repetições que são do poeta. O número certo vem da diferença
+   > de multiconjuntos entre o juntado e o `body` — 21 a mais, zero em falta —, e
+   > é da sessão do passo 19.)*
    >
    > A fonte correcta é o **`body` do `parse_poem`** — o texto antes de ser
    > partido para indexação. Por aí: **120** poemas de Caeiro, mediana **11,5**
