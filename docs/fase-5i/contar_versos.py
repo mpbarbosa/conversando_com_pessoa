@@ -40,7 +40,7 @@ import sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(AQUI, "..", "..")))
 
-from src.corpus.build import load
+from src.corpus.parse import parse_corpus
 from src.plagio import _versos
 
 DENTRO = (10, 20)
@@ -55,25 +55,29 @@ def filtradas(texto: str) -> int:
 
 
 def main() -> None:
-    meta, chunks = load()
-    # **Um poema pode ter vários chunks.** A primeira versão deste ficheiro fazia
-    # `setdefault(c.poem_id, c)` e contava `p.text`, isto é, contava o **primeiro
-    # chunk** e não o poema. Apanhado por uma sessão paralela. As fracções não
-    # mudam — dos 119 só 5 são multi-chunk e os cinco já estavam acima de 20 no
-    # primeiro chunk — mas o **máximo** mudava de 48 para 181.
-    por_poema: dict[str, list] = {}
-    for c in chunks:
-        por_poema.setdefault(c.poem_id, []).append(c)
-    voz = lambda cs: getattr(cs[0].voice, "value", str(cs[0].voice))
-    cae = ["\n".join(c.text for c in cs)
-           for cs in por_poema.values() if voz(cs) == "caeiro"]
+    # **A fonte é o `body` do `parse_poem`, e não os chunks.** Este ficheiro
+    # errou duas vezes antes de chegar aqui, as duas apanhadas por uma sessão
+    # paralela:
+    #
+    # 1. `setdefault(c.poem_id, c)` contava o **primeiro chunk** e não o poema;
+    # 2. juntar os chunks com `"\n".join(...)` conta a mais, porque
+    #    `chunk.py` tem **`SOBREPOSICAO = 1`** e repete **uma estrofe** em cada
+    #    fronteira. No `poem_1487` (5 chunks, 4 fronteiras) isso duplica 23
+    #    ocorrências de linha e dá 181 em vez de 161.
+    #
+    # O `body` é o texto do poema antes de ser partido para indexação, e é a
+    # única fonte que não tem nenhum dos dois problemas.
+    poemas = parse_corpus()
+    voz = lambda p: getattr(p.voice, "value", str(p.voice))
+    cae = [p.body for p in poemas if voz(p) == "caeiro"]
 
     out: dict = {"_meta": {
         "porque_existe": "o número do §9.2 foi calculado ad hoc; a definição "
                          "não estava registada. Ver o docstring.",
-        "intervalo": list(DENTRO)}}
+        "intervalo": list(DENTRO),
+        "fonte": "Poem.body do parse_corpus — nem o 1.º chunk nem os chunks juntados; ver o comentário em main()"}}
 
-    print(f"Caeiro real: {len(cae)} poemas (texto inteiro, todos os chunks)\n")
+    print(f"Caeiro real: {len(cae)} poemas (o `body` do parse_poem)\n")
     for rot, fn in (("linhas_nao_vazias", nao_vazias), ("versos_min3", filtradas)):
         nv = [fn(t) for t in cae]
         dentro = sum(1 for x in nv if DENTRO[0] <= x <= DENTRO[1])

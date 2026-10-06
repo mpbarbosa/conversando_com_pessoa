@@ -131,17 +131,40 @@ cai — **e também não se mostra que o qwen esteja**. Com 30 amostras em 10
 agrupamentos não há potência para a distância. O que fica estabelecido é o
 **negativo**: a afirmação da 5I não tem apoio nos dados que a geraram.
 
-### 2.3 O tecto do harness, que contamina os dois lados por igual
+### 2.3 O tecto do harness não explica nada, e eu publiquei que explicava
 
-`num_predict = 150` ([`src/generation/ollama.py`](../src/generation/ollama.py)).
-Consequência medida: o **máximo observado** é 17 versos no qwen e 15 no llama, e
-**nenhum dos 60 ensaios** passa de 20 — onde está **19%** do Caeiro real.
+**Esta secção dizia o contrário e estava errada.** Fica reescrita em vez de
+apagada, porque o erro é instrutivo e porque a versão errada esteve num commit.
 
-**A região alta da distribuição do poeta é inalcançável por construção.** Isso
-não anula a comparação **entre** braços, que partilham o mesmo tecto, mas
-proíbe ler qualquer `D` absoluto como «distância ao poeta»: parte do fosso é o
-harness. A falha do llama **para baixo**, essa, não tem desculpa de tecto —
-nada obriga um modelo a escrever curto.
+Eu escrevi `num_predict = 150`, lido da **tabela do docstring** de
+[`ollama.py`](../src/generation/ollama.py) linha 11, que ficou desactualizada
+desde a Fase 1. **A constante é `NUM_PREDICT = 220`** (linha 38), e o próprio
+comentário ao lado explica a subida. A sessão da 5I apanhou-o.
+
+E com o número certo a inferência **cai inteira**, porque 220 tokens são ~147
+palavras e as amostras não chegaram perto:
+
+| braço | truncaturas | palavras: máx · mediana | versos: máx |
+|---|---|---|---|
+| **5H qwen** | **1** de 30 | 125 · 81 | 17 |
+| **5H llama** | **0** de 30 | 126 · 63 | 15 |
+| *5I braço A* | *2 de 30* | *139 · 70* | *22* |
+| **5I braço B** *(com reforço)* | **6** de 30 | 153 · 85,5 | 20 |
+
+**Uma truncatura em 60 na 5H**: os dois modelos **pararam sozinhos**, com folga
+de vinte palavras para o tecto. Logo a ausência de poemas acima de 20 versos é
+**dos modelos** e não do orçamento, e não há «fosso superior do harness» para
+descontar.
+
+O tecto **morde**, mas só quando se instrui para o comprimento: é o braço B da
+[5I](FASE-5I-RELATORIO.md), com 6 truncaturas em 30 — precisamente o «o tecto
+corta» que essa fase mediu. Os dois factos convivem, e a ordem é a que a 5I já
+tinha corrigido a si mesma: o `num_predict` é irrelevante **até** a instrução
+pegar.
+
+**Consequência para o §2:** isto **reforça** o J2 em vez de o ressalvar. A
+estreiteza das duas faixas — qwen 8–17, llama 4–15 — é dos modelos, e os `D`
+absolutos podem ser lidos como distância ao poeta sem desconto nenhum.
 
 ---
 
@@ -238,6 +261,23 @@ duas pontas do dilema estão medidas acima**, e não é uma escolha de limiar.
    versos no primeiro chunk, logo nenhum muda de categoria. Esta fase conta
    sempre sobre `.body`.
 
+   **E 161 é o valor certo, não 181.** A sessão da 5I corrigiu o `setdefault`
+   juntando os textos dos chunks, e isso troca um defeito por outro: o chunker
+   tem **`SOBREPOSICAO = 1`** ([`chunk.py:36`](../src/corpus/chunk.py)) e repete
+   **uma estrofe** em cada fronteira. No `poem_1487`, que é o que move o máximo,
+   os cinco chunks juntos dão 181 contra os **161** do `.body`, com **21 linhas
+   duplicadas e zero em falta** — contei os multiconjuntos. A fonte certa é o
+   `body` do `parse_poem`, que é o poema antes de ser partido para indexação.
+
+3. **Escrevi `num_predict = 150` e são 220.** Li a **tabela do docstring** de
+   [`ollama.py`](../src/generation/ollama.py) linha 11, desactualizada desde a
+   Fase 1, em vez da constante na linha 38 — e a constante tinha ao lado o
+   comentário que explicava a subida. Pior do que o número: construí sobre ele
+   uma explicação («a gama alta é inalcançável por construção») que **não se
+   sustenta**, porque na 5H houve **1 truncatura em 60**. O §2.3 está reescrito.
+   A lição é a de sempre nesta sequência, agora aplicada a mim a ler código:
+   **um docstring não é a fonte de um valor; a constante é.**
+
 E uma que não é minha, mas é desta fase: **a definição de verso do §9.2 da 5I
 misturava duas** (linhas não vazias nos poemas reais, `plagio._versos` nas
 amostras geradas). Foi apanhada antes de o protocolo ser escrito e corrigida
@@ -261,9 +301,9 @@ perto. O **M3 da 5H mantém-se de pé** e a troca de modelo continua condicionad
 **Não autoriza retirar o motivo ao passo 20.** O §5 do protocolo escreveu que, se
 o J1 **e** o J2 disparassem, o passo 20 — reforço mais `num_predict`, juntos —
 ficaria sem motivo. **O J2 não disparou**, logo o passo 20 **conserva o motivo**:
-o llama escreve curto a sério. O §2.3 acrescenta-lhe uma razão independente — o
-tecto de 150 proíbe 19% da gama do poeta —, e isso é um argumento para subir o
-`num_predict` **mesmo sem** reforço nenhum.
+o llama escreve curto a sério. O **segundo** motivo que eu tinha dado ao passo 20
+— um tecto a proibir a gama alta — **não existe**: ver o §2.3 corrigido. Fica o
+primeiro, que é o da 5I e basta.
 
 **Não autoriza concluir nada sobre o qwen estar mais perto.** O J5 dispara
 (§2.2).
@@ -278,10 +318,11 @@ mecânica da âncora; verso livre, rima, imagem e ornamento não foram tocados, 
    **distribuição** de comprimentos de um braço com a do corpus (foi o que o J2
    fez com o KS) em vez de pontuar cada poema contra um intervalo. É a única
    forma que o §4.3 deixa de pé, e já está implementada.
-2. **Subir o `num_predict` e remedir**, com motivo duplo: o passo 20 e o tecto do
-   §2.3. Enquanto estiver em 150, nenhuma medição de forma alcança 19% da gama
-   do poeta, e **todos os números de comprimento desta sequência estão
-   censurados** — não só os do llama.
+2. ~~Subir o `num_predict` e remedir~~ — **retirado**, e a razão está no §2.3: o
+   tecto é 220 e não 150, e na 5H houve **1 truncatura em 60**. Os modelos param
+   sozinhos com vinte palavras de folga, logo subir o orçamento não lhes alarga a
+   forma. **Só o passo 20 — com reforço — tem motivo**, porque é o reforço que
+   faz o tecto morder (braço B da 5I: 6 em 30).
 3. **As três outras vozes com os dois modelos** — passo 16, intocado, e agora com
    uma razão a mais: os pisos do Campos e do ortónimo são os piores de todos
    (§1.1), logo é lá que a âncora de forma mais engana.

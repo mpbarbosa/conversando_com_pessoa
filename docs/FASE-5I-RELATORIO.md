@@ -221,7 +221,7 @@ Está medido em que ordem, que é o que eu tinha errado.
 
    | | dentro de 10–20 versos |
    |---|---|
-   | **Caeiro real** (119 poemas) | **46 de 119 — 39%** |
+   | **Caeiro real** (120 poemas) | **47 de 120 — 39%** |
    | llama3.1, braço A | 12 de 30 — **40%** |
    | qwen2.5, 5H | 25 de 30 — **83%** |
 
@@ -244,16 +244,25 @@ Está medido em que ordem, que é o que eu tinha errado.
    > **e a segunda adenda mostra que a coincidência não significa o que eu li
    > nela.**
 
-   > **Nota de reprodutibilidade.** A primeira versão de
-   > `contar_versos.py` contava o **primeiro chunk** de cada poema e não o poema
-   > inteiro (`setdefault(c.poem_id, c)`). Também apanhado pela sessão do passo
-   > 19. As fracções e medianas **não mudam** — dos 119 poemas só 5 são
-   > multi-chunk e os cinco já estavam acima de 20 versos no primeiro chunk —
-   > mas o máximo passa de 48 para **181**. O script está corrigido e conta o
-   > texto inteiro.
+   > **Nota de reprodutibilidade, e errei duas vezes aqui.** A primeira versão
+   > de `contar_versos.py` contava o **primeiro chunk** de cada poema
+   > (`setdefault(c.poem_id, c)`); a segunda juntou os chunks, e **isso conta a
+   > mais**, porque `chunk.py` tem `SOBREPOSICAO = 1` e repete **uma estrofe em
+   > cada fronteira`. No `poem_1487` (5 chunks) são 23 ocorrências de linha
+   > duplicadas, e o máximo sai 181 em vez de 161. As duas foram apanhadas pela
+   > sessão do passo 19.
+   >
+   > A fonte correcta é o **`body` do `parse_poem`** — o texto antes de ser
+   > partido para indexação. Por aí: **120** poemas de Caeiro, mediana **11,5**
+   > versos, mínimo 1, **máximo 161**, e a composição **42% / 39% / 18%**.
+   >
+   > **As fracções e a mediana sobreviveram às três versões** (39% dentro, nos
+   > três cálculos); o que nunca esteve certo foi o **máximo**, que publiquei
+   > como 48 e depois como 181 e é **161**. O script está corrigido e usa o
+   > `body`.
 
-   O Caeiro real tem mediana de 11 versos mas **43% dos seus poemas têm menos de
-   dez**, e 22 têm mais de vinte.
+   O Caeiro real tem mediana de **11,5** versos mas **42% dos seus poemas têm
+   menos de dez**, e 22 têm mais de vinte, até um máximo de 161.
 
    > **Segunda adenda, e esta retira uma frase deste relatório.** Eu tinha
    > escrito que «o llama3.1 reproduz a distribuição do poeta quase
@@ -263,7 +272,7 @@ Está medido em que ordem, que é o que eu tinha errado.
    >
    > | | abaixo de 10 | dentro | acima de 20 |
    > |---|---|---|---|
-   > | **Caeiro real** | 43% | 39% | **18%** |
+   > | **Caeiro real** | 42% | 39% | **18%** |
    > | llama3.1 (5H) | **70%** | 30% | **0%** |
    > | llama3.1 (5I, braço A) | 57% | 40% | 3% |
    > | qwen2.5 (5H) | 17% | 83% | 0% |
