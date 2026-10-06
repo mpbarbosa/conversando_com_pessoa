@@ -206,15 +206,22 @@ tudo mecânico — e isso está dito na 5J §6.2.
 ## 7. Lista de verificação
 
 ```
-[ ] A1  nulo empirico: 10k sub-amostras reais a n=30 e n=10 -> 01-nulo.json
-[ ] B1  K1 os bracos contra o percentil 95, nos dois n
-[ ] B2  K2 a regua entre vozes reais, e cada braco contra cada voz
-[ ] B3  K3 AUC dos tres detectores na tarefa de deteccao, com IC
-[ ] B4  K4 potencia por n em {10,20,30,60,120}
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  relatorio FASE-5K-RELATORIO.md
-[ ] C3  CONTROLO.md: fase, passos 21 e 22, e o n que o passo 16 precisa
+[x] A1  nulo empirico -> 01-nulo.json   p95 = 0,190 (n=30) e 0,371 (n=10)
+[x] B1  K1 -> DISPARA a n=30; NAO dispara agrupado (o qwen cai ao percentil 90)
+[x] B2  K2 -> DISPARA: entre vozes reais 0,149-0,317; nenhum braco cabe em
+        voz nenhuma; o llama mais perto do REIS que do Caeiro
+[x] B3  K3 -> DISPARA: KS 0,999/1,000 contra 0,000/0,784 da conformidade
+[x] B4  K4 -> DISPARA (AUC = 0,000) · potencia: 24% a n=10, 100% a n=20
+[x] C1  portoes -> 03-resultados.json
+[x] C2  relatorio FASE-5K-RELATORIO.md
+[x] C3  CONTROLO.md: fase, passos 21 e 22, e o n do passo 16 (= 20 perguntas)
 ```
+
+**Dois desvios declarados, no §4 do relatorio:** a grelha de potencia perdeu o
+**120** (impossivel sem reposicao de 118 poemas — pre-registei um ponto que nao
+podia ser calculado) e ganhou 12, 15 e 25, onde a potencia salta; e o **nulo por
+voz** entrou no K2, que e descritivo e sem limiar, para dar escala ao «mais perto
+do Reis».
 
 **Sessões paralelas:** verificado com `ListAgents` e `list_sessions` antes de
 abrir a fase — **nenhuma outra sessão neste repositório**. Mesmo assim, `git add`
