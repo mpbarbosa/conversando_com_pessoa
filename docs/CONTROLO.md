@@ -315,6 +315,15 @@ resolução no chão.
 > é o argumento para escrever as definições pelos **casos difíceis** e não pelos
 > fáceis.
 
+> **E o quinto, da Fase 5I, que custou uma segunda adenda e veio de fora.**
+> **Um escalar colapsa uma distribuição.** Eu li «40% contra 39% dentro do
+> intervalo» como «o llama reproduz a distribuição do poeta quase exactamente»,
+> quando era **70+0** contra **43+18**: o Caeiro real erra o intervalo para os
+> dois lados e o llama só para baixo. Mesma fracção, distribuições diferentes —
+> e por KS o llama está **mais longe** do poeta, não mais perto. **Antes de
+> chamar duas distribuições parecidas, comparar as distribuições e não uma
+> fracção delas.** Foi a sessão do passo 19 que o viu.
+
 > **E o quarto, da Fase 5I, que custou uma adenda.** Um número calculado **ad
 > hoc numa sessão** não tem definição registada, e duas definições plausíveis da
 > mesma coisa dão números diferentes: contar «versos» por linhas não vazias ou

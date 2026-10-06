@@ -56,27 +56,37 @@ def filtradas(texto: str) -> int:
 
 def main() -> None:
     meta, chunks = load()
-    poemas: dict[str, object] = {}
+    # **Um poema pode ter vários chunks.** A primeira versão deste ficheiro fazia
+    # `setdefault(c.poem_id, c)` e contava `p.text`, isto é, contava o **primeiro
+    # chunk** e não o poema. Apanhado por uma sessão paralela. As fracções não
+    # mudam — dos 119 só 5 são multi-chunk e os cinco já estavam acima de 20 no
+    # primeiro chunk — mas o **máximo** mudava de 48 para 181.
+    por_poema: dict[str, list] = {}
     for c in chunks:
-        poemas.setdefault(c.poem_id, c)
-    voz = lambda p: getattr(p.voice, "value", str(p.voice))
-    cae = [p for p in poemas.values() if voz(p) == "caeiro"]
+        por_poema.setdefault(c.poem_id, []).append(c)
+    voz = lambda cs: getattr(cs[0].voice, "value", str(cs[0].voice))
+    cae = ["\n".join(c.text for c in cs)
+           for cs in por_poema.values() if voz(cs) == "caeiro"]
 
     out: dict = {"_meta": {
         "porque_existe": "o número do §9.2 foi calculado ad hoc; a definição "
                          "não estava registada. Ver o docstring.",
         "intervalo": list(DENTRO)}}
 
-    print(f"Caeiro real: {len(cae)} poemas\n")
+    print(f"Caeiro real: {len(cae)} poemas (texto inteiro, todos os chunks)\n")
     for rot, fn in (("linhas_nao_vazias", nao_vazias), ("versos_min3", filtradas)):
-        nv = [fn(p.text) for p in cae]
+        nv = [fn(t) for t in cae]
         dentro = sum(1 for x in nv if DENTRO[0] <= x <= DENTRO[1])
         out[rot] = {"n": len(nv), "mediana": st.median(nv),
                     "min": min(nv), "max": max(nv),
                     "dentro_de_10_20": dentro,
                     "fraccao": round(dentro / len(nv), 4),
                     "abaixo_de_10": sum(1 for x in nv if x < DENTRO[0]),
-                    "acima_de_20": sum(1 for x in nv if x > DENTRO[1])}
+                    "acima_de_20": sum(1 for x in nv if x > DENTRO[1]),
+                    "composicao_pct": {
+                        "abaixo": round(sum(1 for x in nv if x < DENTRO[0]) / len(nv), 3),
+                        "dentro": round(dentro / len(nv), 3),
+                        "acima": round(sum(1 for x in nv if x > DENTRO[1]) / len(nv), 3)}}
         print(f"  {rot:20s} mediana {st.median(nv):4.1f}  "
               f"dentro {dentro}/{len(nv)} ({dentro/len(nv):.0%})  "
               f"abaixo de 10: {out[rot]['abaixo_de_10']}")

@@ -10,21 +10,31 @@
   "n": 119,
   "mediana": 12,
   "min": 1,
-  "max": 49,
+  "max": 186,
   "dentro_de_10_20": 51,
   "fraccao": 0.4286,
   "abaixo_de_10": 43,
-  "acima_de_20": 25
+  "acima_de_20": 25,
+  "composicao_pct": {
+   "abaixo": 0.361,
+   "dentro": 0.429,
+   "acima": 0.21
+  }
  },
  "versos_min3": {
   "n": 119,
   "mediana": 11,
   "min": 1,
-  "max": 48,
+  "max": 181,
   "dentro_de_10_20": 46,
   "fraccao": 0.3866,
   "abaixo_de_10": 51,
-  "acima_de_20": 22
+  "acima_de_20": 22,
+  "composicao_pct": {
+   "abaixo": 0.429,
+   "dentro": 0.387,
+   "acima": 0.185
+  }
  },
  "geradas": {
   "qwen_5H": {

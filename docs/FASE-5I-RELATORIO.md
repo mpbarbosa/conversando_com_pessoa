@@ -240,13 +240,48 @@ Está medido em que ordem, que é o que eu tinha errado.
    > de três palavras), com uma excepção de um item no braço B. A tabela acima
    > usa `_versos` em todas as linhas.
    >
-   > **A correcção aperta a conclusão em vez de a afrouxar:** 39% contra 40% é
-   > uma coincidência quase exacta entre o Caeiro real e o llama3.1.
+   > **A correcção aperta a coincidência dos escalares** — 39% contra 40% —
+   > **e a segunda adenda mostra que a coincidência não significa o que eu li
+   > nela.**
+
+   > **Nota de reprodutibilidade.** A primeira versão de
+   > `contar_versos.py` contava o **primeiro chunk** de cada poema e não o poema
+   > inteiro (`setdefault(c.poem_id, c)`). Também apanhado pela sessão do passo
+   > 19. As fracções e medianas **não mudam** — dos 119 poemas só 5 são
+   > multi-chunk e os cinco já estavam acima de 20 versos no primeiro chunk —
+   > mas o máximo passa de 48 para **181**. O script está corrigido e conta o
+   > texto inteiro.
 
    O Caeiro real tem mediana de 11 versos mas **43% dos seus poemas têm menos de
-   dez**, e 22 têm mais de vinte. **O llama3.1 reproduz a distribuição do poeta
-   quase exactamente; o qwen2.5 obedece à persona duas vezes mais do que o
-   próprio Caeiro.**
+   dez**, e 22 têm mais de vinte.
+
+   > **Segunda adenda, e esta retira uma frase deste relatório.** Eu tinha
+   > escrito que «o llama3.1 reproduz a distribuição do poeta quase
+   > exactamente». **Cai, e a sessão que mediu o passo 19 tem razão:** 40%
+   > contra 39% é um **escalar**, e os dois escalares escondem composições
+   > diferentes.
+   >
+   > | | abaixo de 10 | dentro | acima de 20 |
+   > |---|---|---|---|
+   > | **Caeiro real** | 43% | 39% | **18%** |
+   > | llama3.1 (5H) | **70%** | 30% | **0%** |
+   > | llama3.1 (5I, braço A) | 57% | 40% | 3% |
+   > | qwen2.5 (5H) | 17% | 83% | 0% |
+   >
+   > **O Caeiro real erra o intervalo para os dois lados; o llama erra só para
+   > baixo.** Mesma fracção dentro, distribuições diferentes — e a sessão do
+   > passo 19 mediu KS de 0,347 para o llama contra 0,288 para o qwen, isto é, o
+   > llama está **mais longe** do poeta e não mais perto. A conclusão correcta
+   > do §9.2 é a primeira metade e só ela: **o intervalo de 10–20 da âncora de
+   > 3b está errado**, porque 61% do Caeiro autêntico cai fora dele. O que ele
+   > **não** autoriza é exonerar o llama, e o **M3 da 5H mantém-se de pé**.
+   >
+   > Um escalar colapsa uma distribuição, e eu li o colapso como semelhança.
+
+   O que fica do §9.2, então: **o qwen2.5 obedece à persona duas vezes mais do
+   que o próprio Caeiro (83% contra 39%)**, e isso continua a ser um problema do
+   instrumento. O llama é outra coisa — escreve curto, e curto não é o que o
+   Caeiro faz.
 
    Se isto se confirmar num desenho próprio, então o «défice de forma» que o M3
    da 5H nomeou e que esta fase tentou corrigir **não é um défice** — é o
