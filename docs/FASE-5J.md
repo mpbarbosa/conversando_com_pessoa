@@ -285,16 +285,23 @@ medir o 3b recalibrado contra o antigo em dados retidos — não está nesta fas
 ## 7. Lista de verificação
 
 ```
-[ ] A1  elegibilidade e contagem: fase-5j/contar.py -> 01-contagem.json
-[ ] A2  verificacao de ortogonalidade (excluidos vs retidos)
-[ ] B1  J1 nas quatro vozes, Wilson 95%, pt e todas as linguas
-[ ] B2  J2 nos bracos Q/L da 5H: conformidade, KS, bootstrap
-[ ] B3  J3 com e sem o filtro de fragmentos
-[ ] B4  J4 derivar em metade (semente 20261005), validar UMA vez na retida
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  relatorio FASE-5J-RELATORIO.md
-[ ] C3  CONTROLO.md: estado da fase e passo 19 fechado
+[x] A1  elegibilidade e contagem: fase-5j/contar.py -> 01-contagem.json
+[x] A2  verificacao de ortogonalidade (excluidos vs retidos) -> J3, e ao contrario
+[x] B1  J1 nas quatro vozes, Wilson 95%, pt e todas as linguas  -> DISPARA (3/4)
+[x] B2  J2 nos bracos Q/L da 5H: conformidade, KS, bootstrap    -> NAO dispara
+[x] B3  J3 com e sem o filtro de fragmentos                     -> DISPARA
+[x] B4  J4 derivar em metade (semente 20261005), validar UMA vez -> DISPARA, e a
+        consequencia mata-o: 100% aos dois modelos contra 86% do poeta
+[x] C1  portoes -> 03-resultados.json
+[x] C2  relatorio FASE-5J-RELATORIO.md
+[x] C3  CONTROLO.md: estado da fase e passo 19 fechado
 ```
+
+**Duas correccoes ao proprio protocolo, feitas a meio e registadas no §5 do
+relatorio:** o §4.4 dizia que a truncatura nao estava gravada (estava, e a
+heuristica que declarei acertou zero), e a sensibilidade do §4.2 mostrou que o
+J1 **nao** aguenta as quatro combinacoes de lingua x definicao — o nucleo solido
+e Campos e ortonimo, nao o Caeiro.
 
 **Combinação de ficheiros com a sessão paralela** (`Phase 5B`, que correu 5B–5I):
 `docs/FASE-5J*` e `docs/fase-5j/` são desta sessão, e o `CONTROLO.md` também —
