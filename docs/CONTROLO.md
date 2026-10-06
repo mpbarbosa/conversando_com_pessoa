@@ -270,7 +270,7 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 14 | O terceiro braço: **negação que não nomeia** | desfaz a fusão que a [5B §2.1](FASE-5B.md) declarou e a 5G herdou — a variante afirmativa inverte a polaridade **e** deixa de nomear os referentes, e nenhuma das duas fases separou as duas coisas |
 | 15 | ~~**A forma do llama3.1**~~ — **medida, e o reforço não passa** | [Fase 5I](FASE-5I-RELATORIO.md): I1 e I2 falham. E corrigiu-me a ordem — eu tinha escrito que o `num_predict` «não é o constrangimento», o que era verdade **sem** o reforço e falso **com** ele. Os dois são um par, e eu testei-os em sequência |
 | 16 | **As outras três vozes com os dois modelos** | o Caeiro era o caso extremo; o Reis já dava 2,0 na âncora antiga. Se o llama piorar o Reis, a troca deixa de ser óbvia e a 5H não mediu isso |
-| 19 | **Verificar se o intervalo de 10–20 versos da âncora de 3b é real** — é agora o passo que importa mais | medido de passagem na [5I §9.2](FASE-5I-RELATORIO.md): só **51 de 119** poemas reais de Caeiro (43%) lá cabem, com 36% abaixo de dez. O **llama3.1 reproduz essa distribuição (40%); o qwen obedece à persona duas vezes mais do que o próprio Caeiro (83%)**. Se se confirmar, o «défice de forma» é o instrumento a penalizar o modelo mais parecido com o original — o erro da 5E num critério diferente |
+| 19 | **Verificar se o intervalo de 10–20 versos da âncora de 3b é real** — é agora o passo que importa mais | medido de passagem na [5I §9.2](FASE-5I-RELATORIO.md) e **corrigido por adenda**: só **46 de 119** poemas reais de Caeiro (**39%**) lá cabem, com 43% abaixo de dez. O **llama3.1 reproduz essa distribuição (40%); o qwen obedece à persona duas vezes mais do que o próprio Caeiro (83%)**. Se se confirmar, o «défice de forma» é o instrumento a penalizar o modelo mais parecido com o original — o erro da 5E num critério diferente. **Atenção:** os 119 estão contados in-sample, logo um intervalo novo tem de ser derivado numa metade e validado na outra |
 | 20 | **O par reforço + `num_predict`, medidos juntos** | a única leitura que a 5I deixa de pé para corrigir a forma por instrução. Mas o §2.1 avisa: entre as amostras que **não** truncaram, o ganho do braço reforçado já era pequeno (12/24 contra 11/28) |
 | 17 | **Afinar as opções por modelo e remedir** | o Δ de 0,700 da 5H é um piso, porque o llama correu com as opções do qwen |
 | 18 | **O `qwen2.5:3b`**, instalado e nunca medido | diria se o resultado da 5H é de **capacidade** ou de **família** |
@@ -305,6 +305,15 @@ resolução no chão.
 > avaliador. E a causa foi **uma** fronteira que a definição não decidiu, o que
 > é o argumento para escrever as definições pelos **casos difíceis** e não pelos
 > fáceis.
+
+> **E o quarto, da Fase 5I, que custou uma adenda.** Um número calculado **ad
+> hoc numa sessão** não tem definição registada, e duas definições plausíveis da
+> mesma coisa dão números diferentes: contar «versos» por linhas não vazias ou
+> por `plagio._versos` (≥3 palavras) move a fracção do Caeiro real de 43% para
+> 39%. Foi uma sessão paralela que o apanhou, não eu. **Qualquer número que
+> entre num relatório tem de ter um script no repositório que o reproduza** — e
+> comparações entre grupos têm de usar a mesma definição nos dois lados, o que
+> parece óbvio e não foi.
 
 > **E o terceiro, da Fase 5E, que é o mais caro de todos.** Um critério derivado
 > do **tratamento** mede a proximidade ao tratamento, e não à coisa. A Fase 5

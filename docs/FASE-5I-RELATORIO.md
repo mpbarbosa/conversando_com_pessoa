@@ -22,8 +22,10 @@ A autorização exigia I1 **e** I2, e não tem nenhum dos dois. A cláusula de f
 de serviço fica como está.
 
 **E o §9.2 levanta uma dúvida maior do que a que esta fase veio resolver:** só
-**43%** dos poemas reais de Caeiro cabem no intervalo de 10–20 versos que a
-âncora de 3b exige — contra 40% do llama3.1 e **83%** do qwen2.5. O «défice de
+**39%** dos poemas reais de Caeiro cabem no intervalo de 10–20 versos que a
+âncora de 3b exige — contra **40%** do llama3.1 e **83%** do qwen2.5 (ver a
+adenda do §9.2: a primeira versão deste número comparava duas definições de
+verso, e a correcção aperta a coincidência). O «défice de
 forma» pode ser o instrumento, outra vez.
 
 ---
@@ -219,12 +221,30 @@ Está medido em que ordem, que é o que eu tinha errado.
 
    | | dentro de 10–20 versos |
    |---|---|
-   | **Caeiro real** (119 poemas) | **51 de 119 — 43%** |
-   | llama3.1, braço A | 12 de 30 — 40% |
+   | **Caeiro real** (119 poemas) | **46 de 119 — 39%** |
+   | llama3.1, braço A | 12 de 30 — **40%** |
    | qwen2.5, 5H | 25 de 30 — **83%** |
 
-   O Caeiro real tem mediana de 12 versos mas **36% dos seus poemas têm menos de
-   dez**, e 25 têm mais de vinte. **O llama3.1 reproduz a distribuição do poeta
+   > **Adenda, e corrige este relatório.** A primeira versão desta tabela dava
+   > 43% para o Caeiro real, e comparava **duas definições de verso**: os 119
+   > poemas reais contados por **linhas não vazias**, e as amostras geradas pelo
+   > `n_versos` que o harness grava, que vem de `plagio._versos` e **deixa cair
+   > as linhas com menos de três palavras** (`MIN_PALAVRAS = 3`). O Caeiro
+   > escreve linhas curtas, logo a diferença não é inócua. A omissão foi
+   > apanhada por uma sessão paralela, e tinha razão: o número era ad hoc e a
+   > definição não estava registada em lado nenhum.
+   >
+   > Está agora em [`fase-5i/contar_versos.py`](fase-5i/contar_versos.py), que
+   > calcula as duas. O Caeiro real passa de 43% para **39%**; as amostras
+   > geradas dão o **mesmo** nas duas definições (raramente têm linhas de menos
+   > de três palavras), com uma excepção de um item no braço B. A tabela acima
+   > usa `_versos` em todas as linhas.
+   >
+   > **A correcção aperta a conclusão em vez de a afrouxar:** 39% contra 40% é
+   > uma coincidência quase exacta entre o Caeiro real e o llama3.1.
+
+   O Caeiro real tem mediana de 11 versos mas **43% dos seus poemas têm menos de
+   dez**, e 22 têm mais de vinte. **O llama3.1 reproduz a distribuição do poeta
    quase exactamente; o qwen2.5 obedece à persona duas vezes mais do que o
    próprio Caeiro.**
 

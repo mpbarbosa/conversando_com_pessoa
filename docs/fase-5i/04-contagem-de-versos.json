@@ -1,0 +1,55 @@
+{
+ "_meta": {
+  "porque_existe": "o número do §9.2 foi calculado ad hoc; a definição não estava registada. Ver o docstring.",
+  "intervalo": [
+   10,
+   20
+  ]
+ },
+ "linhas_nao_vazias": {
+  "n": 119,
+  "mediana": 12,
+  "min": 1,
+  "max": 49,
+  "dentro_de_10_20": 51,
+  "fraccao": 0.4286,
+  "abaixo_de_10": 43,
+  "acima_de_20": 25
+ },
+ "versos_min3": {
+  "n": 119,
+  "mediana": 11,
+  "min": 1,
+  "max": 48,
+  "dentro_de_10_20": 46,
+  "fraccao": 0.3866,
+  "abaixo_de_10": 51,
+  "acima_de_20": 22
+ },
+ "geradas": {
+  "qwen_5H": {
+   "n": 30,
+   "dentro_gravado_versos_min3": 25,
+   "dentro_linhas_nao_vazias": 25,
+   "coincidem": true
+  },
+  "llama_5H": {
+   "n": 30,
+   "dentro_gravado_versos_min3": 9,
+   "dentro_linhas_nao_vazias": 9,
+   "coincidem": true
+  },
+  "llama_5I_A": {
+   "n": 30,
+   "dentro_gravado_versos_min3": 12,
+   "dentro_linhas_nao_vazias": 12,
+   "coincidem": true
+  },
+  "llama_5I_B": {
+   "n": 30,
+   "dentro_gravado_versos_min3": 18,
+   "dentro_linhas_nao_vazias": 17,
+   "coincidem": false
+  }
+ }
+}
