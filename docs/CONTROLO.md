@@ -1,7 +1,7 @@
 # Documento de controlo — PessoaBot
 
 Estado do projecto, decisões tomadas, correcções feitas e próximos passos.
-**Actualizado em 2026-10-03.**
+**Actualizado em 2026-10-05.**
 
 Este é o índice-mestre. Os detalhes estão nos documentos por fase; aqui está o
 que está feito, o que falta, e o que mudou de ideias pelo caminho.
@@ -38,7 +38,8 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5F — Endireitar a régua** | [`FASE-5F.md`](FASE-5F.md) · [relatório](FASE-5F-RELATORIO.md) | ✅ **os três portões passam: a âncora recalibrada é aceite**. Premeia **16 de 24** poemas autênticos retidos (67%, contra os 15% da antiga) e a discriminação **melhorou** (AUC 0,913 contra 0,811). E, sem portão, a pergunta aberta desde a Fase 5 tem resposta: **AUC(gerado < real) passa de 0,655 (p=0,112) para 0,851 (p=0,0003)** |
 | **5G — A 5B remedida** | [`FASE-5G.md`](FASE-5G.md) · [relatório](FASE-5G-RELATORIO.md) | ✅ **G2 nas três leituras: H5B cai.** E a medição **correu**: `d` passou de **7** (5B) para **17**, com os mesmos n, perguntas e harness — a diferença foi a régua. IC95% do Δ em **[−0,30; +0,18]**, contra uma distância real-para-gerado de **0,93**: as interdições explicam no máximo um quinto disso |
 | **5H — Trocar o modelo** | [`FASE-5H.md`](FASE-5H.md) · [relatório](FASE-5H-RELATORIO.md) | ✅ **M1 dispara nas três leituras: era o modelo.** `llama3.1:8b` dá **+0,700** sobre o `qwen2.5:7b` em 3a′ (IC95% [+0,42; +0,98], p=0,0002, 19 pares contra 2), o que fecha **75%** do fosso de 0,929 que separa o Caeiro gerado do real. **M3 condiciona**: escreve poemas demasiado curtos (7,5 versos contra 10–20 pedidos). Autoriza **investigar** a troca, não trocá-la |
-| **5I — A forma do llama** | [`FASE-5I.md`](FASE-5I.md) · [relatório](FASE-5I-RELATORIO.md) | ✅ **I0 passa, I1 e I2 falham: o reforço não é autorizado.** A instrução pega (12→18 em 30 dentro de 10–20 versos) e o tecto corta (truncaturas de 2 para **6**), com saldo de **−0,150** em 3b. E levanta uma dúvida maior: só **43%** dos poemas **reais** de Caeiro cabem no intervalo que a âncora exige, contra 40% do llama e **83%** do qwen |
+| **5I — A forma do llama** | [`FASE-5I.md`](FASE-5I.md) · [relatório](FASE-5I-RELATORIO.md) | ✅ **I0 passa, I1 e I2 falham: o reforço não é autorizado.** A instrução pega (12→18 em 30 dentro de 10–20 versos) e o tecto corta (truncaturas de 2 para **6**), com saldo de **−0,150** em 3b. E levanta uma dúvida maior: só **43%** dos poemas **reais** de Caeiro cabem no intervalo que a âncora exige, contra 40% do llama e **83%** do qwen. **Dois números desta linha foram corrigidos depois:** os 43% são **39%** com uma definição de verso só (adenda `742b9f6`), e a leitura de que o llama se parece com o poeta **cai** na [5J §2.1](FASE-5J-RELATORIO.md) |
+| **5J — A âncora de forma** | [`FASE-5J.md`](FASE-5J.md) · [relatório](FASE-5J-RELATORIO.md) | ✅ **J1 dispara, J2 não: a régua está torta e endireitá-la deixa-a cega.** Os intervalos de versos do 3b não descrevem o poeta, por **um** mecanismo — os **pisos** das personas: o do Campos (15) está acima da mediana real (14), o do ortónimo (12) acima da sua (9), e o **Reis é a única voz sem piso** e a única que passa (73%). Mas **não exonera o llama**, que está *mais longe* da distribuição real (KS 0,347 contra 0,288): a 5I inferiu a semelhança de **um escalar**, e 42+19 ≈ 70+0 dá a mesma fracção com distribuições diferentes. E o intervalo honesto `[4,31]`, validado a 86% em dados retidos, dá **100% aos dois modelos contra 86% do poeta** — logo a contagem de versos **sai** do 3b |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -129,6 +130,9 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 10 | A extrapolação de rerank falhou por atenção quadrática | Explicação **errada**, tirada de resultados parciais. A estimativa era optimista por 1,9x | `FASE-3-PASSO-1.md` |
 | 11 | Esta máquina não tem GPU utilizável | **Tem**: Intel Arc por Vulkan. Concluí de `nvidia-smi` ausente, vi o `lspci` dizer «Intel Graphics» e não verifiquei | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) |
 | 12 | A guarda de idioma estava com o limiar alto | **Não estava**: contra o corpus, 0,12 rejeita 3 de 1906 (0,16%). O errado era o **instrumento** — media registo, não língua | secção abaixo |
+| 13 | O llama3.1 reproduz a distribuição de comprimento do Caeiro «quase exactamente» | **Não reproduz**: está *mais longe* que o qwen (KS 0,347 contra 0,288; mediana 7,5 contra 11,5 do poeta). Inferi de **um escalar** — 40% contra 39% dentro do intervalo —, e eram **70+0** contra **42+19** | 5I §9.2, corrigido pela [5J §2.1](FASE-5J-RELATORIO.md) |
+| 14 | A truncatura não está gravada no harness, logo precisa de heurística | **Está gravada** (`truncada`, de `done_reason == "length"`). A heurística que declarei — «última linha sem pontuação terminal» — acertou **zero**: 4 falsos positivos e 1 falso negativo em 60. Em verso livre, acabar sem ponto é **estilo** | [`FASE-5J.md`](FASE-5J.md) §4.4, corrigido a meio |
+| 15 | O `num_predict` não é o constrangimento da forma | Verdadeiro **sem** o reforço e falso **com** ele (5I), e a 5J fecha-o: com `num_predict=150`, **nenhum** dos 60 ensaios da 5H passa de 20 versos, onde está 19% do Caeiro real. **Todos** os números de comprimento desta sequência estão censurados em cima | 5I §1, [5J §2.3](FASE-5J-RELATORIO.md) |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -146,6 +150,9 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | Buffer do CLI sem `remover_preambulo` | O ecrã mostrava mais do que o veredicto julgara |
 | `REFORCO_EN` nunca usado no caminho do CLI | Sessão em inglês recebia o reforço em português |
 | Medição condicionada a re-observar um evento estocástico | 0/3 plágios na 1.ª tentativa: zero dados |
+| Dois lados de uma comparação contados por **definições diferentes** de verso | «O llama reproduz o poeta»: real por linhas não vazias, gerado por `_versos` (≥3 palavras) |
+| Contagem de versos resolvida pelo **primeiro chunk** e não pelo poema | `max` publicado como 48 quando é **161**; fracções salvas por acaso (os 5 multi-chunk já estavam acima de 20) |
+| Intervalo central usado para medir **dispersão** | critério por amostra a tentar medir propriedade de um conjunto: contém o poeta **ou** discrimina, nunca os dois |
 
 ---
 
@@ -270,10 +277,12 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 14 | O terceiro braço: **negação que não nomeia** | desfaz a fusão que a [5B §2.1](FASE-5B.md) declarou e a 5G herdou — a variante afirmativa inverte a polaridade **e** deixa de nomear os referentes, e nenhuma das duas fases separou as duas coisas |
 | 15 | ~~**A forma do llama3.1**~~ — **medida, e o reforço não passa** | [Fase 5I](FASE-5I-RELATORIO.md): I1 e I2 falham. E corrigiu-me a ordem — eu tinha escrito que o `num_predict` «não é o constrangimento», o que era verdade **sem** o reforço e falso **com** ele. Os dois são um par, e eu testei-os em sequência |
 | 16 | **As outras três vozes com os dois modelos** | o Caeiro era o caso extremo; o Reis já dava 2,0 na âncora antiga. Se o llama piorar o Reis, a troca deixa de ser óbvia e a 5H não mediu isso |
-| 19 | **Verificar se o intervalo de 10–20 versos da âncora de 3b é real** — é agora o passo que importa mais | medido de passagem na [5I §9.2](FASE-5I-RELATORIO.md) e **corrigido por adenda**: só **46 de 119** poemas reais de Caeiro (**39%**) lá cabem, com 43% abaixo de dez. O **llama3.1 reproduz essa distribuição (40%); o qwen obedece à persona duas vezes mais do que o próprio Caeiro (83%)**. Se se confirmar, o «défice de forma» é o instrumento a penalizar o modelo mais parecido com o original — o erro da 5E num critério diferente. **Atenção:** os 119 estão contados in-sample, logo um intervalo novo tem de ser derivado numa metade e validado na outra |
-| 20 | **O par reforço + `num_predict`, medidos juntos** | a única leitura que a 5I deixa de pé para corrigir a forma por instrução. Mas o §2.1 avisa: entre as amostras que **não** truncaram, o ganho do braço reforçado já era pequeno (12/24 contra 11/28) |
+| 19 | ~~**Verificar se o intervalo de 10–20 versos da âncora de 3b é real**~~ — **feito, e não é; mas o remédio é pior** | [Fase 5J](FASE-5J-RELATORIO.md): **J1 dispara** (3 de 4 vozes, e as três falham **para baixo** — os pisos das personas estão altos demais), **J3 e J4 disparam**, e **J2 não**. O «défice de forma» do llama **não** é artefacto do instrumento: o llama está mais longe do poeta, não mais perto, e a frase da 5I §9.2 veio de uma coincidência de **um escalar**. O J4 valida `[4,31]` a 86% em dados retidos e a consequência mata-o: **100% aos dois modelos contra 86% do poeta**. A prescrição é **retirar** a contagem de versos do 3b, porque a dispersão do Caeiro (1 a 161 versos) é propriedade de **um conjunto** e não de um poema |
+| 20 | **O par reforço + `num_predict`, medidos juntos** — a 5J **confirma-lhe o motivo** e acrescenta-lhe um segundo | o §5 da [5J](FASE-5J.md) escreveu antes de medir que, se o J1 **e** o J2 disparassem, este passo ficaria sem motivo. **O J2 não disparou**: o llama escreve curto a sério (mediana 7,5 contra 11,5 do poeta). E o segundo motivo é independente do reforço — `num_predict=150` faz com que **nenhum** dos 60 ensaios da 5H passe de 20 versos, onde está **19%** do Caeiro real, logo **todos** os números de comprimento desta sequência estão censurados em cima |
 | 17 | **Afinar as opções por modelo e remedir** | o Δ de 0,700 da 5H é um piso, porque o llama correu com as opções do qwen |
 | 18 | **O `qwen2.5:3b`**, instalado e nunca medido | diria se o resultado da 5H é de **capacidade** ou de **família** |
+| 21 | **Um critério de forma ao nível do conjunto** | é a única forma de instrumento que o §4.3 da [5J](FASE-5J-RELATORIO.md) deixa de pé: comparar a **distribuição** de comprimentos de um braço com a do corpus, em vez de pontuar cada poema contra um intervalo. Um poema sozinho não pode ser «correctamente disperso», e a dispersão é o que distingue o Caeiro (1 a 161 versos). Já está implementado — é o KS do J2 em [`fase-5j/analisar.py`](fase-5j/analisar.py) |
+| 22 | **Retirar a contagem de versos da âncora de 3b** | a prescrição que a [5J](FASE-5J-RELATORIO.md) §6 autoriza, e que o §3.2 do protocolo pré-escreveu: não por estar mal calibrada, mas porque **nenhuma** recalibração a torna verdadeira **e** discriminativa ao mesmo tempo. Mexe na [Fase 5](FASE-5.md) §5.2 nas quatro vozes, logo é uma alteração de instrumento e pede o seu próprio pré-registo |
 
 O **Passo 1 era o que importava mais**, e a Fase 5B foi medi-lo. Voltou sem
 veredicto, e a razão é instrutiva: o instrumento com que se ia medir — o
@@ -325,6 +334,24 @@ resolução no chão.
 > original com ele.** Custou três fases de instrumentação descobri-lo e é uma
 > linha de protocolo.
 
+> **E o quarto, da Fase 5J, que é sobre a forma do instrumento e não sobre
+> o seu conteúdo.** Os três anteriores são sobre **validade** (5C: medir em
+> dados retidos), **resolução** (5D: variância no controlo) e **origem** (5E:
+> pontuar o original com o critério). Este é sobre a **forma**: **um critério
+> por amostra não pode medir uma propriedade de um conjunto.** O 3b pontua
+> poemas um a um, e a coisa que distingue o Caeiro em comprimento — escrever
+> ora quatro versos ora cento e sessenta — não está em nenhum poema seu, está
+> na obra. Daí o dilema medido da [5J](FASE-5J-RELATORIO.md) §4.3: um
+> intervalo largo o bastante para conter o poeta contém trivialmente tudo o
+> que os modelos fazem, e um estreito o bastante para discriminar reprova o
+> poeta. **Não é uma escolha de limiar.**
+>
+> E um corolário sobre resumos, que custou uma frase publicada: **uma fracção
+> dentro de um intervalo não identifica uma distribuição.** A 5I concluiu que
+> o llama reproduzia o poeta porque 40% e 39% coincidiam; eram 70+0 contra
+> 42+19. Antes de ler uma coincidência de escalares como semelhança, **olhar
+> para as duas distribuições**.
+
 É agora a **Fase 5**, e a interface passa a Fase 6 — a renumeração está
 declarada no topo de [`FASE-5.md`](FASE-5.md). A hipótese que vai a medição é a
 que está na tabela de perguntas abertas do §5: o contexto recuperado explica e
@@ -346,6 +373,8 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 [ ] repetir o teste de voz do 8B com repeat_penalty (adenda A.3 só corrigiu o arranque)
 [ ] repetir o bench de rerank com pausa de arrefecimento
 [ ] medir num_predict=110 (poupa ~4-5s; medicao contaminada por cache)
+    -> a 5J §2.3 inverte o sinal deste item: a 150 ja se perde 19% da
+       gama do poeta, logo o que falta medir e SUBIR, nao descer
 [ ] remover src/{main,model,retriever}.py no Passo 9
 [ ] remover langchain do requirements.txt
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
