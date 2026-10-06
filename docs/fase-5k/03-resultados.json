@@ -1,0 +1,284 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5K.md §3-4",
+  "semente": 20261006,
+  "B_nulo": 10000,
+  "B_auc": 2000,
+  "gera_amostras": false,
+  "ks": "fase-5j/analisar.py, mesmo codigo"
+ },
+ "K1": {
+  "nulo": {
+   "10": {
+    "n": 10,
+    "b": 10000,
+    "mediana": 0.2136,
+    "p95": 0.3712,
+    "p99": 0.461
+   },
+   "12": {
+    "n": 12,
+    "b": 10000,
+    "mediana": 0.1893,
+    "p95": 0.3376,
+    "p99": 0.411
+   },
+   "15": {
+    "n": 15,
+    "b": 10000,
+    "mediana": 0.1712,
+    "p95": 0.3,
+    "p99": 0.3571
+   },
+   "20": {
+    "n": 20,
+    "b": 10000,
+    "mediana": 0.1462,
+    "p95": 0.2508,
+    "p99": 0.3042
+   },
+   "25": {
+    "n": 25,
+    "b": 10000,
+    "mediana": 0.1258,
+    "p95": 0.22,
+    "p99": 0.2675
+   },
+   "30": {
+    "n": 30,
+    "b": 10000,
+    "mediana": 0.1107,
+    "p95": 0.1904,
+    "p99": 0.2333
+   },
+   "60": {
+    "n": 60,
+    "b": 10000,
+    "mediana": 0.0641,
+    "p95": 0.1124,
+    "p99": 0.139
+   }
+  },
+  "bracos": {
+   "qwen2.5": {
+    "n": 30,
+    "ks_n30": 0.2881,
+    "acima_p95_n30": true,
+    "ks_agrupado_n10_medio": 0.3367,
+    "ks_agrupado_n10_ic95": [
+     0.2881,
+     0.4661
+    ],
+    "acima_p95_n10": false,
+    "percentil_no_nulo_n30": 99.93,
+    "percentil_no_nulo_n10": 90.03
+   },
+   "llama3.1": {
+    "n": 30,
+    "ks_n30": 0.3475,
+    "acima_p95_n30": true,
+    "ks_agrupado_n10_medio": 0.4132,
+    "ks_agrupado_n10_ic95": [
+     0.3475,
+     0.561
+    ],
+    "acima_p95_n10": true,
+    "percentil_no_nulo_n30": 99.99,
+    "percentil_no_nulo_n10": 97.73
+   }
+  },
+  "dispara": true,
+  "dispara_agrupado": false
+ },
+ "K2": {
+  "entre_vozes_reais": {
+   "caeiro_vs_campos": 0.1495,
+   "caeiro_vs_reis": 0.1825,
+   "caeiro_vs_ortonimo": 0.2661,
+   "campos_vs_reis": 0.317,
+   "campos_vs_ortonimo": 0.277,
+   "reis_vs_ortonimo": 0.27
+  },
+  "bracos_contra_cada_voz": {
+   "qwen2.5": {
+    "caeiro": 0.2881,
+    "campos": 0.3959,
+    "reis": 0.3956,
+    "ortonimo": 0.4521,
+    "voz_mais_proxima": "caeiro",
+    "vozes_em_cujo_intervalo_cabe": [],
+    "cabe_em_alguma": false
+   },
+   "llama3.1": {
+    "caeiro": 0.3475,
+    "campos": 0.4653,
+    "reis": 0.2156,
+    "ortonimo": 0.2678,
+    "voz_mais_proxima": "reis",
+    "vozes_em_cujo_intervalo_cabe": [],
+    "cabe_em_alguma": false
+   }
+  },
+  "n_por_voz": {
+   "caeiro": 118,
+   "campos": 245,
+   "reis": 225,
+   "ortonimo": 1055
+  },
+  "mediana_por_voz": {
+   "caeiro": 11.5,
+   "campos": 14,
+   "reis": 10,
+   "ortonimo": 9
+  },
+  "p95_do_nulo_por_voz_n30": {
+   "caeiro": 0.1944,
+   "campos": 0.2076,
+   "reis": 0.2044,
+   "ortonimo": 0.2215
+  }
+ },
+ "K3": {
+  "conformidade_do_corpus": 0.3898,
+  "nota": "scores orientados a «maior = mais real»; D2 e D3 negados porque sao distancias",
+  "ressalva_dos_negativos": "os negativos sao bootstrap dos MESMOS 30 ensaios, nao novas amostras do modelo, logo variam menos do que um braco novo variaria. Uma AUC de 1,000 mede a separacao DESTE perfil de comprimentos, e sobrestima a separacao de um braco fresco. O D1 invertido nao depende disto: a inversao esta nas medianas (83% contra 39%).",
+  "bracos": {
+   "qwen2.5": {
+    "D1_conformidade_monotona": {
+     "auc": 0.0,
+     "ic95": [
+      0.0,
+      0.0
+     ]
+    },
+    "D2_conformidade_dois_lados": {
+     "auc": 1.0,
+     "ic95": [
+      1.0,
+      1.0
+     ]
+    },
+    "D3_ks": {
+     "auc": 0.999,
+     "ic95": [
+      0.9986,
+      0.9995
+     ]
+    },
+    "delta_D3_menos_D1": {
+     "valor": 0.999,
+     "ic95": [
+      0.9973,
+      1.0
+     ],
+     "exclui_zero": true
+    },
+    "D1_pior_que_moeda": true
+   },
+   "llama3.1": {
+    "D1_conformidade_monotona": {
+     "auc": 0.7843,
+     "ic95": [
+      0.7784,
+      0.7905
+     ]
+    },
+    "D2_conformidade_dois_lados": {
+     "auc": 0.6897,
+     "ic95": [
+      0.6825,
+      0.6969
+     ]
+    },
+    "D3_ks": {
+     "auc": 1.0,
+     "ic95": [
+      0.9999,
+      1.0
+     ]
+    },
+    "delta_D3_menos_D1": {
+     "valor": 0.2157,
+     "ic95": [
+      0.196,
+      0.2361
+     ],
+     "exclui_zero": true
+    },
+    "D1_pior_que_moeda": false
+   }
+  },
+  "dispara": true
+ },
+ "K4": {
+  "dispara": true,
+  "auc_D1_qwen": 0.0,
+  "auc_D1_llama": 0.7843
+ },
+ "potencia": {
+  "qwen2.5": {
+   "10": {
+    "p95_do_nulo": 0.3712,
+    "potencia": 0.239
+   },
+   "12": {
+    "p95_do_nulo": 0.3376,
+    "potencia": 0.429
+   },
+   "15": {
+    "p95_do_nulo": 0.3,
+    "potencia": 0.552
+   },
+   "20": {
+    "p95_do_nulo": 0.2508,
+    "potencia": 1.0
+   },
+   "25": {
+    "p95_do_nulo": 0.22,
+    "potencia": 1.0
+   },
+   "30": {
+    "p95_do_nulo": 0.1904,
+    "potencia": 1.0
+   },
+   "60": {
+    "p95_do_nulo": 0.1124,
+    "potencia": 1.0
+   }
+  },
+  "llama3.1": {
+   "10": {
+    "p95_do_nulo": 0.3712,
+    "potencia": 0.631
+   },
+   "12": {
+    "p95_do_nulo": 0.3376,
+    "potencia": 1.0
+   },
+   "15": {
+    "p95_do_nulo": 0.3,
+    "potencia": 1.0
+   },
+   "20": {
+    "p95_do_nulo": 0.2508,
+    "potencia": 1.0
+   },
+   "25": {
+    "p95_do_nulo": 0.22,
+    "potencia": 1.0
+   },
+   "30": {
+    "p95_do_nulo": 0.1904,
+    "potencia": 1.0
+   },
+   "60": {
+    "p95_do_nulo": 0.1124,
+    "potencia": 1.0
+   }
+  }
+ },
+ "K5": {
+  "dispara": false,
+  "leitura": "o K1 passa, logo o K5 não dispara"
+ }
+}
