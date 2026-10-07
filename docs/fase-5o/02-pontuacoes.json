@@ -1,0 +1,230 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5O.md §2.2",
+  "avaliador": "R3 — esta sessao. Nao e a sessao que pontuou a 5H, a 5F nem a 5G.",
+  "escala": "3a' da Fase 5F §2, inalterada, com as seis regras e a regra de aplicacao da 5H",
+  "cegueira": "pontuado sobre 01-itens.md embaralhado, sem pergunta e sem abrir 01-chave.json",
+  "contaminacao_encontrada_a_pontuar": "O42 e o item H01 da 5H, de que eu imprimi ~300 caracteres nesta sessao ao inspeccionar o esquema da chave. Reconheci-o. O §2.3 da 5N dizia que H01 nao entrava na fase seguinte e dizia MAL: entra. Dei-lhe 0, contra a direccao do meu viés (esperava que o braco L fosse bom).",
+  "reconhecidos": [
+   "O42"
+  ]
+ },
+ "pontuacoes": {
+  "O01": {
+   "c3a": 2,
+   "razao": "«o que foste nao es tu»: a rosa e a que esta aqui, e fecha nisso"
+  },
+  "O02": {
+   "c3a": 1,
+   "razao": "«as coisas nao mudam quando as vejo» e bom, mas «iguais por dentro» afirma um interior"
+  },
+  "O03": {
+   "c3a": 2,
+   "razao": "fica no sensorio de ponta a ponta; «quando reparo, nao gozo: vejo»"
+  },
+  "O04": {
+   "c3a": 1,
+   "razao": "argumenta para colapsar alma em corpo («o corpo e que lhes e alma»), mas «uma ninfa pequena» e «um ser interior longinquo» ficam de pe"
+  },
+  "O05": {
+   "c3a": 2,
+   "razao": "«compreendi isto com os olhos, nunca com o pensamento»; «amei as coisas sem sentimentalidade nenhuma»"
+  },
+  "O06": {
+   "c3a": 2,
+   "razao": "tautologia pura em quatro versos: a agua esta suja com a sujeira que carrega"
+  },
+  "O07": {
+   "c3a": 2,
+   "razao": "«mais sol que o sol», e fecha na «coincidencia exacta de uma coisa consigo mesma». A alma e nomeada e redefinida como corpo: regra 4"
+  },
+  "O08": {
+   "c3a": 2,
+   "razao": "«sem se preocupar», «ninguem deixa rasto», e fecha em «uma sombra que passeia»"
+  },
+  "O09": {
+   "c3a": 2,
+   "razao": "descricao visivel e «nada mais do que isso»"
+  },
+  "O10": {
+   "c3a": 2,
+   "razao": "«a chuva cai sem significado», «nao tem segredo nenhum»: regra 3 em serie"
+  },
+  "O11": {
+   "c3a": 2,
+   "razao": "«tem cor e forma e existencia apenas»; «a beleza e o nome de qualquer coisa que nao existe»"
+  },
+  "O12": {
+   "c3a": 2,
+   "razao": "«o vento nao chora nem os rios gritam», «as estrelas nao cantam»: negacao em litania"
+  },
+  "O13": {
+   "c3a": 0,
+   "razao": "boa deflacao e depois «nada esta mais fechado do que o abismo», «nao ha nem um fio de esperanca», e o vento sussurra ao ouvido dos campos"
+  },
+  "O14": {
+   "c3a": 2,
+   "razao": "«ve-la melhor, mas a mesma» e a chave: ela nao mudou a Natureza, aproximou-a. «Tu mudaste» e retirado logo: regra 4"
+  },
+  "O15": {
+   "c3a": 2,
+   "razao": "nomeia a alma e reduz-la a uma folha caida e um vaso de barro; «nao perturba a paz das coisas»"
+  },
+  "O16": {
+   "c3a": 2,
+   "razao": "«uma arvore e uma arvore; um poente e um poente»; «quem sabe? ninguem»; fecha em «tudo existiu»"
+  },
+  "O17": {
+   "c3a": 2,
+   "razao": "«quase que me perco a pensar o que isto significa, mas volto-me»: a tentacao do sentido e nomeada e recusada"
+  },
+  "O18": {
+   "c3a": 2,
+   "razao": "«um monte de pedras que nao seja pedra»; «nao ha mais que ver»"
+  },
+  "O19": {
+   "c3a": 2,
+   "razao": "«amo as flores por serem flores, directamente»: a tautologia como assinatura"
+  },
+  "O20": {
+   "c3a": 2,
+   "razao": "«nunca ao defeito de exigir do Mundo que fosse qualquer coisa que nao fosse o Mundo». O destino aparece mas a direccao e aceitar: regra 6"
+  },
+  "O21": {
+   "c3a": 0,
+   "razao": "«as coisas nao mudaram» e bom, mas o ultimo verso e «agora posso ver o que estava escondido»: afirma verdade oculta no fecho"
+  },
+  "O22": {
+   "c3a": 2,
+   "razao": "«amar e pensar», e fecha em «nao peco nada a ninguem senao pensar»: nao atribui nada as coisas"
+  },
+  "O23": {
+   "c3a": 2,
+   "razao": "«e apenas uma roupa azul e um homem na praca»; «nada alem disso, nao ha misterios»"
+  },
+  "O24": {
+   "c3a": 2,
+   "razao": "«nada mudara, porque tudo esta feito assim»; «a vida continua sem mim»"
+  },
+  "O25": {
+   "c3a": 2,
+   "razao": "«o rio da minha aldeia nao faz pensar em nada; quem esta ao pe dele esta so ao pe dele»"
+  },
+  "O26": {
+   "c3a": 0,
+   "razao": "«aguardar o negro», «a esperanca e apenas um sonho perdido»: a natureza a carregar o desespero"
+  },
+  "O27": {
+   "c3a": 2,
+   "razao": "«deixo-me ser uma coisa, como os montes, as arvores e o rio sao coisas»"
+  },
+  "O28": {
+   "c3a": 1,
+   "razao": "«a verdade esta nelas e em mim» fecha-se na imanencia, mas «a nossa comum divindade» fica de pe como afirmacao de profundidade"
+  },
+  "O29": {
+   "c3a": 2,
+   "razao": "«mais reais que qualquer sentimento»; «os campos que existem, estao presentes»"
+  },
+  "O30": {
+   "c3a": 2,
+   "razao": "«um rio que nao nos diz nada sobre nos»; «apenas a luz a extinguir-se, nao uma tristeza»; e a alma reduzida a dor de dentes"
+  },
+  "O31": {
+   "c3a": 2,
+   "razao": "«a luz nao e chorosa»; e o fecho retira o resto: «nao e um adeus, mas uma mudanca de tempo»"
+  },
+  "O32": {
+   "c3a": 2,
+   "razao": "litania de atribuicao negada, dez vezes, sem abrir porta nenhuma"
+  },
+  "O33": {
+   "c3a": 2,
+   "razao": "querer ser um carro de bois; «em que sou realmente diferente nunca me diriam» recusa a resposta em vez de a afirmar"
+  },
+  "O34": {
+   "c3a": 2,
+   "razao": "«um beijo e um beijo, e nao uma saudade»; «um olhar e um olhar»: regra 2 duas vezes"
+  },
+  "O35": {
+   "c3a": 2,
+   "razao": "«o dia nao cai, apenas esta a descer»; «tudo o resto esta no lugar em que estava»"
+  },
+  "O36": {
+   "c3a": 2,
+   "razao": "«nao e em nada de bom nem de feio»; «so um terreno a subir e o outro a descer»"
+  },
+  "O37": {
+   "c3a": 2,
+   "razao": "«nao trago o sol nem a lua na algibeira»; fecha em «a realidade que nao falta»"
+  },
+  "O38": {
+   "c3a": 2,
+   "razao": "querer ser po, rio, choupo, burro; recusa «olhar para tras de si e ter pena»"
+  },
+  "O39": {
+   "c3a": 1,
+   "razao": "nao atribui nada a natureza, mas acaba em «ja nao mais ter consciencia da diferenca»: uma abstraccao sobre o eu"
+  },
+  "O40": {
+   "c3a": 1,
+   "razao": "«sem pensar no fundo, que nao sei se existe» e excelente, mas «sou eu quem faz a paisagem ficar feita» abre uma"
+  },
+  "O41": {
+   "c3a": 1,
+   "razao": "«os pastores de Virgilio sao Virgilio» e deflacionario, mas «a Natureza e bela e antiga» atribui beleza"
+  },
+  "O42": {
+   "c3a": 0,
+   "razao": "«vao do tempo sem corpo», «nao tenho vida, apenas um vazio que eles preenchem»"
+  },
+  "O43": {
+   "c3a": 1,
+   "razao": "fica no modo de olhar de um homem concreto, mas «aquela grande tristeza que ele nunca disse bem que tinha» afirma profundidade nao dita"
+  },
+  "O44": {
+   "c3a": 2,
+   "razao": "«as coisas continuarao a ser o que sao»; «e so isso»"
+  },
+  "O45": {
+   "c3a": 2,
+   "razao": "«ninguem lhes pos um nome a montanha. Ela e a montanha»"
+  },
+  "O46": {
+   "c3a": 2,
+   "razao": "«nem o sono do rebanho e uma visao sublime, nem um poema, mas o sono»: recusa explicita da poetizacao"
+  },
+  "O47": {
+   "c3a": 2,
+   "razao": "«a agua e a agua»; e o fecho e nao lhe chamar nome nenhum, so bebe-la"
+  },
+  "O48": {
+   "c3a": 2,
+   "razao": "«ele nao pensou nisso»; «nao achou que era um momento importante»"
+  },
+  "O49": {
+   "c3a": 1,
+   "razao": "«parecem ter medo» esta marcado como aparencia, mas «o mesmo sorriso antigo» fica de pe"
+  },
+  "O50": {
+   "c3a": 2,
+   "razao": "«o mundo e sempre igual; o sofrer e so eu»: localiza o sentimento no sujeito e nao nas coisas"
+  },
+  "O51": {
+   "c3a": 2,
+   "razao": "«uma realidade tao real que ate as minhas costas a sentem»; «nao preciso de raciocinio onde tenho espaduas»"
+  },
+  "O52": {
+   "c3a": 2,
+   "razao": "«as coisas nao sao o simbolo do amor, nem o simbolo da morte»; fecha em «e isso»"
+  },
+  "O53": {
+   "c3a": 2,
+   "razao": "«para alem da realidade imediata nao ha nada», dito sem rodeios"
+  },
+  "O54": {
+   "c3a": 2,
+   "razao": "«ser real e isto», apontando para os joelhos e as maos que mudaram de posicao"
+  }
+ }
+}
