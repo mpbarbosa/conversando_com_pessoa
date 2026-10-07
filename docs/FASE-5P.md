@@ -124,14 +124,21 @@ o R1, e a diferença entre as duas leituras é a estimativa do efeito de nível.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  juntar as tres leituras dos 24 reais: eu (5O), R1 e R2 (5F)
-[ ] B1  P1 onde vive a discordancia: 1-vs-2 ou 0-vs-1, com e sem o R1
-[ ] B2  P2 sensibilidade: subir todos os 1 a 2 e recorrer X1, O1-O4, N1
-[ ] B3  P3 a saturacao depois de afrouxar, nos dois grupos
-[ ] C1  portoes e prescricao do §3.1 -> 02-resultados.json
-[ ] C2  relatorio FASE-5P-RELATORIO.md
-[ ] C3  CONTROLO.md: a correccao ao §5 da 5O, e o destino do passo 28
+[x] A1  tres leituras dos 24 reais juntas
+[x] B1  P1 NAO dispara: 4 dos 7 desacordos envolvem um 0, 3 sao 1-vs-2.
+        Sem o R1 caem de 7 para 4 -> ~43% era efeito de NIVEL
+[x] B2  P2 dispara, mas so o O3 e por tautologia. O O1 mantem-se
+        significativo com o p a piorar 6,5x: afrouxar apaga sinal
+[x] B3  P3 NAO dispara: os reais vao a 100% no tecto, o llama a 87%
+[x] C1  portoes -> 02-resultados.json
+[x] C2  relatorio FASE-5P-RELATORIO.md
+[x] C3  CONTROLO.md: passo 28 RETIRADO, passo 12 reapontado ao 0/1
 ```
+
+**A prescricao accionada foi a primeira linha do §3.1: retirar o passo 28 e
+reapontar a fronteira 0/1.** E uma segunda correccao a uma afirmacao minha, no §4
+do relatorio: a critica da 5E **nao** esta resolvida «para os tres avaliadores» —
+a ancora nova ainda da 0 a 4 de 24 poemas autenticos sob o R1.
 
 **Sessões paralelas:** verificado com `ListAgents` e `list_sessions` — nenhuma
 outra neste repositório. `git add` com ficheiros nomeados.
