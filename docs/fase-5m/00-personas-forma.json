@@ -1,0 +1,39 @@
+{
+ "_meta": {
+  "nota": "FASE-5M.md §5.3 / A3 — a persona de servico pede comprimento?",
+  "data": "2026-10-07"
+ },
+ "personas": {
+  "caeiro": {
+   "n_chars": 524,
+   "frases_de_forma": [
+    "', forma='Verso livre, linhas curtas, sem rima",
+    "Entre dez e vinte versos"
+   ]
+  },
+  "campos": {
+   "n_chars": 547,
+   "frases_de_forma": [
+    "', forma='Versículo longo, de respiração ampla, muitas vezes irregular",
+    "Anáfora: começar versos seguidos com a mesma palavra é teu",
+    "Entre\\nquinze e trinta versos"
+   ]
+  },
+  "reis": {
+   "n_chars": 586,
+   "frases_de_forma": [
+    "Aconselhas a medida, a calma, o gozo breve do presente",
+    "', forma='Ode breve",
+    "Estrofes curtas e regulares, três ou quatro versos\\ncada, sem rima",
+    "No máximo doze versos"
+   ]
+  },
+  "ortonimo": {
+   "n_chars": 489,
+   "frases_de_forma": [
+    "Quadras ou quintilhas",
+    "Entre doze e vinte\\nversos"
+   ]
+  }
+ }
+}

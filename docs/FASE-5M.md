@@ -150,13 +150,39 @@ coerente formalmente. Um KS baixo ao ortónimo pode significar «acertou» ou
 «acertou num alvo largo», e o nulo por voz (p95 = 0,222, o mais alto dos quatro)
 já reflecte essa largura. Declarado agora.
 
-### 5.3 A persona de serviço pode não pedir comprimento nenhum
+### 5.3 A persona de serviço pede comprimento — e pede **os intervalos que a 5L acabou de invalidar**
 
-Se a persona de uma voz não disser nada sobre extensão, o M4 pode disparar por
-falta de instrução e não por incapacidade do modelo. **Verificação declarada:**
-reportar, para cada voz, se a persona de serviço menciona comprimento — e se não
-mencionar, o M4 lê-se como «a persona não o pede», não como «o modelo não o
-sabe».
+A verificação estava declarada para o caso de a persona **não** pedir extensão,
+porque então o M4 disparava por falta de instrução. Corri-a (A3, em
+[`fase-5m/00-personas-forma.json`](fase-5m/)) e o resultado é o oposto e muito
+mais consequente:
+
+| voz | o que a persona de serviço manda | onde |
+|---|---|---|
+| caeiro | «Entre dez e vinte versos» | [`src/voices.py:123`](../src/voices.py) |
+| campos | «Entre quinze e trinta versos» | `:133` |
+| reis | «No máximo doze versos» | `:142` |
+| ortonimo | «Entre doze e vinte versos» | `:154` |
+
+**São exactamente os quatro intervalos que a [5J](FASE-5J-RELATORIO.md) mostrou
+não descreverem o poeta e que a [5L](FASE-5L.md) retirou da âncora.** A cadeia
+fecha-se: as personas instruem os intervalos, o 3b **herdou-os delas** (a 5J §9.2
+identificou essa origem), a 5L removeu-os do **instrumento de medida** — e eles
+continuam na **instrução de geração**, em código de produção.
+
+**O projecto passou a medir sem o intervalo e continua a pedi-lo.**
+
+Duas consequências para esta fase, e nenhuma delas muda o desenho:
+
+1. **O M4 lê-se com a instrução presente.** As personas mandam comprimentos
+   **diferentes por voz** (10–20, 15–30, ≤12, 12–20), logo se um modelo não
+   modular a forma por voz **não é por falta de instrução**. É a leitura forte do
+   M4, e é a que fica.
+2. **A 5M mede o sistema como ele está**, que é o correcto para uma fase que
+   pergunta o que os dois modelos fazem **neste** produto. Corrigir a persona é
+   uma **intervenção**, e o efeito de uma intervenção mede-se — foi a 5I a
+   ensiná-lo, ao mexer na instrução e obter um saldo líquido negativo
+   inesperado. Entra como passo próprio, com o seu pré-registo.
 
 ### 5.4 A surdez do KS às caudas, outra vez
 
@@ -171,7 +197,8 @@ pré-registada.
 ```
 [ ] A1  gerar 180 amostras (3 vozes × 2 modelos × 10 × 3) -> 01-cru.jsonl
 [ ] A2  asserção byte a byte do prompt entre bracos, por (voz, pergunta)
-[ ] A3  verificar se a persona de cada voz menciona comprimento (§5.3)
+[x] A3  a persona de cada voz pede comprimento -> 00-personas-forma.json
+        e pede OS INTERVALOS QUE A 5L INVALIDOU: ver o §5.3
 [ ] B1  KS de cada celula ao corpus da sua voz, nulos a n=16 e n=30
 [ ] B2  M1 a predicao da 5K · M2 alguma celula acerta · M3 custo geral
 [ ] B3  M4 os modelos modulam por voz? · M5 leitura no pior caso
