@@ -1,0 +1,72 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5Q.md §3",
+  "semente": 20261007,
+  "B": 10000
+ },
+ "Q1": {
+  "auc_pooled": 0.9883,
+  "n_reais": 24,
+  "n_gerados": 48,
+  "limiar": 0.65,
+  "fuga_editorial": {
+   "n_com_marca": 4,
+   "n_sem_marca": 20,
+   "media_com_marca": 4,
+   "media_sem_marca": 3.95,
+   "auc_so_com_reais_sem_marca": 0.988
+  },
+  "dispara": true
+ },
+ "Q2": {
+  "auc_real_vs_qwen": 0.9783,
+  "auc_real_vs_llama": 0.9983,
+  "delta_llama_menos_qwen": 0.02,
+  "ic95_do_delta": [
+   -0.0052,
+   0.0651
+  ],
+  "ic_exclui_zero": false,
+  "media_qwen": 1.417,
+  "media_llama": 1.417,
+  "nota": "AUC mais BAIXA = mais perto do poeta (mais vezes tomado por real)",
+  "dispara": false
+ },
+ "Q3": {
+  "por_voz": {
+   "campos": {
+    "auc_qwen": 1.0,
+    "auc_llama": 0.9844,
+    "delta": -0.0156,
+    "llama_mais_perto": true,
+    "media_qwen": 1.125,
+    "media_llama": 1.625,
+    "media_real": 3.875
+   },
+   "reis": {
+    "auc_qwen": 0.9375,
+    "auc_llama": 1.0,
+    "delta": 0.0625,
+    "llama_mais_perto": false,
+    "media_qwen": 1.75,
+    "media_llama": 1.5,
+    "media_real": 4
+   },
+   "ortonimo": {
+    "auc_qwen": 1.0,
+    "auc_llama": 1.0,
+    "delta": 0.0,
+    "llama_mais_perto": false,
+    "media_qwen": 1.375,
+    "media_llama": 1.125,
+    "media_real": 4
+   }
+  },
+  "vozes_a_favor_do_llama": 1,
+  "dispara": false
+ },
+ "Q4": {
+  "dispara": true,
+  "leitura": "«nao se mostrou»; a prescricao e acrescentar as duas repeticoes que a 5M tem e esta fase nao usou"
+ }
+}

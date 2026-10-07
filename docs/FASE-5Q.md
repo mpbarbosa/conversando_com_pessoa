@@ -171,16 +171,23 @@ estão geradas e commitadas.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  folha Q01-Q72 (3 vozes x 8 qwen + 8 llama + 8 reais), embaralhada,
-        etiquetada com a voz, sem pergunta, chave fechada
-[ ] B1  julgar 1-4 as cegas, com razao por item
-[ ] B2  Q1 a resolucao · Q2 a decisao · Q3 por voz · Q4 inconclusivo
-[ ] B3  reportar a distribuicao das minhas respostas (§5.1)
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  SE o Q2 disparar: a troca entra no src/ (§4)
-[ ] C3  relatorio FASE-5Q-RELATORIO.md
-[ ] C4  CONTROLO.md: fase, o passo 25 reapontado, e a troca
+[x] A1  folha Q01-Q72 embaralhada, etiquetada com a voz, chave fechada
+[x] B1  72 juizos as cegas -> 02-juizos.json, commitados antes da chave
+[x] B2  Q1 DISPARA (AUC 0,988) · Q2 NAO (medias identicas) · Q3 NAO (1 de 3)
+        · Q4 DISPARA
+[x] B3  distribuicao: 32/13/3/24. Chamei real a 27 de 72, havendo 24 reais
+[x] C1  portoes -> 03-resultados.json
+[x] C2  o Q2 NAO disparou e o Q4 disparou -> **nada entra no src/**, como o
+        §4 pre-escreveu
+[x] C3  relatorio FASE-5Q-RELATORIO.md
+[x] C4  CONTROLO.md: fase, passo 25 sem urgencia, passos 29 e 30 novos
 ```
+
+**Duas correccoes, no §1 e no §4 do relatorio.** A fuga editorial que declarei ao
+commitar os juizos era **imaterial** (a AUC sem esses 4 itens e identica a tres
+decimais). E a prescricao que o §4 deu para o Q4 — «acrescentar as repeticoes
+que sobram» — **esta errada**: supunha falta de potencia, e o que ha e falta de
+**resolucao**, com as medias identicas e as AUCs encostadas ao limite da escala.
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
 nomeados.
