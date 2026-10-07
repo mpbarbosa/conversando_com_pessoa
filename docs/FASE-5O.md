@@ -151,16 +151,21 @@ incómodo.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  folha O01-O54 (30 do braco L da 5H + 24 reais do grupo R da 5F)
-        embaralhada, chave fechada
-[ ] B1  pontuar 3a' as cegas, com razao por amostra
-[ ] B2  O1 e O2: Delta(L - Q) contra as minhas notas de Q da 5N
-[ ] B3  O3 o meu nivel nos 24 reais contra 1,50 (R1) e 1,71 (R2)
-[ ] B4  O4 a condicao X1 da 5F re-corrida · AUC real-contra-llama (numero novo)
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  relatorio FASE-5O-RELATORIO.md
-[ ] C3  CONTROLO.md: fase, passo 26, e o que sair sobre o +0,700
+[x] A1  folha O01-O54 embaralhada, sem pergunta, chave fechada
+[x] B1  54 pontuadas as cegas -> 02-pontuacoes.json, commitadas antes da chave
+[x] B2  O1 DISPARA (+0,667, p=0,0018, 13 de 14) · O2 DISPARA (o IC contem 0,700)
+[x] B3  O3 DISPARA: 1,792 nos reais, contra 1,50 (R1) e 1,71 (R2)
+[x] B4  O4 DISPARA: mediana 2,0 e 19/24 (79%) · AUC(real > llama) = 0,526
+[x] C1  portoes -> 03-resultados.json
+[x] C2  relatorio FASE-5O-RELATORIO.md
+[x] C3  CONTROLO.md: fase, passo 26, o +0,700 replicado, e o tecto
 ```
+
+**Uma correccao a uma afirmacao minha, no §4 do relatorio:** o §2.3 da 5N dizia
+que o `H01` «nao entra nesta fase» e entrava nesta, que e a seguinte — e o item
+`O42` desta folha. Reconheci-o a pontuar e dei-lhe 0, contra a direccao do meu
+vies. **Uma declaracao de contaminacao tem de dizer o que o item e, nao em que
+fase nao vai entrar.**
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
 nomeados.

@@ -1,0 +1,70 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5O.md §3",
+  "semente": 20261007,
+  "B": 10000,
+  "notas_do_Q": "vindas da 5N, as cegas, ja commitadas"
+ },
+ "O1": {
+  "n_pares": 30,
+  "media_L": 1.6333,
+  "media_Q": 0.9667,
+  "delta_L_menos_Q": 0.6667,
+  "discordantes": 14,
+  "a_favor_de_L": 13,
+  "a_favor_de_Q": 1,
+  "binomial_p": 0.00183,
+  "ic95": [
+   0.3333,
+   1.0
+  ],
+  "ic_exclui_zero": true,
+  "dispara": true
+ },
+ "O2": {
+  "delta_5H": 0.7,
+  "meu_delta": 0.6667,
+  "meu_ic95": [
+   0.3333,
+   1.0
+  ],
+  "ic_contem_0_700": true,
+  "dispara": true
+ },
+ "O3": {
+  "media_minha_nos_24_reais": 1.7917,
+  "ic95": [
+   1.625,
+   1.9583
+  ],
+  "media_R1_da_5F": 1.5,
+  "media_R2_da_5F": 1.71,
+  "faixa_pre_registada": [
+   1.3,
+   1.9
+  ],
+  "dispara": true,
+  "distribuicao": {
+   "0": 0,
+   "1": 5,
+   "2": 19
+  }
+ },
+ "O4": {
+  "mediana": 2.0,
+  "com_nota_2": 19,
+  "fraccao_com_2": 0.7917,
+  "condicao": "mediana >= 1 e >= 30% com 2 (X1 da 5F)",
+  "dispara": true
+ },
+ "O5": {
+  "discordantes": 14,
+  "dispara": false
+ },
+ "auc_real_contra_llama": {
+  "auc_real_acima_de_llama": 0.5264,
+  "nota": "numero NOVO: a 5F contrastou real contra qwen (0,851). Aqui o contraste e real contra llama, logo nao e replicacao.",
+  "media_real": 1.7917,
+  "media_llama": 1.6333
+ }
+}
