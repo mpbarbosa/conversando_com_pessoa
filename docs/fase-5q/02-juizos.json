@@ -1,0 +1,300 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5Q.md §2.3",
+  "avaliador": "R3 — esta sessao",
+  "escala": "1=certamente gerado · 2=provavelmente gerado · 3=provavelmente real · 4=certamente real",
+  "cegueira": "julgado sobre 01-itens.md embaralhado, com a voz a vista e sem pergunta, sem abrir a chave",
+  "distribuicao_das_minhas_respostas": "reportada no relatorio (§5.1 do protocolo)",
+  "fuga_encontrada_a_julgar": "alguns poemas REAIS trazem marcas de reconstituicao editorial — «[acordando?]», «[que]», «(tua)», espacos duplos — que os denunciam sem ser pela voz. O filtro de elegibilidade da 5J §4.3 exclui lacunas de pontos mas NAO estas. Afecta o Q1 (infla a resolucao) e NAO o Q2 (os dois bracos enfrentam os mesmos reais)."
+ },
+ "juizos": {
+  "Q01": {
+   "real": 4,
+   "razao": "sintaxe latinizante («o palacio devido»), estoico, fragmento de ode"
+  },
+  "Q02": {
+   "real": 4,
+   "razao": "quintilhas rimadas com retorno de motivo (nau, cego): controlo formal"
+  },
+  "Q03": {
+   "real": 2,
+   "razao": "conteudo de Reis mas sintaxe plana e «livre e pobre, / De cuidados» desajeitado"
+  },
+  "Q04": {
+   "real": 1,
+   "razao": "«Somos vento, ai e constante» quebrado; «Mortais por definicao» e registo moderno"
+  },
+  "Q05": {
+   "real": 4,
+   "razao": "tem «[acordando?]» e «[alem?]»: reconstituicao editorial de manuscrito"
+  },
+  "Q06": {
+   "real": 2,
+   "razao": "«voar-te-ei» e agramatical, «floridez» estranho; aforismo final moderno"
+  },
+  "Q07": {
+   "real": 1,
+   "razao": "misticismo genérico, sem metro nem rima, negacoes em serie"
+  },
+  "Q08": {
+   "real": 4,
+   "razao": "versiculo longo com anafora («Cada um... Cada um») e virgulas sem conjuncao"
+  },
+  "Q09": {
+   "real": 1,
+   "razao": "truncado a meio da palavra («nao alcan»)"
+  },
+  "Q10": {
+   "real": 2,
+   "razao": "«querdes» arcaico sugere real, mas «objeto» e grafia brasileira e «doia» erro de tempo"
+  },
+  "Q11": {
+   "real": 2,
+   "razao": "«sobretudo vazio» e bom jogo, mas «nao encontram quem guardasse» esta quebrado e falta metro"
+  },
+  "Q12": {
+   "real": 1,
+   "razao": "«E morrer ao nascer» cliche; versos curtos irregulares, nao e a ode de Reis"
+  },
+  "Q13": {
+   "real": 1,
+   "razao": "«um farol acesse» erro; «algo alem do viver» cliche"
+  },
+  "Q14": {
+   "real": 4,
+   "razao": "«alva Lidia», o tema pagao-cristao, o tricolon cinza/lama/tronco morto"
+  },
+  "Q15": {
+   "real": 4,
+   "razao": "hiperbato extremo («Para que pois em seres te empenhares»), fragmento"
+  },
+  "Q16": {
+   "real": 2,
+   "razao": "temas de Reis mas «se adensa a boca» quebrado e sem estrofe regular"
+  },
+  "Q17": {
+   "real": 4,
+   "razao": "«nem me outrem» e o neologismo de Pessoa; «Cada um e muita gente»; quadras rimadas"
+  },
+  "Q18": {
+   "real": 4,
+   "razao": "Eolo, Neptuno, Saturno, «atra», alternancia decassilabo/hexassilabo"
+  },
+  "Q19": {
+   "real": 1,
+   "razao": "«requefu» nao e palavra; «Sossega-te, alma inquietude» quebrado"
+  },
+  "Q20": {
+   "real": 2,
+   "razao": "tema pessoano competente mas sem rima e com «olhar escasso» vago"
+  },
+  "Q21": {
+   "real": 1,
+   "razao": "«arduo» e «silencio» sem acento; «Teclas sem sofrerem dor» incoerente"
+  },
+  "Q22": {
+   "real": 1,
+   "razao": "«silenciosa» no feminino e Reis e homem; «vive o que se ve passando em transe» vago"
+  },
+  "Q23": {
+   "real": 3,
+   "razao": "«Grande Libertador», «constelada de Noite Infinita»: registo tardio de Campos. A quebra final pode ser manuscrito"
+  },
+  "Q24": {
+   "real": 1,
+   "razao": "truncado a meio da palavra («sua pass»); «voces» e «embaixo» brasileiros"
+  },
+  "Q25": {
+   "real": 4,
+   "razao": "quadras rimadas com enjambement «esse / Ceu» e o condicional nostalgico"
+  },
+  "Q26": {
+   "real": 2,
+   "razao": "vocabulario de Campos mas «amais-vos com as minhas maos» quebrado e estrofes regulares"
+  },
+  "Q27": {
+   "real": 2,
+   "razao": "«flores sem cheirar» agramatical; «penumbra do outrora» e boa mas o resto e fino"
+  },
+  "Q28": {
+   "real": 2,
+   "razao": "«por onde dirija» e «se acalenta» quebrados, apesar da rima"
+  },
+  "Q29": {
+   "real": 1,
+   "razao": "fino e desconexo; «esta a ser» pendurado"
+  },
+  "Q30": {
+   "real": 4,
+   "razao": "o inventario da secretaria, o parentese sobre estar fora do ritmo, a «Enciclopedia Britanica»"
+  },
+  "Q31": {
+   "real": 4,
+   "razao": "«magnos», «volvem», «hospedes na vida», alternancia de medida"
+  },
+  "Q32": {
+   "real": 4,
+   "razao": "«Lidia», «oiteiro», e a incoerencia e de lacuna de manuscrito e nao de modelo"
+  },
+  "Q33": {
+   "real": 1,
+   "razao": "«Vivo em pensamentos e vivos em realidades» erro de concordancia; sem pontuacao"
+  },
+  "Q34": {
+   "real": 1,
+   "razao": "«em este» em vez de neste; «Um perdedor» e calque moderno; aposicao mecanica"
+  },
+  "Q35": {
+   "real": 4,
+   "razao": "«Clari-i-i-i-ins», «Hela-ho-hooo», o «[que]» editorial: Ode Marcial"
+  },
+  "Q36": {
+   "real": 1,
+   "razao": "«A vida nao tem rota» moderno; perguntas retoricas; «num nada» a fechar"
+  },
+  "Q37": {
+   "real": 4,
+   "razao": "didascalia «(Fausto, com os olhos fechados...)» e o «(tua)» editorial"
+  },
+  "Q38": {
+   "real": 1,
+   "razao": "«irretratavel» mal usado; «a vida e uma pagina em branco» cliche"
+  },
+  "Q39": {
+   "real": 1,
+   "razao": "minusculas, «tenue» brasileiro, e «mas X» mecanico em cada estrofe"
+  },
+  "Q40": {
+   "real": 1,
+   "razao": "sintaxe invertida ate quebrar; «corolarios» por corolas; «Deserto a cidade nao e ja»"
+  },
+  "Q41": {
+   "real": 2,
+   "razao": "«deudivos» nao e palavra; «as lagrimas do horizonte» e sentimental de mais para Reis"
+  },
+  "Q42": {
+   "real": 2,
+   "razao": "«Sua face» possessivo brasileiro e «nem tao diferente» coloquial, apesar do bom paradoxo final"
+  },
+  "Q43": {
+   "real": 4,
+   "razao": "quadra perfeitamente rimada, registo das Quadras ao Gosto Popular, «a esmo»"
+  },
+  "Q44": {
+   "real": 1,
+   "razao": "«Tenho-te a perder» quebrado; «rastro» brasileiro; nostalgia genérica"
+  },
+  "Q45": {
+   "real": 3,
+   "razao": "«que engolem, que atiram, que lancam» e «Naufragar... naufragar»: ritmo de Campos a serio"
+  },
+  "Q46": {
+   "real": 2,
+   "razao": "«sem rumo» duas vezes; anseio maritimo generico, sem enumeracao nem anafora"
+  },
+  "Q47": {
+   "real": 4,
+   "razao": "dísticos rimados (mundo/fundo, incerto/deserto), «p'ro», «cisma», «colado como um escarro»"
+  },
+  "Q48": {
+   "real": 1,
+   "razao": "«concreto» brasileiro; imagens decorativas em vez de enumeracao; disticos regulares"
+  },
+  "Q49": {
+   "real": 1,
+   "razao": "«Tudo else» e ingles; «livreza» nao e palavra"
+  },
+  "Q50": {
+   "real": 3,
+   "razao": "anafora «Ser...» sustentada com invencao real («os cemiterios da alma»); mas «bondes» e brasileiro"
+  },
+  "Q51": {
+   "real": 1,
+   "razao": "«amanece» e «em mi» sao espanhol; «a que pertenco eu» quebrado"
+  },
+  "Q52": {
+   "real": 1,
+   "razao": "«ao verbo voo a alavanca» nao significa nada"
+  },
+  "Q53": {
+   "real": 4,
+   "razao": "«minhaOde», «aultima», espaco duplo: artefactos de transcricao. E nomeia as suas proprias odes"
+  },
+  "Q54": {
+   "real": 1,
+   "razao": "«infindo» como nome; «um suspiro de verde» decorativo; sem enumeracao"
+  },
+  "Q55": {
+   "real": 1,
+   "razao": "mistura «te» e «vossa»; «um sonho da qual»; truncado («que ninguem l»)"
+  },
+  "Q56": {
+   "real": 4,
+   "razao": "rima quero/desespero e mim/Fim, «cospem na cara», «a palavra Fim» a fechar"
+  },
+  "Q57": {
+   "real": 2,
+   "razao": "«Tinha-me de regressar» quebrado; fino, sem forma nem referencia classica"
+  },
+  "Q58": {
+   "real": 1,
+   "razao": "«jantar de cinzento»; repeticao de «que esta/que estao» e tique de modelo"
+  },
+  "Q59": {
+   "real": 1,
+   "razao": "linha em branco entre todos os versos; «Es eu, es tu» quebrado; «em uma» brasileiro"
+  },
+  "Q60": {
+   "real": 1,
+   "razao": "«eletricas» brasileiro; «Entao eu pergunto: quem e?» quebrado; truncado"
+  },
+  "Q61": {
+   "real": 1,
+   "razao": "tem um «---» literal no meio; «a agua do rio bebe da terra» esta ao contrario"
+  },
+  "Q62": {
+   "real": 1,
+   "razao": "truncado («Ve»); contradiz-se (as tres da manha / eram seis); «eletricos» brasileiro"
+  },
+  "Q63": {
+   "real": 1,
+   "razao": "«sou a nenhuma» e «na silencio»: erros de genero; «potenciais» e jargao"
+  },
+  "Q64": {
+   "real": 1,
+   "razao": "«murmuram» com acento errado; «as ruas murmuram pelas maos» incoerente"
+  },
+  "Q65": {
+   "real": 4,
+   "razao": "o refrao «Chove» a variar, «Embandeiraram o barco de maneira errada», a seccao «II»"
+  },
+  "Q66": {
+   "real": 1,
+   "razao": "«A vida e um vaso. Destrui-lo» quebrado; 24 versos, solto onde Reis e comprimido"
+  },
+  "Q67": {
+   "real": 4,
+   "razao": "quadra rimada perfeita (passam/desgracam, aqui/ti), registo popular"
+  },
+  "Q68": {
+   "real": 4,
+   "razao": "a duvida recursiva sobre o proprio choro, rimada e metrica: poliptoto chorar/chorarei/chorando"
+  },
+  "Q69": {
+   "real": 4,
+   "razao": "«inda», «O Apolineo curso», «imperecivel», optativo «Pudesse eu»"
+  },
+  "Q70": {
+   "real": 1,
+   "razao": "«Olhando fumando» dois gerundios; «Nao sei tu» quebrado; refrao repetido"
+  },
+  "Q71": {
+   "real": 4,
+   "razao": "«a mole imensa», «ser-te-a», «Goza-o», enjambement «breve / Dia»"
+  },
+  "Q72": {
+   "real": 4,
+   "razao": "Leucothoe, Dyke, Lydia: as dedicatarias reais de Reis; o paradoxo final e dele"
+  }
+ }
+}
