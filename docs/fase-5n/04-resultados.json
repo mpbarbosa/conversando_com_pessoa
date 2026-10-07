@@ -1,0 +1,151 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5N.md §3",
+  "semente": 20261007,
+  "B": 10000,
+  "primario": "sem os 5 pares contaminados do §2.3",
+  "contaminados": [
+   [
+    "Q",
+    "q01",
+    0
+   ],
+   [
+    "Q",
+    "q06",
+    2
+   ],
+   [
+    "Q",
+    "q07",
+    0
+   ],
+   [
+    "Q",
+    "q07",
+    1
+   ],
+   [
+    "Q",
+    "q07",
+    2
+   ]
+  ]
+ },
+ "3a_primo": {
+  "primario_sem_contaminados": {
+   "rotulo": "primario_sem_contaminados",
+   "n_pares": 25,
+   "media_Q": 0.96,
+   "media_T": 0.56,
+   "delta_Q_menos_T": 0.4,
+   "discordantes": 15,
+   "a_favor_de_Q": 11,
+   "a_favor_de_T": 4,
+   "binomial_p": 0.11847,
+   "ic95": [
+    -0.08,
+    0.88
+   ],
+   "ic_exclui_zero": false
+  },
+  "sensibilidade_todos": {
+   "rotulo": "sensibilidade_todos",
+   "n_pares": 30,
+   "media_Q": 0.9667,
+   "media_T": 0.5,
+   "delta_Q_menos_T": 0.4667,
+   "discordantes": 19,
+   "a_favor_de_Q": 14,
+   "a_favor_de_T": 5,
+   "binomial_p": 0.06357,
+   "ic95": [
+    0.0333,
+    0.9
+   ],
+   "ic_exclui_zero": true
+  }
+ },
+ "3b": {
+  "primario_sem_contaminados": {
+   "rotulo": "primario_sem_contaminados",
+   "n_pares": 25,
+   "media_Q": 1.36,
+   "media_T": 0.84,
+   "delta_Q_menos_T": 0.52,
+   "discordantes": 17,
+   "a_favor_de_Q": 13,
+   "a_favor_de_T": 4,
+   "binomial_p": 0.04904,
+   "ic95": [
+    0.16,
+    0.88
+   ],
+   "ic_exclui_zero": true
+  },
+  "sensibilidade_todos": {
+   "rotulo": "sensibilidade_todos",
+   "n_pares": 30,
+   "media_Q": 1.3667,
+   "media_T": 0.8,
+   "delta_Q_menos_T": 0.5667,
+   "discordantes": 20,
+   "a_favor_de_Q": 16,
+   "a_favor_de_T": 4,
+   "binomial_p": 0.01182,
+   "ic95": [
+    0.2333,
+    0.9
+   ],
+   "ic_exclui_zero": true
+  }
+ },
+ "bonus_reprodutibilidade_entre_sessoes": {
+  "R1_da_5H": {
+   "n": 30,
+   "kappa_linear": 0.5116,
+   "concordancia_exacta": 0.6,
+   "media_minha": 0.9667,
+   "media_dele": 0.5,
+   "discordancias_acima_de_1": 2
+  },
+  "R2_da_5H": {
+   "n": 30,
+   "kappa_linear": 0.6071,
+   "concordancia_exacta": 0.6333,
+   "media_minha": 0.9667,
+   "media_dele": 1,
+   "discordancias_acima_de_1": 0
+  }
+ },
+ "N1": {
+  "binomial_p": 0.11847,
+  "ic95": [
+   -0.08,
+   0.88
+  ],
+  "delta": 0.4,
+  "dispara": false
+ },
+ "N2": {
+  "delta_3b_para_7b": 0.4,
+  "salto_de_capacidade": "+145% (3,1B -> 7,6B)",
+  "delta_7b_para_llama8b_na_5H": 0.7,
+  "salto_de_capacidade_da_5H": "+5% (7,6B -> 8,0B)",
+  "razao": 0.571,
+  "dispara": true
+ },
+ "N3": {
+  "discordantes": 15,
+  "dispara": false
+ },
+ "N4": {
+  "ks_T_ao_caeiro": 0.3825,
+  "ks_Q_ao_caeiro": 0.2881,
+  "p95_do_nulo_n30": 0.1966,
+  "mediana_T": 8.0,
+  "mediana_Q": 13.5,
+  "mediana_real": 11.5,
+  "dispara": true
+ }
+}

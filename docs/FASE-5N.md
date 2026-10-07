@@ -163,17 +163,25 @@ decidir a troca.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  gerar 30 amostras do braco T (qwen2.5:3b), sementes da 5H
-[ ] A2  automaticos por braco (§4.3) ANTES de pontuar
-[ ] A3  folha embaralhada N01-N60 + 01-chave.json fechada
-[ ] B1  pontuar 3a' e 3b as cegas, com razao por amostra
-[ ] B2  N1/N2/N3 em 3a', primario SEM os 5 pares contaminados
-[ ] B3  N4 a forma, mecanico, contra o nulo da 5K
-[ ] B4  bonus: kappa contra R1 e R2 da 5H nos 30 itens do braco Q
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  relatorio FASE-5N-RELATORIO.md
-[ ] C3  CONTROLO.md: fase e passo 18
+[x] A1  30 amostras do braco T geradas, sementes da 5H
+[x] A2  automaticos -> 02-automaticos.json, ANTES de pontuar. Duas assimetrias
+        que favorecem o T (plagio 4 vs 1; tentativas 47% vs 20%), declaradas
+[x] A3  folha N01-N60 + chave fechada; a ancora de 3b e a NOVA, da 5L
+[x] B1  60 pontuadas as cegas -> 03-pontuacoes.json. Reconheci 4 dos 5
+        itens contaminados, como o §2.3 previa
+[x] B2  N1 NAO dispara (+0,400, p=0,12) · N2 DISPARA · N3 nao (d=15)
+[x] B3  N4 DISPARA (KS 0,383 contra 0,288)
+[x] B4  bonus: R1=0,50  R2=1,00  eu=0,97 nos mesmos 30 itens; kappa ENTRE
+        sessoes (0,51 / 0,61) melhor que DENTRO da mesma (0,46)
+[x] C1  portoes -> 04-resultados.json
+[x] C2  relatorio FASE-5N-RELATORIO.md
+[x] C3  CONTROLO.md: fase, passo 18 fechado, passo 26 novo
 ```
+
+**A exclusao pre-registada mudou a leitura.** Com os 5 pares contaminados o Δ era
++0,467 e o IC excluia zero; sem eles e +0,400 e o IC cruza-o. Se a exclusao
+tivesse sido decidida depois de ver os dois numeros, havia duas leituras a
+escolha.
 
 **Sessões paralelas:** verificado com `ListAgents` e `list_sessions` — nenhuma
 outra sessão neste repositório. `git add` com ficheiros nomeados.
