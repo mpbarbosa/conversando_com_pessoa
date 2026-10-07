@@ -1,0 +1,318 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5N.md §2.2",
+  "avaliador": "R1 — esta sessao, que escreveu o protocolo. NAO e a sessao que pontuou a 5H.",
+  "escalas": "3a' da Fase 5F §2 (inalterada) · 3b da Fase 5L (NOVA, sem contagem de versos)",
+  "cegueira": "pontuado sobre 01-itens.md embaralhado, sem abrir 01-chave.json",
+  "contaminacao_declarada": "o §2.3 do protocolo declarou 5 itens do braco Q cujo texto eu tinha impresso nesta sessao. Ao pontuar reconheci 4: N11 (o texto todo), N23, N48 e N58 (pela ultima linha). O quinto nao identifiquei.",
+  "reconhecidos": [
+   "N11",
+   "N23",
+   "N48",
+   "N58"
+  ],
+  "nota_da_folha": "a folha nao mostra o campo 'truncada', logo a truncatura foi detectada a vista, pelo verso cortado a meio — como na 5I, onde os dois avaliadores apanharam as mesmas sete. Afecta o 3b e nao o 3a."
+ },
+ "pontuacoes": {
+  "N01": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "argumenta e fecha: «paixões e angústias são apenas pontes breves», «nada plantamos na memória». Linhas longas e imagem decorativa em 3b"
+  },
+  "N02": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«sons da minha alma», «fogo da minha própria luz»: alma de ponta a ponta. Truncada a meio de verso"
+  },
+  "N03": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«melancolia nas almas se aloja», «mão do dia»: personificação mantida e alma"
+  },
+  "N04": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«as estrelas são apenas luz», «não damos a elas a força de um destino», «as flores não possuem a culpa»: atribuição negada em série e fecho na coisa"
+  },
+  "N05": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«constelações dançam», «vastidão celestial»: personificação mantida e ornamento. Quatro linhas longas, prosa com enters"
+  },
+  "N06": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "fecho deflacionário forte («passamos, mas não ficamos») mas «a noite esvazia o corpo» é personificação mantida: uma porta aberta"
+  },
+  "N07": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«as folhas caem e anunciam», «a noite mostra o que o dia escondeu», «aprisionar a escuridão»: duas ou mais portas"
+  },
+  "N08": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«universos desconhecidos», «a cidade murmura respostas escondidas», «segredos do céu»: verdade oculta em cada verso"
+  },
+  "N09": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«enxergam a verdade» e «o silêncio cai do céu»: duas portas. «castelos de argila» é ornamento"
+  },
+  "N10": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«a terra geme em seus mistérios ocultos», «o céu fala», «as flores olham»: mistério explícito"
+  },
+  "N11": {
+   "c3a": 1,
+   "c3b": 0,
+   "razao": "«não é o poente que traz mais do que sol e céu» é bom fecho, mas «dentro da minha alma» abre uma porta. Quadras com assonância e título: não é verso livre"
+  },
+  "N12": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«dão testemunho da minha alheação», «o vazio que me preenche»: folhas que testemunham. Linhas longas e um «---» no meio"
+  },
+  "N13": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«o sol se levantará sem contar minhas faltas» fecha bem, mas «no cortejo do eterno» abre uma. «lua perfeita» é decorativo"
+  },
+  "N14": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«sem sentido nenhum», «sem rumo», «sem nenhuma intenção», «não traz notícias nem expectativas»: negação em série, e o fecho aceita o que é"
+  },
+  "N15": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "núcleo caeiriano (ver não é pensar) mas «a verdade é abstraída» abre uma porta. «Eis onde» é dicção alta"
+  },
+  "N16": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«silêncio eterno», «os olhos da memória procuram». Cinco linhas longas numa frase emaranhada"
+  },
+  "N17": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "«apenas reflecte» é deflacionário, mas afirma um dentro que os outros não vêem: uma porta"
+  },
+  "N18": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a noite não precisará de mim para ser sombra» é excelente, mas «o destino já anuncia» e «cada instante vive a sua própria essência» são duas portas"
+  },
+  "N19": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "diz «as coisas são simplesmente o que são» e no mesmo poema «as coisas têm vida» e «a beleza do rio é mais que voz»: contradiz-se"
+  },
+  "N20": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«não sou capaz de desvendar o mistério» e «uma narrativa contida»: afirma que há o que desvendar"
+  },
+  "N21": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«as folhas caem sem se lembrar», «não busco flores no horizonte», e fecha em «os passos que o esquecimento logo anula»"
+  },
+  "N22": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«não ficou mais bonita, nem sequer feia», «nada tiramos e nada deixamos»: deflação pura em cinco versos planos"
+  },
+  "N23": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«onde está a liricidade pura?», «os sonhos», «eis que me deslumbro»: três portas, apesar do bom fecho"
+  },
+  "N24": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«sussurro do passado» abre uma; o resto é vago e com símile desajeitado («um balde de água que corre»)"
+  },
+  "N25": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a verdadeira miragem», «a verdadeira percepção», «a realidade»: abstracção a fazer de coisa"
+  },
+  "N26": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "cada personificação é negada logo: «não murmura segredos», «não teima em mensagens», «sem prometer nada além da luz». Fecho perfeito"
+  },
+  "N27": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vazio do meu ser», «como um sonho que passa»: introspecção, o contrário do Caeiro"
+  },
+  "N28": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«nem sonhos nem desejos têm, não proclamam nenhuma lei» e fecha em «somente o pastar e o passar numa encosta sem nome»"
+  },
+  "N29": {
+   "c3a": 0,
+   "c3b": 2,
+   "razao": "«o essencial», «a trama da realidade», «morfemas de ideia»: abstracção académica. Mas formalmente é verso livre curto sem rima nem imagem"
+  },
+  "N30": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«a verdade viva», «a alma pura», «sua essência»: alma e essência. Linhas longas e sintaxe quebrada"
+  },
+  "N31": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«segredos cálidos», «ballet infindo», «memória doce do amado»: ornamento denso e segredo"
+  },
+  "N32": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«a eternidade de ser nada», «um sonho que se dissolverá», «fora dos tempos»"
+  },
+  "N33": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«nada além da passagem» fecha, mas o vento diz uma frase citada sobre saudades: uma porta, só meio retirada por «em vão»"
+  },
+  "N34": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«as verdades são como fadas que se negam a ser vistas»: verdade mística. «Mientras» é espanhol"
+  },
+  "N35": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«não busco os segredos» é bom, mas «os tempos em que não tínhamos fim» e «saudade de ser» são duas portas"
+  },
+  "N36": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«nenhuma ordem, nenhum nome», «sem medo ou esperança», «não buscam símbolos nem sonhos», e fecha em «somente os passos»"
+  },
+  "N37": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o vazio é um espectro», «um murmúrio do vento»: introspecção abstracta"
+  },
+  "N38": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "quatro versos e «nada mais além dos cascos»: não abre porta nenhuma"
+  },
+  "N39": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "as duas primeiras estrofes são Caeiro puro, e depois «os seus suspiros transformados em respirações da brisa»: a natureza a sentir pelo poeta"
+  },
+  "N40": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "nega o sentido oculto quatro vezes e depois «a luz do sol que canta»: uma porta mantida. O fecho «o mistério está na própria realidade» lê-se como deflacionário"
+  },
+  "N41": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«tudo é mais claro, mais palpável» responde no visível, e «saboreio-os como sempre» aceita o que é"
+  },
+  "N42": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«nas almas assombra uma penumbra», «o espírito», «vê-se a morte ao espreitar»"
+  },
+  "N43": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«não há enigmas por trás da luz: é ela, sem mais nenhuma roupagem», e o fecho põe a chave do mistério nas próprias coisas — é a tautologia deflacionária da regra 2"
+  },
+  "N44": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "começa em «sem deixar rastro» e acaba em «em cada pétala de rosa há uma memória do seu vôo»: contradiz a premissa"
+  },
+  "N45": {
+   "c3a": 1,
+   "c3b": 2,
+   "razao": "responde no visível e nega as personificações («as folhas dançam sem perguntas»), mas «a chuva cai de forma desdenhosa» fica de pé"
+  },
+  "N46": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«nas profundezas do vazio», «sopro sem soprar», «presença irrelevante»: jogo abstracto sobre o ser"
+  },
+  "N47": {
+   "c3a": 2,
+   "c3b": 1,
+   "razao": "«a indiferença é a minha companhia e não uma mágoa» responde à pergunta e fecha; «sem sonhos do futuro» aceita o presente. Mas são quatro linhas longas, que é forma de Campos"
+  },
+  "N48": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«uma nuvem é apenas uma nuvem», «os ramos não são mais do que os ramos», «água é água, céu é céu»: a tautologia deflacionária como assinatura, e fecha no aqui e agora"
+  },
+  "N49": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«não há significado escondido» e «apenas o viver» fecham, mas «o mar é realidade de cada respiração» abre uma"
+  },
+  "N50": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«sua ausência nos ensina o respeito pelo tempo»: moral que manda buscar além, regra 6"
+  },
+  "N51": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«confundimos a mudança com um fim» é excelente, mas «o poente, senhor da sombra» e «uma brilhante lágrima» são duas portas mantidas"
+  },
+  "N52": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«as coisas estão como são» e «existir é simplesmente estar» fecham, mas «correntes da alma» abre uma"
+  },
+  "N53": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«paisagens que vivem», «acertam-me no coração», «a lua desperta»: a natureza a sentir pelo poeta"
+  },
+  "N54": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«é vasto demais para se importar com um morto», «o sol nascerá mesmo sem olhos meus para ver», e o fecho aceita"
+  },
+  "N55": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "«o silêncio do vazio é onde eu fui criado», «o significado adorado», «constelação de imagens»"
+  },
+  "N56": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«não somos rastro, nem sonho, somente os passos que se perdem»: negação e fecho na coisa"
+  },
+  "N57": {
+   "c3a": 0,
+   "c3b": 1,
+   "razao": "o clímax é «descubro que ela também pensa»: a nuvem a pensar, personificação mantida e posta como remate"
+  },
+  "N58": {
+   "c3a": 2,
+   "c3b": 2,
+   "razao": "«não em dança espiritual mas sussurro» é a retracção da regra 4 feita explicitamente, e «não busco na natureza falar para além de sua voz própria» é a regra 3"
+  },
+  "N59": {
+   "c3a": 0,
+   "c3b": 0,
+   "razao": "«as sombras nos revelam nossa própria forma triste»: a natureza a revelar verdade sobre nós"
+  },
+  "N60": {
+   "c3a": 1,
+   "c3b": 1,
+   "razao": "«cortejo sem nome, sem motivo» e «eis tudo, menos explicação» fecham, mas «bênção do instante» sacraliza: uma porta. Metáfora densa («arquivo da luz»)"
+  }
+ }
+}
