@@ -1,0 +1,40 @@
+{
+ "_meta": {
+  "nota": "FASE-5N.md §4.3 / A2 — automaticos por braco, registados ANTES de pontuar 3a'",
+  "data": "2026-10-07"
+ },
+ "T_qwen3b": {
+  "n": 30,
+  "c1_verso_2": 30,
+  "c2_pt_2": 26,
+  "c5_sem_plagio": 26,
+  "truncadas": 1,
+  "lingua_errada": 0,
+  "com_brasileirismos": 4,
+  "tentativas_maior_que_1": 14,
+  "mediana_versos": 8.0,
+  "mediana_segundos": 19.200000000000003
+ },
+ "Q_qwen7b": {
+  "n": 30,
+  "c1_verso_2": 30,
+  "c2_pt_2": 28,
+  "c5_sem_plagio": 29,
+  "truncadas": 1,
+  "lingua_errada": 0,
+  "com_brasileirismos": 2,
+  "tentativas_maior_que_1": 6,
+  "mediana_versos": 13.5,
+  "mediana_segundos": 35.45
+ },
+ "leitura_pre_escrita": {
+  "c1_identico": "c1 verso = 2 em 100% dos dois bracos: nenhuma contaminacao por nao-verso",
+  "c2_nao_material": "26/30 contra 28/30 — 4 falhas contra 2, longe de qualquer limiar. Pelo criterio do §4.3 a comparacao de 3a NAO esta contaminada",
+  "duas_assimetrias_que_favorecem_o_T": [
+   "plagio: 4 de 30 marcadas no T contra 1 de 30 no Q. A 5B §4 mostrou que as amostras que chegaram ao topo de 3a tinham um poema REAL de Caeiro no prompt, logo copiar INFLACIONA 3a",
+   "tentativas: 47% do T precisou de mais de uma tentativa contra 20% do Q. O braco T e portanto output MAIS filtrado pela guarda, com mais sorteios por amostra sobrevivente"
+  ],
+  "consequencia": "as duas assimetrias empurram 3a PARA CIMA no T. Logo um DEFICIT de 3a no T e robusto (medido contra o vento) e uma VANTAGEM de 3a no T e suspeita. Escrito antes de pontuar."
+ },
+ "nota_velocidade": "o 3b e ~1,8x mais rapido (19,2 s contra 35,5 s de mediana). Nao entra em portao nenhum — §4.4"
+}

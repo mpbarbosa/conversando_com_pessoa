@@ -1,0 +1,368 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5N.md §2.3",
+  "aviso": "sem o braço, o modelo nem o n_versos, de propósito."
+ },
+ "amostras": [
+  {
+   "id": "N01",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "A diligência se foi, e deixou apenas rastro de pó,\nO que a vida deposita na rocha, em breve desaparece.\nAssim é com nossas ações, aqui e além do horizonte;\nVemos e fazemos, mas o mundo continua seu curso.\n\nNada plantamos no terreno da memória, nem deixamos sementes,\nAs flores que germinam nas lágrimas são apenas mais água na terra.\nMas quando a estrada de alguém sai, ela é sempre uma lembrança,\nUm caminho que se fecha atrás, mas o mundo segue seu ritmo.\n\nO Sol nunca pára para nos assistir ou nos ausentar,\nEle continua seu movimento, incansável e imparcial.\nNossas paixões e angústias são apenas pontes breves sobre a vida,\nSobre as quais apressamo-nos, não dando muita importância.",
+   "truncada": false
+  },
+  {
+   "id": "N02",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Não vejo existir apenas como reflexo,  \nmas cego e inexistente do mundo.  \nQuero a voz de uma árvore no silêncio vasto,  \ndou vida aos sonhos que não me pertencem.  \n\nExisto para ser eu mesmo, não sombra dos outros,  \npara que na escuridão da consciência clareie o fogo  \nda minha própria luz. Não é só eu quem existo aqui,  \nmas a beleza silenciosa das coisas,  \na dor e a alegria que são meus sinais de vida.  \n\nAprender com os olhos fechados,  \nperceber as cores na noite dos outros.  \nFingir ser alguém que não sou,  \ne assim fingir viver. Não é isso que busco,  \nsino mergulhar nos ritmos do meu eu,\nnos sons da minha alma, nos gestos de mim mesmo.  \n\nSer como um deus pode ser uma doença de cego,",
+   "truncada": true
+  },
+  {
+   "id": "N03",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "O poente cai em silêncio,\nTerra esconde-se sob o leito da noite,\nMelancolia nas almas se aloja,  \nEnquanto estrelas incandescentes brilham.\n\nA mão do dia é largada, \nMas na penumbra emerge tristeza,  \nPor que a luz vaga e fugaz,  \n\nÉ mais uma lembrança de ausência.",
+   "truncada": false
+  },
+  {
+   "id": "N04",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "É olhar sem rumo, deixar os olhos serem guias.\nNão buscar no que vemos um sentido oculto,\nNão se molda a vista à lógica da mente.\n\nVer o sol sem lhe atribuir calor humano,\nO rio correr sem imaginar seu fluxo.\nNão refletir sobre as coisas, simplesmente estar,\nPreservar a pureza dos sentidos em estado puro.\n\nEstudamos para aprendermos desaprender,\nPara não sermos escravos das nossas próprias visões.\nA liberdade está em manter o coração inerte\nQuando os olhos navegam pelo que é.\n\nTal como as estrelas são apenas luz,\nNão damos a elas a força de um destino.\nAssim as flores, tão brancas e belas,\nTambém não possuem a culpa dos dias tristes.",
+   "truncada": false
+  },
+  {
+   "id": "N05",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "Olho para o céu em silêncio, onde constelações dançam sob a noite.\nEla se move com lentidão, distante de mim, tão próxima.\nMinha ausência é como um vazio que abraça as estrelas,\nEnquanto eu permanço aqui, indiferente à vastidão celestial.",
+   "truncada": false
+  },
+  {
+   "id": "N06",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "Caminha a noite sobre as ruas,\ne esvazia o corpo em silêncio.\nNem pedra, nem vento, nem chama;\nsó sombra, leve e sem nome.\n\nSai o sol pela janela,\ne volve ao horizonte esquecido.\nO que foi não muda a ordem\ndo que é; passamos, mas não ficamos.",
+   "truncada": false
+  },
+  {
+   "id": "N07",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "Observo os sons na brisa,\nos gestos de um passarinho.\n\nTudo vê-se se não pensamos,\na noite mostra o que o dia escondeu.\n\nA árvore nasce sem razão,\na nuvem desenha-se ao vento.\n\nAqui o pensar é escorregar,\nnada permanece em silêncio.\n\nO rio flui e diz nada,\nas folhas caem e anunciam.\n\nVer é despojar-se de nome,\npensar, é aprisionar a escuridão.",
+   "truncada": false
+  },
+  {
+   "id": "N08",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "A janela entreaberta, no quarto alheio,\nLuz que se filtra, pensamentos que brotam.\nO vazio a preencher-se com formas estranhas,\nCada silêncio com sua voz solitária.\n\nAo olhar ao lado, um sorriso enigmático,\nOlhos que contêm universos desconhecidos.\nPés que descalços percorrem as ruas da memória,\nE a cidade murmura respostas escondidas.\n\nA chuva é uma dança em gestos de água fria,\nCada gota carrega segredos do céu.\nAs folhas agitam-se, dançando com o vento,\nE na claridade fraca um cão lateja longe.",
+   "truncada": false
+  },
+  {
+   "id": "N09",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "Olhos que vêem,\nsem a conivência do pensamento,\nenxergam a verdade.\n\nPensar é esconder as coisas,\nfechando-se em castelos de argila.\n\nO espelho, pura reflexão,\numa testemunha inabalável.\n\nA visão limpa da quietude,\nquando o silêncio cai do céu.",
+   "truncada": false
+  },
+  {
+   "id": "N10",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "O sol espreita pela abertura da cortina,\nTrazendo consigo a saudade que não aguça.\nAs manhãs se desdobram em danças de luz,\nE eu, como um giz sob os dedos do vento,\nperco-me nas cores que escapa à noite.\n\nAs flores olham para mim sem dizer nada,\nO céu fala com as nuvens e o mar com o horizonte.\nA terra geme em seus mistérios ocultos,\nE eu, como um pássaro nas costas dos braços da manhã,\nnão sei se sou mais eu ou ela nos desfiles que vejo.",
+   "truncada": false
+  },
+  {
+   "id": "N11",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "O fim do dia\n\nNasce a noite sem se pedir,\nSilenciosa e muda.\nComo quem vê um cadente\nAo final de uma vida.\n\nAs luzes dos outros, mais vivas,\nBrilham na esplanada.\nMas dentro da minha alma\nA tristeza se instala.\n\nNão é o poente que traz,\nMais do que sol e céu.\nÉ o meu olhar que vê\nUm fim, um adiós a tudo.\n\nPoderia ser a aurora\nDe um novo começo.\nMas as sombras já vêm,\nE me lembro das penas.",
+   "truncada": false
+  },
+  {
+   "id": "N12",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "A noite despeja-se pelos caminhos sinuosos.\nOlho-a sem tocar, sinto-a distante.\nEla é estranha, mas meia-me a ela,\nPorque a noite não pede sentimentos, apenas passagem.\n\n---\n\nO vento rasga as folhas silenciosas.\nNão os ouço, mas elas dançam ao meu lado.\nDão testemunho da minha alheação\nE abrem caminho para o vazio que me preenche.",
+   "truncada": false
+  },
+  {
+   "id": "N13",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "Quando eu morrer  \no sol se levantará igual  \ne a chuva molhará as flores  \nsem contar minhas faltas.\n\nSe não souber ao certo  \nem que ordem vêm os dias  \nestou pronto para ser o último  \nno cortejo do eterno.\n\nNão tenho medo das sombras  \nque se alongam sobre mim  \nnem dos olhares dos vivos  \nque seguem a minha passagem.\n\nAqui e agora, tudo é real  \ne quando já não estiver aqui  \no mundo girará igual  \na uma lua perfeita.",
+   "truncada": false
+  },
+  {
+   "id": "N14",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "O rio corre sem sentido nenhum,\neu olho-o sem mais do que isso.\nE nele a nuvem se espelha e desvia-se,\no seu movimento, meu vazio.\n\nA pedra na margem permanece indiferente,\neu fico à sua beira, insígnificante.\nNenhuma emoção me toca no olhar dela,\ne isso mesmo que nos aproxima.\n\nO vento sopra sem rumo,\neu sinto-o nas faces, leve e distante.\nEle não traz notícias nem expectativas,\nsó um toque tênue na pele.\n\nO dia se estende sem nenhuma intenção,\neu o vejo passar, inerte e longe.\nCada hora é igual a outra, vazia como a minha mente,\ne no vazio encontro uma certa paz.",
+   "truncada": false
+  },
+  {
+   "id": "N15",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "Espelho que brilha com precisão,\nReflecte-se e não se engana,  \nPois sem a mente que pensa erra.\n\nO olhar busca as coisas claras,\nEis onde a verdade é abstraída.\nSaber ver é antes o ato de não pensar,\nDe deixar as imagens fluírem livremente,\nSem condicionar com o que pensamos.",
+   "truncada": false
+  },
+  {
+   "id": "N16",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "Passou, ave, passou, ensinando o animal a esquecer  \nSua presença no chão, onde já não está e por isso serve  \nPara lembrar-se daqui em diante de sua passagem breve  \nQue nada deixará além das notas do seu voo que ecoa  \nEm silêncio eterno, onde os olhos da memória procuram.",
+   "truncada": false
+  },
+  {
+   "id": "N17",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Pois os outros me vêem passar e vão,\nIgnorando, sem ver, aquilo que penso.\nE quando estão longe de mim esfumado,\nSeu olhar apenas reflecte a noite estendida.",
+   "truncada": false
+  },
+  {
+   "id": "N18",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "Quando eu partir\nAs estrelas brilharão no mesmo céu escuro\nE as nuvens passarão pelo sol como ontem.\nA noite não precisará de mim para ser sombra.\n\nSinto uma paz imensa,\nAo saber que a minha ausência não altera o curso dos astros.\n\nSe visse amanhã a morte aguardar-me,\nMorreria satisfeita, porque o destino já anuncia.\nSe este é o instante de partir, quando mais poderia esperar?\nGosto que cada momento seja verdadeiro e certo;\nE gosto mesmo assim, se assim for determinado.\nPortanto, se morrer agora, morro tranquila,\nPorque cada instante vive a sua própria essência.",
+   "truncada": false
+  },
+  {
+   "id": "N19",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "As coisas têm vida como estrelas que brilham,\nEla as observa sem preconceito nem culpa, \nA beleza do rio é mais que somente voz,\nE a árvore se curva em seu próprio vórtice,\n\nTu não penses sempre no significado oculto,\nNão veja cada pedra como um livro para interpretar,\nQue as coisas existem e são simplesmente o quê elas são,  \nNada mais do que o tempo que passa na natureza.",
+   "truncada": false
+  },
+  {
+   "id": "N20",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "X\n\nDo alto da encosta eu vejo\nUma fileira em movimento,\nNão é sombra nem ruídos,\nÉ apenas um longo suspiro.\nOuço, mas não sou capaz\nDe desvendar o mistério,\nOs tropeções e os saltos,\nCada passo na rocha.\n\nNão é música, nem murmúrio,\nMas uma narrativa contida,\nDos anos nas costas dos corvos,\nNa sombra das árvores que se curvam.",
+   "truncada": false
+  },
+  {
+   "id": "N21",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "Nem sempre os passos deixam rasto;\nas pedras não mudam de lugar.\n\nE as folhas caem sem se lembrar,\ncaem para onde o vento carrega.\n\nMas a trilha que fiz desaparece.\nO rio continua a correr.\n\nCada sombra que se move é vaga\ne a luz que acende-se é nova.\n\nNão guardo sementes na terra;\nnão busco flores no horizonte.\n\nAqui estou, ou lá, ou não,\ne o dia segue a sua rotina.\n\nSe o vento sopra em direcção contrária,\nos ramos se inclinam por ele.\n\nMas o que permanece são os passos\nque o esquecimento logo anula.",
+   "truncada": false
+  },
+  {
+   "id": "N22",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "Passou a chuva pela cidade, e foi-se;\nE a cidade não ficou mais bonita, nem sequer feia.\nAssim é a passagem humana pelo mundo fora.\nNada tiramos e nada deixamos; esquecemos-nos;\nE a lua é sempre pontual todos os noites.",
+   "truncada": false
+  },
+  {
+   "id": "N23",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "O olhar sem medo é quem vê\nA paisagem que não espera\nSem cair no peso do que deve ser\n\nNão sou nada a não ser eu\nOnde está a liricidade pura?\nÉ um campo de mil e uma flores\nMas os sonhos deixam-no em pedaços\n\nOuvi o murmúrio, senti o vento\nEis que me deslumbro\nSei do que sou capaz apenas\nQuando sei estar sem pensar",
+   "truncada": false
+  },
+  {
+   "id": "N24",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "O tempo deixa rastros em pedras;\nMas quando as folhas caem, a terra se apaga.\nA noite continua seu ciclo,\nE o Sol segue sua linha nesse dia sem prelúdio.\n\nFrigores na atmosfera, e ar que sopra,\nSemelhante ao sussurro do passado.\nTudo flui, como um balde de água que corre;\nNão nos damos conta quando se acaba.",
+   "truncada": false
+  },
+  {
+   "id": "N25",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "Espelho que reflecte tudo, erra sempre,\nPorque seu poder está no não pensar.\nNão erra na visão, mas também não vê,\nO olho é a verdadeira miragem.\n\nOlhar é ser e ver-se,\nPensar é negar-se à realidade.\nA verdadeira percepção vem sem pensamentos, apenas observando.\nNem espelho cego, nem o meu olhar errante.",
+   "truncada": false
+  },
+  {
+   "id": "N26",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "O vento sussurra nos ramos,\ne não murmura segredos.\nCada folha dança ao acaso,\nnão teima em mensagens.\n\nO sol brilha no horizonte,\nsem se tornar esperança.\nÉ claridade e esplendor,\nsem prometer nada além da luz.",
+   "truncada": false
+  },
+  {
+   "id": "N27",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Para não olhar nos meus olhos,\nPara só senti-los vivos, distantes.\nPara a sombra ser meu tudo,\nE eu apenas aquilo que eles vêem, nada.\n\nPorque se eu desaparecer,\nNão há quem se lembre de mim.\nNa ausência minha, não sinto falta,\nSó nos olhos, onde só fui refleita.\n\nComo um sonho que passa,\nSou apenas um eco da vista,\nExisto só na mente alheia,\nE no vazio do meu ser, desapareço.",
+   "truncada": false
+  },
+  {
+   "id": "N28",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "e nada mais do que isso.  \n\nPastos verdes a estender-se,\no sol brilha no seu brilhar.\n\nSilêncio das penas levadas,\nvoces sussurram ao vento.\n\nNem sonhos nem desejos têm,\nnão proclamam nenhuma lei.\n\nSomente o pastar e o passar\nnuma encosta sem nome.",
+   "truncada": false
+  },
+  {
+   "id": "N29",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "o olhar desvia-se\ndo que se apresenta\npara buscar entre linhas \nmorfemas de ideia\n\nos contornos borravam-se\nà procura do essencial\nna trama da realidade\ntudo se tornava incerto\n\naprendemos a silenciar o pensamento\nquando vemos, mas em vão\no olhar perdeu a certeza \ndo que nos é mostrado\n\nretornamos aos erros\ndessa velha escola\nonde a mente não pode parar\naté se tornar cega",
+   "truncada": false
+  },
+  {
+   "id": "N30",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "Olhos que reflectem são ilusórios,\nEnquanto que a verdade viva surge sem pensar.\nO espelho age conforme instruções de observação,\nE não perdoa, mas segue o papel da refleição.\n\nVês mais do que penses; vês é a alma pura,\nQue ao olhar se encerra em sua essência sem desvair.\nA visão não tem preconceitos nem hesitações,\nPena do pensar, embriagado nas nuvens de imaginação.",
+   "truncada": false
+  },
+  {
+   "id": "N31",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "O amanhã nasce sobre os descalabros da noite,\nE eu vejo-o com olhos que são meros olhares vazios.\nAs colinas escondem-se, como em seus segredos cálidos,\nEnquanto a margem do rio murmura ao ritmo dos meus passos.\n\nOs sonhadores se abrigam nos recantos da terra,\nE eu sou um relógio que marca os instantes que não se dão.\nAs flores dançam e se curvam na brisa, um ballet infindo,\nEnquanto a memória doce do amado flui como o rio em mim.\n\nA noite, com seus incansáveis movimentos de estrelas,\nÉ a única companhia que me lembra a presença ausente.\nE assim, cada manhã nasce para os pensamentos frios\nQue se fazem ao longo das linhas onde o amor se esvai.",
+   "truncada": false
+  },
+  {
+   "id": "N32",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "As flores ainda se erguerão do mesmo modo,\nE as árvores manter-se-ão verdes no ciclo da vida.\nA realidade segue seu curso, indiferente ao meu fim.\n\nSinto-me um brilho que dissipará em seguida,\nUm sonho que se dissolverá em vazio quando acordar.\n\nEu estarei fora dos tempos, sem o peso da morte,\nPerdendo-me na eternidade de ser nada.\n\nGosto do sentir que sou parte desse fluxo constante.\nQue a Primavera venha mesmo depois de minha partida.",
+   "truncada": false
+  },
+  {
+   "id": "N33",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "Passa a estrada a correr,\nSilêncio e ar livre.\nO vento, em vão, sussurra:\n“Um dia, há muitas saudades.”\nNada além da passagem,\nDo rebanho ao caminho branco.\nE o vento? Só fala do vazio.",
+   "truncada": false
+  },
+  {
+   "id": "N34",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "Olhos que vêem só quando estão calmos,\nPensamentos que estragam a visão do espelho.\nO espelho emite sem pensar, cego aos errantes dedos,\nE eu penso sem olhar, surdo às coisas que vejo.\n\nExisto somente na dualidade entre ver e pensar,\nA luz no espelho esclarece o que é verdadeiramente nele,\nMientras que minha mente confunde-se em teias de erros.\nAs verdades são como fadas que se negam a ser vistas,\nSua própria ausência, mais bela do que qualquer visão.",
+   "truncada": false
+  },
+  {
+   "id": "N35",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Quando deixei de te ver, paraste de viver.\nO mundo diminuiu como a lua sob à sombra do rio.\nA vida se tornou mais leve, sem peso algum.\nE agora, me remonta uma saudade de ser.\n\nNão busco nas águas os segredos que guardam\nSendo esses olhos apenas vidro do meu eu,\nFumos e cinzas que o tempo entrelaçaram.\nA minha saudade é um suspiro tênue no ar,\nUm eco dos tempos em que não tínhamos fim.",
+   "truncada": false
+  },
+  {
+   "id": "N36",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "e nada mais do que isso.  \n\nMurmúrios de lamas, cascalhos,\nbaque de pés nus no solo.  \n\nNenhuma ordem, nenhum nome,\nsó o som que desce em direcção ao rio.  \n\nVão e vêm, sem medo ou esperança,\nsob um céu que se estende infinito.  \n\nFolhas verdes a dançar na brisa,\ncavacos de nuvens a rastejar pelo horizonte.  \n\nNão buscam símbolos nem sonhos,\nsomente os passos que deslizam pela encosta.",
+   "truncada": false
+  },
+  {
+   "id": "N37",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Não desejo mais essa realidade,\no vazio nos olhos alheios, apenas.\nAqui, fico, mas nisto, nada.\nO silêncio me envolve, sem voz, só.\n\nDesapareço, talvez,\nmas não na memória dos que veem.\nLá fora, a vida segue seu caminho,\neu sou o eco, breve e furtivo.\n\nNão busco a ausência de si mesmo,\nnem em saudade me detenho.\nO vazio é um espectro,\nque se desvanece com as sombras.\n\nOutros olham, outros sussurram,\neu, apenas um murmúrio do vento,\nreflexo fugaz no espelho alheio.",
+   "truncada": false
+  },
+  {
+   "id": "N38",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "Rebanho à beira da encosta,\nSussurro do vento que passa.\nNada mais além dos cascos,\nE do eco de suas rédeas.",
+   "truncada": false
+  },
+  {
+   "id": "N39",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "Depois de gostar  \ndas coisas em volta ficaram mais claras,  \nvisíveis como a palma da mão.  \nPasso mais tempo olhando —  \nnão consigo afastar o olhar.  \n\nPassei um dia na praça,  \ne vi a sombra dos pinheiros  \ncrescer e diminuir lentamente,  \nsentindo-a com os pés, com as palmas das mãos.  \n\nEla era como uma melodia em cada farfalho do vento,  \nem cada gota de água que se escorria pela folha da árvore.  \nOlhava para o horizonte e via a sua forma  \ncomo se fosse um contorno trazido pelo voo das gaivotas.  \n\nA noite veio lentamente,  \ncom as estrelas a acenderem-se uma a uma.  \nPelas janelas abertas, ouvia os seus suspiros  \ntransformados em respirações silenciosas da brisa.",
+   "truncada": true
+  },
+  {
+   "id": "N40",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "Existem as árvores e o rio corre,\nNada mais, sem mistério ou segredo.\nEu observo e penso em como eles parecem ser,\nComo eu sou, que também nada mais é senão eu.\n\nOração de um pensador, sem fé nenhuma,\nOlhando para as coisas, sem perguntas nem rastos.\nAs árvores não são filosofias ocultas,\nE o rio em seus movimentos não conta histórias. \n\nSimples e verdadeiros como a luz do sol que canta\nPelas caminhadas da tarde sob o céu cinzento,\nNão há mais significado na natureza, apenas vida,\nEm cada flor, cada pássaro, cada nuvem leve.\n\nAssim aprendi com meus próprios olhos e ouvidos:\nAs coisas não têm um sentido oculto; têm ser.\nE o mistério das coisas está em sua própria realidade.",
+   "truncada": false
+  },
+  {
+   "id": "N41",
+   "pergunta": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "texto": "A janela aberta,  \na rua estende-se verde.  \nOuvem-se passos leves,  \ne a chuva desce suave.\n\nNão penso nela agora,  \nmas a sua imagem está  \nnas formas da cidade,  \nnos cacos de vidro que brilham.\n\nO sol dá cor aos telhados,  \ne o vento sopra frágil.  \nTudo é mais claro,  \nmais palpável do que antes.\n\nNão preciso dela para sentir,  \nmas ela enriquece tudo ao meu lado.  \nEstes momentos simples,  \nsaboreio-os como sempre.",
+   "truncada": false
+  },
+  {
+   "id": "N42",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "Quando a tarde cai, quieta,\nSilenciosa como um suspiro,\nA luz se desliza, esvai-se,\nComo mãos que de nós se afastam.\n\nNas almas assombra uma penumbra,\nUma melancolia encolhe o espírito.\nNão é por ser fim do dia —\nÉ a noite que antecede o amanhecer,\nE em cada sombra, em cada som,\nVê-se a morte ao espreitar.\n\nA vida se adormece, mais leve,\nComo uma folha ao vento desprendida.\nMas o coração, que tanto sofre,\nSente nas horas da escuridão,\nUm eco de tristeza impelindo,\nQue só as luzes do amanhã podem aliviar.",
+   "truncada": false
+  },
+  {
+   "id": "N43",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "A paisagem não esconde nenhum segredo\n\nO mistério das coisas, onde está?\nNem o ar que suspira,\nnem a folha que cai,\nnem eu que sou apenas o vazio\nque os olha.\n\nCada pedra é um rumor\nque ouço em silêncio.\nNão há enigmas por trás da luz:\né ela, sem mais nenhuma roupagem.\n\nPortanto, na linha do horizonte,\nno crepúsculo que se despede,\nno farfalhar das árvores\nque não se fazem notar,\ncada instante é pleno de sua presença.\n\nAs coisas são as únicas,\na única chave do seu mistério.",
+   "truncada": false
+  },
+  {
+   "id": "N44",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "A diligência passou,\nE a estrada continua em seu traço.\nAs flores dançam sem ser lembradas,\nO sol nasce e se esvai, tão breve.\n\nAves voam sem deixar rastro,\nSó as garras da natureza testemunham o passado.\nA ave esquece a passagem, \nMas em cada pétala de rosa,\nHá uma memória do seu vôo.",
+   "truncada": false
+  },
+  {
+   "id": "N45",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "O olhar desliza sobre o campo,\nsem tocar, sem saber.\nE é a inexistência de sentimento \nque me aproxima dele.\n\nA noite esvazia-se nos muros silenciosos.\nNão sou eu quem contempla,\nmas um espectador que nada faz,\nestranho ao teatro em que está.\n\nO vento sopra sem pedir licença,\ne as folhas dançam sem perguntas.\nE eu, aqui parado,\nsentado sobre a minha indiferença.\n\nA chuva cai de forma desdenhosa,\npelas janelas do meu silêncio.\nE eu, quieto,\napenas testemunho do seu voo.",
+   "truncada": false
+  },
+  {
+   "id": "N46",
+   "pergunta": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "texto": "Nas profundezas do vazio, desapareço,\nSombra sem sombra, sopro sem soprar.\nApenas uma sombra nos olhos alheios,\nUm suspiro a mais na escuridão que carrego.\n\nNo mundo dos outros, sou apenas refletido,\nNão sei se existe, não preciso de prova.\nBasta ser visto, nada mais me interessa,\nSeria o mesmo, desaparecido ou vivido.\n\nPorque é que as saudades morrem com a presença?\nSe desço do navio, só fico com a proa.\nE é no vazio que sinto que existi,\nQue na ausência sou presença irrelevante.",
+   "truncada": false
+  },
+  {
+   "id": "N47",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "Olho o Tejo em silêncio, as ondas suspensas no horizonte,\nA indiferença é a minha companhia e não uma mágoa.\nNão sinto o vazio como um desabafo de distante lamentos,\nMas uma calma que enlaça o presente sem sonhos do futuro.",
+   "truncada": false
+  },
+  {
+   "id": "N48",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "o olhar perde forma a mente toma conta  \numa nuvem é apenas uma nuvem  \nnão vê-se senão em pensamento aquela sombra  \n\nos ramos não são mais do que os ramos  \nperder-se na metáfora é perder-se na noite  \nágua é água, céu é céu  \nos sonhos desenham nas cores da realidade  \n\nesse que vê e o que vê se fundem  \nmas a mente cria pontes entre mundos  \na tristeza não é mais do que uma tarde de outono  \nas folhas caem sem lembrar o inverno que virá  \n\nnão há simbolismo em simples existir  \no vento sopra, as pedras estão, as flores crescem  \naqui o olhar não busca o além  \npensa-se no aqui e agora, naqui e então",
+   "truncada": false
+  },
+  {
+   "id": "N49",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "Vês a corrente indiferentemente flutuar,\nAs ondas erguerem-se sem pedir nada.\nA brisa move as folhas como se falasse,\nO mar é realidade de cada respiração.\n\nNão há significado escondido nessas linhas,\nNenhuma tristeza em abandono, apenas o viver.",
+   "truncada": false
+  },
+  {
+   "id": "N50",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "Voo da águia em seu vôo,\nNão deixa apenas as asas;\nOuvimos no céu sua leitura,\nMas os raios de sol que cintilam\nNo chão, são recordações mais sádas.\n\nPassa o pássaro, a sombra esconde-se,\nCada instante é um novo adeus.\nA ave passa e logo esquecida,\nPorém sua ausência nos ensina \nO respeito pelo tempo que não se detém.",
+   "truncada": false
+  },
+  {
+   "id": "N51",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "O poente, senhor da sombra,  \ncorta a luz, corta o alimento.  \nNas traseiras do sol, desempenha  \numa morte que não é de entulho.\n\nTorna-se treva, torna-se esquecimento,  \nnada fica além da sua estirpe.  \nMas ali, no horizonte perdido,  \nainda há uma brilhante lágrima.\n\nE nós, desavisados, vemos  \nessa transição como um fim.  \nConfundimos a mudança com  \num sussurro de triste eminência.\n\nA sombra da noite nos assombra,  \nmas o poente é apenas um gesto.  \nEle nasce da mesma luz que se foge,  \nsempre renovando o seu esplendor.",
+   "truncada": false
+  },
+  {
+   "id": "N52",
+   "pergunta": "pensar estraga o que se está a ver",
+   "texto": "Olhos que veem e pensam com um sorriso,\nE a vida brilha lá fora.\nQuando olhamos sem pensar,  \nAs coisas estão como são.\n\nO espelho do nada na mão de quem vê,\nGuarda os sons e correntes da alma.\nPensar, erra; existir é simplesmente estar.",
+   "truncada": false
+  },
+  {
+   "id": "N53",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "Nas sombras do horizonte, o sol se deixa levar,\nO céu abre-se em tons de roxo e rosa.\nPaisagens que vivem em cada folha caída,\nAcertam-me no coração como música melancólica.\n\nQuando os pássaros retiram suas vozes,\nE a lua desperta, trazendo sua luz tênue,\nEntendo o sentimento, um ligeiro eco\nDo encanto de despedir-se do dia, de forma leve.",
+   "truncada": false
+  },
+  {
+   "id": "N54",
+   "pergunta": "quando eu morrer o mundo continua exactamente como está",
+   "texto": "Quando eu por aqui não andar mais,\nAs estrelas continuarão a brilhar,\nOs rios manterão o seu curso sem meu rosto.\n\nSilenciosamente as folhas mudarão de cor,\nE os ventos soprarão com igual força.\n\nO sol nascerá, mesmo sem olhos meus para ver,\nA noite chegará, sem que eu a possa prever.\n\nNascerão flores e caírão folhas no chão,\nSerão primaveras e serões, e invernos e outonos.\n\nO mundo segue o seu caminho, não espera,\nÉ vasto demais para se importar com um morto.\n\nSei que morrer é como sumir-me no horizonte,\nMas os céus continuarão azuis, as ruas continuará a rodar.\n\nAssim, contento sou com meu destino,\nPorque o universo continua independente.",
+   "truncada": false
+  },
+  {
+   "id": "N55",
+   "pergunta": "olho a paisagem sem sentir nada por ela, e é isso que me aproxima dela",
+   "texto": "Olho a brisa que sussurra pela areia\nE é esse o contato que me une a ela.\nO silêncio do vazio, em que os pensamentos nascem,\nÉ onde eu fui criado e posso sempre voltar.\n\nVês as cores dos ramos dançarem sob o sol\nE não te preocupas com o significado adorado.\nTão pura é a natureza ao seu próprio tempo —\nDesta constelação de imagens, que são meus horizontes.",
+   "truncada": false
+  },
+  {
+   "id": "N56",
+   "pergunta": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "texto": "Passamos sem deixar sinais,\nComo murmúrio de ondas em praias.\nNas ruas ou nos campos, sem alçar voo,\nUm dia mais se desenha na paisagem.\n\nA folha cai e logo uma nova surge;\nO sol brilha e a sombra desce.\nNão somos rastro, nem sonho,\nSomente os passos que se perdem.",
+   "truncada": false
+  },
+  {
+   "id": "N57",
+   "pergunta": "aprender a ver é mais difícil do que aprender a pensar",
+   "texto": "Só aprendendo a ver o pensamento,\nAprendo que a mente é sombra.\nPena não é só de tinta em papel,\nMas do olhar que a ignora.\n\nEstender os braços para o vento,\nNão para capturá-lo, mas sentir.\nPalavras são vãs se não ouvidas;\nIdeias são vãs se não vistas.\n\nAprendendo a ver a nuvem,\nDescubro que ela também pensa.",
+   "truncada": false
+  },
+  {
+   "id": "N58",
+   "pergunta": "as coisas não escondem nenhum sentido por baixo de si",
+   "texto": "O vento assobia ao horizonte\nSem buscar ou encontrar sentido\nA nuvem deixa passar o sol \nQue não pede explicação alguma\n\nOs pinheiros agitam as folhas\nNão em dança espiritual mas sussurro\nDa brisa que se desloca sem pressa\nAo acaso das águas que fluem\n\nNão busco na natureza falar\nPara além de sua voz própria\nAqui o ser é ausência de querer\nSilêncio do que não tem que ser",
+   "truncada": false
+  },
+  {
+   "id": "N59",
+   "pergunta": "por que é que as pessoas acham melancólico o fim do dia?",
+   "texto": "Nas sombras das árvores, a brisa suave chama,\nCantando em tons que lembram melodia adormecida.\nO mundo se tira de cima a baixo ao ritmo do dia,\nE lá vamos nós, nossos corações encolhidos e vazios.\n\nPergunta-se por este sentimento, sem fim na noite?\nAs sombras nos revelam nossa própria forma triste,\nComo o poente em seu encadeamento melancólico.",
+   "truncada": false
+  },
+  {
+   "id": "N60",
+   "pergunta": "um rebanho a passar numa encosta, e nada mais do que isso",
+   "texto": "e nada mais do que isso.  \n\nÁspas de nevoeiro em campos soltos,  \nsilhuetas deslizando na costa.\n\nBoca da tarde, sussurro no ouvido,  \ncortejo sem nome, sem motivo.\n\nPés leves sobre o manto verde,  \nlambendo a suavidade do que é.  \n\nSilêncio de corpos em movimento,  \narquivo da luz, do som inexistente.\n\nEis tudo, menos explicação,  \nbênção do instante que esquecemos.",
+   "truncada": false
+  }
+ ]
+}
