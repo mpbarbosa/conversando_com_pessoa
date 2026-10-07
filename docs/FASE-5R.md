@@ -152,14 +152,22 @@ reporto-o no relatório e deixo o limite de tentativas como está.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  derivar as tres classes, so de pt -> data/ortografia-corpus.json
-[ ] B1  R1 falsos positivos: derivar da metade A, correr na metade B
-[ ] B2  R2 recall nos 48 itens gerados da 5Q
-[ ] C1  SE R1 e R2 passarem: detector + rejeicao de truncatura em src/, com testes
-[ ] C2  R3 os 237 testes + ./pessoa a responder
-[ ] C3  relatorio FASE-5R-RELATORIO.md
-[ ] C4  CONTROLO.md: passos 29 e 30, e as tres razoes erradas da 5Q
+[x] A1  tres classes derivadas: 2013 variantes (B 1284, C 649, A 80)
+[x] B1  R1 NAO dispara: 2,18% na metade B. Mas 9 das 19 formas eram GRALHAS da
+        transcricao (`ha` 2x contra `ha` acentuado 698x): o portao contava como
+        erro casos em que o detector estava certo
+[x] B2  R2 NAO dispara: 42% (5 de 12)
+[x] C1  o detector NAO entra (os dois portoes falharam). Entrou o passo 30:
+        a truncatura reprova o turno, em src/pipeline.py, com teste
+[x] C2  R3 dispara: 238 testes (eram 237) e o ./pessoa responde
+[x] C3  relatorio FASE-5R-RELATORIO.md
+[x] C4  CONTROLO.md: passo 29 fechado com a limitacao, 30 feito, 31-33 novos
 ```
+
+**A correccao posterior, declarada, nao salva os portoes:** aplicando a razao de
+20x uniformemente (constante que o §2 ja tinha), os falsos positivos caem a
+**0,73%** — passa — e o recall fica em **17%** — falha. **Nao ha limiar em que os
+dois passem**, e a causa e o **tamanho do corpus**: `objecto` aparece 8 vezes.
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
 nomeados.

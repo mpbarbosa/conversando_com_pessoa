@@ -61,7 +61,17 @@ class Turno:
 
     @property
     def aprovado(self) -> bool:
-        return bool(self.veredicto) and not self.plagio.plagiou
+        """Veredicto limpo, sem plágio e **não truncado**.
+
+        A truncatura entrou em 2026-10-07 (Fase 5R, passo 30). O campo
+        `resposta.truncada` vem de `done_reason == "length"` e era **gravado e
+        não usado**: na Fase 5Q cinco de 48 amostras chegaram à folha cortadas a
+        meio da **palavra** («não alcan», «sua pass», «que ninguém l»). Uma
+        resposta cortada não é uma resposta, e a âncora de 3b da Fase 5 §5.2 já
+        lhe dava 0 por isso.
+        """
+        return (bool(self.veredicto) and not self.plagio.plagiou
+                and not self.resposta.truncada)
 
     def fontes(self) -> str:
         return ", ".join(f"{c.poem_id}" for c in self.usados)
@@ -150,7 +160,7 @@ class Pipeline:
             r = self.gerador.gerar(p.system, user)
             v = verificar(r.texto, pergunta=pergunta, idioma=idioma)
             a = analisar(v.texto, tuple(mostrados))
-            if not a.plagiou or tentativa == max_tentativas:
+            if (not a.plagiou and not r.truncada) or tentativa == max_tentativas:
                 return Turno(pergunta, voz, idioma, tuple(recuperados),
                              p.chunks_usados, r, v, a, tentativa, ms, ms_rr)
             p = self._repetir_sem(pergunta, voz, idioma, recuperados,

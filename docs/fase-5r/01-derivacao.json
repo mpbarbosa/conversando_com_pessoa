@@ -1,0 +1,167 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5R.md §2-4",
+  "semente": 20261007,
+  "regra": "freq(c)>=2 e freq(v)==0, ou freq(c)>=20 e freq(v)<=1",
+  "so_pt": true,
+  "n_poemas_pt": 1926,
+  "n_formas_no_vocabulario": 16099
+ },
+ "lista_final": {
+  "n": 2013,
+  "por_classe": {
+   "B": 1284,
+   "C": 649,
+   "A": 80
+  }
+ },
+ "R1": {
+  "n_variantes_derivadas_de_A": 1271,
+  "n_poemas_em_B": 963,
+  "poemas_de_B_marcados": 21,
+  "fraccao": 0.02181,
+  "limiar": 0.01,
+  "exemplos": [
+   {
+    "poema": "poem_824",
+    "formas": [
+     "hó"
+    ]
+   },
+   {
+    "poema": "poem_1246",
+    "formas": [
+     "acoite"
+    ]
+   },
+   {
+    "poema": "poem_798",
+    "formas": [
+     "andamos"
+    ]
+   },
+   {
+    "poema": "poem_3271",
+    "formas": [
+     "helahoho"
+    ]
+   },
+   {
+    "poema": "poem_3152",
+    "formas": [
+     "musica"
+    ]
+   },
+   {
+    "poema": "poem_827",
+    "formas": [
+     "es"
+    ]
+   },
+   {
+    "poema": "poem_3372",
+    "formas": [
+     "silencio"
+    ]
+   },
+   {
+    "poema": "poem_2475",
+    "formas": [
+     "faca"
+    ]
+   },
+   {
+    "poema": "poem_2456",
+    "formas": [
+     "avô",
+     "faca",
+     "forca"
+    ]
+   },
+   {
+    "poema": "poem_509",
+    "formas": [
+     "porem"
+    ]
+   },
+   {
+    "poema": "poem_3237",
+    "formas": [
+     "ha"
+    ]
+   },
+   {
+    "poema": "poem_2783",
+    "formas": [
+     "murmuro"
+    ]
+   }
+  ],
+  "dispara": false
+ },
+ "R2": {
+  "n_gerados": 48,
+  "n_alvo_ortografico": 12,
+  "apanhados_do_alvo": 5,
+  "recall_no_alvo": 0.4167,
+  "limiar": 0.5,
+  "apanhados_de_todos_os_gerados": 6,
+  "reais_da_5Q_marcados": 0,
+  "detalhe": [
+   {
+    "id": "Q09",
+    "voz": "ortonimo",
+    "modelo": "llama3.1:8b",
+    "formas": [
+     "veem"
+    ]
+   },
+   {
+    "id": "Q10",
+    "voz": "reis",
+    "modelo": "llama3.1:8b",
+    "formas": [
+     "objeto"
+    ]
+   },
+   {
+    "id": "Q21",
+    "voz": "ortonimo",
+    "modelo": "qwen2.5:7b",
+    "formas": [
+     "silencio"
+    ]
+   },
+   {
+    "id": "Q39",
+    "voz": "campos",
+    "modelo": "qwen2.5:7b",
+    "formas": [
+     "tênue"
+    ]
+   },
+   {
+    "id": "Q60",
+    "voz": "campos",
+    "modelo": "llama3.1:8b",
+    "formas": [
+     "elétricas"
+    ]
+   },
+   {
+    "id": "Q62",
+    "voz": "campos",
+    "modelo": "llama3.1:8b",
+    "formas": [
+     "elétricos",
+     "ve"
+    ]
+   }
+  ],
+  "dispara": false
+ },
+ "R4": {
+  "dispara": false,
+  "leitura": "a via mecanica nao da; declarar a limitacao e nao cair na lista a mao"
+ }
+}

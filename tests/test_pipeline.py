@@ -11,6 +11,9 @@ import pytest
 from src.corpus.build import load
 from src.corpus.models import Chunk, Lang, Voice
 from src.generation.base import Resposta
+from src.guard import Veredicto
+from src.pipeline import Turno
+from src.plagio import Analise
 from src.pipeline import Pipeline
 from src.plagio import REFORCO, REFORCO_EN
 
@@ -195,3 +198,36 @@ def test_a_ordem_do_reranker_e_a_que_vale(chunks_caeiro):
     com, _, _ = p.recuperar("pergunta", Voice.CAEIRO)
     sem, _, _ = _pipeline_espiao(chunks_caeiro)[0].recuperar("pergunta", Voice.CAEIRO)
     assert [c.poem_id for c in com] != [c.poem_id for c in sem]
+
+
+# --- Fase 5R / passo 30: a truncatura reprova o turno -------------------- #
+
+def _turno(truncada: bool) -> Turno:
+    """Um `Turno` aprovado em tudo o resto, para isolar a truncatura."""
+    return Turno(
+        pergunta="porque é que o fim do dia é melancólico?",
+        voz=Voice.CAEIRO, idioma=Lang.PT,
+        recuperados=(), usados=(),
+        resposta=Resposta("As coisas são o que são.\nE nada mais.",
+                          prefill_s=0.1, decode_s=0.2, prefill_tokens=10,
+                          decode_tokens=12, truncada=truncada),
+        veredicto=Veredicto(True, (), "As coisas são o que são.\nE nada mais.",
+                            ()),
+        plagio=Analise(0.0, 2, (), 0.0),
+        tentativas=1, recuperacao_ms=1.0)
+
+
+def test_turno_truncado_nao_e_aprovado():
+    """O campo `truncada` era gravado e não usado.
+
+    Vem de `done_reason == "length"`. Na Fase 5Q **cinco de 48** amostras
+    chegaram à folha de julgamento cortadas a meio da **palavra** («não alcan»,
+    «sua pass», «que ninguém l»), porque `aprovado` não olhava para ele — e é
+    `aprovado` que faz o `responder_em_fluxo` repetir.
+    """
+    assert _turno(truncada=False).aprovado
+    cortado = _turno(truncada=True)
+    assert not cortado.aprovado, "uma resposta cortada a meio não é resposta"
+    # o resto do veredicto não muda: a truncatura não é um motivo da guarda
+    assert bool(cortado.veredicto)
+    assert not cortado.plagio.plagiou
