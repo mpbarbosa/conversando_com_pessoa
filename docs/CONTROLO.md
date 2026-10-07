@@ -1,7 +1,7 @@
 # Documento de controlo — PessoaBot
 
 Estado do projecto, decisões tomadas, correcções feitas e próximos passos.
-**Actualizado em 2026-10-06.**
+**Actualizado em 2026-10-07.**
 
 Este é o índice-mestre. Os detalhes estão nos documentos por fase; aqui está o
 que está feito, o que falta, e o que mudou de ideias pelo caminho.
@@ -299,6 +299,8 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 21 | ~~**Um critério de forma ao nível do conjunto**~~ — **calibrado e aceite** | [Fase 5K](FASE-5K-RELATORIO.md): o KS ao corpus bate a conformidade nos dois braços (AUC 0,999 e 1,000 contra 0,000 e 0,784), com Δ a excluir 0. Tem **chão** (nulo empírico: p95 de 0,190 a n=30) e **régua** (0,149–0,317 entre vozes reais). Instrumento em [`fase-5j/analisar.py`](fase-5j/analisar.py), calibração em [`fase-5k/01-nulo.json`](fase-5k/) |
 | 22 | ~~**Retirar a cláusula de comprimento da âncora de 3b**~~ — **feito** | [Fase 5L](FASE-5L.md): a [Fase 5 §5.2](FASE-5.md) está alterada nas quatro vozes, com a âncora original preservada para ler as pontuações antigas. O caso do **Reis** fechou o argumento — intervalo **correcto** e **invertido** ao mesmo tempo —, logo a correcção descritiva não salva um escalar. Nota de compatibilidade no §3 da 5L |
 | 23 | **Os limiares de estrofe e de verso, que ficaram sem teste** | a 5L retirou os limiares por **poema** e deixou ficar `estrofes de 3–4 versos`, `quadras ou quintilhas`, `linhas curtas` e `versículo longo` — comprimentos de **estrofe** e de **linha**, que a 5J nunca mediu. Pela mesma lógica podem ter o mesmo defeito, e o teste é o mesmo: contar no corpus real e ver se o intervalo descreve o poeta |
+| 24 | **As personas pedem os intervalos que a 5L invalidou** — e estão em **produção** | descoberto pela verificação A3 da [5M §5.3](FASE-5M.md): `src/voices.py` manda «Entre dez e vinte versos» (:123), «Entre quinze e trinta» (:133), «No máximo doze» (:142) e «Entre doze e vinte» (:154) — **os quatro intervalos** que a [5J](FASE-5J-RELATORIO.md) mostrou não descreverem o poeta. A 5L removeu-os do **instrumento de medida** e eles ficaram na **instrução de geração**: o projecto mede sem o intervalo e continua a pedi-lo. Corrigir é uma **intervenção** e o efeito mede-se — a 5I mexeu na instrução e deu saldo líquido **negativo** —, logo pede pré-registo próprio |
+| 25 | **Uma âncora 3a′ por voz** — o que bloqueia metade do passo 16 | a âncora da [5F §2](FASE-5F.md) mede «o poema acaba na coisa» e é inteiramente **do Caeiro**. Ao **ortónimo**, cujo modo é acabar **além** da coisa, daria **0 por construção**: é uma anti-medida, não uma medida má. Cada voz precisa da sua, validada contra os poemas **reais** dessa voz — o percurso [5E](FASE-5E-RELATORIO.md) → [5F](FASE-5F-RELATORIO.md), três vezes. **Até isso existir, o passo 16 só se pode medir na forma** |
 
 O **Passo 1 era o que importava mais**, e a Fase 5B foi medi-lo. Voltou sem
 veredicto, e a razão é instrutiva: o instrumento com que se ia medir — o
