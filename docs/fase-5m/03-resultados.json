@@ -1,0 +1,334 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5M.md §4",
+  "semente": 20261007,
+  "B_nulo": 10000,
+  "ns_do_nulo": [
+   16,
+   30
+  ],
+  "caeiro": "reutilizado da 5H, mesmo banco de perguntas",
+  "ks": "fase-5j/analisar.py",
+  "nulo": "fase-5k/calibrar.py"
+ },
+ "celulas": {
+  "caeiro/L": {
+   "voz_pedida": "caeiro",
+   "modelo": "llama3.1",
+   "n": 30,
+   "mediana_versos": 7.5,
+   "min": 4,
+   "max": 15,
+   "ks_a_cada_voz": {
+    "caeiro": 0.3475,
+    "campos": 0.4653,
+    "reis": 0.2156,
+    "ortonimo": 0.2678
+   },
+   "ks_a_voz_pedida": 0.3475,
+   "voz_mais_proxima": "reis",
+   "margem_para_a_rival_mais_proxima": -0.1319,
+   "acertou_a_voz_pedida": false,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  },
+  "caeiro/Q": {
+   "voz_pedida": "caeiro",
+   "modelo": "qwen2.5",
+   "n": 30,
+   "mediana_versos": 13.5,
+   "min": 8,
+   "max": 17,
+   "ks_a_cada_voz": {
+    "caeiro": 0.2881,
+    "campos": 0.3959,
+    "reis": 0.3956,
+    "ortonimo": 0.4521
+   },
+   "ks_a_voz_pedida": 0.2881,
+   "voz_mais_proxima": "caeiro",
+   "margem_para_a_rival_mais_proxima": 0.1074,
+   "acertou_a_voz_pedida": true,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  },
+  "campos/L": {
+   "voz_pedida": "campos",
+   "modelo": "llama3.1",
+   "n": 30,
+   "mediana_versos": 14.5,
+   "min": 7,
+   "max": 22,
+   "ks_a_cada_voz": {
+    "caeiro": 0.2661,
+    "campos": 0.2803,
+    "reis": 0.4,
+    "ortonimo": 0.4188
+   },
+   "ks_a_voz_pedida": 0.2803,
+   "voz_mais_proxima": "caeiro",
+   "margem_para_a_rival_mais_proxima": -0.0142,
+   "acertou_a_voz_pedida": false,
+   "dentro_do_nulo": {
+    "16": true,
+    "30": false
+   }
+  },
+  "campos/Q": {
+   "voz_pedida": "campos",
+   "modelo": "qwen2.5",
+   "n": 30,
+   "mediana_versos": 15.0,
+   "min": 10,
+   "max": 22,
+   "ks_a_cada_voz": {
+    "caeiro": 0.4237,
+    "campos": 0.3143,
+    "reis": 0.5089,
+    "ortonimo": 0.5062
+   },
+   "ks_a_voz_pedida": 0.3143,
+   "voz_mais_proxima": "campos",
+   "margem_para_a_rival_mais_proxima": 0.1094,
+   "acertou_a_voz_pedida": true,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  },
+  "ortonimo/L": {
+   "voz_pedida": "ortonimo",
+   "modelo": "llama3.1",
+   "n": 30,
+   "mediana_versos": 9.5,
+   "min": 4,
+   "max": 20,
+   "ks_a_cada_voz": {
+    "caeiro": 0.2548,
+    "campos": 0.3626,
+    "reis": 0.2622,
+    "ortonimo": 0.3286
+   },
+   "ks_a_voz_pedida": 0.3286,
+   "voz_mais_proxima": "caeiro",
+   "margem_para_a_rival_mais_proxima": -0.0738,
+   "acertou_a_voz_pedida": false,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  },
+  "ortonimo/Q": {
+   "voz_pedida": "ortonimo",
+   "modelo": "qwen2.5",
+   "n": 30,
+   "mediana_versos": 12.0,
+   "min": 4,
+   "max": 16,
+   "ks_a_cada_voz": {
+    "caeiro": 0.3305,
+    "campos": 0.4408,
+    "reis": 0.2956,
+    "ortonimo": 0.3752
+   },
+   "ks_a_voz_pedida": 0.3752,
+   "voz_mais_proxima": "reis",
+   "margem_para_a_rival_mais_proxima": -0.0796,
+   "acertou_a_voz_pedida": false,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  },
+  "reis/L": {
+   "voz_pedida": "reis",
+   "modelo": "llama3.1",
+   "n": 30,
+   "mediana_versos": 10.0,
+   "min": 5,
+   "max": 24,
+   "ks_a_cada_voz": {
+    "caeiro": 0.1955,
+    "campos": 0.3136,
+    "reis": 0.1956,
+    "ortonimo": 0.3678
+   },
+   "ks_a_voz_pedida": 0.1956,
+   "voz_mais_proxima": "reis",
+   "margem_para_a_rival_mais_proxima": -0.0001,
+   "acertou_a_voz_pedida": true,
+   "dentro_do_nulo": {
+    "16": true,
+    "30": true
+   }
+  },
+  "reis/Q": {
+   "voz_pedida": "reis",
+   "modelo": "qwen2.5",
+   "n": 30,
+   "mediana_versos": 12.0,
+   "min": 6,
+   "max": 18,
+   "ks_a_cada_voz": {
+    "caeiro": 0.2994,
+    "campos": 0.3966,
+    "reis": 0.3756,
+    "ortonimo": 0.3953
+   },
+   "ks_a_voz_pedida": 0.3756,
+   "voz_mais_proxima": "caeiro",
+   "margem_para_a_rival_mais_proxima": -0.0761,
+   "acertou_a_voz_pedida": false,
+   "dentro_do_nulo": {
+    "16": false,
+    "30": false
+   }
+  }
+ },
+ "M1": {
+  "referencia_5K_llama_caeiro": 0.347,
+  "ks_llama_reis": 0.1956,
+  "dispara": true,
+  "ks_llama_caeiro_remedido": 0.3475,
+  "coincide_com_5K": true,
+  "dispara_com_remedido": true
+ },
+ "M2": {
+  "celulas_dentro_do_nulo": {
+   "16": [
+    "campos/L",
+    "reis/L"
+   ],
+   "30": [
+    "reis/L"
+   ]
+  },
+  "p95_por_voz": {
+   "caeiro": {
+    "16": 0.286,
+    "30": 0.1972
+   },
+   "campos": {
+    "16": 0.3038,
+    "30": 0.2156
+   },
+   "reis": {
+    "16": 0.2919,
+    "30": 0.2067
+   },
+   "ortonimo": {
+    "16": 0.2979,
+    "30": 0.2185
+   }
+  },
+  "dispara": true,
+  "dispara_so_a_n30": false
+ },
+ "M3": {
+  "por_voz": {
+   "caeiro": {
+    "ks_qwen": 0.2881,
+    "ks_llama": 0.3475,
+    "llama_pior": true,
+    "delta_llama_menos_qwen": 0.0594
+   },
+   "campos": {
+    "ks_qwen": 0.3143,
+    "ks_llama": 0.2803,
+    "llama_pior": false,
+    "delta_llama_menos_qwen": -0.034
+   },
+   "reis": {
+    "ks_qwen": 0.3756,
+    "ks_llama": 0.1956,
+    "llama_pior": false,
+    "delta_llama_menos_qwen": -0.18
+   },
+   "ortonimo": {
+    "ks_qwen": 0.3752,
+    "ks_llama": 0.3286,
+    "llama_pior": false,
+    "delta_llama_menos_qwen": -0.0466
+   }
+  },
+  "vozes_onde_o_llama_e_pior": [
+   "caeiro"
+  ],
+  "n": 1,
+  "dispara": false,
+  "so_no_caeiro": true
+ },
+ "M4": {
+  "por_modelo": {
+   "qwen2.5": {
+    "voz_mais_proxima_por_celula": {
+     "caeiro": "caeiro",
+     "campos": "campos",
+     "reis": "caeiro",
+     "ortonimo": "reis"
+    },
+    "corpus_dominante": "caeiro",
+    "quantas": 2,
+    "nao_modula": false,
+    "medianas_por_voz_pedida": {
+     "caeiro": 13.5,
+     "campos": 15.0,
+     "reis": 12.0,
+     "ortonimo": 12.0
+    },
+    "amplitude_das_medianas": 3.0,
+    "acertos": [
+     "caeiro",
+     "campos"
+    ],
+    "directa": {
+     "amplitude_das_medianas": 3.0,
+     "ks_medio_entre_os_proprios_bracos": 0.3056,
+     "ks_max_entre_os_proprios_bracos": 0.4667
+    }
+   },
+   "llama3.1": {
+    "voz_mais_proxima_por_celula": {
+     "caeiro": "reis",
+     "campos": "caeiro",
+     "reis": "reis",
+     "ortonimo": "caeiro"
+    },
+    "corpus_dominante": "reis",
+    "quantas": 2,
+    "nao_modula": false,
+    "medianas_por_voz_pedida": {
+     "caeiro": 7.5,
+     "campos": 14.5,
+     "reis": 10.0,
+     "ortonimo": 9.5
+    },
+    "amplitude_das_medianas": 7.0,
+    "acertos": [
+     "reis"
+    ],
+    "directa": {
+     "amplitude_das_medianas": 7.0,
+     "ks_medio_entre_os_proprios_bracos": 0.3444,
+     "ks_max_entre_os_proprios_bracos": 0.5333
+    }
+   }
+  },
+  "dispara": false
+ },
+ "M5": {
+  "correccao_ao_protocolo": "o §4 punha a direccao ao contrario para uma afirmacao de ajuste: para o M2 o teste estrito e n=30 (p95 mais baixo), nao n=16",
+  "celulas_robustas_aos_dois_n": [
+   "reis/L"
+  ],
+  "celulas_que_so_passam_o_nulo_fraco": [
+   "campos/L"
+  ],
+  "dispara": true,
+  "leitura": "as celulas em `so_passam_o_nulo_fraco` leem-se como «nao mostrado»; as de `robustas` ajustam-se aos dois n"
+ }
+}

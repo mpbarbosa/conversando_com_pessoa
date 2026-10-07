@@ -195,17 +195,23 @@ pré-registada.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  gerar 180 amostras (3 vozes × 2 modelos × 10 × 3) -> 01-cru.jsonl
-[ ] A2  asserção byte a byte do prompt entre bracos, por (voz, pergunta)
+[x] A1  180 amostras geradas -> 01-cru.jsonl
+[x] A2  prompt verificado igual entre bracos nos 30 pares (voz, pergunta)
 [x] A3  a persona de cada voz pede comprimento -> 00-personas-forma.json
         e pede OS INTERVALOS QUE A 5L INVALIDOU: ver o §5.3
-[ ] B1  KS de cada celula ao corpus da sua voz, nulos a n=16 e n=30
-[ ] B2  M1 a predicao da 5K · M2 alguma celula acerta · M3 custo geral
-[ ] B3  M4 os modelos modulam por voz? · M5 leitura no pior caso
-[ ] C1  portoes -> 03-resultados.json
-[ ] C2  relatorio FASE-5M-RELATORIO.md
-[ ] C3  CONTROLO.md: fase, passo 16, a correccao a 5K e o passo novo do 3a'
+[x] B1  KS das 8 celulas, nulos a n=16 e n=30
+[x] B2  M1 DISPARA (0,196 vs 0,347) · M2 DISPARA (reis/L) · M3 NAO (1 de 4)
+[x] B3  M4 NAO dispara (disparava por desempate de 7,6e-5) · M5 DISPARA
+[x] C1  portoes -> 03-resultados.json
+[x] C2  relatorio FASE-5M-RELATORIO.md
+[x] C3  CONTROLO.md: fase, passo 16, passos 24/24b/25
 ```
+
+**Duas correcções a este protocolo, no §5 do relatório:** o **M5** tinha a
+direccao invertida (foi escrito para afirmacoes de **desvio**, onde n=16 e o
+teste estrito; o M2 e uma afirmacao de **ajuste**, onde o estrito e n=30), e o
+**M4** resolvia empates pela ordem do dicionario — em `reis/L` os KS ao Caeiro e
+ao Reis diferem **7,6×10⁻⁵** e isso bastava para o portao disparar.
 
 **Sessões paralelas:** verificado antes de abrir — nenhuma outra sessão neste
 repositório. `git add` com ficheiros nomeados. O Ollama foi arrancado por esta

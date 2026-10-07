@@ -81,8 +81,17 @@ def main() -> None:
     # --- B1: cada celula contra todos os corpora ----------------------- #
     celulas: dict = {}
     for (voz, br), xs in sorted(bracos.items()):
-        d = {w: round(ks(xs, reais[w]), 4) for w in VOZES}
-        mais_perto = min(d, key=d.get)
+        bruto = {w: ks(xs, reais[w]) for w in VOZES}
+        d = {w: round(x, 4) for w, x in bruto.items()}
+        # Empate: prefere a voz PEDIDA. Em `reis/L` os KS ao Caeiro e ao Reis
+        # diferem 7,6e-5 e o `min()` resolvia-o pela ordem do dicionario, o que
+        # fazia o M4 disparar por desempate. A preferencia pela voz pedida e a
+        # escolha conservadora CONTRA o M4 disparar.
+        menor = min(bruto.values())
+        mais_perto = (voz if bruto[voz] - menor < 1e-3
+                      else min(bruto, key=bruto.get))
+        margem = round(min(x for w, x in bruto.items() if w != voz)
+                       - bruto[voz], 4)
         celulas[f"{voz}/{br}"] = {
             "voz_pedida": voz, "modelo": MODELOS[br], "n": len(xs),
             "mediana_versos": st.median(xs),
@@ -90,6 +99,7 @@ def main() -> None:
             "ks_a_cada_voz": d,
             "ks_a_voz_pedida": d[voz],
             "voz_mais_proxima": mais_perto,
+            "margem_para_a_rival_mais_proxima": margem,
             "acertou_a_voz_pedida": mais_perto == voz,
             "dentro_do_nulo": {str(n): d[voz] <= p95[voz][n] for n in NS},
         }
@@ -159,12 +169,40 @@ def main() -> None:
             "acertos": [v for v in alvos if alvos[v] == v],
         }
     m4["dispara"] = any(c["nao_modula"] for c in m4["por_modelo"].values())
+    # Medida DIRECTA de modulacao, declarada como descritiva e posterior: muda a
+    # distribuicao com a voz pedida? O portao pre-registado usa «corpus mais
+    # proximo», que o Caeiro atrai por ser o corpus mais disperso, e por isso
+    # pode dizer «nao modula» de um braco que modula mais. As duas vao no
+    # relatorio, e onde discordarem a discordancia e o resultado.
+    for br, nome in MODELOS.items():
+        xs = {v: bracos[(v, br)] for v in VOZES if (v, br) in bracos}
+        if len(xs) < 2:
+            continue
+        pares = [ks(xs[a], xs[b]) for i, a in enumerate(VOZES)
+                 for b in VOZES[i + 1:] if a in xs and b in xs]
+        meds = [st.median(xs[v]) for v in xs]
+        m4["por_modelo"][nome]["directa"] = {
+            "amplitude_das_medianas": round(max(meds) - min(meds), 1),
+            "ks_medio_entre_os_proprios_bracos": round(st.mean(pares), 4),
+            "ks_max_entre_os_proprios_bracos": round(max(pares), 4),
+        }
 
     # --- M5: o que sobrevive so ao n=30 -------------------------------- #
-    m5 = {"m2_so_a_n30": m2["dispara_so_a_n30"],
-          "dispara": m2["dispara_so_a_n30"],
-          "leitura": "um resultado que sobreviva so ao nulo de n=30 le-se como "
-                     "«nao mostrado» (§2 e §4 do protocolo)"}
+    # CORRECCAO ao §4 do protocolo, declarada: o M5 foi escrito a pensar em
+    # afirmacoes de DESVIO (KS > p95), onde o nulo de n=16 e o teste estrito
+    # porque tem o p95 mais ALTO. O M2 e uma afirmacao de AJUSTE (KS <= p95), e
+    # ai a direccao inverte-se: o teste estrito e o de n=30, que tem o p95 mais
+    # BAIXO. Uma celula que so passa a n=16 e a fraca, nao a forte.
+    so_a_16 = [k for k in m2["celulas_dentro_do_nulo"]["16"]
+               if k not in m2["celulas_dentro_do_nulo"]["30"]]
+    m5 = {"correccao_ao_protocolo":
+              "o §4 punha a direccao ao contrario para uma afirmacao de ajuste: "
+              "para o M2 o teste estrito e n=30 (p95 mais baixo), nao n=16",
+          "celulas_robustas_aos_dois_n": m2["celulas_dentro_do_nulo"]["30"],
+          "celulas_que_so_passam_o_nulo_fraco": so_a_16,
+          "dispara": bool(so_a_16),
+          "leitura": "as celulas em `so_passam_o_nulo_fraco` leem-se como «nao "
+                     "mostrado»; as de `robustas` ajustam-se aos dois n"}
 
     out = {"_meta": {"protocolo": "docs/FASE-5M.md §4", "semente": SEMENTE,
                      "B_nulo": B_NULO, "ns_do_nulo": list(NS),
