@@ -1,0 +1,368 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5Q.md §2",
+  "aviso": "sem o grupo, o modelo nem a origem."
+ },
+ "amostras": [
+  {
+   "id": "Q01",
+   "voz": "reis",
+   "texto": "Aquilo que não tens.\nQue vale o César que serias? Goza\nBastar-te o pouco que és.\nMelhor te acolhe a vil choupana dada\nQue o palácio devido."
+  },
+  {
+   "id": "Q02",
+   "voz": "ortonimo",
+   "texto": "Quanta, quanta solidão!\nAquela alma, que vazia,\nQue sinto inútil e fria\nDentro do meu coração!\n\nQue angústia desesperada!\nQue mágoa que sabe a fim!\nSe a nau foi abandonada,\nE o cego caiu na estrada —\nDeixai-os, que é tudo assim.\n\nSem sossego, sem sossego,\nNenhum momento de meu\nOnde for que a alma emprego —\nNa estrada morreu o cego\nA nau desapareceu."
+  },
+  {
+   "id": "Q03",
+   "voz": "reis",
+   "texto": "Na solidão do meu jardim,\nUm riacho pequeno murmura,\nSem alguém para lhe ouvir,\nNinguém a quem ele seja querido.\nE eu sinto-me livre e pobre,\nDe cuidados, de ambições;\nComo o riacho que nasce ali,\nFrio e límpido, sem esperança."
+  },
+  {
+   "id": "Q04",
+   "voz": "reis",
+   "texto": "Via sem rumo, destino igual.\n\nNas horas que passam, no caminho\nQue não sabe seu fim.\nO mesmo vazio em quem busca\nE quem aceita ser.\n\nSomos vento, aí é constante,\nMortais por definição.\nPara onde quer que o vento\nNos leve ou se encerre."
+  },
+  {
+   "id": "Q05",
+   "voz": "campos",
+   "texto": "Fixo no tédio do dia que passa permanentemente\nMoro na vigília involuntária como um fecho de porta\nQue não fecha coisa nenhuma.\nMeu coração involuntário, impulsivo,\nNaufraga a esfinges indigentes\nNas consequências e fins, [acordando?] no [além?]..."
+  },
+  {
+   "id": "Q06",
+   "voz": "reis",
+   "texto": "Sem lhes pedir mais nada,\nantes colhendo\nas flores vivas e sem nome,\nque se murchem na floridez.\n\nTempo há de ser murchas,\nmas não agora.\nEstender-me-ei num suspiro\ne voar-te-ei com a aurora.\n\nFlor, breve fruto da luz,\nviva neste breve amanhã.\nO amanhã é para os que esperam,\nnão para os que desejam."
+  },
+  {
+   "id": "Q07",
+   "voz": "ortonimo",
+   "texto": "Não existe palavra que se aplique ao mistério\nQue está na alma do que a alma não entende\nÉ um silêncio de palavras e um olhar vazio\nUm sussurro sem som, um murmúrio sem eco\nO que é dito não diz nada, o que é ouvido\nNão é ouvido nem por si nem pelos outros\nE no meio desse silêncio, esse vazio,\nPerguntam-se em mim perguntas sem resposta."
+  },
+  {
+   "id": "Q08",
+   "voz": "campos",
+   "texto": "Sou-lhe alheio à alegria, mas não alheio a que a tenha\nQuero que sejam alegres à maneira deles.\nSe o fossem à minha seriam tristes.\nNão pretendo ser como eles, nem que eles sejam como eu.\nCada um no seu lugar e com a alegria dele\nCada um no seu ponto de espírito e faltando a língua dele.\nOuço a sua alegria, amo-a, não participo não a posso ter."
+  },
+  {
+   "id": "Q09",
+   "voz": "ortonimo",
+   "texto": "Sumiu-se, o velho povo da terra antiga,\ncom as vidas arrancadas ao desalinho do mar.\n\nNenhuma alma mais sobre a costa se estende,\nnem uma sombra sequer dos que de lá partiram.\nOs olhos do mundo não veem a sua sorte,\nnem os ventos do Norte trazem o seu rumor.\n\nÉ a grande maré da vida que os arrebata,\ne os leva para além do infinito horizonte.\nDeixaram atrás, ao lado da praia nua,\num silêncio de cegura e um vazio sem fim.\n\nE tu, velho mar, com teus cantos frios,\ncantas o regresso às águas frias e profundas\ndos que partiram sem volta nem lembrança.\nCantas o que não se pode dizer da alma,\no silêncio de quem morre longe do lar.\n\nMas a tua voz, o som infindo do teu canto,\nnão alcan"
+  },
+  {
+   "id": "Q10",
+   "voz": "reis",
+   "texto": "És mais uma flor que eu não sei se colherei a tempo,\nMas que, até ao momento em que as folhas amarelam,\nPode ser de si mesma e não daquele que a admira.\nSó não me magoais se também não me querdes.\n\nNão pedir nada é uma coisa estranha, porque\nEm verdade a perda do objeto amado,\nO desaparecimento daquilo que se almejava,\nTalvez seja o que mais nos doía, mas talvez também\nFosse um grande consolo."
+  },
+  {
+   "id": "Q11",
+   "voz": "ortonimo",
+   "texto": "Sobre o pano, o copo estreito\nDeixa trincas do que bebeu.\nA mão partiu, sem se arrepender,\nO tempo da reunião.\n\nNa cadeira, sobretudo vazio,\nO fio das palavras passadas.\nNão toques e olhares perdidos\nJá não encontram quem guardasse."
+  },
+  {
+   "id": "Q12",
+   "voz": "reis",
+   "texto": "Sereno e distante o destino nos espera  \nO único caminho  \nO único natural de viver...\n\nMeninos solitários que mal reconhecem  \nA face da morte  \nCaminham na penumbra cega  \nSem norte ou guia...\n\nNada nos garante  \nNem amanhã nem ontem\nSomos apenas sombra  \nQue desfaz a noite...\n\nPois é a lei do ser  \nSer sem saber  \nÉ viver sem esperança  \nÉ morrer ao nascer."
+  },
+  {
+   "id": "Q13",
+   "voz": "ortonimo",
+   "texto": "Há um sussurro nas noites frias,\nQue murmura palavras de luz e sombra,\nÉ haver essa voz muda, essa respiração\nQue se mistura ao vento que não vê.\n\nÉ uma dança entre o visível e invisível,\nUm farol acesse sem morada,\nÉ um eco na desolação da solidão,\nQue ressoa em cada esquina, em cada ângulo.\n\nNão há mais que esse murmúrio,\nNem ao norte, nem ao sul, nem abaixo do mar,\nÉ o sussurro que nos persegue,\nÉ a promessa de algo além do viver."
+  },
+  {
+   "id": "Q14",
+   "voz": "reis",
+   "texto": "Não porque os deuses findaram, alva Lídia, choro...\nMas porque nas bocas de hoje os nomes sobrevivem\nMortos apenas, como nomes em pedras sepulcrais.\nPor isso, Lídia, lamento\nQue Vénus em bocas cristãs seja uma palavra dita,\nQue Apolo seja um nome que usam quantos\nSequentes de Cristo — e a crença lúcida\nNos deuses puramente deuses,\nTenha passado e ficado, cinza do que era fogo,\nLama do que era água reflectindo as árvores,\nTronco morto do que dava fruto e florescia.\nMas se choro, não creio\nMenos que ainda existo, como existem os deuses."
+  },
+  {
+   "id": "Q15",
+   "voz": "reis",
+   "texto": "Te mudarão em outro.\nPara quê pois em seres te empenhares\nO que não serás tu?\nTeu é o que és, teu o que tens, de quem\nE o que outro tiveres?"
+  },
+  {
+   "id": "Q16",
+   "voz": "reis",
+   "texto": "Na bruma da tarde que se adensa a boca  \nO sabor do vinho e da liberdade  \nQue amanhã já será outono ou primavera\n\nAqui as sombras não medem o tempo nem dão  \nPrazos aos desejos de quem bebe em vão  \nSomos servos de um destino sem juiz  \nMas a taça, uma promessa que se faz presente\n\nDói-me recordar o vazio da noite  \nE o fim que cada copo anuncia de súbito  \nHoje, quais heróis do vinho e das horas  \nEstende-se a festa, antes que a escuridão nos tome"
+  },
+  {
+   "id": "Q17",
+   "voz": "ortonimo",
+   "texto": "Mas não tenho culpa enfim\nDe que em mim não correspondo\nAo outro que amaste em mim.\n\nCada um é muita gente.\nPara mim sou quem me penso,\nPara outros — cada um sente\nO que julga, e é um erro imenso.\n\nAh, deixem-me sossegar\nNão me sonhem nem me outrem.\nSe eu não me quero encontrar,\nQuererei que outros me encontrem?"
+  },
+  {
+   "id": "Q18",
+   "voz": "reis",
+   "texto": "O mar jaz; gemem em segredo os ventos\nEm Éolo cativos;\nSó com as pontas do tridente as vastas\nÁguas franze Neptuno;\nE a praia é alva e cheia de pequenos\nBrilhos sob o sol claro.\nInutilmente parecemos grandes.\nNada, no alheio mundo,\nNossa vista grandeza reconhece\nOu com razão nos serve.\nSe aqui de um manso mar meu fundo indício\nTrês ondas o apagam,\nQue me fará o mar que na atra praia\nEcoa de Saturno?"
+  },
+  {
+   "id": "Q19",
+   "voz": "ortonimo",
+   "texto": "Mar e saudade que não volta\n\nDeste, povo, à miragem vasta,\nO navio partiu, misterioso rasto;\nNos olhos, o vazio da praia.\nSombra da noite que nos deixou.\n\nÓ mar, espelho do que se perdeu,\nQue as ondas de areia carregas;\nSossega-te, alma inquietude!\n\nNão te apanha, nem te dá\nA pátria que ao navio fez requefú.\nÉ o silêncio do navio vazio."
+  },
+  {
+   "id": "Q20",
+   "voz": "ortonimo",
+   "texto": "Na escuridão, um olhar escasso\nDá forma a uma face distante,\nE eu sinto-me em outra parte\nComo quem se vê em outro retrato.\nMas quando a imagem começa\nA definir-se, e a voz deixa\nDe ser um rumor no fundo,\nEu sei que sou outro e não tu."
+  },
+  {
+   "id": "Q21",
+   "voz": "ortonimo",
+   "texto": "Tudo em mim é teatro,\nCenas desenrolam-se, eu a actuar.\nPalavras são palavras,\nA vida, um espectáculo arduo.\n\nDias passam como fios\nNa trama da história,\nNo teclado do vento\nTeclas sem sofrerem dor.\n\nSonhos voam, mas o chão\nÉ de pedra e silencio.\nAqui, eu sou apenas\nUma sombra que desliza.\n\nSinto, mas não sei se\nO que sinto é só mim.\nTudo ao redor disfarça,\nE no fim, quem é real?"
+  },
+  {
+   "id": "Q22",
+   "voz": "reis",
+   "texto": "Sentar-me à beira do rio,  \nsilenciosa, à espera do que vai.  \nNão busco o que permaneça;  \nvivo o que se vê passando em transe.  \n\nNas águas, a sombra d’água,  \nreflecte um céu que se move.  \nÉs tu quem fica ou que se foi?  \nEi-lo que não se pode manter.  \n\nAqui, entre o amanhecer e o crepúsculo,  \nno abraço dos dois instantes,  \nvem a nuvem, vai o sol,  \ne no meu olhar, o rio passa sem mais."
+  },
+  {
+   "id": "Q23",
+   "voz": "campos",
+   "texto": "Grande Libertador, volto submisso a ti.\n\nSem dúvida teve um fim a minha personalidade.\nSem dúvida porque se exprimiu, quis dizer qualquer coisa\nMas hoje, olhando pra trás, só uma ânsia me fica —\nNão ter tido a tua calma superior a ti-próprio,\nA tua libertação constelada de Noite Infinita.\n\nNão tive talvez missão alguma na terra,"
+  },
+  {
+   "id": "Q24",
+   "voz": "ortonimo",
+   "texto": "Nem eu, nem vocês, nem a minha sombra,\nSomos mais do que uma imagem no mar.\nQuatro ondas movem-se na superfície plana,\nMas embaixo da água há um silêncio imenso e branco.\n\nA vida é uma página escrita à mão,\nCom traços que se confundem no entrecruzar\nDe duas linhas distintas, que ninguém sabe\nOnde começam a se bifurcar ou terminar.\n\nHá em mim alguém que quer o impossível,\nQue fala e não é ouvido. Há quem esteja escondido\nNo canto da casa e sorria ao pensar nos outros.\nHá também quem esteja ausente, mas presente.\n\nSinto-me sem raízes: uma folha a arder\nEm meio a um jardim de estanques de água fria.\nSou a sombra que se move quando não há ninguém\nPara ver ou sentir o movimento da sua pass"
+  },
+  {
+   "id": "Q25",
+   "voz": "ortonimo",
+   "texto": "O céu, azul de luz quieta,\nAs ondas brandas a quebrar,\nNa praia lúcida e completa —\nPontos de dedos a brincar.\n\nNo piano anónimo da praia\nTocam nenhuma melodia\nDe cujo ritmo por fim saia\nTodo o sentido deste dia.\n\nQue bom, se isto satisfizesse!\nQue certo, se eu pudesse crer\nQue esse mar e essas ondas e esse\nCéu têm vida e têm ser."
+  },
+  {
+   "id": "Q26",
+   "voz": "campos",
+   "texto": "e na sua voragem sinto-me férvido.\nMáquinas, ventos que não são do mar alto,\nar imprensado a esforçar-se para respirar.\n\nE eu, com alma em revolta, rebelde contra as regras,\namo a cacofonia que me perturba e alivia.\nEngenheiro das palavras, desafio ao mundo,\nnuma dança de versos sem canto fixo.\n\nNas mãos da razão, o coração rebela-se,\nem farrapos de meditação, sangue a correr.\nMas a febre aumenta, e no espírito brota\numa esperança que se ergue, desafiadora.\n\nMáquinas, amais-vos com as minhas mãos,\nna agonia de uma poesia em fuga.\nE eu, que sou tanto mais, quando menos me penso,\namo-vos na vossa loucura"
+  },
+  {
+   "id": "Q27",
+   "voz": "ortonimo",
+   "texto": "Em jardim desolado,\nflores sem cheirar.\nCriança que não era,\nluz que se fez sombra.\n\nPé nu sobre erva,\nlágrimas que não voam.\nOnde a vida entrou,\nmas foi-se o querer.\n\nSussurro de vela,\na arder sem brilhar.\nE eu, que sou agora,\npenumbra do outrora."
+  },
+  {
+   "id": "Q28",
+   "voz": "ortonimo",
+   "texto": "Leve é a brisa que suspira,\nQue eu sussurro ao vazio,\nSem saber por onde dirija,\nO passo que há de levar-me.\n\nNas frestas do horizonte,\nSe me aventuro e saio,\nA incerteza se acalenta\nNum calor inesperado."
+  },
+  {
+   "id": "Q29",
+   "voz": "ortonimo",
+   "texto": "Dentro do meu abismo,\num deserto sem estrelas,\nnão há nada além da falta\nde um toque que não há.\n\nQuando a palavra sai de mim,\nela é uma estrada perdida.\nO que eu pensava, está a ser,\ne eu vou-me embora."
+  },
+  {
+   "id": "Q30",
+   "voz": "campos",
+   "texto": "Há mais de meia hora\nQue estou sentado à secretária\nCom o único intuito\nDe olhar para ela.\n(Estes versos estão fora do meu ritmo.\nEu também estou fora do meu ritmo).\nTinteiro grande à frente.\nCanetas com aparos novos à frente.\nMais para cá papel muito limpo.\nAo lado esquerdo um volume da «Enciclopédia Britânica».\nAo lado direito —\nAh, ao lado direito!\nA faca de papel com que ontem\nNão tive paciência para abrir completamente\nO livro que me interessava e não lerei.\n\nQuem pudesse sintonizar tudo isto!"
+  },
+  {
+   "id": "Q31",
+   "voz": "reis",
+   "texto": "Regular de Saturno,\nNem magnos deuses implorados volvem\nQuem foi à luz que vemos.\nMoramos, hóspedes na vida, e usamos\nUm tempo do discurso,\nUm breve amor, um sorriso breve, e um dia\nSaudoso de todos."
+  },
+  {
+   "id": "Q32",
+   "voz": "reis",
+   "texto": "Breve é a flor, Lídia, que se abre.\nE cedo no voo,\n—  Ora à luz beijando a flor,\nOra, por ela, oiteiro,\nConsiste em nos atrevermos,\nAntes que as estrelas, morte, nos tirem."
+  },
+  {
+   "id": "Q33",
+   "voz": "ortonimo",
+   "texto": "Em mim mais do que uma sombra se insinua\nE nenhuma é a verdadeira\nMúltipla infância, múltiplo eu\nQue não consigo apurar\n\nVivo em pensamentos e vivos em realidades\nAmbas desconexas e indiferentes\nUm ser ou vários?\nEm mim tudo se mistura, desmancha-se\nNenhuma alma fixa, nenhuma essência\nSombras que dançam nas frestas da mente"
+  },
+  {
+   "id": "Q34",
+   "voz": "campos",
+   "texto": "A cidade estende-se, um imenso túmulo,\nAs multidões andam, um eterno funeral.\nOs autos a correrem, uma ligeira exaltação,\nO sol a brilhar, um vão espectáculo.\n\nCada pedra me dói, cada ruído é\nUma agonia que não acaba de morrer.\nAs pessoas que passam, máscaras sem rosto,\nUm sorriso é uma mentira, uma amizade é um vazio.\n\nO silêncio é o meu único refúgio,\nMas até ele está contaminado pela vida.\nE assim estou preso em este labirinto,\nUm perdedor que não encontra a saída.\n\nEu vivo num estado de vertigem constante,\nEntre euforia e náusea, sem descanso.\nA cidade é um túmulo, mas também é um espectáculo,\nE eu sou o espectador, condenado a assisti-lo."
+  },
+  {
+   "id": "Q35",
+   "voz": "campos",
+   "texto": "ODE MARCIAL\n\nClarins na noite,\nClarins na noite,\nClarins subitamente distintos na noite...\n\n(É de cavalgada, de cavalgada, de cavalgada o ruído longínquo?)\n\nO que é [que] estremece de diverso pela erva e nas almas?\nO que é que se vai alterar e já lá longe se altera —\nNa distância, no futuro, na angústia — não se sabe onde — ?\n\nClarins na noite,\nClarins... na noite,\nClari-i-i-i-ins.....\n\nÉ de cavalgada,\nÉ de cavalgada, de cavalgada,\nÉ de cavalgada, de cavalgada, de cavalgada\nO ruído, ruído, ruído agora já nítido.\n\nVejo-as no coração e no horror que há em mim:\nValquírias, bruxas, amazonas do assombro...\nSão um grande sonho — mistério de sombras pegadas que mexe na noite.\nVêm em cavalgada, e a terra estremece duas vezes,\nE o coração como a terra estremece duas vezes também.\n\nVêm do fundo do mundo,\nVêm do abismo das coisas,\nVêm de onde partem as leis que governam tudo;\nVêm de onde a injustiça derrama-se sobre os seres,\nVêm de onde se vê que é inútil amar e querer,\nE só a guerra e o mal são o dentro e fora do mundo.\n\nHela-hô-hôôô...helahô-hôôôôô......."
+  },
+  {
+   "id": "Q36",
+   "voz": "reis",
+   "texto": "sua e pequena, sem um deslizar\nsuficiente para o mundo se curvar.\nNada é mais que uma nuvem, um sopro,\num movimento errático e vazio.\nQue importa saber de onde viemos\nou para onde vamos? A vida não tem rota.\n\nUm rio escuro e imprevisível\ndesce a encosta, vai-se embora\nlevando consigo o que era nosso.\nNada é nosso: tudo passa a ser outro,\ntudo se torna um vazio inútil.\nOnde está o sentido de uma vida assim?\nEm nada, num nada."
+  },
+  {
+   "id": "Q37",
+   "voz": "ortonimo",
+   "texto": "O Suspiro do mundo:\n\nVida, morte,\nRiso, pranto\nÉ o manto\nQue me cobre.\nNatureza,\nAmor, beleza,\nTudo quanto\nA alma descobre.\n\nO Mistério\nDeste mundo\nTeu profundo\nOlhar leu;\nD'além dele —\nCerra a alma\nDe pavor! —\nVenho eu.\nNada, nada\nJá acalma\nTua dor.\nTu bem sabes\nSer minha voz\nMais atroz\nDe mudo horror\nNo que não diz,\nE só tu sentes\nE compreendes.\nCerra, infeliz\nCerra a (tua) alma\nAo meu pavor!\n\n(Fausto, com os olhos fechados, encolhido na cadeira, treme como que dum grande frio.)"
+  },
+  {
+   "id": "Q38",
+   "voz": "ortonimo",
+   "texto": "Pouco sinto a saudade\nDe tudo o que é meu e não posso ter;\nTudo o que temos de irretratável\nSe perde no vão da experiência.\n\nA vida é uma página em branco\nQue os dias escrevem sem parar,\nE nós somos figuras desenhadas,\nQue a história vai cobrindo a folha.\n\nNo entanto, há um peso que carrego.\nÉ o de ter uma alma que não é minha,\nE ser um habitante de dois mundos,\nCom um olhar para além do presente."
+  },
+  {
+   "id": "Q39",
+   "voz": "campos",
+   "texto": "náusea de viajar,\ne ao mesmo tempo necessidade de partir.\n\nvagar pelas ruas sem rumo,\npés que hesitam e se agarram à terra,\nmas almas que fogem, que querem voar.\n\nhorizontes a desenhar-se num fio tênue,\nolhares que buscam a liberdade nas nuvens,\nmas medos que prendem os pés na mesma pedra.\n\ncidades que se espalham como espinhos,\ntentação de tocar e ser ferido pelo acaso,\nsabores da memória que se desvanecem no vazio.\n\ntarde que cai, trazendo consigo a promessa\nde um amanhã que pode não chegar,\nmas o sol que se enterra, levando com ele o correr do tempo.\n\no mar que se estende aos limites da visão,\nmurmúrios que se confundem na brisa,\nmas ondas que partem para distâncias incertas."
+  },
+  {
+   "id": "Q40",
+   "voz": "campos",
+   "texto": "Fios de luz na escuridão quebra,\nBrisa inquieta o vidro sacode,\nSonhos adormecem sob a janela.\n\nO tráfego um canto enche,\nRuídos estranhos, uma dança cheia.\nAmanhecer nos murmúrios cresce,\nMas ainda sonho em que me prende.\n\nCafé se vende na esquina, o aroma estende-se,\nPássaros de metálica alegria voam,\nSementes da noite agora abrem,\nSeus corolários ao sol são levados.\n\nDeserto a cidade não é já,\nA alma adormecida ouve e espanta-se,\nCom o ritmo da vida que insiste,\nÉs acordado, desliza a noite para a luz."
+  },
+  {
+   "id": "Q41",
+   "voz": "reis",
+   "texto": "Nas sombras da tarde inquieta\nEstendemo-nos, sem medo,\nSob as lágrimas do horizonte,\nQue nos dão leve beijo.\n\nSem olhar para cima, Lídia,\nPermitamos que a tristeza\nDilua o amanhã e esteja\nNa calma de hoje suficiente.\n\nNem os céus deudivos nos vêem,\nEis o alívio dos corações.\nFazemos do silêncio um gesto,\nDo esquecimento uma homenagem.\n\nAssim, entre as folhas que se agitam\nNa brisa da tarde emprestada,\nPermitamos que a sombra passe\nE a luz nos conte histórias."
+  },
+  {
+   "id": "Q42",
+   "voz": "reis",
+   "texto": "O que busca a sombra da verdade,\nEla mesma se lhe apresenta.\nSua face sorridente ao olhar,\nConhecida, nem tão diferente.\n\nNunca é agora, e sempre é de mais\nEsta hora que eu tenho."
+  },
+  {
+   "id": "Q43",
+   "voz": "ortonimo",
+   "texto": "O rosário da vontade,\nRezei-o trocado e a esmo.\nSe vens dizer-me a verdade,\nVê lá bem se é isso mesmo."
+  },
+  {
+   "id": "Q44",
+   "voz": "ortonimo",
+   "texto": "Tenho-te a perder no vazio,\nE tu me deixas sem rumo.\n\nUm olhar que me perdeu nos anos\nVive em mim, mas não é meu.\n\nA infância que tive e não tenho\nSussurra segredos no silêncio\n\nSe eu for lá buscar, talvez encontre\nO menino que eu fui, ou apenas um rastro."
+  },
+  {
+   "id": "Q45",
+   "voz": "campos",
+   "texto": "Esguichos de cidade, esguichos de estação,\ne as máquinas que engolem, que atiram, que lançam para fora,\nnós que entra e sai, como se saísse de mim,\ncomo se eu desaparecesse com cada passageiro.\nNaufragar nos arranha-céus, naufragar nas linhas,\nou naufragar no chão, entre as multidões,\nque me fazem perder a memória dos lugares onde estive,\ne não sei qual é o lugar em que estou.\n\nA cidade esquiva-se-me, como um sussurro,\numa ponta de cabelo que se desloca,\num som de pneu que muda de direcção.\nE eu perco a identidade dos meus pés no asfalto.\nAs máquinas e as multidões formam um único corpo,\nque não sei qual é a minha parte,\nse o coração, se os pulmões ou a alma.\n\nOs trinta dias"
+  },
+  {
+   "id": "Q46",
+   "voz": "campos",
+   "texto": "A manhã da entrada, uma barca desliza e enche-me\nde ânsia de ir para longe, como se a alma fugisse,\nse estende, sem rumo, um mar de luz, que me arrebata.\nSinto o peso das ondas, do sal e da liberdade.\nEntre as margens dos portos, a terra se perde\nnum abismo de horizontes, onde a memória se esconde.\nA brisa traz rumor de profundezas, um suspiro\ndo mar que me chama, sem rumo, sem destino."
+  },
+  {
+   "id": "Q47",
+   "voz": "campos",
+   "texto": "Cortei relações com o sol e as estrelas, pus ponto no mundo.\nLevei a mochila das coisas que sei para o lado e p'ro fundo\nFiz a viagem, comprei o inútil, achei o incerto,\nE o meu coração é o mesmo que fui, um céu e um deserto\nFalhei no que fui, falhei no que quis, falhei no que soube.\nNão tenho já alma que a luz me desperte ou a treva me roube,\nNão sou senão náusea, não sou senão cisma, não sou senão ânsia\nSou uma coisa que fica a uma grande distância\nE vou, só porque o meu ser é cómodo e profundo,\nColado como um escarro a uma das rodas do mundo."
+  },
+  {
+   "id": "Q48",
+   "voz": "campos",
+   "texto": "A janela que escancara o céu\nSobranceira, espartilho de luz\n\nE as ruas, braços longos de concreto\nEstendem-se, cintilam ao sol\n\nMas a saudade que o sol não apaga\nCresce, enrijece na pele\n\nMemórias em frascos vidrados\nQue racham com cada passo velho\n\nO vento traz murmúrios da infância perdida\nCanta no vazio das calçadas\n\nE a dor, gato selvagem nos braços\nDorme e geme sem acordar"
+  },
+  {
+   "id": "Q49",
+   "voz": "reis",
+   "texto": "Sê dono de ti, sem esconder  \nA face ao vento que se leva\n\nNa mão ferida, aperta  \nO mundo como quem anuncia  \nO outono a um fruto maduro  \n\nSentindo nele a pele dura,  \nOutra vida que não a tua  \n\nMantém-te no vazio  \nDe olhos abertos, sem cair  \n\nNão seja pedaço mais  \nDo que o teu ser erguido  \n\nTudo else é pobreza  \nEm ti flui um mar de livreza"
+  },
+  {
+   "id": "Q50",
+   "voz": "campos",
+   "texto": "Ah, ser tudo nos crimes! ser todas as máquinas\nQue rugem no inferno das fábricas!\nSer todas as multidões que entram pelas portas dos cemitérios da alma,\nE saem pelas janelas do amor estendido!\n\nSer o rufar dos bondes, os berros dos peixeiros,\nOs gemidos das máquinas, as gargalhadas dos malvados!\nSer o vento que uiva ao lado de uma mulher que chorou!\nSer a onda que se arroja contra um rochedo para não mais existir!\n\nSer tudo na esterilidade da terra que racha e cava!\nSer todos os ossos que jazem no lugar das grandes vitórias,\nE as sombras que nasceram deles, desenhando-se no chão das nossas derrotas!\nSer a voz que grita para o vazio: «Não! Não! Não!»\n\n(Eu sei que não é. Mas vou continuar sendo.)"
+  },
+  {
+   "id": "Q51",
+   "voz": "campos",
+   "texto": "A embarcação que amanece na mira\n\nVê-se a lancha entrar no porto,\nas ondas que se agitam em espuma,\nnarrando ao sol nascente.\nUm nó em meu peito, alvoroço em mi,\n\nquem sou eu para a deixar partir?\nA brisa fresca já se sente em mim,\ncujos sonhos viajantes não abdicam.\n\nNo convés, o vento desdobra-se,\nnos amplos pátios do navio,\na hélice batendo na água,\nuniformes azuis erguem-se aos troncos.\n\nE o mar alto ressona em múltiplas notas,\nnão é a nossa vida a que pertenço eu.\nEstende-me um olhar, tua presença me apossa,\nmas ainda não, vou-te seguir."
+  },
+  {
+   "id": "Q52",
+   "voz": "ortonimo",
+   "texto": "Dizem que sou mistério,\nQue nebulosa a minha mão.\nOuço o vento e penso,\nE ao verbo voo a alavanca.\n\nA luz muda, as sombras desenham\nNovos contornos na alma.\nDe cada instante, cada poema,\nÉ um rastro que não me segura.\n\nSei que sinto, mas se esvanece\nNo papel que o fixa.\nEis o enigma: em mim tudo vive,\nNoutros todos os dias resplandece."
+  },
+  {
+   "id": "Q53",
+   "voz": "campos",
+   "texto": "De escrever um poema extenso!\nHá anos...\n\nPerdi a virtude do desenvolvimento rítmico\nEm que a ideia e a forma,\nNuma unidade de corpo com alma,\nUnanimemente se moviam...\nPerdi tudo que me fazia consciente\nDe uma certeza qualquer no meu ser...\nHoje o que me resta?\nO sol que está sem que eu o chamasse...\nO dia que me não custou esforço...\nUma brisa, com a festa de uma brisa\nQue me dão uma consciência do ar...\nE o egoísmo doméstico de não querer mais nada\n\nMas, ah!, minhaOde Triunfal,\nO teu movimento rectilíneo!\nAh, minhaOde Marítima\n\nA tua estrutura geral em estrofe antiestrofe e epodo!\nE os meus  planos, então, os meus planos —\nEsses é que eram as grandes odes.\nE aquela aúltima a suprema a impossível!"
+  },
+  {
+   "id": "Q54",
+   "voz": "campos",
+   "texto": "Cidade do infindo,\n\ncada alma é uma praça vazia\nonde ninguém espera\nmas onde a multidão se encontra.\n\nNuma manhã de chuva sem fim,\nas árvores tremem e dão-nos\num suspiro de verde.\n\nAs máquinas são como nós,\ndesorientadas, perdidas.\nO seu rugir é um grito vazio.\n\nE eu que sinto não ser alguém?\nSó uma onda no oceano,\nque pode ir em direcção a qualquer lugar.\n\nMas carrego tudo o que poderia ter sido\num passado de silêncio e solidão."
+  },
+  {
+   "id": "Q55",
+   "voz": "reis",
+   "texto": "Senhor do teu corpo e da tua alma,\nnão tens outro senhor que te domine;\na liberdade é um jugo sem peso,\ne a vossa escravidão é uma farsa\nque se faz de amor e de desejo,\nmas não te esqueças de ser quem és,\nporque no mundo, o teu nome é nada.\n\nO tempo é um rio que corremos com os peixes,\ne a vida é um sonho da qual acordamos tarde;\no vento que sussurra nos ouvidos\né uma voz que fala sem parar de si.\nA luz que brilha no horizonte é o fim,\na sombra que se estende na praia é o início.\n\nNão te deixes levar pelo capricho,\npelo amor, pelo ódio, pela inveja;\nsê sempre tu, sê sempre livre,\nnão te sujeites a nada e a ninguém.\nA tua alma é um livro que ninguém l"
+  },
+  {
+   "id": "Q56",
+   "voz": "campos",
+   "texto": "Outro é um deus, e as crianças do mundo não lhe cospem na cara.\nQueria ser uma pedra, não aspiro a mais, quero\nSer uma coisa que não possa ter vergonha nem desespero,\nFui rei nos meus sonhos, mas nem sonhos houve, além de mim\nE a última palavra que se escreve nos livros é a palavra Fim."
+  },
+  {
+   "id": "Q57",
+   "voz": "reis",
+   "texto": "Fazia-se luz entre nuvens escuras.\nE as águas dos rios corriam mais depressa.\n\nEstavas tu para lá, ou eu?\n\nTinha-me de regressar ao mundo\nonde a vida não é senão um instante\ne o silêncio do fim é tão grande."
+  },
+  {
+   "id": "Q58",
+   "voz": "ortonimo",
+   "texto": "No jantar de cinzento que está acabado\nEstão as chávenas e os pratos que já não são usados.\nA mesa, que não é uma mesa agora,\nÉ um lugar onde sombras se encontram a chorar.\n\nO silêncio que está nos olhos de todos\nDiz-me que não é mais como antes.\nOs sorrisos que estão entre eles e eu\nSão a despedida dos olhares, que agora se escondem.\n\nNesse espaço vazio onde estamos sentados\nA ausência é um peso que se sente.\nMas a vida segue, sem sentir o peso,\nE nos leva para longe de tudo o que somos."
+  },
+  {
+   "id": "Q59",
+   "voz": "campos",
+   "texto": "Quereria ser todas as almas juntas\n\nNo instante da fuga, na luta, no gesto perdido\n\nSer cada rosto, cada mão estendida\n\nCada coração martelando\n\nSer a lua que abraça, o vazio que sugere\n\nSer o primeiro e o último suspiro\n\nO sorriso traidor, a dor que se alivia\n\nA voz inaudível, o canto que se liberta\n\nSer o amor à primeira vista e ao olhar perdido\n\nSer cada sentimento, cada lembrança que se distingue\n\nÉs eu, és tu, somos nós, somos eles\n\nNo encontro do primeiro beijo\n\nNa fuga do último olhar\n\nSomos todos os possíveis, todos os impossíveis\n\nEm um só instante, em uma só respiração"
+  },
+  {
+   "id": "Q60",
+   "voz": "campos",
+   "texto": "Tudo me atinge ao mesmo tempo, é tudo,\nRuído ensurdecedor de sirenes de ambulâncias,\nBarulho do tráfego que se multiplica,\nCorrentes elétricas que latejam em cada fio.\nOuve-se o barulho da multidão,\nChama-me a atenção com uma sombra,\nTenta-me com um perfume de café,\nFaz-me desejar alguém.\n\nA cidade respira pesadamente, é uma fera\nQue não se detém e que não se calma,\nEstá sempre em movimento, está sempre louca.\nUm motor de automóvel ouve-se perto,\nUm grito, um choro, um lamento,\nAlguém desembarcou ao lado.\nEntão eu pergunto: quem é?\nMas a resposta é nenhuma.\n\nA cidade lateja em cada veia\nComo uma dor que me atinge no coração,\nUma dor aguda"
+  },
+  {
+   "id": "Q61",
+   "voz": "reis",
+   "texto": "Nada me falta, pois é suficiente a natureza.\nA água do rio bebe da terra,\ne eu não tenho sede que satisfaça\nnem tempos de esperança nem dias futuros.\nSinto-me bem, como se estivesse no meio\nda vida ou na sua margem.\n\n---\n\nNão é mal ser uma alma errante."
+  },
+  {
+   "id": "Q62",
+   "voz": "campos",
+   "texto": "Meu pulso é um relógio de repetição,\n\nas horas passam-me em minutos.\n\nUm minuto dura-me eternidade,\num segundo é minha eternidade\nque se desfaz.\n\nPoucos dias na vida dão uma ideia da\nmúltiplice velocidade dos dias.\nFui hoje às três horas da manhã ver a cidade,\nvila das multidões, onde as máquinas\ndesfazem e remontam o mundo.\nEram seis da manhã. A luz de uns postes elétricos\niluminava os teus corredores.\n\nNinguém me pedia nada. O vento do mar\ndepois de sair das minhas janelas, entrou-me no cérebro,\nfui eu, a máquina, que eu era.\n\nEra uma máquina de dourar-se, de cobrir-me\nde ouro em poesia.\nFui. Foi. Foram. Estão. Vão. Ve"
+  },
+  {
+   "id": "Q63",
+   "voz": "campos",
+   "texto": "sou a nenhuma,\ne carrego todos os potenciais.\n\nem cada célula um \"eu podia\"\nem cada voo uma queda esperada\n\nos olhos de quem não existe\nreflectem todas as cores da vida\n\nna silêncio o eco das vozes perdidas\nno vazio a densidade do que poderia ser\n\nsou a nenhuma,\ne com isso tudo."
+  },
+  {
+   "id": "Q64",
+   "voz": "campos",
+   "texto": "fumo e olho pela janela  \ne nada tem remédio\n\nenrolo os dias em círculos  \nas cinzas voam para lá fora  \no céu é um manto desbotado\n\nnem a chuva que o alivia  \nnem a luz que o endurece  \na cidade sonha e esquece\n\nas ruas murmúram pelas mãos  \nas casas suspiram por portões  \ne eu, no vento sem destino"
+  },
+  {
+   "id": "Q65",
+   "voz": "ortonimo",
+   "texto": "II\n\nNa sombra Cleópatra jaz morta.\nChove.\n\nEmbandeiraram o barco de maneira errada.\nChove sempre.\n\nPara que olhas tu a cidade longínqua?\nTua alma é a cidade longínqua.\nChove friamente.\n\nE quanto à mãe que embala ao colo um filho morto —\nTodos nós embalamos ao colo um filho morto.\nChove, chove.\n\nO sorriso triste que sobra a teus lábios cansados,\nVejo-o no gesto com que os teus dedos não deixam os teus anéis.\nPorque é que chove?"
+  },
+  {
+   "id": "Q66",
+   "voz": "reis",
+   "texto": "Ninguém nos pode furtar a um instante\nFuturo sem esperança\nE um passo que não dá destino\nNa ausência do tempo\nDeixem-nos ao menos beber.\nPorque não há de ser amanhã.\nA vida é um vaso. Destruí-lo.\n\nOnde o vinho corremos como a água,\nSempre novo, sem velhice,\nEm taças diversas,\nNós outros também somos diversos.\n\nQue se possa esquecer tudo,\nE que em cada momento\nDeixemos de ter alma.\nÉ bom beber até onde chega\nA nossa vista. De mais não sabemos.\n\nBebamos por isso, mortais,\nPois a vida é breve e o vinho é longo.\nNo rosto da noite, na luz do dia,\nO vinho não muda.\n\nNão é uma vida derramada\nSe bebermos todos os dias,\nMas em cada gole está um fim.\nComemoramos a vida."
+  },
+  {
+   "id": "Q67",
+   "voz": "ortonimo",
+   "texto": "Todos os dias que passam\nSem passares por aqui\nSão dias que me desgraçam\nPor me privarem de ti."
+  },
+  {
+   "id": "Q68",
+   "voz": "ortonimo",
+   "texto": "E é como a infância de outro. Já não sei\nSe o choro, se suponho só que o choro,\nSe o choro por supor que o chorarei.\n\nDas lágrimas sei eu... Essas são quentes\nNos olhos cheios de um olhar perdido...\nMas nisso tudo são-me indiferentes\nAs causas vagas deste mal sentido.\n\nE choro, choro, na sinceridade\nDe quem chora sentindo-se chorar\nMas se choro a mentir ou a verdade,\nContinuarei, chorando, a ignorar."
+  },
+  {
+   "id": "Q69",
+   "voz": "reis",
+   "texto": "O sol que canto acabará em noite.\nNão ignoro o que esqueço.\nCanto por esquecê-lo.\n\nPudesse eu suspender, inda que em sonho,\nO Apolíneo curso, e conhecer-me,\nInda que louco, gémeo\nDe uma hora imperecível!"
+  },
+  {
+   "id": "Q70",
+   "voz": "campos",
+   "texto": "Olhando fumando a cidade, em tudo quero acudir\nE ao invés de descansar é que estou na minha cura\nCada som é um eco de mim, cada forma é uma dor\nMas eu continuo sem mudar o rumo, contigo querida Cidade\nNão sei tu, mas a tua confusão me enche e seca e me afoga\n\nVêem-te nas multidões como vês-me na minha cela?\nAqui onde sinto-me livre estou aprisionado pelo teu movimento.\nEu também estou a pensar que não há solução\nSe me tocas, fico desorientado, a cidade é o meu refúgio\nE no entanto, por trás da janela, sei que lá fora estás\nE eu continuo sem mudar o rumo, contigo querida Cidade"
+  },
+  {
+   "id": "Q71",
+   "voz": "reis",
+   "texto": "Ter que ser, não o chores.\nSe toda a mole imensa\nDo mundo ser-te-á noite,\nAproveita este breve\nDia, e sem choro ou cura\nGoza-o, contente por viveres\nO pouco que te é dado."
+  },
+  {
+   "id": "Q72",
+   "voz": "reis",
+   "texto": "Lembro o teu sorriso pequeno, Leucothoe, e não sorrio para não chorar.\n\nVi-te como eras, Dyke, num sonho da meia-noite\nDe novo te amei, mas de outra maneira. Porém vi-te qual eras.\n\nAs árvores da floresta onde andámos sãs as mesmas, ou são outras.\nNós, Lydia, nem somos os mesmos nem outros, porque lembramos."
+  }
+ ]
+}
