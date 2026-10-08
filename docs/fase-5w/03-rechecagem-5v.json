@@ -1,0 +1,80 @@
+{
+ "_meta": {
+  "porque_existe": "verificar uma conclusao publicada da 5V com a chave de rima corrigida, achada ao testar o analisador desta fase e ANTES de os dados dela existirem",
+  "defeito": "a chave da 5V parte do penultimo GRUPO de vogais e o regex junta `ia`; logo havia->avia e servia->ervia, que nao casam. A correccao parte da penultima VOGAL-LETRA",
+  "conclusao": "as conclusoes da 5V nao mudam; as magnitudes melhoram"
+ },
+ "por_voz": {
+  "ortonimo": {
+   "persona_manda": "«metro regular e rima»",
+   "n_real": 1206,
+   "n_gerado": 60,
+   "chave_5v": {
+    "real": 0.7769,
+    "nulo_real": 0.2388,
+    "gerado": 0.2167,
+    "nulo_gerado": 0.2167
+   },
+   "chave_corrigida": {
+    "real": 0.8367,
+    "nulo_real": 0.3549,
+    "gerado": 0.3833,
+    "nulo_gerado": 0.3833
+   },
+   "gerado_acima_do_proprio_nulo_chave_corrigida": false,
+   "real_acima_do_proprio_nulo_chave_corrigida": true
+  },
+  "reis": {
+   "persona_manda": "«sem rima»",
+   "n_real": 251,
+   "n_gerado": 60,
+   "chave_5v": {
+    "real": 0.1992,
+    "nulo_real": 0.2072,
+    "gerado": 0.1667,
+    "nulo_gerado": 0.2333
+   },
+   "chave_corrigida": {
+    "real": 0.2709,
+    "nulo_real": 0.2709,
+    "gerado": 0.2333,
+    "nulo_gerado": 0.3667
+   },
+   "gerado_acima_do_proprio_nulo_chave_corrigida": false,
+   "real_acima_do_proprio_nulo_chave_corrigida": false
+  },
+  "campos": {
+   "persona_manda": "«irregular», anáfora",
+   "n_real": 320,
+   "n_gerado": 60,
+   "chave_5v": {
+    "real": 0.4594,
+    "nulo_real": 0.4094,
+    "gerado": 0.2,
+    "nulo_gerado": 0.3167
+   },
+   "chave_corrigida": {
+    "real": 0.5469,
+    "nulo_real": 0.5156,
+    "gerado": 0.3833,
+    "nulo_gerado": 0.55
+   },
+   "gerado_acima_do_proprio_nulo_chave_corrigida": false,
+   "real_acima_do_proprio_nulo_chave_corrigida": true
+  },
+  "caeiro": {
+   "persona_manda": "verso livre",
+   "n_real": 120,
+   "n_gerado": 0,
+   "chave_5v": {
+    "real": 0.1583,
+    "nulo_real": 0.2833
+   },
+   "chave_corrigida": {
+    "real": 0.1917,
+    "nulo_real": 0.35
+   },
+   "real_acima_do_proprio_nulo_chave_corrigida": false
+  }
+ }
+}
