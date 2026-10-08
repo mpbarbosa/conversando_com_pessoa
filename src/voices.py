@@ -29,7 +29,14 @@ from dataclasses import dataclass
 from .corpus.models import Lang, Voice
 
 #: Substituições lexicais PT-BR -> PT-PT, povoada com os casos **medidos** na
-#: Fase 0, não de memória. Usada na instrução e na guarda de saída.
+#: Fase 0, não de memória.
+#:
+#: **Usada só na guarda de saída** (`guard.brasileirismos` e
+#: `guard.corrigir_brasileirismos`, mais o aviso do `cli`). Esta linha dizia
+#: «usada na instrução e na guarda de saída» e a instrução **nunca** a recebeu:
+#: `grep INTERDICOES src/` dá `guard.py`, `cli.py` e a referência do
+#: `lexico.py`, e nada que vá ao `system_prompt`. Verificado pela Fase 5U, que
+#: precisava de saber exactamente o que a sua ablação removia.
 INTERDICOES: dict[str, str] = {
     "fumaça": "fumo",
     "grama": "erva",
