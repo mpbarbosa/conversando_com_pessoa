@@ -92,7 +92,7 @@ aparecem, não em **quantas**.
 """
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 from ..corpus.models import Chunk
 
@@ -114,7 +114,7 @@ N_RERANK = 8
 TRUNCAR_TOKENS = 120
 
 
-def padrao() -> "Reranker":
+def padrao() -> Reranker:
     """O reranker na configuração que a Fase 3B mediu e escolheu."""
     return Reranker(PADRAO, truncar_tokens=TRUNCAR_TOKENS)
 
@@ -132,7 +132,7 @@ class Reranker:
         if self.truncar_tokens is None:
             return texto
         if self._tok is None:
-            from ..tokens import _tokenizador, ENCODER
+            from ..tokens import ENCODER, _tokenizador
             self._tok = _tokenizador(ENCODER)
         ids = self._tok(texto, add_special_tokens=False).input_ids
         if len(ids) <= self.truncar_tokens:
@@ -145,6 +145,7 @@ class Reranker:
             return []
         pares = [(consulta, self._truncar(c.text)) for c in candidatos]
         pontos = self._ce.predict(pares, show_progress_bar=False)
-        ordenados = sorted(zip(candidatos, (float(p) for p in pontos)),
+        ordenados = sorted(zip(candidatos, (float(p) for p in pontos),
+                               strict=True),
                            key=lambda x: -x[1])
         return ordenados[:top_k] if top_k else ordenados

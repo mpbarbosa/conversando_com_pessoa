@@ -102,7 +102,8 @@ def _limpar_corpo(corpo: str, titulo: str) -> str:
 
 
 def parse_poem(caminho: str) -> Poem:
-    bruto = open(caminho, encoding="utf-8").read()
+    with open(caminho, encoding="utf-8") as f:
+        bruto = f.read()
     linhas = bruto.split("\n")
     if not linhas or not linhas[0].strip():
         raise ValueError(f"{caminho}: sem linha de autor")

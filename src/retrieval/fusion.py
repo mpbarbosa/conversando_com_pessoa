@@ -24,7 +24,7 @@ ajustar um parâmetro sem sobreajustar.
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Callable, Sequence
+from collections.abc import Callable, Sequence
 
 from ..corpus.models import Chunk
 
@@ -48,7 +48,7 @@ def rrf(listas: Sequence[Sequence[Chunk]], k: int = K,
 
     pontos: dict[str, float] = defaultdict(float)
     primeiro: dict[str, Chunk] = {}
-    for lista, peso in zip(listas, pesos):
+    for lista, peso in zip(listas, pesos, strict=True):
         vistos: set[str] = set()
         posicao = 0
         for c in lista:

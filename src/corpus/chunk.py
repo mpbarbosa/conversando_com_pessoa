@@ -26,7 +26,7 @@ mesmo objecto, de propósito.
 """
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 from .models import Chunk, Poem
 
@@ -47,7 +47,7 @@ def _partir_estrofe(estrofe: str, n_tokens: Callable[[str], int],
     grupos: list[list[str]] = []
     actual: list[str] = []
     for verso in versos:
-        candidato = actual + [verso]
+        candidato = [*actual, verso]
         if actual and n_tokens("\n".join(candidato)) > limite:
             grupos.append(actual)
             actual = [verso]
@@ -97,7 +97,7 @@ def chunk_poem(poema: Poem, n_tokens: Callable[[str], int],
         janela = [unidades[i]]
         j = i + 1
         while j < len(unidades):
-            candidato = janela + [unidades[j]]
+            candidato = [*janela, unidades[j]]
             if n_tokens("\n\n".join(candidato)) > limite:
                 break
             janela = candidato

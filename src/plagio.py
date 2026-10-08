@@ -28,8 +28,8 @@ from __future__ import annotations
 
 import difflib
 import re
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
 
 from .corpus.models import Chunk
 
@@ -73,8 +73,8 @@ def _norm(t: str) -> str:
 
 
 def _versos(texto: str) -> list[str]:
-    return [l.strip() for l in texto.split("\n")
-            if len(l.strip().split()) >= MIN_PALAVRAS]
+    return [linha.strip() for linha in texto.split("\n")
+            if len(linha.strip().split()) >= MIN_PALAVRAS]
 
 
 @dataclass(frozen=True)

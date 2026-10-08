@@ -5,11 +5,18 @@ caso inventado.
 """
 import pytest
 
-from src.corpus.models import Lang
 from src import guard
-from src.guard import (brasileirismos, corrigir_brasileirismos, e_verso,
-                       fracao_pt, lingua_errada, remover_cercas,
-                       remover_preambulo, verificar)
+from src.corpus.models import Lang
+from src.guard import (
+    brasileirismos,
+    corrigir_brasileirismos,
+    e_verso,
+    fracao_pt,
+    lingua_errada,
+    remover_cercas,
+    remover_preambulo,
+    verificar,
+)
 
 # Amostras reais, de docs/fase-0/05-teste-voz.md e 05b-teste-voz-cego.md
 LATIM = """Vitam brevis, spem longum; nec metuamus,
@@ -130,6 +137,7 @@ def test_so_o_poema_frances_do_corpus_e_dado_por_lingua_errada():
     indeterminada.
     """
     from collections import defaultdict
+
     from src.corpus.build import load
     _, chunks = load()
     por = defaultdict(list)

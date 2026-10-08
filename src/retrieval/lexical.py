@@ -12,7 +12,7 @@ só o mínimo — minúsculas, pontuação fora, stopwords.
 from __future__ import annotations
 
 import re
-from typing import Sequence
+from collections.abc import Sequence
 
 from ..corpus.models import Chunk, Lang, Voice
 

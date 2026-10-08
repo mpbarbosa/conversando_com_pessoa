@@ -10,8 +10,8 @@ Medido no corpus: o e5 dá mediana de 1,469 tokens por palavra (a estimativa de
 """
 from __future__ import annotations
 
+from collections.abc import Callable
 from functools import lru_cache
-from typing import Callable
 
 ENCODER = "intfloat/multilingual-e5-base"
 

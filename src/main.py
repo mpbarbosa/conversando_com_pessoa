@@ -1,5 +1,5 @@
-from retriever import PessoaRetriever
 from model import PessoaModel
+from retriever import PessoaRetriever
 
 PERSONA = "Você é Fernando Pessoa. Responda com o estilo e pensamento dele."
 SEPARATOR = "\n---\n"

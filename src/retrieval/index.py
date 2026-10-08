@@ -56,7 +56,7 @@ class Index:
 
     @classmethod
     def build(cls, chunks: list[Chunk], encoder: Encoder, assinatura: str,
-              progresso: bool = True) -> "Index":
+              progresso: bool = True) -> Index:
         vectores = encoder.encode_passages(
             [c.indexed_text for c in chunks], progresso=progresso)
         manifesto = Manifesto(
@@ -74,7 +74,7 @@ class Index:
 
     @classmethod
     def load(cls, chunks: list[Chunk], encoder: Encoder, assinatura: str,
-             caminho: str = CAMINHO) -> "Index | None":
+             caminho: str = CAMINHO) -> Index | None:
         """Carrega o índice, ou devolve None se não for de confiança."""
         npy, man = f"{caminho}.npy", f"{caminho}.manifest.json"
         if not (os.path.exists(npy) and os.path.exists(man)):
@@ -103,7 +103,7 @@ class Index:
     @classmethod
     def load_or_build(cls, chunks: list[Chunk], encoder: Encoder,
                       assinatura: str, caminho: str = CAMINHO,
-                      progresso: bool = True) -> "Index":
+                      progresso: bool = True) -> Index:
         existente = cls.load(chunks, encoder, assinatura, caminho)
         if existente is not None:
             return existente

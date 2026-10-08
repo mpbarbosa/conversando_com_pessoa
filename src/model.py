@@ -1,5 +1,5 @@
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 class PessoaModel:

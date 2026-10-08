@@ -10,6 +10,10 @@ langgraph
 
 # Desenvolvimento
 pytest
+# Linter e formatador, numa dependência só. Configurado em `pyproject.toml`,
+# que diz também o que está deliberadamente desligado e porquê — o `E501` e o
+# `SIM905` mexeriam em literais que são artefactos de medição.
+ruff
 
 # Removidos nesta revisão, com motivo:
 # - `langchain`: estava declarado e usado em **zero linhas** (docs/CONTROLO.md §3).

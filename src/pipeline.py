@@ -17,8 +17,8 @@ Custo médio esperado: 1,21 gerações, ou ~34 s.
 """
 from __future__ import annotations
 
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass
-from typing import Callable, Iterator, Sequence
 
 from .corpus.models import Chunk, Lang, Voice
 from .generation.base import Generator, Resposta
@@ -183,7 +183,6 @@ class Pipeline:
         aparecer e depois a ser substituída, o que é mais honesto que esconder
         os ~28 s que a repetição custa.
         """
-        import time
         recuperados, ms, ms_rr = self.recuperar(pergunta, voz, idioma)
         p = montar(pergunta, recuperados, persona(voz, idioma), self.n_tokens)
 

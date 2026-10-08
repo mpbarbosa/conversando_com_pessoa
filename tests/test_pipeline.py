@@ -9,13 +9,11 @@ utilizador interrompeu.
 import pytest
 
 from src.corpus.build import load
-from src.corpus.models import Chunk, Lang, Voice
+from src.corpus.models import Lang, Voice
 from src.generation.base import Resposta
 from src.guard import Veredicto
-from src.pipeline import Turno
-from src.plagio import Analise
-from src.pipeline import Pipeline
-from src.plagio import REFORCO, REFORCO_EN
+from src.pipeline import Pipeline, Turno
+from src.plagio import REFORCO, REFORCO_EN, Analise
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +33,7 @@ class GeradorFalso:
         self.prompts.append(user)
         if self.copiar_de in user:
             # Reproduz o modo de falha real: versos do contexto, quase intactos.
-            versos = [l for l in self.copiar_de.split("\n") if l.strip()][:6]
+            versos = [ln for ln in self.copiar_de.split("\n") if ln.strip()][:6]
             return "\n".join(versos)
         return ("Um poema sem nada de empréstimo,\n"
                 "feito de palavras minhas e curtas,\n"
@@ -107,7 +105,8 @@ def test_plagio_e_medido_contra_tudo_o_que_foi_mostrado(chunks_caeiro):
     class SempreCopia(GeradorFalso):
         def _texto(self, user: str) -> str:
             self.prompts.append(user)
-            return "\n".join(l for l in self.copiar_de.split("\n") if l.strip())[:400]
+            return "\n".join(
+                ln for ln in self.copiar_de.split("\n") if ln.strip())[:400]
 
     g = SempreCopia(alvo.text)
     t = _pipeline(chunks_caeiro, g).responder("o que é a natureza?", Voice.CAEIRO)
@@ -174,7 +173,7 @@ def _pipeline_espiao(chunks, reranker=None):
 
 def test_sem_reranker_pede_top_k_e_nao_cobra_nada(chunks_caeiro):
     p, idx = _pipeline_espiao(chunks_caeiro)
-    res, ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
+    res, _ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
     assert idx.pedidos == [3]
     assert ms_rr is None
     assert len(res) == 3
@@ -185,7 +184,7 @@ def test_com_reranker_pede_n_rerank_e_nao_top_k(chunks_caeiro):
     from src.retrieval.rerank import N_RERANK
     rr = _RerankerInverso()
     p, idx = _pipeline_espiao(chunks_caeiro, reranker=rr)
-    res, ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
+    res, _ms, ms_rr = p.recuperar("pergunta", Voice.CAEIRO)
     assert idx.pedidos == [N_RERANK]
     assert rr.vistos == [min(N_RERANK, len(chunks_caeiro))]
     assert ms_rr is not None and ms_rr >= 0

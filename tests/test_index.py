@@ -140,7 +140,8 @@ def test_duplicados_fora_do_indice(idx):
 def test_latencia_de_busca(idx, enc):
     """7,0 MB de vectores: a busca é um produto matriz-vector."""
     import time
-    qs = [s["q"] for s in json.load(open("docs/fase-0/smoke-set.json"))]
+    with open("docs/fase-0/smoke-set.json", encoding="utf-8") as f:
+        qs = [s["q"] for s in json.load(f)]
     vs = enc.encode_queries(qs)
     t0 = time.perf_counter()
     for v in vs:

@@ -180,7 +180,7 @@ def detectar(poemas: list[Poem]) -> RelatorioDedupe:
     # --- 3. incipits partilhados (relação, NÃO duplicação) ---
     por_incipit: dict[str, list[str]] = defaultdict(list)
     for p in poemas:
-        primeiro = next((l for l in p.body.split("\n") if l.strip()), "")
+        primeiro = next((ln for ln in p.body.split("\n") if ln.strip()), "")
         chave = _normalizar(primeiro)
         if len(chave.split()) >= 4:
             por_incipit[chave].append(p.id)

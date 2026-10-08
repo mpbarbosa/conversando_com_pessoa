@@ -11,8 +11,7 @@ import pytest
 
 from src.corpus.models import Voice
 from src.generation.base import ErroDeGeracao, Resposta
-from src.roteador import (MAX_TOKENS, ROTEAVEIS, SYSTEM, TEMPERATURA,
-                          interpretar, rotear)
+from src.roteador import MAX_TOKENS, ROTEAVEIS, SYSTEM, TEMPERATURA, interpretar, rotear
 
 
 class GeradorFalso:

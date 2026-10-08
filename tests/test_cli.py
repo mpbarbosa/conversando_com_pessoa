@@ -3,7 +3,6 @@
 Testa as peças do CLI que não precisam de modelo. A validação real foi a
 travessia completa, registada em `docs/FASE-1.md` §Passo 9.
 """
-import pytest
 
 from src.cli import COMANDOS_VOZ, SAIR, _cinza
 from src.corpus.models import Voice
@@ -149,7 +148,7 @@ class _PipelineFalso:
 
 
 def test_comandos_auto_ligam_e_desligam():
-    assert COMANDOS_AUTO == {"/auto", "/manual"}
+    assert {"/auto", "/manual"} == COMANDOS_AUTO
 
 
 def test_propor_usa_a_voz_do_roteador(capsys):

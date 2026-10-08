@@ -5,8 +5,7 @@ a priori. Estes testes fixam esse comportamento.
 """
 import pytest
 
-from src.corpus.dedupe import (LIMIAR_VARIANTE, detectar, marcar,
-                               similaridade_versos)
+from src.corpus.dedupe import LIMIAR_VARIANTE, detectar, marcar, similaridade_versos
 from src.corpus.parse import parse_corpus
 
 

@@ -64,7 +64,8 @@ def gabarito(corpus):
     meta, _ = corpus
     notas: dict[str, dict[str, int]] = {}
     for caminho in (JULGAMENTOS, JULGAMENTOS_3B):
-        j = json.load(open(caminho, encoding="utf-8"))
+        with open(caminho, encoding="utf-8") as f:
+            j = json.load(f)
         for q, d in j.items():
             if q.startswith("_"):
                 continue

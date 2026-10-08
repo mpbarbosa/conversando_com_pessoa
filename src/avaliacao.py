@@ -28,8 +28,8 @@ sobre melancolia».
 from __future__ import annotations
 
 import math
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from typing import Mapping, Sequence
 
 from .corpus.models import Chunk
 

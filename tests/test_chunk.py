@@ -4,10 +4,11 @@ Usa um contador de tokens falso (palavras × 1,47, a razão medida no corpus) na
 maioria dos testes, para não carregar o tokenizador real a cada um; e o real
 nas asserções que dependem do limite de 512 do e5.
 """
+from itertools import pairwise
+
 import pytest
 
-from src.corpus.chunk import (LIMITE_TOKENS, chunk_corpus, chunk_poem,
-                              _partir_estrofe)
+from src.corpus.chunk import LIMITE_TOKENS, _partir_estrofe, chunk_corpus, chunk_poem
 from src.corpus.dedupe import detectar, marcar
 from src.corpus.parse import parse_corpus, parse_poem
 from src.tokens import contador
@@ -93,7 +94,7 @@ def test_sobreposicao_entre_janelas_consecutivas():
     p = parse_poem("data/pessoa_poems/poem_135.txt")
     cs = chunk_poem(p, falso)
     sobrepostos = 0
-    for a, b in zip(cs, cs[1:]):
+    for a, b in pairwise(cs):
         if set(a.text.split("\n\n")) & set(b.text.split("\n\n")):
             sobrepostos += 1
     assert sobrepostos > 0, "nenhuma sobreposição em 43 chunks"

@@ -41,9 +41,9 @@ dependência declarada e não exercida é dívida, não capacidade.
 """
 from __future__ import annotations
 
-import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable, TypedDict
+from typing import Any, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
@@ -194,7 +194,7 @@ class PipelineGrafo:
     grafo: Any
 
     @classmethod
-    def de(cls, pipeline: Pipeline) -> "PipelineGrafo":
+    def de(cls, pipeline: Pipeline) -> PipelineGrafo:
         return cls(pipeline=pipeline, grafo=construir(pipeline))
 
     def responder(self, pergunta: str, voz: Voice, idioma: Lang = Lang.PT,

@@ -6,7 +6,7 @@ continham pelo menos um defeito lexical, distribuído pelas quatro vozes.
 import pytest
 
 from src.corpus.models import Lang
-from src.lexico import (aspell_disponivel, suspeitas, vocabulario_do_corpus)
+from src.lexico import aspell_disponivel, suspeitas, vocabulario_do_corpus
 
 sem_aspell = pytest.mark.skipif(
     not aspell_disponivel(),

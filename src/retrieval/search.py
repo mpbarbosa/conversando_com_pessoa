@@ -1,7 +1,7 @@
 """Recuperação: denso, lexical, ou a fusão dos dois."""
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 from ..corpus.models import Chunk, Lang, Voice
 from .encoder import Encoder

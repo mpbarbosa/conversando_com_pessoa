@@ -115,11 +115,12 @@ def _silenciar_hf() -> None:
 
 def _arrancar(modelo: str | None, verboso: bool):
     """Carrega corpus, índice, encoder e gerador, falhando com mensagem útil."""
+    import os
+
     from .corpus.build import CAMINHO, build, load
     from .retrieval.encoder import Encoder
     from .retrieval.index import Index
     from .tokens import contador
-    import os
 
     gen = OllamaGenerator(modelo=modelo) if modelo else OllamaGenerator()
     if not gen.disponivel():
@@ -325,7 +326,7 @@ def _ajustar_lingua(voz: Voice, pedida: Lang, avisar: bool = False) -> Lang:
         if disponiveis and pedida not in disponiveis:
             if avisar:
                 typer.echo(_cinza(f"  esta voz só tem persona em "
-                                  f"{', '.join(l.value for l in disponiveis)}"))
+                                  f"{', '.join(i.value for i in disponiveis)}"))
             return disponiveis[0]
     return pedida
 
@@ -464,8 +465,7 @@ def _limpar_inicio(acumulado: str, pergunta: str) -> tuple[str, bool]:
     uma linha completa que sobreviva à limpeza: o preâmbulo e o eco da pergunta
     são ambos removíveis e podem vir em linhas separadas.
     """
-    from .guard import (remover_cercas, remover_eco_da_pergunta,
-                        remover_preambulo)
+    from .guard import remover_cercas, remover_eco_da_pergunta, remover_preambulo
     if "\n" not in acumulado:
         return acumulado, True
     linha, resto = acumulado.split("\n", 1)

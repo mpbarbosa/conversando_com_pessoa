@@ -1,0 +1,61 @@
+# Configuração de ferramentas. **Não** declara o pacote: a instalação continua
+# a ser `requirements.txt` + `.venv`, como o `CONTROLO.md` descreve.
+
+[tool.ruff]
+# O `src/` é o produto e o `tests/` verifica-o. O `docs/` fica **fora**, e não
+# por comodidade: aqueles scripts são artefactos de fases fechadas e
+# commitadas — o `docs/fase-5f/analisar.py` é o registo do que a Fase 5F
+# calculou. Reformatá-los reescrevia o registo.
+include = ["src/**/*.py", "tests/**/*.py"]
+extend-exclude = ["docs", ".venv", "data"]
+
+# A largura da casa. 196 linhas passam dos 79, 15 passam dos 88 e **uma** passa
+# dos 100, logo 88 descreve o código como ele é.
+line-length = 88
+
+[tool.ruff.lint]
+# O `E501` (linha comprida) está **deliberadamente fora**, e tem motivo medido:
+# das 15 linhas acima de 88, as duas mais compridas são as duas que **não se
+# podem tocar** —
+#
+#   `src/voices.py:59`     é o texto de `REGRAS_LINGUA[Lang.PT]`, e a quebra de
+#                          linha está **dentro** da string. Repartir essa linha
+#                          muda o prompt que a Fase 5U mediu por ablação.
+#   `tests/test_guard.py:28`  é uma amostra observada na Fase 0, não é código.
+#
+# Activá-lo convidava a reformatar literais que são artefactos de medição, que é
+# exactamente a edição silenciosa que este projecto existe para evitar.
+select = [
+    "E4", "E7", "E9",  # pycodestyle, sem o E501
+    "F",               # pyflakes
+    "I",               # ordem dos imports
+    "UP",              # pyupgrade
+    "B",               # bugbear
+    "C4",              # comprehensions
+    "SIM",             # simplificações
+    "RUF",
+]
+# O `RUF001/002/003` acusam «carácter unicode ambíguo» e o que acusam de facto é
+# o **travessão** (– e —) na prosa portuguesa dos docstrings e comentários, que
+# é a tipografia correcta aqui e está em todo o `docs/`. «Did you mean `-`?» —
+# não, não quis.
+ignore = [
+    "RUF001", "RUF002", "RUF003",
+    # O `SIM905` quer `["de", "a", "o", ...]` em vez de `"de a o ...".split()`.
+    # Aqui o `.split()` é **deliberado**: as listas de stopwords do
+    # `guard.py`, do `parse.py` e do `retrieval/lexical.py` são escolhas
+    # revistas à mão e documentadas — a do `lexical.py` traz o comentário
+    # «Deliberadamente ausentes: «não», «nada», «tudo» — em Pessoa são
+    # palavras-chave». Aplicá-lo transformou-as em literais de 500 caracteres
+    # numa linha só, e isso não é mais legível: é menos.
+    "SIM905",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# O `warnings.filterwarnings` **tem** de correr antes de importar o `typer` e,
+# por ele, o `transformers`: é o que silencia o `FutureWarning` na importação.
+# Pôr os imports no topo desfazia-o.
+"src/cli.py" = ["E402"]
+# Os testes importam depois de montar o ambiente (`monkeypatch`, variáveis), e
+# comparam com `==` de propósito onde o `SIM` preferia outra forma.
+"tests/*" = ["E402"]

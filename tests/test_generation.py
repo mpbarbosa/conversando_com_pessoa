@@ -5,7 +5,6 @@ do `requests.post`), para não depender de modelo carregado nem gastar 40 s por
 caso. Os testes de integração saltam se o Ollama não estiver a correr.
 """
 import json
-import types
 
 import pytest
 import requests

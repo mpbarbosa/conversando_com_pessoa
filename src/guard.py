@@ -13,7 +13,7 @@ import unicodedata
 from dataclasses import dataclass
 
 from .corpus.models import Lang
-from .voices import INTERDICOES, PERSONAS
+from .voices import INTERDICOES
 
 # --- detecção de quebra de persona ---------------------------------------
 #
@@ -103,11 +103,12 @@ def remover_preambulo(texto: str) -> str:
     linhas = texto.strip().split("\n")
     i = 0
     while i < len(linhas):
-        l = linhas[i].strip()
-        if not l:
+        linha = linhas[i].strip()
+        if not linha:
             i += 1
             continue
-        if _RE_PREAMBULO.match(l) or (l.endswith(":") and len(l.split()) > 3):
+        if _RE_PREAMBULO.match(linha) or (linha.endswith(":")
+                                          and len(linha.split()) > 3):
             i += 1
             continue
         break
@@ -175,8 +176,12 @@ def _fracao_reconhecida(texto: str, idioma: Lang) -> float | None:
     `None` quando não há dicionário — e aí quem chama tem de decidir, porque
     «não sei» não é «está bem».
     """
-    from .lexico import (MIN_LETRAS, _RE_PALAVRA, aspell_disponivel,
-                         desconhecidas_do_dicionario)
+    from .lexico import (
+        _RE_PALAVRA,
+        MIN_LETRAS,
+        aspell_disponivel,
+        desconhecidas_do_dicionario,
+    )
     if not aspell_disponivel(idioma):
         return None
     palavras = {p.lower() for p in _RE_PALAVRA.findall(texto)
@@ -245,7 +250,8 @@ def lingua_errada(texto: str, esperada: Lang, piso: float = 0.12) -> bool:
     if f_esperada >= piso:
         return False
 
-    outras = [fracao_lingua(texto, l) for l in _STOPWORDS if l is not esperada]
+    outras = [fracao_lingua(texto, idm) for idm in _STOPWORDS
+              if idm is not esperada]
     if f_esperada <= max(outras, default=0.0):
         return True
 
@@ -305,10 +311,10 @@ def tratamento_indevido(texto: str) -> tuple[str, ...]:
 
 def e_verso(texto: str) -> bool:
     """Verso tem quebras deliberadas: várias linhas, a maioria curta."""
-    linhas = [l for l in texto.split("\n") if l.strip()]
+    linhas = [ln for ln in texto.split("\n") if ln.strip()]
     if len(linhas) < 3:
         return False
-    curtas = sum(1 for l in linhas if len(l.split()) <= 14)
+    curtas = sum(1 for ln in linhas if len(ln.split()) <= 14)
     return curtas / len(linhas) >= 0.7
 
 

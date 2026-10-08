@@ -15,10 +15,9 @@ from dataclasses import asdict
 
 from ..tokens import ENCODER, contador
 from .chunk import LIMITE_TOKENS, chunk_corpus
-from .dedupe import detectar
+from .dedupe import detectar, marcar
 from .models import Chunk, Lang, Voice
 from .parse import parse_corpus
-from .dedupe import marcar
 
 CAMINHO = "data/corpus.jsonl"
 
@@ -34,7 +33,7 @@ def _assinatura(chunks: list[Chunk], encoder: str, limite: int) -> str:
     h = hashlib.sha256()
     h.update(f"{encoder}|{limite}".encode())
     for c in chunks:
-        h.update(f"{c.poem_id}|{c.chunk_ix}|{c.indexed_text}".encode("utf-8"))
+        h.update(f"{c.poem_id}|{c.chunk_ix}|{c.indexed_text}".encode())
     return h.hexdigest()
 
 

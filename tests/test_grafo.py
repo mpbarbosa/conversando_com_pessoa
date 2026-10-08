@@ -101,7 +101,7 @@ def test_o_grafo_declara_o_ciclo(chunks_caeiro):
     """A aresta de repetição existe no desenho, não só no comportamento."""
     grafo = PipelineGrafo.de(_pipeline(chunks_caeiro, GeradorFalso("x")))
     g = grafo.grafo.get_graph()
-    nos = {n for n in g.nodes}
+    nos = set(g.nodes)
     assert {"recuperar", "montar", "gerar", "verificar", "repetir"} <= nos
     arestas = {(e.source, e.target) for e in g.edges}
     assert ("repetir", "gerar") in arestas, "o ciclo tem de estar declarado"

@@ -38,7 +38,7 @@ class PessoaRetriever:
         return sorted(f for f in os.listdir(self.data_dir) if f.endswith(".txt"))
 
     def _read(self, name):
-        with open(os.path.join(self.data_dir, name), "r", encoding="utf-8") as f:
+        with open(os.path.join(self.data_dir, name), encoding="utf-8") as f:
             return f.read()
 
     def load_texts(self):
@@ -51,7 +51,7 @@ class PessoaRetriever:
         h.update(self.embedding_model_name.encode("utf-8"))
         for name in self.filenames:
             size = os.path.getsize(os.path.join(self.data_dir, name))
-            h.update(f"{name}:{size}".encode("utf-8"))
+            h.update(f"{name}:{size}".encode())
         return h.hexdigest()
 
     # --- embeddings -------------------------------------------------------
