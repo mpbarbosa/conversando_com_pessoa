@@ -6,12 +6,16 @@ transformers
 rank-bm25
 requests
 typer
+langgraph
 
 # Desenvolvimento
 pytest
 
 # Removidos nesta revisão, com motivo:
 # - `langchain`: estava declarado e usado em **zero linhas** (docs/CONTROLO.md §3).
+#   ⚠️ `langgraph` (acima) entrou em 2026-10-08 e é o caso oposto: `src/grafo.py`
+#   importa-o, o CLI expõe-no em `--grafo` e `tests/test_grafo.py` falha sem ele.
+#   A lição de 01/10 fica: dependência declarada e não exercida é dívida.
 # - `faiss-cpu`: o índice é `numpy`, por decisão medida — 2290 × 768 = 7,0 MB,
 #   busca em 5,57 ms. O único `import faiss` que resta está em `src/retriever.py`,
 #   código anterior já substituído por `src/retrieval/`; para o correr, instale

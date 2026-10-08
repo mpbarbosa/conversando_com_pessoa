@@ -162,6 +162,9 @@ def main(
     rerank: bool = typer.Option(False, "--rerank",
                                 help="reordena os candidatos (+0,090 nDCG@5, +2,6 s)"),
     verboso: bool = typer.Option(False, "--verboso", help="mostra progresso de construção"),
+    grafo: bool = typer.Option(False, "--grafo",
+                               help="responde pelo grafo de estado (LangGraph); "
+                                    "sem streaming, imprime no fim"),
 ) -> None:
     chave = f"/{voz.lower().lstrip('/')}"
     if chave not in COMANDOS_VOZ:
@@ -256,7 +259,53 @@ def main(
         voz_da_vez = actual
         if auto:
             voz_da_vez = _propor(pipeline, linha, actual)
-        _responder(pipeline, linha, voz_da_vez, lingua)
+        if grafo:
+            _responder_pelo_grafo(pipeline, linha, voz_da_vez, lingua)
+        else:
+            _responder(pipeline, linha, voz_da_vez, lingua)
+
+
+def _responder_pelo_grafo(pipeline: Pipeline, pergunta: str, voz: Voice,
+                          idioma: Lang = Lang.PT) -> None:
+    """Mesma resposta, pelo grafo de estado — e sem streaming.
+
+    ⚠️ **A diferença é visível para quem usa:** o caminho normal imprime os
+    versos à medida que chegam (~2 s para o primeiro); este espera a resposta
+    inteira (~30 s de silêncio). É o preço de declarar a política como grafo em
+    vez de a executar num laço de streaming, e por isso vive atrás de um flag em
+    vez de substituir o caminho medido.
+
+    O que NÃO muda: recuperação, prompt, guarda, detector de plágio e política
+    de repetição são os mesmos objectos — ver `src/grafo.py` e o teste de
+    paridade em `tests/test_grafo.py`.
+    """
+    from .grafo import PipelineGrafo
+    from .pipeline import Turno
+
+    typer.echo()
+    t0 = time.perf_counter()
+    try:
+        turno: Turno = PipelineGrafo.de(pipeline).responder(pergunta, voz, idioma)
+    except ErroDeGeracao as e:
+        typer.secho(f"\n{e}", fg="red", err=True)
+        return
+    except KeyboardInterrupt:
+        typer.echo(_cinza("\n  (interrompido)"))
+        return
+
+    typer.echo(f"{VERDE}{turno.texto}{FIM}")
+    typer.echo()
+    if not turno.aprovado:
+        motivos = list(turno.veredicto.motivos)
+        if turno.plagio.plagiou:
+            motivos.append(turno.plagio.resumo())
+        typer.echo(_cinza(f"  não aprovado ({'; '.join(motivos)})"))
+    # `primeiro` é None de propósito: esse campo imprime «s até ao 1.º verso» e
+    # aqui não há 1.º verso antes do fim. O total vai à parte, com o nome certo.
+    _rodape(turno, None)
+    typer.echo(_cinza(f"  {time.perf_counter() - t0:.1f} s até à resposta "
+                      f"inteira (grafo, sem streaming)"))
+    typer.echo()
 
 
 def _ajustar_lingua(voz: Voice, pedida: Lang, avisar: bool = False) -> Lang:

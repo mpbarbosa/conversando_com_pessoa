@@ -78,6 +78,36 @@ data/pessoa_poems/ (2083 .txt)
         └─ src/cli.py                `pessoa`
 ```
 
+A orquestração existe em **duas formas que fazem a mesma coisa**:
+
+| | onde | o que corre |
+|---|---|---|
+| **laço escrito à mão** (omissão) | `src/pipeline.py` | streaming: os versos aparecem à medida (~2 s até ao 1.º) |
+| **grafo de estado** (`--grafo`) | `src/grafo.py` (LangGraph) | a mesma política, declarada; sem streaming, imprime no fim |
+
+O grafo **não reescreve nada**: chama a mesma recuperação, o mesmo prompt, a
+mesma guarda, o mesmo detector de plágio e a mesma política de repetição. O que
+muda é que o ciclo — *se copiou e ainda há tentativa, repetir sem os poemas
+copiados* — deixa de ser um `for` e passa a ser uma aresta condicional,
+inspeccionável:
+
+```mermaid
+graph TD;
+	__start__([__start__]) --> recuperar;
+	recuperar --> montar;
+	montar --> gerar;
+	gerar --> verificar;
+	verificar -. fim .-> __end__([__end__]);
+	verificar -.-> repetir;
+	repetir --> gerar;
+```
+
+`tests/test_grafo.py` compara os dois caminhos resposta a resposta — texto,
+número de tentativas, veredicto e poemas usados. **Se divergirem, falha**: é
+isso que mantém os números medidos válidos para ambos.
+
+⚠️ **Não é um agente.** O caminho é decidido por regras, não pelo modelo.
+
 ### Quatro decisões que valem explicação
 
 **O índice é `numpy`, não FAISS.** 2290 × 768 = 7,0 MB; uma busca é um produto

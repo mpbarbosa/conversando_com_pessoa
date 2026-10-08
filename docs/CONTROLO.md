@@ -131,6 +131,43 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | roteador de voz (`/auto`) | +0,5 s por pergunta, e ~20 s uma vez a aquecer |
 | reordenação (`/rerank`) | +2,6 s por pergunta, e ~4,8 s na primeira |
 
+### O pipeline declarado como grafo (LangGraph) — 2026-10-08
+
+**O que foi feito:** `src/grafo.py` declara a orquestração existente como um
+`StateGraph` — nós `recuperar · montar · gerar · verificar · repetir`, com a
+aresta condicional `verificar → repetir | END`. `PipelineGrafo.responder` tem o
+mesmo contrato de `Pipeline.responder` e devolve o mesmo `Turno`. O CLI expõe-o
+em `--grafo`.
+
+**O que NÃO foi feito, e é o ponto:** nenhum componente medido mudou. O grafo
+chama `Pipeline.recuperar`, `generation.prompt.montar`, `guard.verificar`,
+`plagio.analisar` e `Pipeline._repetir_sem` — os mesmos objectos, pela mesma
+ordem. ⇒ **os números acima continuam a valer para os dois caminhos**, e
+`tests/test_grafo.py` é quem o garante: compara os dois resposta a resposta
+(texto, tentativas, veredicto, poemas usados) e falha se divergirem.
+
+**Por que o porte é natural e não decorativo:** o `for` do `pipeline.responder`
+já era um grafo cíclico com arestas condicionais. A política *«se copiou e ainda
+há tentativa, repetir sem os poemas de que copiou»* passou de fluxo de controlo
+a objecto inspeccionável (`PipelineGrafo.diagrama()`, em Mermaid).
+
+**Custo visível ao utilizador, e por isso fica atrás de um flag:** o caminho do
+grafo **não faz streaming**. O caminho normal mostra o 1.º verso em ~2 s; o
+grafo cala-se ~30 s e imprime no fim. **O caminho medido continua a ser o
+omisso.**
+
+⚠️ **Não é um agente.** O percurso é decidido por regras, não pelo modelo. Não
+há ferramentas, nem escolha de caminho pelo LLM. Chamar-lhe agente seria vender
+o que não há.
+
+📌 **`draw_ascii()` precisa de `grandalf`; `draw_mermaid()` não precisa de nada**
+— o diagrama é Mermaid por isso, e renderiza no README.
+
+🔁 **E fecha um ciclo do próprio repositório:** em 2026-10-01 o `langchain` foi
+**removido** do `requirements.txt` por estar declarado e usado em zero linhas.
+O `langgraph` entra agora no caso oposto — importado em `src/`, exposto no CLI e
+com teste que falha sem ele. A nota ficou escrita no `requirements.txt`.
+
 ---
 
 ## 4. Correcções a afirmações minhas
