@@ -6,6 +6,7 @@ caso inventado.
 import pytest
 
 from src.corpus.models import Lang
+from src import guard
 from src.guard import (brasileirismos, corrigir_brasileirismos, e_verso,
                        fracao_pt, lingua_errada, remover_cercas,
                        remover_preambulo, verificar)
@@ -284,3 +285,40 @@ def test_primeiro_verso_parecido_mas_distinto_fica():
 def test_sem_pergunta_nao_altera():
     saida = "Verde se estende, não mais.\nRaízes enterradas."
     assert verificar(saida).texto == saida
+
+
+# --------------------------------------------------------------------------- #
+# Fase 5T — «você» é aviso e não rejeição, e a medição é que o decide.
+# --------------------------------------------------------------------------- #
+def test_voce_avisa_e_nao_rejeita():
+    """0,21% no corpus põe isto do lado do aviso, pela regra pré-escrita."""
+    poema = ("Você não chega nunca à hora certa,\n"
+             "e a tarde cai sobre o jardim,\n"
+             "e tudo fica como estava antes.")
+    v = guard.verificar(poema)
+    assert v.gramatica == ("«você» (a persona manda «tu»)",)
+    assert v.ok, "o aviso não pode falhar o veredicto"
+
+
+def test_tu_nao_dispara_o_aviso():
+    poema = ("Tu não chegas nunca à hora certa,\n"
+             "e a tarde cai sobre o jardim,\n"
+             "e tudo fica como estava antes.")
+    assert guard.verificar(poema).gramatica == ()
+
+
+def test_o_aviso_de_tratamento_nao_se_repete():
+    """Duas ocorrências da mesma forma dão um aviso, não dois."""
+    assert guard.tratamento_indevido("você vem, você vai") == ("você",)
+    assert guard.tratamento_indevido("Vocês vêm e você vai") == ("vocês", "você")
+
+
+def test_colocacao_pronominal_nao_e_verificada():
+    """A Fase 5T fechou-a: à régua da atracção, Pessoa procliticiza como os
+    modelos. Este teste fixa a **ausência** para que ninguém a reponha sem
+    medir outra vez."""
+    assert not hasattr(guard, "proclise")
+    brasileiro = ("Uma mão se recua do escuro,\n"
+                  "e me dói o que ela deixa,\n"
+                  "e a tarde fica mais funda.")
+    assert guard.verificar(brasileiro).gramatica == ()

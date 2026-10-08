@@ -442,6 +442,9 @@ def _rodape(turno, primeiro: float | None) -> None:
         palavras = ", ".join(f"«{x.palavra}»" for x in turno.veredicto.suspeitas)
         typer.echo(_cinza(f"  palavras que nem o corpus nem o dicionário "
                           f"conhecem: {palavras}"))
+    if turno.veredicto.gramatica:
+        typer.echo(_cinza(f"  construções que a persona proíbe: "
+                          f"{', '.join(turno.veredicto.gramatica)}"))
     fontes = ", ".join(c.poem_id for c in turno.usados) or "nenhuma"
     typer.echo(_cinza(f"  fontes: {fontes}"))
     partes = [f"{turno.recuperacao_ms:.0f} ms recuperação"]

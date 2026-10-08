@@ -1,0 +1,248 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5T.md §5.2",
+  "correccao": "POSTERIOR aos dados, declarada",
+  "o_que_mudou": [
+   "quebra de linha nao e fronteira de oracao",
+   "denominador = proclise + enclise"
+  ],
+  "nada_derivado_dos_dados": true,
+  "semente_bootstrap": 20261008
+ },
+ "correccao1_quebra_de_linha": {
+  "poemas_marcados_antes": 435,
+  "poemas_marcados_depois": 435,
+  "n": 1926,
+  "taxa_depois": 0.2259,
+  "limiar_T1": 0.01,
+  "T1_depois": false
+ },
+ "proporcao_da_construcao": {
+  "corpus_pt": {
+   "n_itens": 1926,
+   "itens_com_o_pronome": 812,
+   "proclise": 630,
+   "enclise": 1349,
+   "ocorrencias": 1979,
+   "proporcao": 0.3183,
+   "wilson95_ocorrencias": [
+    0.2982,
+    0.3392
+   ],
+   "bootstrap95_itens": [
+    0.2834,
+    0.353
+   ]
+  },
+  "reais_5q": {
+   "n_itens": 24,
+   "itens_com_o_pronome": 11,
+   "proclise": 8,
+   "enclise": 9,
+   "ocorrencias": 17,
+   "proporcao": 0.4706,
+   "wilson95_ocorrencias": [
+    0.2616,
+    0.6904
+   ],
+   "bootstrap95_itens": [
+    0.2308,
+    0.7
+   ]
+  },
+  "gerados_5q": {
+   "n_itens": 48,
+   "itens_com_o_pronome": 22,
+   "proclise": 5,
+   "enclise": 30,
+   "ocorrencias": 35,
+   "proporcao": 0.1429,
+   "wilson95_ocorrencias": [
+    0.0626,
+    0.2938
+   ],
+   "bootstrap95_itens": [
+    0.0312,
+    0.25
+   ]
+  },
+  "gerados_5m": {
+   "n_itens": 180,
+   "itens_com_o_pronome": 91,
+   "proclise": 36,
+   "enclise": 128,
+   "ocorrencias": 164,
+   "proporcao": 0.2195,
+   "wilson95_ocorrencias": [
+    0.163,
+    0.2889
+   ],
+   "bootstrap95_itens": [
+    0.1567,
+    0.2865
+   ]
+  },
+  "gerados_5q::llama3.1:8b": {
+   "n_itens": 24,
+   "itens_com_o_pronome": 14,
+   "proclise": 4,
+   "enclise": 20,
+   "ocorrencias": 24,
+   "proporcao": 0.1667,
+   "wilson95_ocorrencias": [
+    0.0668,
+    0.3585
+   ],
+   "bootstrap95_itens": [
+    0.0,
+    0.3125
+   ]
+  },
+  "gerados_5q::qwen2.5:7b": {
+   "n_itens": 24,
+   "itens_com_o_pronome": 8,
+   "proclise": 1,
+   "enclise": 10,
+   "ocorrencias": 11,
+   "proporcao": 0.0909,
+   "wilson95_ocorrencias": [
+    0.0162,
+    0.3774
+   ],
+   "bootstrap95_itens": [
+    0.0,
+    0.2143
+   ]
+  },
+  "gerados_5m::campos": {
+   "n_itens": 60,
+   "itens_com_o_pronome": 33,
+   "proclise": 13,
+   "enclise": 58,
+   "ocorrencias": 71,
+   "proporcao": 0.1831,
+   "wilson95_ocorrencias": [
+    0.1102,
+    0.2885
+   ],
+   "bootstrap95_itens": [
+    0.0896,
+    0.2875
+   ]
+  },
+  "gerados_5m::ortonimo": {
+   "n_itens": 60,
+   "itens_com_o_pronome": 30,
+   "proclise": 8,
+   "enclise": 36,
+   "ocorrencias": 44,
+   "proporcao": 0.1818,
+   "wilson95_ocorrencias": [
+    0.0951,
+    0.3196
+   ],
+   "bootstrap95_itens": [
+    0.0789,
+    0.2979
+   ]
+  },
+  "gerados_5m::reis": {
+   "n_itens": 60,
+   "itens_com_o_pronome": 28,
+   "proclise": 15,
+   "enclise": 34,
+   "ocorrencias": 49,
+   "proporcao": 0.3061,
+   "wilson95_ocorrencias": [
+    0.1952,
+    0.4453
+   ],
+   "bootstrap95_itens": [
+    0.1778,
+    0.4375
+   ]
+  }
+ },
+ "anteriores_mais_comuns_no_corpus": [
+  [
+   "eu",
+   59
+  ],
+  [
+   ",",
+   52
+  ],
+  [
+   "e",
+   51
+  ],
+  [
+   "tu",
+   12
+  ],
+  [
+   "mim",
+   10
+  ],
+  [
+   "deus",
+   10
+  ],
+  [
+   "isto",
+   9
+  ],
+  [
+   "ou",
+   9
+  ],
+  [
+   "vezes",
+   8
+  ],
+  [
+   "‑",
+   8
+  ],
+  [
+   "morte",
+   7
+  ],
+  [
+   "isso",
+   7
+  ],
+  [
+   "coisa",
+   6
+  ],
+  [
+   "ele",
+   6
+  ],
+  [
+   "vez",
+   6
+  ],
+  [
+   "mesmo",
+   6
+  ],
+  [
+   "vento",
+   6
+  ],
+  [
+   "vida",
+   6
+  ],
+  [
+   "ser",
+   5
+  ],
+  [
+   "sou",
+   5
+  ]
+ ]
+}

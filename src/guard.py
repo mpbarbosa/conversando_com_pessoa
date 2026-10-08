@@ -79,6 +79,11 @@ class Veredicto:
     #: veredicto**: uma palavra inventada não estraga um poema, e rejeitar
     #: custa ~28 s. Ver src/lexico.py.
     suspeitas: tuple = ()
+    #: Construções que a persona proíbe e a saída traz. **Também não falham o
+    #: veredicto**, e por medição: ver `tratamento_indevido`. Canal próprio e
+    #: não `suspeitas`, porque ali os elementos são palavras com `.palavra` e
+    #: aqui são construções.
+    gramatica: tuple[str, ...] = ()
 
     def __bool__(self) -> bool:
         return self.ok
@@ -267,6 +272,37 @@ def corrigir_brasileirismos(texto: str) -> str:
     return texto
 
 
+#: «você» como tratamento, que a persona proíbe explicitamente
+#: («Usa «tu», não «você»», src/voices.py). **Medido no corpus** pela Fase 5T:
+#: aparece em **4 de 1926** poemas portugueses (0,21%) — `poem_1225`,
+#: `poem_3134`, `poem_3326` e `poem_3567`, onde é deliberado («O quê — você não
+#: chega?»). Nos 228 textos gerados da 5Q e da 5M aparece **2 vezes**.
+_RE_TRATAMENTO = re.compile(r"\bvoc[êe]s?\b", re.I)
+
+
+def tratamento_indevido(texto: str) -> tuple[str, ...]:
+    """«você» onde a persona manda «tu». **Reporta e não rejeita.**
+
+    ## Porque é um aviso e não uma rejeição
+
+    A Fase 5T pré-escreveu a decisão a partir de dois precedentes deste
+    ficheiro: o `lingua_errada` **rejeita** e tem 0,16% medido contra o corpus;
+    as `suspeitas` do léxico **reportam** porque rejeitar custa ~28 s. O limiar
+    da rejeição ficou nos 0,2% — o nível do `lingua_errada`, que é o único a que
+    este projecto já autorizou uma —, e isto mede **0,21%**. Fica do lado do
+    aviso por uma centésima, e a regra estava escrita antes de o número existir.
+
+    ## O que isto não é
+
+    Não é um detector de colocação pronominal. A mesma fase construiu um, em
+    três passagens, e **fechou-o**: a próclise por atracção marca 2,65% dos
+    poemas de Pessoa, e à mesma régua o poeta e os modelos procliticizam na
+    mesma proporção (0,045 contra 0,052–0,062). Ver `docs/FASE-5T.md`.
+    """
+    return tuple(dict.fromkeys(m.group(0).lower()
+                               for m in _RE_TRATAMENTO.finditer(texto)))
+
+
 def e_verso(texto: str) -> bool:
     """Verso tem quebras deliberadas: várias linhas, a maioria curta."""
     linhas = [l for l in texto.split("\n") if l.strip()]
@@ -333,13 +369,19 @@ def verificar(texto: str, *, pergunta: str | None = None,
     if nomeados:
         motivos.append(f"quebra de persona: {', '.join(nomeados)}")
 
-    # Brasileirismos e colocação pronominal só fazem sentido em português.
+    # Brasileirismos e tratamento só fazem sentido em português. A
+    # **colocação pronominal não está aqui**, e por medição: a Fase 5T
+    # fechou-a (ver `tratamento_indevido`).
     br = brasileirismos(t) if idioma is Lang.PT else ()
     if br:
         if corrigir:
             t = corrigir_brasileirismos(t)
         else:
             motivos.append(f"brasileirismos: {', '.join(br)}")
+
+    gram = (tuple(f"«{v}» (a persona manda «tu»)"
+                  for v in tratamento_indevido(t))
+            if idioma is Lang.PT else ())
 
     susp: tuple = ()
     if lexico:
@@ -349,4 +391,4 @@ def verificar(texto: str, *, pergunta: str | None = None,
         except Exception:
             susp = ()      # a guarda lexical é opcional; nunca quebra o fluxo
 
-    return Veredicto(not motivos, tuple(motivos), t, susp)
+    return Veredicto(not motivos, tuple(motivos), t, susp, gram)

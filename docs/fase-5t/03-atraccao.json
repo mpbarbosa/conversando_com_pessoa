@@ -1,0 +1,179 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5T.md §5.2",
+  "passagem": 3,
+  "correccao": "POSTERIOR aos dados, declarada",
+  "regra": "licenciado se ha atractor em qualquer ponto anterior da mesma oracao, ou se o token seguinte e infinitivo",
+  "virgula_nao_fecha_oracao": true,
+  "nada_derivado_dos_dados": true
+ },
+ "proporcao_da_construcao": {
+  "corpus_pt": {
+   "n_itens": 1926,
+   "itens_marcados": 51,
+   "taxa_por_item": 0.02648,
+   "proclise": 63,
+   "enclise": 1349,
+   "proporcao": 0.0446,
+   "bootstrap95_itens": [
+    0.0307,
+    0.0603
+   ]
+  },
+  "reais_5q": {
+   "n_itens": 24,
+   "itens_marcados": 2,
+   "taxa_por_item": 0.08333,
+   "proclise": 2,
+   "enclise": 9,
+   "proporcao": 0.1818,
+   "bootstrap95_itens": [
+    0.0,
+    0.4
+   ]
+  },
+  "gerados_5q": {
+   "n_itens": 48,
+   "itens_marcados": 2,
+   "taxa_por_item": 0.04167,
+   "proclise": 2,
+   "enclise": 30,
+   "proporcao": 0.0625,
+   "bootstrap95_itens": [
+    0.0,
+    0.1538
+   ]
+  },
+  "gerados_5m": {
+   "n_itens": 180,
+   "itens_marcados": 7,
+   "taxa_por_item": 0.03889,
+   "proclise": 7,
+   "enclise": 128,
+   "proporcao": 0.0519,
+   "bootstrap95_itens": [
+    0.0196,
+    0.087
+   ]
+  },
+  "gerados_5q::llama3.1:8b": {
+   "n_itens": 24,
+   "itens_marcados": 1,
+   "taxa_por_item": 0.04167,
+   "proclise": 1,
+   "enclise": 20,
+   "proporcao": 0.0476,
+   "bootstrap95_itens": [
+    0.0,
+    0.1765
+   ]
+  },
+  "gerados_5q::qwen2.5:7b": {
+   "n_itens": 24,
+   "itens_marcados": 1,
+   "taxa_por_item": 0.04167,
+   "proclise": 1,
+   "enclise": 10,
+   "proporcao": 0.0909,
+   "bootstrap95_itens": [
+    0.0,
+    0.2143
+   ]
+  }
+ },
+ "portao": {
+  "T1": {
+   "taxa_por_item_corpus": 0.02648,
+   "limiar": 0.01,
+   "dispara": false
+  },
+  "T2": {
+   "taxa_gerados": 0.04167,
+   "wilson_inf": 0.0115,
+   "dispara": false
+  },
+  "tratamento_pre_escrito": "nao entra (T1 nao dispara)"
+ },
+ "anteriores_mais_comuns_no_corpus": [
+  [
+   "vez",
+   5
+  ],
+  [
+   "^",
+   5
+  ],
+  [
+   "eu",
+   4
+  ],
+  [
+   "vezes",
+   3
+  ],
+  [
+   "melhor",
+   3
+  ],
+  [
+   "e",
+   3
+  ],
+  [
+   "‑",
+   3
+  ],
+  [
+   "dia",
+   2
+  ],
+  [
+   "horas",
+   2
+  ],
+  [
+   "—",
+   2
+  ],
+  [
+   ")",
+   2
+  ],
+  [
+   "ou",
+   2
+  ],
+  [
+   "quase",
+   1
+  ],
+  [
+   "uníssono",
+   1
+  ],
+  [
+   "boca",
+   1
+  ],
+  [
+   "olhos",
+   1
+  ],
+  [
+   "anos",
+   1
+  ],
+  [
+   "coisa",
+   1
+  ],
+  [
+   "cedo",
+   1
+  ],
+  [
+   "agora",
+   1
+  ]
+ ]
+}

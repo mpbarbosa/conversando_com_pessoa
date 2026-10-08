@@ -180,15 +180,23 @@ defeito para valer.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  detectores escritos como o §2 os declara, sem olhar para dados
-[ ] A2  T1: taxa nos 1906 poemas pt, por regra
-[ ] A3  T2: taxa nos 48 gerados e nos 24 reais da 5Q, com IC de Wilson
-[ ] A4  descritivo: por modelo e por voz, nos 180 da 5M
-[ ] B1  portões, e a decisao do §4.1 accionada
-[ ] C1  se autorizado: entra em src/guard.py com o tratamento que o §4.1 manda
-[ ] C2  testes, e o ./pessoa responde
-[ ] C3  relatorio FASE-5T-RELATORIO.md
-[ ] C4  CONTROLO.md
+[x] A1  detectores escritos como o §2 os declara, sem olhar para dados
+[x] A2  T1: taxa nos 1926 poemas pt (nao 1906: o filtro e por Lang.PT), por regra
+[x] A3  T2: taxa nos 48 gerados e nos 24 reais da 5Q, com IC de Wilson
+[x] A4  descritivo: por modelo e por voz, nos 180 da 5M
+[x] A5  correccao POSTERIOR declarada (corrigir.py): quebra de linha e
+        denominador livre de comprimento. Nao salvou o portao
+[x] A6  3.a passagem (atraccao.py): a proclise por atraccao, que e a gramatica.
+        T1 2,65% -- continua a nao disparar -- e SEM SINAL: 0,045 no poeta
+        contra 0,052-0,062 nos modelos
+[x] B1  portoes: T1 so no R-VOC; T2 do R-VOC dispara com UMA ocorrencia, o que
+        e um defeito do portao e esta declarado no §4 do relatorio
+[x] C1  entrou `tratamento_indevido` + `Veredicto.gramatica` como AVISO, que e
+        o que o §4.1 manda a 0,21%. Mais a correccao de um comentario que
+        prometia verificacao de colocacao pronominal e nao havia nenhuma
+[x] C2  243 testes (eram 239) e o ./pessoa responde
+[x] C3  relatorio FASE-5T-RELATORIO.md
+[x] C4  CONTROLO.md
 ```
 
 **Sessões paralelas:** verificado antes de abrir (nenhuma neste repositório).

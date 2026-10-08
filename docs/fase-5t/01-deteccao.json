@@ -1,0 +1,387 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5T.md §2-4",
+  "geracao_nova": false,
+  "pronomes": [
+   "lhe",
+   "lhes",
+   "me",
+   "te"
+  ],
+  "n_licenciadores": 113,
+  "n_poemas_pt": 1926
+ },
+ "T1_corpus": {
+  "R-PRO": {
+   "n": 1926,
+   "marcados": 435,
+   "taxa": 0.22586,
+   "wilson95": [
+    0.20774,
+    0.24507
+   ],
+   "exemplos": [
+    "tu [me] amares",
+    "tu [me] escolheres",
+    "e [te] amar",
+    "quase [me] cansa",
+    "cansa [me] cansar",
+    "guindaste [te] eleva",
+    "guindaste [te] eleva",
+    "repente [me] lembre",
+    "tia [me] punha",
+    "^ [te] segredo"
+   ]
+  },
+  "R-GER": {
+   "n": 1926,
+   "marcados": 101,
+   "taxa": 0.05244,
+   "wilson95": [
+    0.04335,
+    0.06332
+   ],
+   "exemplos": [
+    "vamos despertando",
+    "estar olhando",
+    "estou vendo",
+    "estou vendo",
+    "vou escrevendo",
+    "vai andando",
+    "vou andando",
+    "vou vivendo",
+    "vou sendo",
+    "vou sendo"
+   ]
+  },
+  "R-VOC": {
+   "n": 1926,
+   "marcados": 4,
+   "taxa": 0.00208,
+   "wilson95": [
+    0.00081,
+    0.00533
+   ],
+   "exemplos": [
+    "você",
+    "você",
+    "vocês",
+    "você",
+    "você",
+    "você",
+    "você",
+    "vocês"
+   ]
+  },
+  "_se": {
+   "n": 1926,
+   "marcados": 359,
+   "taxa": 0.1864,
+   "wilson95": [
+    0.16963,
+    0.20441
+   ],
+   "exemplos": [
+    "olhos [se] esvaia",
+    "mas [se] ele",
+    "sabe [se] ainda",
+    "corno [se] o",
+    "e [se] tiverem",
+    "sei [se] já",
+    "sabe [se] existiu",
+    "isto [se] fundou",
+    "seria [se] eu",
+    "ela [se] percebesse"
+   ]
+  },
+  "_vosso": {
+   "n": 1926,
+   "marcados": 29,
+   "taxa": 0.01506,
+   "wilson95": [
+    0.0105,
+    0.02154
+   ],
+   "exemplos": [
+    "vossa",
+    "vossa",
+    "Vosso",
+    "vossa",
+    "Vosso",
+    "vosso",
+    "vossos",
+    "vossas",
+    "vossos",
+    "vossa"
+   ]
+  }
+ },
+ "T1_quais": {
+  "R-PRO": [
+   "poem_1000",
+   "poem_1006",
+   "poem_1025",
+   "poem_1028",
+   "poem_1032",
+   "poem_1038",
+   "poem_1039",
+   "poem_1046",
+   "poem_1050",
+   "poem_1062",
+   "poem_1063",
+   "poem_1069"
+  ],
+  "R-GER": [
+   "poem_100",
+   "poem_1012",
+   "poem_1042",
+   "poem_1104",
+   "poem_1130",
+   "poem_1132",
+   "poem_1158",
+   "poem_1238",
+   "poem_1265",
+   "poem_135",
+   "poem_141",
+   "poem_143"
+  ],
+  "R-VOC": [
+   "poem_1225",
+   "poem_3134",
+   "poem_3326",
+   "poem_3567"
+  ]
+ },
+ "T2_gerados_5q": {
+  "R-PRO": {
+   "n": 48,
+   "marcados": 4,
+   "taxa": 0.08333,
+   "wilson95": [
+    0.03288,
+    0.19554
+   ],
+   "exemplos": [
+    "pedra [me] dói",
+    "tu [me] deixas",
+    "presença [me] apossa",
+    "confusão [me] enche",
+    "e [me] afoga"
+   ]
+  },
+  "R-GER": {
+   "n": 48,
+   "marcados": 2,
+   "taxa": 0.04167,
+   "wilson95": [
+    0.0115,
+    0.13976
+   ],
+   "exemplos": [
+    "vai cobrindo",
+    "vou continuar sendo",
+    "continuar sendo"
+   ]
+  },
+  "R-VOC": {
+   "n": 48,
+   "marcados": 1,
+   "taxa": 0.02083,
+   "wilson95": [
+    0.00369,
+    0.10899
+   ],
+   "exemplos": [
+    "vocês"
+   ]
+  },
+  "_se": {
+   "n": 48,
+   "marcados": 14,
+   "taxa": 0.29167,
+   "wilson95": [
+    0.18241,
+    0.4318
+   ],
+   "exemplos": [
+    "ou [se] encerre",
+    "costa [se] estende",
+    "sei [se] colherei",
+    "magoais [se] também",
+    "sei [se]",
+    "incerteza [se] acalenta",
+    "sombra [se] insinua",
+    "mundo [se] curvar",
+    "e [se] agarram",
+    "café [se] vende"
+   ]
+  },
+  "_vosso": {
+   "n": 48,
+   "marcados": 2,
+   "taxa": 0.04167,
+   "wilson95": [
+    0.0115,
+    0.13976
+   ],
+   "exemplos": [
+    "vossa",
+    "vossa"
+   ]
+  }
+ },
+ "T2_reais_5q": {
+  "R-PRO": {
+   "n": 24,
+   "marcados": 6,
+   "taxa": 0.25,
+   "wilson95": [
+    0.11999,
+    0.449
+   ],
+   "exemplos": [
+    "melhor [te] acolhe",
+    "^ [te] mudarão",
+    "seres [te] empenhares",
+    "outros [me] encontrem",
+    "ânsia [me] fica",
+    "luz [me] desperte",
+    "treva [me] roube",
+    "novo [te] amei"
+   ]
+  },
+  "R-GER": {
+   "n": 24,
+   "marcados": 0,
+   "taxa": 0.0,
+   "wilson95": [
+    0.0,
+    0.13798
+   ],
+   "exemplos": []
+  },
+  "R-VOC": {
+   "n": 24,
+   "marcados": 0,
+   "taxa": 0.0,
+   "wilson95": [
+    0.0,
+    0.13798
+   ],
+   "exemplos": []
+  },
+  "_se": {
+   "n": 24,
+   "marcados": 4,
+   "taxa": 0.16667,
+   "wilson95": [
+    0.06679,
+    0.35853
+   ],
+   "exemplos": [
+    "mas [se] choro",
+    "longe [se] altera",
+    "unanimemente [se] moviam",
+    "mas [se] choro"
+   ]
+  },
+  "_vosso": {
+   "n": 24,
+   "marcados": 0,
+   "taxa": 0.0,
+   "wilson95": [
+    0.0,
+    0.13798
+   ],
+   "exemplos": []
+  }
+ },
+ "A4_5m_por_modelo": {
+  "llama3.1:8b-instruct-q4_K_M": {
+   "R-PRO": 0.2,
+   "R-GER": 0.04444,
+   "R-VOC": 0.01111
+  },
+  "qwen2.5:7b-instruct-q4_K_M": {
+   "R-PRO": 0.12222,
+   "R-GER": 0.01111,
+   "R-VOC": 0.0
+  }
+ },
+ "A4_5m_por_voz": {
+  "campos": {
+   "R-PRO": 0.16667,
+   "R-GER": 0.05,
+   "R-VOC": 0.0
+  },
+  "ortonimo": {
+   "R-PRO": 0.13333,
+   "R-GER": 0.03333,
+   "R-VOC": 0.01667
+  },
+  "reis": {
+   "R-PRO": 0.18333,
+   "R-GER": 0.0,
+   "R-VOC": 0.0
+  }
+ },
+ "A4_5q_por_modelo": {
+  "llama3.1:8b": {
+   "R-PRO": 0.125,
+   "R-GER": 0.08333,
+   "R-VOC": 0.04167
+  },
+  "qwen2.5:7b": {
+   "R-PRO": 0.04167,
+   "R-GER": 0.0,
+   "R-VOC": 0.0
+  }
+ },
+ "portoes": {
+  "R-PRO": {
+   "T1": {
+    "taxa_corpus": 0.22586,
+    "limiar": 0.01,
+    "dispara": false
+   },
+   "T2": {
+    "taxa_gerados": 0.08333,
+    "wilson_inf": 0.03288,
+    "dispara": false
+   },
+   "tratamento_pre_escrito": "nao entra (T1 nao dispara)"
+  },
+  "R-GER": {
+   "T1": {
+    "taxa_corpus": 0.05244,
+    "limiar": 0.01,
+    "dispara": false
+   },
+   "T2": {
+    "taxa_gerados": 0.04167,
+    "wilson_inf": 0.0115,
+    "dispara": false
+   },
+   "tratamento_pre_escrito": "nao entra (T1 nao dispara)"
+  },
+  "R-VOC": {
+   "T1": {
+    "taxa_corpus": 0.00208,
+    "limiar": 0.01,
+    "dispara": true
+   },
+   "T2": {
+    "taxa_gerados": 0.02083,
+    "wilson_inf": 0.00369,
+    "dispara": true
+   },
+   "tratamento_pre_escrito": "AVISO em suspeitas"
+  }
+ },
+ "T3": {
+  "dispara": true
+ },
+ "T4": {
+  "dispara": false
+ }
+}
