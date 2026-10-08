@@ -1,0 +1,191 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5U.md §3",
+  "n_amostras": 120,
+  "n_agrupamentos": 30,
+  "razao_ortografica": 20,
+  "n_variantes_ortograficas": 209,
+  "lido_no_texto": "cru (§2.1)",
+  "nulos_publicados_das_fases_anteriores": {
+   "ortografia_5r20x": 0.0073,
+   "proclise": 0.0265,
+   "voce": 0.0021,
+   "gerundio": 0.0524
+  },
+  "reamostras": 4000,
+  "semente": 20261008
+ },
+ "portoes": {
+  "U1": {
+   "A": 0.0,
+   "C": 0.0408,
+   "diferenca": -0.0408,
+   "ic95": [
+    -0.0959,
+    0.0
+   ],
+   "exclui_zero": false,
+   "n_agrupamentos": 30,
+   "dispara": false
+  },
+  "U1_linha": {
+   "limiar": 0.15,
+   "proporcao_A": 0.0,
+   "dispara": false
+  },
+  "U2": {
+   "A": 0.0,
+   "C": 0.0167,
+   "diferenca": -0.0167,
+   "ic95": [
+    -0.05,
+    0.0
+   ],
+   "exclui_zero": false,
+   "n_agrupamentos": 30,
+   "dispara": false
+  },
+  "U3": {
+   "dispara": true,
+   "leitura": "o bloco e decoracao; o passo 34 sai do prompt"
+  }
+ },
+ "descritivo": {
+  "voce": {
+   "A": 0.0,
+   "C": 0.0,
+   "diferenca": 0.0,
+   "ic95": [
+    0.0,
+    0.0
+   ],
+   "exclui_zero": false,
+   "n_agrupamentos": 30
+  },
+  "gerundio": {
+   "A": 0.0333,
+   "C": 0.0333,
+   "diferenca": 0.0,
+   "ic95": [
+    -0.0667,
+    0.0667
+   ],
+   "exclui_zero": false,
+   "n_agrupamentos": 30
+  },
+  "e_verso": {
+   "A": 0.9833,
+   "C": 1.0,
+   "diferenca": -0.0167,
+   "ic95": [
+    -0.05,
+    0.0
+   ],
+   "exclui_zero": false,
+   "n_agrupamentos": 30
+  }
+ },
+ "por_voz": {
+  "campos": {
+   "proclise": {
+    "A": 0.0,
+    "C": 0.0476,
+    "diferenca": -0.0476,
+    "ic95": [
+     -0.1579,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   },
+   "ortografia": {
+    "A": 0.0,
+    "C": 0.05,
+    "diferenca": -0.05,
+    "ic95": [
+     -0.15,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   }
+  },
+  "ortonimo": {
+   "proclise": {
+    "A": 0.0,
+    "C": 0.0625,
+    "diferenca": -0.0625,
+    "ic95": [
+     -0.125,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   },
+   "ortografia": {
+    "A": 0.0,
+    "C": 0.0,
+    "diferenca": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   }
+  },
+  "reis": {
+   "proclise": {
+    "A": 0.0,
+    "C": 0.0,
+    "diferenca": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   },
+   "ortografia": {
+    "A": 0.0,
+    "C": 0.0,
+    "diferenca": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "exclui_zero": false,
+    "n_agrupamentos": 10
+   }
+  }
+ },
+ "tokens_system": {
+  "C": [
+   340,
+   370,
+   388
+  ],
+  "A": [
+   243,
+   273,
+   291
+  ]
+ },
+ "latencia_mediana_s": {
+  "C": 37.2,
+  "A": 42.4
+ },
+ "truncadas": {
+  "C": 1,
+  "A": 0
+ },
+ "tentativas_2": {
+  "C": 17,
+  "A": 16
+ },
+ "exemplos_proclise_A": [],
+ "exemplos_orto_A": [],
+ "exemplos_orto_C": [
+  "veem"
+ ]
+}

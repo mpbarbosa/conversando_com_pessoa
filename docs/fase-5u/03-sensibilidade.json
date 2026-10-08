@@ -1,0 +1,98 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5U.md §4.3",
+  "analise": "SENSIBILIDADE, posterior e declarada",
+  "motivada_por": "«Em cada instante te vejo a ti mesma» — a regua da 5T nao a marca porque «Em» e preposicao e licencia a distancia",
+  "diferenca": "preposicao licencia SO adjacente; os outros atractores continuam a licenciar a distancia",
+  "reamostras": 4000,
+  "semente": 20261008
+ },
+ "nulo_corpus_regua_estrita": {
+  "poemas_marcados": 106,
+  "n_poemas": 1926,
+  "taxa_por_poema": 0.055,
+  "proclise": 123,
+  "enclise": 1349,
+  "proporcao": 0.0836
+ },
+ "por_braco": {
+  "C": {
+   "n": 60,
+   "proclise": 7,
+   "enclise": 47,
+   "cliticos": 54,
+   "proporcao": 0.1296,
+   "wilson95": [
+    0.0642,
+    0.2442
+   ],
+   "itens_marcados": 7
+  },
+  "A": {
+   "n": 60,
+   "proclise": 4,
+   "enclise": 34,
+   "cliticos": 38,
+   "proporcao": 0.1053,
+   "wilson95": [
+    0.0417,
+    0.2413
+   ],
+   "itens_marcados": 2
+  }
+ },
+ "U1_regua_estrita": {
+  "A": 0.1053,
+  "C": 0.1296,
+  "diferenca": -0.0244,
+  "ic95": [
+   -0.1702,
+   0.1737
+  ],
+  "exclui_zero": false,
+  "n_agrupamentos": 30
+ },
+ "U1_por_itens": {
+  "A": 0.0333,
+  "C": 0.1167,
+  "diferenca": -0.0833,
+  "ic95": [
+   -0.2,
+   0.0167
+  ],
+  "exclui_zero": false,
+  "n_agrupamentos": 30
+ },
+ "U1_linha_regua_estrita": {
+  "limiar": 0.15,
+  "A": 0.1053,
+  "wilson_sup_A": 0.2413,
+  "exclui_sistematico": false
+ },
+ "cliticos_por_item": {
+  "A": 0.6333,
+  "C": 0.9,
+  "diferenca": -0.2667,
+  "ic95": [
+   -0.6,
+   0.05
+  ],
+  "exclui_zero": false,
+  "n_agrupamentos": 30
+ },
+ "exemplos_C": [
+  "pedra [me] dói",
+  "cigarro [me] bate",
+  "universo [me] bate",
+  ", [me] perturba",
+  "mesmo [me] não",
+  "suspiro [me] traz",
+  "tu [me] deixas"
+ ],
+ "exemplos_A": [
+  "vazio [me] suga",
+  "abismo [me] chama",
+  "peso [me] aguça",
+  "instante [te] vejo"
+ ]
+}

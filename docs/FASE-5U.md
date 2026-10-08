@@ -149,14 +149,21 @@ honesta não é optimista.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  gerar os 120 (3 vozes x 10 perguntas x 2 repeticoes x 2 bracos)
-[ ] A2  asserir que o `system` dos dois bracos difere EXACTAMENTE no bloco
-[ ] A3  os quatro instrumentos, no texto CRU
-[ ] B1  U1, U1', U2 com bootstrap emparelhado por celula
-[ ] B2  a decisao do §3.1 accionada
-[ ] C1  relatorio FASE-5U-RELATORIO.md
-[ ] C2  a docstring do INTERDICOES corrigida
-[ ] C3  CONTROLO.md
+[x] A1  120 geradas (3 vozes x 10 perguntas x 2 repeticoes x 2 bracos)
+[x] A2  asserido: o `system` difere em 300 caracteres nas tres vozes, e sao o
+        bloco. Verificado antes de gerar E a cada celula
+[x] A3  os quatro instrumentos, no texto CRU
+[x] A7  SENSIBILIDADE posterior e declarada: a regua pre-registada licenciava
+        qualquer preposicao a distancia, o que e permissivo de mais. Encontrado
+        a ler «Em cada instante te vejo» no braco A
+[x] B1  U1 nao dispara (A 0,0000 contra C 0,0408) · U1' nao · U2 nao (UM item
+        marcado em 120) · U3 DISPARA
+[x] B2  decisao do §3.1 accionada: U3 -> nada e removido. **Mas dispara no
+        chao**: 2 ocorrencias de proclise e 1 marca ortografica no braco de
+        base. Ausencia de prova nao e prova de ausencia
+[x] C1  relatorio FASE-5U-RELATORIO.md
+[x] C2  a docstring do INTERDICOES corrigida
+[x] C3  CONTROLO.md
 ```
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
