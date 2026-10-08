@@ -25,7 +25,20 @@ import requests
 from .base import ErroDeGeracao, Resposta
 
 URL_BASE = "http://127.0.0.1:11434"
-MODELO = "qwen2.5:7b-instruct-q4_K_M"
+
+#: Trocado de `qwen2.5:7b-instruct-q4_K_M` em 2026-10-08, pela Fase 5S.
+#:
+#: A evidencia, de sete fases: +0,700 em 3a' no Caeiro (5H, p=0,0002),
+#: **replicado a +0,667 por um terceiro avaliador cego noutra sessao** (5O);
+#: AUC ao poeta de **0,526** contra os 0,851 do qwen (5F/5O); capacidade
+#: excluida como explicacao (5N: +145% de parametros rendem +0,400 n.s.); forma
+#: melhor em 3 das 4 vozes (5M); **sem diferenca** no conteudo das outras tres
+#: (5Q); latencia igual (28,6 s contra 29,3 s).
+#:
+#: O custo, medido na 5S: o roteador de voz **partilha esta constante** e cai de
+#: **72% para 68%** — duas perguntas em 40, que o protocolo pre-escreveu como
+#: «nao se le como diferenca». E o roteador apenas **propoe**.
+MODELO = "llama3.1:8b-instruct-q4_K_M"
 
 NUM_THREAD = 10
 REPEAT_PENALTY = 1.1

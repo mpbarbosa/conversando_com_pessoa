@@ -121,13 +121,19 @@ feita primeiro.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  correr o bench do roteador da Fase 4 com o llama3.1:8b
-[ ] B1  S1/S2/S3 contra os 72% do qwen
-[ ] C1  aplicar a decisao do §4.1 em src/, com teste
-[ ] C2  os testes passam e o ./pessoa responde
-[ ] C3  relatorio FASE-5S-RELATORIO.md
-[ ] C4  CONTROLO.md: a decisao, e o roteador partilhado
+[x] A1  bench corrido, reutilizando o harness da Fase 4 sem o alterar
+[x] B1  S1 DISPARA (68%, 27/40) · S2 nao · S3 nao (68% contra 72%)
+[x] C1  MODELO = "llama3.1:8b-instruct-q4_K_M", com a proveniencia no
+        comentario e um teste que fixa TAMBEM a partilha com o roteador
+[x] C2  239 testes (eram 238) e o ./pessoa responde
+[x] C3  relatorio FASE-5S-RELATORIO.md
+[x] C4  CONTROLO.md: a decisao em §3, a fase, e os passos 31-33 fechados
 ```
+
+**A decisao do §4.1 accionada foi a primeira linha: trocar globalmente.** E o
+§1.1 do relatorio registra a convergencia: a afinidade do llama com o **Reis**
+aparece agora em **tres medicoes independentes** — a forma (5M), a predicao
+registada (5K) e o roteamento (esta fase).
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
 nomeados.

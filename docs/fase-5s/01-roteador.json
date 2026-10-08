@@ -1,0 +1,109 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5S.md §3-4",
+  "modelo": "llama3.1:8b-instruct-q4_K_M",
+  "gabarito": "docs/fase-1/08-perguntas.json (40, etiquetadas)",
+  "determinista": "temperature=0, uma corrida",
+  "harness": "fase-4/bench_roteador_llm.py, reutilizado"
+ },
+ "exactidao": 0.675,
+ "certos": 27,
+ "n": 40,
+ "por_voz": {
+  "caeiro": 0.5,
+  "campos": 0.7,
+  "reis": 0.9,
+  "ortonimo": 0.6
+ },
+ "erros": [
+  {
+   "id": "q01",
+   "q": "por que é que as pessoas acham melancólico o fim do dia?",
+   "esperada": "caeiro",
+   "prevista": "reis"
+  },
+  {
+   "id": "q02",
+   "q": "o que fazemos não deixa marca; tudo continua igual depois de passarmos",
+   "esperada": "caeiro",
+   "prevista": "reis"
+  },
+  {
+   "id": "q04",
+   "q": "queria parar de me sentir existir e ser apenas aquilo que os outros vêem",
+   "esperada": "caeiro",
+   "prevista": "reis"
+  },
+  {
+   "id": "q05",
+   "q": "depois de gostar de alguém, as coisas em volta ficaram mais nítidas",
+   "esperada": "caeiro",
+   "prevista": "campos"
+  },
+  {
+   "id": "q09",
+   "q": "quando eu morrer o mundo continua exactamente como está",
+   "esperada": "caeiro",
+   "prevista": "reis"
+  },
+  {
+   "id": "q12",
+   "q": "sinto que não sou ninguém e ao mesmo tempo que carrego tudo o que poderia ter sido",
+   "esperada": "campos",
+   "prevista": "ortonimo"
+  },
+  {
+   "id": "q16",
+   "q": "queria ser todas as pessoas e todos os lugares de uma só vez",
+   "esperada": "campos",
+   "prevista": "ortonimo"
+  },
+  {
+   "id": "q20",
+   "q": "sou uma série de sensações sem nada por baixo que as una",
+   "esperada": "campos",
+   "prevista": "caeiro"
+  },
+  {
+   "id": "q26",
+   "q": "sentar-me à beira do rio e deixar passar o que passa",
+   "esperada": "reis",
+   "prevista": "caeiro"
+  },
+  {
+   "id": "q31",
+   "q": "quando acordamos, o sítio prometido desaparece e fica só água",
+   "esperada": "ortonimo",
+   "prevista": "campos"
+  },
+  {
+   "id": "q32",
+   "q": "uma brisa leve faz-me querer partir para outro lugar sem saber porquê",
+   "esperada": "ortonimo",
+   "prevista": "campos"
+  },
+  {
+   "id": "q33",
+   "q": "um gesto pequeno à mesa diz-me que a despedida é definitiva",
+   "esperada": "ortonimo",
+   "prevista": "campos"
+  },
+  {
+   "id": "q34",
+   "q": "ofereço-lhe o meu afecto e ela nem repara",
+   "esperada": "ortonimo",
+   "prevista": "campos"
+  }
+ ],
+ "sem_voz_reconhecida": [],
+ "parede_mediana_s": 1.28,
+ "prefill_mediana_s": 0.89,
+ "referencia_qwen7b": 0.72,
+ "S1": {
+  "limiar": 0.65,
+  "dispara": true
+ },
+ "S3": {
+  "bate_o_qwen": false
+ }
+}

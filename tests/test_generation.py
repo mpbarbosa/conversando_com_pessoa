@@ -190,3 +190,23 @@ def test_servidor_e_modelo(vivo):
         pytest.skip("Ollama não está a correr")
     g = OllamaGenerator()
     assert g.modelo_instalado(), f"{g.modelo} não instalado"
+
+
+# --- Fase 5S: o modelo de serviço, e o roteador que o partilha ----------- #
+
+def test_o_modelo_de_servico_e_o_llama_e_o_roteador_partilha_o():
+    """Fixa a decisão da Fase 5S e a sua consequência medida.
+
+    A troca entrou com +0,667 em 3a′ replicado por um terceiro avaliador cego
+    (5O) e AUC 0,526 ao poeta contra 0,851 do qwen. O custo medido é o
+    **roteador**, que usa esta mesma constante por partilhar a instância de
+    gerador: 72% -> 68%, duas perguntas em 40.
+
+    Se alguém separar os dois modelos, este teste é o sítio onde se vê que a
+    partilha era deliberada e não um acidente.
+    """
+    from src.generation.ollama import MODELO, OllamaGenerator
+
+    assert MODELO == "llama3.1:8b-instruct-q4_K_M"
+    assert OllamaGenerator().modelo == MODELO, (
+        "o roteador recebe o gerador do pipeline, logo herda esta constante")
