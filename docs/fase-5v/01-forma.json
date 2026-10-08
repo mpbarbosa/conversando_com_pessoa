@@ -1,0 +1,237 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5V.md §2-4",
+  "semente": 20261008,
+  "permutacoes": 2000,
+  "reamostras": 4000,
+  "silabas": "grupos de vogais, sem elisao (§5.1)",
+  "chave_consoante": "desde a penultima vogal (§5.2)"
+ },
+ "A2_calibracao_reais": {
+  "reis": {
+   "n": 251,
+   "rima_consoante": 0.3586,
+   "rima_toante": 0.9044,
+   "regularidade_media": 0.4755,
+   "versos_mediana": 11,
+   "silabas_mediana": 9.0,
+   "nulo_permutacao_consoante": {
+    "media": 0.2391,
+    "p95": 0.2749,
+    "p99": 0.2908
+   }
+  },
+  "campos": {
+   "n": 320,
+   "rima_consoante": 0.7063,
+   "rima_toante": 0.9156,
+   "regularidade_media": 0.3566,
+   "versos_mediana": 17.0,
+   "silabas_mediana": 14,
+   "nulo_permutacao_consoante": {
+    "media": 0.4585,
+    "p95": 0.4906,
+    "p99": 0.5062
+   }
+  },
+  "ortonimo": {
+   "n": 1206,
+   "rima_consoante": 0.8143,
+   "rima_toante": 0.9577,
+   "regularidade_media": 0.7572,
+   "versos_mediana": 11.0,
+   "silabas_mediana": 9,
+   "nulo_permutacao_consoante": {
+    "media": 0.2653,
+    "p95": 0.2803,
+    "p99": 0.2861
+   }
+  },
+  "caeiro": {
+   "n": 120,
+   "rima_consoante": 0.6417,
+   "rima_toante": 0.925,
+   "regularidade_media": 0.3642,
+   "versos_mediana": 12.0,
+   "silabas_mediana": 13.0,
+   "nulo_permutacao_consoante": {
+    "media": 0.3344,
+    "p95": 0.3917,
+    "p99": 0.4167
+   }
+  }
+ },
+ "V1": {
+  "rima_reis": 0.3586,
+  "nulo_p99": 0.2908,
+  "rima_caeiro": 0.6417,
+  "dispara": false
+ },
+ "V2": {
+  "regularidade_reis": 0.4755,
+  "regularidade_campos": 0.3566,
+  "dispara": true
+ },
+ "V3": {
+  "campos": {
+   "n_gerado_5u": 20,
+   "n_real": 320,
+   "perfil_gerado_5u": {
+    "n": 20,
+    "rima_consoante": 0.2,
+    "rima_toante": 0.95,
+    "regularidade_media": 0.5094,
+    "versos_mediana": 12.0,
+    "silabas_mediana": 14
+   },
+   "perfil_gerado_5m": {
+    "n": 60,
+    "rima_consoante": 0.45,
+    "rima_toante": 0.9833,
+    "regularidade_media": 0.5165,
+    "versos_mediana": 15.0,
+    "silabas_mediana": 13.0
+   },
+   "perfil_real": {
+    "n": 320,
+    "rima_consoante": 0.7063,
+    "rima_toante": 0.9156,
+    "regularidade_media": 0.3566,
+    "versos_mediana": 17.0,
+    "silabas_mediana": 14
+   },
+   "metro": {
+    "a": 0.3566,
+    "b": 0.5094,
+    "diferenca": -0.1527,
+    "ic95": [
+     -0.2521,
+     -0.0664
+    ],
+    "exclui_zero": true,
+    "n_a": 309,
+    "n_b": 20
+   },
+   "metro_5m": {
+    "a": 0.3566,
+    "b": 0.5165,
+    "diferenca": -0.1599,
+    "ic95": [
+     -0.2093,
+     -0.1104
+    ],
+    "exclui_zero": true,
+    "n_a": 309,
+    "n_b": 60
+   }
+  },
+  "ortonimo": {
+   "n_gerado_5u": 20,
+   "n_real": 1206,
+   "perfil_gerado_5u": {
+    "n": 20,
+    "rima_consoante": 0.3,
+    "rima_toante": 0.9,
+    "regularidade_media": 0.6672,
+    "versos_mediana": 9.5,
+    "silabas_mediana": 11.0
+   },
+   "perfil_gerado_5m": {
+    "n": 60,
+    "rima_consoante": 0.3,
+    "rima_toante": 0.95,
+    "regularidade_media": 0.6712,
+    "versos_mediana": 12.0,
+    "silabas_mediana": 10
+   },
+   "perfil_real": {
+    "n": 1206,
+    "rima_consoante": 0.8143,
+    "rima_toante": 0.9577,
+    "regularidade_media": 0.7572,
+    "versos_mediana": 11.0,
+    "silabas_mediana": 9
+   },
+   "metro": {
+    "a": 0.7572,
+    "b": 0.6672,
+    "diferenca": 0.09,
+    "ic95": [
+     0.0132,
+     0.1776
+    ],
+    "exclui_zero": true,
+    "n_a": 1179,
+    "n_b": 20
+   },
+   "metro_5m": {
+    "a": 0.7572,
+    "b": 0.6712,
+    "diferenca": 0.0861,
+    "ic95": [
+     0.0354,
+     0.1365
+    ],
+    "exclui_zero": true,
+    "n_a": 1179,
+    "n_b": 60
+   }
+  },
+  "reis": {
+   "n_gerado_5u": 20,
+   "n_real": 251,
+   "perfil_gerado_5u": {
+    "n": 20,
+    "rima_consoante": 0.35,
+    "rima_toante": 0.9,
+    "regularidade_media": 0.5269,
+    "versos_mediana": 10.5,
+    "silabas_mediana": 10
+   },
+   "perfil_gerado_5m": {
+    "n": 60,
+    "rima_consoante": 0.3167,
+    "rima_toante": 0.9667,
+    "regularidade_media": 0.6151,
+    "versos_mediana": 12.0,
+    "silabas_mediana": 10.0
+   },
+   "perfil_real": {
+    "n": 251,
+    "rima_consoante": 0.3586,
+    "rima_toante": 0.9044,
+    "regularidade_media": 0.4755,
+    "versos_mediana": 11,
+    "silabas_mediana": 9.0
+   },
+   "metro": {
+    "a": 0.4755,
+    "b": 0.5269,
+    "diferenca": -0.0514,
+    "ic95": [
+     -0.1432,
+     0.041
+    ],
+    "exclui_zero": false,
+    "n_a": 241,
+    "n_b": 20
+   },
+   "metro_5m": {
+    "a": 0.4755,
+    "b": 0.6151,
+    "diferenca": -0.1396,
+    "ic95": [
+     -0.1951,
+     -0.0854
+    ],
+    "exclui_zero": true,
+    "n_a": 241,
+    "n_b": 60
+   }
+  }
+ },
+ "V3_dispara": true,
+ "V4": {
+  "dispara": false
+ }
+}

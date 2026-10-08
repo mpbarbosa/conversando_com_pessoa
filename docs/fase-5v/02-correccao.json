@@ -1,0 +1,119 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5V.md",
+  "tudo_posterior": true,
+  "erro_corrigido": "o §1 atribuiu ao Reis a instrucao do ortonimo; o Reis manda «sem rima»",
+  "fonte_da_premissa": "src/voices.py, anterior a esta fase"
+ },
+ "A1_A2_calibracao_corrigida": {
+  "ortonimo": {
+   "n": 1206,
+   "rima_com_repeticao": 0.8143,
+   "rima_sem_repeticao": 0.7769,
+   "nulo_sem_repeticao": {
+    "media": 0.2176,
+    "p99": 0.2388
+   }
+  },
+  "reis": {
+   "n": 251,
+   "rima_com_repeticao": 0.3586,
+   "rima_sem_repeticao": 0.1992,
+   "nulo_sem_repeticao": {
+    "media": 0.1601,
+    "p99": 0.2072
+   }
+  },
+  "campos": {
+   "n": 320,
+   "rima_com_repeticao": 0.7063,
+   "rima_sem_repeticao": 0.4594,
+   "nulo_sem_repeticao": {
+    "media": 0.3648,
+    "p99": 0.4094
+   }
+  },
+  "caeiro": {
+   "n": 120,
+   "rima_com_repeticao": 0.6417,
+   "rima_sem_repeticao": 0.1583,
+   "nulo_sem_repeticao": {
+    "media": 0.2135,
+    "p99": 0.2833
+   }
+  }
+ },
+ "V1_corrigido": {
+  "ortonimo": 0.7769,
+  "reis": 0.1992,
+  "nulo_p99_ortonimo": 0.2388,
+  "dispara": true
+ },
+ "A3_metro": {
+  "campos": {
+   "real_media": 0.3566,
+   "gerado_5u_media": 0.5094,
+   "gerado_5m_media": 0.5165,
+   "auc_5u": {
+    "auc": 0.7286,
+    "ic95": [
+     0.6417,
+     0.8135
+    ]
+   },
+   "auc_5m": {
+    "auc": 0.7403,
+    "ic95": [
+     0.6817,
+     0.7973
+    ]
+   },
+   "direccao": "gerado mais regular"
+  },
+  "reis": {
+   "real_media": 0.4755,
+   "gerado_5u_media": 0.5269,
+   "gerado_5m_media": 0.6151,
+   "auc_5u": {
+    "auc": 0.591,
+    "ic95": [
+     0.4626,
+     0.7075
+    ]
+   },
+   "auc_5m": {
+    "auc": 0.6881,
+    "ic95": [
+     0.6154,
+     0.7559
+    ]
+   },
+   "direccao": "gerado mais regular"
+  },
+  "ortonimo": {
+   "real_media": 0.7572,
+   "gerado_5u_media": 0.6672,
+   "gerado_5m_media": 0.6712,
+   "auc_5u": {
+    "auc": 0.6386,
+    "ic95": [
+     0.5404,
+     0.7352
+    ]
+   },
+   "auc_5m": {
+    "auc": 0.632,
+    "ic95": [
+     0.5687,
+     0.693
+    ]
+   },
+   "direccao": "real mais regular"
+  }
+ },
+ "amplitude_entre_vozes": {
+  "real": 0.4006,
+  "gerado_5m": 0.1547,
+  "gerado_5u": 0.1578
+ }
+}

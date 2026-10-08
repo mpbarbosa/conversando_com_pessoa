@@ -165,13 +165,21 @@ mais útil que arranjar um sétimo instrumento até algum disparar.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  instrumentos escritos como o §2 os declara, sem olhar para dados
-[ ] A2  V1 e V2: calibracao nos poemas REAIS, por voz, com nulo de permutacao
-[ ] A3  V3: real contra gerado, por voz, nos conjuntos ja commitados
-        (5U braco C = 60 em configuracao de producao, 5M = 180, 5Q = 48+24)
-[ ] B1  portoes e a decisao do §4.1
-[ ] C1  relatorio FASE-5V-RELATORIO.md
-[ ] C2  CONTROLO.md
+[x] A1  instrumentos escritos como o §2 os declara, sem olhar para dados
+[x] A2  V1 NAO dispara -- e o erro era MEU: o §1 atribuiu ao Reis a instrucao
+        do ortonimo. O Reis manda «sem rima». V2 dispara
+[x] A4  V1' com o par certo (ortonimo vs Reis): DISPARA, 0,777 contra 0,199
+[x] A5  a chave de rima contava REPETICAO: Caeiro cai de 0,64 para 0,16,
+        abaixo do proprio nulo. Excluidos os pares de palavra igual
+[x] A6  metro: AUC 0,63-0,74 e a AMPLITUDE entre vozes -- 0,4006 no poeta
+        contra 0,1547 no modelo, 2,6x
+[x] A7  V3 da rima: o ortonimo gerado rima a 0,2167, que E o seu proprio nulo
+        de permutacao. NAO RIMA NADA, e a persona manda-o rimar
+[x] B1  V3 dispara nos dois instrumentos e replica em dois conjuntos. A decisao
+        do §4.1 autoriza PRE-REGISTAR uma intervencao, e na voz onde disparou:
+        o ortonimo, nao o Reis que o §4.1 previa (vozes trocadas)
+[x] C1  relatorio FASE-5V-RELATORIO.md
+[x] C2  CONTROLO.md
 ```
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
