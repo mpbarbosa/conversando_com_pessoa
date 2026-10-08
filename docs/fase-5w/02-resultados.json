@@ -1,0 +1,298 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5W.md §3-4",
+  "fixado_antes_dos_dados": true,
+  "decide": "chave consoante (§3)",
+  "dados_da_5V": {
+   "real_rima": 0.7769,
+   "real_metro": 0.7572,
+   "gerado_rima_5V": 0.2167
+  },
+  "semente": 20261008,
+  "reamostras": 4000
+ },
+ "por_braco": {
+  "C": {
+   "n": 20,
+   "rima_consoante": 0.35,
+   "nulo_consoante": {
+    "media": 0.1015,
+    "p99": 0.25
+   },
+   "rima_letra": 0.4,
+   "nulo_letra": {
+    "media": 0.1613,
+    "p99": 0.35
+   },
+   "rima_toante": 0.9,
+   "nulo_toante": {
+    "media": 0.9375,
+    "p95": 1.0,
+    "p99": 1.0
+   },
+   "metro_medio": 0.6648,
+   "metro_dist_ao_poeta": 0.0924,
+   "e_verso": 1.0,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 0,
+   "tentativas_2": 3,
+   "falhas_guarda": 0,
+   "suspeitas": 4,
+   "versos_mediana": 9.0,
+   "tokens_system": [
+    340
+   ],
+   "segundos_mediana": 32.1,
+   "terminacoes_mais_usadas": [
+    [
+     "ido",
+     6
+    ],
+    [
+     "ado",
+     6
+    ],
+    [
+     "ombra",
+     4
+    ],
+    [
+     "esta",
+     4
+    ],
+    [
+     "alma",
+     3
+    ],
+    [
+     "ento",
+     3
+    ],
+    [
+     "ome",
+     3
+    ],
+    [
+     "eu",
+     3
+    ]
+   ]
+  },
+  "R": {
+   "n": 20,
+   "rima_consoante": 0.1,
+   "nulo_consoante": {
+    "media": 0.1101,
+    "p99": 0.25
+   },
+   "rima_letra": 0.25,
+   "nulo_letra": {
+    "media": 0.1943,
+    "p99": 0.4
+   },
+   "rima_toante": 0.9,
+   "nulo_toante": {
+    "media": 0.9397,
+    "p95": 1.0,
+    "p99": 1.0
+   },
+   "metro_medio": 0.6706,
+   "metro_dist_ao_poeta": 0.0866,
+   "e_verso": 1.0,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 1,
+   "tentativas_2": 3,
+   "falhas_guarda": 0,
+   "suspeitas": 4,
+   "versos_mediana": 10.0,
+   "tokens_system": [
+    369
+   ],
+   "segundos_mediana": 36.5,
+   "terminacoes_mais_usadas": [
+    [
+     "ado",
+     8
+    ],
+    [
+     "eu",
+     7
+    ],
+    [
+     "ome",
+     4
+    ],
+    [
+     "undo",
+     4
+    ],
+    [
+     "ido",
+     4
+    ],
+    [
+     "onge",
+     3
+    ],
+    [
+     "im",
+     3
+    ],
+    [
+     "ao",
+     3
+    ]
+   ]
+  },
+  "X": {
+   "n": 20,
+   "rima_consoante": 0.3,
+   "nulo_consoante": {
+    "media": 0.1594,
+    "p99": 0.35
+   },
+   "rima_letra": 0.5,
+   "nulo_letra": {
+    "media": 0.2733,
+    "p99": 0.5
+   },
+   "rima_toante": 1.0,
+   "nulo_toante": {
+    "media": 0.9659,
+    "p95": 1.0,
+    "p99": 1.0
+   },
+   "metro_medio": 0.7075,
+   "metro_dist_ao_poeta": 0.0497,
+   "e_verso": 1.0,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 0,
+   "tentativas_2": 2,
+   "falhas_guarda": 0,
+   "suspeitas": 1,
+   "versos_mediana": 12.0,
+   "tokens_system": [
+    422
+   ],
+   "segundos_mediana": 38.2,
+   "terminacoes_mais_usadas": [
+    [
+     "ento",
+     6
+    ],
+    [
+     "onde",
+     5
+    ],
+    [
+     "ada",
+     5
+    ],
+    [
+     "ei",
+     5
+    ],
+    [
+     "ade",
+     4
+    ],
+    [
+     "ida",
+     4
+    ],
+    [
+     "undo",
+     4
+    ],
+    [
+     "im",
+     4
+    ]
+   ]
+  }
+ },
+ "portoes": {
+  "R": {
+   "W1": {
+    "rima": 0.1,
+    "limiar": 0.5,
+    "passa_limiar": false,
+    "nulo_p99": 0.25,
+    "acima_do_nulo": false,
+    "ic95_contra_C": [
+     -0.5,
+     0.0
+    ],
+    "exclui_zero": false,
+    "dispara": false
+   },
+   "W1_chave_letra": {
+    "rima": 0.25,
+    "nulo_p99": 0.4,
+    "acima_do_nulo": false,
+    "ic95_contra_C": [
+     -0.45,
+     0.15
+    ],
+    "dispara": false
+   },
+   "as_duas_chaves_concordam": true,
+   "W3": {
+    "danos": [
+     "truncatura: 1 contra 0"
+    ],
+    "dispara": false
+   }
+  },
+  "X": {
+   "W1": {
+    "rima": 0.3,
+    "limiar": 0.5,
+    "passa_limiar": false,
+    "nulo_p99": 0.35,
+    "acima_do_nulo": false,
+    "ic95_contra_C": [
+     -0.35,
+     0.2
+    ],
+    "exclui_zero": false,
+    "dispara": false
+   },
+   "W1_chave_letra": {
+    "rima": 0.5,
+    "nulo_p99": 0.5,
+    "acima_do_nulo": false,
+    "ic95_contra_C": [
+     -0.2,
+     0.4
+    ],
+    "dispara": false
+   },
+   "as_duas_chaves_concordam": true,
+   "W3": {
+    "danos": [],
+    "dispara": true
+   }
+  }
+ },
+ "W2": {
+  "X": 0.3,
+  "R": 0.1,
+  "ic95_X_menos_R": [
+   -0.05,
+   0.45
+  ],
+  "dispara": false,
+  "predicao_registada": "5U §1.3, a escorva por exemplos"
+ },
+ "W4": {
+  "dispara": true
+ },
+ "decisao_pre_escrita": {
+  "bracos_que_passam": [],
+  "escolhido": null
+ }
+}

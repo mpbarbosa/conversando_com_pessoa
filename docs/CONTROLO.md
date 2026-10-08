@@ -52,6 +52,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5T — A gramática fecha-se, e por não haver diferença** | [`FASE-5T.md`](FASE-5T.md) · [relatório](FASE-5T-RELATORIO.md) | ❌ **T1 falha em duas das três regras, e a terceira é residual.** Fecha a **segunda metade** do que a 5Q nomeou, e por razão **diferente** da 5R: não é o corpus ser pequeno, é **não haver nada a detectar** — à régua da próclise por **atracção**, o poeta está em **0,045** e os modelos em **0,052–0,062**, intervalos sobrepostos. O detector morreu **três vezes na mesma fase**, sempre no portão de segurança: 1.ª régua marca **22,6% dos poemas de Pessoa**; a correcção da quebra de linha **não muda nada** (435 → 435); a 3.ª régua baixa a 2,65% e mostra que não há sinal. **E duas das três regras da persona não descrevem o poeta**: «não uses gerúndio» quando Pessoa usa a perífrase em **101 poemas**, e «ênclise sempre» quando ele procliticiza em 51. Entrou o aviso de «você» (0,21% no corpus). **243 testes** |
 | **5U — A causa atribuída é rara demais** | [`FASE-5U.md`](FASE-5U.md) · [relatório](FASE-5U-RELATORIO.md) | ❌ **U3 dispara, mas dispara no chão.** Ablação emparelhada do bloco `REGRAS_LINGUA` (120 amostras, 3 vozes, modelo único): remover a instrução **nunca piorou** a superfície — seis estimativas (3 estatísticas × 2 réguas) com o mesmo sinal —, mas **nenhuma exclui zero**, porque o braço de base tem **2 ocorrências de próclise e 1 marca ortográfica em 60 amostras**. **E é isso o achado:** a 5Q mediu AUC 0,938–1,000 e atribuiu-o a ortografia e gramática; em 120 amostras frescas há **sete** próclises e **uma** marca ortográfica. **A causa atribuída não pode carregar a detecção.** O analisador foi fixado com o diário em 2 de 120. Nada entrou em `src/` |
 | **5V — O ortónimo não rima, e a persona manda-o rimar** | [`FASE-5V.md`](FASE-5V.md) · [relatório](FASE-5V-RELATORIO.md) | ✅ **V3 dispara nos dois instrumentos, e replica em dois conjuntos.** É o **primeiro instrumento mecânico da sequência a discriminar nas três vozes** — e não morreu por falta de eventos porque **cada verso é uma observação**. O achado: o ortónimo real rima a **0,7769** e o gerado a **0,2167**, que é **exactamente o seu próprio nulo de permutação** — não rima menos, **não rima nada**, apesar de a persona mandar «metro regular e **rima**». AUC **0,780** [0,724, 0,831]. **E o Reis é o controlo positivo**: manda «sem rima», e a diferença ali é +0,0325 com IC a conter zero — o instrumento não marca «gerado», marca **rima ausente onde a poética a exige**. O metro dá AUC 0,63–0,74 e revela **compressão**: a amplitude entre vozes é **0,4006** no poeta e **0,1547** no modelo. **0,780 não é 0,938**: a forma é o maior contribuinte mecânico e não fecha o número da 5Q |
+| **5W — A rima não se resolve no prompt** | [`FASE-5W.md`](FASE-5W.md) · [relatório](FASE-5W-RELATORIO.md) | ❌ **W4 dispara: nada entra.** Três braços (como está · directiva · exemplo), 60 amostras, braços **intercalados**. Nenhum chegou ao 0,50 nem passou o **seu próprio nulo**, e as duas chaves concordam. **A directiva piorou nas três medidas** — 0,10 contra 0,35 do braço C —, o que replica a [5I](FASE-5I-RELATORIO.md): **duas intervenções de instrução, duas com sinal negativo**. O **exemplo** não fez dano e moveu tudo para o poeta (metro 0,665→0,708, versos 9→12, suspeitas 4→1) **menos a rima**. **E o desfecho que pré-registei era binário, que é a resolução errada:** na **densidade** o poeta rima 1 par de versos em 10 e os três braços 1 em 100 — **um factor de 10 que nenhum braço mexeu**, com n=1196 do lado real. Fecha o prompt como via para a forma; sobra descodificação ou afinação |
 | **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
 
 ### Fase 1, passo a passo
@@ -114,6 +115,8 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | «você» na guarda | **aviso, não rejeição** | 0,21% no corpus (4 de 1926) fica acima dos 0,2% do `lingua_errada`, que é o único nível a que este projecto autorizou uma rejeição. Regra pré-escrita na [5T §4.1](FASE-5T.md) |
 | Remover o `REGRAS_LINGUA` | **não autorizado** | a [5U](FASE-5U-RELATORIO.md) não tem poder para o declarar decoração (7 eventos no braço de base), e mostrou que ablá-lo mexe na **saliência** do resto: o braço ablado teve 3 falhas de guarda contra 0, duas delas quebras de persona — e o `REGRAS_SAIDA`, que as proíbe, **não foi ablado** |
 | Combinar rima e metro num só desfecho | **não sem validação retida** | a [5V §5](FASE-5V-RELATORIO.md) não o fez de propósito: é o movimento que produziu o pior resultado do projecto, a [5C](FASE-5C.md) a ver o AUC cair de **0,869 em amostra para 0,544** em dados retidos |
+| Reforçar instruções de forma no prompt | **não** | duas tentativas, dois sinais negativos: a [5I](FASE-5I-RELATORIO.md) no comprimento e a [5W](FASE-5W-RELATORIO.md) na rima (0,10 contra 0,35). O que o W4 autoriza é **descodificação ou afinação**, não instruir melhor |
+| Desfechos binários para forma | **não** | a [5W §1](FASE-5W-RELATORIO.md) mediu o custo: no binário o fosso da rima lê-se como «0,84 contra 0,38» e pedia ~175 amostras por braço; na **densidade** lê-se como **10×** e não precisou de uma amostra nova. Usar **densidade** e **amplitude entre vozes** ([passo 39](#)) |
 | A chave de rima exclui pares de palavra igual | **sim, obrigatoriamente** | sem isso mede **repetição**: Caeiro, verso livre, «rimava» a **0,6417** por repetir palavras, e cai a **0,1583** — abaixo do próprio nulo — quando os pares de palavra idêntica saem ([5V §2](FASE-5V-RELATORIO.md)) |
 
 ### Números do sistema
@@ -204,6 +207,8 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 25 | A 5Q autoriza baixar a urgência do passo 25, porque «67% das amostras se entregam pela ortografia e pela gramática» | A premissa caiu com a **5U**: em 120 amostras há **7** próclises e **1** marca ortográfica. Se o andar de baixo **não** está caído, o argumento de «medir o andar de cima com o de baixo caído» não se aplica, e o passo 25 **recupera a urgência** que a 5Q lhe tirou | [5U §2](FASE-5U-RELATORIO.md) |
 | 26 | «O Reis manda *metro regular e rima*» (§1 do protocolo da 5V) | **É o ortónimo.** O Reis manda «Ode breve … **sem rima**», e as odes dele são verso branco. Construí o portão de calibração V1 sobre a troca, e ele **não disparou por isso** — com o par certo (ortónimo contra Reis) dispara com folga: 0,777 contra 0,199 | [5V §1](FASE-5V-RELATORIO.md), apanhado pelo próprio portão |
 | 27 | A chave de rima mede rima | Media **repetição**. Dois versos que acabam na mesma palavra dão a mesma chave, e Caeiro repete por poética e Campos faz anáfora **por instrução**. Caeiro «rimava» a 0,6417 e cai a 0,1583 — **abaixo do próprio nulo** — ao excluir os pares de palavra igual | [5V §2](FASE-5V-RELATORIO.md) |
+| 28 | A chave de rima da 5V parte do penúltimo **grupo** de vogais | O regex junta `ia` num grupo só, logo `havia`→`avia` e `servia`→`ervia`, **que não casam** — e é rima de manual. A correcção parte da penúltima **vogal-letra**. Re-corri a 5V: **as conclusões não mudam, as magnitudes melhoram** (ortónimo real 0,777→0,837, gerado 0,217→0,383 contra um nulo de 0,383) | [5W §4](FASE-5W-RELATORIO.md), achado antes de os dados da 5W existirem |
+| 29 | «O poema rima» é o desfecho certo para medir rima | **É a resolução errada.** Num poema de 12 versos há 66 pares e **um** acerto por acaso põe o binário em `True`, logo mistura «rima sistematicamente» com «rimou uma vez sem querer». Na densidade o fosso é de **10×** e não de 2× | [5W §1](FASE-5W-RELATORIO.md) |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -369,7 +374,7 @@ por 2,6 s, em `/rerank`. Captura 24% dos 0,374 do oráculo.
 | 31–33 | ~~**O léxico externo, rejeitar desconhecidas, o detector como aviso**~~ — **a via está fechada**, verificado em 2026-10-08 | as três eram variantes da detecção ortográfica, e ela não dá: (a) o **corpus** não distingue gralha de homografia — `forca` é «tenho os nervos na **forca**», `magoa` é «inda que **magoa**, é vida», `es` é «Dar-**es**-Salaam», e eu classifiquei as três como gralhas **pela razão de frequência**, que não mede ambiguidade; (b) o **dicionário** é a norma de 2026 e **aceita** `objeto`, `eletricas`, `silencio`, `veem` — o [`src/lexico.py`](../src/lexico.py) já o documentava desde 2026-10-01. A intersecção das duas autoridades não resolve esta classe |
 | 35 | ~~**Ablação da instrução de língua**~~ — **corrida, e sem poder** | a [5U](FASE-5U-RELATORIO.md) correu-a: 120 amostras, braços emparelhados por célula. Remover a instrução **nunca piorou** a superfície (seis estimativas com o mesmo sinal) e **nenhuma exclui zero**, porque o braço de base tem 2 ocorrências de próclise e 1 marca ortográfica em 60. **Fica sem resposta por falta de eventos, não por falta de corrida** — e repeti-la só vale com uma taxa de base que dê eventos. Deixa registada a hipótese da **escorva**: o bloco traz três exemplos com clítico, e o braço completo usa 54 clíticos contra 38 do ablado |
 | 36 | **O AUC ao poeta nas três vozes** — **e eu descrevi-o mal** | escrevi na 5U §4 que o instrumento «é **mecânico** e corpus-fundado». **Não é mecânico**: o `fase-5f/analisar.py` calcula a AUC sobre `c3a`, que são as pontuações da âncora 3a′ dadas por um **avaliador cego** (ver a correcção 24 do §4). É corpus-**fundado** — o conjunto de comparação são poemas reais — e isso é o que evita o erro da 5E, mas a pontuação é humana. Logo este passo **depende do passo 25** (uma âncora por voz) e não é a via barata que eu lhe chamei |
-| 37 | **Fazer o ortónimo rimar** — a primeira intervenção da sequência com desfecho mecânico e pré-medido | a [5V §3](FASE-5V-RELATORIO.md) mediu que o ortónimo gerado rima a **0,2167**, que é **o seu próprio nulo de permutação**, contra **0,7769** do poeta — e a persona manda «metro regular e **rima**» em três palavras explícitas. **É a desobediência mais clara a uma instrução de forma que esta sequência encontrou.** O desfecho é barato e já tem nulo; e tem **controlo positivo embutido**: o Reis manda «sem rima» e não pode começar a rimar. Autorizado pelo §4.1 da 5V a **pré-registar**, não a mexer — a [5I](FASE-5I-RELATORIO.md) mediu saldo líquido **negativo** numa mudança de instrução, e nada diz que reforçar a instrução a faz cumprir |
+| 37 | ~~**Fazer o ortónimo rimar**~~ — **tentado, e não é pelo prompt** | a [5W](FASE-5W-RELATORIO.md) correu três braços e o **W4** disparou: nenhum chegou ao 0,50 nem passou o próprio nulo, a **directiva piorou** e o **exemplo** moveu metro, comprimento e léxico para o poeta **menos a rima**. Na densidade o fosso é de **10×** e nenhum braço o mexeu. **Nada entrou em `src/`.** O que fica autorizado é a via que não passa por instruir |
 | 38 | **Combinar rima e metro, com validação retida** | pode levar a forma de 0,780 para mais perto do 0,938 da 5Q. A [5C](FASE-5C.md) diz exactamente como falhar nisto: ajustou um combinador em amostra e viu o AUC cair de **0,869 para 0,544** em dados retidos. Sem validação retida, não se faz |
 | 39 | **A amplitude entre vozes como desfecho próprio** | a [5V §4](FASE-5V-RELATORIO.md) mediu **0,4006** no poeta contra **0,1547** no modelo: o modelo converge para uma regularidade média em todas as vozes, e os erros apontam para o **meio** (regular de mais no Campos, irregular de mais no ortónimo) — **regressão à média, não falta de capacidade numa direcção**. É uma medida de «o modelo diferencia as vozes?» que não existia, e aplica-se a qualquer intervenção futura |
 | 34 | **As outras três vozes** — **a causa volta a ter nome, e agora com tamanho** | a [5Q](FASE-5Q-RELATORIO.md) atribuiu o AUC 0,938–1,000 a «ortografia e **forma de verso**». Três fases desmontaram a primeira metade ([5R](FASE-5R-RELATORIO.md), [5T](FASE-5T-RELATORIO.md), [5U](FASE-5U-RELATORIO.md): **7 próclises e 1 marca em 120 amostras**) e a [5V](FASE-5V-RELATORIO.md) **confirma a segunda**: rima dá AUC **0,780** no ortónimo e o metro 0,63–0,74, com a amplitude entre vozes a cair de **0,4006** no poeta para **0,1547** no modelo. **Mas 0,780 não é 0,938** — a forma é o maior contribuinte mecânico e não fecha o número |
@@ -524,6 +529,24 @@ resolução no chão.
 > palavras. **Nenhum dos dois se veria olhando para o alvo** — os dois
 > produziriam números plausíveis sobre texto gerado.
 
+> **E o nono, da Fase 5W, que é o par do oitavo.** Aquele dizia que escolher
+> **onde** medir é anterior a medir bem. Este: **escolher com que resolução
+> medir é anterior a escolher o n.**
+>
+> Pré-registei «o poema rima» — um binário — e isso deitou fora um factor de
+> dez. No binário o ortónimo real está em 0,84 e o gerado em 0,38, e lê-se «rima
+> menos»; na **densidade** — pares de versos que rimam sobre pares possíveis —
+> está em 0,0997 contra 0,0095, e lê-se «rima **uma ordem de grandeza** menos».
+> **São o mesmo instrumento e o mesmo texto**: a diferença é o limiar que eu pus
+> em cima dele. Num poema de doze versos há 66 pares, e **um** acerto por acaso
+> põe o binário em `True`.
+>
+> E a consequência é prática: no binário a 5W era um nulo fraco de 20 amostras
+> por braço que pedia **~175**; na densidade é um resultado firme com n=1196 do
+> lado que importa, e **não precisou de uma única amostra nova**. Três fases
+> seguidas (5T, 5U, 5W) morreram por potência, e a causa não foi o rigor — foi
+> escolher desfechos binários e de baixa frequência.
+
 É agora a **Fase 5**, e a interface passa a Fase 6 — a renumeração está
 declarada no topo de [`FASE-5.md`](FASE-5.md). A hipótese que vai a medição é a
 que está na tabela de perguntas abertas do §5: o contexto recuperado explica e
@@ -628,9 +651,19 @@ tests/   47 testes a passar
 
 ```bash
 source .venv/bin/activate
-python -m pytest tests/ -q                      # 47 testes, ~90 s
+python -m pytest tests/ -q                      # 243 testes, ~2 min
+ruff check .                                    # linter; ~20 ms, 0 achados
 python -c "from src.corpus.build import build; build()"   # corpus.jsonl, ~40 s
 ```
+
+O `ruff` cobre `src/` e `tests/`, e **não** o `docs/`: aqueles *scripts* são
+artefactos de fases fechadas — o `fase-5f/analisar.py` é o registo do que a
+Fase 5F calculou — e reformatá-los reescrevia o registo. O `pyproject.toml` diz
+o que está desligado e porquê; os dois casos que importam são o **`E501`**, que
+convidava a repartir a linha 59 do `voices.py` (é o texto do `REGRAS_LINGUA`, e
+a quebra está **dentro** da *string*: reparti-la muda o prompt que a 5U mediu) e
+o **`SIM905`**, que transformou as listas de *stopwords* revistas à mão em
+literais de 500 caracteres numa linha.
 
 ### Correr o chatbot
 

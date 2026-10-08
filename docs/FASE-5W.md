@@ -167,14 +167,24 @@ e o **veto do W3**. E o W4 tem uma leitura útil: fecha o prompt como via.
 ## 6. Lista de verificação
 
 ```
-[ ] A1  os tres `forma` escritos e asseridos a diferir SO na parte da rima
-[ ] A2  60 amostras, bracos INTERCALADOS, voz unica, mesmas sementes
-[ ] A3  desfecho: rima consoante e toante, cada uma contra o nulo do braco
-[ ] A4  W3: metro, plagio, e_verso, suspeitas, guarda, truncatura, comprimento
-[ ] B1  W1, W2, W3, W4 e a decisao do §4.1
-[ ] C1  se autorizado: entra em src/voices.py com teste
-[ ] C2  relatorio FASE-5W-RELATORIO.md
-[ ] C3  CONTROLO.md
+[x] A1  os tres `forma` asseridos a diferir SO na parte da rima, e o braco C
+        asserido byte a byte contra o que esta em producao
+[x] A2  60 amostras, bracos INTERCALADOS, voz unica, mesmas sementes, 50 min
+[x] A3  desfecho binario nas duas chaves, cada uma contra o nulo do braco
+[x] A4  W3 medido: metro, plagio, e_verso, suspeitas, guarda, truncatura
+[x] A5  SENSIBILIDADE posterior: o desfecho que pre-registei era BINARIO, que e
+        a resolucao errada. Na DENSIDADE (pares que rimam / pares possiveis) o
+        poeta esta em 0,0997 e os tres bracos em 0,005-0,010 -- um factor de 10
+[x] A6  correccao a 5V, achada antes destes dados existirem: a chave partia do
+        penultimo GRUPO de vogais e perdia havia/servia. Re-corri a 5V e as
+        conclusoes nao mudam, melhoram
+[x] B1  W1 nao dispara em braco nenhum (nem 0,50 nem o proprio nulo) · W1' nas
+        duas chaves tambem nao, e CONCORDAM · W2 nao dispara pelo IC mas as
+        tres medidas e as duas chaves concordam na direccao · W3 falha no R
+        (1 truncatura) e dispara no X · **W4 DISPARA**
+[x] C1  nada entra em src/voices.py, que e o que o §4.1 manda para o W4
+[x] C2  relatorio FASE-5W-RELATORIO.md
+[x] C3  CONTROLO.md
 ```
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros

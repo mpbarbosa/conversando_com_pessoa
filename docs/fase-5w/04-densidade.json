@@ -1,0 +1,59 @@
+{
+ "_meta": {
+  "analise": "POSTERIOR e declarada",
+  "porque": "o §3 pre-registou um desfecho BINARIO, que e a resolucao errada: num poema de 12 versos ha 66 pares e UM acerto por acaso poe o binario em True",
+  "desfecho": "pares que rimam / pares possiveis, chave-letra, pares de palavra igual excluidos",
+  "semente": 20261008
+ },
+ "real_ortonimo": {
+  "n": 1196,
+  "densidade": 0.09969
+ },
+ "por_braco": {
+  "C": {
+   "n": 20,
+   "densidade": 0.00951,
+   "razao_ao_poeta": 10.5,
+   "distancia_ao_poeta": 0.09019
+  },
+  "R": {
+   "n": 20,
+   "densidade": 0.00455,
+   "razao_ao_poeta": 21.9,
+   "distancia_ao_poeta": 0.09514
+  },
+  "X": {
+   "n": 20,
+   "densidade": 0.01024,
+   "razao_ao_poeta": 9.7,
+   "distancia_ao_poeta": 0.08945
+  }
+ },
+ "contrastes": {
+  "R_menos_C": {
+   "dif": -0.00496,
+   "ic95": [
+    -0.01256,
+    0.00232
+   ],
+   "exclui_zero": false
+  },
+  "X_menos_C": {
+   "dif": 0.00073,
+   "ic95": [
+    -0.00749,
+    0.00903
+   ],
+   "exclui_zero": false
+  },
+  "X_menos_R": {
+   "dif": 0.00569,
+   "ic95": [
+    -0.00122,
+    0.01256
+   ],
+   "exclui_zero": false
+  }
+ },
+ "leitura": "o poeta rima cerca de 1 par em 10; os tres bracos cerca de 1 em 100. O fosso e de uma ordem de grandeza e NENHUM braco o mexeu. O binario da 5V media presenca; isto mede densidade, e e a densidade que separa sistematico de acidental"
+}
