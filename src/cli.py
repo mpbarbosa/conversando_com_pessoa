@@ -120,7 +120,7 @@ def _arrancar(modelo: str | None, verboso: bool):
     from .corpus.build import CAMINHO, build, load
     from .retrieval.encoder import Encoder
     from .retrieval.index import Index
-    from .tokens import contador
+    from .tokens import GERADOR, contador
 
     gen = OllamaGenerator(modelo=modelo) if modelo else OllamaGenerator()
     if not gen.disponivel():
@@ -147,7 +147,7 @@ def _arrancar(modelo: str | None, verboso: bool):
 
     # Contador do gerador, não do encoder: o qwen conta ~17% mais tokens em
     # português, e orçamentar com o do e5 subestimaria até 46%.
-    n_tok = contador("Qwen/Qwen2.5-7B-Instruct")
+    n_tok = contador(GERADOR)
     return Pipeline(idx, enc, gen, n_tok), len(chunks)
 
 

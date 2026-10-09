@@ -11,7 +11,7 @@ import pytest
 from src.corpus.chunk import LIMITE_TOKENS, _partir_estrofe, chunk_corpus, chunk_poem
 from src.corpus.dedupe import detectar, marcar
 from src.corpus.parse import parse_corpus, parse_poem
-from src.tokens import contador
+from src.tokens import ENCODER, contador
 
 
 def falso(texto: str) -> int:
@@ -27,7 +27,8 @@ def poemas():
 
 @pytest.fixture(scope="module")
 def n_tok_real():
-    return contador()
+    # O *chunking* é domínio do **encoder** (maxlen=512), logo é o e5.
+    return contador(ENCODER)
 
 
 # --- poema curto: um chunk só --------------------------------------------
@@ -143,3 +144,35 @@ def test_duplicados_excluidos_por_omissao(poemas):
 def test_duplicados_incluidos_se_pedido(poemas):
     cs = chunk_corpus(poemas, falso, incluir_duplicados=True)
     assert len({c.poem_id for c in cs}) == len(poemas)
+
+
+# --------------------------------------------------------------------------- #
+# Os dois tokenizadores não são intercambiáveis, e é isso que torna o `nome`
+# obrigatório no `contador`. Medido em 2026-10-08 (ver `src/tokens.py`).
+# --------------------------------------------------------------------------- #
+def test_o_tokenizador_do_gerador_conta_mais_que_o_do_encoder():
+    """Os ~17% que o `prompt.py` publica, e a razão de o `nome` ser obrigatório.
+
+    Orçamentar o prompt do gerador com o contador do encoder encaixa mais
+    contexto do que o orçamento pede — foi o que aconteceu a nove scripts de
+    fase. Este teste existe para que a diferença deixe de ser folclore.
+    """
+    from src.tokens import ENCODER, GERADOR, contador
+    poema = ("A pedra é pedra e o chão é chão.\n"
+             "Nem tem o cheiro a terra que faz ser terra,\n"
+             "nem a humidade que faz ser água.\n"
+             "E não há um som que lhe fale da chuva.")
+    n_e5 = contador(ENCODER)(poema)
+    n_ger = contador(GERADOR)(poema)
+    assert n_ger > n_e5, (n_ger, n_e5)
+    assert 1.05 < n_ger / n_e5 < 1.40, f"razão {n_ger / n_e5:.3f} fora do medido"
+
+
+def test_o_contador_exige_o_nome_do_tokenizador():
+    """Sem omissão: a omissão era o encoder e isso é a armadilha."""
+    import inspect
+
+    from src.tokens import contador
+    p = inspect.signature(contador).parameters["nome"]
+    assert p.default is inspect.Parameter.empty, (
+        "`contador` voltou a ter omissão; ver o cabeçalho de src/tokens.py")

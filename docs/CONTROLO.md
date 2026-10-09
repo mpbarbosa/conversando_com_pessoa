@@ -116,6 +116,8 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | Remover o `REGRAS_LINGUA` | **não autorizado** | a [5U](FASE-5U-RELATORIO.md) não tem poder para o declarar decoração (7 eventos no braço de base), e mostrou que ablá-lo mexe na **saliência** do resto: o braço ablado teve 3 falhas de guarda contra 0, duas delas quebras de persona — e o `REGRAS_SAIDA`, que as proíbe, **não foi ablado** |
 | Combinar rima e metro num só desfecho | **não sem validação retida** | a [5V §5](FASE-5V-RELATORIO.md) não o fez de propósito: é o movimento que produziu o pior resultado do projecto, a [5C](FASE-5C.md) a ver o AUC cair de **0,869 em amostra para 0,544** em dados retidos |
 | Reforçar instruções de forma no prompt | **não** | duas tentativas, dois sinais negativos: a [5I](FASE-5I-RELATORIO.md) no comprimento e a [5W](FASE-5W-RELATORIO.md) na rima (0,10 contra 0,35). O que o W4 autoriza é **descodificação ou afinação**, não instruir melhor |
+| O tokenizador do orçamento fica o do **qwen** | **sim**, com o modelo a ser llama | medido pelo `prompt_eval_count` do próprio Ollama, que é a contagem autoritativa do modelo que serve: nos mesmos 25 poemas o llama dá **135** contra **133** do qwen — razão **1,000**, máximo 1,031. Trocá-lo não compra nada e custa descarregar um tokenizador. **É a segunda coisa ligada ao `MODELO` que a 5S não olhou, e esta é benigna — mas só se sabe por estar medida** |
+| `contador()` sem omissão | **obrigatório passar `ENCODER` ou `GERADOR`** | a omissão era o `ENCODER`, e orçamentar o prompt do gerador com ele subestima **17%**. O `src/` nunca caiu nisso; **nove scripts de fase caíram**. Fixado por `test_o_contador_exige_o_nome_do_tokenizador` |
 | Desfechos binários para forma | **não** | a [5W §1](FASE-5W-RELATORIO.md) mediu o custo: no binário o fosso da rima lê-se como «0,84 contra 0,38» e pedia ~175 amostras por braço; na **densidade** lê-se como **10×** e não precisou de uma amostra nova. Usar **densidade** e **amplitude entre vozes** ([passo 39](#)) |
 | A chave de rima exclui pares de palavra igual | **sim, obrigatoriamente** | sem isso mede **repetição**: Caeiro, verso livre, «rimava» a **0,6417** por repetir palavras, e cai a **0,1583** — abaixo do próprio nulo — quando os pares de palavra idêntica saem ([5V §2](FASE-5V-RELATORIO.md)) |
 
@@ -209,6 +211,7 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 27 | A chave de rima mede rima | Media **repetição**. Dois versos que acabam na mesma palavra dão a mesma chave, e Caeiro repete por poética e Campos faz anáfora **por instrução**. Caeiro «rimava» a 0,6417 e cai a 0,1583 — **abaixo do próprio nulo** — ao excluir os pares de palavra igual | [5V §2](FASE-5V-RELATORIO.md) |
 | 28 | A chave de rima da 5V parte do penúltimo **grupo** de vogais | O regex junta `ia` num grupo só, logo `havia`→`avia` e `servia`→`ervia`, **que não casam** — e é rima de manual. A correcção parte da penúltima **vogal-letra**. Re-corri a 5V: **as conclusões não mudam, as magnitudes melhoram** (ortónimo real 0,777→0,837, gerado 0,217→0,383 contra um nulo de 0,383) | [5W §4](FASE-5W-RELATORIO.md), achado antes de os dados da 5W existirem |
 | 29 | «O poema rima» é o desfecho certo para medir rima | **É a resolução errada.** Num poema de 12 versos há 66 pares e **um** acerto por acaso põe o binário em `True`, logo mistura «rima sistematicamente» com «rimou uma vez sem querer». Na densidade o fosso é de **10×** e não de 2× | [5W §1](FASE-5W-RELATORIO.md) |
+| 30 | As amostras das fases de geração correram em «configuração de produção» | **O prompt não.** Nove scripts — Fases 5, 5B, 5G, 5H, 5I, 5M, 5N, 5U e 5W — chamam `contador()` **sem argumento**, o que dava o tokenizador do **encoder**, e esse subconta **17%**: correram com ~350 tokens de gerador onde o orçamento pede **300**. As comparações **dentro** de cada fase ficam intactas, porque os braços partilharam o orçamento; o que fica errado é o rótulo. Na [5W](FASE-5W-RELATORIO.md) escrevi que o braço C era idêntico a produção «byte a byte» — era verdade da **persona** e falso do **orçamento** | `src/tokens.py`, cabeçalho |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -571,6 +574,8 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
     -> o valor actual e 220, nao 150. E a 5J §2.3 mostra que na 5H houve 1
        truncatura em 60, com ~20 palavras de folga: descer tem margem, e
        SUBIR nao alarga a forma. Subir so faz sentido COM reforco (passo 20)
+[x] `contador()` sem omissao: o `nome` passa a obrigatorio, e `GERADOR` deixa
+    de ser um literal no cli.py. A razao esta medida no cabecalho de tokens.py
 [ ] remover src/{main,model,retriever}.py no Passo 9
 [ ] remover langchain do requirements.txt
 [ ] actualizar .github/copilot-instructions.md para a arquitectura nova
