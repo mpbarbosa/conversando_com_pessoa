@@ -135,9 +135,12 @@ construção — e o `Turno` **não a guarda**.
 
 ### O que fica na mesa
 
-1. **Registar as tentativas, e não só a última.** É o que torna possível a
-   análise primária correcta, e é pequeno: o `responder` já tem cada tentativa na
-   mão. **É o próximo passo e é de produto, não de medição.**
+1. ~~**Registar as tentativas, e não só a última.**~~ **Feito** no mesmo dia:
+   `Tentativa`, `Turno.historico` e `Turno.primeira` em
+   [`src/pipeline.py`](../src/pipeline.py), sem mudança de comportamento e com
+   quatro testes — um dos quais fixa que a 2.ª tentativa **tem** contexto
+   diferente da 1.ª, que é o mediador deste relatório. O harness da próxima fase
+   emparelhada analisa `turno.primeira` como desfecho primário.
 2. **O passo 40 fica em espera por isto**, e não por capricho: `repeat_penalty =
    0.9` é precisamente a manipulação que mais provavelmente aumenta o plágio, logo
    a que mais contamina — as 3 células em 20 da 5X deixariam de ser 3.

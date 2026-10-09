@@ -40,6 +40,35 @@ MAX_TENTATIVAS = 2
 
 
 @dataclass(frozen=True)
+class Tentativa:
+    """O que uma tentativa **foi**, antes de o sistema a corrigir.
+
+    Existe por causa da [Fase 5Y](../docs/FASE-5Y-RELATORIO.md). O `Turno`
+    guardava só a última tentativa, e a última já passou pelo `_repetir_sem` —
+    que **troca o contexto** quando o modelo plagia. Consequência medida: numa
+    fase emparelhada, o prompt final diverge entre braços sempre que os braços
+    plagiarem de forma diferente, e isso contaminou de **7% a 40%** das células,
+    fase a fase.
+
+    A análise primária de uma fase emparelhada tem de ser sobre a **primeira**
+    tentativa, cujo prompt é idêntico entre braços **por construção**. Sem este
+    registo, não havia como a fazer.
+    """
+
+    n: int
+    #: Os chunks que **esta** tentativa viu. Na 1.ª são os da recuperação; nas
+    #: seguintes já são os que o `_repetir_sem` deixou.
+    usados: tuple[Chunk, ...]
+    resposta: Resposta
+    veredicto: Veredicto
+    plagio: Analise
+
+    @property
+    def texto(self) -> str:
+        return self.veredicto.texto
+
+
+@dataclass(frozen=True)
 class Turno:
     pergunta: str
     voz: Voice
@@ -54,6 +83,15 @@ class Turno:
     #: `None` quando não há reranker. Separado do `recuperacao_ms` porque é a
     #: parcela que o utilizador paga por uma escolha que pode desligar.
     rerank_ms: float | None = None
+    #: Todas as tentativas, na ordem em que correram. **Vazio por omissão**
+    #: para não quebrar quem constrói `Turno` à mão (os testes fazem-no).
+    #: Ver `Tentativa`: é o que a Fase 5Y mostrou fazer falta.
+    historico: tuple[Tentativa, ...] = ()
+
+    @property
+    def primeira(self) -> Tentativa | None:
+        """A 1.ª tentativa, que é a única com prompt comparável entre braços."""
+        return self.historico[0] if self.historico else None
 
     @property
     def texto(self) -> str:
@@ -156,13 +194,16 @@ class Pipeline:
         # poema do prompt não torna aceitável devolvê-lo ao utilizador.
         mostrados: list[Chunk] = list(p.chunks_usados)
         user = p.user
+        historico: list[Tentativa] = []
         for tentativa in range(1, max_tentativas + 1):
             r = self.gerador.gerar(p.system, user)
             v = verificar(r.texto, pergunta=pergunta, idioma=idioma)
             a = analisar(v.texto, tuple(mostrados))
+            historico.append(Tentativa(tentativa, p.chunks_usados, r, v, a))
             if (not a.plagiou and not r.truncada) or tentativa == max_tentativas:
                 return Turno(pergunta, voz, idioma, tuple(recuperados),
-                             p.chunks_usados, r, v, a, tentativa, ms, ms_rr)
+                             p.chunks_usados, r, v, a, tentativa, ms, ms_rr,
+                             tuple(historico))
             p = self._repetir_sem(pergunta, voz, idioma, recuperados,
                                   {x.poema for x in a.copiados}, p)
             mostrados.extend(c for c in p.chunks_usados if c not in mostrados)
@@ -188,6 +229,7 @@ class Pipeline:
 
         mostrados: list[Chunk] = list(p.chunks_usados)
         user = p.user
+        historico: list[Tentativa] = []
         for tentativa in range(1, max_tentativas + 1):
             partes: list[str] = []
             resposta: Resposta | None = None
@@ -200,8 +242,11 @@ class Pipeline:
             assert resposta is not None
             v = verificar(resposta.texto, pergunta=pergunta, idioma=idioma)
             a = analisar(v.texto, tuple(mostrados))
+            historico.append(Tentativa(tentativa, p.chunks_usados, resposta,
+                                       v, a))
             turno = Turno(pergunta, voz, idioma, tuple(recuperados),
-                          p.chunks_usados, resposta, v, a, tentativa, ms, ms_rr)
+                          p.chunks_usados, resposta, v, a, tentativa, ms, ms_rr,
+                          tuple(historico))
             yield turno
             if turno.aprovado or tentativa == max_tentativas:
                 return

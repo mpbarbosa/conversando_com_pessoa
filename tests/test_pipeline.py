@@ -230,3 +230,49 @@ def test_turno_truncado_nao_e_aprovado():
     # o resto do veredicto não muda: a truncatura não é um motivo da guarda
     assert bool(cortado.veredicto)
     assert not cortado.plagio.plagiou
+
+
+# --------------------------------------------------------------------------- #
+# Fase 5Y / passo 43 — o histórico de tentativas.
+#
+# O `Turno` guardava só a última, e a última já passou pelo `_repetir_sem`, que
+# troca o contexto quando o modelo plagia. A 5Y mediu a contaminação que isso
+# causou nas fases emparelhadas: de 7% a 40% das células.
+# --------------------------------------------------------------------------- #
+def test_o_historico_guarda_todas_as_tentativas(chunks_caeiro):
+    """Com plágio na 1.ª, há duas tentativas e as duas ficam registadas."""
+    g = GeradorFalso(chunks_caeiro[0].text)
+    t = _pipeline(chunks_caeiro, g).responder("pergunta", Voice.CAEIRO)
+    assert t.tentativas == len(t.historico) == 2
+    assert [x.n for x in t.historico] == [1, 2]
+    assert t.primeira is t.historico[0]
+    assert t.primeira.n == 1
+
+
+def test_a_primeira_tentativa_ve_o_contexto_da_recuperacao(chunks_caeiro):
+    """É isto que torna a 1.ª tentativa comparável entre braços.
+
+    O `_repetir_sem` só mexe no contexto **depois** da 1.ª, logo os `usados` da
+    1.ª tentativa são os da recuperação — iguais em qualquer braço que parta do
+    mesmo prompt. É a propriedade que a Fase 5Y diz fazer falta.
+    """
+    g = GeradorFalso(chunks_caeiro[0].text)
+    t = _pipeline(chunks_caeiro, g).responder("pergunta", Voice.CAEIRO)
+    assert t.primeira.usados, "a 1.ª tentativa tem de ter visto contexto"
+    assert t.historico[1].usados != t.primeira.usados, (
+        "a 2.ª tentativa devia ter contexto trocado pelo _repetir_sem")
+
+
+def test_sem_repeticao_o_historico_tem_uma_tentativa(chunks_caeiro):
+    g = GeradorFalso("um verso que nenhum contexto tem")
+    t = _pipeline(chunks_caeiro, g).responder("pergunta", Voice.CAEIRO)
+    assert t.tentativas == 1
+    assert len(t.historico) == 1
+    assert t.primeira.resposta is t.resposta
+
+
+def test_turno_construido_a_mao_nao_tem_historico():
+    """A omissão existe para não quebrar quem constrói `Turno` directamente."""
+    t = _turno(truncada=False)
+    assert t.historico == ()
+    assert t.primeira is None
