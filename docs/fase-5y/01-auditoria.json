@@ -1,0 +1,222 @@
+{
+ "_meta": {
+  "o_que_e": "auditoria posterior, sem protocolo pre-registado: nao ha medicao nova nem portao a escrever, e a pergunta nasceu dos dados (emenda da 5X)",
+  "proteccao": "cobertura, nao portao: corre as nove fases emparelhadas e reporta todas as celulas e todas as conclusoes recalculaveis, incluindo as que sobrevivem",
+  "mecanismo": "Pipeline._repetir_sem tira do contexto os poemas plagiados; logo o prompt final diverge entre bracos sempre que os bracos plagiarem de forma diferente",
+  "semente": 20261009
+ },
+ "inventario": {
+  "fase-5b": {
+   "celulas": 30,
+   "bracos": 2,
+   "tentativas_desiguais": 6,
+   "prompt_divergente": 7,
+   "prompt_divergente_sem_tentativas_desiguais": 1,
+   "fraccao_contaminada": 0.2333,
+   "nota": "prompt divergente COM tentativas iguais: os bracos repetiram o mesmo numero de vezes mas plagiaram poemas DIFERENTES, logo removeram poemas diferentes"
+  },
+  "fase-5g": {
+   "celulas": 30,
+   "bracos": 2,
+   "tentativas_desiguais": 12,
+   "prompt_divergente": 12,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.4,
+   "nota": ""
+  },
+  "fase-5h": {
+   "celulas": 30,
+   "bracos": 2,
+   "tentativas_desiguais": 5,
+   "prompt_divergente": 5,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.1667,
+   "nota": ""
+  },
+  "fase-5i": {
+   "celulas": 30,
+   "bracos": 2,
+   "tentativas_desiguais": 2,
+   "prompt_divergente": 2,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.0667,
+   "nota": ""
+  },
+  "fase-5m": {
+   "celulas": 90,
+   "bracos": 2,
+   "tentativas_desiguais": 17,
+   "prompt_divergente": 17,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.1889,
+   "nota": ""
+  },
+  "fase-5n": {
+   "celulas": 30,
+   "bracos": 1,
+   "tentativas_desiguais": 0,
+   "prompt_divergente": 0,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.0,
+   "nota": ""
+  },
+  "fase-5u": {
+   "celulas": 60,
+   "bracos": 2,
+   "tentativas_desiguais": 15,
+   "prompt_divergente": 7,
+   "prompt_divergente_sem_tentativas_desiguais": 5,
+   "fraccao_contaminada": 0.1167,
+   "nota": "prompt divergente COM tentativas iguais: os bracos repetiram o mesmo numero de vezes mas plagiaram poemas DIFERENTES, logo removeram poemas diferentes"
+  },
+  "fase-5w": {
+   "celulas": 20,
+   "bracos": 3,
+   "tentativas_desiguais": 7,
+   "prompt_divergente": 2,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.1,
+   "nota": ""
+  },
+  "fase-5x": {
+   "celulas": 20,
+   "bracos": 3,
+   "tentativas_desiguais": 5,
+   "prompt_divergente": 3,
+   "prompt_divergente_sem_tentativas_desiguais": 0,
+   "fraccao_contaminada": 0.15,
+   "nota": ""
+  }
+ },
+ "5H_o_delta_que_decidiu_o_modelo": {
+  "celulas_contaminadas": [
+   "q02/2",
+   "q03/2",
+   "q06/0",
+   "q10/0",
+   "q10/2"
+  ],
+  "todas": {
+   "n": 30,
+   "delta_medio": 0.7,
+   "ic95": [
+    0.4167,
+    0.9833
+   ],
+   "sinais_pro_L": 19,
+   "sinais_pro_Q": 2,
+   "empates": 9,
+   "p_binomial": 0.00022
+  },
+  "limpas": {
+   "n": 25,
+   "delta_medio": 0.66,
+   "ic95": [
+    0.34,
+    0.96
+   ],
+   "sinais_pro_L": 16,
+   "sinais_pro_Q": 2,
+   "empates": 7,
+   "p_binomial": 0.00131
+  },
+  "veredicto": "SOBREVIVE"
+ },
+ "5M_a_forma_por_voz": {
+  "celulas_contaminadas_por_voz": {
+   "campos": 6,
+   "reis": 6,
+   "ortonimo": 5
+  },
+  "campos/Q": {
+   "todas": {
+    "n": 30,
+    "ks": 0.3143,
+    "p95_do_nulo": 0.2163,
+    "dentro_do_nulo": false
+   },
+   "limpas": {
+    "n": 24,
+    "ks": 0.3143,
+    "p95_do_nulo": 0.2398,
+    "dentro_do_nulo": false
+   },
+   "inverte": false
+  },
+  "campos/L": {
+   "todas": {
+    "n": 30,
+    "ks": 0.2803,
+    "p95_do_nulo": 0.2034,
+    "dentro_do_nulo": false
+   },
+   "limpas": {
+    "n": 24,
+    "ks": 0.2653,
+    "p95_do_nulo": 0.2364,
+    "dentro_do_nulo": false
+   },
+   "inverte": false
+  },
+  "reis/Q": {
+   "todas": {
+    "n": 30,
+    "ks": 0.3756,
+    "p95_do_nulo": 0.2089,
+    "dentro_do_nulo": false
+   },
+   "limpas": {
+    "n": 24,
+    "ks": 0.4411,
+    "p95_do_nulo": 0.2289,
+    "dentro_do_nulo": false
+   },
+   "inverte": false
+  },
+  "reis/L": {
+   "todas": {
+    "n": 30,
+    "ks": 0.1956,
+    "p95_do_nulo": 0.2046,
+    "dentro_do_nulo": true
+   },
+   "limpas": {
+    "n": 24,
+    "ks": 0.2333,
+    "p95_do_nulo": 0.2294,
+    "dentro_do_nulo": false
+   },
+   "inverte": true
+  },
+  "ortonimo/Q": {
+   "todas": {
+    "n": 30,
+    "ks": 0.3752,
+    "p95_do_nulo": 0.2104,
+    "dentro_do_nulo": false
+   },
+   "limpas": {
+    "n": 25,
+    "ks": 0.3685,
+    "p95_do_nulo": 0.2322,
+    "dentro_do_nulo": false
+   },
+   "inverte": false
+  },
+  "ortonimo/L": {
+   "todas": {
+    "n": 30,
+    "ks": 0.3286,
+    "p95_do_nulo": 0.2137,
+    "dentro_do_nulo": false
+   },
+   "limpas": {
+    "n": 25,
+    "ks": 0.3721,
+    "p95_do_nulo": 0.2337,
+    "dentro_do_nulo": false
+   },
+   "inverte": false
+  }
+ }
+}
