@@ -138,13 +138,25 @@ X3 **e** a não-embarcação do §3.1.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  tres bracos por subclasse de `_opcoes`, asseridos antes de gerar
-[ ] A2  60 amostras, bracos INTERCALADOS, voz unica, mesmas sementes
-[ ] A3  desfecho continuo: densidade de rima, com o nulo de permutacao do braco
-[ ] A4  X3: bateria de degeneracao + metro + os instrumentos da 5T/5U
-[ ] B1  X1, X2, X3, X4 e a decisao do §3.1
-[ ] C1  relatorio FASE-5X-RELATORIO.md
-[ ] C2  CONTROLO.md
+[x] A1  tres bracos asseridos: B difere de producao em set(), P so em
+        repeat_penalty, T so em temperature
+[x] A2  60 amostras, bracos INTERCALADOS, voz unica, mesmas sementes, 31 min.
+        Primeiro script de fase a usar contador(GERADOR) e nao contador()
+[x] A3  desfecho continuo: densidade de rima, com o nulo por braco
+[x] A4  X3: bateria de degeneracao medida
+[x] B1  X1 nao dispara (+54%, abaixo da duplicacao que o §2.1 declarou como
+        limite de deteccao) · X2 NAO, e a direccao e a CONTRARIA (-36%) ·
+        X3 veta, e o veto e ruido (metro -0,0097 num IC de +-0,13) ·
+        **X4 DISPARA**
+[x] B2  o achado que nao estava nos portoes: a MESMA configuracao de producao
+        deu 0,00951 na 5W e 0,00615 aqui -- 1,54x, que e exactamente a razao
+        P/B que eu quase li como efeito. O chao de ruido de uma celula de 20
+        amostras esta medido e e um factor de 1,5
+[x] B3  e a degeneracao que justifica a constante NAO se reproduz: o braco P e
+        mais limpo que producao em todas as medidas (0 linhas duplicadas contra
+        0,0031; 0 palavras suspeitas contra 6)
+[x] C1  relatorio FASE-5X-RELATORIO.md
+[x] C2  CONTROLO.md
 ```
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros

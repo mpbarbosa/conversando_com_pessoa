@@ -1,0 +1,152 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5X.md §2.1-3",
+  "fixado_antes_dos_dados": true,
+  "desfecho": "densidade de rima (5W §1)",
+  "potencia": "medida na 5W: meia-largura ~0,008 com 20 por braco, logo detecta uma DUPLICACAO",
+  "regua": {
+   "poeta_densidade": 0.09969,
+   "poeta_metro": 0.7572,
+   "poeta_rima_binaria": 0.8367
+  },
+  "semente": 20261009
+ },
+ "por_braco": {
+  "B": {
+   "n": 20,
+   "opcoes": {
+    "num_thread": 10,
+    "num_predict": 220,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "repeat_penalty": 1.1,
+    "seed": 20261007
+   },
+   "densidade": 0.00615,
+   "nulo_permutacao": {
+    "media": 0.2153,
+    "p99": 0.4
+   },
+   "rima_binaria": 0.15,
+   "razao_ao_poeta": 16.2,
+   "linhas_duplicadas": 0.0031,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 0,
+   "falhas_guarda": 0,
+   "suspeitas": 6,
+   "e_verso": 1.0,
+   "metro": 0.63,
+   "metro_dist_ao_poeta": 0.1272,
+   "versos_mediana": 10.0,
+   "decode_tokens_mediana": 109.5,
+   "segundos_mediana": 25.3
+  },
+  "P": {
+   "n": 20,
+   "opcoes": {
+    "num_thread": 10,
+    "num_predict": 220,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "repeat_penalty": 1.0,
+    "seed": 20261007
+   },
+   "densidade": 0.00945,
+   "nulo_permutacao": {
+    "media": 0.202,
+    "p99": 0.4
+   },
+   "rima_binaria": 0.4,
+   "razao_ao_poeta": 10.6,
+   "linhas_duplicadas": 0.0,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 0,
+   "falhas_guarda": 0,
+   "suspeitas": 0,
+   "e_verso": 1.0,
+   "metro": 0.6203,
+   "metro_dist_ao_poeta": 0.1369,
+   "versos_mediana": 9.0,
+   "decode_tokens_mediana": 129.0,
+   "segundos_mediana": 24.8
+  },
+  "T": {
+   "n": 20,
+   "opcoes": {
+    "num_thread": 10,
+    "num_predict": 220,
+    "temperature": 0.5,
+    "top_p": 0.9,
+    "repeat_penalty": 1.1,
+    "seed": 20261007
+   },
+   "densidade": 0.00396,
+   "nulo_permutacao": {
+    "media": 0.2413,
+    "p99": 0.45
+   },
+   "rima_binaria": 0.25,
+   "razao_ao_poeta": 25.2,
+   "linhas_duplicadas": 0.0048,
+   "plagiou": 0,
+   "fracao_copiada_mediana": 0.0,
+   "truncadas": 0,
+   "falhas_guarda": 0,
+   "suspeitas": 2,
+   "e_verso": 1.0,
+   "metro": 0.59,
+   "metro_dist_ao_poeta": 0.1672,
+   "versos_mediana": 12.0,
+   "decode_tokens_mediana": 136.5,
+   "segundos_mediana": 24.7
+  }
+ },
+ "X1_penalizacao": {
+  "densidade": 0.00945,
+  "densidade_B": 0.00615,
+  "diferenca": 0.0033,
+  "ic95": [
+   -0.0074,
+   0.01398
+  ],
+  "exclui_zero": false,
+  "acima_do_proprio_nulo_binario": false,
+  "dispara": false,
+  "X3": {
+   "danos": [
+    "metro afasta-se do poeta: 0.6203 contra 0.63 (poeta 0.7572)"
+   ],
+   "dispara": false
+  }
+ },
+ "X2_temperatura": {
+  "densidade": 0.00396,
+  "densidade_B": 0.00615,
+  "diferenca": -0.00219,
+  "ic95": [
+   -0.01108,
+   0.00513
+  ],
+  "exclui_zero": false,
+  "acima_do_proprio_nulo_binario": false,
+  "dispara": false,
+  "X3": {
+   "danos": [
+    "linhas duplicadas: 0.0048 contra 0.0031",
+    "metro afasta-se do poeta: 0.59 contra 0.63 (poeta 0.7572)"
+   ],
+   "dispara": false
+  }
+ },
+ "X4": {
+  "dispara": true,
+  "leitura": "nem o prompt nem a descodificacao alcancam a forma; sobra afinacao ou aceitar uma voz"
+ },
+ "decisao_pre_escrita": {
+  "bracos_que_passam_X_e_X3": [],
+  "embarca": false,
+  "porque": "o §3.1: o _opcoes e GLOBAL e o Caeiro e a unica voz que funciona (AUC 0,526). O que isto autoriza e abrir uma fase de verificacao de dano no Caeiro"
+ }
+}
