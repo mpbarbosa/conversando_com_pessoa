@@ -1,4 +1,52 @@
-# Fase 5X — relatório: a mesma configuração, medida duas vezes, varia tanto como o efeito que eu queria ver
+# Fase 5X — relatório: a descodificação não alcança a forma, e o §1 deste relatório estava errado
+
+> ## ⚠ Emenda, 2026-10-09 — duas afirmações deste relatório caem
+>
+> Escrita **horas** depois de o publicar, ao preparar o [passo 40](CONTROLO.md).
+> Dados: [`fase-5x/03-emenda.json`](fase-5x/), de
+> [`emenda.py`](fase-5x/emenda.py). Nada foi regerado.
+>
+> **1. O §1 está retirado.** Eu afirmei que «a mesma configuração, medida duas
+> vezes, varia 1,54×» e que daí «o chão de ruído de uma célula de 20 amostras é
+> um factor de 1,5». **Não era a mesma configuração.** Entre a 5W e a 5X eu
+> mudei o tokenizador do orçamento — `contador()` na 5W, `contador(GERADOR)` na
+> 5X —, e o e5 subconta 17%: **18 das 20 células receberam prompts diferentes**,
+> com 4 *chunks* onde a 5X encaixou 3.
+>
+> **E não há ruído de corrida nenhum.** Nas **2** células em que o prompt
+> coincidiu, o texto é **idêntico byte a byte**. O modelo é determinista dado
+> prompt, semente e opções — logo o remédio que o §5 prescrevia, «correr a
+> configuração de controlo duas vezes», devolveria resultados **idênticos** e não
+> mediria nada. **A premissa e o remédio estavam os dois errados.**
+>
+> **2. O §4 não é robusto.** Nas **17 células com prompt idêntico entre os três
+> braços**, o braço T inverte-se: **1,29×** em vez de 0,64×. «A temperatura vai
+> para o lado errado» era um artefacto das 3 células contaminadas, e o
+> [passo 17](CONTROLO.md) **não** fica sem direcção.
+>
+> | nas 17 células limpas | B | P | T |
+> |---|---|---|---|
+> | densidade | 0,00303 | **0,00593** | 0,00391 |
+> | razão a B | — | **1,96×** | 1,29× |
+> | IC95 da diferença | — | [−0,0037, +0,0092] | [−0,0052, +0,0066] |
+>
+> **O X1 fica mais forte, não mais fraco:** 1,54× passa a **1,96×** — uma
+> duplicação, que é exactamente o limite que o §2.1 declarou detectável. Continua
+> a conter zero.
+>
+> **3. E apareceu uma coisa pior, que não é ruído: a repetição re-recupera.**
+> Quando a guarda rejeita e o `responder` repete, o contexto é **trocado**. Logo
+> um braço que repetiu tem prompt diferente de um que não repetiu — e **todas** as
+> células com prompt divergente dentro de uma fase são células em que os braços
+> repetiram números diferentes de vezes: **3 de 20 na 5X, 2 de 20 na 5W, sem
+> excepção**. Não é um confundidor a declarar: é um **mediador**, porque o
+> tratamento pode causar a repetição. Atravessa todas as fases emparelhadas desta
+> sequência, e está agora no [passo 42](CONTROLO.md).
+>
+> **O que não muda:** o **X4** continua a disparar, nada embarca, e o fosso ao
+> poeta continua a ser de **10 a 30×** em todos os braços e em todos os
+> recortes. A fase decide o mesmo; o §1 é que media outra coisa.
+
 
 **Protocolo:** [`FASE-5X.md`](FASE-5X.md), pré-registado em `8789c58`.
 **Analisador:** fixado em `18daafd`, antes de os dados existirem.
@@ -26,7 +74,15 @@
 
 ---
 
-## 1. O número que decide a fase não está na tabela dos portões
+## 1. ~~O número que decide a fase não está na tabela dos portões~~ — **RETIRADO**
+
+> **Esta secção está errada.** Ver a emenda no topo: as duas medições não eram
+> da mesma configuração, e o modelo é determinista. Fica como estava escrita,
+> porque apagá-la apagava o registo do erro.
+
+<details>
+<summary>o que eu tinha escrito</summary>
+
 
 A 5W mediu o braço de **produção** no ortónimo e deu densidade **0,00951**. Esta
 fase mediu o braço de **produção** no ortónimo e deu **0,00615**.
@@ -54,6 +110,8 @@ braços** a esta escala.
 > neste desenho, e nenhum número de braços o conserta.
 
 ---
+
+</details>
 
 ## 2. O X1: a direcção é a prevista e o tamanho é o que eu declarei não conseguir ver
 
@@ -121,7 +179,11 @@ fase, e é sobre a constante e não sobre a rima.
 
 ---
 
-## 4. O X2: a temperatura vai para o lado errado
+## 4. ~~O X2: a temperatura vai para o lado errado~~ — **não é robusto**
+
+> Nas 17 células com prompt idêntico entre braços, o T dá **1,29×** e não 0,64×.
+> Ver a emenda no topo. O que segue descreve as 20 células, 3 das quais têm
+> prompts divergentes por causa da repetição.
 
 Baixar a temperatura para 0,5 deu **0,64× a densidade de rima** (0,00396 contra
 0,00615) e o metro mais longe do poeta (0,590 contra 0,630, poeta 0,7572).

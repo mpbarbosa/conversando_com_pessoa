@@ -1,0 +1,148 @@
+{
+ "_meta": {
+  "o_que_e": "emenda POSTERIOR ao FASE-5X-RELATORIO.md, que contradiz duas afirmacoes suas",
+  "afirmacao_1_retirada": "«a mesma configuracao medida duas vezes varia 1,54x» e «o chao de ruido de uma celula de 20 amostras e um factor de 1,5»",
+  "afirmacao_2_nao_robusta": "«a temperatura vai para o lado errado (-36%)»: nas celulas limpas inverte-se",
+  "semente": 20261009
+ },
+ "1_nao_era_a_mesma_configuracao": {
+  "celulas": 20,
+  "prompt_identico": 2,
+  "prompt_diferente": 18,
+  "texto_identico_quando_o_prompt_coincide": "2/2",
+  "chunks_5w_para_5x": {
+   "4->3": 6,
+   "6->5": 2,
+   "3->3": 6,
+   "3->2": 6
+  },
+  "tokens_system_5w": [
+   340
+  ],
+  "tokens_system_5x": [
+   401
+  ],
+  "leitura": "mudei o tokenizador do orcamento entre as fases; 18/20 prompts diferem. E o modelo e determinista: onde o prompt coincidiu o texto e identico byte a byte"
+ },
+ "2_a_repeticao_re_recupera": {
+  "5W": {
+   "celulas": 20,
+   "prompt_divergente_entre_bracos": 2,
+   "todas_com_tentativas_desiguais": true,
+   "detalhe": [
+    {
+     "celula": [
+      "q31",
+      1
+     ],
+     "tentativas": {
+      "C": 1,
+      "R": 2,
+      "X": 2
+     }
+    },
+    {
+     "celula": [
+      "q36",
+      0
+     ],
+     "tentativas": {
+      "C": 1,
+      "R": 1,
+      "X": 2
+     }
+    }
+   ]
+  },
+  "5X": {
+   "celulas": 20,
+   "prompt_divergente_entre_bracos": 3,
+   "todas_com_tentativas_desiguais": true,
+   "detalhe": [
+    {
+     "celula": [
+      "q31",
+      1
+     ],
+     "tentativas": {
+      "B": 1,
+      "P": 2,
+      "T": 2
+     }
+    },
+    {
+     "celula": [
+      "q37",
+      0
+     ],
+     "tentativas": {
+      "B": 1,
+      "P": 1,
+      "T": 2
+     }
+    },
+    {
+     "celula": [
+      "q38",
+      0
+     ],
+     "tentativas": {
+      "B": 1,
+      "P": 1,
+      "T": 2
+     }
+    }
+   ]
+  }
+ },
+ "3_portoes_nas_celulas_limpas": {
+  "celulas_limpas": 17,
+  "de": 20,
+  "todas_20": {
+   "B": 0.00615,
+   "P": 0.00945,
+   "T": 0.00396,
+   "P_menos_B": {
+    "diferenca": 0.0033,
+    "razao": 1.54,
+    "ic95": [
+     -0.0074,
+     0.01398
+    ],
+    "exclui_zero": false
+   },
+   "T_menos_B": {
+    "diferenca": -0.00218,
+    "razao": 0.64,
+    "ic95": [
+     -0.01108,
+     0.00513
+    ],
+    "exclui_zero": false
+   }
+  },
+  "limpas_17": {
+   "B": 0.00303,
+   "P": 0.00593,
+   "T": 0.00391,
+   "P_menos_B": {
+    "diferenca": 0.0029,
+    "razao": 1.96,
+    "ic95": [
+     -0.0037,
+     0.00919
+    ],
+    "exclui_zero": false
+   },
+   "T_menos_B": {
+    "diferenca": 0.00088,
+    "razao": 1.29,
+    "ic95": [
+     -0.00518,
+     0.00657
+    ],
+    "exclui_zero": false
+   }
+  }
+ }
+}
