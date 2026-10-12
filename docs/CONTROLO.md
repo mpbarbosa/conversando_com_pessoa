@@ -55,7 +55,7 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5W — A rima não se resolve no prompt** | [`FASE-5W.md`](FASE-5W.md) · [relatório](FASE-5W-RELATORIO.md) | ❌ **W4 dispara: nada entra.** Três braços (como está · directiva · exemplo), 60 amostras, braços **intercalados**. Nenhum chegou ao 0,50 nem passou o **seu próprio nulo**, e as duas chaves concordam. **A directiva piorou nas três medidas** — 0,10 contra 0,35 do braço C —, o que replica a [5I](FASE-5I-RELATORIO.md): **duas intervenções de instrução, duas com sinal negativo**. O **exemplo** não fez dano e moveu tudo para o poeta (metro 0,665→0,708, versos 9→12, suspeitas 4→1) **menos a rima**. **E o desfecho que pré-registei era binário, que é a resolução errada:** na **densidade** o poeta rima 1 par de versos em 10 e os três braços 1 em 100 — **um factor de 10 que nenhum braço mexeu**, com n=1196 do lado real. Fecha o prompt como via para a forma; sobra descodificação ou afinação |
 | **5X — A descodificação também não** · **com emenda** | [`FASE-5X.md`](FASE-5X.md) · [relatório](FASE-5X-RELATORIO.md) | ❌ **X4 dispara: nada embarca.** Três braços no ortónimo — produção, `repeat_penalty=1.0`, `temperature=0.5`. Nas **17 células com prompt limpo**, as duas intervenções sobem a densidade de rima (**1,96×** e **1,29×**) e **nenhuma exclui zero**; o fosso ao poeta fica em 10–30× em todos os recortes. **E a degeneração que justifica o `REPEAT_PENALTY` desde a Fase 0 não se reproduz no llama**: o braço P é mais limpo que produção em todas as medidas. **O §1 publicado primeiro está RETIRADO** — eu li uma diferença de prompts como chão de ruído; ver as correcções 33–35 e o [passo 42](#) |
 | **5Y — Auditoria: o produto sobrevive, a célula mais citada não** | [relatório](FASE-5Y-RELATORIO.md) | **Sem protocolo**, e declarado: não há medição nova nem portão, e a pergunta nasceu dos dados. A protecção é **cobertura** — audita as **nove** fases emparelhadas. **O +0,700 da 5H sobrevive**: nas 25 células limpas dá **+0,660**, IC [+0,340, +0,960], 16 sinais contra 2, p=0,0013 — e **+0,660 é quase exactamente o +0,667 do terceiro avaliador cego da 5O**, logo a contaminação estava a inflacionar o número original. **A troca de modelo em produção está confirmada.** Mas `reis/L` da [5M](FASE-5M-RELATORIO.md) — «a única célula de toda a sequência a reproduzir a distribuição de um poeta» — **inverte**: estava dentro do nulo por 0,009 e fica fora por 0,004. **Era a única das seis que podia inverter**, e eu repeti a frase em quatro relatórios |
-| **6 — Interface e remoto** | §Fase 5 do [plano](PLANO-RAG-LOCAL.md) | ⬜ não planeada em detalhe |
+| **6 — Interface gráfica** | [`FASE-6.md`](FASE-6.md) | ⬜ **planeada em detalhe** (2026-10-12), 9 passos e 7 portões. FastAPI + página estática sem build; a interface é o **terceiro consumidor** do `Pipeline` e o portão **I1** é paridade com o CLI e o grafo, como a 5Y obrigou. O `AnthropicRemote` que o plano original punha nesta fase **sai** — muda a afirmação de «sem credenciais» do `README` e precisa de medição própria |
 
 ### Fase 1, passo a passo
 
@@ -664,6 +664,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 |---|---|
 | [`PLANO-RAG-LOCAL.md`](PLANO-RAG-LOCAL.md) | arquitectura, stack, 5 fases, avaliação, riscos |
 | [`BIBLIOGRAFIA.md`](BIBLIOGRAFIA.md) | 23 referências verificadas, em ordem de leitura |
+| [`TOKENIZACAO.md`](TOKENIZACAO.md) | **temático, não é fase**: os dois tokenizadores e porque não são intercambiáveis, de onde vêm o 480 e o 300, o cache de KV, e o que custou a omissão do `contador()` |
 | [`FASE-0.md`](FASE-0.md) · [`FASE-0-RELATORIO.md`](FASE-0-RELATORIO.md) | protocolo e resultados da medição |
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
@@ -678,6 +679,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`FASE-5G.md`](FASE-5G.md) · [`FASE-5G-RELATORIO.md`](FASE-5G-RELATORIO.md) | a hipótese das interdições, finalmente medida — e rejeitada |
 | [`FASE-5H.md`](FASE-5H.md) · [`FASE-5H-RELATORIO.md`](FASE-5H-RELATORIO.md) | o modelo medido, e o único positivo da cadeia |
 | [`FASE-5I.md`](FASE-5I.md) · [`FASE-5I-RELATORIO.md`](FASE-5I-RELATORIO.md) | a forma do llama, e a âncora de 3b sob a mesma suspeita da 5E |
+| [`FASE-6.md`](FASE-6.md) | a interface gráfica: pilha, entidades, portões de paridade, e a UX desenhada em volta dos 19 s de silêncio |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
 | [`fase-1/09-repeticao.md`](fase-1/09-repeticao.md) | a repetição por plágio voltava ao mesmo poema: medição das duas políticas |
