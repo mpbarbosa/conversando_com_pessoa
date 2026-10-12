@@ -49,6 +49,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 import typer
 
+from .apresentacao import limpar_inicio
 from .corpus.models import Lang, Voice
 from .generation.base import ErroDeGeracao
 from .generation.ollama import OllamaGenerator
@@ -425,7 +426,7 @@ def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,
                     primeiro = time.perf_counter() - t0
                 if a_reter:
                     buffer.append(item)
-                    retido, a_reter = _limpar_inicio("".join(buffer), pergunta)
+                    retido, a_reter = limpar_inicio("".join(buffer), pergunta)
                     if a_reter:
                         buffer = [retido] if retido else []
                         continue
@@ -457,25 +458,6 @@ def _responder(pipeline: Pipeline, pergunta: str, voz: Voice,
     except KeyboardInterrupt:
         typer.echo(_cinza("\n  (interrompido)"))
 
-
-def _limpar_inicio(acumulado: str, pergunta: str) -> tuple[str, bool]:
-    """Descasca as linhas de enquadramento do início do fluxo.
-
-    Devolve `(texto_a_imprimir, continuar_a_reter)`. Retém enquanto não houver
-    uma linha completa que sobreviva à limpeza: o preâmbulo e o eco da pergunta
-    são ambos removíveis e podem vir em linhas separadas.
-    """
-    from .guard import remover_cercas, remover_eco_da_pergunta, remover_preambulo
-    if "\n" not in acumulado:
-        return acumulado, True
-    linha, resto = acumulado.split("\n", 1)
-    limpa = remover_eco_da_pergunta(
-        remover_preambulo(remover_cercas(linha)), pergunta)
-    if not limpa.strip():
-        # Linha descartada por inteiro. O resto pode já trazer outra completa,
-        # logo volta-se a tentar em vez de a dar por boa.
-        return _limpar_inicio(resto, pergunta) if "\n" in resto else (resto, True)
-    return f"{limpa}\n{resto}", False
 
 
 def _rodape(turno, primeiro: float | None) -> None:
