@@ -8,6 +8,15 @@ requests
 typer
 langgraph
 
+# Interface gráfica (Fase 6, passo 3). Entram no mesmo commit que o código que
+# as importa e que os testes que falham sem elas — a lição de 01/10 com o
+# `langchain`, declarado e usado em zero linhas, está no fim deste ficheiro.
+# O `uvicorn` serve o `src/web/app.py`; o Gradio foi avaliado e **recusado**
+# (docs/FASE-6.md §1.1): esconde a fronteira HTTP, que é a que tem de ser
+# testada. A página é HTML/JS estático, sem passo de build, logo não há Node.
+fastapi
+uvicorn
+
 # Desenvolvimento
 pytest
 # Linter e formatador, numa dependência só. Configurado em `pyproject.toml`,
