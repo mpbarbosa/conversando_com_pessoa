@@ -666,6 +666,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`BIBLIOGRAFIA.md`](BIBLIOGRAFIA.md) | 23 referências verificadas, em ordem de leitura |
 | [`tematicos/TOKENIZACAO.md`](tematicos/TOKENIZACAO.md) | **temático, não é fase**: os dois tokenizadores e porque não são intercambiáveis, de onde vêm o 480 e o 300, o cache de KV, e o que custou a omissão do `contador()` |
 | [`tematicos/STOPWORDS.md`](tematicos/STOPWORDS.md) | **temático, não é fase**: as três listas e porque só uma remove; `guard-PT − lexical = {'mais', 'não'}`; e o limiar de língua que estava certo com o instrumento errado |
+| [`tematicos/LEMATIZACAO.md`](tematicos/LEMATIZACAO.md) | **temático, não é fase**: **não houve lematização nem *stemming***, e é decisão nomeada na Fase 2 («normalizar, não lematizar»), com custo nomeado na 5C e um falso positivo em produção no `lexico.py` |
 | [`FASE-0.md`](FASE-0.md) · [`FASE-0-RELATORIO.md`](FASE-0-RELATORIO.md) | protocolo e resultados da medição |
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
