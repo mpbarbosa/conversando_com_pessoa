@@ -673,6 +673,8 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`tematicos/ENTIDADES.md`](tematicos/ENTIDADES.md) | **temático, não é fase**: não há NER e não faria falta; os três sinais que desambiguam `Reis`/`Campos`/`Pessoa`; o nome que vazou para os centróides e custou ~23 pontos; e a medição nova do §4 |
 | [`tematicos/SENTIMENTO.md`](tematicos/SENTIMENTO.md) | **temático, não é fase**: não houve análise de sentimento e **não serviria** — o construto é sensível a negação e retracção; «polaridade» na 5B é gramatical; e **11 das 40 palavras do FAS são afecto puro, 4 são a 2.ª pessoa** |
 | [`tematicos/DADOS.md`](tematicos/DADOS.md) | **temático, não é fase**: 2083 ficheiros, 3 línguas, 18:1 entre vozes; os **153 ingleses tratados como ruído** e os **7,3% que continuam inacessíveis**; o *pooling* imparcial garantido pela ordem de escrita; e a derivação de esquema dos `01-cru.jsonl` |
+| [`tematicos/TRANSFERENCIA.md`](tematicos/TRANSFERENCIA.md) | **temático, não é fase**: nada foi treinado e cinco modelos pré-treinados fazem tudo; o reranker do MS MARCO a +0,018 contra +0,090, guardado como **controlo negativo**; e **família bate escala** (+145% de parâmetros dão +0,400 n.s.; +5% com outra família dão +0,700 a p=0,0002) |
+| [`tematicos/AUMENTO.md`](tematicos/AUMENTO.md) | **temático, não é fase**: três sínteses, e o propósito separa-as — os nulos da 5K e da 5V funcionaram, o instrumento da 5R falhou. Mais o n efectivo: 30 amostras valem **n≈10** |
 | [`FASE-0.md`](FASE-0.md) · [`FASE-0-RELATORIO.md`](FASE-0-RELATORIO.md) | protocolo e resultados da medição |
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |

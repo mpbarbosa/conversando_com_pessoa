@@ -16,11 +16,13 @@ escrever), tem de dizer que foi feito ali.
 | [`ENTIDADES.md`](ENTIDADES.md) | não há NER, e não faria falta: sete entidades num mundo fechado. O difícil é `Reis`/`Campos`/`Pessoa` serem palavras comuns — e **uma medição nova**: o detector rejeita 1,61% dos poemas autênticos |
 | [`SENTIMENTO.md`](SENTIMENTO.md) | não houve, e **não serviria**: as regras 3 e 4 da âncora dependem de negação e retracção, a que um léxico de afecto é cego. Mais a composição das 40 palavras do FAS, que é medição nova |
 | [`DADOS.md`](DADOS.md) | três famílias heterogéneas; os **153 poemas ingleses que tratei como ruído**, em três lugares do código; e o esquema dos meus próprios dados a derivar de 27 para 18 campos a meio da sequência |
+| [`TRANSFERENCIA.md`](TRANSFERENCIA.md) | **nada foi treinado e é tudo transferência**: cinco modelos pré-treinados, o reranker do MS MARCO como controlo negativo, e o que transferiu ser **família e não escala** |
+| [`AUMENTO.md`](AUMENTO.md) | não há, porque não há treino — mas há **três sínteses**, e o que as separa é o propósito: duas construíram nulos e funcionaram, uma construiu um instrumento e falhou |
 
 ## Duas regras, que vêm do resto do projecto
 
 **Dizem onde eu errei.** Um documento temático que só conte a versão que ficou de
-pé é propaganda. Os seis que aqui estão nomeiam as correcções do
+pé é propaganda. Os oito que aqui estão nomeiam as correcções do
 [`CONTROLO.md`](../CONTROLO.md) §4 que lhes dizem respeito — a 16, a 30 e a 33 na
 tokenização e a 12 nas *stopwords* — e a lematização diz onde a sua própria
 ausência custou, que é a 5C.
