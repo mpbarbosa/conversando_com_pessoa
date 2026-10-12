@@ -19,11 +19,14 @@ escrever), tem de dizer que foi feito ali.
 | [`TRANSFERENCIA.md`](TRANSFERENCIA.md) | **nada foi treinado e é tudo transferência**: cinco modelos pré-treinados, o reranker do MS MARCO como controlo negativo, e o que transferiu ser **família e não escala** |
 | [`AUMENTO.md`](AUMENTO.md) | não há, porque não há treino — mas há **três sínteses**, e o que as separa é o propósito: duas construíram nulos e funcionaram, uma construiu um instrumento e falhou |
 | [`MULTITAREFA.md`](MULTITAREFA.md) | um modelo, duas tarefas opostas (verso a 0,9 e classificação a 0,0), e o custo da partilha medido **antes** de mexer: **72% → 68%**. Mais o mesmo padrão a vazar no `Chunk` e a não vazar no encoder |
+| [`PLAGIO.md`](PLAGIO.md) | **o maior efeito de produto do projecto: 82% → 0%**. Porque n-gramas não vêem esta cópia, os três limiares calibrados, e o mecanismo que remove a ocasião em vez de pedir melhor comportamento — e que contaminou cinco fases |
+| [`BUSCA.md`](BUSCA.md) | **produção usa só o denso**: a Fase 2 é um resultado negativo declarado (+0,004, e o `apt@3` cai). Porque o RRF funde por ordem, porque o `k=60` não foi afinado, e porque não há FAISS |
+| [`PERSONA.md`](PERSONA.md) | **descrever a postura produz a voz; nomear produz pastiche** — o achado fundador. E **três das suas regras não descrevem o poeta**, as três em produção |
 
 ## Duas regras, que vêm do resto do projecto
 
 **Dizem onde eu errei.** Um documento temático que só conte a versão que ficou de
-pé é propaganda. Os nove que aqui estão nomeiam as correcções do
+pé é propaganda. Os doze que aqui estão nomeiam as correcções do
 [`CONTROLO.md`](../CONTROLO.md) §4 que lhes dizem respeito — a 16, a 30 e a 33 na
 tokenização e a 12 nas *stopwords* — e a lematização diz onde a sua própria
 ausência custou, que é a 5C.
