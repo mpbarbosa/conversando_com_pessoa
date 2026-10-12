@@ -15,11 +15,12 @@ escrever), tem de dizer que foi feito ali.
 | [`LEMATIZACAO.md`](LEMATIZACAO.md) | **não houve**, e é decisão nomeada na Fase 2 com custo medido na 5C; mais o sítio onde lematizar teria destruído o instrumento de rima da 5V |
 | [`ENTIDADES.md`](ENTIDADES.md) | não há NER, e não faria falta: sete entidades num mundo fechado. O difícil é `Reis`/`Campos`/`Pessoa` serem palavras comuns — e **uma medição nova**: o detector rejeita 1,61% dos poemas autênticos |
 | [`SENTIMENTO.md`](SENTIMENTO.md) | não houve, e **não serviria**: as regras 3 e 4 da âncora dependem de negação e retracção, a que um léxico de afecto é cego. Mais a composição das 40 palavras do FAS, que é medição nova |
+| [`DADOS.md`](DADOS.md) | três famílias heterogéneas; os **153 poemas ingleses que tratei como ruído**, em três lugares do código; e o esquema dos meus próprios dados a derivar de 27 para 18 campos a meio da sequência |
 
 ## Duas regras, que vêm do resto do projecto
 
 **Dizem onde eu errei.** Um documento temático que só conte a versão que ficou de
-pé é propaganda. Os cinco que aqui estão nomeiam as correcções do
+pé é propaganda. Os seis que aqui estão nomeiam as correcções do
 [`CONTROLO.md`](../CONTROLO.md) §4 que lhes dizem respeito — a 16, a 30 e a 33 na
 tokenização e a 12 nas *stopwords* — e a lematização diz onde a sua própria
 ausência custou, que é a 5C.

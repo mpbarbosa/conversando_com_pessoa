@@ -671,6 +671,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`tematicos/LEMATIZACAO.md`](tematicos/LEMATIZACAO.md) | **temático, não é fase**: **não houve lematização nem *stemming***, e é decisão nomeada na Fase 2 («normalizar, não lematizar»), com custo nomeado na 5C e um falso positivo em produção no `lexico.py` |
 | [`tematicos/ENTIDADES.md`](tematicos/ENTIDADES.md) | **temático, não é fase**: não há NER e não faria falta; os três sinais que desambiguam `Reis`/`Campos`/`Pessoa`; o nome que vazou para os centróides e custou ~23 pontos; e a medição nova do §4 |
 | [`tematicos/SENTIMENTO.md`](tematicos/SENTIMENTO.md) | **temático, não é fase**: não houve análise de sentimento e **não serviria** — o construto é sensível a negação e retracção; «polaridade» na 5B é gramatical; e **11 das 40 palavras do FAS são afecto puro, 4 são a 2.ª pessoa** |
+| [`tematicos/DADOS.md`](tematicos/DADOS.md) | **temático, não é fase**: 2083 ficheiros, 3 línguas, 18:1 entre vozes; os **153 ingleses tratados como ruído** e os **7,3% que continuam inacessíveis**; o *pooling* imparcial garantido pela ordem de escrita; e a derivação de esquema dos `01-cru.jsonl` |
 | [`FASE-0.md`](FASE-0.md) · [`FASE-0-RELATORIO.md`](FASE-0-RELATORIO.md) | protocolo e resultados da medição |
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
