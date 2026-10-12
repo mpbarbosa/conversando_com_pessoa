@@ -1,0 +1,135 @@
+{
+ "_meta": {
+  "protocolo": "docs/FASE-5Z.md §2-3",
+  "fixado_antes_dos_dados": true,
+  "primario": "densidade de rima na 1.a tentativa",
+  "z3": "com intervalo: corrige o X3 da 5X",
+  "poeta_densidade": 0.09969,
+  "semente": 20261009
+ },
+ "prompt_divergente": {
+  "primeira_tentativa": 0,
+  "saida_final": 4,
+  "de": 20,
+  "leitura": "a 1.a tentativa devia ser 0: o `_repetir_sem` so actua depois dela"
+ },
+ "por_braco": {
+  "B": {
+   "repeat_penalty": 1.1,
+   "n": 20,
+   "densidade_primeira": 0.0075,
+   "rima_binaria_primeira": 0.2,
+   "nulo_primeira": {
+    "media": 0.2328,
+    "p99": 0.4
+   },
+   "razao_ao_poeta": 13.3,
+   "densidade_final": 0.00793,
+   "tentativas_2": 2,
+   "segundos_mediana": 38.3,
+   "z3_linhas_duplicadas": 0.0031,
+   "z3_nao_verso": 0.0,
+   "z3_truncada": 0.1,
+   "z3_plagiou": 0.0,
+   "z3_metro_dist": 0.2231
+  },
+  "N": {
+   "repeat_penalty": 1.0,
+   "n": 20,
+   "densidade_primeira": 0.0096,
+   "rima_binaria_primeira": 0.4,
+   "nulo_primeira": {
+    "media": 0.2408,
+    "p99": 0.45
+   },
+   "razao_ao_poeta": 10.4,
+   "densidade_final": 0.01262,
+   "tentativas_2": 2,
+   "segundos_mediana": 30.4,
+   "z3_linhas_duplicadas": 0.0,
+   "z3_nao_verso": 0.0,
+   "z3_truncada": 0.05,
+   "z3_plagiou": 0.05,
+   "z3_metro_dist": 0.1687
+  },
+  "R": {
+   "repeat_penalty": 0.9,
+   "n": 20,
+   "densidade_primeira": 0.01437,
+   "rima_binaria_primeira": 0.2,
+   "nulo_primeira": {
+    "media": 0.3548,
+    "p99": 0.55
+   },
+   "razao_ao_poeta": 6.9,
+   "densidade_final": 0.01264,
+   "tentativas_2": 10,
+   "segundos_mediana": 46.0,
+   "z3_linhas_duplicadas": 0.2353,
+   "z3_nao_verso": 0.0,
+   "z3_truncada": 0.5,
+   "z3_plagiou": 0.1,
+   "z3_metro_dist": 0.1545
+  }
+ },
+ "Z1": {
+  "medias_ordenadas": [
+   0.0075,
+   0.0096,
+   0.01437
+  ],
+  "monotona": true,
+  "R_menos_B": 0.00687,
+  "ic95": [
+   -0.00931,
+   0.02827
+  ],
+  "exclui_zero": false,
+  "dispara": false
+ },
+ "Z2": {
+  "razao_N_sobre_B": 1.28,
+  "ic95": [
+   -0.00833,
+   0.01162
+  ],
+  "referencia_5X": 1.96,
+  "dispara": true
+ },
+ "Z3": {
+  "N": {
+   "danos": [],
+   "dispara": true
+  },
+  "R": {
+   "danos": [
+    {
+     "medida": "linhas_duplicadas",
+     "ic95": [
+      0.1262,
+      0.34687
+     ],
+     "braco": 0.2353,
+     "B": 0.0031
+    },
+    {
+     "medida": "truncada",
+     "ic95": [
+      0.15,
+      0.65
+     ],
+     "braco": 0.5,
+     "B": 0.1
+    }
+   ],
+   "dispara": false
+  }
+ },
+ "Z4": {
+  "dispara": true
+ },
+ "decisao_pre_escrita": {
+  "embarca": false,
+  "porque": "o §3.1: o _opcoes e global e o Caeiro e a unica voz que funciona. O passo 41 (dano no Caeiro) passa a obrigatorio antes de qualquer embarque"
+ }
+}

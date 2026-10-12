@@ -120,14 +120,24 @@ intervalo**, e a não-embarcação do §3.1.
 ## 5. Lista de verificação
 
 ```
-[ ] A1  tres bracos asseridos a diferir de producao so no repeat_penalty
-[ ] A2  60 amostras, bracos INTERCALADOS, voz unica, contador(GERADOR), e o
-        harness a registar `turno.primeira` (passo 43)
-[ ] A3  desfecho PRIMARIO: densidade de rima na 1.a tentativa
-[ ] A4  secundario: a saida final; e a bateria do Z3 COM intervalo
-[ ] B1  Z1 (com monotonia), Z2, Z3, Z4 e a decisao do §3.1
-[ ] C1  relatorio FASE-5Z-RELATORIO.md
-[ ] C2  CONTROLO.md
+[x] A1  tres bracos asseridos a diferir de producao so no repeat_penalty
+[x] A2  60 amostras, bracos INTERCALADOS, voz unica (ortonimo), contador(GERADOR),
+        40 min, e o harness a registar `turno.primeira` (passo 43)
+[x] A3  desfecho PRIMARIO: densidade de rima na 1.a tentativa — e o prompt
+        divergiu em 0/20 celulas, contra 4/20 na saida final
+[x] A4  secundario: a saida final (onde 1,0 e 0,9 COINCIDEM); bateria do Z3 COM
+        intervalo, e e ela que da o unico resultado solido da fase
+[x] B1  Z1 nao dispara (monotonia SIM, IC a conter zero), Z2 dispara MAL
+        OPERACIONALIZADO (1,28x contra os 1,96x da 5X), Z3 falha no braco R
+        (duplicadas 0,2353 contra 0,0031; metade truncada), Z4 DISPARA
+[x] B2  o achado que nao estava nos portoes: a monotonia INVERTE sem uma celula
+        de vinte, e o par que decide a fase e `toque`/`que` em quatro versos —
+        a propria manipulacao contada como rima pelo instrumento
+[x] B3  44 das 60 amostras tem densidade ZERO: o desfecho e uma contagem de
+        eventos raros, e o §4.3 estimou a potencia na grandeza errada
+[x] C1  relatorio FASE-5Z-RELATORIO.md
+[x] C2  CONTROLO.md — linha da fase, passos 17b/34/38/40/41, correccao 38 e um
+        defeito de instrumento novo
 ```
 
 **Sessões paralelas:** verificado antes de abrir. `git add` com ficheiros
