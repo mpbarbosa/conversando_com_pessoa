@@ -698,6 +698,23 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`FASE-5G.md`](FASE-5G.md) · [`FASE-5G-RELATORIO.md`](FASE-5G-RELATORIO.md) | a hipótese das interdições, finalmente medida — e rejeitada |
 | [`FASE-5H.md`](FASE-5H.md) · [`FASE-5H-RELATORIO.md`](FASE-5H-RELATORIO.md) | o modelo medido, e o único positivo da cadeia |
 | [`FASE-5I.md`](FASE-5I.md) · [`FASE-5I-RELATORIO.md`](FASE-5I-RELATORIO.md) | a forma do llama, e a âncora de 3b sob a mesma suspeita da 5E |
+| [`FASE-5J.md`](FASE-5J.md) · [`FASE-5J-RELATORIO.md`](FASE-5J-RELATORIO.md) | a âncora de forma medida contra o poeta, e os **pisos** das personas como mecanismo único |
+| [`FASE-5K.md`](FASE-5K.md) · [`FASE-5K-RELATORIO.md`](FASE-5K-RELATORIO.md) | o substituto da conformidade, calibrado com nulo empírico e régua entre vozes reais |
+| [`FASE-5L.md`](FASE-5L.md) | a contagem de versos a sair do 3b, com a verificação que o autorizou — **sem relatório**, é uma alteração |
+| [`FASE-5M.md`](FASE-5M.md) · [`FASE-5M-RELATORIO.md`](FASE-5M-RELATORIO.md) | a forma das quatro vozes nos dois modelos, e o custo da troca a ser só do Caeiro |
+| [`FASE-5N.md`](FASE-5N.md) · [`FASE-5N-RELATORIO.md`](FASE-5N-RELATORIO.md) | o `qwen2.5:3b` da mesma família, e a dose-resposta que não aparece |
+| [`FASE-5O.md`](FASE-5O.md) · [`FASE-5O-RELATORIO.md`](FASE-5O-RELATORIO.md) | o +0,700 remedido por um terceiro avaliador cego, de outra sessão |
+| [`FASE-5P.md`](FASE-5P.md) · [`FASE-5P-RELATORIO.md`](FASE-5P-RELATORIO.md) | a fronteira 1/2 da âncora, e a prova que era minha e estava invertida |
+| [`FASE-5Q.md`](FASE-5Q.md) · [`FASE-5Q-RELATORIO.md`](FASE-5Q-RELATORIO.md) | o gerado contra o real nas três vozes que faltavam, e o gargalo de superfície |
+| [`FASE-5R.md`](FASE-5R.md) · [`FASE-5R-RELATORIO.md`](FASE-5R-RELATORIO.md) | o detector de superfície derivado do corpus, e o limite dos 2083 poemas |
+| [`FASE-5S.md`](FASE-5S.md) · [`FASE-5S-RELATORIO.md`](FASE-5S-RELATORIO.md) | a troca decidida e feita, com o roteador remedido no modelo novo |
+| [`FASE-5T.md`](FASE-5T.md) · [`FASE-5T-RELATORIO.md`](FASE-5T-RELATORIO.md) | a gramática fechada — e por **não haver nada a detectar**, ao contrário da 5R |
+| [`FASE-5U.md`](FASE-5U.md) · [`FASE-5U-RELATORIO.md`](FASE-5U-RELATORIO.md) | a ablação do bloco de língua, e o chão de eventos que a cegou |
+| [`FASE-5V.md`](FASE-5V.md) · [`FASE-5V-RELATORIO.md`](FASE-5V-RELATORIO.md) | a rima: o primeiro instrumento mecânico da sequência a discriminar as três vozes |
+| [`FASE-5W.md`](FASE-5W.md) · [`FASE-5W-RELATORIO.md`](FASE-5W-RELATORIO.md) | três braços de prompt contra a rima, e a **densidade** como desfecho de resolução certa |
+| [`FASE-5X.md`](FASE-5X.md) · [`FASE-5X-RELATORIO.md`](FASE-5X-RELATORIO.md) | a descodificação, **com a emenda** que retirou o §1 e nomeou o mediador da repetição |
+| [`FASE-5Y-RELATORIO.md`](FASE-5Y-RELATORIO.md) | a auditoria das nove fases emparelhadas — **sem protocolo**, e declarado |
+| [`FASE-5Z.md`](FASE-5Z.md) · [`FASE-5Z-RELATORIO.md`](FASE-5Z-RELATORIO.md) | a penalização **invertida**, e a monotonia que uma célula de vinte desfaz |
 | [`FASE-6.md`](FASE-6.md) | a interface gráfica: pilha, entidades, portões de paridade, e a UX desenhada em volta dos 19 s de silêncio |
 | `fase-0/` | 21 ficheiros de evidência e 5 scripts |
 | [`fase-0/07-igpu-vulkan.md`](fase-0/07-igpu-vulkan.md) | a iGPU por Vulkan: prefill 6x, decode 0,55x — corrige a premissa «CPU-only» |
@@ -713,6 +730,23 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | `fase-5g/` | as 60 amostras novas dos dois braços, as duas pontuações com a âncora 3a′, e os portões G0–G5 |
 | `fase-5h/` | as 60 amostras dos dois modelos, com a asserção de prompt igual, e os portões M1–M5 |
 | `fase-5i/` | as 60 amostras dos dois braços de forma, e os portões I0–I4 |
+| `fase-5j/` | a contagem de versos do corpus e dos dois geradores, e os portões J1–J5 |
+| `fase-5k/` | o nulo empírico do KS por `n`, a régua entre vozes reais, e os portões K1–K5 |
+| `fase-5l/` | a verificação dos quatro intervalos contra o poeta, que autorizou retirá-los |
+| `fase-5m/` | as **180** amostras das três vozes que faltavam nos dois modelos, as medianas das personas, e os portões M1–M5 |
+| `fase-5n/` | as **30** amostras do `qwen2.5:3b`, a folha cega, as pontuações e os portões N1–N4 |
+| `fase-5o/` | a folha de **54** itens para o terceiro avaliador, às cegas, e os portões O1–O5 |
+| `fase-5p/` | a reanálise dos três avaliadores nos 24 poemas reais, e os portões P1–P3 |
+| `fase-5q/` | a folha de **48** itens, gerado contra real nas três vozes, os juízos e os portões Q1–Q4 |
+| `fase-5r/` | a derivação do detector por log-odds, a validação retida, e os portões R1–R4 |
+| `fase-5s/` | o banco do roteador corrido com o modelo novo (27/40), e os portões S1–S3 |
+| `fase-5t/` | a próclise por **atracção** medida no corpus e nos dois modelos, e os portões T1–T4 |
+| `fase-5u/` | as **120** amostras da ablação emparelhada, a sensibilidade, e os portões U1–U3 (o U4 é descritivo) |
+| `fase-5v/` | a rima do poeta e do gerado verso a verso, as duas chaves, e os portões V1–V4 |
+| `fase-5w/` | as 60 amostras dos três braços de prompt, a densidade de rima, e os portões W1–W4 |
+| `fase-5x/` | as 60 amostras dos três braços de descodificação, a emenda das 17 células limpas, e os portões X1–X4 |
+| `fase-5y/` | a auditoria das nove fases emparelhadas, célula a célula |
+| `fase-5z/` | as 60 amostras dos três níveis de penalização, com a **1.ª tentativa** como primário, e os portões Z1–Z4 |
 
 ### Código
 
