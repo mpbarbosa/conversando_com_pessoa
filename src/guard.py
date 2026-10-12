@@ -331,8 +331,21 @@ def _nomes_indevidos(texto: str) -> tuple[str, ...]:
     for n in _NOMES_INEQUIVOCOS:
         if re.search(rf"\b{re.escape(_sem_acentos(n))}\b", sem, re.I):
             achados.append(n)
+    # A linguagem meta é **só o portão** dos nomes ambíguos, e não um achado
+    # por si. Era, e isso rejeitava poesia: medido no passo 44, o
+    # `_nomes_indevidos` marcava **31 de 1926** poemas autênticos (1,61%, dez
+    # vezes o `lingua_errada`) e **13 desses 31 eram só linguagem meta** — «A
+    # caligrafia rápida destes versos» (`poem_163`) e «A alma da minha voz?»
+    # (`poem_1068`) são poemas a falar de si, não meta-comentário.
+    #
+    # É o defeito da correcção 12 noutro instrumento: ali a fracção de
+    # stopwords media **registo** e chamava-lhe **língua**; aqui o `_RE_META`
+    # mede **auto-referência** e chamava-lhe **meta-comentário**.
+    #
+    # Nenhum modo de falha conhecido depende disto: «este poema não é do Reis,
+    # mas da minha voz» tem `Reis` + meta, «Álvaro suspira» é nome inequívoco,
+    # e o preâmbulo é do `_RE_PREAMBULO`. Ver `docs/PASSO-44.md`.
     if tem_meta:
-        achados.append("linguagem meta")
         for n in _NOMES_AMBIGUOS:
             if re.search(rf"\b{re.escape(_sem_acentos(n))}\b", sem):
                 achados.append(n)

@@ -330,3 +330,35 @@ def test_colocacao_pronominal_nao_e_verificada():
                   "e me dói o que ela deixa,\n"
                   "e a tarde fica mais funda.")
     assert guard.verificar(brasileiro).gramatica == ()
+
+
+# --------------------------------------------------------------------------- #
+# Passo 44 — a linguagem meta é o portão dos nomes ambíguos, não um achado.
+#
+# Antes disto o `_nomes_indevidos` marcava 31 de 1926 poemas autênticos e 13
+# eram só linguagem meta. Ver `docs/PASSO-44.md`.
+# --------------------------------------------------------------------------- #
+#: `poem_1068`, verbatim. É um dos 13 falsos positivos que o passo 44 corrigiu:
+#: «a minha voz» aqui é o **assunto** do poema, não meta-comentário sobre ele.
+AUTO_REFERENCIA = """A alma da minha voz?
+Que digo eu quando falo?
+Em que sonho me encontro
+quando acordo e me calo?"""
+
+
+def test_auto_referencia_poetica_nao_e_quebra_de_persona():
+    """Um poema sobre a própria voz não é um chatbot a explicar-se."""
+    v = verificar(AUTO_REFERENCIA)
+    assert not any("persona" in m or "meta" in m for m in v.motivos), v.motivos
+
+
+def test_linguagem_meta_sozinha_nao_e_achado():
+    """Sem nome de heterónimo, a linguagem meta não produz motivo nenhum."""
+    assert guard._nomes_indevidos("A caligrafia rápida destes versos,\n"
+                                  "a tinta que seca devagar.") == ()
+
+
+def test_linguagem_meta_continua_a_licenciar_o_nome_ambiguo():
+    """O portão tem de continuar a funcionar — é o P3 do passo 44."""
+    achados = guard._nomes_indevidos("Reis, na minha voz,\nsou alegre e sombrio.")
+    assert "Reis" in achados and "linguagem meta" not in achados, achados

@@ -106,9 +106,50 @@ Os três modos observados na Fase 0, e onde ficam:
 ## 5. Lista de verificação
 
 ```
-[ ] A1  medir o antes: 31/1926, e as três classes
-[ ] B1  tirar a linha; P1, P2, P3
-[ ] C1  se autorizado: entra com comentario de proveniencia + teste do poem_1068
-[ ] C2  relatorio neste ficheiro, em §6
-[ ] C3  CONTROLO.md
+[x] A1  medido o antes: 31/1926 = 1,61%, e as tres classes (17/13/1)
+[x] B1  linha tirada. P1 DISPARA, P2 DISPARA, P3 DISPARA
+[x] C1  entrou, com a proveniencia no comentario e tres testes novos
+[x] C2  relatorio no §6
+[x] C3  CONTROLO.md
 ```
+
+---
+
+## 6. Relatório
+
+### 6.1 Os portões
+
+| | | |
+|---|---|---|
+| **P1** a guarda fica mais segura | ✅ **dispara** | **18/1926 = 0,93%**, e **zero** casos sem nome de heterónimo |
+| **P2** sem regressão | ✅ dispara | a *suite* passa, `QUEBRA` e `PREAMBULO` incluídos |
+| **P3** o portão dos ambíguos sobrevive | ✅ dispara | «Reis, na minha voz» é apanhado; «Reis houve que nada souberam» não |
+
+**E a predição estava escrita antes: «31 → 18 (0,93%)».** Saiu **18 (0,93%)** —
+os 17 de nome e o 1 de ambos, exactamente como o §3 previa. Não é mérito de
+previsão: é aritmética, porque a correcção remove uma classe inteira e a classe
+estava contada. **Mas estava contada antes, e é isso que faz a diferença entre
+uma predição e uma descrição.**
+
+### 6.2 O que entrou
+
+Uma linha **retirada** do `_nomes_indevidos` — `achados.append("linguagem
+meta")` —, treze de comentário com a proveniência, e **três testes**:
+
+| teste | o que fixa |
+|---|---|
+| `test_auto_referencia_poetica_nao_e_quebra_de_persona` | o `poem_1068` **verbatim**, «A alma da minha voz?» |
+| `test_linguagem_meta_sozinha_nao_e_achado` | «A caligrafia rápida destes versos» não produz motivo |
+| `test_linguagem_meta_continua_a_licenciar_o_nome_ambiguo` | o portão, e que `"linguagem meta"` **não** volta à lista |
+
+O primeiro usa um poema real do corpus, e é deliberado: é o argumento que o
+[`tematicos/STOPWORDS.md`](tematicos/STOPWORDS.md) §3.2 registou — uma amostra
+inventada por mim concorda comigo; a observada não.
+
+### 6.3 O que fica
+
+**Os 18 que sobram são poemas em que Pessoa nomeia um heterónimo** — «Desembrulhar-me
+e ser eu, não Alberto Caeiro», a nota biográfica de Campos. Numa resposta
+**gerada** isso é quebra de persona, logo a guarda está a fazer o que lhe
+mandaram. **0,93% de material autêntico continua a não passar**, e isso fica
+declarado: o §4 diz porque não tentei corrigi-lo.
