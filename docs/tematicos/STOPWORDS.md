@@ -15,9 +15,9 @@ descreve **um** dos três usos.
 
 | ficheiro | lista | n | o que faz |
 |---|---|---|---|
-| [`retrieval/lexical.py`](../src/retrieval/lexical.py) | `STOPWORDS` | **84** | **remove**, para o BM25 |
-| [`guard.py`](../src/guard.py) | `_STOPWORDS[PT]` / `[EN]` | **34** / **49** | **detecta** a língua da resposta |
-| [`corpus/parse.py`](../src/corpus/parse.py) | `_PT` / `_EN` | **31** / **24** | **classifica** a língua do poema |
+| [`retrieval/lexical.py`](../../src/retrieval/lexical.py) | `STOPWORDS` | **84** | **remove**, para o BM25 |
+| [`guard.py`](../../src/guard.py) | `_STOPWORDS[PT]` / `[EN]` | **34** / **49** | **detecta** a língua da resposta |
+| [`corpus/parse.py`](../../src/corpus/parse.py) | `_PT` / `_EN` | **31** / **24** | **classifica** a língua do poema |
 
 As duas últimas **não removem nada**. Contam palavras funcionais para decidir em
 que língua um texto está — é o uso inverso, porque ali as *stopwords* são o
@@ -89,7 +89,7 @@ Está escrita como `"""a o as os …""".split()`. O `ruff` quer o contrário
 (`SIM905`) e **aplicá-lo fez dano medido**: transformou as três listas em
 literais de ~500 caracteres numa linha só, levando com elas o comentário que
 explica as ausências deliberadas. A regra está desligada no
-[`pyproject.toml`](../pyproject.toml) com esse motivo escrito.
+[`pyproject.toml`](../../pyproject.toml) com esse motivo escrito.
 
 > **Uma lista de *stopwords* é uma decisão editorial, não dados.** O formato que
 > a mantém legível e anotável vale mais que a convenção do linter.
@@ -226,7 +226,7 @@ poemas portugueses contra os quais todas as fases calibraram instrumentos.
 6. **A lista é uma decisão editorial**, e o formato que a mantém anotável vale
    mais que a convenção do linter.
 
-**Ficheiros:** [`src/retrieval/lexical.py`](../src/retrieval/lexical.py) ·
-[`src/guard.py`](../src/guard.py) ·
-[`src/corpus/parse.py`](../src/corpus/parse.py) ·
-[`CONTROLO.md`](CONTROLO.md) correcção 12 e a secção da guarda de idioma.
+**Ficheiros:** [`src/retrieval/lexical.py`](../../src/retrieval/lexical.py) ·
+[`src/guard.py`](../../src/guard.py) ·
+[`src/corpus/parse.py`](../../src/corpus/parse.py) ·
+[`CONTROLO.md`](../CONTROLO.md) correcção 12 e a secção da guarda de idioma.
