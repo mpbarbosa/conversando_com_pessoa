@@ -675,6 +675,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | [`tematicos/DADOS.md`](tematicos/DADOS.md) | **temático, não é fase**: 2083 ficheiros, 3 línguas, 18:1 entre vozes; os **153 ingleses tratados como ruído** e os **7,3% que continuam inacessíveis**; o *pooling* imparcial garantido pela ordem de escrita; e a derivação de esquema dos `01-cru.jsonl` |
 | [`tematicos/TRANSFERENCIA.md`](tematicos/TRANSFERENCIA.md) | **temático, não é fase**: nada foi treinado e cinco modelos pré-treinados fazem tudo; o reranker do MS MARCO a +0,018 contra +0,090, guardado como **controlo negativo**; e **família bate escala** (+145% de parâmetros dão +0,400 n.s.; +5% com outra família dão +0,700 a p=0,0002) |
 | [`tematicos/AUMENTO.md`](tematicos/AUMENTO.md) | **temático, não é fase**: três sínteses, e o propósito separa-as — os nulos da 5K e da 5V funcionaram, o instrumento da 5R falhou. Mais o n efectivo: 30 amostras valem **n≈10** |
+| [`tematicos/MULTITAREFA.md`](tematicos/MULTITAREFA.md) | **temático, não é fase**: o gerador e o roteador partilham a instância para tarefas **opostas** (0,9 contra 0,0), e o custo foi medido **antes** de mexer na constante — **72% → 68%**. E o mesmo padrão de «um objecto, duas tarefas» **vazou** no `Chunk` (~23 pontos) e **não vazou** no encoder |
 | [`FASE-0.md`](FASE-0.md) · [`FASE-0-RELATORIO.md`](FASE-0-RELATORIO.md) | protocolo e resultados da medição |
 | [`FASE-1.md`](FASE-1.md) | 9 passos do pipeline |
 | [`FASE-2.md`](FASE-2.md) | busca híbrida, BM25, ortografia histórica |
