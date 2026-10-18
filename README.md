@@ -51,8 +51,8 @@ híbrida da Fase 2. Relatório: [`docs/fase-1/08-RELATORIO.md`](docs/fase-1/08-R
 | chunks indexados | 2290 |
 | índice | 7,0 MB · busca em **5,57 ms** |
 | construção do corpus · do índice | ~40 s · 383 s |
-| latência de resposta | ~44 s a 500 tokens de contexto (CPU) |
-| testes | **237, todos a passar** |
+| latência de resposta **prevista** | ~44 s a 500 tokens de contexto (CPU), com a máquina fria — a quente dá 14–17 tok/s e sai do orçamento |
+| testes | **353 a passar**, 1 ignorado |
 
 ---
 
@@ -71,7 +71,7 @@ data/pessoa_poems/ (2083 .txt)
         └─ src/retrieval/lexical.py  BM25
         │
         ├─ src/generation/prompt.py  persona no `system`, orçamento de tokens
-        ├─ src/generation/ollama.py  qwen2.5:7b-instruct-q4_K_M, em fluxo
+        ├─ src/generation/ollama.py  llama3.1:8b-instruct-q4_K_M, em fluxo
         ├─ src/guard.py              guardas de persona e de língua
         └─ src/plagio.py             guarda de cópia
         │
@@ -145,7 +145,7 @@ ficheiros em `data/pessoa_poems/` (ver *Corpus*, abaixo — não vêm no reposit
 ```bash
 python3.12 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-ollama pull qwen2.5:7b-instruct-q4_K_M
+ollama pull llama3.1:8b-instruct-q4_K_M
 python -m src.cli --voz caeiro
 ```
 
@@ -154,7 +154,7 @@ grava-os em `data/`; nas seguintes carrega-os, se o manifesto os aceitar. Use
 `--verboso` para ver o progresso.
 
 Dentro da conversa: `/auto` deixa o roteador propor a voz a cada pergunta
-(72% de acerto, +0,5 s); `/rerank` reordena os candidatos por cross-encoder
+(68% de acerto com o llama3.1, +0,5 s); `/rerank` reordena os candidatos por cross-encoder
 (+0,090 de nDCG@5, +2,6 s); `/caeiro` `/campos` `/reis` `/pessoa` `/search` trocam de voz
 e desligam o roteador,
 `/pt` `/en` de língua, `/sair` sai. Cada resposta imprime as **fontes** usadas e os
@@ -162,7 +162,7 @@ tempos — o *prefill* domina a espera (58–89%), e mostrá-lo ensina o custo e
 o esconder.
 
 ```bash
-pytest          # 237 testes, ~2 min
+pytest          # 353 testes, ~2 min
 ```
 
 ---
@@ -198,7 +198,7 @@ também ficam fora, por serem precisamente isso.
 | **1 — Pipeline** (parsing → índice → vozes → gerador → guardas → conjunto dourado → CLI) | ✅ **completa, 9 de 9** |
 | **2 — Busca híbrida** (fundir denso + BM25) | ⬜ desbloqueada pela linha de base |
 | **3 — Rerank** | 🔄 candidato escolhido por *benchmark* (MiniLM-L12 a 1694 tok/s contra 90 do bge-m3) |
-| **4 — Enriquecimento e roteador de voz** | ✅ roteador em `/auto` (72%, 92% com etiqueta múltipla); enriquecimento **vetado** por medição |
+| **4 — Enriquecimento e roteador de voz** | ✅ roteador em `/auto` (**68%** com o llama3.1; os 72% · 92% com etiqueta múltipla são do qwen2.5, antes da troca da [5S](docs/FASE-5S-RELATORIO.md)); enriquecimento **vetado** por medição |
 | **5 — Interface e geração remota** | ⬜ |
 
 Limitações conhecidas e não resolvidas estão listadas em
