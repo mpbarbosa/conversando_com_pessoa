@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+  A página. Passo 5 da Fase 6.
+
+  Três ficheiros servidos como ficheiros, sem passo de compilação (§1.1 do
+  plano). Não há motor de Markdown e não há framework: o conteúdo é verso, as
+  quebras de linha são semânticas, e um renderizador de Markdown colapsava-as,
+  comia o travessão e transformava uma linha que comece por `*` numa lista
+  (§4.8.1).
+
+  A página NÃO decide nada — é a mesma regra do §0 aplicada ao cliente. Não
+  limpa o início do fluxo (fá-lo o `src/apresentacao.py`, no servidor, portão
+  I2), não recalcula `aprovado` (vem no fio, calculado pelo `serial.py`) e não
+  corrige combinações impossíveis (desactiva-as, §4.6).
+-->
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversando com Pessoa</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header>
+  <h1>Conversando com Pessoa</h1>
+
+  <!-- §4.5: a voz é O controlo, não uma preferência num menu. Fica sempre
+       visível, como o `você [caeiro]>` do terminal. -->
+  <nav id="vozes" aria-label="voz"></nav>
+
+  <div class="opcoes">
+    <span id="idiomas" role="group" aria-label="língua"></span>
+    <label><input type="checkbox" id="auto"> <span id="rotulo-auto">roteador propõe a voz</span></label>
+    <label><input type="checkbox" id="rerank"> <span id="rotulo-rerank">reordenar candidatos</span></label>
+  </div>
+
+  <!-- §3.6: o maior risco de UX desta fase. Uma caixa de conversa promete
+       memória, e o `Pipeline` não recebe histórico: cada pergunta é
+       independente. Não é um aviso modal; é uma propriedade declarada, como o
+       rodapé dos tempos. -->
+  <p class="propriedade">Cada pergunta é independente: o Pessoa não se lembra da
+  anterior.</p>
+</header>
+
+<!-- §4.2: a interface arranca a mostrar a prontidão por componente, não uma
+     página em branco. Quatro das esperas não são por pergunta, e a mais longa
+     é o índice a construir — ~6,4 min. -->
+<section id="prontidao" aria-live="polite">
+  <h2>Estado</h2>
+  <ul id="componentes"></ul>
+</section>
+
+<main id="conversa"></main>
+
+<form id="formulario" autocomplete="off">
+  <textarea id="pergunta" rows="2" placeholder="Pergunte alguma coisa."
+            aria-label="pergunta"></textarea>
+  <button type="submit" id="enviar">Perguntar</button>
+  <p id="aviso" class="aviso" hidden></p>
+</form>
+
+<!-- Modelos clonados pelo `app.js`. Ficam aqui, e não em cadeias de texto no
+     JS, porque o `app.js` nunca escreve HTML: só clona e preenche com
+     `textContent`. É o que impede o verso gerado de ser interpretado como
+     marcação, e é verificado por `tests/test_pagina.py`. -->
+<template id="modelo-turno">
+  <article class="turno">
+    <p class="pergunta"></p>
+    <div class="corpo">
+      <div class="progresso">
+        <span class="relogio">0,0 s</span>
+        <span class="fase"></span>
+      </div>
+      <div class="resposta"><span class="texto"></span><span class="cursor"></span></div>
+      <details class="rejeitada" hidden>
+        <summary></summary>
+        <div class="resposta texto-rejeitado"></div>
+      </details>
+      <footer class="rodape" hidden>
+        <p class="fontes"></p>
+        <p class="tempos"></p>
+        <p class="notas"></p>
+      </footer>
+    </div>
+  </article>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>

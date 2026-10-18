@@ -1,0 +1,318 @@
+/* §4.8 — Tipografia: o conteúdo é verso, e todas as decisões saem daí.
+ *
+ * Sem CSS de terceiros e sem tipos da rede: o servidor é local e serve um
+ * corpus cujos termos de uso não estão confirmados (§4.9), logo a página não
+ * faz pedidos para fora. Os tipos são os do sistema.
+ */
+
+:root {
+  /* Serifa: verso não é código, logo monospace é a escolha errada. */
+  --serifa: Georgia, "Times New Roman", "Liberation Serif", serif;
+  --sem-serifa: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --fundo: #fbfaf7;
+  --tinta: #1a1a18;
+  --tenue: #6b6b64;
+  --linha: #ddd9d0;
+  --bom: #1d6b3f;
+  --mau: #9a2a1f;
+  --realce: #2b4a7a;
+}
+
+/* §4.8.6: tema do sistema, sem selector próprio nesta fase, e um contraste
+ * que passe AA nos dois. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #15150f;
+    --tinta: #eceae3;
+    --tenue: #a3a099;
+    --linha: #343129;
+    --bom: #74c48f;
+    --mau: #e8897d;
+    --realce: #9cbce8;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 1.5rem 16px 6rem;
+  max-width: 44rem;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--sem-serifa);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: var(--serifa);
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tenue);
+  margin: 0 0 0.5rem;
+}
+
+/* --- cabeçalho: voz, língua, opções ------------------------------------- */
+
+nav#vozes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+button.voz, #idiomas button {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+button.voz[aria-pressed="true"], #idiomas button[aria-pressed="true"] {
+  border-color: var(--realce);
+  color: var(--realce);
+  font-weight: 600;
+}
+
+/* §4.6: o impossível desactiva-se, não se corrige depois. O motivo fica como
+ * legenda — o utilizador aprende a razão em vez de ver a sua escolha mudar
+ * sozinha. O `title` leva o motivo, e o `:disabled` leva o aspecto. */
+button:disabled, input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+label:has(input:disabled) { opacity: 0.5; }
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--tenue);
+}
+
+.opcoes label { display: flex; align-items: center; gap: 0.3rem; }
+
+.propriedade {
+  margin: 0.9rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--linha);
+  font-size: 0.8rem;
+  color: var(--tenue);
+}
+
+/* --- prontidão por componente (§4.2) ------------------------------------ */
+
+#prontidao { margin: 1.5rem 0; }
+
+#componentes { list-style: none; margin: 0; padding: 0; font-size: 0.82rem; }
+
+#componentes li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.15rem 0;
+  color: var(--tenue);
+}
+
+#componentes .nome { color: var(--tinta); min-width: 5.5rem; }
+#componentes .sim { color: var(--bom); }
+#componentes .nao { color: var(--mau); }
+/* Uma escolha desligada é neutra, não vermelha: o reranker custa ~2,6 s por
+ * +0,090 de nDCG@5, e essa é uma troca para o utilizador fazer. */
+#componentes .escolha { color: var(--tenue); }
+
+/* O remédio é código a correr — `ollama serve`, `ollama pull …` —, logo veste
+ * monospace. É a única coisa nesta página que é. */
+#componentes .remedio {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  color: var(--mau);
+}
+
+/* --- a conversa --------------------------------------------------------- */
+
+/* §4.8.3: sem bolhas de conversa. A pergunta fica discreta; a resposta ocupa a
+ * largura e respira. O protagonista é o poema, não a troca de mensagens. */
+.turno { margin: 2.5rem 0; }
+
+.turno .pergunta {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--tenue);
+}
+
+.turno .pergunta::before { content: "— "; }
+
+.resposta {
+  font-family: var(--serifa);
+  font-size: 18px;
+  line-height: 1.7;
+  /* §4.8.1: as quebras são semânticas. Mantém-se no verso — um poema pode
+   * trazer espaços à cabeça que são dele. */
+  white-space: pre-wrap;
+  /* §4.8.4: medida de ~62 caracteres. */
+  max-width: 62ch;
+}
+
+/* §4.8.4: um versículo de Campos é longo por natureza e quebra com indentação
+ * pendente, não a meio.
+ *
+ * Isto exige **um bloco por verso**: `text-indent` negativo aplica-se à
+ * primeira linha do bloco, não a cada linha visual, logo num bloco só com
+ * `pre-wrap` recuava todos os versos menos o primeiro. Viu-se a correr, e é o
+ * `desenhar()` do `app.js` que divide. */
+.verso {
+  white-space: pre-wrap;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+
+/* Um verso vazio é uma estrofe a separar-se, e um bloco vazio tem altura 0. */
+.verso:empty { min-height: 1.7em; }
+
+/* §4.8.5: o sinal mais barato de «ainda vem mais». */
+.cursor { display: none; }
+
+.a-gerar .cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  vertical-align: text-bottom;
+  background: var(--realce);
+  animation: piscar 1.1s step-end infinite;
+}
+
+@keyframes piscar { 50% { opacity: 0; } }
+
+/* --- a espera (§4.1) ---------------------------------------------------- */
+
+/* Um cronómetro que CONTA é diferente de um que roda: diz que o sistema está
+ * vivo e ensina o custo. É a decisão do rodapé do CLI levada ao tempo de
+ * espera. */
+.progresso {
+  display: none;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--tenue);
+}
+
+.a-gerar .progresso { display: flex; }
+
+.relogio {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.1rem;
+  color: var(--tinta);
+}
+
+/* --- a tentativa rejeitada (§4.4) --------------------------------------- */
+
+/* Fica no lugar, recolhida e atenuada, com o motivo em texto. É a única forma
+ * de o utilizador entender porque esperou 58 s em vez de 30. */
+.rejeitada {
+  margin: 1rem 0;
+  padding: 0.5rem 0.8rem;
+  border-left: 2px solid var(--mau);
+  font-size: 0.82rem;
+  color: var(--tenue);
+}
+
+.rejeitada summary { cursor: pointer; color: var(--mau); }
+
+.rejeitada .resposta {
+  font-size: 15px;
+  opacity: 0.75;
+  margin-top: 0.6rem;
+}
+
+/* --- o rodapé (§4.7) ---------------------------------------------------- */
+
+.rodape {
+  margin-top: 1.2rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--linha);
+  font-size: 0.78rem;
+  color: var(--tenue);
+}
+
+.rodape p { margin: 0.25rem 0; }
+
+.ficha {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.74rem;
+}
+
+/* `recuperado` e `usado` ficam distintos: há poemas que a recuperação trouxe e
+ * que o orçamento de tokens de `montar` cortou antes do prompt. */
+.ficha.recuperado { opacity: 0.55; border-style: dashed; }
+
+.marca { color: var(--mau); font-weight: 600; }
+
+/* --- o formulário ------------------------------------------------------- */
+
+form#formulario {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 0.8rem 0;
+  background: var(--fundo);
+  border-top: 1px solid var(--linha);
+}
+
+#pergunta {
+  flex: 1 1 18rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem;
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--tinta);
+  resize: vertical;
+}
+
+#enviar {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--realce);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--realce);
+  cursor: pointer;
+}
+
+#enviar:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.aviso {
+  flex: 1 1 100%;
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  color: var(--mau);
+}

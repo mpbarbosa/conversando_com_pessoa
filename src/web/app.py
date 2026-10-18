@@ -42,10 +42,12 @@ import asyncio
 import json
 import time
 from dataclasses import asdict
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from ..apresentacao import limpar_inicio
@@ -72,6 +74,34 @@ PORTA = 8000
 #: um cliente ingénuo esperar pelo fim para desserializar — que é exactamente o
 #: que o fluxo existe para evitar.
 NDJSON = "application/x-ndjson"
+
+#: Os tipos de evento que o fluxo emite, em declaração única.
+#:
+#: O `estatico/app.js` declara a sua lista (`EVENTOS`) e
+#: `tests/test_pagina.py` compara as duas. É um modo de falha que **não dá
+#: erro**: uma página que escutasse `chunk` enquanto o servidor emite
+#: `fragmento` recebia o fluxo inteiro e desenhava um ecrã vazio, que é o
+#: parente próximo do «índice velho não dá erro: dá respostas erradas» do
+#: `src/retrieval/index.py`.
+TIPOS_DE_EVENTO = ("proposta", "fragmento", "turno", "erro")
+
+#: A página: `index.html`, `app.js`, `estilo.css`, servidos como ficheiros.
+#: Sem passo de compilação e sem Node (§1.1 do plano).
+ESTATICO = Path(__file__).parent / "estatico"
+
+#: Os componentes sem os quais não há resposta. O roteador e o reranker ficam
+#: de fora de propósito: são escolhas medidas, não requisitos.
+EXIGIDOS = ("ollama", "modelo", "corpus", "indice")
+
+#: Os exigidos que a **1.ª pergunta não resolve sozinha**, e por isso os únicos
+#: que impedem de perguntar.
+#:
+#: O corpus constrói-se (~40 s) e o índice verifica-se ou reconstrói-se
+#: (~6,4 min) dentro do `garantir_pipeline` — é essa a razão de o remédio deles
+#: ser «constrói-se no arranque» e não um comando. O Ollama em baixo e o modelo
+#: ausente só se resolvem fora daqui, e é por isso que o remédio deles **é** um
+#: comando a correr: `ollama serve`, `ollama pull …`.
+BLOQUEANTES = ("ollama", "modelo")
 
 #: Custo médio de uma resposta, para a estimativa do `409`. É o número do
 #: `pipeline.py`: «1,21 gerações, ou ~34 s». É **média medida**, não promessa —
@@ -271,6 +301,7 @@ class Pedido(BaseModel):
 
 def _linha(evento: dict[str, Any]) -> bytes:
     """Um evento, uma linha. `ensure_ascii=False` porque o conteúdo é verso."""
+    assert evento["tipo"] in TIPOS_DE_EVENTO, evento["tipo"]
     return (json.dumps(evento, ensure_ascii=False) + "\n").encode("utf-8")
 
 
@@ -391,12 +422,26 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
         modelo, corpus e índice. O roteador e o reranker estão de fora de
         propósito — são escolhas, não requisitos, e tratá-los como requisito
         dizia «não pronto» a um sistema que responde perfeitamente.
+
+        `pode_perguntar` responde a **outra** pergunta, e a diferença não é
+        cosmética — foi um defeito observado a correr a página do passo 5. O
+        `pronto` diz «está tudo verificado?», e isso é **falso antes da 1.ª
+        pergunta por construção**: o índice só se verifica quando há corpus
+        carregado, e o corpus só se carrega na 1.ª pergunta. Com o `pronto` a
+        governar o botão, a única acção que resolve o que falta nunca podia
+        ser feita. Ver `BLOQUEANTES`.
         """
         cs = app.state.servico.componentes()
-        exigidos = {"ollama", "modelo", "corpus", "indice"}
         return {
-            "pronto": all(c.pronto for c in cs if c.nome in exigidos),
-            "componentes": [asdict(c) for c in cs],
+            "pronto": all(c.pronto for c in cs if c.nome in EXIGIDOS),
+            "pode_perguntar": all(c.pronto for c in cs
+                                  if c.nome in BLOQUEANTES),
+            # `exigido` vai por componente para a página poder distinguir uma
+            # falha de uma escolha desligada. Sem ele, o reranker — que é uma
+            # troca medida que o utilizador pode não querer — aparecia com a
+            # mesma cruz vermelha que um Ollama em baixo.
+            "componentes": [asdict(c) | {"exigido": c.nome in EXIGIDOS}
+                            for c in cs],
         }
 
     @app.get("/api/vozes")
@@ -464,6 +509,17 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
         servico.inicio_geracao = time.monotonic()
         return StreamingResponse(_eventos(servico, pedido),
                                  media_type=NDJSON)
+
+    # A página, montada **em último** e de propósito: um `mount` em `/` casa
+    # com qualquer caminho, e o que decide é a ordem de registo. Registá-lo
+    # antes engolia o `/api/estado` — e a falha era um 404 numa rota que
+    # existe, que é das mais difíceis de ler.
+    #
+    # `html=True` serve o `index.html` na raiz. Serve **só** esta pasta: o
+    # corpo dos poemas continua a sair exclusivamente pelo
+    # `GET /api/poema/{id}` do passo 9, que é a rota que o portão I7 fecha a
+    # `127.0.0.1`.
+    app.mount("/", StaticFiles(directory=ESTATICO, html=True), name="pagina")
 
     return app
 
