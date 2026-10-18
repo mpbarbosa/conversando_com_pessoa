@@ -310,6 +310,29 @@ form#formulario {
 
 #enviar:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* §2.3: o cancelar. Mesma medida do «Perguntar» para o botão não saltar de
+ * sítio quando um substitui o outro, e a cor do erro — porque interromper é
+ * desfazer, não uma segunda acção normal.
+ *
+ * Nenhuma regra de `display` aqui, de propósito: o `hidden` do HTML é que
+ * governa se o botão existe no ecrã, e um `display` nesta declaração
+ * ganhava-lhe por especificidade — um «cancelar» visível sem nada a gerar é a
+ * promessa falsa que o §4.1 proíbe. */
+#cancelar {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--mau);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mau);
+  cursor: pointer;
+}
+
+/* «interrompido depois de 12,4 s»: o equivalente do «(interrompido)» que o CLI
+ * imprime no `KeyboardInterrupt`, e com o custo à frente como todo o resto. */
+.interrompido { color: var(--tenue); font-style: italic; }
+
 .aviso {
   flex: 1 1 100%;
   margin: 0.4rem 0 0;

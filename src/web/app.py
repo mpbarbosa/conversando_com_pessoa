@@ -52,10 +52,10 @@ from pydantic import BaseModel, Field
 
 from ..apresentacao import limpar_inicio
 from ..corpus.models import VOZES_PRINCIPAIS, Lang, Voice
-from ..generation.ollama import OllamaGenerator
 from ..roteador import ROTEAVEIS
 from ..voices import IDIOMA_UNICO, PERSONAS, idiomas_de, persona
 from . import serial
+from .cancelar import GeradorCancelavel
 from .estado import (
     Componente,
     componente_corpus,
@@ -118,7 +118,12 @@ class Servico:
     """
 
     def __init__(self, gerador=None, pipeline=None):
-        self.gerador = gerador if gerador is not None else OllamaGenerator()
+        #: `GeradorCancelavel` e não `OllamaGenerator`: a subclasse acrescenta
+        #: uma atribuição por pedido em fluxo e nada mais, e é o que permite
+        #: fechar a resposta do `requests` quando o cliente desiste (§2.3,
+        #: portão **I5**). O `cli.py` continua a usar o `OllamaGenerator`
+        #: directo — o caminho medido não muda de classe.
+        self.gerador = gerador if gerador is not None else GeradorCancelavel()
         #: `None` até alguém fazer a primeira pergunta. Os testes injectam-no
         #: já feito — é o que permite exercitar a API sem pagar o encoder.
         self.pipeline = pipeline
@@ -267,6 +272,28 @@ class Servico:
         self.roteador_aquecido = True
         return p
 
+    # --- cancelamento (§2.3, portão I5) -----------------------------------
+
+    #: Os dois métodos abaixo passam pelo `getattr` porque os testes injectam
+    #: geradores duplos que não são `GeradorCancelavel` — e um deles que não
+    #: saiba cancelar não é uma avaria: é um gerador que não fala com o Ollama,
+    #: logo não tem socket nenhum para fechar.
+
+    def preparar_geracao(self) -> None:
+        """Desarma o cancelamento da geração anterior. Antes de cada geração."""
+        preparar = getattr(self.gerador, "preparar", None)
+        if preparar is not None:
+            preparar()
+
+    def cancelar_geracao(self) -> bool:
+        """Fecha o fluxo aberto do Ollama. Devolve se havia um para fechar.
+
+        Chamado do `finally` do `em_fluxo`, **no laço de eventos**: não pode
+        bloquear. Ver a tabela medida no `cancelar.py`.
+        """
+        cancelar = getattr(self.gerador, "cancelar", None)
+        return bool(cancelar is not None and cancelar())
+
     def espera_estimada_s(self) -> float:
         """Quanto falta da geração em curso, pela média medida.
 
@@ -382,7 +409,8 @@ async def _eventos(servico: Servico, p: Pedido):
         buffer: list[str] = []
         a_reter = True
         async for item in em_fluxo(
-                lambda: pipeline.responder_em_fluxo(p.pergunta, voz, idioma)):
+                lambda: pipeline.responder_em_fluxo(p.pergunta, voz, idioma),
+                ao_desistir=servico.cancelar_geracao):
             if isinstance(item, str):
                 if a_reter:
                     buffer.append(item)
@@ -404,7 +432,10 @@ async def _eventos(servico: Servico, p: Pedido):
                       "mensagem": str(e)})
     finally:
         # Também no caminho do cancelamento (`CancelledError` não é `Exception`
-        # e passa ao lado do `except`): abortar liberta o trinco.
+        # e passa ao lado do `except`): abortar liberta o trinco. **E só liberta
+        # com honestidade por causa do `ao_desistir` acima** — medido, o trinco
+        # já ficava livre em 1 ms sem ele, mas com a geração a continuar no
+        # Ollama a competir com a pergunta seguinte (§2.3, portão I5).
         servico.inicio_geracao = None
         servico.trinco.release()
 
@@ -506,6 +537,7 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
                 "espera_estimada_s": servico.espera_estimada_s(),
             })
         await servico.trinco.acquire()
+        servico.preparar_geracao()
         servico.inicio_geracao = time.monotonic()
         return StreamingResponse(_eventos(servico, pedido),
                                  media_type=NDJSON)

@@ -301,3 +301,65 @@ def test_uma_escolha_desligada_nao_aparece_como_falha(cliente):
     for nome in ("ollama", "modelo", "corpus", "indice"):
         assert por_nome[nome]["exigido"] is True
     assert "c.exigido" in CODIGO_JS, "a página ignora o campo `exigido`"
+
+
+# --- §2.3: cancelar, do lado do cliente (passo 6) ------------------------- #
+
+def test_o_botao_de_cancelar_existe_e_nasce_escondido():
+    """Só aparece enquanto gera: um «cancelar» inerte ensina que não funciona.
+
+    O `hidden` no HTML é o estado inicial, e o `trancar()` é quem o liga e
+    desliga — no mesmo sítio onde tranca o «Perguntar» e a caixa de texto, para
+    os três não poderem discordar.
+    """
+    assert re.search(r'id="cancelar"[^>]*\shidden', CODIGO_HTML), (
+        "o botão de cancelar não nasce escondido")
+    assert re.search(r'type="button"[^>]*id="cancelar"', CODIGO_HTML), (
+        "um botão sem `type` dentro de um `form` submete: cancelar passava a "
+        "perguntar outra vez")
+    assert re.search(r'\$\("#cancelar"\)\.hidden\s*=', CODIGO_JS), (
+        "nada liga e desliga o botão")
+
+
+def test_o_abortcontroller_chega_ao_fetch():
+    """O modo de falha silencioso deste passo, e é o pior de todos.
+
+    Um `AbortController` criado, um botão a chamar-lhe `abort()` e o `signal`
+    esquecido no `fetch`: a página fica com o botão certo, o `abort` não dá
+    erro nenhum, o fluxo continua a chegar e **o Ollama nunca sabe**. Fica
+    exactamente igual a funcionar.
+    """
+    assert "new AbortController()" in CODIGO_JS
+    assert re.search(r"signal:\s*\w+\.signal", CODIGO_JS), (
+        "o `fetch` não leva o `signal`: o `abort` não aborta nada")
+    assert ".abort()" in CODIGO_JS
+
+
+def test_o_controlador_e_um_por_geracao():
+    """Um controlador abortado fica abortado para sempre.
+
+    Reutilizá-lo fazia o `fetch` seguinte rebentar antes de sair, com um
+    `AbortError` que a página ia ler como «o servidor não respondeu».
+    """
+    corpo = re.search(r"async function perguntar\(.*?\n}\n", CODIGO_JS,
+                      flags=re.S)
+    assert corpo, "a função `perguntar` mudou de forma"
+    assert "new AbortController()" in corpo.group(0), (
+        "o controlador deixou de ser criado por geração")
+
+
+def test_cancelar_nao_apaga_o_que_ja_apareceu_no_ecra():
+    """É verso que o modelo escreveu, e parar não é desfazer.
+
+    A mesma decisão do §4.4 para a tentativa rejeitada: fica no lugar, com o
+    motivo. O que o `cancelado()` faz é escrever «interrompido depois de …» —
+    e nada mais.
+    """
+    corpo = re.search(r"\n    cancelado\(\) \{.*?\n    \},", CODIGO_JS,
+                      flags=re.S)
+    assert corpo, "a página deixou de ter um estado `cancelado`"
+    for destrutivo in ("remove()", "replaceChildren", "textContent = \"\";"):
+        assert destrutivo not in corpo.group(0).replace(
+            'fase.textContent = "";', ""), (
+            f"o `cancelado()` apaga o ecrã com `{destrutivo}`")
+    assert "interrompido" in corpo.group(0)

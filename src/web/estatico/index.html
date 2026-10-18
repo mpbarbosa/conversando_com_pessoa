@@ -57,6 +57,13 @@
   <textarea id="pergunta" rows="2" placeholder="Pergunte alguma coisa."
             aria-label="pergunta"></textarea>
   <button type="submit" id="enviar">Perguntar</button>
+  <!-- §2.3: só aparece enquanto gera, e não é um botão desactivado à espera de
+       vez. Um «cancelar» sempre visível e inerte ensina que não funciona; este
+       aparece quando há o que cancelar e desaparece quando não há.
+
+       `type="button"` e não `submit`: dentro de um `form`, um botão sem tipo
+       submete, e cancelar passava a perguntar outra vez. -->
+  <button type="button" id="cancelar" hidden>Cancelar</button>
   <p id="aviso" class="aviso" hidden></p>
 </form>
 

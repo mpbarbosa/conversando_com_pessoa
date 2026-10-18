@@ -36,6 +36,10 @@ const estado = {
   vozes: new Map(),       // voz -> {nomes, idiomas, idioma_unico, roteavel}
   roteador: null,         // {idiomas, acerto, custo_s, nota}
   aGerar: false,
+  /* O `AbortController` da geração em curso, ou `null`. **Um por geração**, e
+   * não um reutilizado: um controlador abortado fica abortado para sempre, e
+   * reusá-lo fazia o `fetch` seguinte rebentar antes de sair (§2.3). */
+  controlador: null,
 };
 
 /* --- arranque ----------------------------------------------------------- */
@@ -174,9 +178,19 @@ $("#formulario").addEventListener("submit", (ev) => {
   perguntar(texto);
 });
 
+/* §2.3: cancelar. O `abort` fecha o fluxo **e** o servidor fecha o pedido ao
+ * Ollama — ver `src/web/cancelar.py`. Sem a segunda metade, isto libertava o
+ * ecrã e deixava a máquina a decodificar até ao `num_predict`, a competir com a
+ * pergunta seguinte: a interface ficava a mentir sobre quem manda. */
+$("#cancelar").addEventListener("click", () => {
+  if (estado.controlador) estado.controlador.abort();
+});
+
 async function perguntar(pergunta) {
   const vista = novoTurno(pergunta);
   avisar(null);
+  const controlador = new AbortController();
+  estado.controlador = controlador;
   trancar(true);
 
   let resposta;
@@ -191,9 +205,13 @@ async function perguntar(pergunta) {
         rerank: $("#rerank").checked,
         auto: $("#auto").checked,
       }),
+      signal: controlador.signal,
     });
   } catch (e) {
-    vista.falhar(`o servidor não respondeu: ${e.message}`);
+    // Um `abort` antes de a resposta chegar também cai aqui, e não é um erro do
+    // servidor: é o utilizador. Dizer «o servidor não respondeu» era mentira.
+    if (controlador.signal.aborted) vista.cancelado();
+    else vista.falhar(`o servidor não respondeu: ${e.message}`);
     trancar(false);
     return;
   }
@@ -217,7 +235,12 @@ async function perguntar(pergunta) {
       vista.evento(evento);
     }
   } catch (e) {
-    vista.falhar(`o fluxo interrompeu-se: ${e.message}`);
+    // O `abort` rebenta o leitor do corpo com `AbortError`. O que já apareceu
+    // no ecrã **fica** — é verso que o modelo escreveu, e apagá-lo porque o
+    // utilizador parou era destruir o que ele pode querer ler. É a mesma
+    // decisão do §4.4 para a tentativa rejeitada.
+    if (controlador.signal.aborted) vista.cancelado();
+    else vista.falhar(`o fluxo interrompeu-se: ${e.message}`);
   } finally {
     vista.terminar();
     trancar(false);
@@ -360,6 +383,17 @@ function novoTurno(pergunta) {
       no.querySelector(".notas").textContent = `✗ ${mensagem}`;
       no.querySelector(".notas").classList.add("marca");
     },
+    /* O CLI imprime «(interrompido)» no `KeyboardInterrupt`. Isto é o
+     * equivalente, e com o mesmo tom: diz o que aconteceu e o que custou, sem
+     * pedir desculpa e sem apagar nada. */
+    cancelado() {
+      fase.textContent = "";
+      const rodape = no.querySelector(".rodape");
+      rodape.hidden = false;
+      const nota = no.querySelector(".notas");
+      nota.textContent = `interrompido depois de ${relogio.textContent}`;
+      nota.classList.add("interrompido");
+    },
     terminar() {
       clearInterval(tique);
       no.classList.remove("a-gerar");
@@ -468,6 +502,9 @@ function trancar(aGerar) {
   estado.aGerar = aGerar;
   $("#enviar").disabled = aGerar;
   $("#pergunta").disabled = aGerar;
+  // §2.3: o cancelar existe **enquanto** há o que cancelar, e não antes.
+  $("#cancelar").hidden = !aGerar;
+  if (!aGerar) estado.controlador = null;
 }
 
 function avisar(mensagem) {

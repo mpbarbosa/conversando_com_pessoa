@@ -32,18 +32,30 @@ fragmentos emitidos antes da falha chegam ao cliente antes dela. O contrário �
 guardar o erro à parte e levantá-lo no fim — trocava a ordem dos eventos e
 mentia sobre quando a geração parou.
 
-## ⚠️ O que isto NÃO faz: cancelar
+## Cancelar: `asyncio.to_thread` não se cancela, logo avisa-se o gerador
 
-`asyncio.to_thread` **não se cancela**. Se o consumidor desistir, a thread
-continua até o gerador terminar, porque o Ollama continua a decodificar até ao
-`num_predict` — é precisamente o que o §2.3 do plano registou. O `finally`
-abaixo espera por ela em vez de a abandonar: uma thread a escrever numa fila que
-ninguém lê é uma fuga, e deixá-la solta fazia o trinco do §2.2 parecer livre
-quando não está.
+Se o consumidor desistir — e no navegador desistir é um `AbortController` —, a
+thread não se interrompe: continua até o gerador terminar, porque o Ollama
+continua a decodificar até ao `num_predict`. É o §2.3 do plano, e confirmou-se.
 
-Fechar isto é o **passo 6** (portão **I5**): fechar a resposta do `requests` do
-lado do gerador para a thread acabar depressa. Até lá, abortar liberta o
-cliente e não o hardware — e a interface não deve prometer o contrário.
+O que **não** se confirmou é o resto da previsão («o trinco fica retido»). Com
+`starlette` 1.7.0 e `uvicorn` 0.54.0 o `CancelledError` cai dentro do
+`await fila.get()` abaixo, o `finally` corre de imediato, e o `await tarefa`
+levanta `CancelledError` à entrada porque o âmbito do `anyio` já está cancelado:
+**não espera nada**. Medido, com o trinco livre em 1 ms. Logo a thread órfã não
+tranca a porta — passa a competir pelo Ollama com a pergunta seguinte, que é a
+mentira do §2.4 provocada pela própria interface.
+
+Por isso o `finally` não se contenta com esperar: **avisa**. O `ao_desistir`
+corre antes do `await`, é síncrono, e nunca bloqueia (ver `cancelar.py`, onde a
+diferença entre `shutdown` e `close` está medida). Fechada a resposta do
+`requests`, o leitor acorda em ~1 ms, a thread morre com `ChunkedEncodingError`
+e o Ollama deixa de decodificar. Portão **I5**.
+
+O `await tarefa` fica, porque continua a valer no caminho em que o consumidor
+sai sem cancelamento do laço — um `break` ou uma excepção no corpo do `async
+for`: aí espera-se de facto pela thread, e uma thread a escrever numa fila que
+ninguém lê é uma fuga.
 """
 from __future__ import annotations
 
@@ -57,12 +69,19 @@ from typing import Any
 _FIM = object()
 
 
-async def em_fluxo(fabrica: Callable[[], Iterator[Any]]) -> AsyncIterator[Any]:
+async def em_fluxo(fabrica: Callable[[], Iterator[Any]],
+                   ao_desistir: Callable[[], Any] | None = None,
+                   ) -> AsyncIterator[Any]:
     """Corre `fabrica()` numa thread e emite o que ela emitir, item a item.
 
     Recebe uma **fábrica** e não um iterador já criado porque criar o gerador é
     de graça mas o primeiro `next` não é: é lá que a recuperação e o `montar`
     acontecem. A fábrica garante que nada do gerador corre no laço de eventos.
+
+    `ao_desistir` é chamado — **síncrono, no laço** — se o consumidor sair antes
+    de a thread acabar. É o único sítio do servidor onde se sabe que o cliente
+    desistiu, e é a diferença entre abortar o `fetch` e parar o Ollama (§2.3).
+    Tem de ser barato: ver o `cancelar.py`.
     """
     laco = asyncio.get_running_loop()
     fila: asyncio.Queue = asyncio.Queue()
@@ -87,6 +106,11 @@ async def em_fluxo(fabrica: Callable[[], Iterator[Any]]) -> AsyncIterator[Any]:
                 raise item
             yield item
     finally:
-        # Ver a ressalva no cabeçalho: esperar é o mal menor, e o passo 6 é que
-        # faz a espera ser curta.
+        # `tarefa.done()` é o que distingue «o gerador acabou» de «o consumidor
+        # desistiu»: só no segundo caso há o que cancelar. Avisar primeiro e
+        # esperar depois é deliberado — invertido, o `await` levantava
+        # `CancelledError` (o âmbito do `anyio` já está cancelado) e o aviso
+        # nunca chegava a sair.
+        if not tarefa.done() and ao_desistir is not None:
+            ao_desistir()
         await tarefa
