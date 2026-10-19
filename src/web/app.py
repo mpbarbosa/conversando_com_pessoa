@@ -22,10 +22,17 @@ que o `/api/estado` responda em menos de 100 ms **durante** uma geração.
 
 ## Porque é que o servidor escuta em 127.0.0.1, e porque é que isso deixou de bastar
 
-O corpus não está no repositório porque os termos de uso do Arquivo Pessoa não
-estão confirmados — ver `data/README.md`. Expor o corpo dos poemas à rede era
-publicar esse material. A omissão é local, e mudá-la tem de ser explícito e
-ruidoso.
+Os termos de uso do Arquivo Pessoa não estão confirmados — ver `data/README.md`.
+Expor o corpo dos poemas à rede era publicar esse material. A omissão é local, e
+mudá-la tem de ser explícito e ruidoso.
+
+⚠️ **A frase que estava aqui dizia «o corpus não está no repositório», e era
+falsa.** Está: 2083 ficheiros, 241 250 palavras, versionados desde `396cca7`
+(2025-10-24) num repositório **público** — medido em 2026-10-19, correcção **42**
+do `docs/CONTROLO.md` §4. O que esta omissão protege continua a valer como
+decisão de transporte (o portão **I7′**, abaixo, mede-a e morde), mas **não é
+uma protecção de direitos**: fecha esta porta enquanto a do repositório está
+aberta, e o material que ela retém é o mesmo que um `git clone` traz.
 
 ⚠️ **Mas «escuta em `127.0.0.1`» era uma *medida* de «não é alcançável de
 fora», e um túnel separa as duas.** O `cloudflared` corre nesta máquina e
@@ -64,6 +71,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import platform
 import time
 from dataclasses import asdict
 from pathlib import Path
@@ -90,6 +98,7 @@ from .estado import (
 )
 from .fluxo import em_fluxo
 from .retencao import Retentor, linhas_de_corpo, redigir
+from .saude import ler_lancamento
 from .sentinela import a_correr as medicao_a_correr
 from .sentinela import componente as componente_sentinela
 
@@ -136,6 +145,14 @@ EXIGIDOS = ("ollama", "modelo", "corpus", "indice")
 #: quem corre a casa. Mas impede de perguntar, senão o utilizador escreve a
 #: pergunta e recebe um 409 — a surpresa que esta distinção nasceu para evitar.
 BLOQUEANTES = ("ollama", "modelo", "sentinela")
+
+#: De que código este processo foi lançado. Lido **aqui, à importação**, e não
+#: por pedido: o campo afirma o que está em memória, e um `git rev-parse` por
+#: pedido dizia a verdade sobre o disco e mentia sobre o processo. Ver
+#: `saude.py`, que tem o argumento inteiro e a consequência aceite (reiniciar é
+#: o que actualiza o `sha`). Custa 3,6 ms, medidos — a regra deste módulo é que
+#: importá-lo custa milissegundos, e isto cabe nela.
+LANCAMENTO = ler_lancamento()
 
 #: Custo médio de uma resposta, para a estimativa do `409`. É o número do
 #: `pipeline.py`: «1,21 gerações, ou ~34 s». É **média medida**, não promessa —
@@ -569,6 +586,62 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
             "componentes": [asdict(c) | {"exigido": c.nome in EXIGIDOS,
                                          "bloqueante": c.nome in BLOQUEANTES}
                             for c in cs],
+        }
+
+    @app.get("/api/health")
+    def health() -> dict:
+        """A sonda de serviço: **de que código** isto foi lançado, e se serve.
+
+        Portão **D1** do [plano](../../docs/PRODUCAO.md) §6. Não substitui o
+        `/api/estado` — esse diz à **página** o que falta e com que remédio;
+        este diz a **quem opera** de onde veio o código a correr, que é o que
+        permite confirmar um recuo (passo 8) e a disciplina que transfere do
+        repositório irmão: verifica-se pela saúde do serviço, nunca pelo
+        emblema do CI.
+
+        **`status` não é construído sobre `pronto`, e isso é o §6 ponto 2.** O
+        `pronto` é `false` antes da 1.ª pergunta por construção — o índice só
+        se verifica com o corpus carregado —, logo uma sonda que o exigisse
+        reprovava todos os arranques saudáveis. Lê-se o `pode_perguntar`, mais
+        a condição de o `sha` existir: uma sonda que diz `ok` sem saber nomear
+        o código é pior do que não haver sonda.
+
+        **Uma medição a correr dá `degradado`, e é de propósito.** Não é
+        avaria — o `/api/estado` chama-lhe cedência e o `BLOQUEANTES` explica
+        porquê —, mas o serviço de facto não responde, e sob a saída D o URL
+        **cai** durante as medições (passo 5). O `medicao_a_correr` ao lado é o
+        campo que explica a queda a quem a vê, que é o próprio dono.
+        """
+        cs = app.state.servico.componentes()
+        por_nome = {c.nome: c for c in cs}
+        motivos = [f"{c.nome}: {c.detalhe}"
+                   for c in cs if c.nome in BLOQUEANTES and not c.pronto]
+        if not LANCAMENTO.nomeia_o_codigo:
+            motivos.insert(0, f"sem sha: {LANCAMENTO.erro}")
+        indice = por_nome["indice"]
+        return {
+            "status": "ok" if not motivos else "degradado",
+            # Em texto e por componente, porque «degradado» sem o motivo manda
+            # quem opera abrir o `/api/estado` para descobrir o que já se sabe.
+            "motivos": motivos,
+            "sha": LANCAMENTO.sha,
+            "etiqueta": LANCAMENTO.etiqueta,
+            # `commit_em` e não `builtAt` do plano: não há passo de construção
+            # para datar, e o resto do fio é português. Ver o `PRODUCAO.md`
+            # §6.1 — o desvio está registado, não feito de passagem.
+            "commit_em": LANCAMENTO.commit_em,
+            # O que o processo **reporta**, não o que um ficheiro diz que devia
+            # ser.
+            "python": platform.python_version(),
+            # O modelo **configurado**. Quem diz se o Ollama o tem é o
+            # `/api/estado`, e é a distinção que o irmão faz com `provider`.
+            "modelo": app.state.servico.gerador.modelo,
+            # Dicionário e não a cadeia do exemplo do plano: um cliente que
+            # queira o booleano não devia ter de ler prosa para o obter.
+            "indice": {"aceito": indice.pronto, "detalhe": indice.detalhe},
+            "pode_perguntar": all(c.pronto for c in cs
+                                  if c.nome in BLOQUEANTES),
+            "medicao_a_correr": not por_nome["sentinela"].pronto,
         }
 
     @app.get("/api/vozes")

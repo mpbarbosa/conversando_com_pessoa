@@ -484,7 +484,7 @@ estão aqui porque o túnel não deve existir antes deles.
 |---|---|---|---|
 | 1 | **Passo 7 da Fase 6**, com a correcção do caminho absoluto da §4: sentinela, verificação antes de cada geração, `/api/estado`, ajudante `with` | o servidor e uma medição deixam de se atropelar | **I8**, com a asserção dos dois checkouts |
 | 2 | ✅ **feito** (2026-10-19) — **o portão I7 reescrito como I7′** (§2) e fixado por teste (`tests/test_i7.py`, 8 testes). **E a surpresa: a saída B não bastava.** O varrimento achou **três outras portas** por onde o corpo saía, e obrigou a escrever a retenção (`src/web/retencao.py`) — §2.1 | o portão volta a medir o que protege, e o corpo deixou de sair por onde ninguém olhava | **I7′**, na metade que não precisa do túnel |
-| 3 | **`/api/health`** (§6) | uma rota que diz de que `sha` o serviço foi lançado | **D1** |
+| 3 | ✅ **feito** (2026-10-19) — **`/api/health`** (§6), com o `sha` lido **à importação** e a raiz derivada do módulo (§6.1) | uma rota que diz de que `sha` o serviço foi lançado, e não de que `sha` está o disco | **D1** ✅ |
 | 4 | **Segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger` | o serviço sobrevive a um logout e a um reinício | **D2** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
 | 6 | **Fechar o serviço a estranhos antes de o abrir** (§7): autenticação na camada gratuita do fornecedor do túnel, com lista de endereços de correio | o URL funciona para quem o dono convidar | **D4** |
@@ -597,6 +597,74 @@ guarda-se. Sem CI a estampar nada.
 - `medicao_a_correr`: o sentinela da §3. Num serviço cujo URL cai durante as
   medições, é o campo que explica a queda ao próprio dono.
 
+### 6.1 O passo 3, feito: as duas decisões e os dois desvios ao exemplo
+
+Escrito em 2026-10-19. `src/web/saude.py`, a rota em `src/web/app.py`,
+`tests/test_saude.py` com 13 testes.
+
+**Decisão 1: o `sha` lê-se à importação, e não por pedido.** Não por custo — são
+**3,6 ms**, medidos. É porque o campo afirma *de que código este processo foi
+lançado*, e um `git rev-parse` por pedido dizia a verdade sobre o disco e
+**mentia sobre o processo**: depois de um `git checkout` no checkout do serviço,
+o `uvicorn` continua a correr os módulos que já importou, e a sonda passava a
+nomear código que não está em memória. Seria a forma exacta do que este plano
+corrige em toda a parte — o mecanismo a dizer «certo» depois de deixar de
+descrever o que protege —, e no sítio mais caro de todos, porque é esta sonda
+que o passo 8 usa para confirmar um recuo. Consequência aceite e escrita:
+**reiniciar é o que actualiza o `sha`**, que é como o recuo funciona de qualquer
+maneira.
+
+Isto não se mede com um cliente: os dois desenhos devolvem o mesmo `sha`
+enquanto o `HEAD` não se mexer, e o errado só aparece com o serviço de pé e sem
+ninguém a olhar. Fixa-se por **inspecção do código** — a rota não pode conter
+chamada ao `git` —, com a disciplina que o portão I1 já usa para comparar as
+duas chamadas a `Pipeline(...)`.
+
+**Decisão 2: a raiz é derivada do módulo, não do `cwd`.** `RAIZ =
+Path(__file__).resolve().parents[2]`. O `cwd` de uma unidade de utilizador é o
+que o `WorkingDirectory` disser, e com **dois checkouts** (§4) um `git` do
+directório errado respondia **com sucesso** e com o `sha` do checkout de
+trabalho enquanto o serviço corria o outro. É palavra por palavra o defeito do
+sentinela com o `data/.medicao-a-correr` relativo (`CONTROLO.md` §4 #39), e tem
+a mesma correcção e o mesmo tipo de asserção: o teste lança um processo **dentro**
+de um segundo checkout, construído de propósito com um `sha` diferente, e exige
+que o `sha` que sai continue a ser o deste repositório. Verificado a morder:
+com `RAIZ = Path.cwd()`, falha.
+
+**Dois desvios ao exemplo da §6, registados em vez de feitos de passagem:**
+
+| no exemplo | aqui | porquê |
+|---|---|---|
+| `builtAt` | **`commit_em`** | **não há passo de construção para datar** — é a premissa da saída D —, e o nome afirmava um que não existe; e o resto do fio deste repositório é português em `snake_case` (`pode_perguntar`, `medicao_a_correr`, `n_palavras`). O valor é a data do commit do `HEAD`, normalizada a UTC com `Z`: o `%cI` do git traz o desvio de quem fez o commit (`-03:00` nesta máquina), e duas sondas a comparar fusos comparam cadeias que diferem por motivo nenhum. **Não** é o instante do arranque: o `uptime` é a verificação fraca que a §6 recusa |
+| `"indice": "aceito"` | **`"indice": {"aceito": …, "detalhe": …}`** | um cliente que queira o booleano não devia ter de ler prosa para o obter, e é a forma que o `/api/estado` já dá a cada componente |
+
+**E um campo a mais: `motivos`.** `status: "degradado"` sozinho manda quem opera
+abrir o `/api/estado` para descobrir o que a sonda já sabe. Vai em texto, por
+componente.
+
+**O `status` não é construído sobre `pronto`, e é o §6 ponto 2 a funcionar.**
+Lê-se o `pode_perguntar` mais a condição de o `sha` existir — uma sonda que
+devolve `ok` sem saber nomear o código é pior do que não haver sonda. Está
+medido nos dois sentidos: com o Ollama em baixo **não** é `ok`; com tudo de pé
+**é** `ok` embora o `pronto` do `/api/estado` seja `false`, que é o estado de
+todos os arranques saudáveis antes da 1.ª pergunta.
+
+**Uma medição a correr dá `degradado`**, com `medicao_a_correr: true` e a fase
+nomeada nos motivos. Não é avaria — o `/api/estado` chama-lhe cedência —, mas o
+serviço de facto não responde, e sob a saída D o URL **cai** durante as medições
+(passo 5). Uma sonda que dissesse `ok` aí deixava o dono a procurar a avaria que
+ele próprio causou.
+
+**A `etiqueta` é `null` hoje, e isso é o estado verdadeiro:** não há etiquetas
+neste repositório, e criá-las é o passo 8. A leitura está exercitada contra um
+checkout com etiqueta, para não ser código que só se estreia quando alguém
+depender dele.
+
+**E o portão I7′ do passo 2 mordeu no dia seguinte a nascer.** A rota nova fez
+`test_i7_o_varrimento_cobre_todas_as_rotas` falhar antes de qualquer teste do
+passo 3 a tocar, que é exactamente para o que a cobertura de rotas existe.
+Deixou de ser hipótese: está medido uma vez.
+
 ---
 
 ## 7. Um cliente em ciclo, que aqui não é um risco de disponibilidade
@@ -666,7 +734,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 |---|---|---|
 | **I8′ — a medição e o serviço não se atropelam, com dois checkouts** | o sentinela atravessa checkouts | a fase escreve o sentinela do checkout de trabalho e o serviço, no **outro** checkout, vê-o: `/api/estado` mostra-o e `POST /api/perguntar` recusa. Com o caminho relativo da especificação original, este portão **falha** — é o seu objectivo |
 | **I7′ — o corpo não sai desta máquina** 🔶 **metade medida** | o túnel não publica o corpus | **de fora**, contra o URL: `GET /api/poema/{id}` dá 404, e o varrimento do I6 apontado ao fio HTTP dá **zero** acertos de qualquer linha de corpo de qualquer poema. **Feito (2026-10-19):** o varrimento contra a aplicação, `tests/test_i7.py`, 8 testes, com a cobertura de rotas a falhar se nascer uma rota não varrida, e verificado a morder por mutação das duas metades da retenção. **Falta:** correr o mesmo varrimento **de fora**, contra o URL do túnel — passo 6 sobre o passo 4 |
-| **D1 — a saúde não mente** | `/api/health` nomeia o código a correr | o `sha` devolvido é o do `HEAD` do checkout do serviço, em 3 arranques seguidos. Com o Ollama em baixo, `status` não é `ok` |
+| **D1 — a saúde não mente** ✅ | `/api/health` nomeia o código a correr | o `sha` devolvido é o do `HEAD` do checkout do serviço, em 3 arranques seguidos. Com o Ollama em baixo, `status` não é `ok`. **Feito (2026-10-19):** `tests/test_saude.py`, 13 testes — os 3 arranques são **3 processos** e não 3 chamadas num só, e acrescentou-se a asserção que o enunciado não tinha: o `sha` é o do checkout do **serviço** e não o do `cwd`, medido com um processo lançado dentro de um segundo checkout. Quatro mutações verificadas a morder. §6.1 |
 | **D2 — o serviço sobrevive à sessão** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder |
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
 | **D4 — fechado antes de aberto** | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido |
@@ -675,10 +743,11 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (411 testes em
-2026-10-19, eram 403 depois do passo 5 e 377 antes dele), e deste plano muda em
-`src/` apenas o que o passo 7 da Fase 6 já autorizava (o sentinela), o
-`src/web/tunel.py` do passo 5, a rota `/api/health`, o teste do I7′ — **e o
+E a asserção de não-regressão: **`pytest` continua verde** (424 testes em
+2026-10-19, eram 411 depois do passo 2, 403 depois do passo 5 e 377 antes
+dele), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
+autorizava (o sentinela), o `src/web/tunel.py` do passo 5, a rota
+`/api/health` com o `src/web/saude.py`, o teste do I7′ — **e o
 `src/web/retencao.py` que o passo 2 obrigou a escrever, mais a ligação dele no
 `src/web/app.py`** (§2.1). Nada em `src/pipeline.py`, `src/grafo.py`,
 `src/guard.py`, `src/retrieval/` ou `src/generation/`. Um plano de publicação

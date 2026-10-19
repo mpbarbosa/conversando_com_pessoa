@@ -93,8 +93,13 @@ class GeradorPlagiador(GeradorFalso):
 #: `test_i7_o_varrimento_cobre_todas_as_rotas` falhar, e é esse o mecanismo —
 #: sem ele, o passo 9 da Fase 6 podia acrescentar o `GET /api/poema/{id}` e
 #: este ficheiro continuava verde a varrer as três rotas antigas.
+#:
+#: ✅ **E funcionou, no passo seguinte.** O `GET /api/health` do passo 3 fez
+#: este portão falhar no dia em que nasceu, antes de qualquer outro teste o
+#: tocar. Não é hipótese: está medido uma vez.
 ROTAS_COBERTAS = {
     ("GET", "/api/estado"),
+    ("GET", "/api/health"),
     ("GET", "/api/vozes"),
     ("POST", "/api/perguntar"),
     # Do FastAPI, e não deste repositório — e vai ao fio como as outras. Não
@@ -186,7 +191,8 @@ def _cliente(chunks, gerador):
 
 def _fio(cliente, pergunta: str = "o que é a natureza?") -> str:
     """Tudo o que as rotas cobertas devolvem, num texto só."""
-    partes = [cliente.get("/api/estado").text, cliente.get("/api/vozes").text,
+    partes = [cliente.get("/api/estado").text, cliente.get("/api/health").text,
+              cliente.get("/api/vozes").text,
               cliente.get("/openapi.json").text]
     with cliente.stream("POST", "/api/perguntar",
                         json={"pergunta": pergunta, "voz": "caeiro"}) as r:
