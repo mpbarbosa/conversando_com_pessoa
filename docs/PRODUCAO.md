@@ -455,9 +455,16 @@ no ar. Portanto duas cópias na mesma máquina:
 
 Partilham o que é caro e imutável: **o Ollama e o modelo de 4,9 GB** (um
 processo, uma cópia em memória) e o cache do Hugging Face para o encoder. O
-índice são 7,0 MB e pode ser duplicado sem pensar; `data/pessoa_poems/`
-duplica-se ou liga-se por *symlink*, e não há razão de direitos para preferir
-uma das duas — já está fora do repositório nas duas.
+índice são 7,0 MB e pode ser duplicado sem pensar.
+
+> ⚠️ **A frase que estava aqui dizia que o `data/pessoa_poems/` «duplica-se ou
+> liga-se por *symlink*, e não há razão de direitos para preferir uma das duas
+> — já está fora do repositório nas duas». As duas metades são falsas desde a
+> correcção 42:** os 2083 ficheiros **estão** versionados, logo um
+> `git clone --local` traz-nos com os objectos ligados por `hardlink` e **não
+> há nada para ligar nem para escolher**. O que o clone não traz são os
+> artefactos ignorados — `corpus.jsonl` e `index.*`, 12,9 MB — e esses
+> copiam-se, porque reconstruí-los custa 40 s e 383 s. Ver a §5.4.
 
 **E aqui está o defeito**, que vale nomear porque o passo 7 ainda não está
 escrito e portanto isto é entrada de desenho e não correcção — **e foi assim
@@ -495,7 +502,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 1 | **Passo 7 da Fase 6**, com a correcção do caminho absoluto da §4: sentinela, verificação antes de cada geração, `/api/estado`, ajudante `with` | o servidor e uma medição deixam de se atropelar | **I8**, com a asserção dos dois checkouts |
 | 2 | ✅ **feito** (2026-10-19) — **o portão I7 reescrito como I7′** (§2) e fixado por teste (`tests/test_i7.py`, 8 testes). **E a surpresa: a saída B não bastava.** O varrimento achou **três outras portas** por onde o corpo saía, e obrigou a escrever a retenção (`src/web/retencao.py`) — §2.1 | o portão volta a medir o que protege, e o corpo deixou de sair por onde ninguém olhava | **I7′**, na metade que não precisa do túnel |
 | 3 | ✅ **feito** (2026-10-19) — **`/api/health`** (§6), com o `sha` lido **à importação** e a raiz derivada do módulo (§6.1) | uma rota que diz de que `sha` o serviço foi lançado, e não de que `sha` está o disco | **D1** ✅ |
-| 4 | **Segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger` | o serviço sobrevive a um logout e a um reinício | **D2** |
+| 4 | 🔶 **instalado** (2026-10-19), **D2 por medir** — **segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger`. `src/web/unidades.py`, `src/web/instalar.py`, `src/web/__main__.py`, 17 testes (§5.4) | o serviço sobrevive a um logout e a um reinício | **D2**, e as duas metades dele **só o dono as pode correr** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
 | 6 | **Fechar o serviço a estranhos antes de o abrir** (§7): autenticação na camada gratuita do fornecedor do túnel, com lista de endereços de correio | o URL funciona para quem o dono convidar | **D4** |
 | 7 | **A janela registada** (§3.3, peça 3): o ajudante escreve os instantes de túnel de pé no ficheiro da fase | uma célula lenta é interpretável daqui a seis meses | **D5** |
@@ -568,6 +575,75 @@ temporizador de utilizador, e o que a torna uma cópia é o **ensaio de restauro
 acertos num varrimento — ganha aqui uma segunda função: é também o que diz que
 esta cópia não é uma cópia do corpus, e portanto que pode ir para onde o corpus
 não pode.
+
+### 5.4 O passo 4, instalado: onde vive, o que custa, e as duas metades do D2
+
+Escrito em 2026-10-19. `src/web/unidades.py` (as unidades),
+`src/web/instalar.py` (a instalação, com `--ensaio`), `src/web/__main__.py` (o
+`ExecStart`), `tests/test_unidades.py` com 17 testes.
+
+**Onde vive:** `~/.local/share/pessoabot/servico`, debaixo do mesmo `pessoabot`
+que o sentinela já usa (`~/.local/state/pessoabot/`), para quem procurar
+encontrar as duas peças no mesmo sítio. O plano não tinha escolhido o sítio.
+
+**O que custa em disco, medido nesta máquina:**
+
+| | |
+|---|---|
+| `git clone --local` | os objectos vão por `hardlink`, e os **8,4 MB** de corpus versionado vêm com eles |
+| `corpus.jsonl` + `index.*` | **12,9 MB**, copiados: estão no `.gitignore`, e reconstruí-los custava **40 s** e **383 s** |
+| `.venv` próprio | **1,3 GB** |
+| Ollama, modelo de 4,9 GB, cache do Hugging Face (11 GB) | **partilhados** |
+| **total novo** | **~1,32 GB**, contra **108 GB** livres |
+
+O `.venv` é próprio e não partilhado, e é decisão e não omissão: partilhar o do
+checkout de trabalho deixava um `pip install` de desenvolvimento mudar, **nesse
+instante**, o que o serviço corre — a acoplagem que o segundo checkout existe
+para cortar. E o passo 8 corre `pip install` no recuo, logo o serviço tem de ter
+onde o correr.
+
+**Uma peça que o plano não previa: `python -m src.web`.** A unidade precisa de
+um `ExecStart`, e se ele fosse `uvicorn src.web.app:app --host 127.0.0.1 --port
+8000` o interface e a porta passavam a existir em **dois** sítios — as
+constantes `HOST`/`PORTA` do `app.py`, que até aqui **não eram lidas por
+ninguém**, e um ficheiro de unidade que nenhum teste lê. E o que divergia era
+precisamente a decisão que o portão I7′ protege: um `--host 0.0.0.0` numa
+unidade é o «copiado de um tutorial» que a Fase 6 listou como risco. Há um teste
+a proibir `--host`, `--port` e `0.0.0.0` no ficheiro da unidade.
+
+**As quatro decisões das unidades, e as quatro mutações que as prendem:**
+
+| decisão | o que se perdia | mutação verificada |
+|---|---|---|
+| `ExecStart` **absoluto** | o Ollama está fora do `PATH` por decisão da Fase 0, e o `PATH` de uma unidade não é o do dono: `ExecStart=ollama serve` falha com «not found» depois de funcionar na consola | `ollama serve` solto → **3 testes falham**, um deles o do próprio `systemd-analyze` |
+| `After=` e **não** `Requires=` | desfazia a decisão medida do portão I3: o `/api/estado` reporta «Ollama em baixo» com o remédio em vez de o processo morrer, e com `Requires=` um Ollama caído levava com ele a página que sabia explicar a avaria | `Requires=ollama.service` → falha |
+| `WantedBy=default.target` | só `start` dava um serviço que corre hoje e não volta amanhã — «funciona e não fica a funcionar», que é o que o D2 nega | `graphical-session.target` → falha |
+| nunca o checkout de **trabalho** | é a regra da §4, e a que um `--destino` distraído quebra | o instalador **recusa** com código 2, e há teste |
+
+E o validador: **`systemd-analyze --user verify`**, o do próprio systemd, sobre
+as unidades geradas. Um `configparser` diz que o ficheiro é um INI; só o systemd
+diz que é uma unidade — e foi ele que apanhou o `ExecStart` não executável.
+
+**As duas metades do D2, e porque é que esta sessão não as pode medir.** O
+portão afirma que *fechar a sessão gráfica* e *reiniciar a máquina* deixam o
+serviço de pé. Nenhuma das duas é coisa que um processo a correr dentro dessa
+sessão possa fazer e ver o resultado. Então o que está feito é deixar a máquina
+no estado em que o D2 é mensurável, e o instalador imprime os dois comandos que
+o medem:
+
+1. fechar a sessão gráfica, voltar a entrar, e `curl -s http://127.0.0.1:8000/api/health`;
+2. reiniciar, e correr o mesmo `curl` **antes** de abrir a sessão gráfica — por
+   SSH, ou num terminal virtual.
+
+Em ambos o `sha` tem de ser o do checkout do **serviço**. Enquanto os dois não
+forem corridos, o **D2 está por medir, e não cumprido** — e é por isso que a
+tabela do §9 o marca 🔶 e não ✅.
+
+⚠️ **Uma ressalva sobre o `systemctl --user` desta máquina:** responde
+`degraded`, e já respondia **antes** deste passo. A unidade falhada é do snap
+(`app-snap\x2duserd\x2dautostart@autostart.service`) e não deste repositório.
+Fica escrito para que `degraded` não seja lido como consequência do passo 4
+quando o D2 for medido.
 
 ---
 
@@ -745,7 +821,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **I8′ — a medição e o serviço não se atropelam, com dois checkouts** | o sentinela atravessa checkouts | a fase escreve o sentinela do checkout de trabalho e o serviço, no **outro** checkout, vê-o: `/api/estado` mostra-o e `POST /api/perguntar` recusa. Com o caminho relativo da especificação original, este portão **falha** — é o seu objectivo |
 | **I7′ — o corpo não sai desta máquina** 🔶 **metade medida** | o túnel não publica o corpus | **de fora**, contra o URL: `GET /api/poema/{id}` dá 404, e o varrimento do I6 apontado ao fio HTTP dá **zero** acertos de qualquer linha de corpo de qualquer poema. **Feito (2026-10-19):** o varrimento contra a aplicação, `tests/test_i7.py`, 8 testes, com a cobertura de rotas a falhar se nascer uma rota não varrida, e verificado a morder por mutação das duas metades da retenção. **Falta:** correr o mesmo varrimento **de fora**, contra o URL do túnel — passo 6 sobre o passo 4 |
 | **D1 — a saúde não mente** ✅ | `/api/health` nomeia o código a correr | o `sha` devolvido é o do `HEAD` do checkout do serviço, em 3 arranques seguidos. Com o Ollama em baixo, `status` não é `ok`. **Feito (2026-10-19):** `tests/test_saude.py`, 13 testes — os 3 arranques são **3 processos** e não 3 chamadas num só, e acrescentou-se a asserção que o enunciado não tinha: o `sha` é o do checkout do **serviço** e não o do `cwd`, medido com um processo lançado dentro de um segundo checkout. Quatro mutações verificadas a morder. §6.1 |
-| **D2 — o serviço sobrevive à sessão** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder |
+| **D2 — o serviço sobrevive à sessão** 🔶 **instalado, por medir** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder. **Feito (2026-10-19):** a instalação, e 17 testes sobre o que torna o D2 possível — caminhos absolutos, `After` sem `Requires`, `WantedBy=default.target`, nunca o checkout de trabalho, e o `systemd-analyze --user verify` do próprio systemd; quatro mutações a morder. **Falta:** as duas metades que só o dono pode correr — um logout e um reinício (§5.4) |
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
 | **D4 — fechado antes de aberto** | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido |
 | **D5 — a janela fica escrita** | uma célula lenta é interpretável | o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras |
@@ -753,11 +829,13 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (424 testes em
-2026-10-19, eram 411 depois do passo 2, 403 depois do passo 5 e 377 antes
-dele), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
+E a asserção de não-regressão: **`pytest` continua verde** (441 testes em
+2026-10-19, eram 424 depois do passo 3, 411 depois do passo 2, 403 depois do
+passo 5 e 377 antes dele), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
 autorizava (o sentinela), o `src/web/tunel.py` do passo 5, a rota
-`/api/health` com o `src/web/saude.py`, o teste do I7′ — **e o
+`/api/health` com o `src/web/saude.py`, o `src/web/unidades.py`, o
+`src/web/instalar.py` e o `src/web/__main__.py` do passo 4, o teste do I7′ —
+**e o
 `src/web/retencao.py` que o passo 2 obrigou a escrever, mais a ligação dele no
 `src/web/app.py`** (§2.1). Nada em `src/pipeline.py`, `src/grafo.py`,
 `src/guard.py`, `src/retrieval/` ou `src/generation/`. Um plano de publicação
