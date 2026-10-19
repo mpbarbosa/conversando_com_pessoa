@@ -111,13 +111,40 @@ def clonar(alvo: Alvo, ref: str, *, ensaio: bool) -> None:
     Um checkout que já exista **não** se re-clona: isso apagava o `.venv` e os
     artefactos. Reinstalar sobre um existente é mudar de referência, que é o que
     o recuo do passo 8 faz.
+
+    ⚠️ **E é por isso que há um `git fetch` aqui, achado a correr.** A primeira
+    versão desta função ia direita ao `checkout` quando o directório já
+    existia — e um clone feito ontem **não tem os objectos de hoje**. O `git`
+    não diz «esse commit não existe»: não reconhecendo a referência,
+    interpreta-a como um **caminho** e responde `--detach does not take a path
+    argument '79e4dbb'`, que manda quem o lê procurar um erro de sintaxe. A
+    segunda instalação desta máquina falhou assim.
+
+    Donde as duas correcções: **buscar** antes de mudar de referência, e
+    **verificar** que ela resolve para um commit, para a mensagem falar da
+    referência em vez de falar de caminhos.
     """
     if alvo.checkout.exists():
         print(f"  · o checkout já existe: {alvo.checkout}")
+        # `origin` é o checkout de trabalho: foi de lá que o `clone --local`
+        # veio. Sem isto, só se pode mudar para referências que já lá estavam.
+        _correr("git", "-C", str(alvo.checkout), "fetch", "--prune", "origin",
+                ensaio=ensaio)
     else:
         alvo.checkout.parent.mkdir(parents=True, exist_ok=True)
         _correr("git", "clone", "--local", str(RAIZ), str(alvo.checkout),
                 ensaio=ensaio)
+    if not ensaio:
+        r = subprocess.run(("git", "-C", str(alvo.checkout), "rev-parse",
+                            "--verify", "--quiet", f"{ref}^{{commit}}"),
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            raise Falhou(
+                f"a referência «{ref}» não existe no checkout do serviço "
+                f"({alvo.checkout}) nem veio no `fetch` do de trabalho. Se é "
+                f"um commit, falta publicá-lo em {RAIZ}; se é uma etiqueta, "
+                f"`git push` dela não se aplica aqui — o `fetch` traz as de "
+                f"origin")
     _correr("git", "-C", str(alvo.checkout), "checkout", "--detach", ref,
             ensaio=ensaio)
 
@@ -159,6 +186,18 @@ def instalar_unidades(alvo: Alvo, *, ensaio: bool) -> None:
     `default.target`, e é isso que faz o `enable-linger` abaixo significar algo
     depois de um reinício. Só `start` deixava um serviço que corre hoje e não
     volta amanhã — a forma «funciona e não fica a funcionar».
+
+    ⚠️ **E um `restart` depois, achado a correr.** `enable --now` arranca uma
+    unidade **inactiva** e não toca numa que já corra. A segunda instalação
+    desta máquina mudou o checkout para `79e4dbb` e **deixou o processo de
+    `734f77a` a servir** — sem erro nenhum, com os dois comandos a devolver 0.
+    Num recuo (passo 8) isso é o pior resultado possível: o `git checkout` da
+    etiqueta anterior «sucede», o `systemctl` «sucede», e o código doente
+    continua a responder.
+
+    Quem o disse foi o `/api/health`, e disse-o porque o `sha` é lido **à
+    importação** e nomeia o que está em memória (§6.1). Um `sha` lido por pedido
+    teria respondido `79e4dbb` — o do disco — e o defeito ficava invisível.
     """
     lista = decidir_tunel()
     unidades = [NOME_OLLAMA, NOME_SERVICO] + ([NOME_TUNEL] if lista else [])
@@ -171,6 +210,10 @@ def instalar_unidades(alvo: Alvo, *, ensaio: bool) -> None:
             print(f"  · {nome} → {caminho}")
     _correr("systemctl", "--user", "daemon-reload", ensaio=ensaio)
     _correr("systemctl", "--user", "enable", "--now", *unidades, ensaio=ensaio)
+    # Ver a docstring: sem isto uma instalação sobre um serviço a correr troca
+    # o checkout e não troca o processo. O `restart` corta uma geração a meio,
+    # e é o preço certo — é o mesmo comando que a §5.2 prescreve para o recuo.
+    _correr("systemctl", "--user", "restart", *unidades, ensaio=ensaio)
 
 
 def decidir_tunel() -> tuple[str, ...]:
@@ -210,14 +253,64 @@ def ligar_linger(*, ensaio: bool) -> None:
     _correr("loginctl", "enable-linger", getpass.getuser(), ensaio=ensaio)
 
 
-def verificar(alvo: Alvo, *, ensaio: bool) -> list[str]:
+def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
+    """A queixa, se o serviço a correr não for o código instalado. `None` se for.
+
+    Função à parte e pura para ter teste: é o predicado do portão **D1**
+    aplicado como verificação de instalação, e é ele que apanha um `restart`
+    que não aconteceu. A disciplina é a que o plano transfere do repositório
+    irmão — **verifica-se pela saúde do serviço, nunca pelo código de saída dos
+    comandos que se correram**.
+    """
+    if do_checkout is None:
+        return "o checkout do serviço não diz de que commit é"
+    if da_saude is None:
+        return (f"o /api/health não respondeu, logo não se sabe o que está a "
+                f"correr (o checkout está em {do_checkout})")
+    if da_saude != do_checkout:
+        return (f"o serviço está a correr {da_saude} e o checkout está em "
+                f"{do_checkout}: o processo não foi substituído")
+    return None
+
+
+#: Quantas vezes se pergunta a saúde depois de um `restart`, de segundo a
+#: segundo. Há-as porque a primeira pergunta depois de um `restart` chega antes
+#: de o `uvicorn` ligar o socket, e sem elas a verificação dizia «não
+#: respondeu» a um serviço que estava a arrancar — um falso alarme a seguir a
+#: uma instalação boa é o que faz uma verificação deixar de se ler.
+#:
+#: 20 e não 30: o `uvicorn` deste serviço **não** carrega modelos no arranque
+#: (o encoder vem na 1.ª pergunta), logo ligar o socket é imediato. A nota do
+#: plano retirado sobre o `HEALTH_ATTEMPTS=30` curto era para um arranque que
+#: podia tocar o índice, e este não toca.
+TENTATIVAS_SAUDE = 20
+
+
+def _sha_da_saude(tentativas: int = TENTATIVAS_SAUDE) -> str | None:
+    """O `sha` que o serviço a correr declara, ou `None` se não responder."""
+    import json
+    import urllib.error
+    import urllib.request
+    for n in range(tentativas):
+        try:
+            with urllib.request.urlopen(
+                    f"http://127.0.0.1:{PORTA}/api/health", timeout=5) as r:
+                return json.load(r).get("sha")
+        except (OSError, urllib.error.HTTPError, ValueError):
+            if n + 1 < tentativas:
+                time.sleep(1)
+    return None
+
+
+def verificar(alvo: Alvo, *, ensaio: bool) -> tuple[list[str], str | None]:
     """O que se pode medir **sem** fechar a sessão nem reiniciar.
 
-    Devolve as linhas do relatório. O que fica de fora é o D2 inteiro, e está
-    dito no fim em vez de assumido.
+    Devolve `(linhas do relatório, queixa)`. O que fica de fora é o D2 inteiro,
+    e está dito no fim em vez de assumido.
     """
     if ensaio:
-        return ["    (o ensaio não verifica nada: não há nada instalado)"]
+        return (["    (o ensaio não verifica nada: não há nada instalado)"],
+                None)
     linhas = []
     linger = _correr("loginctl", "show-user", getpass.getuser(),
                      "--property=Linger", ensaio=False).strip()
@@ -233,7 +326,9 @@ def verificar(alvo: Alvo, *, ensaio: bool) -> list[str]:
     do_servico = ler_lancamento(alvo.checkout)
     linhas.append(f"  · sha do checkout do serviço: {do_servico.sha}"
                   f"{f' ({do_servico.erro})' if do_servico.erro else ''}")
-    return linhas
+    da_saude = _sha_da_saude()
+    linhas.append(f"  · sha que o /api/health declara: {da_saude}")
+    return linhas, conferir_sha(do_servico.sha, da_saude)
 
 
 def contar_acessos(registo: str) -> int:
@@ -364,8 +459,12 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
     print("\n[verificação, do que não precisa de reinício]")
-    for linha in verificar(alvo, ensaio=a.ensaio):
+    linhas, queixa = verificar(alvo, ensaio=a.ensaio)
+    for linha in linhas:
         print(linha)
+    if queixa is not None:
+        print(f"\nINSTALAÇÃO INCOMPLETA: {queixa}", file=sys.stderr)
+        return 1
     print(f"""
 O portão **D2** não se mede daqui. Os dois comandos que o medem, e que só o
 dono pode correr, são:

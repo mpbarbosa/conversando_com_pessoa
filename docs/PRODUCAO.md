@@ -548,6 +548,12 @@ O irmão recua instalando bytes que o S3 já tem. Aqui a unidade de lançamento 
 serviço, mais `systemctl --user restart`. Mais simples, e com duas armadilhas que
 o portão **D6** mede:
 
+- **o checkout tem de buscar os objectos primeiro**, e **o processo tem de ser
+  substituído.** Os dois foram achados a reinstalar, em 2026-10-19, e estão na
+  §7.1: sem `fetch`, o `git` recusa a etiqueta com uma mensagem sobre caminhos;
+  sem `restart`, o `git checkout` e o `systemctl` devolvem 0 e **o código
+  doente continua a responder**. O `src/web/instalar.py` faz os dois e
+  confere-se pelo `/api/health`;
 - **as dependências podem ter mudado** entre etiquetas, e o `pip install` do
   recuo tem de correr (é o mesmo motivo pelo qual o `06_redeploy.sh` do irmão
   corre `npm ci` no recuo e não só restaura o `dist/`);
@@ -914,6 +920,55 @@ dois passos que faltam, e que são do dono:
    recomendação do §7 — «ficar no passo 6» — passa a «ficar no passo 5, com o
    túnel em baixo», até o defeito ser corrigido.
 
+### Dois defeitos do instalador, achados na segunda instalação
+
+O dono correu `python -m src.web.instalar` uma segunda vez, para passar do
+`734f77a` ao `79e4dbb`. Nenhum dos dois defeitos abaixo aparecia na primeira
+instalação, porque na primeira o checkout **nasce**: os dois vivem no caminho de
+**reinstalar sobre o que já existe** — que é exactamente o caminho de que o
+**recuo do passo 8** depende.
+
+**1. O `clone` não buscava os objectos novos.** Um clone feito há duas horas não
+tem os commits de agora, e o `git` não diz «esse commit não existe»: não
+reconhecendo a referência, interpreta-a como um **caminho** e responde
+`fatal: git checkout: --detach does not take a path argument '79e4dbb'`, que
+manda quem o lê procurar um erro de sintaxe onde não há nenhum. Corrigido com um
+`git fetch --prune origin` antes de mudar de referência (o `origin` do clone é o
+checkout de trabalho), e com uma verificação de que a referência resolve para um
+commit, para a mensagem falar da referência. Dois testes novos clonam um
+repositório a sério, acrescentam-lhe um commit e exigem que o checkout o siga; e
+um terceiro recua para uma etiqueta anterior, que é o passo 8 ensaiado em
+miniatura. Verificado a morder: sem o `fetch`, os dois falham.
+
+**2. `enable --now` não substituía o processo. Este é o grave.** O
+`systemctl --user enable --now` arranca uma unidade **inactiva** e **não toca**
+numa que já corra. Consequência medida: o checkout passou a `79e4dbb` e o
+processo continuou a servir `734f77a`, com os dois comandos a devolver **0** e
+sem erro nenhum. Num recuo é o pior resultado possível — o `git checkout` da
+etiqueta anterior «sucede», o `systemctl` «sucede», e **o código doente continua
+a responder**.
+
+**Quem o disse foi o `/api/health`, e disse-o por causa da decisão 1 do §6.1.**
+O `sha` é lido **à importação** e nomeia o que está em memória; um `sha` lido por
+pedido teria respondido `79e4dbb` — o do disco — e o defeito ficava invisível
+precisamente na rota que existe para o tornar visível. A decisão que parecia
+pedante pagou-se no dia seguinte.
+
+Corrigido com um `systemctl --user restart` depois do `enable`, e — mais
+importante — com a instalação a **verificar-se pela saúde do serviço**:
+`conferir_sha` compara o `sha` do `/api/health` com o do checkout e o instalador
+devolve **1** se divergirem. É a disciplina que a §1 transfere do repositório
+irmão, «verificar pela saúde do serviço, nunca pelo emblema do CI», aplicada ao
+próprio instalador em vez de ao CI.
+
+⚠️ **E o que isto diz sobre o que os testes podem.** O `restart` em si **nenhum
+teste o vê correr**: tirá-lo não faz falhar asserção nenhuma contra um serviço
+inexistente, e quem o apanha é a `conferir_sha` numa instalação a sério. O que
+ficou prendido por teste é o predicado da conferência (verificado a morder) e a
+**presença** da chamada, por inspecção do código — a mesma disciplina que o
+portão I1 usa nas duas chamadas a `Pipeline(...)`. Está escrito porque a
+alternativa era um teste que parecia cobrir o `restart` e não cobria.
+
 ⚠️ **Uma nota sobre a contagem de testes:** a suite passou de «441 passados, 1
 saltado» a **450 passados, nenhum saltado**. O que deixou de saltar foi o
 `test_servidor_e_modelo`, que salta quando o Ollama não responde — e o Ollama
@@ -963,8 +1018,8 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (450 testes em
-2026-10-19, eram 441 depois do passo 4, 424 depois do passo 3, 411 depois do
+E a asserção de não-regressão: **`pytest` continua verde** (455 testes em
+2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
 autorizava (o sentinela), o `src/web/tunel.py` do passo 5, a rota

@@ -29,13 +29,22 @@ E o validador: **`systemd-analyze --user verify`**, o do próprio systemd. Um
 from __future__ import annotations
 
 import configparser
+import pathlib
 import shutil
 import subprocess
 
 import pytest
 
+from src.web import instalar
 from src.web.app import HOST, PORTA
-from src.web.instalar import DESTINO, contar_acessos, main
+from src.web.instalar import (
+    DESTINO,
+    Falhou,
+    clonar,
+    conferir_sha,
+    contar_acessos,
+    main,
+)
 from src.web.saude import RAIZ
 from src.web.unidades import (
     DIRECTORIO,
@@ -363,3 +372,136 @@ def test_d4_o_contador_conta_pedidos_e_nao_linhas():
     assert len(sem_pedidos.splitlines()) == 6, (
         "o recorte sem pedidos tem de continuar a ter linhas, senão este "
         "teste não distingue «não conta ruído» de «não conta nada»")
+
+
+# --- o clone, e o defeito que a segunda instalação encontrou -------------- #
+
+def _repo(d: pathlib.Path, ficheiro: str, mensagem: str) -> str:
+    """Um commit num repositório, e o seu `sha` curto."""
+    (d / ficheiro).write_text(mensagem + "\n", encoding="utf-8")
+    subprocess.run(("git", "-C", str(d), "add", ficheiro), check=True,
+                   capture_output=True)
+    subprocess.run(("git", "-C", str(d), "-c", "commit.gpgsign=false",
+                    "commit", "-q", "-m", mensagem), check=True,
+                   capture_output=True)
+    return subprocess.run(("git", "-C", str(d), "rev-parse", "--short", "HEAD"),
+                          check=True, capture_output=True,
+                          text=True).stdout.strip()
+
+
+@pytest.fixture
+def par(tmp_path, monkeypatch):
+    """Um checkout de trabalho e um do serviço já clonado dele — a máquina a sério.
+
+    O `clonar` clona do `RAIZ` do módulo, logo é o `RAIZ` que se troca: assim o
+    teste exercita o caminho real sem tocar neste repositório.
+    """
+    trabalho = tmp_path / "trabalho"
+    trabalho.mkdir()
+    subprocess.run(("git", "init", "-q", "-b", "main", str(trabalho)),
+                   check=True, capture_output=True)
+    for chave, valor in (("user.email", "t@t"), ("user.name", "t")):
+        subprocess.run(("git", "-C", str(trabalho), "config", chave, valor),
+                       check=True, capture_output=True)
+    primeiro = _repo(trabalho, "a.txt", "primeiro")
+    monkeypatch.setattr(instalar, "RAIZ", trabalho)
+
+    servico = tmp_path / "servico"
+    alvo = Alvo.de(servico)
+    clonar(alvo, primeiro, ensaio=False)
+    return trabalho, alvo, primeiro
+
+
+def _head(d: pathlib.Path) -> str:
+    return subprocess.run(("git", "-C", str(d), "rev-parse", "--short", "HEAD"),
+                          check=True, capture_output=True,
+                          text=True).stdout.strip()
+
+
+def test_reinstalar_numa_referencia_nova_busca_os_objectos_primeiro(par):
+    """**O defeito que a segunda instalação desta máquina encontrou.**
+
+    Um clone feito ontem não tem os objectos de hoje, e o `git` não diz «esse
+    commit não existe»: não reconhecendo a referência, interpreta-a como um
+    **caminho** e responde `--detach does not take a path argument '79e4dbb'`,
+    que manda quem o lê procurar um erro de sintaxe. É o caminho de que o
+    **recuo do passo 8** depende — mudar a referência de um checkout que já
+    existe — logo falhava no dia em que fosse preciso.
+    """
+    trabalho, alvo, primeiro = par
+    assert _head(alvo.checkout) == primeiro
+
+    segundo = _repo(trabalho, "b.txt", "segundo")
+    assert segundo != primeiro
+    clonar(alvo, segundo, ensaio=False)
+    assert _head(alvo.checkout) == segundo, (
+        "o checkout do serviço não seguiu para a referência nova")
+
+
+def test_recuar_para_uma_etiqueta_anterior_tambem_funciona(par):
+    """O passo 8 ao contrário: da referência nova para a antiga, por etiqueta."""
+    trabalho, alvo, primeiro = par
+    subprocess.run(("git", "-C", str(trabalho), "tag", "servico-1"),
+                   check=True, capture_output=True)
+    segundo = _repo(trabalho, "b.txt", "segundo")
+    clonar(alvo, segundo, ensaio=False)
+    clonar(alvo, "servico-1", ensaio=False)
+    assert _head(alvo.checkout) == primeiro
+    assert not (alvo.checkout / "b.txt").exists()
+
+
+def test_uma_referencia_que_nao_existe_falha_a_falar_da_referencia(par):
+    """E não a falar de caminhos, que é o que o `git` faz sozinho."""
+    _, alvo, _ = par
+    with pytest.raises(Falhou, match="não existe no checkout do serviço"):
+        clonar(alvo, "0000000", ensaio=False)
+
+
+# --- verificar pelo serviço, e não pelo código de saída dos comandos ------ #
+
+def test_a_instalacao_confere_se_o_processo_foi_substituido():
+    """**O segundo defeito que a segunda instalação encontrou.**
+
+    `systemctl --user enable --now` arranca uma unidade **inactiva** e não toca
+    numa que já corra: o checkout passou a `79e4dbb` e o processo continuou a
+    servir `734f77a`, com os dois comandos a devolver 0 e sem erro nenhum.
+    Num recuo (passo 8) é o pior resultado possível — o `git checkout` «sucede»,
+    o `systemctl` «sucede», e o código doente continua a responder.
+
+    A defesa não é cuidado: é o predicado do portão **D1** aplicado como
+    verificação de instalação, que é a disciplina que o plano transfere do
+    repositório irmão — verifica-se pela **saúde do serviço**, nunca pelo
+    código de saída do que se correu.
+    """
+    assert conferir_sha("79e4dbb", "79e4dbb") is None
+
+    queixa = conferir_sha("79e4dbb", "734f77a")
+    assert queixa is not None
+    assert "79e4dbb" in queixa and "734f77a" in queixa
+    assert "não foi substituído" in queixa
+
+    assert "não respondeu" in (conferir_sha("79e4dbb", None) or "")
+    assert "de que commit" in (conferir_sha(None, "79e4dbb") or "")
+
+
+def test_a_instalacao_reinicia_e_nao_so_activa():
+    """O `restart` em si **nenhum teste o vê correr**, e isto é o que resta.
+
+    Tirá-lo não faz falhar asserção nenhuma deste ficheiro: quem o apanha é a
+    `conferir_sha` numa instalação **a sério**, contra um serviço que já estava
+    de pé. Então prende-se por inspecção, que é honesto sobre o que mede — a
+    presença da chamada — e impede a regressão de voltar sem ninguém notar.
+    Mesma disciplina do portão I1 sobre as duas chamadas a `Pipeline(...)`.
+    """
+    import ast
+    import inspect
+    import textwrap
+
+    from src.web.instalar import instalar_unidades
+    fonte = textwrap.dedent(inspect.getsource(instalar_unidades))
+    comandos = [n.value for n in ast.walk(ast.parse(fonte))
+                if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+    assert "restart" in comandos, (
+        "sem o `restart`, uma instalação sobre um serviço a correr troca o "
+        "checkout e não troca o processo — e os dois `systemctl` devolvem 0")
+    assert "enable" in comandos, "o `enable` é o que faz o linger significar algo"
