@@ -136,9 +136,19 @@ deixar de proteger.**
 
 O portão **I7** da Fase 6 afirma: «`GET /api/poema/{id}` recusa pedidos de fora
 de `127.0.0.1`; o servidor **não escuta noutro interface sem sinalizador
-explícito**». O cabeçalho de `src/web/app.py` diz porquê — a interface serve
+explícito**». O cabeçalho de `src/web/app.py` dizia porquê — a interface serve
 corpos de poemas de um corpus cujos termos de uso não estão confirmados, e
 «expor isto à rede era publicar esse material».
+
+> ⚠️ **Essa razão caiu, e o argumento desta secção não depende dela.** O corpus
+> **está** no repositório público desde 2025-10-24 (correcção **42**), logo o
+> `bind` fechava esta porta enquanto a do repositório estava aberta, e o
+> material que retinha é o mesmo que um `git clone` traz. O cabeçalho do
+> `app.py` está corrigido. O que se segue continua a valer palavra por palavra,
+> porque é sobre o **mecanismo** e não sobre os direitos: um portão que mede
+> `bind` e afirma alcançabilidade continua a passar depois de deixar de medir o
+> que afirma — e a correcção **40** mostrou que havia corpo a sair por três
+> portas que nada disto cobria.
 
 Um túnel não muda o `bind`. O `cloudflared` corre **nesta** máquina e liga-se
 **de dentro** a `127.0.0.1:8000`. Portanto:
