@@ -1,0 +1,17 @@
+{
+ "_meta": {
+  "porque_existe": "O `poem_4341` entrou no top-20 do denso da q25 ao reconstruir o índice em 2026-10-19, e não tinha nota. Sem ela o `test_o_top20_do_denso_esta_completamente_julgado` falha, e com razão: um documento sem nota no top-20 penaliza por construção qualquer reranker que o promova.",
+  "porque_nao_e_drift_de_versao": "A fronteira do top-20 na q25 é um EMPATE decidido por um ULP de float32 — `poem_4341` e `poem_2733` dão ambos 0,819427, com diferença de 5,96e-08. Fixar as versões (PR #1) não o resolve e não o resolveu: o índice da medição tinha o empate a cair do outro lado. Qualquer reconstrução, em qualquer máquina, pode trocá-los outra vez. Julgar o candidato é o que torna o invariante robusto ao arredondamento; fixar versões não é.",
+  "rubrica": "A mesma da Fase 1 Passo 8 e da Fase 3B: 2 = responde bem e seria boa base para o chatbot; 1 = serviria se nada melhor houvesse; 0 = não serve. Critério operacional da 3B: 2 se o ASSUNTO CENTRAL do poema é o assunto da pergunta; 1 se partilha a postura ou um assunto adjacente; 0 caso contrário. A doutrina que fundamenta a resposta não é a resposta.",
+  "avaliador": "único (Claude), sessão de 2026-10-19. Não é medição intersubjectiva, e é o mesmo avaliador das Fases 1 a 4 — a limitação que a Fase 3 §4 nomeou continua sem estar resolvida. O CONTROLO.md pede um segundo avaliador para os 433; este julgamento herda a mesma dívida.",
+  "cegueira": "NÃO foi julgado às cegas, e isso é uma diferença face aos 433. Eu já sabia que este candidato estava na posição 20 e que o teste falhava por falta da sua nota. A mitigação é que a NOTA não altera o resultado do teste — ele verifica que existe nota, não qual é — logo não há incentivo a inflacioná-la ou deflacioná-la. Fica registado para quem reauditar.",
+  "separado_de_proposito": "Ficheiro próprio, pela mesma razão que a 3B deu para o seu: a proveniência de cada julgamento tem de ser recuperável. 291 vêm do pooling aberto das Fases 1-3, 142 de fechar o top-20 na 3B, e este 1 de uma reconstrução do índice ter trocado um empate.",
+  "n": 1
+ },
+ "q25": {
+  "poem_4341": 1
+ },
+ "_justificacao": {
+  "q25/poem_4341": "«Quis que comigo vísseis» (Ricardo Reis). O assunto central é a esterilidade do pensamento abstracto e a censura a um interlocutor que não soube ver — «não fostes mais que uma luz extinta em noite densa, um pampal sem fruto» — fechando em «Que é pensar sem ser? [...] e a raiz não medita». A pergunta é sobre não querer mais do que cabe num dia: medida do desejo, e o dia. Não é o assunto deste poema, logo não é 2. O fecho carrega uma postura de ser-em-vez-de-especular que é adjacente à ética de Reis, e é isso que lhe dá o 1; mas é doutrina que fundamenta a resposta, não a resposta, e o movimento do poema é até o de querer MAIS (que o outro visse o essencial) e ficar desiludido. Nota 1, de fronteira com o 0. Para contexto, a q25 já tinha 23 julgamentos: 9 de nota 2, 13 de nota 1, 1 de nota 0 — este poema nunca seria necessário na prática, mas o critério é intrínseco, não comparativo."
+ }
+}
