@@ -624,6 +624,47 @@ E o validador: **`systemd-analyze --user verify`**, o do próprio systemd, sobre
 as unidades geradas. Um `configparser` diz que o ficheiro é um INI; só o systemd
 diz que é uma unidade — e foi ele que apanhou o `ExecStart` não executável.
 
+**Instalado, e o que isso deu — medido na máquina a 2026-10-19:**
+
+| | |
+|---|---|
+| referência servida | `734f77a`, destacada no checkout do serviço |
+| `loginctl show-user` | **`Linger=yes`** |
+| as duas unidades | `enabled · active`, as duas |
+| `/api/health` **da unidade** (não do `TestClient`) | `status: "ok"`, `sha: "734f77a"`, `pode_perguntar: true` |
+| o índice copiado, diagnosticado **no checkout do serviço** | **aceito** — 2290 chunks, `intfloat/multilingual-e5-base`, dim 768, em **0,03 s** |
+| uma pergunta real, ponta a ponta pela unidade | **200**, 12 eventos, **1** tentativa, zero plágio, `retidas: 0`, **42,1 s** de geração e **65 s** de parede |
+
+Dois desses números dizem mais do que parecem.
+
+**O índice aceito é a armadilha da §5.2 evitada de propósito.** O manifesto
+compara encoder, assinatura do corpus, contagem e ordem, e **devolve `None` em
+vez de reconstruir em silêncio** — num checkout novo isso significava que a
+primeira pergunta reconstruía o índice durante **383 s** de CPU saturado, com um
+utilizador à espera. Copiar os 12,9 MB em vez de deixar reconstruir é o que o
+torna desnecessário, e **está verificado no checkout do serviço** e não presumido
+do de trabalho.
+
+**Os 65 s de parede contra os 42,1 s de geração** são os ~23 s do encoder e do
+índice a carregar na primeira pergunta — pagos uma vez por arranque da unidade,
+e é o que o `/api/estado` chama «ainda não carregado: carrega na 1.ª pergunta».
+A segunda pergunta não os paga.
+
+E **o varrimento do portão I7′ correu contra um fio HTTP real** por esta via, e
+não contra o `TestClient`: zero linhas de corpo em 4997 bytes de NDJSON. É a
+primeira vez que esse portão se mede fora do `pytest` — continua a não ser a
+asserção plena, que é **de fora**, pelo túnel.
+
+⚠️ **E uma consequência do passo 4 que não é um número: o servidor passou a
+estar sempre de pé.** Até aqui o `src/web/app.py` dizia, em letra própria, que
+«não correr o servidor com uma medição a decorrer é disciplina e não mecanismo».
+Com uma unidade activada e `Linger=yes`, **não há onde aplicar disciplina**: o
+sentinela do passo 7 deixou de ser uma protecção contra o futuro e passou a ser
+a única que existe. Qualquer fase que gere amostras tem de correr debaixo do
+`sentinela.medicao(...)` — senão partilha com o serviço um Ollama de um slot só,
+e as latências medidas deixam de descrever o caminho que o utilizador corre. Era
+previsto (§3), e agora é o estado da máquina.
+
 **As duas metades do D2, e porque é que esta sessão não as pode medir.** O
 portão afirma que *fechar a sessão gráfica* e *reiniciar a máquina* deixam o
 serviço de pé. Nenhuma das duas é coisa que um processo a correr dentro dessa
