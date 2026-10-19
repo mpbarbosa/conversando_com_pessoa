@@ -504,7 +504,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 3 | ✅ **feito** (2026-10-19) — **`/api/health`** (§6), com o `sha` lido **à importação** e a raiz derivada do módulo (§6.1) | uma rota que diz de que `sha` o serviço foi lançado, e não de que `sha` está o disco | **D1** ✅ |
 | 4 | 🔶 **instalado** (2026-10-19), **D2 por medir** — **segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger`. `src/web/unidades.py`, `src/web/instalar.py`, `src/web/__main__.py`, 17 testes (§5.4) | o serviço sobrevive a um logout e a um reinício | **D2**, e as duas metades dele **só o dono as pode correr** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
-| 6 | **Fechar o serviço a estranhos antes de o abrir** (§7): autenticação na camada gratuita do fornecedor do túnel, com lista de endereços de correio | o URL funciona para quem o dono convidar | **D4** |
+| 6 | 🔶 **construído e o D4 medido** (2026-10-19), **por abrir** — **fechar o serviço a estranhos antes de o abrir** (§7): *Protected Quick Tunnel* com `--allowed-mail`, lista de convidados **nesta máquina**, `cloudflared.service` gerado pelo `unidades.py`. Falta a lista ter um endereço, e falta o defeito do fornecedor (§7.1) | o URL funciona para quem o dono convidar | **D4** ✅ medido |
 | 7 | **A janela registada** (§3.3, peça 3): o ajudante escreve os instantes de túnel de pé no ficheiro da fase | uma célula lenta é interpretável daqui a seis meses | **D5** |
 | 8 | **Recuo** (§5.2): o serviço corre numa etiqueta; recuar é `git checkout` da anterior e reiniciar a unidade. **Ensaiado** | recuar é um comando, e foi ensaiado | **D6** |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
@@ -827,6 +827,99 @@ Recomendação: **ficar no passo 6.** Um serviço que responde em verso a quem f
 convidado entrega tudo o que a Fase 6 construiu, e não põe as medições do
 repositório à mercê de quem encontrar o URL.
 
+### 7.1 O passo 6, construído: o túnel que nenhum passo instalava, e um defeito do fornecedor
+
+Escrito em 2026-10-19.
+
+**Primeiro, um buraco no plano.** O passo 5 escreveu o `src/web/tunel.py` para
+parar «uma unidade que ainda não existe nesta máquina» e disse que criá-la era
+o passo 4 — mas a §5.1, que é a lista do passo 4, nomeia **só** o
+`pessoabot.service` e o `ollama.service`. **Nenhum passo do plano instalava o
+túnel**, e o passo 6 pressupõe-no. Fica como `NOME_TUNEL` no
+`src/web/unidades.py`, e é o que dá ao `PESSOABOT_TUNEL` do passo 5 onde
+apontar.
+
+**Segundo, o mecanismo mudou depois de o plano ser escrito, e para melhor.** O
+plano dizia «autenticação na camada gratuita do fornecedor do túnel, com lista
+de endereços de correio», e o que isso queria dizer em 2026-10-18 era
+*Cloudflare Access* — que precisa de uma conta e de um **domínio** numa zona da
+Cloudflare, ou seja, de dinheiro, contra a restrição de que a saída D nasceu. A
+Cloudflare lançou a **2026-10-02** os *Protected Quick Tunnels*: a opção
+`--allowed-mail` do `cloudflared` pede ao visitante um PIN por correio, **sem
+conta e sem domínio**, e a lista de convidados **fica nesta máquina** — o
+`cloudflared` compara-a localmente. Custo zero, e a lista não existe em conta de
+fornecedor nenhum, o que é melhor do que o plano pedia.
+
+Instalado com a **mesma disciplina da Fase 0 para o Ollama**: binário oficial em
+`~/.local/cloudflared/bin/`, sem `sudo`, **fora do `PATH`**. Versão **2026.10.1**
+(construída 2026-10-15).
+
+**A lista é o mecanismo, e não um conselho.** Vive em
+`~/.config/pessoabot/convidados`, um endereço por linha, e o `ler_convidados`
+**levanta** se o ficheiro faltar, estiver vazio ou só tiver comentários; o
+`servico_tunel` **recusa** gerar sem convidados. Não há caminho pelo qual nasça
+uma unidade de túnel sem `--allowed-mail` — que seria um túnel aberto ao mundo
+com o corpus do outro lado, e sem erro nenhum a dizê-lo. Quatro mutações
+verificadas a morder. Hoje a lista está **vazia de propósito**, e o instalador
+diz «sem túnel» em vez de instalar um.
+
+**Três coisas medidas, e a segunda é a que decide se isto é viável.**
+
+| | |
+|---|---|
+| **D4** | 4 pedidos de fora → **0** linhas no registo do serviço; `GET /` dá 302 para o ecrã da Cloudflare, `POST /api/perguntar` dá **401**. Instrumento verificado a morder: +1 com um pedido local |
+| **o fluxo sobrevive ao túnel** | um servidor de brincar a emitir NDJSON com pausas de 2 s, medido pelo URL público: linhas aos **0,53 · 2,55 · 4,67 · 6,53 · 8,55 s**. O túnel **não acumula** — os intervalos chegam como foram emitidos, com +0,53 s de borda |
+| **os limites do Quick Tunnel** | 200 pedidos em voo (429 acima), **sem SSE**, e **o nome muda de cada vez que o túnel arranca** |
+
+**O fluxo sobreviver não era dado, e é a §2 do plano retirado a cobrar-se ao
+contrário.** Aquela versão listava quatro peças do repositório irmão que
+quebravam este serviço, e duas eram sobre isto: o `proxy_buffering` do nginx «a
+desfazer o fluxo NDJSON **sem dar erro**». Um túnel que acumulasse matava os 18 s
+até ao 1.º verso e a página voltava a ser uma espera de 34 s em branco — sem
+erro nenhum. Está medido que não acontece.
+
+E há uma ironia que vale registar: **a documentação da Cloudflare diz que os
+Quick Tunnels não suportam SSE.** A Fase 6 recusou o SSE por uma razão que nada
+tem que ver com túneis — «o `EventSource` do navegador só faz GET, e com GET a
+pergunta viajava na *query string*, que fica no histórico do navegador» —, e é
+essa decisão, tomada por privacidade, que torna este serviço compatível com o
+único túnel gratuito que há. Não foi previsão; foi sorte com uma causa.
+
+**O nome muda de cada vez**, e isso tem duas consequências que o plano não
+previa. O passo 5 derruba o túnel para correr uma fase e volta a levantá-lo —
+com **outro** URL. Logo (a) o **D3** mede «o URL volta», não «o mesmo URL
+volta»; e (b) um convite enviado por correio deixa de servir depois da primeira
+medição. Quem quiser um URL estável precisa de um túnel nomeado, que precisa de
+um domínio, que é dinheiro. **Fica nomeado no §10 e não resolvido aqui.**
+
+⚠️ **E o que impede o passo 6 de se dar por feito: um defeito aberto do
+fornecedor, e é da forma exacta deste serviço.** O
+[cloudflare/cloudflared#1752](https://github.com/cloudflare/cloudflared/issues/1752)
+— **aberto**, sem correcção — diz que a sessão autenticada de um Quick Tunnel
+protegido expira **~5 s depois do login**. O último comentário reproduz na
+versão **2026.10.1**, a que está instalada aqui, em Ubuntu 24.04, com uma
+origem Python, e o sintoma é **um POST JSON de mesma origem a devolver 401**.
+Isso é, linha por linha, o que esta interface faz: a página autentica-se e
+depois faz `POST /api/perguntar`. **Não o pude verificar** — verificá-lo exige
+completar um login com PIN, e portanto um endereço real na lista e alguém a ler
+o correio.
+
+Logo o passo 6 está **construído e medido no que fecha**, e **por abrir**. Os
+dois passos que faltam, e que são do dono:
+
+1. pôr um endereço em `~/.config/pessoabot/convidados` e correr
+   `python -m src.web.instalar`;
+2. entrar pelo URL, pedir **uma** pergunta, e ver se o `POST /api/perguntar`
+   responde ou dá 401. Se der 401, o passo 6 fica bloqueado a montante e a
+   recomendação do §7 — «ficar no passo 6» — passa a «ficar no passo 5, com o
+   túnel em baixo», até o defeito ser corrigido.
+
+⚠️ **Uma nota sobre a contagem de testes:** a suite passou de «441 passados, 1
+saltado» a **450 passados, nenhum saltado**. O que deixou de saltar foi o
+`test_servidor_e_modelo`, que salta quando o Ollama não responde — e o Ollama
+passou a estar sempre de pé por causa da unidade do passo 4. **Mudou a máquina,
+não o teste.**
+
 ---
 
 ## 8. O que o `README` passa a dizer, e o que não pode continuar a dizer
@@ -864,15 +957,16 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D1 — a saúde não mente** ✅ | `/api/health` nomeia o código a correr | o `sha` devolvido é o do `HEAD` do checkout do serviço, em 3 arranques seguidos. Com o Ollama em baixo, `status` não é `ok`. **Feito (2026-10-19):** `tests/test_saude.py`, 13 testes — os 3 arranques são **3 processos** e não 3 chamadas num só, e acrescentou-se a asserção que o enunciado não tinha: o `sha` é o do checkout do **serviço** e não o do `cwd`, medido com um processo lançado dentro de um segundo checkout. Quatro mutações verificadas a morder. §6.1 |
 | **D2 — o serviço sobrevive à sessão** 🔶 **instalado, por medir** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder. **Feito (2026-10-19):** a instalação, e 17 testes sobre o que torna o D2 possível — caminhos absolutos, `After` sem `Requires`, `WantedBy=default.target`, nunca o checkout de trabalho, e o `systemd-analyze --user verify` do próprio systemd; quatro mutações a morder. **Falta:** as duas metades que só o dono pode correr — um logout e um reinício (§5.4) |
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
-| **D4 — fechado antes de aberto** | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido |
+| **D4 — fechado antes de aberto** ✅ | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido. **Medido (2026-10-19)**, contra um túnel protegido com uma lista que ninguém pode usar: `GET /` dá 302 para o ecrã da Cloudflare (46 702 bytes), `POST /api/perguntar` dá **401**, e os 4 pedidos de fora deixam **0** linhas no registo do serviço — com o instrumento verificado a morder no mesmo instante (+1 com um pedido local). `python -m src.web.instalar --verificar-d4 <url>` |
 | **D5 — a janela fica escrita** | uma célula lenta é interpretável | o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras |
 | **D6 — o recuo recua** | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido |
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (441 testes em
-2026-10-19, eram 424 depois do passo 3, 411 depois do passo 2, 403 depois do
-passo 5 e 377 antes dele), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
+E a asserção de não-regressão: **`pytest` continua verde** (450 testes em
+2026-10-19, eram 441 depois do passo 4, 424 depois do passo 3, 411 depois do
+passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
+teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
 autorizava (o sentinela), o `src/web/tunel.py` do passo 5, a rota
 `/api/health` com o `src/web/saude.py`, o `src/web/unidades.py`, o
 `src/web/instalar.py` e o `src/web/__main__.py` do passo 4, o teste do I7′ —
@@ -904,6 +998,7 @@ que precise de mexer na política está mal desenhado.
 | 2 | **Licença do código** | `README` §Licença: «código sem licença declarada». Um serviço público com origem num repositório público sem licença é uma ambiguidade que se resolve com uma linha. Não bloqueia nenhum passo; bloqueia chamar-lhe terminado |
 | 3 | **`AnthropicRemote`** | continua a ser a resposta ao tecto de ~105 respostas/hora, e continua a **mudar a afirmação** de «sem chamada a API externa e sem credenciais». Fase própria, com medição comparada de qualidade contra as âncoras das Fases 5F–5Y |
 | 4 | **Uma segunda máquina** | é o que tornaria isto «produção» no sentido do irmão, e separaria quem edita de quem serve. Custa dinheiro, que é a restrição de onde este plano partiu |
+| 7 | **Um URL estável** | o Quick Tunnel muda de nome de cada vez que arranca (§7.1), logo um convite por correio caduca na primeira medição e o D3 só pode medir «volta um URL», não «volta o mesmo». Resolve-se com um túnel nomeado, que precisa de um domínio numa zona da Cloudflare — e isso é dinheiro, outra vez a restrição de origem |
 | 5 | **Os dados de roteamento acumulados pelo serviço** | §3.5 da Fase 6 já o nomeou. Um serviço convidado muda a população de perguntas em relação ao conjunto rotulado de 40, e comparar é outra fase |
 | 6 | **`src/{main,model,retriever}.py`** | o sistema anterior, de Flan-T5; o `retriever.py` importa um `faiss` que não está nas dependências. O checkout do serviço corre-os em zero linhas. Removê-los é limpeza, não publicação |
 

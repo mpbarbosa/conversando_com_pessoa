@@ -35,7 +35,7 @@ import subprocess
 import pytest
 
 from src.web.app import HOST, PORTA
-from src.web.instalar import DESTINO, main
+from src.web.instalar import DESTINO, contar_acessos, main
 from src.web.saude import RAIZ
 from src.web.unidades import (
     DIRECTORIO,
@@ -43,12 +43,16 @@ from src.web.unidades import (
     KEEP_ALIVE,
     NOME_OLLAMA,
     NOME_SERVICO,
+    NOME_TUNEL,
     Alvo,
     ErroDeUnidade,
+    ListaVazia,
     escrever,
+    ler_convidados,
     recusar_o_trabalho,
     servico_ollama,
     servico_pessoabot,
+    servico_tunel,
 )
 
 
@@ -63,10 +67,23 @@ def alvo(tmp_path) -> Alvo:
     (checkout / ".venv" / "bin").mkdir(parents=True)
     py = checkout / ".venv" / "bin" / "python"
     ollama = tmp_path / "ollama"
-    for f in (py, ollama):
+    cloudflared = tmp_path / "cloudflared"
+    for f in (py, ollama, cloudflared):
         f.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
         f.chmod(0o755)
-    return Alvo(checkout=checkout, python=py, ollama=ollama)
+    return Alvo(checkout=checkout, python=py, ollama=ollama,
+                cloudflared=cloudflared)
+
+
+@pytest.fixture
+def convidados(tmp_path):
+    """Uma lista com um endereço, um domínio com curinga, um comentário e ruído."""
+    f = tmp_path / "convidados"
+    f.write_text("# quem pode entrar\n"
+                 "alguem@exemplo.pt\n"
+                 "\n"
+                 "*@outro.exemplo.pt   # a casa toda\n", encoding="utf-8")
+    return f
 
 
 def _ini(texto: str) -> configparser.ConfigParser:
@@ -234,3 +251,115 @@ def test_os_caminhos_por_omissao_sao_desta_maquina_e_nao_do_cwd():
     assert DESTINO.is_absolute() and DIRECTORIO.is_absolute()
     assert DIRECTORIO.name == "user" and DIRECTORIO.parent.name == "systemd"
     assert NOME_OLLAMA.endswith(".service") and NOME_SERVICO.endswith(".service")
+
+
+# --- passo 6: fechar antes de abrir --------------------------------------- #
+
+def test_d4_a_lista_de_convidados_le_se_e_ignora_comentarios(convidados):
+    assert ler_convidados(convidados) == ("alguem@exemplo.pt",
+                                          "*@outro.exemplo.pt")
+
+
+def test_d4_sem_lista_nao_ha_tunel_e_isso_e_uma_excepcao(tmp_path):
+    """A asserção que torna «fechar antes de abrir» mecanismo e não conselho.
+
+    Três estados dariam, sem isto, uma unidade **sem** `--allowed-mail` — um
+    túnel aberto ao mundo com o corpus do outro lado, e sem erro nenhum a
+    dizê-lo. É a forma «não dá erro: dá respostas erradas» com o pior resultado
+    possível desta casa.
+    """
+    with pytest.raises(ListaVazia, match="não há lista"):
+        ler_convidados(tmp_path / "nao-existe")
+
+    vazia = tmp_path / "vazia"
+    vazia.write_text("", encoding="utf-8")
+    with pytest.raises(ListaVazia, match="nenhum endereço"):
+        ler_convidados(vazia)
+
+    so_comentarios = tmp_path / "comentada"
+    so_comentarios.write_text("# ninguém ainda\n\n   \n", encoding="utf-8")
+    with pytest.raises(ListaVazia, match="nenhum endereço"):
+        ler_convidados(so_comentarios)
+
+
+def test_d4_uma_linha_sem_arroba_e_erro_e_nao_um_convidado_silencioso(tmp_path):
+    """Senão era um convidado que nunca entra, e ninguém saberia porquê."""
+    f = tmp_path / "convidados"
+    f.write_text("alguem@exemplo.pt\nalguem.exemplo.pt\n", encoding="utf-8")
+    with pytest.raises(ErroDeUnidade, match="não são endereços"):
+        ler_convidados(f)
+
+
+def test_d4_a_unidade_do_tunel_recusa_nascer_sem_convidados(alvo):
+    with pytest.raises(ListaVazia, match="túnel aberto ao mundo"):
+        servico_tunel(alvo, ())
+
+
+def test_d4_a_unidade_do_tunel_leva_a_lista_e_o_caminho_absoluto(alvo,
+                                                                 convidados):
+    texto = servico_tunel(alvo, ler_convidados(convidados))
+    exec_start = _ini(texto)["Service"]["ExecStart"]
+    assert exec_start.split()[0] == str(alvo.cloudflared), (
+        "o cloudflared está fora do PATH, como o Ollama")
+    assert "--allowed-mail alguem@exemplo.pt,*@outro.exemplo.pt" in exec_start
+    assert f"--url http://{HOST}:{PORTA}" in exec_start, (
+        "o interface e a porta vêm do app.py, aqui como no __main__.py")
+    assert _ini(texto)["Unit"]["After"] == NOME_SERVICO
+    assert "Requires" not in _ini(texto)["Unit"]
+
+
+def test_d4_escrever_sem_lista_da_duas_unidades_e_com_lista_da_tres(
+        alvo, tmp_path, convidados):
+    sem = escrever(alvo, tmp_path / "sem", convidados=None)
+    assert set(sem) == set(GERADORES), (
+        "sem lista não se escreve túnel, e isso não é erro: é o passo 6 "
+        "ainda não dado")
+
+    com = escrever(alvo, tmp_path / "com", convidados=convidados)
+    assert set(com) == set(GERADORES) | {NOME_TUNEL}
+    assert "--allowed-mail" in com[NOME_TUNEL].read_text(encoding="utf-8")
+
+
+@pytest.mark.skipif(shutil.which("systemd-analyze") is None,
+                    reason="sem systemd-analyze nesta máquina")
+def test_d4_o_systemd_aceita_a_unidade_do_tunel(alvo, tmp_path, convidados):
+    d = tmp_path / "unidades"
+    escrever(alvo, d, convidados=convidados)
+    r = subprocess.run(("systemd-analyze", "--user", "verify",
+                        str(d / NOME_TUNEL)), capture_output=True, text=True)
+    meus = [ln for ln in r.stderr.splitlines() if ln.startswith(NOME_TUNEL)]
+    assert not meus, meus
+
+
+# --- o instrumento do D4, e o defeito que ele quase teve ------------------ #
+
+#: Um registo real desta máquina, recortado: arranque, avisos do Hugging Face,
+#: uma barra de progresso, e **três** pedidos.
+REGISTO = """\
+Starting pessoabot.service - PessoaBot, o serviço público...
+INFO:     Started server process [477112]
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:32856 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51494 - "POST /api/perguntar HTTP/1.1" 200 OK
+Warning: You are sending unauthenticated requests to the HF Hub.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|#| 199/199
+INFO:     127.0.0.1:43572 - "GET /api/health HTTP/1.1" 200 OK
+"""
+
+
+def test_d4_o_contador_conta_pedidos_e_nao_linhas():
+    """Contar linhas fazia o D4 falhar por o modelo ter carregado.
+
+    O registo da unidade leva o arranque, os avisos do Hugging Face e as barras
+    de progresso dos pesos — e todos crescem entre a contagem de antes e a de
+    depois sem ninguém ter pedido nada.
+    """
+    assert contar_acessos(REGISTO) == 3
+    assert contar_acessos("") == 0
+    sem_pedidos = "\n".join(ln for ln in REGISTO.splitlines()
+                            if '"GET ' not in ln and '"POST ' not in ln)
+    assert contar_acessos(sem_pedidos) == 0
+    assert len(sem_pedidos.splitlines()) == 6, (
+        "o recorte sem pedidos tem de continuar a ter linhas, senão este "
+        "teste não distingue «não conta ruído» de «não conta nada»")

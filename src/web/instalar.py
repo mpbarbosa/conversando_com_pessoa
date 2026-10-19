@@ -51,18 +51,23 @@ import getpass
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 from .app import PORTA
 from .saude import RAIZ, ler_lancamento
 from .unidades import (
+    CONVIDADOS,
     DIRECTORIO,
     GERADORES,
     NOME_OLLAMA,
     NOME_SERVICO,
+    NOME_TUNEL,
     Alvo,
     ErroDeUnidade,
+    ListaVazia,
     escrever,
+    ler_convidados,
     recusar_o_trabalho,
 )
 
@@ -155,15 +160,44 @@ def instalar_unidades(alvo: Alvo, *, ensaio: bool) -> None:
     depois de um reinício. Só `start` deixava um serviço que corre hoje e não
     volta amanhã — a forma «funciona e não fica a funcionar».
     """
+    lista = decidir_tunel()
+    unidades = [NOME_OLLAMA, NOME_SERVICO] + ([NOME_TUNEL] if lista else [])
     if ensaio:
-        for nome in GERADORES:
+        for nome in unidades:
             print(f"    $ escreve {DIRECTORIO / nome}")
     else:
-        for nome, caminho in escrever(alvo).items():
+        for nome, caminho in escrever(
+                alvo, convidados=CONVIDADOS if lista else None).items():
             print(f"  · {nome} → {caminho}")
     _correr("systemctl", "--user", "daemon-reload", ensaio=ensaio)
-    _correr("systemctl", "--user", "enable", "--now", NOME_OLLAMA, NOME_SERVICO,
-            ensaio=ensaio)
+    _correr("systemctl", "--user", "enable", "--now", *unidades, ensaio=ensaio)
+
+
+def decidir_tunel() -> tuple[str, ...]:
+    """Há túnel? Lê a lista de convidados e **relata**, em vez de adivinhar.
+
+    Três respostas, e as três são estados legítimos do plano:
+
+    - **sem ficheiro** → o passo 6 ainda não foi dado. Não se instala túnel, e
+      isso não é falha: é «fechar antes de abrir» (§7) com o serviço fechado
+      por não haver URL nenhum.
+    - **ficheiro sem endereços** → alguém começou e não acabou. Também não se
+      instala, e diz-se porquê. **Nunca** se instala um túnel sem
+      `--allowed-mail`: a `servico_tunel` recusa-o, e é essa recusa que faz do
+      §7 um mecanismo e não um conselho.
+    - **endereços a sério** → instala-se, com a lista no `ExecStart`.
+
+    Um endereço mal escrito **não** cai em nenhuma destas: levanta
+    `ErroDeUnidade`, e o passo falha. Um convidado que nunca entra, sem
+    ninguém perceber porquê, é pior do que uma instalação que pára.
+    """
+    try:
+        lista = ler_convidados()
+    except ListaVazia as e:
+        print(f"  · sem túnel: {e}")
+        return ()
+    print(f"  · {len(lista)} convidado(s) em {CONVIDADOS}")
+    return lista
 
 
 def ligar_linger(*, ensaio: bool) -> None:
@@ -202,6 +236,90 @@ def verificar(alvo: Alvo, *, ensaio: bool) -> list[str]:
     return linhas
 
 
+def contar_acessos(registo: str) -> int:
+    """As linhas de acesso do `uvicorn` num registo. Função pura, para a testar.
+
+    O predicado é o do formato dele — `INFO: 127.0.0.1:x - "GET /… HTTP/1.1"` —
+    e **não** uma contagem de linhas: o mesmo registo leva o arranque, os avisos
+    do Hugging Face e as barras de progresso do carregamento de pesos, e contar
+    tudo fazia o D4 falhar por o modelo ter carregado.
+    """
+    return sum(1 for ln in registo.splitlines()
+               if '"GET ' in ln or '"POST ' in ln)
+
+
+def acessos_registados(unidade: str = NOME_SERVICO) -> int:
+    """Quantas linhas de acesso o `uvicorn` escreveu, desde sempre.
+
+    **Conta linhas, e não uma janela de tempo.** A primeira versão desta
+    medição usou `journalctl --since` com um carimbo de `date -u`, e o
+    `journalctl` lê a hora **local**: a janela ficava três horas no futuro e o
+    registo vinha vazio — o que, num portão cuja asserção é «o registo não tem
+    o pedido», é um falso **sucesso**. Contar linhas não tem fuso.
+    """
+    r = subprocess.run(("journalctl", "--user", "-u", unidade,
+                        "--no-pager", "-o", "cat"),
+                       capture_output=True, text=True)
+    return contar_acessos(r.stdout)
+
+
+def verificar_d4(url: str) -> int:
+    """Portão **D4**: de fora, o URL nunca toca no `uvicorn`.
+
+        python -m src.web.instalar --verificar-d4 https://....trycloudflare.com
+
+    Quatro pedidos pelo URL público, de quem **não** está na lista de
+    convidados, e o registo do serviço não pode ganhar uma linha. E depois um
+    pedido local, que **tem** de ganhar uma — senão «zero linhas» não distingue
+    «ninguém chegou» de «o registo não regista», e foi essa verificação que
+    apanhou o defeito do fuso horário acima.
+    """
+    import urllib.error
+    import urllib.request
+
+    antes = acessos_registados()
+    print(f"  · acessos no registo, antes: {antes}")
+    for caminho in ("/", "/api/perguntar", "/api/health", "/api/estado"):
+        pedido = urllib.request.Request(url.rstrip("/") + caminho)
+        try:
+            with urllib.request.urlopen(pedido, timeout=30) as r:
+                codigo = r.status
+        except urllib.error.HTTPError as e:
+            codigo = e.code
+        except OSError as e:
+            codigo = f"erro: {e}"
+        print(f"    {caminho} → {codigo}")
+    time.sleep(3)
+    depois = acessos_registados()
+    print(f"  · acessos no registo, depois dos 4 pedidos de fora: {depois}")
+
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{PORTA}/api/health",
+                                    timeout=10):
+            pass
+    except OSError as e:
+        print(f"recusado: o serviço local não respondeu ({e}), logo o "
+              f"instrumento não se pode verificar", file=sys.stderr)
+        return 2
+    time.sleep(2)
+    com_local = acessos_registados()
+    print(f"  · acessos depois de **um pedido local**: {com_local}")
+
+    de_fora, do_local = depois - antes, com_local - depois
+    if do_local < 1:
+        print("\nINVÁLIDO: um pedido que chegou ao serviço não deixou linha no "
+              "registo. «Zero de fora» não prova nada enquanto isto não "
+              "crescer.", file=sys.stderr)
+        return 2
+    if de_fora:
+        print(f"\nD4 FALHA: {de_fora} pedido(s) de fora chegaram ao uvicorn.",
+              file=sys.stderr)
+        return 1
+    print(f"\nD4 passa: 0 de {4} pedidos de fora tocaram no uvicorn, e o "
+          f"instrumento morde (+{do_local} com um pedido local).")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         description="Instala o serviço público nesta máquina (passo 4).")
@@ -212,7 +330,13 @@ def main(argv: list[str] | None = None) -> int:
                         "checkout de trabalho)")
     p.add_argument("--ensaio", action="store_true",
                    help="imprime o que faria, e não toca em nada")
+    p.add_argument("--verificar-d4", metavar="URL", default=None,
+                   help="mede o portão D4 contra um URL público já de pé, e "
+                        "não instala nada")
     a = p.parse_args(argv)
+
+    if a.verificar_d4:
+        return verificar_d4(a.verificar_d4)
 
     ref = a.ref or (ler_lancamento().sha or "HEAD")
     try:

@@ -61,12 +61,29 @@ from pathlib import Path
 #: mesmo papel, e inventar-lhe um nome diferente só dificultava a procura.
 NOME_OLLAMA = "ollama.service"
 NOME_SERVICO = "pessoabot.service"
+#: O túnel. O passo 5 escreveu o `tunel.py` para parar **uma unidade que ainda
+#: não existia**, e disse que criá-la era o passo 4 — mas a §5.1 nunca a nomeou
+#: na lista desse passo. É esta, e é o que faz o `PESSOABOT_TUNEL` do
+#: `tunel.py` ter onde apontar, e o portão **D3** passar de inmensurável a
+#: mensurável. Ver a §7.1 do plano.
+NOME_TUNEL = "cloudflared.service"
 
 #: Onde o `systemctl --user` lê as unidades deste utilizador.
 DIRECTORIO = Path.home() / ".config" / "systemd" / "user"
 
 #: O Ollama desta máquina, fora do `PATH` por decisão da Fase 0.
 OLLAMA = Path.home() / ".local" / "ollama" / "bin" / "ollama"
+
+#: O `cloudflared`, instalado com a **mesma** disciplina do Ollama: binário
+#: oficial em espaço de utilizador, sem `sudo`, **fora do `PATH`**. Não é
+#: coerência por gosto: um `ExecStart=cloudflared` dependia de um `PATH` que a
+#: unidade não tem, e é o modo de falha que o `test_unidades.py` prende.
+CLOUDFLARED = Path.home() / ".local" / "cloudflared" / "bin" / "cloudflared"
+
+#: A lista de convidados do passo 6, **nesta máquina** e não na conta de
+#: ninguém. Um endereço por linha; `#` comenta; `*@dominio` é um domínio
+#: inteiro, como o `--allowed-mail` aceita.
+CONVIDADOS = Path.home() / ".config" / "pessoabot" / "convidados"
 
 #: Longo de propósito — ver o cabeçalho. 24 h é «não descarregues».
 KEEP_ALIVE = "24h"
@@ -91,9 +108,10 @@ class Alvo:
     #: checkout de trabalho. O recuo do passo 8 corre `pip install` **neste**.
     python: Path
     ollama: Path = OLLAMA
+    cloudflared: Path = CLOUDFLARED
 
     def __post_init__(self) -> None:
-        for nome in ("checkout", "python", "ollama"):
+        for nome in ("checkout", "python", "ollama", "cloudflared"):
             c = getattr(self, nome)
             if not isinstance(c, Path):
                 # Converte-se em vez de levantar `TypeError`: quem passa uma
@@ -109,7 +127,8 @@ class Alvo:
                     f"e um relativo resolve-se contra o que o systemd quiser")
 
     @classmethod
-    def de(cls, checkout: Path | str, ollama: Path = OLLAMA) -> Alvo:
+    def de(cls, checkout: Path | str, ollama: Path = OLLAMA,
+           cloudflared: Path = CLOUDFLARED) -> Alvo:
         """O alvo derivado de um checkout: o `python` é o `.venv` dele.
 
         Derivado e não dado, porque dá-los em separado permitia a combinação que
@@ -119,7 +138,8 @@ class Alvo:
         """
         c = Path(checkout).expanduser().resolve()
         return cls(checkout=c, python=c / ".venv" / "bin" / "python",
-                   ollama=Path(ollama).expanduser())
+                   ollama=Path(ollama).expanduser(),
+                   cloudflared=Path(cloudflared).expanduser())
 
 
 def recusar_o_trabalho(alvo: Alvo, trabalho: Path) -> None:
@@ -193,22 +213,117 @@ WantedBy=default.target
 """
 
 
-#: As duas unidades, por nome. A ordem é a do arranque.
+class ListaVazia(ErroDeUnidade):
+    """Não há convidados, logo não há túnel. Ver `ler_convidados`."""
+
+
+def ler_convidados(caminho: Path = CONVIDADOS) -> tuple[str, ...]:
+    """A lista de convidados do passo 6. **Levanta se estiver vazia.**
+
+    É esta excepção que torna «fechar antes de abrir» (§7) um mecanismo em vez
+    de uma recomendação. Sem ela, um ficheiro ausente, vazio ou só com
+    comentários dava uma unidade **sem** `--allowed-mail` — um túnel aberto ao
+    mundo, com o corpus do outro lado e sem erro nenhum a dizê-lo. É a forma
+    «não dá erro: dá respostas erradas», e aqui com o pior resultado possível.
+
+    Cada linha tem de ter `@`: o `--allowed-mail` aceita endereços e domínios
+    com curinga (`*@exemplo.pt`), e uma linha sem `@` é um erro de escrita que
+    de outro modo passava a ser um convidado que nunca entra — sem ninguém
+    perceber porquê.
+    """
+    caminho = Path(caminho).expanduser()
+    if not caminho.exists():
+        raise ListaVazia(
+            f"não há lista de convidados em {caminho}. O passo 6 do plano é "
+            f"«fechar o serviço a estranhos **antes** de o abrir», logo sem "
+            f"lista não se gera unidade de túnel nenhuma")
+    linhas = [ln.split("#", 1)[0].strip()
+              for ln in caminho.read_text(encoding="utf-8").splitlines()]
+    nomes = [ln for ln in linhas if ln]
+    if not nomes:
+        raise ListaVazia(
+            f"{caminho} não tem nenhum endereço (só linhas vazias ou "
+            f"comentários): um túnel sem `--allowed-mail` é um túnel aberto")
+    maus = [n for n in nomes if "@" not in n]
+    if maus:
+        raise ErroDeUnidade(
+            f"estas linhas de {caminho} não são endereços nem domínios com "
+            f"curinga: {maus}")
+    return tuple(nomes)
+
+
+def servico_tunel(alvo: Alvo, convidados: tuple[str, ...]) -> str:
+    """A unidade do túnel, **sempre** com lista de convidados.
+
+    O `--allowed-mail` entra no `ExecStart` e não num `EnvironmentFile` porque o
+    `cloudflared` não lê a lista de nenhuma variável de ambiente (verificado em
+    `cloudflared tunnel --help`, versão 2026.10.1). A consequência tem de ficar
+    escrita: **mudar a lista é regerar a unidade** e fazer `daemon-reload`, e é
+    o que o `src/web/instalar.py` faz.
+
+    `--url` aponta ao `HOST`/`PORTA` do `app.py`, pela mesma razão do
+    `__main__.py`: o interface não pode viver em dois sítios.
+    """
+    if not convidados:
+        raise ListaVazia(
+            "servico_tunel sem convidados: isso geraria um túnel aberto ao "
+            "mundo, e é o que o passo 6 existe para impedir")
+    from .app import HOST, PORTA
+    return f"""[Unit]
+Description=Tunel do PessoaBot (Quick Tunnel protegido por correio, passo 6)
+Documentation=file://{alvo.checkout}/docs/PRODUCAO.md
+# `After=` e não `Requires=`: um túnel que arranca antes do serviço devolve a
+# página de erro do fornecedor, que é a verdade. Com `Requires=`, um serviço
+# em baixo derrubava o túnel e o visitante não recebia explicação nenhuma.
+After={NOME_SERVICO}
+
+[Service]
+Type=exec
+# Caminho absoluto: o `cloudflared` está fora do `PATH`, como o Ollama.
+# `--allowed-mail` é o que fecha o túnel a estranhos (portão D4). A lista vem de
+# {CONVIDADOS} e **fica nesta máquina**: o `cloudflared` compara-a localmente, e
+# não há conta em fornecedor nenhum onde ela exista.
+ExecStart={alvo.cloudflared} tunnel --no-autoupdate \
+    --url http://{HOST}:{PORTA} \
+    --allowed-mail {",".join(convidados)}
+Restart=on-failure
+RestartSec={SEGUNDOS_REINICIO}
+
+[Install]
+WantedBy=default.target
+"""
+
+
+#: As unidades que não dependem de configuração, por nome. A ordem é a do
+#: arranque. O túnel **não** está aqui de propósito: gerá-lo exige a lista de
+#: convidados, e uma unidade de túnel que se gere sem pensar é um túnel aberto.
 GERADORES = {NOME_OLLAMA: servico_ollama, NOME_SERVICO: servico_pessoabot}
 
 
-def escrever(alvo: Alvo, directorio: Path = DIRECTORIO) -> dict[str, Path]:
-    """Escreve as duas unidades. Devolve `{nome: caminho}`.
+def escrever(alvo: Alvo, directorio: Path = DIRECTORIO, *,
+             convidados: Path | None = None) -> dict[str, Path]:
+    """Escreve as unidades. Devolve `{nome: caminho}`.
 
     Não corre `systemctl` nenhum: escrever ficheiros e mudar o estado dos
     serviços são dois actos com riscos diferentes, e misturá-los fazia um teste
     de geração tocar no `systemd` desta máquina.
+
+    A unidade do **túnel** só se escreve quando `convidados` for dado, e por
+    omissão **não** é: quem decide se há túnel é o `instalar.py`, que lê a lista
+    e relata. Aqui, uma lista inutilizável levanta e **nada** se escreve.
     """
     directorio = Path(directorio).expanduser()
+    # Gera-se **tudo** antes de escrever o primeiro ficheiro: uma lista de
+    # convidados má fazia o `ler_convidados` levantar depois de as outras duas
+    # unidades já estarem no disco, e meia instalação é pior do que nenhuma
+    # porque parece feita.
+    textos = {nome: gerar(alvo) for nome, gerar in GERADORES.items()}
+    if convidados is not None:
+        textos[NOME_TUNEL] = servico_tunel(alvo, ler_convidados(convidados))
     directorio.mkdir(parents=True, exist_ok=True)
     feitos = {}
-    for nome, gerar in GERADORES.items():
+    for nome, texto in textos.items():
         caminho = directorio / nome
-        caminho.write_text(gerar(alvo), encoding="utf-8")
+        caminho.write_text(texto, encoding="utf-8")
         feitos[nome] = caminho
     return feitos

@@ -365,6 +365,8 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 42 | Os 2083 ficheiros do corpus **não estão no repositório** — `README.md` §Corpus, e eu repeti-o no [`PRODUCAO.md`](PRODUCAO.md) §0.1 e §5.3 e na entrada da saída B do §3 | **Estão, e há um ano.** `git ls-files data/pessoa_poems/` dá **2083**, estão no `origin/main`, nenhuma regra de ignore os cobre e o repositório é **PÚBLICO**: **241 250 palavras**, entradas em `396cca7` (2025-10-24), o **segundo** commit deste repositório, cuja mensagem — «Major project restructure and documentation» — não as menciona. **E o repositório contradizia-se:** `data/README.md` §Origem registava «Data de entrada no repositório: 2025-10-24» e o commit, na mesma árvore em que o `README.md` dizia o contrário; o que estava certo era o `data/README.md`. O que isto derruba não é uma frase: é a função de direitos que eu dei à **saída B** (o passo 9 nunca reteve nada que um `git clone` não trouxesse) e a justificação do `bind` em `127.0.0.1` no cabeçalho do `src/web/app.py`. **Tomei a afirmação do `README` e não a verifiquei, num documento cujo assunto era o risco de publicar o corpus** — um `git ls-files \| wc -l` resolvia, e é o primeiro comando que devia ter corrido. Alcance medido no mesmo dia: 0 forks, 0 estrelas, 0 visitas, e **289 clones de 128 origens** em 14 dias, que nenhuma reescrita de histórico recupera | levantado em 2026-10-19; `README.md`, `data/README.md`, `src/web/app.py`, [`PRODUCAO.md`](PRODUCAO.md) e §3/§5 deste ficheiro corrigidos. **Decisão sobre o repositório por tomar** |
 | 43 | O `.gitignore` mantém as folhas de julgamento fora do repositório público, «porque contêm os poemas INTEIROS» | **Mantém duas, por nome exacto, e a terceira passou.** As linhas excluíam `docs/fase-1/08-folha-julgamento.md` e `docs/fase-0/06b-folha-julgamento.md` — os dois nomes que existiam quando a regra foi escrita. `docs/fase-3b/01-folha-julgamento.md` **está versionada**: 9 075 palavras, 126 poemas. É o mesmo modo de falha da correcção **39** (o caminho relativo do sentinela) numa ferramenta diferente: **um nome exacto não cobre a fase seguinte, e nada avisa** — a regra continua a dizer «certo» sobre os ficheiros que nomeia enquanto deixa passar os que não nomeia. E a mesma família tem mais: os `0*-itens.md` e `0*-chave.json` das fases guardam o **contexto** dado ao modelo, que é o corpo dos poemas recuperados, e cerca de onze ficheiros versionados contêm versos à letra. Corrigido para **padrão** (`docs/**/*folha-julgamento*.md` e os dois acima), o que cobre as fases futuras e **não desversiona** o que já está no índice — desversionar é decisão de direitos, não de `.gitignore` | verificado em 2026-10-19 com `git check-ignore` sobre uma fase inventada (pega) e sobre as já seguidas (continuam seguidas) |
 | 44 | O `/api/health` lê o `sha` com `git rev-parse --short HEAD` (`PRODUCAO.md` §6, pré-registo do passo 3) — e o enunciado não dizia **de onde**, nem **quando** | **Duas omissões, e as duas já tinham custado nesta casa.** *De onde:* um `git` sem `-C` segue o `cwd`, que numa unidade de utilizador é o que o `WorkingDirectory` disser — com dois checkouts, respondia **com sucesso** e com o `sha` do checkout de trabalho enquanto o serviço corria o outro. É o #39 outra vez, no instrumento seguinte. *Quando:* por pedido, dizia a verdade sobre o disco e **mentia sobre o processo** — depois de um `git checkout` o `uvicorn` continua a correr os módulos que importou, e a sonda nomeava código que não está em memória, na rota de que o recuo do passo 8 depende. Corrigido para `Path(__file__).resolve().parents[2]` e leitura **à importação**, as duas verificadas a morder | [`PRODUCAO.md`](PRODUCAO.md) §6.1 |
+| 45 | «A unidade do túnel é o passo 4» ([`PRODUCAO.md`](PRODUCAO.md) §5, linha do passo 5) | **Nenhum passo do plano instalava o túnel.** A §5.1, que é a lista do passo 4, nomeia só o `pessoabot.service` e o `ollama.service`; o passo 5 escreveu o `tunel.py` para parar uma unidade que apontava para um passo que não a criava, e o passo 6 pressupõe-na. O buraco só apareceu ao tentar dar o passo 6 — e é o tipo de remissão entre passos que parece cobertura e não é | [`PRODUCAO.md`](PRODUCAO.md) §7.1 |
+| 46 | O portão **D4** mede-se com `journalctl --since <marca>` e a asserção «o registo não tem o pedido» (1.ª versão da medição, minha) | **Media zero por o fuso estar errado.** A marca vinha de `date -u` e o `journalctl` lê **hora local**: a janela ficava três horas no futuro e o registo vinha vazio. Num portão cuja asserção é «não há linha», um fuso errado é um **falso sucesso** — e o D4 passou assim antes de eu verificar o instrumento com um pedido que *devia* deixar linha. Trocado por **contagem de linhas**, que não tem fuso, e a verificação de que o contador cresce passou a fazer parte do próprio portão. É o mesmo erro que eu tinha acabado de corrigir no `saude.py`, onde o `em_utc` existe precisamente porque «duas sondas a comparar fusos comparam cadeias que diferem por motivo nenhum» | [`PRODUCAO.md`](PRODUCAO.md) §7.1 |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -1329,3 +1331,62 @@ foi assim que as três portas apareceram. A comparação em si é exacta dos doi
 lados, logo um teste que a medisse seria circular — e a asserção plena do I7′ é
 **de fora, contra o URL público**, que não existe até ao passo 6 sobre o
 passo 4. Está registado como pendente em vez de o portão se dar por cumprido.
+
+
+---
+
+## O passo 6, e o túnel que se mediu antes de se abrir
+
+Portão **D4** do [`PRODUCAO.md`](PRODUCAO.md) (§7.1). Três medições de
+2026-10-19, contra um `cloudflared` 2026.10.1 instalado em espaço de utilizador.
+
+### O que fecha, medido
+
+Um *Protected Quick Tunnel* com uma lista de convidados que **ninguém pode
+usar** (`ninguem@pessoabot.invalid`), e quatro pedidos de fora:
+
+| pedido | resposta | tocou no `uvicorn`? |
+|---|---|---|
+| `GET /` | **302** → ecrã da Cloudflare, 46 702 bytes | não |
+| `POST /api/perguntar` | **401** `Unauthorized`, 13 bytes | não |
+| `GET /api/health` | **302** | não |
+| `GET /api/estado` | **302** | não |
+
+**0 linhas** novas no registo do serviço, e o instrumento verificado a morder no
+mesmo instante: **+1** linha com um pedido local. Essa verificação não é zelo —
+foi ela que apanhou a correcção **46**, em que a medição anterior dava zero por
+o carimbo estar em UTC contra um `journalctl` em hora local.
+
+### O que atravessa, medido
+
+Um servidor de brincar a emitir NDJSON com pausas de 2 s (não este serviço: só
+instantes), pelo URL público:
+
+| linha | local | pelo túnel |
+|---|---|---|
+| 0 | 0,00 s | **0,53 s** |
+| 1 | 1,99 s | **2,55 s** |
+| 2 | 3,99 s | **4,67 s** |
+| 3 | 5,99 s | **6,53 s** |
+| 4 | 7,99 s | **8,55 s** |
+
+**O túnel não acumula.** Os intervalos chegam como foram emitidos, com +0,53 s
+de borda. Era o risco que a versão retirada do plano tinha nomeado para o nginx
+— «o `proxy_buffering` a desfazer o fluxo NDJSON **sem dar erro**» —, e que
+mataria os 18 s até ao 1.º verso deixando a página numa espera de 34 s em
+branco.
+
+E uma ironia com causa: a documentação do fornecedor diz que os Quick Tunnels
+**não suportam SSE**. A Fase 6 recusou o SSE por privacidade — «o `EventSource`
+só faz GET, e com GET a pergunta viajava na *query string*» —, e é essa decisão
+que torna este serviço compatível com o único túnel gratuito que há.
+
+### O que impede de o declarar feito
+
+O [cloudflare/cloudflared#1752](https://github.com/cloudflare/cloudflared/issues/1752),
+**aberto**: a sessão autenticada expira ~5 s depois do login, reproduzido na
+versão **2026.10.1** em Ubuntu 24.04 com uma origem Python, e com o sintoma de
+**um POST JSON de mesma origem a devolver 401** — que é, linha por linha, o que
+esta interface faz. **Não foi verificado aqui**: verificá-lo exige completar um
+login com PIN, logo um endereço real na lista e alguém a ler o correio. Fica
+como o que o dono tem de medir antes de convidar alguém.
