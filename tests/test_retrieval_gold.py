@@ -42,11 +42,15 @@ from src.corpus.models import Voice
 
 PERGUNTAS = "docs/fase-1/08-perguntas.json"
 #: Os 291 julgamentos do pooling aberto das Fases 1-3, **mais** os 142 da Fase
-#: 3B que fecharam o top-20 do denso. Ficheiros separados para a proveniência de
-#: cada julgamento ser recuperável; fundidos aqui porque o gabarito de medir é
-#: o mais completo que existe.
+#: 3B que fecharam o top-20 do denso, **mais** o 1 de 2026-10-19: o `poem_4341`
+#: entrou no top-20 da q25 ao reconstruir o índice, porque a fronteira ali é um
+#: empate decidido por um ULP de float32 (ver o `_meta` desse ficheiro). Fixar
+#: versões não estabiliza isso; julgar o candidato estabiliza.
+#: Ficheiros separados para a proveniência de cada julgamento ser recuperável;
+#: fundidos aqui porque o gabarito de medir é o mais completo que existe.
 JULGAMENTOS = "docs/fase-1/08-julgamentos.json"
 JULGAMENTOS_3B = "docs/fase-3b/02-julgamentos-novos.json"
+JULGAMENTOS_RECONSTRUCAO = "docs/julgamentos-reconstrucao.json"
 
 pytestmark = pytest.mark.skipif(
     not os.path.exists("data/index.npy"),
@@ -63,7 +67,7 @@ def corpus():
 def gabarito(corpus):
     meta, _ = corpus
     notas: dict[str, dict[str, int]] = {}
-    for caminho in (JULGAMENTOS, JULGAMENTOS_3B):
+    for caminho in (JULGAMENTOS, JULGAMENTOS_3B, JULGAMENTOS_RECONSTRUCAO):
         with open(caminho, encoding="utf-8") as f:
             j = json.load(f)
         for q, d in j.items():
@@ -222,6 +226,8 @@ def test_o_top20_do_denso_esta_completamente_julgado(denso20, perguntas,
         f"{len(sem_nota)} documentos do top-20 sem nota: {sem_nota[:10]}")
 
 
-def test_o_gabarito_fechado_tem_433_julgamentos(gabarito):
+def test_o_gabarito_fechado_tem_434_julgamentos(gabarito):
     n = sum(len(v) for v in gabarito.notas.values())
-    assert n == 433, f"{n} julgamentos; 291 das Fases 1-3 + 142 da 3B"
+    assert n == 434, (
+        f"{n} julgamentos; 291 das Fases 1-3 + 142 da 3B + 1 da reconstrução "
+        f"de 2026-10-19 (q25/poem_4341, ver docs/julgamentos-reconstrucao.json)")
