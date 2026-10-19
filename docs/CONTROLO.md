@@ -199,7 +199,7 @@ medição**. Nomear isso é o que as distingue das linhas acima.
 
 | Decisão | Valor | De onde vem |
 |---|---|---|
-| **O que se publica** | **saída B**: o serviço vai a público **sem o passo 9 da Fase 6** — cita `poem_1019` como **id**, e não há rota que devolva o corpo do poema | decisão do dono, 2026-10-18. Não é medição: é a resposta ao bloqueio de direitos do [`PRODUCAO.md`](PRODUCAO.md) §0.1, onde o servidor escuta em `127.0.0.1` por desenho e o portão **I7** mede-o. A confirmação dos termos de uso do Arquivo Pessoa (saída A) fica **em curso**, e é ela que desbloqueia o passo 9 |
+| **O que se publica** | **saída B**: o serviço vai a público **sem o passo 9 da Fase 6** — cita `poem_1019` como **id**, e não há rota que devolva o corpo do poema. **A decisão fica; a razão que lhe dei caiu** — ver a nota ⚠️ abaixo | decisão do dono, 2026-10-18. Não é medição: era a resposta ao bloqueio de direitos do [`PRODUCAO.md`](PRODUCAO.md) §0.1. ⚠️ **E esse bloqueio estava mal localizado:** em 2026-10-19 mediu-se que o corpus está **versionado num repositório público** desde 2025-10-24 (correcção **42**), logo o passo 9 nunca foi o que retinha as transcrições. O que sustenta a saída B hoje é a correcção **40** — o varrimento do passo 2 mostrou que ela **não bastava** e obrigou à retenção —, e isso é um argumento de transporte, não de direitos |
 | **Onde corre** | **saída D**: a **máquina de desenvolvimento**, atrás de um **túnel gratuito**. Fechada em 2026-10-18, depois de a opção 1 (EC2 de CPU grande) ter sido escolhida e **retirada horas depois** pela restrição de custo | decisão do dono, 2026-10-18, em dois tempos — ver a nota abaixo. Aqui **há** medição a favor, e é a única das três saídas que a tem: o hardware é **o hardware das Fases 0 a 5**, logo os 34 s por resposta e os 18 s até ao 1.º verso descrevem o que vai servir. Lido na máquina em 2026-10-18: 14 núcleos, 30 GiB, 22 disponíveis, contra os ~6–7 GiB do modelo e do encoder |
 
 E as duas consequências que estas decisões criam, registadas por serem o que
@@ -362,6 +362,8 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 39 | O sentinela de medição vive em **`data/.medicao-a-correr`** ([FASE-6 §2.4](FASE-6.md), pré-registo do passo 7) | **Caminho relativo, e o serviço público corre num segundo checkout**, logo há **dois `data/`**: a fase escreve no seu e o servidor verifica o outro. O ficheiro nunca é visto, o `/api/estado` diz que está tudo bem, e o mecanismo que existe para tornar o túnel seguro fica **silenciosamente desligado** — a forma «não dá erro: dá respostas erradas» do manifesto do índice, desta vez **no instrumento que protege as medições**. Corrigido para absoluto **antes de o código existir**, que é a primeira vez nesta lista que isso acontece. **E o teste que o apanharia não existia:** com um processo e um directório o portão I8 passava — daí a asserção dos dois checkouts, verificada por mutação | [`PRODUCAO.md`](PRODUCAO.md) §4, achado a planear o túnel |
 | 40 | A saída B torna o portão I7′ **verdadeiro por construção**: sem o passo 9 não há rota que devolva corpo de poema, logo o corpo não sai ([`PRODUCAO.md`](PRODUCAO.md) §2, escrito a planear o túnel) | **Verdade para a rota, falso para o serviço.** O varrimento falhou em **três** sítios, todos abertos de propósito pela Fase 6: os `fragmento` da tentativa plagiada (§4.4 manda-a ao fio para explicar a espera), o evento `turno` dela, e o `serial.verso_copiado` — cujo comentário dizia «o verso **gerado** [...] sem o verso original», o que é falso exactamente numa cópia à letra, em que o gerado **é** o original. Medido: 6 de 8 versos do `poem_1005` no fio. **E o achado 1 não se corrige a jusante:** a tentativa sai **em fluxo**, antes de a guarda de plágio existir para a reprovar. Eu raciocinei sobre a rota que serve corpo e não sobre **todas** as rotas que o serviço tem | [`PRODUCAO.md`](PRODUCAO.md) §2.1, achado pelo varrimento do passo 2 |
 | 41 | O varrimento do I7′ mede se o corpo vai ao fio (`tests/test_i7.py`, 1.ª versão) | **Não media.** Partia a resposta por `\n` e comparava cada linha com o conjunto do corpus — e o fio é **NDJSON**, onde a mudança de linha de um verso é o par de caracteres `\n` *dentro* de uma cadeia JSON, não uma linha do corpo HTTP. Partido assim, o fio de uma geração inteira são **seis** linhas, e um verso no meio de uma delas nunca é uma linha. **Com a retenção desligada em `app.py`, as oito asserções passaram verdes.** Só a mutação o mostrou — o segundo defeito de instrumento neste mesmo portão, depois do #39. Agora varre por **subcadeia**, no texto cru *e* nas cadeias desserializadas, porque o cru não vê um verso com `"` dentro e as cadeias não vêem corpo que viaje fora de um evento válido | [`PRODUCAO.md`](PRODUCAO.md) §2.1 |
+| 42 | Os 2083 ficheiros do corpus **não estão no repositório** — `README.md` §Corpus, e eu repeti-o no [`PRODUCAO.md`](PRODUCAO.md) §0.1 e §5.3 e na entrada da saída B do §3 | **Estão, e há um ano.** `git ls-files data/pessoa_poems/` dá **2083**, estão no `origin/main`, nenhuma regra de ignore os cobre e o repositório é **PÚBLICO**: **241 250 palavras**, entradas em `396cca7` (2025-10-24), o **segundo** commit deste repositório, cuja mensagem — «Major project restructure and documentation» — não as menciona. **E o repositório contradizia-se:** `data/README.md` §Origem registava «Data de entrada no repositório: 2025-10-24» e o commit, na mesma árvore em que o `README.md` dizia o contrário; o que estava certo era o `data/README.md`. O que isto derruba não é uma frase: é a função de direitos que eu dei à **saída B** (o passo 9 nunca reteve nada que um `git clone` não trouxesse) e a justificação do `bind` em `127.0.0.1` no cabeçalho do `src/web/app.py`. **Tomei a afirmação do `README` e não a verifiquei, num documento cujo assunto era o risco de publicar o corpus** — um `git ls-files \| wc -l` resolvia, e é o primeiro comando que devia ter corrido. Alcance medido no mesmo dia: 0 forks, 0 estrelas, 0 visitas, e **289 clones de 128 origens** em 14 dias, que nenhuma reescrita de histórico recupera | levantado em 2026-10-19; `README.md`, `data/README.md`, `src/web/app.py`, [`PRODUCAO.md`](PRODUCAO.md) e §3/§5 deste ficheiro corrigidos. **Decisão sobre o repositório por tomar** |
+| 43 | O `.gitignore` mantém as folhas de julgamento fora do repositório público, «porque contêm os poemas INTEIROS» | **Mantém duas, por nome exacto, e a terceira passou.** As linhas excluíam `docs/fase-1/08-folha-julgamento.md` e `docs/fase-0/06b-folha-julgamento.md` — os dois nomes que existiam quando a regra foi escrita. `docs/fase-3b/01-folha-julgamento.md` **está versionada**: 9 075 palavras, 126 poemas. É o mesmo modo de falha da correcção **39** (o caminho relativo do sentinela) numa ferramenta diferente: **um nome exacto não cobre a fase seguinte, e nada avisa** — a regra continua a dizer «certo» sobre os ficheiros que nomeia enquanto deixa passar os que não nomeia. E a mesma família tem mais: os `0*-itens.md` e `0*-chave.json` das fases guardam o **contexto** dado ao modelo, que é o corpo dos poemas recuperados, e cerca de onze ficheiros versionados contêm versos à letra. Corrigido para **padrão** (`docs/**/*folha-julgamento*.md` e os dois acima), o que cobre as fases futuras e **não desversiona** o que já está no índice — desversionar é decisão de direitos, não de `.gitignore` | verificado em 2026-10-19 com `git check-ignore` sobre uma fase inventada (pega) e sobre as já seguidas (continuam seguidas) |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -462,9 +464,27 @@ contaminada — ver [`FASE-5.md`](FASE-5.md) §9.3.
 ### Sobre direitos
 
 Fernando Pessoa morreu em 1935; obra em domínio público em Portugal e no Brasil
-desde 2006. **Sem impedimento legal.** Mas a origem dos 2083 ficheiros não está
-registada em nenhum lugar — de onde vieram, em que data, sob que licença. É
+desde 2006. ~~**Sem impedimento legal.**~~ Mas a origem dos 2083 ficheiros não
+está registada em nenhum lugar — de onde vieram, em que data, sob que licença. É
 requisito de reprodutibilidade e continua pendente.
+
+⚠️ **O «sem impedimento legal» é sobre a obra, e a questão nunca foi a obra.**
+É a **transcrição**: `data/README.md` §Situação de direitos escreve-o com
+cuidado — «a obra estar em domínio público não implica que uma transcrição ou
+edição crítica específica o esteja», e «os ficheiros aqui vêm de uma edição
+digital concreta, não de manuscritos». Esta linha resumia essa secção
+apagando-lhe a distinção que ela existe para fazer, e com a procedência
+pendente a frase não tinha como ser verificada em nenhum sentido.
+
+E o que a torna mais do que imprecisa, medido em 2026-10-19: os 2083 ficheiros
+estão **versionados num repositório público** desde `396cca7` (2025-10-24) —
+**241 250 palavras** —, mais uma terceira folha de julgamento
+(`docs/fase-3b/01-folha-julgamento.md`, 9 075 palavras) e corpos de poemas em
+cerca de onze ficheiros de fases. `data/README.md` diz «para distribuir o
+corpus ou publicar um serviço que o sirva, confirmar os termos do Arquivo
+Pessoa primeiro», e a distribuição aconteceu há um ano. Correcções **42** e
+**43** do §4; levantamento e opções feitos, **decisão por tomar**, nada
+alterado no histórico nem na visibilidade.
 
 ---
 

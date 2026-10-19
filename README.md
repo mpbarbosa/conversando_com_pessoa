@@ -169,15 +169,33 @@ pytest          # 377 testes, ~2 min
 
 ## Corpus
 
-Os 2083 ficheiros **não estão no repositório**. Vêm do
+> ⚠️ **Esta secção afirmou durante um ano que os 2083 ficheiros não estavam no
+> repositório. Estavam.** Medido em 2026-10-19:
+> `git ls-files data/pessoa_poems/ | wc -l` dá **2083**, estão no `origin/main`,
+> não há regra de ignore que os cubra, e o repositório é **público**. Entraram
+> em `396cca7` (2025-10-24), o segundo commit deste repositório, cuja mensagem
+> não os menciona. São **241 250 palavras**. A afirmação antiga fica abaixo,
+> riscada, porque o que ela diz sobre direitos continua a valer e porque apagá-la
+> esconderia o erro; a correcção é a **42** do
+> [`docs/CONTROLO.md`](docs/CONTROLO.md) §4, e a decisão sobre o que fazer ao
+> repositório está **por tomar**.
+
+~~Os 2083 ficheiros **não estão no repositório**.~~ **Estão.** Vêm do
 [Arquivo Pessoa](http://www.arquivopessoa.net/); a obra de Pessoa está em domínio
 público desde 2006 (morreu em 1935), mas **os termos de uso do sítio não estão
 confirmados** e a transcrição de uma edição digital concreta pode ter protecção
-própria. Procedência, defeitos conhecidos dos dados e situação de direitos em
+própria — logo a distribuição que `data/README.md` diz para não fazer antes de
+confirmar os termos **é a que este repositório fez**. Procedência, defeitos
+conhecidos dos dados e situação de direitos em
 [`data/README.md`](data/README.md).
 
-Pela mesma razão ficam fora do repositório as **folhas de julgamento** do conjunto
-dourado, que contêm os poemas inteiros (34 384 palavras). As **notas** ficam
+Pela mesma razão deviam ficar fora do repositório as **folhas de julgamento** do
+conjunto dourado, que contêm os poemas inteiros (34 384 palavras) — e **duas
+ficam**: `docs/fase-0/06b-` e `docs/fase-1/08-`. A da fase 3B **não**:
+`docs/fase-3b/01-folha-julgamento.md` está versionada, com 9 075 palavras e 126
+poemas, porque o `.gitignore` excluía as folhas **por nome exacto** e não por
+padrão. Corrigido para padrão em 2026-10-19 (correcção **43**), o que cobre as
+fases futuras e **não** desversiona as que já estão. As **notas** ficam
 publicadas — [`docs/fase-1/08-julgamentos.json`](docs/fase-1/08-julgamentos.json)
 e [`docs/fase-0/06c-julgamentos.json`](docs/fase-0/06c-julgamentos.json), que são
 ids e graus sem texto — e os scripts que geram as folhas também

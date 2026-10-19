@@ -25,6 +25,18 @@ restrição de rede deste ambiente ou indisponibilidade do sítio. **Os termos d
 uso do Arquivo Pessoa não foram verificados** e devem ser confirmados antes de
 qualquer distribuição do corpus.
 
+> ⚠️ **E a distribuição já aconteceu.** Esta frase e a secção *Origem* acima
+> estiveram um ano no mesmo ficheiro sem se lerem uma à outra: a *Origem*
+> registra a **data de entrada no repositório** e o commit (`396cca7`,
+> 2025-10-24), e esta diz para não distribuir antes de confirmar os termos. Os
+> 2083 ficheiros estão versionados num repositório **público** desde esse
+> commit — **241 250 palavras** —, enquanto o `README.md` da raiz afirmava que
+> não estavam no repositório. Os dois ficheiros contradiziam-se, e o que estava
+> certo era este. Levantado em 2026-10-19; correcção **42** do
+> [`../docs/CONTROLO.md`](../docs/CONTROLO.md) §4. **O que fazer ao
+> repositório está por decidir** — nada foi alterado no histórico nem na
+> visibilidade.
+
 ## Situação de direitos
 
 Fernando Pessoa morreu em **1935**. Em Portugal e no Brasil o prazo é de 70 anos

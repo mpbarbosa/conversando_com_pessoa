@@ -231,5 +231,27 @@ data/index.faiss
 # Reconstruiveis: docs/fase-0/pool_julgamento.py e docs/fase-1/pool_dourado.py
 # geram-nas a partir do corpus local. As NOTAS (ids + graus) ficam publicadas
 # em 06c-julgamentos.json e 08-julgamentos.json, que nao contem texto.
-docs/fase-1/08-folha-julgamento.md
-docs/fase-0/06b-folha-julgamento.md
+#
+# POR PADRAO, e nao por nome. Estas duas linhas estiveram um ano escritas como
+# dois nomes exactos, e foi exactamente por isso que a folha de uma fase
+# posterior passou: docs/fase-3b/01-folha-julgamento.md esta VERSIONADA, com
+# 9.075 palavras e 126 poemas. Um nome exacto nao cobre a fase seguinte; um
+# padrao cobre. Ver a correccao 43 do docs/CONTROLO.md, secao 4.
+docs/**/*folha-julgamento*.md
+#
+# E a mesma falha na mesma familia de ficheiros: os *itens* e *chave* das fases
+# de medicao guardam o CONTEXTO que foi dado ao modelo, e esse contexto e o
+# corpo dos poemas recuperados. Ficam fora pela razao das folhas, nao por serem
+# grandes. Reconstruiveis pelos gerar_amostras.py de cada fase.
+docs/**/0*-itens.md
+docs/**/0*-chave.json
+
+# ATENCAO -- uma regra de ignore NAO desversiona o que ja esta versionado.
+# As tres linhas acima protegem as fases FUTURAS. Os ficheiros que ja estao no
+# indice continuam a ser seguidos e a ir para o repositorio publico, e
+# desversiona-los e uma decisao de direitos que nao se toma num .gitignore:
+# esta por decidir em 2026-10-19, com o levantamento feito e as opcoes
+# escritas. O mesmo vale, muito mais, para data/pessoa_poems/ -- os 2083
+# ficheiros, 241.250 palavras, versionados desde 396cca7 (2025-10-24) num
+# repositorio PUBLICO, apesar de o README ter afirmado durante um ano que nao
+# estavam no repositorio. Ver a correccao 42.

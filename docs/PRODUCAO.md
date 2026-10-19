@@ -11,6 +11,32 @@ que este plano é:
 Ambas estão registadas em [`CONTROLO.md`](CONTROLO.md) §3, com a data e com a
 nota de que nenhuma das duas é consequência de uma medição.
 
+> ⚠️ **A razão de ser da saída B cai, e o plano não a reescreve por isso.**
+> Escolhi-a e escrevi-a a argumentar que não publicar o passo 9 evitava
+> «publicar transcrições» cujos termos de uso não estão confirmados. Medido em
+> 2026-10-19: **as transcrições já estão publicadas** — 2083 ficheiros,
+> **241 250 palavras**, versionados em `396cca7` (2025-10-24) num repositório
+> **público**, e o `data/README.md` registava a data de entrada enquanto o
+> `README.md` afirmava o contrário. Correcção **42** do
+> [`CONTROLO.md`](CONTROLO.md) §4.
+>
+> O que isto muda e o que não muda, porque não é tudo:
+>
+> - **A saída B continua a ser a decisão certa, por outra razão.** O §2.1
+>   mostrou que ela não bastava e obrigou a escrever a retenção; o portão
+>   **I7′** mede algo verdadeiro e que morde. Um serviço que não serve corpos é
+>   melhor que um que serve, com ou sem repositório público.
+> - **Mas deixou de ser uma protecção de direitos.** Era essa a função que eu
+>   lhe dei no §0.1, e essa função não existe: o que o passo 9 serviria é o
+>   que um `git clone` já traz. Chamar-lhe protecção de direitos depois de
+>   saber isto seria a mesma confusão entre mecanismo e alcance que o §2 deste
+>   plano identificou no portão I7.
+> - **E o bloqueio que o §0.1 nomeava mudou de sítio.** Não é «não publicar o
+>   serviço até confirmar os termos»; é que a publicação a confirmar aconteceu
+>   há um ano, por outra porta. O levantamento e as opções estão feitos, e a
+>   decisão sobre o repositório **está por tomar** — nada foi alterado no
+>   histórico nem na visibilidade.
+
 > ⚠️ **A primeira versão deste documento está retirada, e não foi guardada.**
 > Foi escrita sobre o molde do repositório irmão `portal_brasileirao` — EC2,
 > S3, OIDC, SSM, nginx, certbot, pacote promovido — e recomendava um EC2 de
@@ -519,7 +545,11 @@ o portão **D6** mede:
 
 Hoje: **nenhum**. `data/sessoes.db` é o passo 8 da Fase 6 e não existe. O
 corpus, o `corpus.jsonl` e o índice são todos reconstruíveis a partir dos 2083
-ficheiros, e esses não estão no repositório mas estão na máquina.
+ficheiros, e esses ~~não estão no repositório mas estão na máquina~~ **estão nos
+dois** — versionados desde `396cca7` (2025-10-24), ver a correcção **42**. Para
+este parágrafo a diferença é a favor: um checkout do serviço traz o corpus com
+ele, logo não há nada a copiar à parte nem a buscar a um balde. Para tudo o
+resto, é o §0.1.
 
 Quando o passo 8 existir, `data/sessoes.db` passa a ser essa peça, no checkout
 do **serviço** — e não no de trabalho. A cópia é um `sqlite3 .backup` num
