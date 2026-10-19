@@ -193,8 +193,18 @@ artefactos commitados, e o `pyproject.toml` já diz porque é que nem o formatad
 lhes toca — «reformatá-los reescrevia o registo». Logo o mecanismo é o mais
 estúpido que funciona:
 
-- um ficheiro-sentinela, `data/.medicao-a-correr`, com o nome da fase e o PID
-  lá dentro, para que um sentinela esquecido se diagnostique;
+- um ficheiro-sentinela com o nome da fase e o PID lá dentro, para que um
+  sentinela esquecido se diagnostique. **Este documento escreveu
+  `data/.medicao-a-correr` e isso estava errado** — não por gosto, por modo de
+  falha: o [plano do serviço público](PRODUCAO.md) §4 mostrou, antes do passo 7
+  ser escrito, que o serviço corre num **segundo checkout** e portanto há **dois
+  `data/`** — a fase escreve no seu, o servidor verifica o outro, e o mecanismo
+  fica **silenciosamente desligado**. Passou a
+  `~/.local/state/pessoabot/.medicao-a-correr` — **absoluto, único na máquina,
+  fora de qualquer checkout** —, com `PESSOABOT_SENTINELA` a sobrepô-lo para os
+  testes. **Uma** variável e não duas: o `XDG_STATE_HOME` ficou de fora porque os
+  dois processos têm de concordar no caminho, e cada fonte de verdade a mais é
+  outra maneira de discordarem;
 - o servidor verifica-o **antes de cada geração**, não no arranque, e recusa com
   `409` e a mensagem que diz o que está a correr e como se liberta;
 - o `GET /api/estado` reporta-o como um componente, ao lado do `ollama` e do
@@ -209,6 +219,58 @@ a decisão errada — acrescentava um `flock` a cada chamada HTTP do caminho que
 Fases 0 a 5Y mediram, e isso é uma mudança que precisava de medição própria.
 
 Portão **I8**.
+
+#### O que o passo 7 entregou, e as três coisas que o plano não tinha previsto
+
+Feito em 2026-10-18, em `src/web/sentinela.py` — **nada** fora de `src/web/`
+foi tocado, e a asserção de não-regressão do §6 está cumprida. 24 testes
+novos, `pytest` a **377** (eram 353).
+
+**1. O caminho, que já está corrigido acima.** Veio do
+[`PRODUCAO.md`](PRODUCAO.md) §4 e entrou antes do código, não depois. Está
+registado como correcção **39** no [`CONTROLO.md`](CONTROLO.md) §4 — a primeira
+dessa lista a ser apanhada antes de custar algo.
+
+**2. O I8 ganhou a asserção dos dois checkouts, e ela está verificada por
+mutação.** Com o `caminho()` revertido ao `data/.medicao-a-correr`
+especificado, `test_i8_a_fase_de_um_checkout_e_vista_pelo_servidor_do_outro`
+falha — e falha de uma maneira que vale escrever, porque a asserção
+**anterior** no mesmo teste passa: `caminho() == caminho()` é verdade dos dois
+lados (`data/.medicao-a-correr` é igual a `data/.medicao-a-correr`) e aponta a
+**ficheiros diferentes**. O que falha é a linha seguinte, `assert (None is not
+None)`: o servidor do segundo checkout não vê nada e **gera**. Era a forma mais
+pura do modo de falha que se podia pedir, e um teste num processo com um
+directório só nunca a mostrava.
+
+**3. O `/api/estado` passou a ter três casos por componente, e não dois.** O
+sentinela entra no **`pode_perguntar`** e **não** no `pronto`, e a decisão é
+deliberada: o `pronto` afirma «está tudo verificado?», que é uma afirmação
+sobre o **sistema**, e uma medição a correr não avaria nada — é uma
+**cedência**. Metê-la no `pronto` fazia a página acender a cruz vermelha de
+avaria sobre uma decisão de quem corre a casa. Mas tem de fechar o botão, senão
+o utilizador escreve a pergunta e recebe o 409 — que é a surpresa que a
+distinção `pronto`/`pode_perguntar` nasceu para evitar (§4.2, e o defeito foi
+observado a correr no passo 5).
+
+Consequência que o plano não previa: com dois campos no fio (`pronto`,
+`exigido`) a página rotulava o sentinela **«escolha»**, e ninguém escolheu
+aquilo na interface. Daí um `bloqueante` por componente e um terceiro estado na
+página — `⏸`, na cor do realce e não na do erro. Os três casos são agora
+**avaria**, **cedência** e **escolha desligada**, e a página distingue-os porque
+o servidor lhos diz.
+
+E duas peças que ficaram **de fora de propósito**, porque são do
+[`PRODUCAO.md`](PRODUCAO.md) e não desta fase: o ajudante `with` **não** para o
+túnel (passo 5 desse plano — e não há `cloudflared` nem `tailscale` nesta
+máquina) e a **janela** não fica registada ao lado das amostras (passo 7). O
+`medicao()` marca em comentário as duas linhas onde a primeira entra, e a ordem
+— parar depois de escrever, arrancar antes de limpar — está lá escrita, porque
+invertê-la abria exactamente a janela que o mecanismo fecha.
+
+O custo no caminho do portão **I4**: medido, **7,9 µs** sem ficheiro e
+**15,6 µs** com ele, contra um orçamento de 100 ms para a resposta inteira do
+`/api/estado`. O I4 foi corrido cinco vezes depois desta peça entrar e passou
+5 de 5.
 
 ---
 
@@ -513,10 +575,10 @@ dificuldade.
 | 4 | **`POST /api/perguntar`** em NDJSON, com o pipeline em *thread* e o trinco | fluxo ponta a ponta, sem interface | **I1 · I4** |
 | 5 | **A página**: fluxo, estados do §4.1–4.2, rodapé, fontes | a interface a funcionar | **I2** |
 | 6 | **Cancelamento** no cliente e no Ollama | abortar liberta o trinco e para a geração | **I5** |
-| 7 | **Sentinela de medição** (§2.4): `data/.medicao-a-correr`, verificado antes de cada geração e reportado no `/api/estado`; ajudante `with` para fases futuras | o servidor e uma fase de medição deixam de se atropelar | **I8** |
+| 7 | ✅ **Sentinela de medição** (§2.4): `src/web/sentinela.py`, **caminho absoluto** (ver §2.4: o `data/…` relativo era um defeito), verificado antes de cada geração e reportado no `/api/estado`; ajudante `with` para fases futuras | o servidor e uma fase de medição deixam de se atropelar | **I8** ✅ |
 | 8 | **Persistência** (§3.4) e `GET /api/sessoes` | reabrir conversas; `PropostaReg` a acumular | **I6** |
 | 9 | **Painel do poema** e `GET /api/poema/{id}` | fichas de fonte clicáveis | **I7** |
-| 10 | **Fechar**: `requirements.txt`, `.gitignore` (`data/sessoes.db` e `data/.medicao-a-correr` — o `data/` **não** está ignorado por inteiro, só quatro ficheiros nomeados), `README`, `CONTROLO.md` §2 e §7, e correr tudo | a fase documentada | 257+ testes a passar (eram 243 quando este plano foi escrito; o Passo 44 levou-os a 257) |
+| 10 | **Fechar**: `requirements.txt`, `.gitignore` (`data/sessoes.db` **só** — o sentinela deixou de precisar de entrada quando o passo 7 o pôs fora de qualquer checkout; verificado, não assumido: `git status` não o vê. O `data/` **não** está ignorado por inteiro, só ficheiros nomeados), `README`, `CONTROLO.md` §2 e §7, e correr tudo | a fase documentada | 257+ testes a passar (eram 243 quando este plano foi escrito; o Passo 44 levou-os a 257) |
 
 Passos 1–6 são o produto mínimo: uma interface que responde, mostra o custo e
 cancela. O **passo 7 é o que a torna segura de ter ligada** enquanto a sequência
@@ -539,7 +601,7 @@ diz qual falhou.
 | **I5 — cancelar cancela** | Abortar para a geração | após `abort`, a pergunta seguinte arranca em menos de 2 s e o trinco está livre; o Ollama não está a decodificar |
 | **I6 — corpos não são guardados** | `data/sessoes.db` não contém poemas | varrimento da base por qualquer linha de corpo de qualquer poema do corpus: **zero** acertos |
 | **I7 — o painel não é uma porta** | O corpo do poema não sai da máquina | `GET /api/poema/{id}` recusa pedidos de fora de `127.0.0.1`; o servidor não escuta noutro interface sem sinalizador explícito |
-| **I8 — o servidor cede à medição** | O servidor não compete com uma fase pelo mesmo Ollama | com `data/.medicao-a-correr` presente, `POST /api/perguntar` responde **409** nomeando a fase e o PID, e `GET /api/estado` mostra-o como componente; sem o ficheiro, gera normalmente. E a medição que o justifica: **com** sentinela, os `segundos` de 10 gerações do servidor e de 10 de um script não se sobrepõem no tempo — verificado por *timestamps*, não por intenção |
+| **I8 — o servidor cede à medição** ✅ | O servidor não compete com uma fase pelo mesmo Ollama | com o sentinela presente, `POST /api/perguntar` responde **409** nomeando a fase e o PID, e `GET /api/estado` mostra-o como componente; sem o ficheiro, gera normalmente. E a medição que o justifica: **com** sentinela, os `segundos` de 10 gerações do servidor e de 10 de um script não se sobrepõem no tempo — verificado por *timestamps*, não por intenção. **E a asserção que o [`PRODUCAO.md`](PRODUCAO.md) §4 acrescentou:** a fase escreve de um checkout e o servidor, **no outro**, vê-o — sem ela o I8 passava num processo com um directório só e não dizia nada sobre a máquina real. Tudo em `tests/test_sentinela.py`, 24 testes |
 
 E uma asserção de **não-regressão**, que é a mais importante de todas: `pytest`
 continua verde, e **nenhum ficheiro de `src/` fora de `src/web/`,

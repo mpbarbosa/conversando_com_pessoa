@@ -69,9 +69,16 @@ async function actualizarProntidao() {
     // o utilizador pode não querer; com a mesma cruz vermelha de um Ollama em
     // baixo, a página dizia-lhe que estava alguma coisa avariada. Quem sabe
     // quais são requisitos é o servidor, e manda-o em `exigido`.
-    const marca = c.pronto ? "✓" : (c.exigido ? "✗" : "○");
-    li.append(elemento("span", c.pronto ? "sim" : (c.exigido ? "nao" : "escolha"),
-                       marca));
+    // Três casos e não dois, desde o sentinela do passo 7: avaria (exigido e
+    // não pronto), **cedência** (bloqueante e não exigido: uma medição a
+    // correr, que não avariou nada e mesmo assim fecha o botão) e escolha
+    // desligada. Com dois casos só, uma medição aparecia aqui rotulada
+    // «escolha» — e ninguém a escolheu nesta interface.
+    const classe = c.pronto ? "sim"
+                 : c.exigido ? "nao"
+                 : c.bloqueante ? "cedencia" : "escolha";
+    const marca = { sim: "✓", nao: "✗", cedencia: "⏸", escolha: "○" }[classe];
+    li.append(elemento("span", classe, marca));
     li.append(elemento("span", "detalhe", c.detalhe));
     if (c.remedio) li.append(elemento("span", "remedio", c.remedio));
     // §4.2: o custo vai declarado, para a escolha ser feita com o número à
@@ -220,7 +227,12 @@ async function perguntar(pergunta) {
     // §2.2: o 409 não é uma fila escondida. Diz quanto falta e porquê, porque
     // é a verdade do hardware — um Ollama, um encoder, um reranker.
     const d = (await resposta.json().catch(() => ({}))).detail || {};
-    if (resposta.status === 409) {
+    if (resposta.status === 409 && d.erro === "medicao_a_correr") {
+      // §2.4: o sentinela não tem tempo que falte — uma fase dura o que durar,
+      // e a 5Z são ~30 min só de geração. Dizer «falta ~0,0 s» aqui era o que
+      // o `formatar(undefined)` fazia, e era uma mentira com uma casa decimal.
+      avisar(`${d.mensagem}. ${d.remedio}.`);
+    } else if (resposta.status === 409) {
       avisar(`${d.mensagem}. Falta ~${formatar(d.espera_estimada_s)} s.`);
     } else {
       avisar(d.mensagem || `o servidor recusou (${resposta.status})`);

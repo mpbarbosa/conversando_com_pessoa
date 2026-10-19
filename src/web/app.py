@@ -1,4 +1,5 @@
-"""A fronteira HTTP. Passos 3 e 4 da Fase 6: estado, vozes e `/api/perguntar`.
+"""A fronteira HTTP. Passos 3, 4 e 7 da Fase 6: estado, vozes, `/api/perguntar`
+e o sentinela de medição.
 
 ## O que este módulo não faz
 
@@ -65,6 +66,8 @@ from .estado import (
     manifesto_cru,
 )
 from .fluxo import em_fluxo
+from .sentinela import a_correr as medicao_a_correr
+from .sentinela import componente as componente_sentinela
 
 HOST = "127.0.0.1"
 PORTA = 8000
@@ -93,15 +96,22 @@ ESTATICO = Path(__file__).parent / "estatico"
 #: de fora de propósito: são escolhas medidas, não requisitos.
 EXIGIDOS = ("ollama", "modelo", "corpus", "indice")
 
-#: Os exigidos que a **1.ª pergunta não resolve sozinha**, e por isso os únicos
-#: que impedem de perguntar.
+#: Os componentes que impedem de perguntar **agora**.
 #:
-#: O corpus constrói-se (~40 s) e o índice verifica-se ou reconstrói-se
-#: (~6,4 min) dentro do `garantir_pipeline` — é essa a razão de o remédio deles
-#: ser «constrói-se no arranque» e não um comando. O Ollama em baixo e o modelo
-#: ausente só se resolvem fora daqui, e é por isso que o remédio deles **é** um
-#: comando a correr: `ollama serve`, `ollama pull …`.
-BLOQUEANTES = ("ollama", "modelo")
+#: Os exigidos que a **1.ª pergunta não resolve sozinha**: o corpus constrói-se
+#: (~40 s) e o índice verifica-se ou reconstrói-se (~6,4 min) dentro do
+#: `garantir_pipeline` — é essa a razão de o remédio deles ser «constrói-se no
+#: arranque» e não um comando. O Ollama em baixo e o modelo ausente só se
+#: resolvem fora daqui, e é por isso que o remédio deles **é** um comando a
+#: correr: `ollama serve`, `ollama pull …`.
+#:
+#: E o **sentinela**, que entra aqui e **não** nos `EXIGIDOS`, de propósito
+#: (§2.4, portão I8): uma medição a correr não avaria nada — é uma **cedência**,
+#: e o sistema continua tão pronto como estava. Metê-la no `pronto` fazia a
+#: página acender a cruz vermelha de avaria sobre uma decisão deliberada de
+#: quem corre a casa. Mas impede de perguntar, senão o utilizador escreve a
+#: pergunta e recebe um 409 — a surpresa que esta distinção nasceu para evitar.
+BLOQUEANTES = ("ollama", "modelo", "sentinela")
 
 #: Custo médio de uma resposta, para a estimativa do `409`. É o número do
 #: `pipeline.py`: «1,21 gerações, ou ~34 s». É **média medida**, não promessa —
@@ -174,6 +184,10 @@ class Servico:
             else "desligado: +0,090 nDCG@5 por ~2,6 s, e é uma escolha",
             remedio=None if self.reranker_ligado else "liga-se em /rerank",
             custo_s=None if self.reranker_ligado else 2.6))
+        #: Em último porque é o único que não é uma peça do sistema: é o estado
+        #: da **máquina** em volta dele. Custa um `stat` e um JSON pequeno, que
+        #: é o que o portão I4 permite neste caminho (§2.4, portão I8).
+        cs.append(componente_sentinela())
         return cs
 
     def _componente_indice(self) -> Componente:
@@ -471,7 +485,16 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
             # falha de uma escolha desligada. Sem ele, o reranker — que é uma
             # troca medida que o utilizador pode não querer — aparecia com a
             # mesma cruz vermelha que um Ollama em baixo.
-            "componentes": [asdict(c) | {"exigido": c.nome in EXIGIDOS}
+            #
+            # `bloqueante` apareceu com o sentinela (§2.4), porque com ele
+            # passaram a ser **três** casos e não dois: avaria (exigido e não
+            # pronto), escolha desligada (nem exigido nem bloqueante) e
+            # **cedência** — o sentinela, que não é avaria nenhuma e mesmo
+            # assim fecha o botão. Com dois campos só, uma medição a correr
+            # aparecia na página rotulada «escolha», que é falso: ninguém
+            # escolheu isto na interface.
+            "componentes": [asdict(c) | {"exigido": c.nome in EXIGIDOS,
+                                         "bloqueante": c.nome in BLOQUEANTES}
                             for c in cs],
         }
 
@@ -515,15 +538,37 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
         limitação a esconder: é a verdade do hardware que a Fase 0 mediu a
         fazer *throttling* térmico até 101 °C.
 
-        ⚠️ O trinco é um `asyncio.Lock`, logo é **por processo**. Não protege
-        contra um `gerar_amostras.py` de uma fase a falar com o mesmo Ollama, e
-        esse é o modo de falha caro: o campo `segundos` do `01-cru.jsonl` da
-        fase fica ininterpretável. O interbloqueio entre processos é o
-        **passo 7** (sentinela em ficheiro, portão **I8**); até lá, não correr o
-        servidor com uma medição a decorrer é disciplina e não mecanismo.
+        O trinco é um `asyncio.Lock`, logo é **por processo**, e não protege
+        contra um `gerar_amostras.py` de uma fase a falar com o mesmo Ollama.
+        Esse é o modo de falha caro — o campo `segundos` do `01-cru.jsonl` da
+        fase fica ininterpretável — e o interbloqueio entre processos é o
+        **sentinela** abaixo (§2.4, portão **I8**). Até ao passo 7 isto era
+        «disciplina e não mecanismo», e deixou de poder ser: o
+        [plano do serviço público](../../docs/PRODUCAO.md) §3.1 mostrou que com
+        um URL público os clientes são estranhos que não sabem que há uma
+        medição a decorrer, e a disciplina deixa de ter onde se aplicar.
         """
         servico: Servico = app.state.servico
         _verificar_combinacao(pedido)
+        # O sentinela antes do trinco, e por duas razões. Primeira: é a recusa
+        # mais informativa das duas — «ocupado» dura ~34 s e isto dura o que a
+        # fase durar (a Fase 5Z são ~30 min só de geração; o índice são 383 s),
+        # logo é a que o utilizador precisa de ver. Segunda: é leitura de disco
+        # síncrona, sem `await` nenhum, logo não abre janela entre o `locked()`
+        # e o `acquire()` abaixo — e **nada** aqui toma o trinco, para uma
+        # recusa não trancar a porta que estava livre.
+        medicao = medicao_a_correr()
+        if medicao is not None:
+            raise HTTPException(409, detail={
+                "erro": "medicao_a_correr",
+                "fase": medicao.fase,
+                "pid": medicao.pid,
+                "mensagem": f"há uma medição a correr — {medicao.descricao()} "
+                            f"— e o servidor cede-lhe o Ollama: duas gerações "
+                            f"em paralelo tornariam o `segundos` dela "
+                            f"ininterpretável",
+                "remedio": "a fase acaba, e a pergunta repete-se",
+            })
         # Entre este `locked()` e o `acquire()` não há `await` nenhum, logo
         # nada mais corre no laço pelo meio: um `acquire()` sobre um trinco
         # livre devolve sem suspender. É o que torna a verificação atómica, e

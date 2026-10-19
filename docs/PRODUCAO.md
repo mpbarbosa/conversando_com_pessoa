@@ -155,6 +155,16 @@ de cada geração, reportado no `/api/estado`, com o portão **I8**. A Fase 6 es
 no **passo 6 de 10**. O passo 7 **não está feito** — verificado hoje: zero
 ocorrências de `medicao-a-correr` em `src/` e em `tests/`.
 
+> ✅ **Deixou de ser verdade no mesmo dia**, e a medição acima fica como foi
+> feita em vez de ser reescrita. O passo 7 está **feito** desde 2026-10-18:
+> `src/web/sentinela.py`, com as duas correcções do §4 abaixo dentro — caminho
+> **absoluto** e a asserção dos **dois checkouts** no portão I8. O que este §3
+> diz a seguir sobre o sentinela «resolver metade do problema» **continua a
+> valer**: o que está feito é o guarda de pedido, e o guarda de **alcance** —
+> parar o túnel, §3.3 — é o passo 5 desta lista e não está feito. Logo o
+> remédio em vigor é ainda o 409, que o §3.2 (c) diz ser a resposta errada ao
+> público.
+
 O que existe é o trinco, e `src/web/app.py` já diz, em letra própria, o que ele
 não cobre:
 
@@ -248,7 +258,7 @@ Três peças, portanto, e as três são passos da §5:
 
 **Nenhuma fase de medição se corre com o túnel de pé**, e a partir do passo 7 isso
 é imposto pelo ajudante. Mas há um caso que o ajudante não cobre e vale nomear:
-o `pytest` são **353 testes, ~2 minutos**, e saturam o CPU. Correr a bateria de
+o `pytest` são **377 testes, ~2 minutos**, e saturam o CPU. Correr a bateria de
 testes não é uma fase de medição, não escreve sentinela, e aquece o chip tanto
 como uma. Se a corrida seguinte for uma medição, os 60 s de pausa da Fase 0 §3.2
 contam **depois dos testes**, não depois da edição.
@@ -273,7 +283,11 @@ duplica-se ou liga-se por *symlink*, e não há razão de direitos para preferir
 uma das duas — já está fora do repositório nas duas.
 
 **E aqui está o defeito**, que vale nomear porque o passo 7 ainda não está
-escrito e portanto isto é entrada de desenho e não correcção:
+escrito e portanto isto é entrada de desenho e não correcção — **e foi assim
+que entrou**: o passo 7, escrito nesse mesmo dia, nasceu já com o caminho
+absoluto, e está registado como correcção **39** no
+[`CONTROLO.md`](CONTROLO.md) §4, a primeira dessa lista a ser apanhada antes de
+custar algo:
 
 > O sentinela está especificado como **`data/.medicao-a-correr`** — caminho
 > **relativo ao checkout**. Com dois checkouts há **dois `data/`**, a fase

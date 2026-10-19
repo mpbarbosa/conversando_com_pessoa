@@ -52,7 +52,7 @@ híbrida da Fase 2. Relatório: [`docs/fase-1/08-RELATORIO.md`](docs/fase-1/08-R
 | índice | 7,0 MB · busca em **5,57 ms** |
 | construção do corpus · do índice | ~40 s · 383 s |
 | latência de resposta **prevista** | ~44 s a 500 tokens de contexto (CPU), com a máquina fria — a quente dá 14–17 tok/s e sai do orçamento |
-| testes | **353 a passar**, 1 ignorado |
+| testes | **377 a passar**, 1 ignorado |
 
 ---
 
@@ -162,7 +162,7 @@ tempos — o *prefill* domina a espera (58–89%), e mostrá-lo ensina o custo e
 o esconder.
 
 ```bash
-pytest          # 353 testes, ~2 min
+pytest          # 377 testes, ~2 min
 ```
 
 ---

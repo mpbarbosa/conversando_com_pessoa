@@ -137,6 +137,10 @@ label:has(input:disabled) { opacity: 0.5; }
 /* Uma escolha desligada é neutra, não vermelha: o reranker custa ~2,6 s por
  * +0,090 de nDCG@5, e essa é uma troca para o utilizador fazer. */
 #componentes .escolha { color: var(--tenue); }
+/* Uma cedência também não é vermelha, e é o terceiro caso: o servidor cedeu o
+ * Ollama a uma medição (§2.4). Não está avariado nada — está a esperar —, logo
+ * veste a cor do realce e não a do erro. */
+#componentes .cedencia { color: var(--realce); }
 
 /* O remédio é código a correr — `ollama serve`, `ollama pull …` —, logo veste
  * monospace. É a única coisa nesta página que é. */
