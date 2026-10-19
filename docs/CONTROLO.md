@@ -58,6 +58,13 @@ máquina, com a camada de geração plugável para permitir uma fase remota depo
 | **5Z — A manipulação forte, e a monotonia que não vale nada** | [`FASE-5Z.md`](FASE-5Z.md) · [relatório](FASE-5Z-RELATORIO.md) | ❌ **Z4 dispara: a mecânica fica refutada como explicação útil.** Três níveis de `repeat_penalty` no ortónimo — **1,1 · 1,0 · 0,9** —, 60 amostras, desfecho **primário na 1.ª tentativa** (passo 43: **0/20** prompts divergentes, contra **4/20** na saída final). A **monotonia** pré-registada verificou-se — 0,0075 < 0,0096 < 0,0144 — **e inverte se eu tirar uma célula de vinte**: sem `q34/r1` o braço que *premeia* repetição rima **0,8×** o de produção. Essa célula tem **quatro versos** e o par que a faz rimar é **`toque`/`que`** — a própria manipulação, contada como rima. **A 5X não replica** (1,96× → **1,28×**), e o **Z2 disparou mal operacionalizado**: a quarta vez nesta sequência, a primeira a aprovar em ruído. **O único resultado sólido é o dano**: a 0,9, linhas duplicadas **0,2353 contra 0,0031** e **metade** das amostras truncadas — o ciclo da Fase 0 reproduzido. **O `REPEAT_PENALTY` fica justificado contra 0,9 e injustificado contra 1,0** |
 | **6 — Interface gráfica** | [`FASE-6.md`](FASE-6.md) | ⬜ **planeada em detalhe** (2026-10-12), 10 passos e 8 portões; **passos 1–6 feitos** (o 6 corrigiu uma previsão do próprio plano: abortar **não** retinha o trinco — deixava a geração órfã a 985% de CPU com o trinco a dizer «livre»). FastAPI + página estática sem build; a interface é o **terceiro consumidor** do `Pipeline` e o portão **I1** é paridade com o CLI e o grafo, como a 5Y obrigou. O `AnthropicRemote` que o plano original punha nesta fase **sai** — muda a afirmação de «sem credenciais» do `README` e precisa de medição própria |
 
+E uma linha que não é fase, porque não tem portão de medição a cumprir antes
+de existir:
+
+| | Documento | Estado |
+|---|---|---|
+| **Serviço público** | [`PRODUCAO.md`](PRODUCAO.md) | ⬜ **planeado** (2026-10-18), 11 passos e 10 portões. **Nada publicado, nenhum túnel existe, nenhuma unidade instalada.** As duas decisões estão fechadas (§3): **sem o passo 9 da Fase 6** por direitos, e **desta máquina atrás de um túnel gratuito** (saída D). **Não se chama «produção»**: dev e prod são o mesmo computador, que é a confusão que o documento equivalente do irmão foi escrito para evitar. Bloqueado pelo **passo 7 da Fase 6**, que a saída D torna pré-requisito — e pela reescrita do portão **I7** em **I7′**, porque um túnel fá-lo passar sem proteger |
+
 ### Fase 1, passo a passo
 
 | # | Passo | Estado | Entregável |
@@ -180,6 +187,112 @@ o que não há.
 **removido** do `requirements.txt` por estar declarado e usado em zero linhas.
 O `langgraph` entra agora no caso oposto — importado em `src/`, exposto no CLI e
 com teste que falha sem ele. A nota ficou escrita no `requirements.txt`.
+
+### Produção — as duas decisões que **não** têm medição por trás (2026-10-18)
+
+Esta secção abre com «nenhuma destas é preferência: todas têm medição por
+trás». Estas duas são a excepção, e ficam aqui — e não escondidas noutro
+sítio — porque é aqui que se procura o que foi decidido. São decisões do dono
+do projecto, tomadas em 2026-10-18 sobre o plano
+[`PRODUCAO.md`](PRODUCAO.md), e **nenhuma das duas é consequência de uma
+medição**. Nomear isso é o que as distingue das linhas acima.
+
+| Decisão | Valor | De onde vem |
+|---|---|---|
+| **O que se publica** | **saída B**: o serviço vai a público **sem o passo 9 da Fase 6** — cita `poem_1019` como **id**, e não há rota que devolva o corpo do poema | decisão do dono, 2026-10-18. Não é medição: é a resposta ao bloqueio de direitos do [`PRODUCAO.md`](PRODUCAO.md) §0.1, onde o servidor escuta em `127.0.0.1` por desenho e o portão **I7** mede-o. A confirmação dos termos de uso do Arquivo Pessoa (saída A) fica **em curso**, e é ela que desbloqueia o passo 9 |
+| **Onde corre** | **saída D**: a **máquina de desenvolvimento**, atrás de um **túnel gratuito**. Fechada em 2026-10-18, depois de a opção 1 (EC2 de CPU grande) ter sido escolhida e **retirada horas depois** pela restrição de custo | decisão do dono, 2026-10-18, em dois tempos — ver a nota abaixo. Aqui **há** medição a favor, e é a única das três saídas que a tem: o hardware é **o hardware das Fases 0 a 5**, logo os 34 s por resposta e os 18 s até ao 1.º verso descrevem o que vai servir. Lido na máquina em 2026-10-18: 14 núcleos, 30 GiB, 22 disponíveis, contra os ~6–7 GiB do modelo e do encoder |
+
+E as duas consequências que estas decisões criam, registadas por serem o que
+um leitor futuro precisa de saber:
+
+- **A saída B não implanta o sistema inteiro.** O passo 9 da Fase 6 não está
+  escrito, logo não há nada a remover — mas também não se escreve enquanto A
+  não fechar. O `README` passa a descrever um sistema com uma rota a menos do
+  que o plano da Fase 6 prometia.
+- **A saída B continua válida.** É uma decisão de direitos, não de dinheiro, e
+  a restrição abaixo não a toca.
+
+#### A restrição que reabriu «onde corre», no mesmo dia
+
+Horas depois de escolher a opção 1, o dono acrescentou a restrição:
+**«não aumente os custos atuais»**. Ela é incompatível com a decisão, e o
+número está no próprio plano: um `m7i.2xlarge`/`c7i.2xlarge` em `sa-east-1` é
+**~50–100× o `t3.micro`** que o repositório irmão paga. Não é um aumento
+marginal a negociar — é a ordem de grandeza da opção.
+
+Fica registado assim, e não como uma emenda silenciosa ao parágrafo acima,
+porque as duas coisas aconteceram e a segunda não apaga a primeira: **a opção
+1 foi escolhida com a informação que havia e foi retirada quando a restrição
+apareceu.** É o mesmo hábito da §4.
+
+O que a restrição **elimina**: qualquer EC2 novo, de qualquer tamanho —
+incluindo spot, que é menos caro e não é custo zero. E elimina também
+co-habitar com o irmão: o `t3.micro` dele tem 1 GiB e já está a servir
+`brasileirao.mpbarbosa.com`.
+
+O que **sobrou** para o Passo 1 decidir outra vez, e que ele decidiu no mesmo
+dia (ver a nota seguinte):
+
+| saída | custo | o que custa de outra coisa |
+|---|---|---|
+| **D — a máquina de desenvolvimento, atrás de um túnel gratuito** | zero em nuvem | é **o hardware que foi medido**, logo a latência é conhecida (34 s, 18 s até ao 1.º verso) e não precisa do Passo 2. Mas: a disponibilidade passa a ser a do portátil ligado, e **colide com a sequência de medição** — o sentinela do passo 7 da Fase 6 (portão **I8**) existe porque o servidor e as fases disputam o mesmo Ollama, e um URL público nessa máquina torna a disputa permanente em vez de ocasional |
+| **E — geração remota** (`AnthropicRemote`) | **não é zero**: paga-se por token, mas o servidor volta a caber num `t3.micro` | muda a afirmação «sem chamada a API externa e sem credenciais» do `README`, e as latências medidas deixam de descrever o sistema. A Fase 6 §8 já a nomeou como **fase própria com medição comparada de qualidade** |
+| **C — não publicar** | zero | o plano de produção fica escrito e não executado. É a única saída que respeita a restrição **e** não desfaz nenhuma afirmação medida |
+
+Nenhuma destas três é «a opção 1 mais barata». As três mudam o produto, e é
+por isso que a escolha voltou ao dono em vez de ser inferida do orçamento.
+
+#### O que a saída D escolheu, e os dois achados que ela produziu
+
+**Escolhida a D**, no mesmo dia. O plano foi reescrito em volta dela e a
+versão que recomendava o EC2 está **retirada e não foi guardada** — o
+`PRODUCAO.md` foi reescrito antes de qualquer commit, logo esse texto **não
+está no histórico**. É uma perda, não uma decisão, e fica registada. Ela traz a
+única vantagem que nenhuma das outras tinha — **o hardware é o que foi
+medido** — e dois problemas que não se viam antes de ela ser escolhida. Os
+dois estão em [`PRODUCAO.md`](PRODUCAO.md) §2 e §3, e ambos são da família
+que esta casa já conhece: **o mecanismo continua a dizer «certo» depois de
+deixar de proteger.**
+
+**1. O túnel faz o portão I7 passar e tira a protecção que ele codifica.** O
+I7 afirma que «o servidor não escuta noutro interface sem sinalizador
+explícito». O `cloudflared` corre **nesta** máquina e liga-se **de dentro** a
+`127.0.0.1:8000`: o `bind` não muda, não há sinalizador, **o portão passa
+literalmente** — e o serviço está na internet. A asserção usava «escuta em
+`127.0.0.1`» como medida de «não é alcançável de fora», e com um túnel as
+duas deixam de ser a mesma coisa. Reescreve-se como **I7′**: o corpo do poema
+não sai desta máquina, medido **de fora**.
+
+**2. O mecanismo que devia mediar o conflito com as medições não existe.** O
+sentinela é o **passo 7** da Fase 6, e a fase está no passo 6 — verificado em
+2026-10-18: zero ocorrências de `medicao-a-correr` em `src/` e `tests/`. O
+`src/web/app.py` já diz, em letra própria, que até lá «não correr o servidor
+com uma medição a decorrer é **disciplina e não mecanismo**». Com um URL
+público os clientes são estranhos que não sabem que há uma medição a correr, e
+**a disciplina deixa de ter onde se aplicar** — logo o passo 7 passa a
+**pré-requisito do túnel**, invertendo a ordem do plano da Fase 6.
+
+E o sentinela, **como está especificado, resolve metade**: protege a medição
+do servidor (é o que o I8 mede) e não protege (a) a medição de um pedido
+público que não gera nada e **aquece o chip** na pausa de 60 s da [Fase 0
+§3.2](FASE-0.md) — e o *throttling* desta máquina foi medido **até 101 °C**,
+pelo que a queda monotónica de tok/s passa a ter duas causas indistinguíveis;
+nem (b) o público de um **409 que dura sete horas** (o enriquecimento estava
+orçamentado em 3,2–7,5 h). O remédio passa a ser **parar o túnel**, com a
+**janela registada** ao lado das amostras — porque a alternativa é um
+`01-cru.jsonl` em que uma célula lenta pode ser térmica ou pode ser um
+estranho, e isso **não se descobre depois**. É a lição das 4 horas que o cache
+de KV invalidou (§4, «defeitos nos meus próprios instrumentos»), aplicada
+antes de custar quatro horas.
+
+**E um defeito a corrigir antes de o código existir:** o serviço público corre
+num **segundo checkout**, logo há **dois `data/`**, e o sentinela especificado
+como `data/.medicao-a-correr` — caminho **relativo** — é escrito num e
+verificado no outro. **Nunca é visto, o `/api/estado` diz que está tudo bem, e
+o mecanismo que torna o túnel seguro está silenciosamente desligado**: passa
+nos testes (um processo, um directório) e falha na máquina. Entra no passo 7
+como caminho **absoluto** (`~/.local/state/pessoabot/`), e o I8 ganha a
+asserção de que atravessa checkouts.
 
 ---
 
@@ -671,6 +784,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
 | Documento | Conteúdo |
 |---|---|
 | [`PLANO-RAG-LOCAL.md`](PLANO-RAG-LOCAL.md) | arquitectura, stack, 5 fases, avaliação, riscos |
+| [`PRODUCAO.md`](PRODUCAO.md) | **plano do serviço público** (2026-10-18): publicar **desta** máquina atrás de um túnel, sem o passo 9 da Fase 6. Porque é que isto **não** é «produção» e o molde do `portal_brasileirao` quase não transfere; o túnel a fazer o portão **I7 passar sem proteger**; o conflito com a sequência de medição, cujo mecanismo (**passo 7, I8**) **não existe** e resolve metade do problema quando existir; os dois `data/` que desligam o sentinela em silêncio; 11 passos e 10 portões. A versão anterior, sobre EC2, está **retirada e perdida** — reescrita antes de qualquer commit, logo não está no histórico |
 | [`BIBLIOGRAFIA.md`](BIBLIOGRAFIA.md) | 23 referências verificadas, em ordem de leitura |
 | [`tematicos/TOKENIZACAO.md`](tematicos/TOKENIZACAO.md) | **temático, não é fase**: os dois tokenizadores e porque não são intercambiáveis, de onde vêm o 480 e o 300, o cache de KV, e o que custou a omissão do `contador()` |
 | [`tematicos/STOPWORDS.md`](tematicos/STOPWORDS.md) | **temático, não é fase**: as três listas e porque só uma remove; `guard-PT − lexical = {'mais', 'não'}`; e o limiar de língua que estava certo com o instrumento errado |
