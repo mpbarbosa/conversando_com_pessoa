@@ -51,20 +51,32 @@ os dois processos têm de concordar no caminho, e cada fonte de verdade a mais �
 outra maneira de discordarem — que é exactamente o defeito que esta secção
 existe para fechar. Quem quiser mudar o sítio muda-o num lugar só.
 
-## O que este módulo **não** faz, e tem dono
+## O guarda de alcance, que é o passo 5 do `PRODUCAO.md`, está feito
 
-Parar e arrancar o túnel a partir do `with` é o **passo 5 do
-`PRODUCAO.md`**, não deste. O §3.3 desse plano mostra porquê: com um URL
-público, 409 durante as sete horas de uma fase de enriquecimento não é
-honestidade, é uma avaria com uma mensagem interna — e um pedido que chega na
-pausa de 60 s da Fase 0 §3.2 não gera nada e **aquece o chip**, pondo duas
-causas indistinguíveis na mesma queda monotónica de tok/s. O remédio é o túnel
-cair, não o 409. A emenda entra em volta das duas linhas que o `medicao()`
-abaixo marca, e não dentro delas.
+O `medicao()` deixou de só escrever o ficheiro: **para e arranca o túnel**. O
+§3.3 do [plano](../../docs/PRODUCAO.md) argumenta porquê — com um URL público,
+409 durante as sete horas de uma fase de enriquecimento não é honestidade, é
+uma avaria com uma mensagem interna; e um pedido que chega na pausa de 60 s da
+Fase 0 §3.2 não gera nada e **aquece o chip**, pondo duas causas
+indistinguíveis na mesma queda monotónica de tok/s (*throttling* medido até
+101 °C). O remédio é o túnel cair, não o 409.
+
+O túnel entra por **indirecção**, e não como um `systemctl` em linha: não há
+túnel instalado nesta máquina, logo este código foi escrito antes de haver o
+que parar. O porquê, o `TunelAusente` que declara o estado de hoje, e a decisão
+sobre **o que acontece quando parar falha** (a fase recusa arrancar) estão em
+[`tunel.py`](tunel.py), que é o dono dessa prosa.
 
 A **janela registada** com as amostras (os instantes em que o túnel esteve de
 pé, para uma célula lenta ser interpretável dentro de seis meses) é o passo 7
-do mesmo plano, e também não é daqui.
+do mesmo plano, e não é daqui.
+
+E nada disto entra no caminho do `GET /api/estado`: o `a_correr()` e o
+`componente()` continuam a ler **só o ficheiro**, e não perguntam nada a
+nenhuma unidade. O portão **I4** (menos de 100 ms durante uma geração) não
+ganhou trabalho nenhum — os 7,9 µs sem ficheiro e 15,6 µs com ele continuam a
+descrever o que ele mede. Quem fala com o túnel é o `medicao()`, que corre no
+processo da **fase** e nunca no do servidor.
 """
 from __future__ import annotations
 
@@ -76,6 +88,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .estado import Componente
+from .tunel import (
+    Tunel,
+    TunelIndisponivel,
+    avisar_que_nao_voltou,
+)
+from .tunel import desta_maquina as tunel_desta_maquina
 
 #: O sítio, **absoluto e único na máquina**, fora de qualquer checkout. Ver a
 #: secção do cabeçalho: com dois checkouts, um caminho relativo desliga o
@@ -219,7 +237,7 @@ def limpar(*, alvo: Path | None = None) -> bool:
 
 
 @contextmanager
-def medicao(fase: str, *, alvo: Path | None = None):
+def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None):
     """O ajudante das fases **futuras**: `with medicao("5Z"): ...`.
 
     As fases fechadas ficam como estão. Não se retroajusta um trinco aos
@@ -231,18 +249,41 @@ def medicao(fase: str, *, alvo: Path | None = None):
     rebenta a meio não deixa o servidor recusado para sempre. Quando deixa —
     um `kill -9` —, o PID no ficheiro diagnostica-o (ver `Medicao.descricao`).
 
-    ⚠️ **O ponto de extensão do passo 5 do `PRODUCAO.md` é aqui**, nas duas
-    linhas marcadas: parar o túnel vem imediatamente depois do `escrever` e
-    arrancá-lo imediatamente antes do `limpar`, **por fora** — de modo que o
-    ficheiro já exista quando o URL cai e ainda exista enquanto ele volta, e
-    nunca haja um instante com túnel de pé e medição a correr. A ordem é essa e
-    não a inversa; invertê-la abria exactamente a janela que o mecanismo fecha.
+    ⚠️ **A ordem é a decisão, e não é invertível.** Parar o túnel vem
+    imediatamente **depois** do `escrever` e arrancá-lo imediatamente **antes**
+    do `limpar`, por fora — de modo que o ficheiro já exista quando o URL cai e
+    ainda exista enquanto ele volta, e **nunca haja um instante com túnel de pé
+    e medição a correr**. Invertê-la abre exactamente a janela que o mecanismo
+    fecha: um pedido que entrasse nela gerava contra o Ollama da fase, e o
+    `campo segundos` do `01-cru.jsonl` ficava ininterpretável sem o dizer.
+    Verificado **por mutação** em `tests/test_sentinela.py` — com a ordem
+    trocada, o teste da ordem cai.
+
+    **Parar falha ⇒ a fase não arranca**, e o sentinela que já tinha sido
+    escrito é retirado antes de levantar (senão um `TunelIndisponivel` deixava
+    o servidor a recusar perguntas por causa de uma fase que nunca começou). O
+    porquê desta decisão — a assimetria de custos, e porque é que o sentido
+    único do §2.4 **não** a responde — está no cabeçalho do `tunel.py`.
+
+    **Arrancar falha ⇒ avisa, e não levanta.** A fase já correu, os dados são
+    bons, e levantar aqui trocava um resultado válido por uma excepção — ou,
+    pior, tapava a excepção do corpo da fase.
     """
     c = caminho() if alvo is None else alvo
+    t = tunel_desta_maquina() if tunel is None else tunel
     m = escrever(fase, alvo=c)
-    # ↓ passo 5 do PRODUCAO.md: parar o túnel entra nesta linha.
+    try:
+        t.parar()
+    except TunelIndisponivel:
+        # O ficheiro é de uma fase que não vai correr. Retirá-lo é o que
+        # impede isto de recusar perguntas ao servidor para sempre.
+        limpar(alvo=c)
+        raise
     try:
         yield m
     finally:
-        # ↑ passo 5 do PRODUCAO.md: arrancar o túnel entra nesta linha.
+        try:
+            t.arrancar()
+        except TunelIndisponivel as e:
+            avisar_que_nao_voltou(t, e)
         limpar(alvo=c)

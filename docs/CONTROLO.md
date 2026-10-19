@@ -63,7 +63,7 @@ de existir:
 
 | | Documento | Estado |
 |---|---|---|
-| **Serviço público** | [`PRODUCAO.md`](PRODUCAO.md) | ⬜ **planeado** (2026-10-18), 11 passos e 10 portões. **Nada publicado, nenhum túnel existe, nenhuma unidade instalada.** As duas decisões estão fechadas (§3): **sem o passo 9 da Fase 6** por direitos, e **desta máquina atrás de um túnel gratuito** (saída D). **Não se chama «produção»**: dev e prod são o mesmo computador, que é a confusão que o documento equivalente do irmão foi escrito para evitar. O **passo 7 da Fase 6 — o pré-requisito — está feito** (2026-10-18), com as duas correcções do §4 deste plano dentro: caminho absoluto e a asserção dos dois checkouts. **Continua bloqueado** pelos passos 5 e 7 do próprio plano — o ajudante `with` **não** para o túnel e a janela **não** fica registada ao lado das amostras, logo o remédio em vigor é o 409 e não o túnel a cair, que o §3.3 diz ser a resposta errada ao público — e pela reescrita do portão **I7** em **I7′**, porque um túnel fá-lo passar sem proteger. **E não há túnel instalado**: nem `cloudflared` nem `tailscale` nesta máquina |
+| **Serviço público** | [`PRODUCAO.md`](PRODUCAO.md) | ⬜ **planeado** (2026-10-18), 11 passos e 10 portões. **Nada publicado, nenhum túnel existe, nenhuma unidade instalada.** As duas decisões estão fechadas (§3): **sem o passo 9 da Fase 6** por direitos, e **desta máquina atrás de um túnel gratuito** (saída D). **Não se chama «produção»**: dev e prod são o mesmo computador, que é a confusão que o documento equivalente do irmão foi escrito para evitar. O **passo 7 da Fase 6 — o pré-requisito — está feito** (2026-10-18), com as duas correcções do §4 deste plano dentro: caminho absoluto e a asserção dos dois checkouts. O **passo 5 — o ajudante a parar e a arrancar o túnel — está feito** (2026-10-18), e com ele o remédio em vigor **deixa de ser o 409** e passa a ser o túnel a cair, que é o que o §3.3 pede. Três decisões de desenho, no §3.4 do plano: **(a)** o túnel entra por **indirecção** (`src/web/tunel.py`: um `Tunel` que o `medicao()` recebe, com `TunelSystemd` real e um duplo nos testes) e não como um `systemctl` em linha, porque **não há unidade para parar** — assim o passo 4 é *nomeá-la* e não reescrever isto; **(b)** a **ausência é declarada** — sem `PESSOABOT_TUNEL` há `TunelAusente`, que não faz nada e di-lo, e uma unidade **mal nomeada falha** em vez de passar, porque `systemctl --user stop` de uma unidade inexistente devolve **0** e sem verificar o `LoadState` isso dava «túnel parado» com o URL de pé (a correcção **39** outra vez, agora com o público do outro lado); **(c)** **parar que falha ⇒ a fase não arranca**, e o sentinela já escrito é retirado antes de levantar. O §2.4 da Fase 6 **não** respondia a esta — ali quem cede é o servidor, aqui quem pode ceder é a **medição** —, e decide a assimetria: uma fase que não arranca custa um comando, uma fase corrida com o túnel de pé custa até as **3,2–7,5 h** do orçamento do enriquecimento e **não se descobre depois**. A inversa é assimétrica de propósito: **arrancar que falha avisa e não levanta** (a fase já correu, os dados são bons, e levantar tapava a excepção do corpo). A **ordem** — parar depois do `escrever`, arrancar antes do `limpar` — está **verificada por mutação**: trocadas as duas chamadas caem os **três** testes da ordem e nenhum outro. E o **I4 não ganhou trabalho nenhum**: ninguém pergunta ao túnel no caminho do `/api/estado`, e há um teste que cai se alguém o fizer. **403 testes** (eram 377). **Continua bloqueado** pelo passo 4 (a unidade do túnel não existe, logo o **D3 não é mensurável** e fica aberto), pelo passo 7 do próprio plano (a janela **não** fica registada ao lado das amostras) e pela reescrita do portão **I7** em **I7′**, porque um túnel fá-lo passar sem proteger. **E não há túnel instalado**: nem `cloudflared` nem `tailscale` nesta máquina |
 
 ### Fase 1, passo a passo
 
@@ -284,6 +284,15 @@ orçamentado em 3,2–7,5 h). O remédio passa a ser **parar o túnel**, com a
 estranho, e isso **não se descobre depois**. É a lição das 4 horas que o cache
 de KV invalidou (§4, «defeitos nos meus próprios instrumentos»), aplicada
 antes de custar quatro horas.
+
+> ✅ **As duas metades ficaram feitas no mesmo dia**, e o parágrafo acima fica
+> como foi escrito em vez de ser reescrito: é o argumento que as fez existir. O
+> passo 7 da Fase 6 (o guarda de **pedido**) e o passo 5 do `PRODUCAO.md` (o
+> guarda de **alcance**: o ajudante derruba o túnel) estão ambos feitos desde
+> 2026-10-18 — ver a linha «Serviço público» no §2, que traz as três decisões
+> de desenho do passo 5, incluindo o que acontece quando parar o túnel falha
+> (**a fase não arranca**). O que fica da lista é a **janela registada**, que é
+> o passo 7 do mesmo plano.
 
 **E um defeito a corrigir antes de o código existir:** o serviço público corre
 num **segundo checkout**, logo há **dois `data/`**, e o sentinela especificado

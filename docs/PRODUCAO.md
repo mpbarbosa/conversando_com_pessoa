@@ -158,12 +158,18 @@ ocorrências de `medicao-a-correr` em `src/` e em `tests/`.
 > ✅ **Deixou de ser verdade no mesmo dia**, e a medição acima fica como foi
 > feita em vez de ser reescrita. O passo 7 está **feito** desde 2026-10-18:
 > `src/web/sentinela.py`, com as duas correcções do §4 abaixo dentro — caminho
-> **absoluto** e a asserção dos **dois checkouts** no portão I8. O que este §3
-> diz a seguir sobre o sentinela «resolver metade do problema» **continua a
-> valer**: o que está feito é o guarda de pedido, e o guarda de **alcance** —
-> parar o túnel, §3.3 — é o passo 5 desta lista e não está feito. Logo o
-> remédio em vigor é ainda o 409, que o §3.2 (c) diz ser a resposta errada ao
-> público.
+> **absoluto** e a asserção dos **dois checkouts** no portão I8.
+>
+> ✅ **E o guarda de alcance também, no mesmo dia.** O que a frase seguinte
+> deste §3 diz — que o sentinela «resolve metade do problema» — era verdade
+> enquanto só existia o guarda de **pedido** (o 409). O **passo 5 desta lista
+> está feito** (2026-10-18): o ajudante `with` para e arranca o túnel, por
+> indirecção (`src/web/tunel.py`), e a ordem está verificada por mutação. Logo
+> o remédio em vigor **deixou de ser o 409** e passou a ser o túnel a cair, que
+> é o que o §3.3 pede. O que **falta** para o D3 passar de facto é a unidade:
+> não há túnel instalado nesta máquina, e por isso o túnel por omissão é o
+> `TunelAusente` — declarado, e não silencioso. O §3.2 a seguir fica como foi
+> escrito, porque é o argumento que fez o passo 5 existir.
 
 O que existe é o trinco, e `src/web/app.py` já diz, em letra própria, o que ele
 não cobre:
@@ -249,12 +255,83 @@ Três peças, portanto, e as três são passos da §5:
 2. **O ajudante `with` passa a parar e a arrancar o túnel**, e não só a escrever
    o ficheiro. Uma fase de medição abre o contexto e o URL cai; fecha-o e volta.
    O dono não tem de se lembrar, que é a diferença entre mecanismo e disciplina.
+   ✅ **Feito** em 2026-10-18 — ver o §3.4, que é onde ficam as três decisões de
+   desenho que isto obrigou a tomar.
 3. **A janela registada com as amostras.** Cada ficheiro de fase passa a trazer
    os instantes em que o túnel esteve de pé. É o que torna uma célula lenta
    interpretável por quem a ler depois — e é a lição das 4 horas invalidadas,
    aplicada antes de custar quatro horas.
 
-### 3.4 E uma regra que não é mecanismo nenhum, mas tem de ficar escrita
+### 3.4 O passo 5, feito: as três decisões que ele obrigou a tomar
+
+Feito em 2026-10-18. `src/web/tunel.py` (novo) e o `medicao()` do
+`src/web/sentinela.py`; 26 testes novos, em `tests/test_tunel.py` e na secção
+D3 do `tests/test_sentinela.py`. **403 testes** (eram 377). Nada em `src/` fora
+de `src/web/`.
+
+**(a) O túnel entra por indirecção, e não como um `systemctl` em linha.** O
+obstáculo é o facto do §5.1: **não há túnel instalado nesta máquina**, logo
+este código foi escrito antes de haver o que parar. Um `systemctl --user stop`
+em linha dentro do `medicao()` punha o mecanismo fora de alcance de um teste —
+ou os testes mexiam nas unidades reais desta máquina, ou não verificavam nada.
+Portanto o `medicao()` recebe um objecto que cumpre um `Tunel`, com uma
+implementação real (`TunelSystemd`) e um duplo nos testes. Quando a unidade for
+instalada — passo 4 — o trabalho é **nomeá-la** (`PESSOABOT_TUNEL`), e não
+reescrever este código.
+
+**(b) A ausência é declarada, e um nome errado não é ausência.** Sem
+`PESSOABOT_TUNEL` há `TunelAusente`, que não faz nada e **diz** que não faz
+nada: é o estado desta máquina hoje, e uma fase corre. Com a variável a nomear
+uma unidade que não existe, **falha** — porque `systemctl --user stop` de uma
+unidade inexistente devolve **0**, e sem verificar o `LoadState` isso dava
+«túnel parado» com o URL de pé. É a correcção **39** outra vez («não dá erro:
+dá respostas erradas»), agora com o público do outro lado.
+
+**(c) Quando parar o túnel falha, a fase não arranca.** Esta é a decisão que o
+§2.4 da Fase 6 **não** responde: aquele sentido único — «o servidor é que cede
+à medição, nunca o contrário» — fala de quem cede entre o servidor e a fase, e
+aqui quem pode ceder é a **medição**. Deixar uma fase correr com o túnel de pé
+é precisamente o que invalida os dados que ela vai produzir. Decide a
+assimetria de custos, que é a aritmética do §3.2 (b):
+
+| | custo | recupera-se? |
+|---|---|---|
+| a fase **não arranca** | ler a mensagem e correr um comando | sim, repete-se |
+| a fase arranca com o túnel de pé | até as **3,2–7,5 h** do orçamento do enriquecimento | **não**: daqui a seis meses, num `01-cru.jsonl`, uma célula lenta pode ser térmica ou pode ser um estranho |
+
+Logo o `parar()` levanta, o `medicao()` **retira o sentinela que já tinha
+escrito** — senão um túnel avariado deixava o `POST /api/perguntar` a devolver
+409 por causa de uma fase que nunca começou, que é o 409 de sete horas do §3.2
+(c) sem fase nenhuma do outro lado — e a fase não começa.
+
+**E a direcção inversa é assimétrica de propósito:** quando **arrancar** falha,
+no fim, a fase já correu e os dados são bons. Levantar ali trocava um resultado
+válido por uma excepção, ou pior, tapava a excepção do corpo da fase (há um
+teste para isso). O túnel em baixo é, além disso, a direcção segura e
+**auto-anunciada** — o visitante recebe a página do fornecedor, o `/api/estado`
+continua a servir o dono em local — logo avisa, com o nome da unidade e o
+comando, e não levanta.
+
+**A ordem, e que ela está verificada por mutação.** Parar vem imediatamente
+depois do `escrever` e arrancar imediatamente antes do `limpar`, por fora: o
+ficheiro já existe quando o URL cai e ainda existe quando ele volta, e **nunca
+há um instante com túnel de pé e medição a correr**. Trocadas as duas chamadas,
+caem os **três** testes da ordem e nenhum outro — verificado a correr, não
+presumido.
+
+**E o portão I4 não ganhou trabalho nenhum.** Ninguém pergunta nada ao túnel no
+caminho do `GET /api/estado`: quem fala com a unidade é o `medicao()`, que
+corre no processo da **fase** e nunca no do servidor. Os 7,9 µs sem ficheiro e
+15,6 µs com ele continuam a descrever o que o I4 mede, e há um teste que cai se
+alguém puser uma pergunta ao túnel no `a_correr()` ou no `componente()` — antes
+de o I4 precisar de ser medido outra vez.
+
+**O que o D3 ainda não pode medir.** O portão exige o URL a deixar de responder
+em menos de 10 s e a voltar em menos de 30 s, com zero pedidos atendidos no
+registo do túnel. Nada disso é mensurável sem unidade: **o D3 fica aberto**, e
+o que está feito é o mecanismo que ele vai medir.
+
+### 3.5 E uma regra que não é mecanismo nenhum, mas tem de ficar escrita
 
 **Nenhuma fase de medição se corre com o túnel de pé**, e a partir do passo 7 isso
 é imposto pelo ajudante. Mas há um caso que o ajudante não cobre e vale nomear:
@@ -319,7 +396,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 2 | **Reescrever o portão I7 como I7′** (§2) e fixá-lo por teste: a asserção passa de «escuta em `127.0.0.1`» para «o corpo não sai», medida **de fora** | o portão volta a medir o que protege | **I7′** |
 | 3 | **`/api/health`** (§6) | uma rota que diz de que `sha` o serviço foi lançado | **D1** |
 | 4 | **Segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger` | o serviço sobrevive a um logout e a um reinício | **D2** |
-| 5 | **O túnel**, ligado ao sentinela (§3.3, peça 2): o ajudante `with` para e arranca a unidade do túnel | o URL existe, e cai quando uma fase corre | **D3** |
+| 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
 | 6 | **Fechar o serviço a estranhos antes de o abrir** (§7): autenticação na camada gratuita do fornecedor do túnel, com lista de endereços de correio | o URL funciona para quem o dono convidar | **D4** |
 | 7 | **A janela registada** (§3.3, peça 3): o ajudante escreve os instantes de túnel de pé no ficheiro da fase | uma célula lenta é interpretável daqui a seis meses | **D5** |
 | 8 | **Recuo** (§5.2): o serviço corre numa etiqueta; recuar é `git checkout` da anterior e reiniciar a unidade. **Ensaiado** | recuar é um comando, e foi ensaiado | **D6** |
@@ -504,9 +581,10 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde**, e deste plano muda
-em `src/` apenas o que o passo 7 da Fase 6 já autorizava (o sentinela), a rota
-`/api/health`, e o teste do I7′. Nada em `src/pipeline.py`, `src/grafo.py`,
+E a asserção de não-regressão: **`pytest` continua verde** (403 testes em
+2026-10-18, eram 377 antes do passo 5), e deste plano muda em `src/` apenas o
+que o passo 7 da Fase 6 já autorizava (o sentinela), o `src/web/tunel.py` do
+passo 5, a rota `/api/health`, e o teste do I7′. Nada em `src/pipeline.py`, `src/grafo.py`,
 `src/retrieval/` ou `src/generation/`. Um plano de publicação que precise de
 mexer na política está mal desenhado.
 
@@ -547,7 +625,11 @@ servidor continua a escutar em `127.0.0.1` e está na internet. O portão
 reescreve-se para medir o que protege: o corpo não sai, medido **de fora**.
 
 **O verdadeiro custo é a sequência de medição desta casa.** O mecanismo que
-devia mediar o conflito — o sentinela do passo 7, portão I8 — **não existe**, e
+devia mediar o conflito — o sentinela do passo 7, portão I8 — **não existia** à
+data em que este plano foi escrito (está feito desde 2026-10-18, e com ele o
+passo 5: o ajudante derruba o túnel, e o §3.4 regista as três decisões que isso
+obrigou a tomar — a indirecção, a ausência declarada, e a fase a recusar
+arrancar se o túnel não cair). O argumento abaixo é o que os fez existir, e
 o código diz hoje que até lá «não correr o servidor com uma medição a decorrer é
 disciplina e não mecanismo». Com um URL público não há onde aplicar disciplina,
 logo **o passo 7 passa a pré-requisito do túnel**. E o sentinela como está

@@ -34,8 +34,10 @@ from __future__ import annotations
 import contextlib
 import json
 import os
+import subprocess
 import threading
 import time
+import warnings
 from pathlib import Path
 
 import pytest
@@ -43,8 +45,9 @@ from fastapi.testclient import TestClient
 
 from src.corpus.build import load
 from src.corpus.models import Voice
-from src.web import sentinela
+from src.web import sentinela, tunel
 from src.web.app import BLOQUEANTES, EXIGIDOS, criar_app
+from src.web.tunel import TunelIndisponivel
 
 from .test_perguntar import GeradorDeterminista, _servico, _servidor
 from .test_pipeline import _pipeline
@@ -524,3 +527,234 @@ def test_i8_as_geracoes_do_servidor_e_do_script_nao_se_sobrepoem(
             assert a1 <= b0 or b1 <= a0, (
                 f"sobreposição: fase [{a0:.3f}, {a1:.3f}] e servidor "
                 f"[{b0:.3f}, {b1:.3f}]")
+
+
+# --- D3: a ordem, que é a decisão do passo 5 do PRODUCAO.md --------------- #
+#
+# «Parar o túnel vem imediatamente depois do `escrever` e arrancá-lo
+# imediatamente antes do `limpar`, por fora» — de modo que o ficheiro já exista
+# quando o URL cai e ainda exista enquanto ele volta, e **nunca haja um
+# instante com túnel de pé e medição a correr**. Invertê-la abre exactamente a
+# janela que o mecanismo fecha.
+#
+# A ordem está verificada **por mutação**, e não só por os testes passarem:
+# trocadas as duas chamadas em `src/web/sentinela.py` — `parar` antes do
+# `escrever` e `arrancar` depois do `limpar` —, caem os **três** testes abaixo
+# que falam da ordem (`..._cai_depois_de_o_sentinela_existir`,
+# `..._volta_antes_de_o_sentinela_ser_apagado` e `..._nunca_ha_um_instante_...`)
+# e nenhum outro. O `..._mesmo_quando_a_fase_rebenta` **não** cai, e é correcto
+# que não caia: é sobre o `finally`, não sobre a ordem. A disciplina é a do
+# passo 7 e está registada no `CONTROLO.md` §2.
+
+class TunelDuplo:
+    """Um túnel de mentira que **observa o ficheiro** em cada transição.
+
+    Não basta registar a ordem das chamadas: o que o plano afirma é uma relação
+    entre o túnel e o *sentinela*, logo o duplo olha para o ficheiro em cada
+    transição. É a diferença entre verificar a sequência e verificar a
+    propriedade.
+    """
+
+    nome = "duplo.service"
+
+    def __init__(self, alvo: Path, *, falha_a_parar=None, falha_a_arrancar=None):
+        self.alvo = alvo
+        self.falha_a_parar = falha_a_parar
+        self.falha_a_arrancar = falha_a_arrancar
+        self.de_pe = True
+        #: `(evento, o ficheiro existia?, o túnel estava de pé antes?)`
+        self.registo: list[tuple[str, bool, bool]] = []
+
+    def _anotar(self, evento: str) -> None:
+        self.registo.append((evento, self.alvo.exists(), self.de_pe))
+
+    def parar(self) -> None:
+        self._anotar("parar")
+        if self.falha_a_parar is not None:
+            raise self.falha_a_parar
+        self.de_pe = False
+
+    def arrancar(self) -> None:
+        self._anotar("arrancar")
+        if self.falha_a_arrancar is not None:
+            raise self.falha_a_arrancar
+        self.de_pe = True
+
+    def observar(self, evento: str) -> None:
+        """Para o corpo da fase se anotar a si mesmo no mesmo registo."""
+        self._anotar(evento)
+
+    @property
+    def eventos(self) -> list[str]:
+        return [e for e, _, _ in self.registo]
+
+
+def test_d3_o_tunel_cai_depois_de_o_sentinela_existir(alvo):
+    """A primeira metade da ordem, e a razão de ela ser essa.
+
+    Se o túnel caísse **antes** do `escrever`, havia um intervalo com o URL já
+    em baixo e nenhum sentinela no disco — e nesse intervalo o servidor do
+    outro checkout aceitava perguntas, que é o pedido que o §3.2 (a) diz que
+    aquece o chip sem gerar nada.
+    """
+    t = TunelDuplo(alvo)
+    with sentinela.medicao("fase-5z", tunel=t):
+        pass
+    (evento, existia, de_pe), *_ = t.registo
+    assert evento == "parar"
+    assert existia is True, "o sentinela já estava escrito quando o URL caiu"
+    assert de_pe is True, "e o túnel ainda estava de pé — era ele a cair"
+
+
+def test_d3_o_tunel_volta_antes_de_o_sentinela_ser_apagado(alvo):
+    """A segunda metade: o ficheiro ainda existe enquanto o URL volta.
+
+    Invertido, o URL respondia num instante em que já não havia sentinela
+    nenhum mas a fase ainda não tinha fechado — a mesma janela, do outro lado.
+    """
+    t = TunelDuplo(alvo)
+    with sentinela.medicao("fase-5z", tunel=t):
+        pass
+    evento, existia, de_pe = t.registo[-1]
+    assert evento == "arrancar"
+    assert existia is True, "o sentinela ainda estava lá quando o URL voltou"
+    assert de_pe is False
+    assert not alvo.exists(), "e só depois foi retirado"
+
+
+def test_d3_nunca_ha_um_instante_com_tunel_de_pe_e_medicao_a_correr(alvo):
+    """A propriedade inteira, que é a que o §3.3 compra, nas duas direcções.
+
+    O corpo da fase anota-se no mesmo registo, e a asserção é sobre **todas**
+    as entradas, as duas transições incluídas: em cada instante observado o
+    sentinela está no disco. Juntando a isso o túnel em baixo durante o corpo,
+    fica dito que o ficheiro já existia quando o URL caiu, continuava lá quando
+    voltou, e no meio não houve URL.
+
+    Com as duas chamadas trocadas em `src/web/sentinela.py`, as duas transições
+    passam a observar o ficheiro **ausente** e este teste cai nas duas.
+    """
+    t = TunelDuplo(alvo)
+    with sentinela.medicao("fase-5z", tunel=t):
+        t.observar("amostra-1")
+        t.observar("amostra-2")
+    for evento, existia, _ in t.registo:
+        assert existia is True, f"{evento}: sem sentinela no disco"
+    for evento, _, de_pe in t.registo:
+        if evento.startswith("amostra"):
+            assert de_pe is False, f"{evento}: o túnel estava de pé"
+    assert t.eventos == ["parar", "amostra-1", "amostra-2", "arrancar"]
+    assert t.de_pe is True
+
+
+def test_d3_o_tunel_volta_mesmo_quando_a_fase_rebenta(alvo):
+    """O mesmo argumento do `finally` do passo 7, aplicado ao URL.
+
+    Sem isto, uma fase que levantasse a meio deixava o serviço público em baixo
+    até alguém se lembrar — e o sentinela, esse, era apagado, logo nada no
+    `/api/estado` explicava o URL morto.
+    """
+    t = TunelDuplo(alvo)
+    with pytest.raises(RuntimeError), sentinela.medicao("rebenta", tunel=t):
+        raise RuntimeError("o Ollama desligou-se a meio")
+    assert t.de_pe is True
+    assert t.eventos == ["parar", "arrancar"]
+    assert not alvo.exists()
+
+
+# --- D3: o que acontece quando parar falha, que é a decisão deliberada ---- #
+
+def test_d3_se_o_tunel_nao_parar_a_fase_nao_arranca(alvo):
+    """A assimetria de custos, e porque é que o §2.4 não responde a isto.
+
+    O sentido único do §2.4 — «o servidor cede à medição, nunca o contrário» —
+    fala de quem cede entre o servidor e a fase. Aqui quem pode ceder é a
+    **medição**, e deixar uma fase correr com o túnel de pé é o que invalida os
+    dados que ela vai produzir. Uma fase que não arranca custa um comando; uma
+    fase de 3,2 a 7,5 horas corrida com um estranho no CPU custa as horas **e
+    não se descobre depois** — é a forma das 4 horas que o cache de KV
+    invalidou (`CONTROLO.md` §4).
+    """
+    t = TunelDuplo(alvo, falha_a_parar=TunelIndisponivel("devolveu 5"))
+    corpo_correu = False
+    with pytest.raises(TunelIndisponivel, match="devolveu 5"), \
+            sentinela.medicao("fase-5z", tunel=t):
+        corpo_correu = True
+    assert corpo_correu is False, "a fase não começou"
+    assert t.eventos == ["parar"], "e não se tentou arrancar o que não parou"
+
+
+def test_d3_uma_fase_que_nao_arranca_nao_deixa_o_servidor_recusado(alvo):
+    """O sentinela é retirado antes de levantar, e tem de ser.
+
+    Senão um túnel avariado deixava o `POST /api/perguntar` a devolver 409 por
+    causa de uma fase que nunca correu — exactamente o 409 de sete horas que o
+    §3.2 (c) chama «avariado com uma mensagem interna», e sem fase nenhuma do
+    outro lado.
+    """
+    t = TunelDuplo(alvo, falha_a_parar=TunelIndisponivel("não está instalada"))
+    with pytest.raises(TunelIndisponivel), \
+            sentinela.medicao("fase-5z", tunel=t):
+        pass
+    assert not alvo.exists()
+    assert sentinela.a_correr() is None
+
+
+def test_d3_se_o_tunel_nao_voltar_a_fase_termina_e_avisa(alvo):
+    """A direcção inversa é assimétrica de propósito.
+
+    A fase já correu e os dados são bons: levantar aqui trocava um resultado
+    válido por uma excepção. O túnel em baixo é a direcção segura, e
+    auto-anuncia-se — o visitante recebe a página do fornecedor.
+    """
+    t = TunelDuplo(alvo, falha_a_arrancar=TunelIndisponivel("devolveu 1"))
+    with pytest.warns(RuntimeWarning, match="NÃO voltou"), \
+            sentinela.medicao("fase-5z", tunel=t) as m:
+        assert m.fase == "fase-5z"
+    assert not alvo.exists(), "o sentinela sai de qualquer maneira"
+
+
+def test_d3_um_tunel_que_nao_volta_nao_tapa_a_excepcao_da_fase(alvo):
+    """Duas falhas ao mesmo tempo, e a que importa é a da fase.
+
+    Se o `arrancar` levantasse, a mensagem que chegava a quem corre a fase era
+    a do túnel, e a causa real — o que rebentou na geração — desaparecia.
+    """
+    t = TunelDuplo(alvo, falha_a_arrancar=TunelIndisponivel("devolveu 1"))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        with pytest.raises(ValueError, match="a amostra 7"), \
+                sentinela.medicao("fase-5z", tunel=t):
+            raise ValueError("a amostra 7 veio vazia")
+
+
+# --- D3: e o que o passo 5 NÃO acrescentou ao caminho do /api/estado ------ #
+
+def test_d3_o_tunel_por_omissao_e_o_desta_maquina_e_hoje_e_o_ausente(
+        alvo, monkeypatch):
+    """Sem `PESSOABOT_TUNEL`, uma fase corre — é o estado desta máquina."""
+    monkeypatch.delenv(tunel.VARIAVEL, raising=False)
+    with sentinela.medicao("fase-5z"):
+        assert alvo.exists()
+    assert not alvo.exists()
+
+
+def test_d3_o_caminho_do_estado_nao_pergunta_nada_ao_tunel(alvo, monkeypatch):
+    """O portão **I4** não ganhou trabalho nenhum, e isto fixa-o.
+
+    Os 7,9 µs sem ficheiro e 15,6 µs com ele continuam a descrever o que o I4
+    mede porque quem fala com o túnel é o `medicao()`, que corre no processo da
+    **fase** e nunca no do servidor. Se alguém puser uma pergunta ao túnel no
+    `a_correr()` ou no `componente()`, este teste cai — e cai antes de o I4
+    precisar de ser medido outra vez.
+    """
+    def recusar(*a, **kw):
+        raise AssertionError("o /api/estado perguntou algo ao túnel")
+
+    monkeypatch.setattr(tunel, "desta_maquina", recusar)
+    monkeypatch.setattr(subprocess, "run", recusar)
+    assert sentinela.a_correr() is None
+    assert sentinela.componente().pronto is True
+    sentinela.escrever("fase-5z")
+    assert sentinela.a_correr() is not None
+    assert sentinela.componente().pronto is False
