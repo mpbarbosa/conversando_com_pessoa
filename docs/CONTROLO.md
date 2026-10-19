@@ -263,6 +263,13 @@ literalmente** — e o serviço está na internet. A asserção usava «escuta e
 duas deixam de ser a mesma coisa. Reescreve-se como **I7′**: o corpo do poema
 não sai desta máquina, medido **de fora**.
 
+> ✅ **Feito em 2026-10-19** (passo 2), e com um achado que esta entrada não
+> previa: **reescrever o portão não bastou, porque a saída B não bastava.** O
+> varrimento encontrou três outras portas por onde o corpo saía, a pior delas
+> **em fluxo** — antes de a guarda de plágio poder reprovar. Ver
+> [`PRODUCAO.md`](PRODUCAO.md) §2.1, as correcções #40 e #41 do §4, e a secção
+> «A retenção de versos» no fim deste ficheiro.
+
 **2. O mecanismo que devia mediar o conflito com as medições não existe.** O
 sentinela é o **passo 7** da Fase 6, e a fase está no passo 6 — verificado em
 2026-10-18: zero ocorrências de `medicao-a-correr` em `src/` e `tests/`. O
@@ -353,6 +360,8 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 
 | 38 | «A monotonia nos três níveis é a evidência mais forte que consigo — é o que a mecânica prediz e o que uma coincidência não prediz» ([5Z §1.1](FASE-5Z.md), pré-registo) | **Uma coincidência prediz, e previu.** A monotonia verificou-se (0,0075 < 0,0096 < 0,0144) e **inverte ao remover uma célula de vinte** — sem `q34/r1` o braço de 0,9 fica **0,8×** o de produção. Com **44 das 60** amostras a densidade **zero**, a ordenação de três médias é decidida por quais células calharam não ser zero. **Escrevi a força da predição a partir da sua forma lógica, não dos dados que a iam avaliar** | [5Z §1](FASE-5Z-RELATORIO.md) |
 | 39 | O sentinela de medição vive em **`data/.medicao-a-correr`** ([FASE-6 §2.4](FASE-6.md), pré-registo do passo 7) | **Caminho relativo, e o serviço público corre num segundo checkout**, logo há **dois `data/`**: a fase escreve no seu e o servidor verifica o outro. O ficheiro nunca é visto, o `/api/estado` diz que está tudo bem, e o mecanismo que existe para tornar o túnel seguro fica **silenciosamente desligado** — a forma «não dá erro: dá respostas erradas» do manifesto do índice, desta vez **no instrumento que protege as medições**. Corrigido para absoluto **antes de o código existir**, que é a primeira vez nesta lista que isso acontece. **E o teste que o apanharia não existia:** com um processo e um directório o portão I8 passava — daí a asserção dos dois checkouts, verificada por mutação | [`PRODUCAO.md`](PRODUCAO.md) §4, achado a planear o túnel |
+| 40 | A saída B torna o portão I7′ **verdadeiro por construção**: sem o passo 9 não há rota que devolva corpo de poema, logo o corpo não sai ([`PRODUCAO.md`](PRODUCAO.md) §2, escrito a planear o túnel) | **Verdade para a rota, falso para o serviço.** O varrimento falhou em **três** sítios, todos abertos de propósito pela Fase 6: os `fragmento` da tentativa plagiada (§4.4 manda-a ao fio para explicar a espera), o evento `turno` dela, e o `serial.verso_copiado` — cujo comentário dizia «o verso **gerado** [...] sem o verso original», o que é falso exactamente numa cópia à letra, em que o gerado **é** o original. Medido: 6 de 8 versos do `poem_1005` no fio. **E o achado 1 não se corrige a jusante:** a tentativa sai **em fluxo**, antes de a guarda de plágio existir para a reprovar. Eu raciocinei sobre a rota que serve corpo e não sobre **todas** as rotas que o serviço tem | [`PRODUCAO.md`](PRODUCAO.md) §2.1, achado pelo varrimento do passo 2 |
+| 41 | O varrimento do I7′ mede se o corpo vai ao fio (`tests/test_i7.py`, 1.ª versão) | **Não media.** Partia a resposta por `\n` e comparava cada linha com o conjunto do corpus — e o fio é **NDJSON**, onde a mudança de linha de um verso é o par de caracteres `\n` *dentro* de uma cadeia JSON, não uma linha do corpo HTTP. Partido assim, o fio de uma geração inteira são **seis** linhas, e um verso no meio de uma delas nunca é uma linha. **Com a retenção desligada em `app.py`, as oito asserções passaram verdes.** Só a mutação o mostrou — o segundo defeito de instrumento neste mesmo portão, depois do #39. Agora varre por **subcadeia**, no texto cru *e* nas cadeias desserializadas, porque o cru não vê um verso com `"` dentro e as cadeias não vêem corpo que viaje fora de um evento válido | [`PRODUCAO.md`](PRODUCAO.md) §2.1 |
 
 ### Defeitos encontrados nos meus próprios instrumentos
 
@@ -397,7 +406,7 @@ mesmo que a corrida que as gerou e não serve nenhuma pergunta aberta.
 | Qualidade do reranker em PT-PT desconhecida | Pode piorar o ranking | mede-se no Passo 2 da Fase 3 |
 | ~~**Sem copiar, nem sempre é a voz pedida**~~ | **medido na Fase 5**: é verdade que nem sempre é — o Caeiro dá 0,0 de mediana em poética. Mas a explicação estava **errada**: ele quebra a interdição **sem contexto nenhum**, e a ablação dá 4 pares contra 4 | ✅ fechada, e o suspeito absolvido |
 | Alguns poemas são atractores (`poem_3426`, `poem_2832`) | muito recuperados e muito copiados | pode exigir MMR na recuperação |
-| **Streaming imprime antes de validar** | só o 1.º verso é retido; brasileirismos a meio só são avisados | aceite; buffer total custaria o streaming |
+| **Streaming imprime antes de validar** | só o 1.º verso é retido; brasileirismos a meio só são avisados | aceite; buffer total custaria o streaming. ⚠️ **Deixou de ser só de qualidade quando o serviço passou a ser público:** o que sai antes de validar inclui **corpo de poema**, na tentativa que a guarda de plágio ia reprovar (6 de 8 versos, medido). Resolvido **para o corpo** por `src/web/retencao.py` — retenção por linha, portão I7′, [`PRODUCAO.md`](PRODUCAO.md) §2.1 —, e **não** para os brasileirismos, que continuam a sair antes de haver veredicto |
 | Enviesamento de pooling | sistema novo é penalizado por construção | procedimento escrito no topo de `test_retrieval_gold.py` |
 | Pool de top-5 era raso | 3 gabaritos estavam em 6.º–9.º | top-10 na próxima ronda |
 | **Tabacaria em 37.º sem explicação** | hipótese do chunking testada e refutada | investigar chunk a chunk |
@@ -1232,3 +1241,70 @@ Número lateral dessa corrida falhada: **0 de 3 primeiras tentativas plagiaram**
 contra 1 de 1 na sessão do utilizador. O plágio é um evento, não o estado normal
 destas respostas — e isto enquadra o que a correcção vale, porque ela só age
 quando a primeira tentativa falha.
+
+
+---
+
+## A retenção de versos, e o que ela custa em texto real
+
+Portão **I7′**, passo 2 do [`PRODUCAO.md`](PRODUCAO.md) (§2.1). O túnel fez o
+portão I7 da Fase 6 passar sem proteger nada, e o varrimento de substituição
+mostrou que a saída B — não construir o `GET /api/poema/{id}` — fechava a rota
+e deixava **três outras portas** abertas. A pior sai **em fluxo**: a tentativa
+que a guarda de plágio ia reprovar chega ao cliente antes de haver veredicto,
+logo não há verificação a jusante que a possa apanhar.
+
+A correcção é um filtro por linha em `src/web/retencao.py`: retém-se a linha
+cujo texto normalizado está no corpus, e **retém-se a linha e não o evento** —
+`aprovado: false`, o veredicto e a fracção copiada continuam a ir ao fio,
+porque são eles que explicam ao utilizador porque esperou 58 s em vez de 30
+(§4.4 da Fase 6).
+
+### O limiar
+
+Protegem-se as linhas de **4 palavras ou mais**: **29 816** das **33 236**
+linhas distintas do corpus, já normalizadas (espaços colapsados, `casefold`).
+Ficam **3 420** de fora — `*`, `IV`, `Agora`, `A verdade`, `Nada, nada` —, que
+são numeração, rubricas de cena e fala comum: protegê-las fazia a retenção
+cortar texto gerado legítimo.
+
+### O que custa, contado nos textos que esta casa já gerou
+
+Os dez ficheiros `01-cru.jsonl` das Fases 5B a 5Z, que é todo o texto gerado
+nesta máquina que está guardado:
+
+| | |
+|---|---|
+| textos gerados | **1 560** |
+| linhas de 4+ palavras | **16 866** |
+| linhas retidas | **20** (**0,119%**) |
+| textos afectados | **12** de 1 560 (0,77%) |
+| linhas distintas | **15**, de **6** poemas |
+| falsos positivos | **0** |
+
+As 15 foram inspeccionadas uma a uma, e **as 15 são versos de Pessoa** — «O
+mistério das coisas, onde está ele?» e «As coisas não têm significação: têm
+existência.» (`poem_3452`), «Que voz vem no som das ondas» (`poem_100`) —, e
+**8 das 15 são linhas seguidas do `poem_3657` num texto só**, que é um poema
+inteiro reproduzido num braço da 5Z e que nenhuma destas fases tratou como tal.
+
+**A ressalva que importa:** isto mede o custo da retenção, não a frequência do
+plágio. O plágio é um evento e não o estado normal destas respostas (ver
+§Correcção sobre a repetição por plágio), e estes 16 866 versos são de fases de
+medição com perguntas fixas, não de utilizadores.
+
+### O que a retenção não é
+
+Não é uma guarda de plágio e não a substitui: apanha a linha **igual**, e uma
+linha com uma palavra trocada passa-lhe ao lado — é da `guard.py`, que a mede
+por fracção. A da 5B que motivou a correcção de repetição por plágio era
+precisamente por substituição (`Natureza`→`Silêncio`), e a retenção não a
+teria visto. As duas têm alvos diferentes: a guarda protege a qualidade da
+resposta, a retenção protege o corpus de ser publicado.
+
+E **não garante o I7′ sozinha.** O que o garante é a cobertura: o
+`tests/test_i7.py` falha se nascer uma rota que não passe pelo varrimento, e
+foi assim que as três portas apareceram. A comparação em si é exacta dos dois
+lados, logo um teste que a medisse seria circular — e a asserção plena do I7′ é
+**de fora, contra o URL público**, que não existe até ao passo 6 sobre o
+passo 4. Está registado como pendente em vez de o portão se dar por cumprido.

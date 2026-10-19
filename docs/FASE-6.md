@@ -577,8 +577,16 @@ dificuldade.
 | 6 | **Cancelamento** no cliente e no Ollama | abortar liberta o trinco e para a geração | **I5** |
 | 7 | ✅ **Sentinela de medição** (§2.4): `src/web/sentinela.py`, **caminho absoluto** (ver §2.4: o `data/…` relativo era um defeito), verificado antes de cada geração e reportado no `/api/estado`; ajudante `with` para fases futuras | o servidor e uma fase de medição deixam de se atropelar | **I8** ✅ |
 | 8 | **Persistência** (§3.4) e `GET /api/sessoes` | reabrir conversas; `PropostaReg` a acumular | **I6** |
-| 9 | **Painel do poema** e `GET /api/poema/{id}` | fichas de fonte clicáveis | **I7** |
+| 9 | **Painel do poema** e `GET /api/poema/{id}` | fichas de fonte clicáveis | **I7′**, e ver a nota abaixo |
 | 10 | **Fechar**: `requirements.txt`, `.gitignore` (`data/sessoes.db` **só** — o sentinela deixou de precisar de entrada quando o passo 7 o pôs fora de qualquer checkout; verificado, não assumido: `git status` não o vê. O `data/` **não** está ignorado por inteiro, só ficheiros nomeados), `README`, `CONTROLO.md` §2 e §7, e correr tudo | a fase documentada | 257+ testes a passar (eram 243 quando este plano foi escrito; o Passo 44 levou-os a 257) |
+
+> ⚠️ **O passo 9 está suspenso, e não por falta de tempo.** A saída B do
+> [`PRODUCAO.md`](PRODUCAO.md) decidiu publicar sem ele: **a rota não existe
+> enquanto houver túnel**, porque uma rota que devolve corpo de poema atrás de
+> um URL público é o corpus publicado, e os termos de uso do Arquivo Pessoa não
+> estão confirmados (`data/README.md`). Se a saída A fechar e o passo 9 for
+> escrito, ele nasce com a verificação de origem que o I7 original pedia — e aí
+> o túnel passa a ser o problema, não a solução.
 
 Passos 1–6 são o produto mínimo: uma interface que responde, mostra o custo e
 cancela. O **passo 7 é o que a torna segura de ter ligada** enquanto a sequência
@@ -600,7 +608,8 @@ diz qual falhou.
 | **I4 — o laço não bloqueia** | O servidor responde durante uma geração | durante 30 s de geração, `GET /api/estado` responde em **< 100 ms**, em 10 de 10 tentativas |
 | **I5 — cancelar cancela** | Abortar para a geração | após `abort`, a pergunta seguinte arranca em menos de 2 s e o trinco está livre; o Ollama não está a decodificar |
 | **I6 — corpos não são guardados** | `data/sessoes.db` não contém poemas | varrimento da base por qualquer linha de corpo de qualquer poema do corpus: **zero** acertos |
-| **I7 — o painel não é uma porta** | O corpo do poema não sai da máquina | `GET /api/poema/{id}` recusa pedidos de fora de `127.0.0.1`; o servidor não escuta noutro interface sem sinalizador explícito |
+| **I7 — o painel não é uma porta** ❌ **retirado** | O corpo do poema não sai da máquina | ~~`GET /api/poema/{id}` recusa pedidos de fora de `127.0.0.1`; o servidor não escuta noutro interface sem sinalizador explícito~~ — **substituído pelo I7′** (ver abaixo) no passo 2 do [`PRODUCAO.md`](PRODUCAO.md), em 2026-10-19 |
+| **I7′ — o corpo não sai desta máquina** ✅ | O corpo do poema não sai da máquina | **nenhuma linha de corpo de nenhum poema do corpus aparece em nenhuma resposta de nenhuma rota** — o varrimento do I6 apontado ao fio HTTP, em `tests/test_i7.py`. A asserção plena é **de fora**, contra o URL público, e essa metade espera o túnel (passos 4 e 6 do `PRODUCAO.md`) |
 | **I8 — o servidor cede à medição** ✅ | O servidor não compete com uma fase pelo mesmo Ollama | com o sentinela presente, `POST /api/perguntar` responde **409** nomeando a fase e o PID, e `GET /api/estado` mostra-o como componente; sem o ficheiro, gera normalmente. E a medição que o justifica: **com** sentinela, os `segundos` de 10 gerações do servidor e de 10 de um script não se sobrepõem no tempo — verificado por *timestamps*, não por intenção. **E a asserção que o [`PRODUCAO.md`](PRODUCAO.md) §4 acrescentou:** a fase escreve de um checkout e o servidor, **no outro**, vê-o — sem ela o I8 passava num processo com um directório só e não dizia nada sobre a máquina real. Tudo em `tests/test_sentinela.py`, 24 testes |
 
 E uma asserção de **não-regressão**, que é a mais importante de todas: `pytest`
@@ -621,7 +630,7 @@ fase**. Se um passo precisar de mexer no `pipeline.py`, o passo está mal desenh
 | A espera parece uma avaria | 19 s de silêncio parecem-no mesmo | §4.1: estado que avança com números, nunca um indicador a rodar |
 | A base de dados cresce sem limite | uma pergunta por minuto durante meses | só texto e ids; `VACUUM` manual, e nada automático que apague (apagar o registo de medição é o que esta casa não faz) |
 | `fastapi` e `uvicorn` ficam declarados e pouco exercidos | a lição de 01/10 com o `langchain` | entram no mesmo commit do código e dos testes que falham sem elas |
-| Expor à rede por distracção | um `--host 0.0.0.0` copiado de um tutorial | omissão em `127.0.0.1`, **I7**, e o aviso no `README` |
+| Expor à rede por distracção | um `--host 0.0.0.0` copiado de um tutorial | omissão em `127.0.0.1`, **I7′**, e o aviso no `README`. ⚠️ A mitigação original era o I7, e um túnel passa-a sem a tocar: ver `PRODUCAO.md` §2 |
 
 ---
 

@@ -118,8 +118,14 @@ def poema(p: Poem) -> dict[str, Any]:
     """O poema **com** corpo. Só o `GET /api/poema/{id}` do passo 9 chama isto.
 
     Está neste ficheiro para que o formato do fio viva todo num sítio, mas é o
-    único serializador que leva verso de Pessoa — e o portão **I7** é o que
-    mantém a rota que o usa fechada a `127.0.0.1`.
+    único serializador que leva verso de Pessoa **de propósito**.
+
+    ⚠️ A rota que o usa **não existe enquanto houver túnel** — saída B do
+    [`PRODUCAO.md`](../../docs/PRODUCAO.md). O portão que a protegia (**I7**:
+    fechada a `127.0.0.1`) foi reescrito como **I7′**, porque um túnel liga-se
+    de dentro ao *loopback* e passa-o sem o tocar. Se o passo 9 for escrito, a
+    rota nasce com verificação de origem, e esta função deixa de ser chamada
+    pelo caminho público.
     """
     return {
         "id": p.id,
@@ -175,7 +181,15 @@ def suspeita(x: Suspeita) -> dict[str, Any]:
 
 
 def verso_copiado(x: VersoCopiado) -> dict[str, Any]:
-    """O verso **gerado** que copiou, e de que poema. Sem o verso original."""
+    """O verso **gerado** que copiou, e de que poema. Sem o verso original.
+
+    ⚠️ **«Sem o verso original» é falso no caso que importa**, e foi o terceiro
+    achado do varrimento do portão **I7′** (`PRODUCAO.md` §2.1). É verdade
+    quando a cópia troca palavras — e é falso numa cópia **à letra**, em que o
+    verso gerado **é** o original. Daí o `web/retencao.py` esvaziar este campo
+    quando o conteúdo dele está no corpus: o que fica é a similaridade e o
+    poema, que é o que o rodapé precisa para explicar a rejeição.
+    """
     return {
         "verso": x.verso,
         "similaridade": x.similaridade,

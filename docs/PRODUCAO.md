@@ -141,6 +141,70 @@ existe enquanto houver túnel». Se um dia a saída A fechar e o passo 9 for
 escrito, a rota nasce com a verificação de origem que o I7 original pedia — e
 nessa altura o túnel passa a ser o problema, não a solução.
 
+### 2.1 O passo 2, feito: a saída B não bastava, e o varrimento achou três portas
+
+Escrito em 2026-10-19, depois do passo 2.
+
+O raciocínio da §2 acima tinha um erro de omissão, e era confortável: dizia que
+a saída B torna o I7′ «verdadeiro por construção», porque sem o passo 9 não há
+rota que devolva corpo. **É verdade para a rota, e falso para o serviço.** O
+`tests/test_i7.py` foi escrito a contar com uma passagem trivial e falhou em
+três sítios — os três abertos **de propósito** pela Fase 6:
+
+| # | por onde | porque é que a Fase 6 o abriu | medido |
+|---|---|---|---|
+| 1 | **os `fragmento` da tentativa plagiada** | §4.4: a tentativa rejeitada vai ao fio para o utilizador saber porque esperou 58 s em vez de 30 | **6 de 8 versos** do `poem_1005` no fio |
+| 2 | **o evento `turno` da tentativa rejeitada**, com o texto inteiro | o mesmo §4.4, e a Fase 5Y sobre o que custa guardar só a última tentativa | os mesmos 6 |
+| 3 | **`serial.verso_copiado`** | o comentário dizia «o verso **gerado** que copiou [...] sem o verso original» | verdade numa cópia com palavras trocadas; **falso à letra**, que é o caso em que o verso gerado **é** o original |
+
+**O achado 1 é o que importa, e é de uma família que não se resolve a jusante.**
+A tentativa sai **em fluxo, à medida que é gerada** — logo sai *antes* de a
+guarda de plágio existir para a reprovar. Não há verificação no fim que a possa
+apanhar: já saiu. É o parente exacto do que o `CONTROLO.md` §5 já registava
+sobre o CLI («o streaming imprime antes de validar»), e o que muda com um túnel
+é a consequência: ali o ecrã mostrava ao dono um verso que o dono tem no disco;
+aqui publica-se.
+
+**A correcção, e a decisão que ela obrigou a tomar.** `src/web/retencao.py`:
+um filtro de fluxo **por linha**, que retém a linha cujo texto normalizado está
+no corpus, e uma redacção genérica do `turno` já serializado. Fica em
+`src/web/`, que é transporte — nada em `src/pipeline.py`, `src/guard.py` ou
+`src/generation/`, como a §9 exige.
+
+A decisão foi **o que retir**: a linha, e não o evento. Passar o I7′ deixando
+de mandar a tentativa rejeitada era mais fácil e desfazia o §4.4, devolvendo o
+utilizador aos 58 s sem explicação. Então o que sobrevive é tudo menos o verso:
+`aprovado: false`, o veredicto, a fracção copiada, a lista de versos copiados —
+com o campo `verso` vazio quando era o do corpus. O `test_i7.py` prende as
+**duas** metades, porque proteger uma à custa da outra é regressão.
+
+**O preço, contado e não estimado.** Protegem-se as linhas de 4 palavras ou
+mais: 29 816 das 33 236 linhas distintas do corpus. Contra os **1 560 textos
+gerados** que os dez `01-cru.jsonl` das Fases 5B a 5Z guardam — 16 866 linhas
+de 4+ palavras —, a retenção acerta em **20 linhas (0,119%)**, em 12 textos, e
+são **15 linhas distintas de 6 poemas**. Inspeccionadas uma a uma: **as 15 são
+versos de Pessoa**, incluindo 8 linhas seguidas do `poem_3657` num texto só,
+que é um poema inteiro reproduzido. **Zero falsos positivos em 1 560 textos
+reais.**
+
+**E o defeito do instrumento, que é o segundo deste portão.** A primeira versão
+do varrimento partia a resposta por `\n` e comparava cada linha com o conjunto.
+O fio é **NDJSON**: a mudança de linha de um verso é o par de caracteres `\n`
+*dentro* de uma cadeia JSON, não uma linha do corpo HTTP. Partido assim, o fio
+de uma geração inteira são seis linhas, e um verso no meio de uma delas nunca é
+uma linha. **Com a retenção desligada em `app.py`, as oito asserções passaram
+verdes.** Só a mutação o mostrou. Agora varre por subcadeia, no texto cru e nas
+cadeias desserializadas — as duas, porque o cru não vê um verso com `"` dentro
+e as cadeias não vêem corpo que viaje fora de um evento válido. Custa 19 ms por
+resposta. O `CONTROLO.md` §4 ganha a entrada.
+
+**O que o passo 2 não fecha.** A asserção plena do I7′ é «medido **de fora**,
+contra o URL público», e não há URL: ele é o passo 6 sobre o passo 4. O que está
+fixado é o varrimento contra a aplicação, que é a metade que apanha regressões;
+a outra metade espera o túnel, e está escrita como pendente em vez de o portão
+se dar por cumprido. Dar um portão por cumprido com metade da medição feita é
+exactamente o que fez o I7 ser reescrito.
+
 ---
 
 ## 3. O conflito com a sequência de medição, que é o verdadeiro custo da saída D
@@ -393,7 +457,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | # | passo | entrega | portão |
 |---|---|---|---|
 | 1 | **Passo 7 da Fase 6**, com a correcção do caminho absoluto da §4: sentinela, verificação antes de cada geração, `/api/estado`, ajudante `with` | o servidor e uma medição deixam de se atropelar | **I8**, com a asserção dos dois checkouts |
-| 2 | **Reescrever o portão I7 como I7′** (§2) e fixá-lo por teste: a asserção passa de «escuta em `127.0.0.1`» para «o corpo não sai», medida **de fora** | o portão volta a medir o que protege | **I7′** |
+| 2 | ✅ **feito** (2026-10-19) — **o portão I7 reescrito como I7′** (§2) e fixado por teste (`tests/test_i7.py`, 8 testes). **E a surpresa: a saída B não bastava.** O varrimento achou **três outras portas** por onde o corpo saía, e obrigou a escrever a retenção (`src/web/retencao.py`) — §2.1 | o portão volta a medir o que protege, e o corpo deixou de sair por onde ninguém olhava | **I7′**, na metade que não precisa do túnel |
 | 3 | **`/api/health`** (§6) | uma rota que diz de que `sha` o serviço foi lançado | **D1** |
 | 4 | **Segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger` | o serviço sobrevive a um logout e a um reinício | **D2** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
@@ -571,7 +635,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | portão | afirmação | como se mede |
 |---|---|---|
 | **I8′ — a medição e o serviço não se atropelam, com dois checkouts** | o sentinela atravessa checkouts | a fase escreve o sentinela do checkout de trabalho e o serviço, no **outro** checkout, vê-o: `/api/estado` mostra-o e `POST /api/perguntar` recusa. Com o caminho relativo da especificação original, este portão **falha** — é o seu objectivo |
-| **I7′ — o corpo não sai desta máquina** | o túnel não publica o corpus | **de fora**, contra o URL: `GET /api/poema/{id}` dá 404, e o varrimento do I6 apontado ao fio HTTP dá **zero** acertos de qualquer linha de corpo de qualquer poema |
+| **I7′ — o corpo não sai desta máquina** 🔶 **metade medida** | o túnel não publica o corpus | **de fora**, contra o URL: `GET /api/poema/{id}` dá 404, e o varrimento do I6 apontado ao fio HTTP dá **zero** acertos de qualquer linha de corpo de qualquer poema. **Feito (2026-10-19):** o varrimento contra a aplicação, `tests/test_i7.py`, 8 testes, com a cobertura de rotas a falhar se nascer uma rota não varrida, e verificado a morder por mutação das duas metades da retenção. **Falta:** correr o mesmo varrimento **de fora**, contra o URL do túnel — passo 6 sobre o passo 4 |
 | **D1 — a saúde não mente** | `/api/health` nomeia o código a correr | o `sha` devolvido é o do `HEAD` do checkout do serviço, em 3 arranques seguidos. Com o Ollama em baixo, `status` não é `ok` |
 | **D2 — o serviço sobrevive à sessão** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder |
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
@@ -581,12 +645,26 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (403 testes em
-2026-10-18, eram 377 antes do passo 5), e deste plano muda em `src/` apenas o
-que o passo 7 da Fase 6 já autorizava (o sentinela), o `src/web/tunel.py` do
-passo 5, a rota `/api/health`, e o teste do I7′. Nada em `src/pipeline.py`, `src/grafo.py`,
-`src/retrieval/` ou `src/generation/`. Um plano de publicação que precise de
-mexer na política está mal desenhado.
+E a asserção de não-regressão: **`pytest` continua verde** (411 testes em
+2026-10-19, eram 403 depois do passo 5 e 377 antes dele), e deste plano muda em
+`src/` apenas o que o passo 7 da Fase 6 já autorizava (o sentinela), o
+`src/web/tunel.py` do passo 5, a rota `/api/health`, o teste do I7′ — **e o
+`src/web/retencao.py` que o passo 2 obrigou a escrever, mais a ligação dele no
+`src/web/app.py`** (§2.1). Nada em `src/pipeline.py`, `src/grafo.py`,
+`src/guard.py`, `src/retrieval/` ou `src/generation/`. Um plano de publicação
+que precise de mexer na política está mal desenhado.
+
+> ⚠️ **O passo 2 mexeu num portão da Fase 6, e isso tem de ficar dito.** O
+> **I1** — «a API não decide nada», o `Turno` igual campo a campo nos três
+> braços — passou a comparar o `Turno` **publicado**: serializado *e* com a
+> retenção aplicada aos três lados (`_publicado`, em `tests/test_perguntar.py`).
+> O `Turno` que os três braços produzem continua idêntico, que é o que o I1
+> afirma; o que difere é a publicação, e o CLI e o grafo não publicam nada.
+> Comparar sem isso era exigir que a API publicasse o corpus para o portão
+> passar — e a retenção aplica-se aos dois lados, logo uma API que retivesse
+> mais continuava a divergir e a falhar. O teste do ciclo de repetição ganhou
+> uma asserção de que a retenção **morde nesse caso**, para o `_publicado` não
+> poder virar um `serial.turno` com passos a mais.
 
 ---
 
@@ -623,6 +701,16 @@ verificar pelo serviço e nunca pelo emblema, e ensaiar o recuo.
 **O túnel faz o portão I7 passar e tira a protecção que ele codifica** — o
 servidor continua a escutar em `127.0.0.1` e está na internet. O portão
 reescreve-se para medir o que protege: o corpo não sai, medido **de fora**.
+Está feito desde 2026-10-19 na metade que não precisa do túnel, e o §2.1
+registra o que o varrimento encontrou: **a saída B não bastava.** Havia três
+outras portas — os fragmentos da tentativa plagiada, o `turno` dela, e o verso
+copiado que à letra **é** o original —, e a primeira sai **em fluxo**, antes de
+a guarda de plágio poder reprovar, logo nenhuma verificação a jusante a apanha.
+A correcção é uma retenção por linha em `src/web/retencao.py`, que retém o
+verso e deixa passar a explicação; custa 20 linhas em 16 866 de texto gerado
+real (0,119%), e as 20 são versos de Pessoa. **E o varrimento, na primeira
+versão, não mordia:** partia o fio por `\n`, o fio é NDJSON, e com a retenção
+desligada passava verde.
 
 **O verdadeiro custo é a sequência de medição desta casa.** O mecanismo que
 devia mediar o conflito — o sentinela do passo 7, portão I8 — **não existia** à

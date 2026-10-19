@@ -20,13 +20,36 @@ constrói cada peça quando alguém a pede. Importar este módulo num teste tem 
 custar milissegundos, senão o `pytest` paga o encoder — e o portão **I4** exige
 que o `/api/estado` responda em menos de 100 ms **durante** uma geração.
 
-## Porque é que o servidor escuta em 127.0.0.1 e isso não é um valor por omissão
+## Porque é que o servidor escuta em 127.0.0.1, e porque é que isso deixou de bastar
 
-A interface serve **corpos de poemas** (`GET /api/poema/{id}`, passo 9) de um
-corpus que não está no repositório porque os termos de uso do Arquivo Pessoa
-não estão confirmados — ver `data/README.md`. Expor isto à rede era publicar
-esse material. A omissão é local, e mudá-la tem de ser explícito e ruidoso.
-Portão **I7**.
+O corpus não está no repositório porque os termos de uso do Arquivo Pessoa não
+estão confirmados — ver `data/README.md`. Expor o corpo dos poemas à rede era
+publicar esse material. A omissão é local, e mudá-la tem de ser explícito e
+ruidoso.
+
+⚠️ **Mas «escuta em `127.0.0.1`» era uma *medida* de «não é alcançável de
+fora», e um túnel separa as duas.** O `cloudflared` corre nesta máquina e
+liga-se de dentro ao *loopback*: o `bind` não muda, o portão **I7** da Fase 6
+passa literalmente, e o serviço está na internet. O portão foi reescrito como
+**I7′** — *nenhuma linha de corpo de nenhum poema aparece em nenhuma resposta de
+nenhuma rota* —, e a protecção que o torna verdadeiro é a `retencao.py` abaixo,
+não este `bind`. Ver [`docs/PRODUCAO.md`](../../docs/PRODUCAO.md) §2 e §2.1.
+
+## A retenção de versos, que é a segunda retenção deste ficheiro
+
+Há duas, e confundi-las dava um erro difícil de ler:
+
+- a do **início** (`apresentacao.limpar_inicio`) é de **apresentação** — tira o
+  preâmbulo e o eco da pergunta, portão **I2**, e é a mesma função que o CLI
+  corre;
+- a da **`retencao.py`** é de **publicação** — tira a linha que é corpo de
+  poema, portão **I7′**, e **só existe aqui**: o `cli.py` e o `grafo.py` correm
+  nesta máquina, para quem já tem o corpus no disco.
+
+A segunda tinha de ser um filtro de fluxo e não uma verificação no fim, porque
+o que ela protege sai **em fluxo**: a tentativa que a guarda de plágio vai
+reprovar chega ao cliente antes de haver veredicto (§4.4), logo não há jusante
+onde a apanhar. Medido: 6 de 8 versos do `poem_1005` no fio, sem ela.
 
 ## Porque é que o fluxo é NDJSON num POST, e não SSE
 
@@ -66,6 +89,7 @@ from .estado import (
     manifesto_cru,
 )
 from .fluxo import em_fluxo
+from .retencao import Retentor, linhas_de_corpo, redigir
 from .sentinela import a_correr as medicao_a_correr
 from .sentinela import componente as componente_sentinela
 
@@ -138,6 +162,9 @@ class Servico:
         #: já feito — é o que permite exercitar a API sem pagar o encoder.
         self.pipeline = pipeline
         self.corpus = None          # (meta, chunks)
+        #: As linhas de corpo que a retenção do portão **I7′** protege. `None`
+        #: até à primeira geração; ver `corpo_retido`.
+        self._corpo: frozenset[str] | None = None
         self.roteador_aquecido = False
         #: O reranker fica em cache **aqui** e não no pipeline: um pedido sem
         #: `rerank` desliga-o do pipeline, e desligar não pode significar
@@ -257,6 +284,28 @@ class Servico:
         n_tok = contador(GERADOR)
         self.pipeline = Pipeline(idx, enc, self.gerador, n_tok)
         return self.pipeline
+
+    @property
+    def corpo_retido(self) -> frozenset[str]:
+        """As linhas de corpo que a retenção do portão **I7′** não deixa sair.
+
+        Lê o `corpus.jsonl` à primeira geração e fica em cache. **Não** vem do
+        `self.corpus`: esse só existe depois de o `garantir_pipeline` correr, e
+        os testes — e qualquer chamador que injecte o pipeline já feito —
+        deixavam-no `None`. Uma retenção que se desliga quando não encontra o
+        corpus desliga-se **em silêncio**, que é o modo de falha que este plano
+        existe para evitar. Custa 0,04 s, medido, e é uma vez por processo.
+
+        Se não conseguir ler, **levanta**, e o `_eventos` manda `erro` em vez de
+        gerar: sem o corpus não há como saber o que não pode sair, e nessa
+        situação não gerar é a única resposta honesta. É a mesma escolha do
+        passo 5 do plano — parar que falha faz a fase recusar arrancar.
+        """
+        if self._corpo is None:
+            from ..corpus.build import load
+            _, chunks = load()
+            self._corpo = linhas_de_corpo(chunks)
+        return self._corpo
 
     def reranker_para(self, ligado: bool):
         """O reranker a usar nesta pergunta, carregando-o se for a 1.ª vez.
@@ -404,6 +453,10 @@ async def _eventos(servico: Servico, p: Pedido):
     """
     try:
         pipeline = await asyncio.to_thread(servico.garantir_pipeline)
+        # Portão **I7′**: as linhas que não podem sair, antes de se gerar uma
+        # só. Levanta se o corpus não se ler, e aí o `except` manda `erro` —
+        # gerar sem saber o que retir era publicar às cegas.
+        corpo = await asyncio.to_thread(lambda: servico.corpo_retido)
         voz, idioma = p.voz, p.idioma
         if p.auto:
             proposta = await asyncio.to_thread(servico.rotear, p.pergunta)
@@ -422,6 +475,11 @@ async def _eventos(servico: Servico, p: Pedido):
         # segunda política de apresentação a divergir em silêncio.
         buffer: list[str] = []
         a_reter = True
+        # A segunda retenção, e a que o túnel obrigou a existir: a do início é
+        # de **apresentação** (preâmbulo e eco, portão I2) e esta é de
+        # **publicação** (portão I7′). Uma instância por tentativa, porque a
+        # tentativa plagiada e a aprovada contam-se à parte. Ver `retencao.py`.
+        retentor = Retentor(corpo)
         async for item in em_fluxo(
                 lambda: pipeline.responder_em_fluxo(p.pergunta, voz, idioma),
                 ao_desistir=servico.cancelar_geracao):
@@ -433,14 +491,29 @@ async def _eventos(servico: Servico, p: Pedido):
                         buffer = [retido] if retido else []
                         continue
                     buffer, item = [], retido
-                yield _linha({"tipo": "fragmento", "texto": item})
+                # `""` é normal e acontece duas vezes por resposta: o fragmento
+                # não acabou numa linha, ou a linha era corpo. Um fragmento
+                # vazio não vai ao fio — a página desenhava um salto.
+                if texto := retentor.alimentar(item):
+                    yield _linha({"tipo": "fragmento", "texto": texto})
                 continue
-            yield _linha({"tipo": "turno", "turno": serial.turno(item)})
+            # A última linha da tentativa não trazia `\n`, e sem isto nunca
+            # saía: o fim de uma tentativa é o único sinal de fim de texto que
+            # este laço tem.
+            if texto := retentor.esvaziar():
+                yield _linha({"tipo": "fragmento", "texto": texto})
+            # `retidas` é só o do **fluxo**: é o número que explica um buraco
+            # que o utilizador vê. O que o `redigir` tira do próprio `turno`
+            # não deixa buraco nenhum no ecrã, logo não há o que explicar.
+            yield _linha({"tipo": "turno",
+                          "turno": redigir(serial.turno(item), corpo)[0],
+                          "retidas": retentor.retidas})
             # A tentativa seguinte volta a reter. O CLI **não** faz isto — o
             # `a_reter` dele não é reposto entre tentativas —, logo um eco na
             # 2.ª tentativa chega ao terminal dele. Aqui não chega, porque o
             # portão I2 é sobre o fluxo inteiro e não sobre a 1.ª tentativa.
             buffer, a_reter = [], True
+            retentor.reiniciar()
     except Exception as e:  # vai ao fio como evento `erro`; ver o docstring
         yield _linha({"tipo": "erro", "erro": type(e).__name__,
                       "mensagem": str(e)})
@@ -592,10 +665,9 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
     # antes engolia o `/api/estado` — e a falha era um 404 numa rota que
     # existe, que é das mais difíceis de ler.
     #
-    # `html=True` serve o `index.html` na raiz. Serve **só** esta pasta: o
-    # corpo dos poemas continua a sair exclusivamente pelo
-    # `GET /api/poema/{id}` do passo 9, que é a rota que o portão I7 fecha a
-    # `127.0.0.1`.
+    # `html=True` serve o `index.html` na raiz. Serve **só** esta pasta, e o
+    # `tests/test_i7.py` varre os ficheiros dela: um `index.html` com um poema
+    # de exemplo no corpo era um corpo publicado, e nenhum outro teste o via.
     app.mount("/", StaticFiles(directory=ESTATICO, html=True), name="pagina")
 
     return app

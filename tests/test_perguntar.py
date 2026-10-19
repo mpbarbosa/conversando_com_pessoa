@@ -21,6 +21,12 @@ acabada** e passava vazio. Daí o `_cliente` abaixo, e daí o portão verificar 
 trinco durante a medição: é a diferença entre medir e parecer medir, e o
 `CONTROLO.md` §4 já lista defeitos nos próprios instrumentos desta casa.
 
+⚠️ **A comparação é sobre o `Turno` publicado, e não sobre o serializado.** Desde
+o passo 2 do [plano do serviço público](../docs/PRODUCAO.md) o fio passa pela
+`src/web/retencao.py` — portão **I7′** —, e o CLI e o grafo não passam, porque
+não publicam nada. O `_publicado` abaixo aplica a mesma retenção aos três
+braços; a sua docstring diz porque é que isso não afrouxa o I1.
+
 ⚠️ **Uma divergência conhecida, e que não é desta fase:** o grafo não preenche
 `Turno.historico` (`src/grafo.py:209`), que é o campo que a Fase 5Y criou. Logo
 o braço do grafo compara-se em todos os campos **menos** esse, e isso está
@@ -30,6 +36,7 @@ from __future__ import annotations
 
 import ast
 import contextlib
+import functools
 import hashlib
 import inspect
 import json
@@ -48,6 +55,7 @@ from src.grafo import PipelineGrafo
 from src.pipeline import Turno
 from src.web import serial
 from src.web.app import Servico, criar_app
+from src.web.retencao import linhas_de_corpo, redigir
 
 from .test_pipeline import GeradorFalso, _pipeline
 
@@ -254,6 +262,32 @@ def _turno_da_api(pipeline, pergunta: str, voz: Voice = Voice.CAEIRO) -> dict:
     return turnos[-1]["turno"]
 
 
+@functools.cache
+def _corpo_retido() -> frozenset[str]:
+    """As linhas que a retenção do portão **I7′** não deixa sair pelo fio."""
+    _, chunks = load()
+    return linhas_de_corpo(chunks)
+
+
+def _publicado(t: Turno) -> dict:
+    """O `Turno` **como a API o publica**: serializado e com a retenção do I7′.
+
+    O portão I1 compara o que o utilizador recebe, e desde o passo 2 do
+    [plano do serviço público](../docs/PRODUCAO.md) o que ele recebe passa pela
+    `src/web/retencao.py`: um verso de Pessoa à letra não vai ao fio, nem na
+    tentativa rejeitada que o §4.4 manda mostrar.
+
+    **Isto não afrouxa o I1, e a distinção é a que o portão afirma.** O `Turno`
+    que os três braços produzem continua a ser idêntico campo a campo — a
+    interface não decide nada. O que difere é a **publicação**, e o CLI e o
+    grafo não têm publicação: correm nesta máquina, para quem já tem o corpus no
+    disco. Comparar sem esta função era exigir que a API publicasse o corpus
+    para o portão passar. E a função aplica-se **aos dois lados**, logo uma API
+    que retivesse mais do que isto continuava a divergir e a falhar.
+    """
+    return redigir(serial.turno(t), _corpo_retido())[0]
+
+
 def _turno_do_cli(pipeline, pergunta: str, voz: Voice = Voice.CAEIRO) -> Turno:
     """O caminho do CLI: `responder_em_fluxo`, e o último `Turno` que emite."""
     ultimo = None
@@ -285,7 +319,7 @@ def test_i1_a_api_da_o_mesmo_turno_que_o_cli_nas_20_perguntas(chunks_caeiro):
     """
     for pergunta in PERGUNTAS:
         api, cli, _ = _tres_pipelines(chunks_caeiro, GeradorDeterminista)
-        assert _turno_da_api(api, pergunta) == serial.turno(
+        assert _turno_da_api(api, pergunta) == _publicado(
             _turno_do_cli(cli, pergunta)), f"divergiu em «{pergunta}»"
 
 
@@ -313,7 +347,7 @@ def test_i1_a_api_da_o_mesmo_que_o_grafo_nas_20_perguntas(chunks_caeiro):
     for pergunta in PERGUNTAS:
         api, _, grf = _tres_pipelines(chunks_caeiro, GeradorDeterminista)
         da_api = _turno_da_api(api, pergunta)
-        do_grafo = serial.turno(PipelineGrafo.de(grf).responder(
+        do_grafo = _publicado(PipelineGrafo.de(grf).responder(
             pergunta, Voice.CAEIRO, Lang.PT))
         del da_api["historico"], do_grafo["historico"]
         assert da_api == do_grafo, f"divergiu em «{pergunta}»"
@@ -334,9 +368,16 @@ def test_i1_a_paridade_vale_no_ciclo_de_repeticao(chunks_caeiro):
     assert do_cli.tentativas == 2, "o duplo devia ter forçado uma repetição"
 
     da_api = _turno_da_api(api, "o que é a natureza?")
-    assert da_api == serial.turno(do_cli)
+    assert da_api == _publicado(do_cli)
 
-    do_grafo = serial.turno(PipelineGrafo.de(grf).responder(
+    # E a retenção do I7′ **morde neste caso**, que é o que impede o
+    # `_publicado` de ser um `serial.turno` com mais passos: aqui a tentativa
+    # rejeitada é uma cópia à letra do `poem_1005`, e o texto dela sai do fio.
+    assert (serial.turno(do_cli)["historico"][0]["texto"]
+            != _publicado(do_cli)["historico"][0]["texto"]), (
+        "a retenção não tirou nada: o portão deixou de cobrir a redacção")
+
+    do_grafo = _publicado(PipelineGrafo.de(grf).responder(
         "o que é a natureza?", Voice.CAEIRO, Lang.PT))
     copia = dict(da_api)
     del copia["historico"], do_grafo["historico"]
@@ -747,8 +788,14 @@ def test_o_corpo_e_ndjson_e_cada_linha_e_um_json_valido(chunks_caeiro):
 def test_o_fio_nao_leva_corpos_de_poemas(chunks_caeiro):
     """§3.3, sobre o fluxo inteiro e não só sobre o `serial.turno`.
 
-    As fontes vão como ids; o corpo só pelo `GET /api/poema/{id}` do passo 9,
-    que é a rota que o portão I7 mantém fechada a `127.0.0.1`.
+    As fontes vão como ids, e não como corpo.
+
+    ⚠️ **Este teste é o antepassado fraco do portão I7′**, e fica porque mede o
+    caminho aprovado em detalhe. Vê a **primeira** linha de cada chunk do
+    contexto, com um gerador que não plagia — e foi por isso que não viu nada
+    quando a tentativa plagiada começou a levar 6 versos ao fio. O varrimento
+    completo, sobre todas as rotas e todas as linhas do corpus, está em
+    `tests/test_i7.py`.
     """
     pipeline = _pipeline(chunks_caeiro, GeradorDeterminista())
     with _cliente(_servico(pipeline)) as cliente, \
