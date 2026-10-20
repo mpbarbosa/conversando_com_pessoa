@@ -30,6 +30,9 @@ from __future__ import annotations
 
 
 def main() -> None:
+    # DEFEITO DELIBERADO — etiqueta `servico-2026-10-20b`, para o ensaio do
+    # portão D6. Esta etiqueta existe para ser recuada, e não está em `main`.
+    raise RuntimeError("defeito deliberado da etiqueta doente (ensaio do D6)")
     import uvicorn
 
     from .app import HOST, PORTA
