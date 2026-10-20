@@ -548,7 +548,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 8 | ✅ **feito e ensaiado** (2026-10-20, §5.5) — **recuo**: `python -m src.web.instalar --recuar <etiqueta>`, com o manifesto verificado **antes** do reinício | recuar é um comando, e foi ensaiado de uma etiqueta doente a sério | **D6** ✅ |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
 | 10 | **Cópias de `data/sessoes.db`**, se e quando o passo 8 da Fase 6 existir (§5.3) | o estado dos utilizadores sobrevive | **D8** |
-| 11 | **Fechar**: `README` (§8), `CONTROLO.md`, e `docs/producao/SERVICO.md` escrito **a partir da máquina**, com a proveniência de cada número | o serviço documentado | — |
+| 11 | ✅ **feito** (2026-10-20) — **fechar**: `README` (§8), `CONTROLO.md`, e [`docs/producao/SERVICO.md`](producao/SERVICO.md) escrito **a partir da máquina**, com a proveniência de cada número | o serviço documentado | — |
 
 Os passos 1–2 são o que torna o túnel defensável. Os 3–5 são o serviço. Os 6–9
 são o que o torna seguro de deixar ligado. Os 10–11 fecham.
@@ -678,9 +678,9 @@ encontrar as duas peças no mesmo sítio. O plano não tinha escolhido o sítio.
 |---|---|
 | `git clone --local` | os objectos vão por `hardlink`, e os **8,4 MB** de corpus versionado vêm com eles |
 | `corpus.jsonl` + `index.*` | **12,9 MB**, copiados: estão no `.gitignore`, e reconstruí-los custava **40 s** e **383 s** |
-| `.venv` próprio | **1,3 GB** |
+| `.venv` próprio | **5,7 GB** — ver a correcção no §7.6: os 1,3 GB que aqui estiveram eram os do checkout de **trabalho** |
 | Ollama, modelo de 4,9 GB, cache do Hugging Face (11 GB) | **partilhados** |
-| **total novo** | **~1,32 GB**, contra **108 GB** livres |
+| **total novo** | **~5,7 GB**, contra **102 GB** livres (medido a 2026-10-20) |
 
 O `.venv` é próprio e não partilhado, e é decisão e não omissão: partilhar o do
 checkout de trabalho deixava um `pip install` de desenvolvimento mudar, **nesse
@@ -1286,6 +1286,41 @@ em `127.0.0.1:8000`, agora por unidade de utilizador com `Linger=yes` em vez de
 um processo de terminal — que é o passo 4, e esse não se desfaz. Nada do que
 foi medido deixa de valer.
 
+### 7.6 A guarda ressuscitou o túnel que o dono mandou desligar
+
+Observado a 2026-10-20, horas depois de a §7.5 ter dado o túnel por fechado:
+ao medir a máquina para o `SERVICO.md`, o `cloudflared.service` estava
+`enabled · active` e havia um URL público —
+`pubmed-earn-belief-consultant.trycloudflare.com`.
+
+**A causa é uma linha de systemd que eu não tinha em conta:
+`systemctl --user restart` arranca uma unidade desactivada.** O `disable`
+tira-a do `default.target`; **não a tranca**. E a guarda do §7.3 só olhava
+para o URL: via o último nome do registo a não responder — porque o túnel
+estava parado —, concluía «morreu», e fazia `restart`. De cinco em cinco
+minutos, contra uma decisão tomada sobre uma medição.
+
+O interruptor `tunel-desligado` era honrado pelo **instalador** e ignorado pela
+**guarda**. Escrevi os dois no mesmo dia e não liguei um ao outro.
+
+**É a família inteira deste plano, desta vez construída por mim:** um mecanismo
+automático a desfazer, em silêncio, uma decisão de segurança — e a desfazê-la
+*para o lado de abrir*. A `decidir_guarda` ganhou uma quarta recusa, **à frente
+de todas as outras**, e o `guardar_tunel` lê o interruptor antes de sequer
+abrir o registo. Verificado a morder.
+
+Depois disso, medido: as duas unidades `disabled · inactive`, nenhum processo
+`cloudflared`, e a guarda a responder «o túnel está desligado por
+`~/.config/pessoabot/tunel-desligado`: a guarda não ressuscita o que alguém
+mandou parar».
+
+⚠️ **E uma correcção a um número meu do §5.4:** escrevi que o `.venv` do
+serviço custava **1,3 GB**. Custa **5,7 GB** — eu tinha medido o `.venv` do
+checkout de **trabalho** e assumido que o outro seria igual. O total novo em
+disco é ~**5,7 GB**, não ~1,32 GB; continua a caber nos 102 GB livres, e o
+argumento não muda, mas o número estava errado por 4,4 GB e era apresentado
+como medido.
+
 ---
 
 ## 8. O que o `README` passa a dizer, e o que não pode continuar a dizer
@@ -1303,12 +1338,26 @@ não há API externa; não há credenciais.
 O que o `README` **não** pode continuar a implicar é que o serviço é
 inalcançável de fora. Duas frases a acrescentar, e nenhuma a remover:
 
-- que existe um URL, que corre nesta máquina, e que a disponibilidade é a dela;
-- que o URL **cai durante as medições**, por desenho, com o apontador para a §3.
+- ~~que existe um URL~~ — **não existe** (§7.4): o que se acrescenta é que o
+  serviço corre como unidade em `127.0.0.1:8000`, que a disponibilidade é a do
+  portátil, e **porque é que não há URL**;
+- que o URL **cairá durante as medições**, por desenho, com o apontador para a
+  §3.
 
 E a §Estado ganha a linha da Fase 6 com os passos 7 e 2 feitos por este plano, e
-o passo 9 **nomeado como não-feito por decisão de direitos**, não por falta de
-tempo.
+o passo 9 nomeado como não-feito **por decisão**, não por falta de tempo.
+
+> ⚠️ **«Por decisão de direitos» não se pode escrever assim.** Era o que esta
+> secção dizia, e a correcção **42** derrubou-a: o corpus **está** no
+> repositório público, logo o passo 9 nunca reteve nada que um `git clone` não
+> trouxesse. A saída B continua certa, e pela razão da correcção **40** — o
+> varrimento mostrou que fechar a rota não bastava, e obrigou à retenção —, que
+> é um argumento de **transporte**. É isso que o `README` diz.
+
+**Feito a 2026-10-20** (passo 11), e com três números corrigidos pelo caminho: o
+`pytest` passou de «377 testes» a **483**; as «10 entradas» de correcções são
+**55**; e a frase «não vêm no repositório» sobre os 2083 ficheiros saiu da
+secção *Correr*, onde tinha sobrevivido à correcção 42.
 
 ---
 
@@ -1329,7 +1378,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (482 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (483 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

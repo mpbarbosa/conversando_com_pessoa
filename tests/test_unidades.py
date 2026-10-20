@@ -612,6 +612,27 @@ def test_o_tunel_vivo_le_se_pelas_respostas_do_url(monkeypatch):
 
 # --- a guarda do túnel, e a recusa que protege as medições --------------- #
 
+def test_a_guarda_nao_ressuscita_um_tunel_que_alguem_mandou_parar():
+    """**A recusa que foi acrescentada depois de a guarda a ter violado.**
+
+    Observado a 2026-10-20: o dono mandou desligar o túnel, as unidades foram
+    desactivadas, e a guarda levantou-o outra vez. A razão é uma linha de
+    systemd que eu não tinha em conta — **`systemctl restart` arranca uma
+    unidade desactivada**. `disable` tira-a do arranque; **não a tranca.**
+
+    Logo a guarda, que só olhava para o URL, via o último URL do registo a não
+    responder, concluía «morreu», e reabria ao mundo o que uma decisão tomada
+    sobre uma medição (§7.5) tinha fechado — de cinco em cinco minutos.
+    """
+    agir, porque = decidir_guarda(url_responde=False, ha_rede=True,
+                                  medicao=None, desligado=True)
+    assert agir is False
+    assert "não ressuscita" in porque
+
+    # E ganha mesmo ao caso em que tudo o resto diria «reinicia».
+    assert decidir_guarda(False, True, None, desligado=False)[0] is True
+
+
 def test_a_guarda_nao_levanta_o_tunel_no_meio_de_uma_medicao():
     """**A recusa que importa mais do que todas**, e a razão de a decisão ser
     uma função pura.

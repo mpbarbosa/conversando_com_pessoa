@@ -23,11 +23,11 @@ numa função é um mecanismo.
 |---|---|
 | `git clone --local` do checkout de trabalho | **8,4 MB** de corpus versionado vêm com ele (correcção **42**: o corpus **está** no repositório) e os objectos são ligados por `hardlink` |
 | `data/corpus.jsonl`, `data/index.*` | **12,9 MB**, copiados. Estão no `.gitignore`, logo o clone não os traz — e reconstruí-los custava **40 s** o corpus e **383 s** o índice |
-| `.venv` próprio | **1,3 GB**. Partilhar o do checkout de trabalho era deixar um `pip install` de desenvolvimento mudar, nesse instante, o que o serviço corre — a acoplagem que o segundo checkout existe para cortar |
+| `.venv` próprio | **5,7 GB**, medido no do serviço a 2026-10-20 (os 1,3 GB que aqui estiveram eram os do checkout de **trabalho**). Partilhar o de trabalho era deixar um `pip install` de desenvolvimento mudar, nesse instante, o que o serviço corre — a acoplagem que o segundo checkout existe para cortar |
 | Ollama e o modelo de 4,9 GB | **partilhados**: um processo, uma cópia em memória, a unidade `ollama.service` de utilizador |
 | cache do Hugging Face (encoder) | **partilhado**, 11 GB em `~/.cache/huggingface` |
 
-Total novo em disco: **~1,32 GB**, contra 108 GB livres. O custo da saída D é de
+Total novo em disco: **~5,7 GB**, contra 102 GB livres. O custo da saída D é de
 CPU e de atenção, não de disco.
 
 ⚠️ **O `data/pessoa_poems/` não se liga por `symlink` nem se copia.** A §4 do
@@ -178,7 +178,7 @@ def copiar_artefactos(alvo: Alvo, *, ensaio: bool) -> None:
 def criar_venv(alvo: Alvo, *, ensaio: bool) -> None:
     """Um `.venv` **próprio**, com o `uv` que criou o do checkout de trabalho.
 
-    Próprio e não partilhado: ver o cabeçalho. 1,3 GB é o preço de o serviço não
+    Próprio e não partilhado: ver o cabeçalho. 5,7 GB é o preço de o serviço não
     mudar debaixo dos pés por causa de um `pip install` de desenvolvimento.
     """
     if alvo.python.exists():
@@ -463,10 +463,20 @@ def rede_viva(url: str = SONDA_DE_REDE, *, tempo_limite: float = 10.0) -> bool:
 
 
 def decidir_guarda(url_responde: bool, ha_rede: bool,
-                   medicao: object | None) -> tuple[bool, str]:
+                   medicao: object | None,
+                   desligado: bool = False) -> tuple[bool, str]:
     """Reiniciar o túnel? Função pura, porque é aqui que mora o perigo.
 
-    Três recusas, e a **primeira é a que importa mais do que todas**:
+    Quatro recusas. A **primeira foi acrescentada depois de a guarda ter
+    ressuscitado um túnel que o dono mandou desligar**, e a lição é precisa:
+    `systemctl --user restart` **arranca uma unidade desactivada**. `disable`
+    tira-a do arranque; não a tranca. Logo a guarda, que só olhava para o URL,
+    via o último URL do registo a não responder, concluía «morreu» e levantava
+    o túnel outra vez — de cinco em cinco minutos, contra uma decisão tomada
+    sobre uma medição (§7.5). Um mecanismo automático a desfazer uma decisão de
+    segurança, que é a família inteira de defeitos que este plano persegue.
+
+    As outras três, e a segunda continua a ser a mais perigosa das que restam:
 
     1. **Há uma medição a correr.** O passo 5 derruba o túnel de propósito
        durante uma fase — é o portão **D3** e a razão de o `tunel.py` existir.
@@ -481,6 +491,9 @@ def decidir_guarda(url_responde: bool, ha_rede: bool,
        nenhum — dá um `cloudflared` novo a falhar contra a mesma rede — e de
        cinco em cinco minutos isso é só ruído no registo.
     """
+    if desligado:
+        return False, (f"o túnel está desligado por {TUNEL_DESLIGADO}: a "
+                       f"guarda não ressuscita o que alguém mandou parar")
     if medicao is not None:
         return False, f"medição a correr ({medicao}): o túnel está em baixo de propósito"
     if url_responde:
@@ -498,6 +511,11 @@ def guardar_tunel() -> int:
     quem o lê a ignorá-lo.
     """
     from . import sentinela
+    if TUNEL_DESLIGADO.exists():
+        # Antes de tudo, e antes de sequer ler o registo: ver `decidir_guarda`.
+        agir, porque = decidir_guarda(False, False, None, desligado=True)
+        print(porque)
+        return 0
     url = url_do_tunel(tentativas=1)
     if url is None:
         print("sem URL anunciado nesta execução do túnel; nada a guardar")

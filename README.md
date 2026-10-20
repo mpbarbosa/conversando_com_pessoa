@@ -139,8 +139,10 @@ copiam). Mediana de versos copiados: **82% → 0%**.
 
 ## Correr
 
-Precisa de **Python 3.12**, de [Ollama](https://ollama.com) local e dos 2083
-ficheiros em `data/pessoa_poems/` (ver *Corpus*, abaixo — não vêm no repositório).
+Precisa de **Python 3.12** e de [Ollama](https://ollama.com) local. Os 2083
+ficheiros em `data/pessoa_poems/` **vêm com o repositório** — ver *Corpus*,
+abaixo, e a correcção **42** do [`CONTROLO.md`](docs/CONTROLO.md) §4, que é
+onde se registou que o contrário esteve escrito aqui durante um ano.
 
 ```bash
 python3.12 -m venv .venv && . .venv/bin/activate
@@ -161,8 +163,11 @@ e desligam o roteador,
 tempos — o *prefill* domina a espera (58–89%), e mostrá-lo ensina o custo em vez de
 o esconder.
 
+Há também uma **interface web** — `python -m src.web` serve em
+`http://127.0.0.1:8000` a mesma pipeline, em fluxo. Ver *O serviço*, abaixo.
+
 ```bash
-pytest          # 377 testes, ~2 min
+pytest          # 483 testes, ~2 min
 ```
 
 ---
@@ -217,7 +222,38 @@ também ficam fora, por serem precisamente isso.
 | **2 — Busca híbrida** (fundir denso + BM25) | ⬜ desbloqueada pela linha de base |
 | **3 — Rerank** | 🔄 candidato escolhido por *benchmark* (MiniLM-L12 a 1694 tok/s contra 90 do bge-m3) |
 | **4 — Enriquecimento e roteador de voz** | ✅ roteador em `/auto` (**68%** com o llama3.1; os 72% · 92% com etiqueta múltipla são do qwen2.5, antes da troca da [5S](docs/FASE-5S-RELATORIO.md)); enriquecimento **vetado** por medição |
-| **5 — Interface e geração remota** | ⬜ |
+| **5 — Interface e geração remota** | 🔄 a interface está feita (Fase 6); a geração remota continua por fazer, e **muda a afirmação de abertura** |
+| **6 — Interface web** (NDJSON em fluxo, estado por componente, cancelamento, sentinela de medição) | 🔄 passos 1–7 feitos; o **passo 9** — painel com o corpo do poema — **não é falta de tempo**: ver *O serviço* |
+| **Serviço público** ([`docs/PRODUCAO.md`](docs/PRODUCAO.md)) | 🔄 instalado como serviço de utilizador; **sem URL público**, por medição |
+
+### O serviço
+
+O `pessoabot.service` corre como **unidade de utilizador** com `enable-linger`,
+num segundo checkout, e responde em **`http://127.0.0.1:8000`**. A
+disponibilidade é a do portátil estar ligado — isto não é um ambiente de
+produção, e o [`docs/producao/SERVICO.md`](docs/producao/SERVICO.md) diz
+porquê e o que há na máquina.
+
+**Não há URL público hoje**, e a razão é uma medição: um *Quick Tunnel*
+protegido por correio — a única opção de custo zero — mantém a sessão
+autenticada durante **4 segundos**
+([`cloudflared#1752`](https://github.com/cloudflare/cloudflared/issues/1752),
+aberto). Um túnel **sem** autenticação funcionaria e é o que não se faz: um
+cliente em ciclo consome as ~105 respostas/hora desta máquina e leva as
+medições com ele.
+
+**Quando houver URL, ele cai durante as medições, por desenho.** Uma fase que
+corra sob o ajudante `sentinela.medicao(...)` derruba o túnel enquanto mede e
+escreve a janela ao lado das amostras — senão o servidor e a fase disputam um
+Ollama de um slot só, e as latências deixam de descrever o caminho que o
+utilizador corre. O argumento inteiro está na §3 do
+[`PRODUCAO.md`](docs/PRODUCAO.md).
+
+**E o passo 9 da Fase 6 — o painel com o corpo do poema — não está por fazer
+por falta de tempo:** é a *saída B*, uma decisão. Com um túnel, uma rota que
+devolve corpos de poemas é o corpus publicado, e o varrimento do portão **I7′**
+mostrou que fechar essa rota **não bastava** — havia três outras portas por
+onde o verso saía.
 
 Limitações conhecidas e não resolvidas estão listadas em
 [`docs/CONTROLO.md`](docs/CONTROLO.md) §5 — entre elas a principal pergunta aberta:
@@ -241,12 +277,15 @@ atribuem significado, o que Caeiro proíbe.
 | [`docs/FASE-0.md`](docs/FASE-0.md) · [relatório](docs/FASE-0-RELATORIO.md) | medição de hardware, calibração, escolha de gerador às cegas e de encoder |
 | [`docs/FASE-1.md`](docs/FASE-1.md) | o pipeline, passo a passo |
 | [`docs/FASE-2.md`](docs/FASE-2.md) · [`FASE-3.md`](docs/FASE-3.md) | busca híbrida e rerank, planeadas |
+| [`docs/FASE-6.md`](docs/FASE-6.md) | a interface web: o que ela **não** decide, e os oito portões |
+| [`docs/PRODUCAO.md`](docs/PRODUCAO.md) | o serviço público: porque é que é esta máquina, o que o túnel quebra, e os oito portões D |
+| [`docs/producao/SERVICO.md`](docs/producao/SERVICO.md) | **o que está nesta máquina**, lido dela: caminhos, unidades, comandos, e o que não existe |
 | [`docs/BIBLIOGRAFIA.md`](docs/BIBLIOGRAFIA.md) | as fontes, e onde cada uma falhou na verificação |
 | `docs/fase-*/` | dados brutos e *scripts* de *benchmark* de cada fase |
 
 Duas secções do `CONTROLO.md` são deliberadas e provavelmente mais úteis que o
-resto: **«Correcções a afirmações minhas»** (10 entradas, cada uma com o que foi
-afirmado, o que a medição mostrou e onde) e **«Defeitos encontrados nos meus
+resto: **«Correcções a afirmações minhas»** (**55** entradas, cada uma com o que
+foi afirmado, o que a medição mostrou e onde) e **«Defeitos encontrados nos meus
 próprios instrumentos»** — por exemplo, o cache de KV reaproveitado entre
 repetições de um *benchmark*, que reportou *prefill* a 25 625 tok/s e invalidou
 4 horas de dados, e uma avaliação de voz **não cega** que produziu um viés que
