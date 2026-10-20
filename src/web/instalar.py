@@ -66,6 +66,7 @@ from .unidades import (
     NOME_SERVICO,
     NOME_TEMPORIZADOR,
     NOME_TUNEL,
+    TUNEL_DESLIGADO,
     Alvo,
     ErroDeUnidade,
     ListaVazia,
@@ -243,6 +244,13 @@ def instalar_unidades(alvo: Alvo, *, ensaio: bool) -> None:
         print("  · o túnel responde e a unidade não mudou: **não** se reinicia "
               "(reiniciar trocava o URL)")
     _correr("systemctl", "--user", "restart", *reiniciar, ensaio=ensaio)
+    if not lista:
+        # Desactivar e não só «não escrever»: uma unidade que já esteja
+        # activada continua activada, e a instalação seguinte deixava o túnel
+        # de pé a dizer que não havia túnel. Idempotente — `disable --now` de
+        # algo que não existe não falha nada que importe.
+        _correr("systemctl", "--user", "disable", "--now",
+                NOME_TEMPORIZADOR, NOME_TUNEL, ensaio=ensaio)
     if lista:
         # O temporizador **não** leva `restart`: reiniciá-lo repõe a contagem,
         # e um `enable --now` já o deixa agendado. E o serviço da guarda é
@@ -297,6 +305,10 @@ def decidir_tunel() -> tuple[str, ...]:
 
     Três respostas, e as três são estados legítimos do plano:
 
+    - **o `tunel-desligado` existe** → alguém decidiu que não há porta, e
+      escreveu porquê. Fica à frente de tudo o resto: uma decisão tomada por
+      um defeito medido (§7.4) não pode desaparecer porque se correu o
+      instalador outra vez.
     - **sem ficheiro** → o passo 6 ainda não foi dado. Não se instala túnel, e
       isso não é falha: é «fechar antes de abrir» (§7) com o serviço fechado
       por não haver URL nenhum.
@@ -310,8 +322,18 @@ def decidir_tunel() -> tuple[str, ...]:
     `ErroDeUnidade`, e o passo falha. Um convidado que nunca entra, sem
     ninguém perceber porquê, é pior do que uma instalação que pára.
     """
+    if TUNEL_DESLIGADO.exists():
+        razao = TUNEL_DESLIGADO.read_text(encoding="utf-8").strip()
+        print(f"  · túnel **desligado** por {TUNEL_DESLIGADO}:")
+        for ln in (razao or "(sem razão escrita)").splitlines():
+            print(f"      {ln}")
+        return ()
     try:
-        lista = ler_convidados()
+        # Explícito, e não pelo valor por omissão do `unidades`: assim há um
+        # caminho só dentro deste módulo, e um teste que o troque troca-o
+        # mesmo. Sem isto, o teste do interruptor passava a ler a lista real
+        # desta máquina — e estava a medir outra coisa.
+        lista = ler_convidados(CONVIDADOS)
     except ListaVazia as e:
         print(f"  · sem túnel: {e}")
         return ()

@@ -1173,6 +1173,39 @@ continuam todos medidos e no sítio. Quando houver um túnel que sirva — por
 correcção a montante ou por um domínio — o passo 6 está construído e testado, e
 o que falta é levantar a unidade.
 
+### 7.5 O túnel desligado, e um interruptor que sobrevive a uma reinstalação
+
+A 2026-10-20, sobre a medição da §7.4, o dono decidiu: **túnel em baixo, serviço
+em `127.0.0.1`** até haver um túnel que sirva. Feito, e verificado:
+`cloudflared.service` e `pessoabot-tunel-guarda.timer` `inactive · disabled`,
+nenhum processo `cloudflared`, o último URL a dar **530**, e o
+`/api/health` local a responder `ok`.
+
+**O que a decisão obrigou a construir, e porquê.** Bastava parar as unidades —
+e teria durado até à instalação seguinte. A lista de convidados continua a ter
+um endereço, porque a pergunta «quem entra» **não mudou**; o que mudou foi «há
+porta?». Esvaziar a lista para desligar o túnel confundia as duas, e fazia uma
+decisão tomada sobre uma medição parecer um descuido de quem não convidou
+ninguém — que é como as decisões se perdem.
+
+Daí o `~/.config/pessoabot/tunel-desligado`: **existindo, não há túnel, e o
+conteúdo é a razão**, que o instalador imprime inteira. Ganha à lista de
+convidados, e é a primeira coisa que o `decidir_tunel` olha. Verificado a
+morder: sem a leitura do ficheiro, dois testes falham.
+
+E duas coisas que não são o mesmo, e que custaram um teste cada:
+
+- **desactivar não é «não escrever».** Uma unidade já activada continua
+  activada, logo sem um `disable --now` a instalação dizia «túnel desligado»
+  com o URL de pé — a contradizer-se a si própria;
+- **apagar o ficheiro repõe tudo.** O interruptor não é um caminho sem volta, e
+  há um teste a prendê-lo: é o que torna isto uma pausa e não um abandono.
+
+O estado em que o serviço fica é **exactamente o das Fases 0 a 6**: `uvicorn`
+em `127.0.0.1:8000`, agora por unidade de utilizador com `Linger=yes` em vez de
+um processo de terminal — que é o passo 4, e esse não se desfaz. Nada do que
+foi medido deixa de valer.
+
 ---
 
 ## 8. O que o `README` passa a dizer, e o que não pode continuar a dizer
@@ -1216,7 +1249,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (465 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (469 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

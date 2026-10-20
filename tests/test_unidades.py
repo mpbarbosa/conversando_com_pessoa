@@ -44,6 +44,7 @@ from src.web.instalar import (
     conferir_sha,
     contar_acessos,
     decidir_guarda,
+    decidir_tunel,
     extrair_url,
     main,
     tunel_vivo,
@@ -491,6 +492,27 @@ def test_a_instalacao_confere_se_o_processo_foi_substituido():
     assert "de que commit" in (conferir_sha(None, "79e4dbb") or "")
 
 
+def test_sem_tunel_a_instalacao_desactiva_o_que_estava_activado():
+    """«Não escrever a unidade» não chega: uma unidade já activada continua.
+
+    Sem isto, desligar o túnel escrevia a razão num ficheiro e deixava o
+    `cloudflared` de pé — a instalação a dizer «túnel desligado» com o URL a
+    responder. Como o `restart`, **nenhum teste o vê correr**: prende-se por
+    inspecção, que é honesto sobre o que mede.
+    """
+    import ast
+    import inspect
+    import textwrap
+
+    from src.web.instalar import instalar_unidades
+    fonte = textwrap.dedent(inspect.getsource(instalar_unidades))
+    comandos = [n.value for n in ast.walk(ast.parse(fonte))
+                if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+    assert "disable" in comandos, (
+        "sem o `disable`, desligar o túnel deixa a unidade activada e o URL "
+        "de pé — a instalação a contradizer-se")
+
+
 def test_a_instalacao_reinicia_e_nao_so_activa():
     """O `restart` em si **nenhum teste o vê correr**, e isto é o que resta.
 
@@ -677,3 +699,49 @@ def test_o_systemd_aceita_a_guarda_e_o_temporizador(alvo, tmp_path, convidados):
                             str(d / nome)), capture_output=True, text=True)
         meus = [ln for ln in r.stderr.splitlines() if ln.startswith(nome)]
         assert not meus, meus
+
+
+# --- o interruptor, e o que ele tem de sobreviver ------------------------ #
+
+def test_o_tunel_desligado_ganha_a_uma_lista_com_convidados(tmp_path,
+                                                            monkeypatch,
+                                                            convidados,
+                                                            capsys):
+    """**A asserção que impede uma decisão de desaparecer numa reinstalação.**
+
+    A 2026-10-20 o túnel foi desligado por uma medição: a sessão autenticada de
+    um Quick Tunnel protegido dura 4 segundos (§7.4). A lista de convidados
+    continua com um endereço — porque a pergunta «quem entra» não mudou —, e é
+    por isso que o interruptor é **outro ficheiro**: se fosse a lista vazia, a
+    decisão virava um descuido de quem não convidou ninguém, e o próximo
+    `python -m src.web.instalar` reabria o túnel sem ninguém notar.
+    """
+    desligado = tmp_path / "tunel-desligado"
+    desligado.write_text("porque a sessão dura 4 s — §7.4\n", encoding="utf-8")
+    monkeypatch.setattr(instalar, "TUNEL_DESLIGADO", desligado)
+    monkeypatch.setattr(instalar, "CONVIDADOS", convidados)
+
+    assert decidir_tunel() == ()
+    saida = capsys.readouterr().out
+    assert "desligado" in saida
+    assert "4 s" in saida, "a razão tem de aparecer, senão ninguém sabe porquê"
+
+
+def test_sem_o_interruptor_a_lista_volta_a_mandar(tmp_path, monkeypatch,
+                                                  convidados):
+    """E o interruptor não é um caminho sem volta: apagá-lo repõe o túnel."""
+    monkeypatch.setattr(instalar, "TUNEL_DESLIGADO", tmp_path / "nao-existe")
+    monkeypatch.setattr(instalar, "CONVIDADOS", convidados)
+    assert decidir_tunel() == ("alguem@exemplo.pt", "*@outro.exemplo.pt")
+
+
+def test_o_interruptor_sem_razao_escrita_ainda_desliga(tmp_path, monkeypatch,
+                                                       convidados, capsys):
+    """Vazio continua a desligar — mas diz que não há razão escrita, em vez de
+    deixar quem lê a adivinhar."""
+    desligado = tmp_path / "tunel-desligado"
+    desligado.write_text("", encoding="utf-8")
+    monkeypatch.setattr(instalar, "TUNEL_DESLIGADO", desligado)
+    monkeypatch.setattr(instalar, "CONVIDADOS", convidados)
+    assert decidir_tunel() == ()
+    assert "sem razão escrita" in capsys.readouterr().out

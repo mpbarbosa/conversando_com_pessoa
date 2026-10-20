@@ -90,6 +90,13 @@ CLOUDFLARED = Path.home() / ".local" / "cloudflared" / "bin" / "cloudflared"
 #: inteiro, como o `--allowed-mail` aceita.
 CONVIDADOS = Path.home() / ".config" / "pessoabot" / "convidados"
 
+#: Existindo, **não há túnel**, e o conteúdo é a razão. Separado da lista de
+#: convidados de propósito: a lista responde a «quem entra» e este ficheiro
+#: responde a «há porta?», e confundi-los fazia uma decisão tomada por um
+#: defeito medido (§7.4) parecer um descuido de quem não convidou ninguém — e
+#: desaparecer na primeira reinstalação, que é como as decisões se perdem.
+TUNEL_DESLIGADO = Path.home() / ".config" / "pessoabot" / "tunel-desligado"
+
 #: Longo de propósito — ver o cabeçalho. 24 h é «não descarregues».
 KEEP_ALIVE = "24h"
 
