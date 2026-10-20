@@ -119,10 +119,51 @@ class _OllamaFalso:
             threading.Thread(target=self._atender, args=(con,),
                              daemon=True).start()
 
+    @staticmethod
+    def _ler_pedido(con: socket.socket) -> None:
+        """Lê o pedido **inteiro**: cabeçalhos e as `Content-Length` do corpo.
+
+        ⚠️ Um `recv` único não basta, e o que se poupava nele custava um teste
+        a falhar a espaços. Medido nesta máquina, com seis processos a queimar
+        CPU, no `test_i5_o_fluxo_cancelado_nao_deixa_o_servidor_avariado`: o
+        pedido do servidor são **3260 bytes** (209 de cabeçalhos e 3051 de
+        corpo — o prompt com os oito chunks de Caeiro) e chega em dois
+        segmentos. Sem carga vêm os dois no mesmo `recv`; com carga, 3 de 50
+        corridas liam só os 209 e deixavam os 3051 na fila de recepção.
+
+        E um `close()` sobre um socket com dados por ler **não manda FIN, manda
+        RST** (TCP, por definição). O cliente, que estava a ler a resposta,
+        perdia o que ainda tinha em trânsito e levantava
+        `ChunkedEncodingError: ConnectionResetError(104)` — que chegava à página
+        como um evento `erro` e fazia a geração «seguinte» parecer avariada. A
+        correlação foi perfeita nas três falhas: `pendentes_no_fecho=3051` em
+        todas as que falharam, `0` em todas as que passaram.
+
+        Logo isto não é zelo: é a diferença entre o duplo fechar a ligação como
+        o Ollama a fecha e fechá-la com um RST que inventa uma avaria no código
+        medido. Ver o §4 do [`CONTROLO.md`](../docs/CONTROLO.md), correcção 50.
+        """
+        dados = b""
+        while b"\r\n\r\n" not in dados:
+            pedaco = con.recv(65536)
+            if not pedaco:
+                return                       # o cliente fechou antes do fim
+            dados += pedaco
+        cabeca, _, corpo = dados.partition(b"\r\n\r\n")
+        faltam = next((int(ln.split(b":", 1)[1])
+                       for ln in cabeca.split(b"\r\n")
+                       if ln.lower().startswith(b"content-length:")),
+                      0) - len(corpo)
+        while faltam > 0:
+            pedaco = con.recv(min(faltam, 65536))
+            if not pedaco:
+                return
+            faltam -= len(pedaco)
+
     def _atender(self, con: socket.socket) -> None:
         with con:
             try:
-                con.recv(65536)
+                self._ler_pedido(con)
                 con.sendall(b"HTTP/1.1 200 OK\r\n"
                             b"Content-Type: application/x-ndjson\r\n"
                             b"Transfer-Encoding: chunked\r\n\r\n")
@@ -195,6 +236,24 @@ def _abortar_a_meio(cliente) -> None:
         pytest.fail("a geração acabou antes de haver o que cancelar")
 
 
+def _esperar_trinco_livre(servico, limite_s: float = 2.0) -> None:
+    """Espera que o trinco fique livre, até ao limite que o portão promete.
+
+    O portão **I5** diz «a pergunta seguinte arranca em **menos de 2 s** e o
+    trinco está livre», e não «arranca de imediato»: entre o cancelamento e a
+    libertação do trinco há o `await tarefa` do `fluxo.py`, que devolve o
+    controlo ao laço pelo menos uma vez. Medido nesta máquina com seis
+    processos a queimar CPU: nessa janela o `POST` seguinte apanhava **409
+    `ocupado`** em 25 de 50 corridas. Sem esta espera o teste não media o que o
+    portão afirma — media que a libertação é instantânea, que o portão nunca
+    prometeu.
+    """
+    limite = time.monotonic() + limite_s
+    while servico.trinco.locked() and time.monotonic() < limite:
+        time.sleep(0.01)
+    assert not servico.trinco.locked(), "o trinco ficou retido"
+
+
 # --- I5, as três cláusulas ------------------------------------------------ #
 
 def test_i5_depois_do_abort_o_ollama_nao_esta_a_decodificar(chunks_caeiro):
@@ -224,11 +283,7 @@ def test_i5_o_trinco_fica_livre_e_a_pergunta_seguinte_arranca_em_menos_de_2s(
     """
     with _montado(chunks_caeiro) as (_ollama, servico, cliente):
         _abortar_a_meio(cliente)
-
-        limite = time.monotonic() + 2.0
-        while servico.trinco.locked() and time.monotonic() < limite:
-            time.sleep(0.01)
-        assert not servico.trinco.locked(), "o trinco ficou retido"
+        _esperar_trinco_livre(servico)
 
         t0 = time.monotonic()
         with cliente.stream("POST", "/api/perguntar", json=CORPO) as r:
@@ -249,9 +304,15 @@ def test_i5_o_fluxo_cancelado_nao_deixa_o_servidor_avariado(chunks_caeiro):
     cancelada à nascença e o fluxo saía vazio. Isto é o teste dessa reposição,
     e é por isso que corre **depois** de um abort e não isolado.
     """
-    with _montado(chunks_caeiro, fragmentos=4) as (_o, _s, cliente):
+    with _montado(chunks_caeiro, fragmentos=4) as (_o, servico, cliente):
         _abortar_a_meio(cliente)
+        _esperar_trinco_livre(servico)
         with cliente.stream("POST", "/api/perguntar", json=CORPO) as r:
+            # O estado **antes** dos eventos: sem isto um 409 `ocupado` era
+            # desserializado como lista de eventos e o teste falhava a dizer «a
+            # geração seguinte não acabou», que é a falha errada. Ver o
+            # `_esperar_trinco_livre`.
+            assert r.status_code == 200, r.read()
             eventos = [json.loads(ln) for ln in r.iter_lines() if ln.strip()]
     tipos = [e["tipo"] for e in eventos]
     assert "turno" in tipos, f"a geração seguinte não acabou: {tipos}"
