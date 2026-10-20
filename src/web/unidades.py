@@ -67,6 +67,11 @@ NOME_SERVICO = "pessoabot.service"
 #: `tunel.py` ter onde apontar, e o portão **D3** passar de inmensurável a
 #: mensurável. Ver a §7.1 do plano.
 NOME_TUNEL = "cloudflared.service"
+#: A guarda do túnel e o seu temporizador. Existem porque o `Restart=on-failure`
+#: **não cobre a queda do túnel**: o `cloudflared` não falha, insiste — 1019
+#: tentativas em dez horas, com o `systemctl` a dizer `active` (§7.2 do plano).
+NOME_GUARDA = "pessoabot-tunel-guarda.service"
+NOME_TEMPORIZADOR = "pessoabot-tunel-guarda.timer"
 
 #: Onde o `systemctl --user` lê as unidades deste utilizador.
 DIRECTORIO = Path.home() / ".config" / "systemd" / "user"
@@ -87,6 +92,12 @@ CONVIDADOS = Path.home() / ".config" / "pessoabot" / "convidados"
 
 #: Longo de propósito — ver o cabeçalho. 24 h é «não descarregues».
 KEEP_ALIVE = "24h"
+
+#: De quanto em quanto tempo a guarda pergunta ao URL. Cinco minutos é a
+#: escolha do dono, e a aritmética que a sustenta: a pergunta custa dois
+#: pedidos HTTP e nada de CPU, e o que se perde no pior caso são cinco minutos
+#: de URL morto depois de uma suspensão — contra uma noite inteira sem ela.
+MINUTOS_DA_GUARDA = 5
 
 #: Quanto esperar antes de voltar a arrancar depois de uma falha. Curto o
 #: bastante para o URL voltar sem ninguém olhar, e longo o bastante para um
@@ -294,6 +305,51 @@ WantedBy=default.target
 """
 
 
+def guarda_do_tunel(alvo: Alvo) -> str:
+    """O serviço de uma passagem da guarda. `oneshot`: corre e morre."""
+    return f"""\
+[Unit]
+Description=Uma passagem da guarda do túnel do PessoaBot (§7.2)
+Documentation=file://{alvo.checkout}/docs/PRODUCAO.md
+After={NOME_TUNEL}
+
+[Service]
+Type=oneshot
+WorkingDirectory={alvo.checkout}
+ExecStart={alvo.python} -m src.web.instalar --guardar-tunel
+"""
+
+
+def temporizador_da_guarda(alvo: Alvo) -> str:
+    """O temporizador. `WantedBy=timers.target`, para o `linger` o apanhar.
+
+    `OnBootSec` **e** `OnUnitActiveSec`: o primeiro é o que o faz existir
+    depois de um reinício da máquina, e o segundo é a cadência. Sem o primeiro,
+    um temporizador só agendado a partir da última passagem não tem primeira
+    passagem nenhuma depois de um arranque.
+
+    **Sem `Persistent=true`**, e é deliberado: `Persistent` faz o systemd correr
+    de imediato a passagem que «faltou» enquanto a máquina esteve suspensa —
+    e nesse instante a rede ainda não voltou. A guarda via o URL em baixo e a
+    rede em baixo, recusava (é a 3.ª recusa do `decidir_guarda`), e a seguir
+    esperava cinco minutos na mesma. Ou seja: `Persistent` não adiantava nada e
+    punha a primeira passagem no pior instante possível.
+    """
+    return f"""\
+[Unit]
+Description=Pergunta ao URL do túnel de {MINUTOS_DA_GUARDA} em {MINUTOS_DA_GUARDA} minutos (§7.2)
+Documentation=file://{alvo.checkout}/docs/PRODUCAO.md
+
+[Timer]
+OnBootSec={MINUTOS_DA_GUARDA}min
+OnUnitActiveSec={MINUTOS_DA_GUARDA}min
+Unit={NOME_GUARDA}
+
+[Install]
+WantedBy=timers.target
+"""
+
+
 #: As unidades que não dependem de configuração, por nome. A ordem é a do
 #: arranque. O túnel **não** está aqui de propósito: gerá-lo exige a lista de
 #: convidados, e uma unidade de túnel que se gere sem pensar é um túnel aberto.
@@ -301,12 +357,20 @@ GERADORES = {NOME_OLLAMA: servico_ollama, NOME_SERVICO: servico_pessoabot}
 
 
 def escrever(alvo: Alvo, directorio: Path = DIRECTORIO, *,
-             convidados: Path | None = None) -> dict[str, Path]:
+             convidados: Path | None = None,
+             mudadas: set[str] | None = None) -> dict[str, Path]:
     """Escreve as unidades. Devolve `{nome: caminho}`.
 
     Não corre `systemctl` nenhum: escrever ficheiros e mudar o estado dos
     serviços são dois actos com riscos diferentes, e misturá-los fazia um teste
     de geração tocar no `systemd` desta máquina.
+
+    `mudadas`, se for dado, recebe os nomes das unidades cujo **conteúdo** ficou
+    diferente do que estava no disco. Serve a quem decide o que reiniciar:
+    reiniciar o `cloudflared` **troca o URL público** e deita abaixo as sessões
+    de quem estiver autenticado, logo não pode ser o preço de correr o
+    instalador por outro motivo. Observado a 2026-10-20, com o dono dentro da
+    página: a instalação da guarda trocou-lhe o URL debaixo dos pés.
 
     A unidade do **túnel** só se escreve quando `convidados` for dado, e por
     omissão **não** é: quem decide se há túnel é o `instalar.py`, que lê a lista
@@ -317,13 +381,23 @@ def escrever(alvo: Alvo, directorio: Path = DIRECTORIO, *,
     # convidados má fazia o `ler_convidados` levantar depois de as outras duas
     # unidades já estarem no disco, e meia instalação é pior do que nenhuma
     # porque parece feita.
+    mudadas = mudadas if mudadas is not None else set()
     textos = {nome: gerar(alvo) for nome, gerar in GERADORES.items()}
     if convidados is not None:
         textos[NOME_TUNEL] = servico_tunel(alvo, ler_convidados(convidados))
+        # A guarda só nasce com o túnel: sem túnel não há o que guardar, e um
+        # temporizador a perguntar por um URL que não existe é ruído de cinco
+        # em cinco minutos.
+        textos[NOME_GUARDA] = guarda_do_tunel(alvo)
+        textos[NOME_TEMPORIZADOR] = temporizador_da_guarda(alvo)
     directorio.mkdir(parents=True, exist_ok=True)
     feitos = {}
     for nome, texto in textos.items():
         caminho = directorio / nome
+        antigo = (caminho.read_text(encoding="utf-8")
+                  if caminho.exists() else None)
         caminho.write_text(texto, encoding="utf-8")
         feitos[nome] = caminho
+        if antigo != texto:
+            mudadas.add(nome)
     return feitos

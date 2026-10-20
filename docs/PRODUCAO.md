@@ -1057,6 +1057,64 @@ serve para o dono o usar na hora, e não para convidar ninguém.** Convidar
 alguém pressupõe um endereço que dure mais do que uma noite, e isso é o ponto 7
 do §10.
 
+### 7.3 A guarda do túnel, e três defeitos que ela mostrou ao nascer
+
+O dono escolheu a primeira das três saídas da §7.2: **um temporizador de
+utilizador que pergunta ao URL de 5 em 5 minutos e reinicia o túnel quando ele
+não responder**, aceitando que o nome mude. Instalado a 2026-10-20:
+`pessoabot-tunel-guarda.timer` e `.service`, gerados pelo `unidades.py` ao lado
+do túnel — **só nascem com ele**, porque sem túnel um temporizador a perguntar
+por um URL que não existe é ruído de cinco em cinco minutos.
+
+**A decisão é uma função pura (`decidir_guarda`) e tem três recusas. A
+primeira é a que importa mais do que todas:**
+
+| recusa | porquê |
+|---|---|
+| **há uma medição a correr** | o passo 5 derruba o túnel **de propósito** durante uma fase — é o portão D3 e a razão de o `tunel.py` existir. Uma guarda que não soubesse disto via o URL em baixo, concluía «morreu», e **levantava o túnel no meio da medição**: desfazia a protecção do sentinela, punha público no mesmo CPU das amostras, e deixava um `01-cru.jsonl` em que uma célula lenta pode ser térmica ou pode ser um estranho. Um mecanismo automático a desfazer, em silêncio, o mecanismo que este plano inteiro existe para construir |
+| o URL responde | nada a fazer |
+| o URL não responde **e a rede também não** | reiniciar aqui não dá túnel nenhum, e de 5 em 5 minutos é só ruído |
+
+As quatro verificadas a morder, incluindo a do sentinela.
+
+E o temporizador **não leva `Persistent=true`**, que é a opção que à primeira
+vista servia: `Persistent` faz o systemd correr de imediato a passagem que
+faltou enquanto a máquina esteve suspensa — e nesse instante a rede ainda não
+voltou, logo a guarda recusaria pela terceira regra e esperaria os cinco
+minutos na mesma. Não adiantava nada e punha a primeira passagem no pior
+instante possível.
+
+**Três defeitos que só apareceram a instalar, e os três meus:**
+
+**1. O instalador reiniciava o túnel por tabela, e trocava o URL a quem estava
+lá dentro.** Observado com o dono autenticado na página: instalar a guarda
+reiniciou o `cloudflared` e o URL mudou debaixo dele. Reiniciar não custa o
+mesmo em cada unidade, e agora o instalador distingue: o `pessoabot`
+reinicia-se **sempre** (é a referência do checkout que pode ter mudado, e é a
+razão de alguém correr aquilo); o `ollama` só se a unidade dele mudar, porque
+um reinício descarrega o modelo de 4,9 GB e a pergunta seguinte paga ~50 s de
+prefill a frio; e o `cloudflared` só se a unidade mudar **ou o URL não
+responder**. Correr o instalador deixou de custar o URL.
+
+**2. A guarda foi instalada com sucesso e não conseguia guardar.** A unidade é
+escrita pelo checkout de **trabalho** e corre o código do checkout do
+**serviço**, que está preso numa referência — e saiu a invocar
+`--guardar-tunel` numa referência onde essa opção ainda não existia. O
+`systemctl enable --now` devolveu **0**, o temporizador ficou agendado, e a
+primeira passagem morreu com `status=2/INVALIDARGUMENT`. É uma acoplagem entre
+os dois checkouts que o §4 não tinha previsto: **a unidade pode pedir ao
+serviço uma capacidade que a referência servida não tem.** Remédio da mesma
+família do `conferir_sha`: o instalador **corre a guarda uma vez** e diz se ela
+correu, em vez de acreditar no código de saída do `enable`.
+
+**3.** E o terceiro está na §7.2: o `--verificar-tunel`, que existe porque o
+`systemctl` dizia `active` com o URL morto.
+
+⚠️ **O que a guarda não resolve, e convém não confundir.** Ela mantém *um* URL
+vivo; **não mantém o URL**. Depois de cada suspensão o nome muda, logo continua
+a não haver endereço que se possa enviar a alguém e que dure — §10 ponto 7. O
+que a guarda compra é o dono não ser o detector.
+
 ---
 
 ## 8. O que o `README` passa a dizer, e o que não pode continuar a dizer
@@ -1100,7 +1158,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (457 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (465 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

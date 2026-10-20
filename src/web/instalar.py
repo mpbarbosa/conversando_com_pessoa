@@ -61,8 +61,10 @@ from .unidades import (
     CONVIDADOS,
     DIRECTORIO,
     GERADORES,
+    NOME_GUARDA,
     NOME_OLLAMA,
     NOME_SERVICO,
+    NOME_TEMPORIZADOR,
     NOME_TUNEL,
     Alvo,
     ErroDeUnidade,
@@ -201,20 +203,93 @@ def instalar_unidades(alvo: Alvo, *, ensaio: bool) -> None:
     teria respondido `79e4dbb` — o do disco — e o defeito ficava invisível.
     """
     lista = decidir_tunel()
+    mudadas: set[str] = set()
     unidades = [NOME_OLLAMA, NOME_SERVICO] + ([NOME_TUNEL] if lista else [])
     if ensaio:
-        for nome in unidades:
+        # Os ficheiros, e não as unidades a activar: o `escrever` também põe o
+        # serviço da guarda e o temporizador, e um ensaio que os omitisse
+        # mentia sobre o que a instalação a sério faz.
+        ficheiros = list(GERADORES) + (
+            [NOME_TUNEL, NOME_GUARDA, NOME_TEMPORIZADOR] if lista else [])
+        for nome in ficheiros:
             print(f"    $ escreve {DIRECTORIO / nome}")
     else:
         for nome, caminho in escrever(
-                alvo, convidados=CONVIDADOS if lista else None).items():
-            print(f"  · {nome} → {caminho}")
+                alvo, convidados=CONVIDADOS if lista else None,
+                mudadas=mudadas).items():
+            print(f"  · {nome} → {caminho}"
+                  f"{'  (mudou)' if nome in mudadas else ''}")
     _correr("systemctl", "--user", "daemon-reload", ensaio=ensaio)
     _correr("systemctl", "--user", "enable", "--now", *unidades, ensaio=ensaio)
     # Ver a docstring: sem isto uma instalação sobre um serviço a correr troca
     # o checkout e não troca o processo. O `restart` corta uma geração a meio,
     # e é o preço certo — é o mesmo comando que a §5.2 prescreve para o recuo.
-    _correr("systemctl", "--user", "restart", *unidades, ensaio=ensaio)
+    #
+    # **Mas só o que precisa.** Reiniciar não custa o mesmo em cada unidade:
+    #
+    # - o `pessoabot` reinicia-se **sempre**, porque é a referência do checkout
+    #   que pode ter mudado, e é a razão de alguém correr isto;
+    # - o `ollama` só se a unidade dele mudar: um reinício descarrega o modelo
+    #   de 4,9 GB e a pergunta seguinte paga ~50 s de prefill a frio;
+    # - o `cloudflared` só se a unidade mudar **ou** o URL não responder,
+    #   porque reiniciá-lo **troca o URL** e deita abaixo quem estiver
+    #   autenticado. Observado a 2026-10-20, com o dono dentro da página.
+    reiniciar = [NOME_SERVICO]
+    if NOME_OLLAMA in mudadas:
+        reiniciar.append(NOME_OLLAMA)
+    if lista and (NOME_TUNEL in mudadas or not _tunel_responde(ensaio=ensaio)):
+        reiniciar.append(NOME_TUNEL)
+    elif lista:
+        print("  · o túnel responde e a unidade não mudou: **não** se reinicia "
+              "(reiniciar trocava o URL)")
+    _correr("systemctl", "--user", "restart", *reiniciar, ensaio=ensaio)
+    if lista:
+        # O temporizador **não** leva `restart`: reiniciá-lo repõe a contagem,
+        # e um `enable --now` já o deixa agendado. E o serviço da guarda é
+        # `oneshot` — activá-lo à mão corria uma passagem fora de horas.
+        _correr("systemctl", "--user", "enable", "--now", NOME_TEMPORIZADOR,
+                ensaio=ensaio)
+        provar_a_guarda(alvo, ensaio=ensaio)
+
+
+def provar_a_guarda(alvo: Alvo, *, ensaio: bool) -> None:
+    """Corre a guarda **uma vez**, pelo `python` do checkout do serviço.
+
+    ⚠️ **Existe por uma falha observada, e a falha é de acoplagem entre os dois
+    checkouts.** A unidade da guarda é escrita pelo checkout de **trabalho**,
+    e corre o código do checkout do **serviço**, que está preso numa
+    referência. A 2026-10-20 a unidade saiu a invocar `--guardar-tunel` numa
+    referência onde essa opção ainda não existia: o `systemctl enable --now`
+    devolveu **0**, o temporizador ficou agendado, e a primeira passagem
+    morreu com `status=2/INVALIDARGUMENT` — uma guarda instalada com sucesso e
+    incapaz de guardar.
+
+    É a forma desta casa outra vez, e o remédio é o mesmo do `conferir_sha`:
+    **não se acredita no código de saída do comando que se correu; corre-se a
+    coisa e vê-se.** Não levanta — uma guarda que não corre não justifica
+    desfazer uma instalação boa —, mas **diz**, e com o remédio.
+    """
+    if ensaio:
+        return
+    r = subprocess.run((str(alvo.python), "-m", "src.web.instalar",
+                        "--guardar-tunel"), cwd=str(alvo.checkout),
+                       capture_output=True, text=True)
+    if r.returncode == 0:
+        print(f"  · a guarda corre: {r.stdout.strip().splitlines()[-1]}"
+              if r.stdout.strip() else "  · a guarda corre")
+        return
+    print(f"  · ⚠️ a guarda **não corre** no checkout do serviço "
+          f"(código {r.returncode}): {(r.stderr or r.stdout).strip()[:300]}\n"
+          f"       a referência servida não conhece `--guardar-tunel`. "
+          f"Instala uma referência que a tenha.", file=sys.stderr)
+
+
+def _tunel_responde(*, ensaio: bool) -> bool:
+    """O URL actual responde? `True` no ensaio, que não toca na rede."""
+    if ensaio:
+        return True
+    url = url_do_tunel(tentativas=1)
+    return bool(url) and tunel_vivo(url)[0]
 
 
 def decidir_tunel() -> tuple[str, ...]:
@@ -340,6 +415,79 @@ def tunel_vivo(url: str, *, tempo_limite: float = 20.0) -> tuple[bool, str]:
     return False, f"responde {codigo}, que não é o ecrã de autenticação"
 
 
+#: Um ponto da Cloudflare que responde sempre e não é o nosso túnel. Serve
+#: para distinguir «o túnel caiu» de «esta máquina não tem rede» — e essa
+#: distinção é o que impede a guarda de gerar túneis contra uma rede morta.
+SONDA_DE_REDE = "https://www.cloudflare.com/cdn-cgi/trace"
+
+
+def rede_viva(url: str = SONDA_DE_REDE, *, tempo_limite: float = 10.0) -> bool:
+    import urllib.error
+    import urllib.request
+    try:
+        with urllib.request.urlopen(url, timeout=tempo_limite):
+            return True
+    except urllib.error.HTTPError:
+        return True          # respondeu, logo há rede
+    except OSError:
+        return False
+
+
+def decidir_guarda(url_responde: bool, ha_rede: bool,
+                   medicao: object | None) -> tuple[bool, str]:
+    """Reiniciar o túnel? Função pura, porque é aqui que mora o perigo.
+
+    Três recusas, e a **primeira é a que importa mais do que todas**:
+
+    1. **Há uma medição a correr.** O passo 5 derruba o túnel de propósito
+       durante uma fase — é o portão **D3** e a razão de o `tunel.py` existir.
+       Uma guarda que não soubesse disto via o URL em baixo, concluía «morreu»,
+       e **levantava o túnel no meio da medição**: desfazia a protecção do
+       sentinela, punha público no mesmo CPU das amostras, e deixava um
+       `01-cru.jsonl` em que uma célula lenta pode ser térmica ou pode ser um
+       estranho. Seria um mecanismo automático a desfazer, em silêncio, o
+       mecanismo que o plano inteiro existe para construir.
+    2. **O URL responde.** Nada a fazer.
+    3. **O URL não responde e a rede também não.** Reiniciar aqui não dá túnel
+       nenhum — dá um `cloudflared` novo a falhar contra a mesma rede — e de
+       cinco em cinco minutos isso é só ruído no registo.
+    """
+    if medicao is not None:
+        return False, f"medição a correr ({medicao}): o túnel está em baixo de propósito"
+    if url_responde:
+        return False, "o URL responde"
+    if not ha_rede:
+        return False, "o URL não responde, e a rede desta máquina também não"
+    return True, "o URL não responde e a rede está de pé"
+
+
+def guardar_tunel() -> int:
+    """Uma passagem da guarda. Chamada pelo temporizador, de 5 em 5 minutos.
+
+    Devolve **0 mesmo quando não faz nada**: um temporizador que falha de cinco
+    em cinco minutos enquanto a rede está em baixo enche o registo e ensina
+    quem o lê a ignorá-lo.
+    """
+    from . import sentinela
+    url = url_do_tunel(tentativas=1)
+    if url is None:
+        print("sem URL anunciado nesta execução do túnel; nada a guardar")
+        return 0
+    responde, detalhe = tunel_vivo(url)
+    medicao = sentinela.a_correr()
+    agir, porque = decidir_guarda(responde, rede_viva() if not responde else True,
+                                  medicao.descricao() if medicao else None)
+    print(f"{url}: {detalhe} — {porque}")
+    if not agir:
+        return 0
+    print(f"a reiniciar {NOME_TUNEL}; o URL vai mudar")
+    subprocess.run(("systemctl", "--user", "restart", NOME_TUNEL),
+                   capture_output=True, text=True)
+    novo = url_do_tunel()
+    print(f"URL novo: {novo or 'ainda não anunciado'}")
+    return 0
+
+
 def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
     """A queixa, se o serviço a correr não for o código instalado. `None` se for.
 
@@ -403,7 +551,8 @@ def verificar(alvo: Alvo, *, ensaio: bool,
     linger = _correr("loginctl", "show-user", getpass.getuser(),
                      "--property=Linger", ensaio=False).strip()
     linhas.append(f"  · {linger}")
-    instaladas = list(GERADORES) + ([NOME_TUNEL] if tunel else [])
+    instaladas = list(GERADORES) + ([NOME_TUNEL, NOME_TEMPORIZADOR]
+                                    if tunel else [])
     for nome in instaladas:
         estado = subprocess.run(
             ("systemctl", "--user", "is-enabled", nome),
@@ -523,6 +672,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verificar-d4", metavar="URL", default=None,
                    help="mede o portão D4 contra um URL público já de pé, e "
                         "não instala nada")
+    p.add_argument("--guardar-tunel", action="store_true",
+                   help="uma passagem da guarda: reinicia o túnel se o URL "
+                        "não responder. É o que o temporizador corre")
     p.add_argument("--verificar-tunel", action="store_true",
                    help="pergunta ao URL se o túnel está vivo, e não ao "
                         "systemctl — que responde «active» com o URL morto")
@@ -530,6 +682,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if a.verificar_d4:
         return verificar_d4(a.verificar_d4)
+
+    if a.guardar_tunel:
+        return guardar_tunel()
 
     if a.verificar_tunel:
         url = url_do_tunel()

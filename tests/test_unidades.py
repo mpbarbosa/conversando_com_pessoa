@@ -43,6 +43,7 @@ from src.web.instalar import (
     clonar,
     conferir_sha,
     contar_acessos,
+    decidir_guarda,
     extrair_url,
     main,
     tunel_vivo,
@@ -52,8 +53,11 @@ from src.web.unidades import (
     DIRECTORIO,
     GERADORES,
     KEEP_ALIVE,
+    MINUTOS_DA_GUARDA,
+    NOME_GUARDA,
     NOME_OLLAMA,
     NOME_SERVICO,
+    NOME_TEMPORIZADOR,
     NOME_TUNEL,
     Alvo,
     ErroDeUnidade,
@@ -319,7 +323,7 @@ def test_d4_a_unidade_do_tunel_leva_a_lista_e_o_caminho_absoluto(alvo,
     assert "Requires" not in _ini(texto)["Unit"]
 
 
-def test_d4_escrever_sem_lista_da_duas_unidades_e_com_lista_da_tres(
+def test_d4_escrever_sem_lista_da_so_o_servico_e_com_lista_da_o_tunel(
         alvo, tmp_path, convidados):
     sem = escrever(alvo, tmp_path / "sem", convidados=None)
     assert set(sem) == set(GERADORES), (
@@ -327,7 +331,8 @@ def test_d4_escrever_sem_lista_da_duas_unidades_e_com_lista_da_tres(
         "ainda não dado")
 
     com = escrever(alvo, tmp_path / "com", convidados=convidados)
-    assert set(com) == set(GERADORES) | {NOME_TUNEL}
+    assert set(com) == set(GERADORES) | {NOME_TUNEL, NOME_GUARDA,
+                                         NOME_TEMPORIZADOR}
     assert "--allowed-mail" in com[NOME_TUNEL].read_text(encoding="utf-8")
 
 
@@ -579,3 +584,96 @@ def test_o_tunel_vivo_le_se_pelas_respostas_do_url(monkeypatch):
     monkeypatch.setattr(urllib.request, "urlopen", responder(502))
     vivo, detalhe = tunel_vivo("https://x.trycloudflare.com")
     assert not vivo and "502" in detalhe
+
+
+# --- a guarda do túnel, e a recusa que protege as medições --------------- #
+
+def test_a_guarda_nao_levanta_o_tunel_no_meio_de_uma_medicao():
+    """**A recusa que importa mais do que todas**, e a razão de a decisão ser
+    uma função pura.
+
+    O passo 5 derruba o túnel de propósito durante uma fase — é o portão D3 e
+    a razão de o `tunel.py` existir. Uma guarda que não soubesse disto via o
+    URL em baixo, concluía «morreu» e **levantava o túnel no meio da
+    medição**: desfazia a protecção do sentinela, punha público no mesmo CPU
+    das amostras, e deixava um `01-cru.jsonl` em que uma célula lenta pode ser
+    térmica ou pode ser um estranho. Um mecanismo automático a desfazer, em
+    silêncio, o mecanismo que o plano inteiro existe para construir.
+    """
+    agir, porque = decidir_guarda(url_responde=False, ha_rede=True,
+                                  medicao="fase-7 (pid 123)")
+    assert agir is False
+    assert "medição a correr" in porque and "fase-7" in porque
+
+
+def test_a_guarda_nao_faz_nada_com_o_url_de_pe():
+    agir, porque = decidir_guarda(url_responde=True, ha_rede=True,
+                                  medicao=None)
+    assert agir is False and "responde" in porque
+
+
+def test_a_guarda_nao_gera_tuneis_contra_uma_rede_morta():
+    """Reiniciar sem rede não dá túnel nenhum, e de 5 em 5 minutos é ruído."""
+    agir, porque = decidir_guarda(url_responde=False, ha_rede=False,
+                                  medicao=None)
+    assert agir is False and "a rede desta máquina também não" in porque
+
+
+def test_a_guarda_reinicia_quando_o_url_morre_e_a_rede_esta_de_pe():
+    """O caso de 20/10 às 02:38: a máquina acordou, a rede voltou, o túnel não."""
+    agir, porque = decidir_guarda(url_responde=False, ha_rede=True,
+                                  medicao=None)
+    assert agir is True and "a rede está de pé" in porque
+
+
+# --- as unidades da guarda ------------------------------------------------ #
+
+def test_o_temporizador_e_a_guarda_so_nascem_com_o_tunel(alvo, tmp_path,
+                                                         convidados):
+    """Sem túnel não há o que guardar, e um temporizador a perguntar por um
+    URL que não existe é ruído de cinco em cinco minutos."""
+    sem = escrever(alvo, tmp_path / "sem", convidados=None)
+    assert NOME_GUARDA not in sem and NOME_TEMPORIZADOR not in sem
+
+    com = escrever(alvo, tmp_path / "com", convidados=convidados)
+    assert {NOME_TUNEL, NOME_GUARDA, NOME_TEMPORIZADOR} <= set(com)
+
+
+def test_o_temporizador_tem_cadencia_e_arranque_e_entra_no_timers_target(
+        alvo, tmp_path, convidados):
+    """`OnBootSec` **e** `OnUnitActiveSec`: sem o primeiro não há primeira
+    passagem depois de um reinício da máquina."""
+    d = tmp_path / "u"
+    escrever(alvo, d, convidados=convidados)
+    t = _ini((d / NOME_TEMPORIZADOR).read_text(encoding="utf-8"))
+    assert t["Timer"]["OnBootSec"] == f"{MINUTOS_DA_GUARDA}min"
+    assert t["Timer"]["OnUnitActiveSec"] == f"{MINUTOS_DA_GUARDA}min"
+    assert t["Timer"]["Unit"] == NOME_GUARDA
+    assert t["Install"]["WantedBy"] == "timers.target"
+    assert "Persistent" not in t["Timer"], (
+        "Persistent põe a passagem que faltou no instante em que a máquina "
+        "acorda, que é quando a rede ainda não voltou")
+
+
+def test_a_guarda_e_oneshot_e_corre_o_comando_da_guarda(alvo, tmp_path,
+                                                        convidados):
+    d = tmp_path / "u"
+    escrever(alvo, d, convidados=convidados)
+    g = _ini((d / NOME_GUARDA).read_text(encoding="utf-8"))
+    assert g["Service"]["Type"] == "oneshot"
+    assert g["Service"]["ExecStart"] == \
+        f"{alvo.python} -m src.web.instalar --guardar-tunel"
+    assert "Install" not in g, (
+        "a guarda não se activa sozinha: quem a corre é o temporizador")
+
+
+@pytest.mark.skipif(shutil.which("systemd-analyze") is None,
+                    reason="sem systemd-analyze nesta máquina")
+def test_o_systemd_aceita_a_guarda_e_o_temporizador(alvo, tmp_path, convidados):
+    d = tmp_path / "u"
+    escrever(alvo, d, convidados=convidados)
+    for nome in (NOME_GUARDA, NOME_TEMPORIZADOR):
+        r = subprocess.run(("systemd-analyze", "--user", "verify",
+                            str(d / nome)), capture_output=True, text=True)
+        meus = [ln for ln in r.stderr.splitlines() if ln.startswith(nome)]
+        assert not meus, meus
