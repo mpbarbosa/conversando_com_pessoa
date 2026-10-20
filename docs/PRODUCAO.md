@@ -545,7 +545,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
 | 6 | ⛔ **construído, medido, e bloqueado a montante** (2026-10-20, §7.4: a sessão autenticada dura **4 s**) — **fechar o serviço a estranhos antes de o abrir** (§7): *Protected Quick Tunnel* com `--allowed-mail`, lista de convidados **nesta máquina**, `cloudflared.service` gerado pelo `unidades.py`. Falta a lista ter um endereço, e falta o defeito do fornecedor (§7.1) | o URL funciona para quem o dono convidar | **D4** ✅ medido |
 | 7 | 🔶 **feito, e o portão reduzido ao que é mensurável** (2026-10-20, §3.6) — **a janela registada** (§3.3, peça 3): o ajudante escreve `00-janela.json` ao lado das amostras, na abertura e no fecho | uma célula lenta é interpretável daqui a seis meses — **menos** no que as amostras sem instante não deixam dizer | **D5**, na metade que o formato de hoje permite |
-| 8 | **Recuo** (§5.2): o serviço corre numa etiqueta; recuar é `git checkout` da anterior e reiniciar a unidade. **Ensaiado** | recuar é um comando, e foi ensaiado | **D6** |
+| 8 | ✅ **feito e ensaiado** (2026-10-20, §5.5) — **recuo**: `python -m src.web.instalar --recuar <etiqueta>`, com o manifesto verificado **antes** do reinício | recuar é um comando, e foi ensaiado de uma etiqueta doente a sério | **D6** ✅ |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
 | 10 | **Cópias de `data/sessoes.db`**, se e quando o passo 8 da Fase 6 existir (§5.3) | o estado dos utilizadores sobrevive | **D8** |
 | 11 | **Fechar**: `README` (§8), `CONTROLO.md`, e `docs/producao/SERVICO.md` escrito **a partir da máquina**, com a proveniência de cada número | o serviço documentado | — |
@@ -620,6 +620,47 @@ temporizador de utilizador, e o que a torna uma cópia é o **ensaio de restauro
 acertos num varrimento — ganha aqui uma segunda função: é também o que diz que
 esta cópia não é uma cópia do corpus, e portanto que pode ir para onde o corpus
 não pode.
+
+### 5.5 O passo 8, ensaiado: o recuo, e a etiqueta que o `fetch` não trazia
+
+Escrito em 2026-10-20. `python -m src.web.instalar --recuar <etiqueta>`.
+
+**A ordem é a asserção, e não é invertível:** buscar e mudar de referência →
+`pip install` → **verificar o manifesto e recusar se divergir** → reiniciar →
+conferir pelo `/api/health`. O manifesto **antes** e nunca depois, porque ele
+devolve `None` em vez de reconstruir em silêncio: verificado depois, o serviço
+ficava de pé a cobrar **383 s** de CPU saturado à primeira pergunta de quem
+estivesse à espera — que num recuo é exactamente quem não pode esperar.
+Verificado por mutação: com a recusa desligada, o teste da ordem cai.
+
+**O ensaio, que é o que o D6 exige, e não uma simulação.** Duas etiquetas a
+sério neste repositório:
+
+- **`servico-2026-10-20a`**, boa, no `fd43c2d`;
+- **`servico-2026-10-20b`**, **deliberadamente doente**: o `src/web/__main__.py`
+  levanta no arranque. O commit foi feito num ramo que se apagou a seguir, de
+  propósito — **não está no `main`**, e a etiqueta é a única coisa que o mantém
+  vivo.
+
+| | |
+|---|---|
+| instalada a doente | `pessoabot.service` em `activating`, `status=1/FAILURE`, `curl` a dar **000** |
+| o que a ferramenta disse | **«O RECUO NÃO PEGOU: o /api/health não respondeu»** — e é a `conferir_sha` do §7.1 a fazer o seu trabalho |
+| recuado para a boa | manifesto **aceite** (2290 chunks) antes do reinício, e depois `sha: fd43c2d`, `etiqueta: servico-2026-10-20a`, `status: ok` |
+
+⚠️ **E um defeito que só o ensaio podia encontrar: o `fetch` não trazia a
+etiqueta.** O `git fetch` sem `--tags` traz só as etiquetas **alcançáveis a
+partir dos ramos que buscou** — e a etiqueta de uma versão doente é
+precisamente a que pode não estar em ramo nenhum. O recuo recusou uma etiqueta
+que existia no checkout de trabalho, com uma mensagem correcta sobre uma causa
+que não era aquela. Corrigido para `fetch --prune --tags`, com um teste de
+regressão que constrói o mesmo caso — commit num ramo, etiqueta, ramo apagado
+— e falha sem o `--tags`.
+
+**E uma peça do passo 3 que só agora se exercitou.** O campo `etiqueta` do
+`/api/health` era `null` desde que nasceu, e eu tinha escrito que era «o estado
+verdadeiro: não há etiquetas, e criá-las é o passo 8». São estas. Hoje diz
+`servico-2026-10-20a`, lido da máquina.
 
 ### 5.4 O passo 4, instalado: onde vive, o que custa, e as duas metades do D2
 
@@ -1284,11 +1325,11 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
 | **D4 — fechado antes de aberto** ✅ | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido. **Medido (2026-10-19)**, contra um túnel protegido com uma lista que ninguém pode usar: `GET /` dá 302 para o ecrã da Cloudflare (46 702 bytes), `POST /api/perguntar` dá **401**, e os 4 pedidos de fora deixam **0** linhas no registo do serviço — com o instrumento verificado a morder no mesmo instante (+1 com um pedido local). `python -m src.web.instalar --verificar-d4 <url>` |
 | **D5 — a janela fica escrita** 🔶 **metade medida** | uma célula lenta é interpretável | ~~o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras~~ — **a segunda metade não é mensurável: as amostras não têm instante nenhum** (§3.6). **Feito (2026-10-20):** `00-janela.json` com `inicio`, `fim`, o túnel e se ele foi parado, mais `bytes_no_inicio`/`bytes_no_fim`/`mtime_no_fim` do ficheiro das amostras — e a asserção passa a ser **«o ficheiro das amostras só cresceu dentro da janela»**. 8 testes, quatro mutações a morder |
-| **D6 — o recuo recua** | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido |
+| **D6 — o recuo recua** ✅ | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido. **Feito (2026-10-20):** a `servico-2026-10-20b` rebenta no arranque — o serviço ficou `activating` com `status=1/FAILURE` e o `curl` a dar **000** —, e o recuo para a `servico-2026-10-20a` devolveu `status: ok` com `sha: fd43c2d` e `etiqueta: servico-2026-10-20a`. §5.5 |
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (477 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (482 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

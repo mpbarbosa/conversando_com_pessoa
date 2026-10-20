@@ -826,3 +826,36 @@ def test_d6_com_o_manifesto_aceite_o_recuo_reinicia(monkeypatch, par):
 def test_d6_o_recuo_recusa_o_checkout_de_trabalho(capsys):
     assert main(["--recuar", "HEAD", "--destino", str(RAIZ)]) == 2
     assert "recusado" in capsys.readouterr().err
+
+
+def test_d6_uma_etiqueta_fora_de_qualquer_ramo_e_alcancavel(par):
+    """**O defeito que o ensaio do D6 encontrou, e é o caso normal de um recuo.**
+
+    Sem `--tags`, o `git fetch` só traz as etiquetas **alcançáveis a partir
+    dos ramos que buscou** — e a etiqueta de uma versão doente é precisamente
+    a que pode não estar em ramo nenhum: no ensaio, o commit doente foi feito
+    num ramo que se apagou a seguir, de propósito, para não entrar no `main`.
+    O recuo recusava uma etiqueta que existia no checkout de trabalho, com uma
+    mensagem correcta sobre uma causa que não era aquela.
+    """
+    trabalho, alvo, primeiro = par
+
+    # Um commit doente fora do `main`, que só a etiqueta mantém vivo — é o que
+    # se fez à mão no ensaio.
+    subprocess.run(("git", "-C", str(trabalho), "switch", "-q", "-c", "doente"),
+                   check=True, capture_output=True)
+    _repo(trabalho, "doente.txt", "defeito deliberado")
+    subprocess.run(("git", "-C", str(trabalho), "tag", "servico-doente"),
+                   check=True, capture_output=True)
+    subprocess.run(("git", "-C", str(trabalho), "switch", "-q", "main"),
+                   check=True, capture_output=True)
+    subprocess.run(("git", "-C", str(trabalho), "branch", "-D", "doente"),
+                   check=True, capture_output=True)
+
+    clonar(alvo, "servico-doente", ensaio=False)
+    assert (alvo.checkout / "doente.txt").exists(), (
+        "a etiqueta não chegou ao checkout do serviço: falta o `--tags`")
+
+    clonar(alvo, primeiro, ensaio=False)
+    assert not (alvo.checkout / "doente.txt").exists(), (
+        "e o caminho de volta tem de funcionar, que é o recuo")

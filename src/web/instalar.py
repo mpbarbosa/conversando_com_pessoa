@@ -132,8 +132,15 @@ def clonar(alvo: Alvo, ref: str, *, ensaio: bool) -> None:
         print(f"  · o checkout já existe: {alvo.checkout}")
         # `origin` é o checkout de trabalho: foi de lá que o `clone --local`
         # veio. Sem isto, só se pode mudar para referências que já lá estavam.
-        _correr("git", "-C", str(alvo.checkout), "fetch", "--prune", "origin",
-                ensaio=ensaio)
+        #
+        # **`--tags`, e não é detalhe.** Sem ele o `git` só traz as etiquetas
+        # **alcançáveis a partir dos ramos que buscou** — e uma etiqueta de
+        # recuo é precisamente a que pode não estar em ramo nenhum. Observado
+        # no ensaio do D6: a `servico-2026-10-20b`, criada num ramo que foi
+        # apagado a seguir (o commit doente não entra no `main`), não vinha, e
+        # o recuo recusava uma etiqueta que existia no checkout de trabalho.
+        _correr("git", "-C", str(alvo.checkout), "fetch", "--prune", "--tags",
+                "origin", ensaio=ensaio)
     else:
         alvo.checkout.parent.mkdir(parents=True, exist_ok=True)
         _correr("git", "clone", "--local", str(RAIZ), str(alvo.checkout),
