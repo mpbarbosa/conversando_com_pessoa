@@ -751,6 +751,33 @@ a única que existe. Qualquer fase que gere amostras tem de correr debaixo do
 e as latências medidas deixam de descrever o caminho que o utilizador corre. Era
 previsto (§3), e agora é o estado da máquina.
 
+**O instrumento, escrito a 2026-10-20:** `python -m src.web.instalar
+--verificar-d2`. Julga as duas metades e **devolve 2 quando não as pode
+julgar** — «por medir» não é «passa», e é um veredicto a sério com código de
+saída próprio.
+
+Os instantes são **monótonos, em microssegundos desde o arranque**
+(`ActiveEnterTimestampMonotonic`, `TimestampMonotonic`): o arranque é o zero e
+**não há fuso nenhum na comparação**. É a correcção 46 aplicada antes de
+custar — o D4 passou uma vez por eu ter comparado UTC com hora local, e aqui há
+três instantes para trocar.
+
+As duas metades são separadas porque falham por razões diferentes: *sobrevive
+ao logout* compara o serviço com a sessão mais recente; *sobrevive ao
+reinício* compara-o com o arranque. E há «por medir» porque **correr o
+instalador reinicia o `pessoabot` e apaga a evidência** — responder «falha» aí
+ensinava quem lê o portão a ignorá-lo.
+
+⚠️ **E um buraco meu, apanhado por mutação antes de o commit sair.** A primeira
+versão perguntava «o serviço é mais velho que a sessão?» **antes** de perguntar
+«houve logout?». Num arranque limpo o serviço sobe aos 20 s e a sessão aos
+24 s, logo ele *é* mais velho — e a função dava **passa** à metade do logout
+sem ninguém ter saído de sessão nenhuma. Pior: o teste que eu escrevi para a
+prender **não a prendia**, porque a margem de 60 s mascarava o caso dos 4
+segundos; só um arranque lento (sessão aos 200 s) o distingue, e é esse que
+está no teste agora. Confundir as duas metades é dar o portão por cumprido com
+metade da evidência — exactamente o que o I7 e o D5 fizeram antes dele.
+
 **As duas metades do D2, e porque é que esta sessão não as pode medir.** O
 portão afirma que *fechar a sessão gráfica* e *reiniciar a máquina* deixam o
 serviço de pé. Nenhuma das duas é coisa que um processo a correr dentro dessa
@@ -758,13 +785,21 @@ sessão possa fazer e ver o resultado. Então o que está feito é deixar a máq
 no estado em que o D2 é mensurável, e o instalador imprime os dois comandos que
 o medem:
 
-1. fechar a sessão gráfica, voltar a entrar, e `curl -s http://127.0.0.1:8000/api/health`;
-2. reiniciar, e correr o mesmo `curl` **antes** de abrir a sessão gráfica — por
-   SSH, ou num terminal virtual.
+1. fechar a sessão gráfica, voltar a entrar, e correr
+   `python -m src.web.instalar --verificar-d2`;
+2. reiniciar, e correr o mesmo **antes** de abrir a sessão gráfica — por SSH,
+   ou num terminal virtual.
 
-Em ambos o `sha` tem de ser o do checkout do **serviço**. Enquanto os dois não
-forem corridos, o **D2 está por medir, e não cumprido** — e é por isso que a
-tabela do §9 o marca 🔶 e não ✅.
+⚠️ **O `curl -s .../api/health` sozinho não serve, e foi preciso dizê-lo.** O
+dono correu-o a 2026-10-20 e ele respondeu `ok`: mediu que o serviço responde
+**dentro da sessão que já estava aberta**, que nunca esteve em dúvida. Pior,
+com `Linger=no` o gestor de utilizador arranca no primeiro login e o serviço
+com ele — logo o `curl` responderia na mesma, e veria-se «funciona» com o D2 a
+falhar. O que distingue os dois casos não é a resposta: é **quando o serviço
+arrancou**.
+
+Enquanto os dois não forem corridos, o **D2 está por medir, e não cumprido** —
+e é por isso que a tabela do §9 o marca 🔶 e não ✅.
 
 ⚠️ **Uma ressalva sobre o `systemctl --user` desta máquina:** responde
 `degraded`, e já respondia **antes** deste passo. A unidade falhada é do snap
@@ -1378,7 +1413,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (483 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (490 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

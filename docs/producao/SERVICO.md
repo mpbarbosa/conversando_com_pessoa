@@ -94,6 +94,7 @@ a §5.4 do plano:
 | o túnel está vivo? | `python -m src.web.instalar --verificar-tunel` |
 | o túnel fecha estranhos? | `python -m src.web.instalar --verificar-d4 <url>` |
 | de que código é o processo? | `curl -s localhost:8000/api/health` |
+| o serviço sobrevive à sessão? | `python -m src.web.instalar --verificar-d2` — **não** o `curl`: ver abaixo |
 
 Todos correm do **checkout de trabalho**, e o instalador **recusa-se** a
 instalar sobre ele.
@@ -102,6 +103,15 @@ instalar sobre ele.
 Compara o `sha` do `/api/health` com o do checkout e devolve 1 se divergirem —
 porque `systemctl` a responder 0 não é evidência de nada: já houve uma
 instalação que trocou o checkout e deixou o processo antigo a servir (§7.1).
+
+**O portão D2 mede-se com o `--verificar-d2`, e não com o `curl`.** O `curl`
+responder prova que o serviço está vivo **dentro da sessão que já está
+aberta**; com `Linger=no` o serviço nasceria com o login e o `curl` responderia
+na mesma. O que distingue é **quando o serviço arrancou**, e é isso que o
+comando compara — em tempo monótono desde o arranque, sem fusos. Corre-se duas
+vezes: depois de um logout e de um login novo, e depois de um reinício, de um
+terminal virtual, **antes** de abrir a sessão gráfica. Devolve **2** quando não
+pode julgar, e «por medir» não é «passa».
 
 ---
 

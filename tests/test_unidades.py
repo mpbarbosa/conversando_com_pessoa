@@ -39,7 +39,11 @@ from src.web import instalar
 from src.web.app import HOST, PORTA
 from src.web.instalar import (
     DESTINO,
+    FALHA,
+    PASSA,
+    POR_MEDIR,
     Falhou,
+    avaliar_d2,
     clonar,
     conferir_sha,
     contar_acessos,
@@ -880,3 +884,93 @@ def test_d6_uma_etiqueta_fora_de_qualquer_ramo_e_alcancavel(par):
     clonar(alvo, primeiro, ensaio=False)
     assert not (alvo.checkout / "doente.txt").exists(), (
         "e o caminho de volta tem de funcionar, que é o recuo")
+
+
+# --- o portão D2, julgado em tempo monótono ------------------------------ #
+
+S = 1_000_000          #: um segundo em microssegundos
+H = 3600 * S
+
+
+def _d2(servico_s, sessao_s, linger=True):
+    """`{metade: (veredicto, porquê)}`, com os instantes em segundos."""
+    return {m: (v, p) for m, v, p in
+            avaliar_d2(int(servico_s * S), int(sessao_s * S), linger)}
+
+
+def test_d2_sem_linger_as_duas_metades_falham():
+    """`Linger=no` é a condição de que tudo o resto depende."""
+    r = _d2(10, 20, linger=False)
+    assert r["sobrevive ao logout"][0] == FALHA
+    assert r["sobrevive ao reinício"][0] == FALHA
+    assert "enable-linger" in r["sobrevive ao logout"][1]
+
+
+def test_d2_o_servico_que_sobe_no_arranque_cumpre_a_metade_do_reinicio():
+    """Com o `linger`, o serviço sobe **antes de haver login nenhum**."""
+    assert _d2(20, 24)["sobrevive ao reinício"][0] == PASSA
+
+
+def test_d2_um_arranque_limpo_nao_prova_nada_sobre_o_logout():
+    """**O buraco que eu tinha, e que corrigi antes de testar.**
+
+    Num arranque limpo o serviço sobe aos 20 s e a sessão aos 24 s, logo o
+    serviço «é mais velho que a sessão» — e a primeira versão desta função
+    dava **passa** à metade do logout com isso. Mas ninguém saiu de sessão
+    nenhuma: o que esses quatro segundos provam é a metade do **reinício**.
+    Um portão que confunde as duas dá-se por cumprido com metade da evidência,
+    que é exactamente o que o D5 e o I7 fizeram antes dele.
+    """
+    r = _d2(20, 24)
+    assert r["sobrevive ao logout"][0] == POR_MEDIR
+    assert "não houve logout nenhum" in r["sobrevive ao logout"][1]
+
+    # ⚠️ **E o caso que prende mesmo a ordem.** Com o serviço aos 20 s e a
+    # sessão aos 24 s, a margem de 60 s do `perto` já bastava para dar «por
+    # medir» mesmo com a ordem trocada — logo a asserção acima parecia prender
+    # a correcção e não prendia. Observado por mutação. Aqui a sessão gráfica
+    # demora 200 s a abrir (um arranque lento, e acontece): o serviço é
+    # **180 s mais velho** que ela, muito para lá da margem, e só a ordem
+    # impede o «passa».
+    lento = _d2(20, 200)
+    assert lento["sobrevive ao logout"][0] == POR_MEDIR, (
+        "com a ordem trocada, um arranque lento dá «passa» ao logout sem "
+        "ninguém ter saído de sessão nenhuma")
+    assert lento["sobrevive ao reinício"][0] == PASSA
+
+
+def test_d2_depois_de_um_logout_o_servico_mais_velho_cumpre():
+    """A máquina arrancou, o serviço subiu, o dono saiu e voltou às 2 h."""
+    r = _d2(20, 2 * 3600)
+    assert r["sobrevive ao logout"][0] == PASSA
+    assert r["sobrevive ao reinício"][0] == PASSA
+
+
+def test_d2_o_servico_que_nasce_com_o_login_falha_as_duas():
+    """O modo de falha a sério: o `linger` não pegou, e o login é que o levanta."""
+    r = _d2(7200, 7195)
+    assert r["sobrevive ao logout"][0] == FALHA
+    assert r["sobrevive ao reinício"][0] == FALHA
+    assert "nasceu com o login" in r["sobrevive ao logout"][1]
+    assert "não o levantou" in r["sobrevive ao reinício"][1]
+
+
+def test_d2_uma_instalacao_apaga_a_evidencia_e_isso_diz_se():
+    """**Porque é que «por medir» existe.**
+
+    Correr o instalador reinicia o `pessoabot`: o serviço passa a ser mais novo
+    que o arranque sem que isso diga nada sobre o `linger`. Responder «falha»
+    aí ensinava quem lê o portão a ignorá-lo. É o estado desta máquina a
+    2026-10-20 — serviço a +28,4 h, sessão a +24 s.
+    """
+    r = _d2(28.4 * 3600, 24)
+    assert r["sobrevive ao reinício"][0] == POR_MEDIR
+    assert "reiniciado" in r["sobrevive ao reinício"][1]
+    assert r["sobrevive ao logout"][0] == POR_MEDIR
+
+
+def test_d2_por_medir_nao_e_passa():
+    """A asserção que impede o portão de se dar por cumprido por omissão."""
+    assert POR_MEDIR != PASSA
+    veredictos = {v for _, v, _ in avaliar_d2(28 * H, 24 * S, True)}
+    assert PASSA not in veredictos

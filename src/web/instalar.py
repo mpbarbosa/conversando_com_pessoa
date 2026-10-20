@@ -631,6 +631,156 @@ def recuar(alvo: Alvo, ref: str, *, ensaio: bool) -> int:
     return 0
 
 
+#: Quanto tempo depois do arranque da máquina ainda se considera que uma
+#: unidade «subiu no arranque». Generoso: o `pessoabot` espera o
+#: `ollama.service`, e o `ollama` espera a rede. 5 minutos é folga a mais do
+#: que o necessário e muito menos do que uma sessão de trabalho.
+ARRANQUE_S = 300
+
+#: Veredictos. «por medir» **não** é «passa»: é o estado em que o portão não
+#: pode ser avaliado com o que a máquina mostra agora, e dizê-lo é o ponto.
+PASSA, FALHA, POR_MEDIR = "passa", "falha", "por medir"
+
+
+def avaliar_d2(servico_us: int, sessao_us: int, linger: bool,
+               arranque_s: int = ARRANQUE_S) -> list[tuple[str, str, str]]:
+    """O portão **D2**, julgado em **tempo monótono desde o arranque**.
+
+    Devolve `[(metade, veredicto, porquê)]`.
+
+    ## Porque é que os instantes são monótonos, e não datas
+
+    `ActiveEnterTimestampMonotonic` e `TimestampMonotonic` vêm em microssegundos
+    **desde o arranque da máquina**, logo o arranque é o zero e **não há fuso
+    nenhum na comparação**. É a lição da correcção 46 aplicada antes de custar:
+    o portão D4 passou uma vez por eu ter comparado um carimbo em UTC com um
+    `journalctl` em hora local, e aqui há três instantes para trocar.
+
+    ## As duas metades, e porque é que são separadas
+
+    O D2 afirma duas coisas que falham por razões diferentes:
+
+    - **sobrevive ao logout** — o serviço é mais velho do que a sessão de onde
+      se pergunta. Se tivesse nascido com o login, seria da idade dela;
+    - **sobrevive ao reinício** — o serviço subiu **no arranque**, antes de
+      haver login nenhum. É isto, e só isto, que o `enable-linger` compra.
+
+    ⚠️ **E a razão de haver «por medir»:** um `python -m src.web.instalar`
+    reinicia o `pessoabot`, e com isso **apaga a evidência** — o serviço passa
+    a ser mais novo que o arranque e mais novo que a sessão, sem que isso diga
+    nada sobre o `linger`. Um portão que respondesse «falha» aí ensinava quem o
+    lê a ignorá-lo. Responde «por medir», e diz o que fazer.
+    """
+    us = arranque_s * 1_000_000
+    perto = 60 * 1_000_000
+    if not linger:
+        porque = ("`Linger=no`: as unidades de utilizador morrem com a sessão. "
+                  "`loginctl enable-linger` é metade do passo 4")
+        return [("sobrevive ao logout", FALHA, porque),
+                ("sobrevive ao reinício", FALHA, porque)]
+
+    subiu_no_arranque = servico_us <= us
+    sessao_do_arranque = sessao_us <= us
+
+    if subiu_no_arranque:
+        reinicio = (PASSA, f"o serviço subiu {servico_us / 1e6:.0f} s depois do "
+                           f"arranque, antes de qualquer login")
+    elif not sessao_do_arranque and abs(servico_us - sessao_us) <= perto:
+        # O único caso em que se pode culpar o `linger`: a máquina arrancou, o
+        # login veio muito depois, e o serviço nasceu **com ele**.
+        reinicio = (FALHA,
+                    f"o serviço ({servico_us / 1e6:.0f} s) nasceu com esta "
+                    f"sessão ({sessao_us / 1e6:.0f} s) e não com o arranque: o "
+                    f"`linger` não o levantou")
+    else:
+        reinicio = (POR_MEDIR,
+                    f"o serviço foi reiniciado {servico_us / 3.6e9:.1f} h depois "
+                    f"do arranque — provavelmente por uma instalação —, logo "
+                    f"não se sabe se teria subido sozinho. Reinicia a máquina e "
+                    f"volta a correr isto **antes** de entrar na sessão gráfica")
+
+    # A ordem é a correcção: **primeiro** pergunta-se se houve logout. Sem
+    # isto, um arranque limpo dava «passa» ao logout — o serviço sobe antes da
+    # sessão e parecia mais velho que ela — sem que ninguém tivesse saído de
+    # sessão nenhuma. Isso prova a metade do reinício, não esta.
+    if sessao_do_arranque:
+        logout = (POR_MEDIR,
+                  "a sessão mais recente começou com a máquina, logo **não "
+                  "houve logout nenhum desde o arranque**. Termina a sessão "
+                  "gráfica, volta a entrar, e corre isto outra vez")
+    elif servico_us < sessao_us - perto:
+        logout = (PASSA, f"o serviço é {(sessao_us - servico_us) / 1e6:.0f} s "
+                         f"mais velho que esta sessão, logo não nasceu com ela")
+    else:
+        logout = (FALHA,
+                  f"o serviço ({servico_us / 1e6:.0f} s) é da idade desta "
+                  f"sessão ({sessao_us / 1e6:.0f} s): nasceu com o login, e não "
+                  f"sobreviveu ao anterior")
+    return [("sobrevive ao logout", *logout),
+            ("sobrevive ao reinício", *reinicio)]
+
+
+def _monotono(*args: str) -> int:
+    r = subprocess.run(args, capture_output=True, text=True)
+    try:
+        return int(r.stdout.strip())
+    except ValueError:
+        return 0
+
+
+def _sessao_mais_recente_us() -> int:
+    """A sessão **mais nova** deste utilizador, em µs desde o arranque.
+
+    A mais nova, e não a de onde isto corre: depois de um logout e de um login
+    novo, é a nova que interessa — e o processo pode estar a correr de um
+    terminal sem sessão própria.
+    """
+    r = subprocess.run(("loginctl", "list-sessions", "--no-legend"),
+                       capture_output=True, text=True)
+    utilizador = getpass.getuser()
+    marcas = [_monotono("loginctl", "show-session", ln.split()[0],
+                        "-p", "TimestampMonotonic", "--value")
+              for ln in r.stdout.splitlines()
+              if len(ln.split()) > 2 and ln.split()[2] == utilizador]
+    return max(marcas, default=0)
+
+
+def verificar_d2() -> int:
+    """Portão **D2**, contra o estado actual da máquina.
+
+        python -m src.web.instalar --verificar-d2
+
+    Corre-se **duas vezes**: depois de um logout e de um login novo, e depois
+    de um reinício, de um terminal virtual, **antes** de abrir a sessão
+    gráfica.
+    """
+    servico_us = _monotono("systemctl", "--user", "show", "-p",
+                           "ActiveEnterTimestampMonotonic", "--value",
+                           NOME_SERVICO)
+    sessao_us = _sessao_mais_recente_us()
+    linger = subprocess.run(
+        ("loginctl", "show-user", getpass.getuser(), "-p", "Linger", "--value"),
+        capture_output=True, text=True).stdout.strip() == "yes"
+
+    print(f"  · Linger: {'yes' if linger else 'no'}")
+    print("  · arranque da máquina: 0 s (é o zero do tempo monótono)")
+    print(f"  · sessão mais recente: +{sessao_us / 1e6:.0f} s")
+    print(f"  · {NOME_SERVICO} a correr desde: +{servico_us / 1e6:.0f} s")
+    print()
+    veredictos = avaliar_d2(servico_us, sessao_us, linger)
+    for metade, veredicto, porque in veredictos:
+        print(f"  {veredicto.upper():<10} {metade}")
+        print(f"             {porque}")
+    estados = {v for _, v, _ in veredictos}
+    if FALHA in estados:
+        return 1
+    if POR_MEDIR in estados:
+        print("\nO D2 continua **por medir**, e por medir não é cumprido.")
+        return 2
+    print("\nD2 cumprido, nas duas metades.")
+    return 0
+
+
 def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
     """A queixa, se o serviço a correr não for o código instalado. `None` se for.
 
@@ -815,6 +965,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verificar-d4", metavar="URL", default=None,
                    help="mede o portão D4 contra um URL público já de pé, e "
                         "não instala nada")
+    p.add_argument("--verificar-d2", action="store_true",
+                   help="julga o portão D2 pelo tempo monótono: o serviço é "
+                        "mais velho que a sessão, e subiu no arranque?")
     p.add_argument("--recuar", metavar="ETIQUETA", default=None,
                    help="volta o serviço a uma etiqueta, verificando o "
                         "manifesto antes de reiniciar (portão D6)")
@@ -828,6 +981,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if a.verificar_d4:
         return verificar_d4(a.verificar_d4)
+
+    if a.verificar_d2:
+        return verificar_d2()
 
     if a.recuar:
         try:
