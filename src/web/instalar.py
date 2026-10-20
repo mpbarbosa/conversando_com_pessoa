@@ -303,6 +303,43 @@ def url_do_tunel(unidade: str = NOME_TUNEL,
     return None
 
 
+#: As respostas do URL público que **provam que o túnel está vivo**. 403 e 302
+#: são o ecrã de autenticação do fornecedor a funcionar; 200 seria o serviço a
+#: responder a quem não entrou, e aí o problema era outro e maior.
+VIVO = (200, 301, 302, 403)
+
+
+def tunel_vivo(url: str, *, tempo_limite: float = 20.0) -> tuple[bool, str]:
+    """O túnel responde? Pergunta-se **ao URL**, nunca ao `systemctl`.
+
+    ⚠️ **Esta função existe por uma falha observada, e a falha é o `systemctl`
+    a mentir.** A 2026-10-20 a máquina suspendeu às 02:22; ao acordar, a rede
+    demorou, e a Cloudflare já tinha largado o registo do *quick tunnel*. O
+    `cloudflared` **não morreu**: ficou a tentar registar um túnel que já não
+    existe — **1019 vezes em dez horas** —, e durante essas dez horas o
+    `systemctl --user is-active cloudflared.service` respondeu **`active`**,
+    com `NRestarts=0`, enquanto o URL dava `NXDOMAIN` no navegador do dono.
+
+    Logo `Restart=on-failure` não serve de nada aqui: o processo não falha,
+    insiste. E «a unidade está activa» deixou de ser evidência de «o serviço
+    está acessível» — exactamente a separação que o portão **I7′** teve de
+    fazer entre «escuta em 127.0.0.1» e «não é alcançável de fora». A única
+    pergunta que não mente é feita ao URL.
+    """
+    import urllib.error
+    import urllib.request
+    try:
+        with urllib.request.urlopen(url, timeout=tempo_limite) as r:
+            codigo = r.status
+    except urllib.error.HTTPError as e:
+        codigo = e.code
+    except OSError as e:
+        return False, f"não responde: {e}"
+    if codigo in VIVO:
+        return True, f"responde {codigo}"
+    return False, f"responde {codigo}, que não é o ecrã de autenticação"
+
+
 def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
     """A queixa, se o serviço a correr não for o código instalado. `None` se for.
 
@@ -486,10 +523,33 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verificar-d4", metavar="URL", default=None,
                    help="mede o portão D4 contra um URL público já de pé, e "
                         "não instala nada")
+    p.add_argument("--verificar-tunel", action="store_true",
+                   help="pergunta ao URL se o túnel está vivo, e não ao "
+                        "systemctl — que responde «active» com o URL morto")
     a = p.parse_args(argv)
 
     if a.verificar_d4:
         return verificar_d4(a.verificar_d4)
+
+    if a.verificar_tunel:
+        url = url_do_tunel()
+        if url is None:
+            print("o túnel não anunciou URL nenhum nesta execução",
+                  file=sys.stderr)
+            return 1
+        vivo, detalhe = tunel_vivo(url)
+        activa = subprocess.run(
+            ("systemctl", "--user", "is-active", NOME_TUNEL),
+            capture_output=True, text=True).stdout.strip()
+        print(f"  · URL:        {url}")
+        print(f"  · o URL diz:  {detalhe}")
+        print(f"  · o systemd diz: {activa}")
+        if not vivo:
+            print(f"\nTÚNEL MORTO com a unidade «{activa}». Remédio:\n"
+                  f"  systemctl --user restart {NOME_TUNEL}\n"
+                  f"e o URL muda — ver a §7.2 do plano.", file=sys.stderr)
+            return 1
+        return 0
 
     ref = a.ref or (ler_lancamento().sha or "HEAD")
     try:

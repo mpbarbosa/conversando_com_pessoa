@@ -45,6 +45,7 @@ from src.web.instalar import (
     contar_acessos,
     extrair_url,
     main,
+    tunel_vivo,
 )
 from src.web.saude import RAIZ
 from src.web.unidades import (
@@ -527,3 +528,54 @@ def test_o_url_lido_e_o_ultimo_anunciado():
         "https://charging-arrangements-whether-burst.trycloudflare.com"
     assert extrair_url("ainda a arrancar, sem URL nenhum") is None
     assert extrair_url("") is None
+
+
+# --- o túnel vivo, perguntado ao URL e não ao systemd --------------------- #
+
+def test_o_tunel_vivo_le_se_pelas_respostas_do_url(monkeypatch):
+    """403 e 302 são o ecrã de autenticação a funcionar: o túnel está vivo.
+
+    Esta distinção não é cosmética. Na noite de 2026-10-19 para 20 a máquina
+    suspendeu, o registo do *quick tunnel* caiu, e o `cloudflared` ficou a
+    tentar registar um túnel que já não existe **1019 vezes em dez horas** —
+    com o `systemctl` a responder `active` e `NRestarts=0` o tempo todo. «A
+    unidade está activa» deixou de ser evidência de «o serviço está
+    acessível», e a única pergunta que não mente é feita ao URL.
+    """
+    import urllib.error
+
+    class Resposta:
+        def __init__(self, status):
+            self.status = status
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    def responder(codigo):
+        def abrir(url, timeout=None):
+            if isinstance(codigo, OSError):
+                raise codigo
+            if codigo >= 400:
+                raise urllib.error.HTTPError(url, codigo, "", {}, None)
+            return Resposta(codigo)
+        return abrir
+
+    import urllib.request
+    for codigo in (200, 302, 403):
+        monkeypatch.setattr(urllib.request, "urlopen", responder(codigo))
+        vivo, detalhe = tunel_vivo("https://x.trycloudflare.com")
+        assert vivo, f"{codigo}: {detalhe}"
+
+    monkeypatch.setattr(urllib.request, "urlopen",
+                        responder(OSError("Name or service not known")))
+    vivo, detalhe = tunel_vivo("https://x.trycloudflare.com")
+    assert not vivo
+    assert "não responde" in detalhe, (
+        "o NXDOMAIN de um túnel morto tem de ser legível no relatório")
+
+    monkeypatch.setattr(urllib.request, "urlopen", responder(502))
+    vivo, detalhe = tunel_vivo("https://x.trycloudflare.com")
+    assert not vivo and "502" in detalhe

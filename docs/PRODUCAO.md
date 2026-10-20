@@ -1004,6 +1004,59 @@ saltado» a **450 passados, nenhum saltado**. O que deixou de saltar foi o
 passou a estar sempre de pé por causa da unidade do passo 4. **Mudou a máquina,
 não o teste.**
 
+### 7.2 A máquina suspendeu, e o túnel morreu com o `systemctl` a dizer «active»
+
+Observado a 2026-10-20, pelo dono, no navegador: `DNS_PROBE_FINISHED_NXDOMAIN`.
+A cronologia está no registo da unidade e é esta:
+
+| instante (−03) | o que aconteceu |
+|---|---|
+| 19/10 21:55:55 | o túnel arranca e anuncia `charging-arrangements-whether-burst` |
+| 20/10 **02:22:21** | **`systemd-logind: The system will suspend now!`** — o portátil adormece |
+| 20/10 02:37:53 | acorda; `failed to dial to edge with quic: network is unreachable` |
+| 20/10 **02:38:00** | `ERR Register tunnel error from server side error="Unauthorized: Tunnel not found"` |
+| 20/10 02:38 → 12:26 | **1019** tentativas de registar o mesmo túnel, que já não existe |
+| durante as ~10 h | `systemctl --user is-active` → **`active`**, `NRestarts=0` |
+
+**O túnel durou 4 h 42 min, e o que o matou foi a máquina dormir.** A §1 deste
+documento já dizia que a disponibilidade é «igual à do portátil estar ligado e
+desocupado» — e o que não estava previsto é que uma suspensão **não interrompe**
+o túnel: **mata-o para sempre**. A Cloudflare larga o registo de um *quick
+tunnel* cuja ligação cai, o nome deixa de resolver, e não volta.
+
+**E o `Restart=on-failure` não serve para nada aqui, por uma razão que esta casa
+conhece.** O `cloudflared` **não falha**: insiste. O processo está vivo, logo o
+systemd não tem o que reiniciar, logo a unidade fica `active` com o URL morto.
+É a mesma separação que o portão **I7′** teve de fazer entre «escuta em
+`127.0.0.1`» e «não é alcançável de fora» — aqui entre «a unidade está activa» e
+«o serviço está acessível». **A unidade activa deixou de ser evidência.**
+
+O que está feito hoje é o instrumento que não mente, porque pergunta ao URL:
+
+```
+python -m src.web.instalar --verificar-tunel
+```
+
+Imprime as duas respostas lado a lado — a do URL e a do `systemd` — e devolve
+**1** quando divergem. Na noite medida teria dito «não responde» com o systemd a
+dizer `active`, que é a frase que faltava.
+
+**O que isto obriga a decidir, e que não é meu.** Manter *um* URL vivo exige
+reiniciar a unidade depois de cada suspensão, e **cada reinício muda o nome**.
+Não há caminho, com um *quick tunnel*, em que o URL sobreviva a uma noite. As
+três saídas, com o custo de cada uma:
+
+| | o que dá | o que custa |
+|---|---|---|
+| **um temporizador de utilizador** que pergunte ao URL de N em N minutos e reinicie quando ele não responder | há sempre *um* URL vivo | o nome muda todas as noites, logo **nenhum convite enviado sobrevive**; e o serviço fica a gerar túneis sem ninguém olhar |
+| **reiniciar à mão** quando se quiser usar | nada automático a correr | quem for convidado encontra um URL morto, e o dono é o detector |
+| **um túnel nomeado**, com domínio em zona da Cloudflare | URL estável, que sobrevive a suspensões e a reinícios | **dinheiro** — um domínio —, que é a restrição de onde a saída D partiu |
+
+A recomendação muda em consequência: enquanto for um *quick tunnel*, **o URL
+serve para o dono o usar na hora, e não para convidar ninguém.** Convidar
+alguém pressupõe um endereço que dure mais do que uma noite, e isso é o ponto 7
+do §10.
+
 ---
 
 ## 8. O que o `README` passa a dizer, e o que não pode continuar a dizer
@@ -1047,7 +1100,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (456 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (457 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
