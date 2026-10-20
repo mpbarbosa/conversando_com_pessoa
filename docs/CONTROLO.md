@@ -373,6 +373,7 @@ interessa: **a aritmética estava quase sempre certa e o modelo mental errado**.
 | 50 | O `Restart=on-failure` da unidade do túnel cobre a queda do túnel (implícito na unidade que escrevi no passo 6) | **Não cobre nada: o `cloudflared` não falha, insiste.** Na noite de 19 para 20/10 a máquina **suspendeu** às 02:22, e ao acordar a Cloudflare já tinha largado o registo do *quick tunnel*: `Unauthorized: Tunnel not found`, **1019 tentativas em dez horas**, com `systemctl --user is-active` a responder **`active`** e `NRestarts=0` o tempo todo. O processo está vivo, logo o systemd não tem o que reiniciar, logo a unidade fica activa com o URL a dar `NXDOMAIN` no navegador do dono. **«A unidade está activa» deixou de ser evidência de «o serviço está acessível»** — é a separação do I7′ outra vez, noutro par de conceitos. O túnel durou **4 h 42 min**, e o que o matou foi a máquina dormir | [`PRODUCAO.md`](PRODUCAO.md) §7.2, observado pelo dono no navegador |
 | 51 | Correr o instalador é inócuo para quem está a usar o serviço (implícito no `instalar.py` desde o passo 4) | **Trocava o URL a quem estava autenticado.** Instalar a guarda reiniciou o `cloudflared` por tabela, e o URL mudou com o dono dentro da página. Reiniciar não custa o mesmo em cada unidade: o `pessoabot` tem de reiniciar sempre, o `ollama` descarrega 4,9 GB e a pergunta seguinte paga ~50 s de prefill, e o `cloudflared` **troca o URL**. Agora só reinicia o que mudou — e o túnel só se a unidade mudar ou o URL não responder | [`PRODUCAO.md`](PRODUCAO.md) §7.3, observado pelo dono |
 | 52 | A unidade da guarda, instalada com sucesso, guarda | **Não guardava.** A unidade é escrita pelo checkout de **trabalho** e corre o código do checkout do **serviço**, que está preso numa referência — e saiu a invocar `--guardar-tunel` numa referência onde a opção não existia. O `enable --now` devolveu **0**, o temporizador ficou agendado, e a primeira passagem morreu com `status=2/INVALIDARGUMENT`: uma guarda instalada com sucesso e incapaz de guardar. **A §4 não previa esta acoplagem** — a unidade pode pedir ao serviço uma capacidade que a referência servida não tem. Remédio igual ao do `conferir_sha`: corre-se a guarda uma vez em vez de acreditar no código de saída | [`PRODUCAO.md`](PRODUCAO.md) §7.3 |
+| 53 | O defeito do `cloudflared` tem o sintoma de «um POST JSON de mesma origem a devolver 401» (minha leitura do [#1752](https://github.com/cloudflare/cloudflared/issues/1752), escrita na §7.1) | **O POST não é especial: a sessão morre.** Medido a 2026-10-20 com um relógio independente — a página sonda o `/api/estado` de **3 em 3 s** (`app.js:53`), e o registo do serviço tem 7 pedidos entre 09:45:32 e **09:45:36**, todos `GET`, e **nenhum** depois. A sessão autenticada durou **4 segundos**; o POST foi só a primeira coisa que o utilizador fez depois disso. Eu tinha repetido a descrição do relator, que não tinha uma sonda periódica para ver o resto | [`PRODUCAO.md`](PRODUCAO.md) §7.4 |
 | 50 | «O `test_i5_o_fluxo_cancelado_nao_deixa_o_servidor_avariado` mede que o servidor sobrevive a um cancelamento» — e, quando falhava, a sua própria mensagem: «a geração seguinte não acabou» (minha, no passo 6 da [`FASE-6.md`](FASE-6.md)) | **Quem avariava era o duplo, e o portão culpava o código medido.** O `_OllamaFalso` lia o pedido com **um `recv` só** e fechava a ligação no fim; o pedido do servidor são **3260 bytes** (209 de cabeçalhos e 3051 de corpo, o prompt com os oito chunks) e com a máquina ocupada chega em dois segmentos. Um `close()` sobre um socket com dados por ler **manda RST, não FIN**: o cliente perdia a resposta em trânsito e levantava `ChunkedEncodingError: ConnectionResetError(104)`, que o `_eventos` punha no fio como evento `erro`. Correlação perfeita nas falhas medidas: `pendentes_no_fecho=3051` em todas as que falharam e `0` em todas as que passaram. **Verificado por mutação, sob seis processos a queimar CPU:** com o `recv` único, **16 e 8 falhas em 100**; com o pedido lido até ao fim, **0 em 100**. Sem carga passava 455 vezes seguidas — e foi a máquina a ganhar um serviço e um Ollama permanentes (passo 4 do [`PRODUCAO.md`](PRODUCAO.md)) que tornou visível o que já lá estava. **E o mesmo teste afirmava uma segunda coisa que o portão não promete:** pedia outra vez sem esperar pelo trinco, quando o I5 diz «em menos de 2 s»; nessa janela — o `await tarefa` do `fluxo.py` devolve o controlo ao laço — o `POST` apanhava **409 `ocupado` em 25 de 50 corridas**, e o teste desserializava o 409 como lista de eventos e falhava a dizer a coisa errada. Corrigidos os dois: o duplo drena o pedido, o teste espera o trinco como o seu irmão já fazia, e confere o `status_code` antes dos eventos. **O portão I5 não mudou de forma** | [`tests/test_cancelar.py`](../tests/test_cancelar.py); levantado em 2026-10-19 |
 
 ### Defeitos encontrados nos meus próprios instrumentos
@@ -1399,3 +1400,32 @@ versão **2026.10.1** em Ubuntu 24.04 com uma origem Python, e com o sintoma de
 esta interface faz. **Não foi verificado aqui**: verificá-lo exige completar um
 login com PIN, logo um endereço real na lista e alguém a ler o correio. Fica
 como o que o dono tem de medir antes de convidar alguém.
+
+
+---
+
+## O passo 6 medido até ao fim: a sessão dura quatro segundos
+
+A 2026-10-20 o dono autenticou-se no túnel protegido com o PIN, a página
+carregou, e ao perguntar recebeu «o servidor recusou (401)». O registo do
+`uvicorn` deste lado:
+
+| hora (−03) | pedido |
+|---|---|
+| 09:45:32 | `GET /` 200 |
+| 09:45:33 | `app.js` · `estilo.css` · `/api/vozes` · `/api/estado` · `favicon.ico` |
+| 09:45:36 | `GET /api/estado` 200 |
+| 09:45:39 em diante | **nada** |
+
+**7 pedidos, todos `GET`, zero `POST`.** A sonda de prontidão corre de 3 em 3
+segundos, logo a ausência da sonda das 09:45:39 data a morte da sessão entre
+09:45:36 e 09:45:39 — **4 segundos** depois do primeiro pedido autenticado. O
+`#1752` diz «~5 s»; é a mesma coisa, medida de outro lado.
+
+O que isto corrige na minha própria escrita está na correcção **53**: não é o
+POST que falha, é a sessão que acaba.
+
+E o que decide: **um *quick tunnel* protegido não consegue servir esta
+interface.** O passo 6 está construído, testado e com o D4 medido, e não há
+como entrar por ele. A recomendação da §7 do `PRODUCAO.md` — «ficar no passo
+6» — foi retirada.

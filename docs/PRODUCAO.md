@@ -504,7 +504,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 3 | ✅ **feito** (2026-10-19) — **`/api/health`** (§6), com o `sha` lido **à importação** e a raiz derivada do módulo (§6.1) | uma rota que diz de que `sha` o serviço foi lançado, e não de que `sha` está o disco | **D1** ✅ |
 | 4 | 🔶 **instalado** (2026-10-19), **D2 por medir** — **segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger`. `src/web/unidades.py`, `src/web/instalar.py`, `src/web/__main__.py`, 17 testes (§5.4) | o serviço sobrevive a um logout e a um reinício | **D2**, e as duas metades dele **só o dono as pode correr** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
-| 6 | 🔶 **construído e o D4 medido** (2026-10-19), **por abrir** — **fechar o serviço a estranhos antes de o abrir** (§7): *Protected Quick Tunnel* com `--allowed-mail`, lista de convidados **nesta máquina**, `cloudflared.service` gerado pelo `unidades.py`. Falta a lista ter um endereço, e falta o defeito do fornecedor (§7.1) | o URL funciona para quem o dono convidar | **D4** ✅ medido |
+| 6 | ⛔ **construído, medido, e bloqueado a montante** (2026-10-20, §7.4: a sessão autenticada dura **4 s**) — **fechar o serviço a estranhos antes de o abrir** (§7): *Protected Quick Tunnel* com `--allowed-mail`, lista de convidados **nesta máquina**, `cloudflared.service` gerado pelo `unidades.py`. Falta a lista ter um endereço, e falta o defeito do fornecedor (§7.1) | o URL funciona para quem o dono convidar | **D4** ✅ medido |
 | 7 | **A janela registada** (§3.3, peça 3): o ajudante escreve os instantes de túnel de pé no ficheiro da fase | uma célula lenta é interpretável daqui a seis meses | **D5** |
 | 8 | **Recuo** (§5.2): o serviço corre numa etiqueta; recuar é `git checkout` da anterior e reiniciar a unidade. **Ensaiado** | recuar é um comando, e foi ensaiado | **D6** |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
@@ -829,9 +829,16 @@ Portanto a ordem dos passos 6 e 9 é deliberada: **fechar antes de abrir.**
   abrir: quanto tempo leva um cliente em ciclo a pôr o `p95` de geração fora do
   orçamento (**D7**).
 
-Recomendação: **ficar no passo 6.** Um serviço que responde em verso a quem for
-convidado entrega tudo o que a Fase 6 construiu, e não põe as medições do
-repositório à mercê de quem encontrar o URL.
+Recomendação: ~~**ficar no passo 6.**~~ **Retirada a 2026-10-20** — ver a §7.4.
+O passo 6 não é um sítio onde se possa ficar: com o defeito do fornecedor, a
+sessão autenticada dura **4 segundos**, logo a porta está fechada também a quem
+tem chave. A recomendação passa a ser **manter o túnel em baixo e o serviço em
+`127.0.0.1`** até haver um túnel que sirva.
+
+O argumento abaixo mantém-se inteiro e é o que impede a saída fácil: um túnel
+**sem** autenticação funcionaria hoje, e é precisamente o que não se faz. Um
+serviço que responde em verso a quem for convidado entrega tudo o que a Fase 6
+construiu — mas só se houver maneira de o convidado entrar.
 
 ### 7.1 O passo 6, construído: o túnel que nenhum passo instalava, e um defeito do fornecedor
 
@@ -1114,6 +1121,57 @@ correu, em vez de acreditar no código de saída do `enable`.
 vivo; **não mantém o URL**. Depois de cada suspensão o nome muda, logo continua
 a não haver endereço que se possa enviar a alguém e que dure — §10 ponto 7. O
 que a guarda compra é o dono não ser o detector.
+
+### 7.4 O defeito do fornecedor morde, e o passo 6 fica bloqueado a montante
+
+Medido a 2026-10-20 pelo dono, no navegador, e confirmado no registo do
+serviço. **O resultado muda a recomendação deste plano.**
+
+O dono autenticou-se com o PIN, a página carregou, e ao perguntar recebeu
+«o servidor recusou (401)». Do lado de cá, o registo do `uvicorn` mostra
+exactamente **7 pedidos, todos `GET`, e zero `POST`**:
+
+| hora (−03) | pedido |
+|---|---|
+| 09:45:32 | `GET /` 200 |
+| 09:45:33 | `GET /app.js` · `GET /estilo.css` · `GET /api/vozes` · `GET /api/estado` · `GET /favicon.ico` |
+| 09:45:36 | `GET /api/estado` 200 |
+| — | **nada mais** |
+
+**A sessão autenticada durou 4 segundos.** A página sonda o `/api/estado` de
+**3 em 3 segundos** (`app.js:53`), logo a sonda seguinte era às 09:45:39 e
+**nunca chegou**: a partir daí tudo levou 401, incluindo os `GET`. O
+[cloudflare/cloudflared#1752](https://github.com/cloudflare/cloudflared/issues/1752)
+fala em «~5 segundos»; aqui, medido com um relógio independente, foram **4**.
+
+**E isto corrige a leitura que eu tinha feito do defeito.** Eu tinha escrito na
+§7.1 que o sintoma era «um POST JSON de mesma origem a devolver 401», porque é
+assim que o relator o descreve. **Não é o POST que é especial** — é a sessão
+que morre, e o POST é só a primeira coisa que o utilizador faz depois de ela
+morrer. A sonda de 3 s é o que o mostra, e o relator não tinha uma.
+
+**O que isto bloqueia.** Não é o passo 6: é o túnel. Um *quick tunnel*
+protegido **não consegue servir esta interface**, nem nenhuma outra que peça
+mais do que quatro segundos de sessão. As saídas que restam:
+
+| | o que dá | porque é que não serve, ou o que custa |
+|---|---|---|
+| **túnel protegido** (o que está instalado) | nada: a sessão morre aos 4 s | bloqueado a montante, até a Cloudflare corrigir |
+| **túnel sem `--allowed-mail`** | um serviço público que funciona | **recusado pela §7**, «fechar antes de abrir»: um cliente em ciclo consome as ~105 respostas/hora e leva as medições com ele. E o `unidades.py` recusa gerá-lo |
+| **túnel nomeado, com domínio** | URL estável *e* Access a sério, sem este defeito | **dinheiro** — a restrição de onde a saída D partiu |
+| **sem túnel** | o serviço como estava: `127.0.0.1`, para o dono | não é publicação nenhuma |
+
+**A recomendação da §7 muda.** Dizia «ficar no passo 6», e o passo 6 não é um
+sítio onde se possa ficar: é uma porta fechada que também não deixa entrar quem
+tem chave. Enquanto o defeito estiver aberto, a recomendação é **manter o
+túnel em baixo e o serviço em `127.0.0.1`** — que é onde ele esteve as Fases 0
+a 6 inteiras, e onde nada do que foi medido deixa de valer.
+
+O que **não** se perde com isso, e vale dizer: os portões **D4** (de fora, o
+corpo não toca no `uvicorn`), **I7′** (o corpo não sai) e a guarda do túnel
+continuam todos medidos e no sítio. Quando houver um túnel que sirva — por
+correcção a montante ou por um domínio — o passo 6 está construído e testado, e
+o que falta é levantar a unidade.
 
 ---
 
