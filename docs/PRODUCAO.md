@@ -431,6 +431,45 @@ em menos de 10 s e a voltar em menos de 30 s, com zero pedidos atendidos no
 registo do túnel. Nada disso é mensurável sem unidade: **o D3 fica aberto**, e
 o que está feito é o mecanismo que ele vai medir.
 
+### 3.6 O passo 7, feito: e o portão D5 pedia uma medição que o formato não permite
+
+Escrito em 2026-10-20. `src/web/sentinela.py`: a `Janela`, escrita em
+`00-janela.json` ao lado das amostras — `00-` de propósito, porque numa pasta
+de fase o que explica a corrida tem de aparecer **antes** do que ela produziu.
+
+**O achado é sobre o enunciado do portão.** O D5 dizia: «o ficheiro de uma fase
+corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se
+sobrepõem aos instantes das amostras**». A segunda metade **não é mensurável**:
+os dez `01-cru.jsonl` das Fases 5B a 5Z **não têm instante nenhum** —
+verificado campo a campo. Têm `segundos`, que é uma **duração**, e nunca
+ninguém escreveu quando é que cada amostra aconteceu. O portão pedia uma
+comparação entre dois conjuntos de instantes, e só existe um.
+
+Dar-lhe instantes significava mexer nos `gerar_amostras.py`, e esta casa não o
+faz: «são artefactos de registo, e o `pyproject.toml` já explica porque é que
+nem o formatador lhes toca — reformatá-los reescrevia o registo».
+
+**Então a asserção mudou para uma que se mede hoje, sem tocar em nada:** o
+ficheiro das amostras **só cresceu enquanto a janela esteve aberta**.
+`bytes_no_inicio`, `bytes_no_fim` e `mtime_no_fim` são medidas que existem no
+sistema de ficheiros, e apanham o modo de falha que importa — **a fase correu
+fora do ajudante**, ou alguém acrescentou amostras depois de o túnel voltar. O
+que **não** apanham é uma amostra individual mal colocada dentro da janela, e
+isso está escrito na `Janela` em vez de escondido.
+
+**Três decisões de desenho, as três com teste:**
+
+| | |
+|---|---|
+| **a janela escreve-se na abertura, com `fim: null`** | uma fase morta por `kill -9` não corre `finally` nenhum. Sem isto não deixava rasto, e quem lesse a pasta via amostras sem janela sem saber porquê. É a ideia do PID no sentinela — «um esquecido diagnostica-se» — aplicada ao registo |
+| **`parado: false` com `TunelAusente`** | **não** é «o túnel esteve em baixo»: é «não havia túnel». Hoje, com o passo 6 desligado (§7.5), é este o caso — e quem ler a fase daqui a seis meses tem de poder distinguir as duas |
+| **o instante é UTC com `Z`, no formato do `saude.em_utc`** | o `commit_em` do `/api/health` e o `inicio` da janela saem do mesmo repositório, e em formatos diferentes quem os compara desiste. Há um teste a comparar os dois. E em UTC porque um fuso já custou uma medição a esta casa (correcção 46) |
+
+E a `_fechar_janela` **nunca levanta**, pela mesma razão que o `arrancar`: corre
+num `finally` depois de a fase ter produzido os dados, e uma falha a escrever o
+registo não pode deitar fora meia hora de geração nem tapar a excepção do
+corpo da fase.
+
 ### 3.5 E uma regra que não é mecanismo nenhum, mas tem de ficar escrita
 
 **Nenhuma fase de medição se corre com o túnel de pé**, e a partir do passo 7 isso
@@ -505,7 +544,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 4 | 🔶 **instalado** (2026-10-19), **D2 por medir** — **segundo checkout e unidades de utilizador** (§5.1): `pessoabot.service` e `ollama.service` em `systemctl --user`, com `loginctl enable-linger`. `src/web/unidades.py`, `src/web/instalar.py`, `src/web/__main__.py`, 17 testes (§5.4) | o serviço sobrevive a um logout e a um reinício | **D2**, e as duas metades dele **só o dono as pode correr** |
 | 5 | ✅ **feito** (2026-10-18) — **o túnel ligado ao sentinela** (§3.3, peça 2; as decisões no §3.4): o ajudante `with` para e arranca a unidade, por indirecção, porque não há unidade. **Parar que falha ⇒ a fase não arranca** | o ajudante derruba e devolve o URL. **A unidade em si é o passo 4**, logo o D3 fica aberto | **D3**, ainda não mensurável |
 | 6 | ⛔ **construído, medido, e bloqueado a montante** (2026-10-20, §7.4: a sessão autenticada dura **4 s**) — **fechar o serviço a estranhos antes de o abrir** (§7): *Protected Quick Tunnel* com `--allowed-mail`, lista de convidados **nesta máquina**, `cloudflared.service` gerado pelo `unidades.py`. Falta a lista ter um endereço, e falta o defeito do fornecedor (§7.1) | o URL funciona para quem o dono convidar | **D4** ✅ medido |
-| 7 | **A janela registada** (§3.3, peça 3): o ajudante escreve os instantes de túnel de pé no ficheiro da fase | uma célula lenta é interpretável daqui a seis meses | **D5** |
+| 7 | 🔶 **feito, e o portão reduzido ao que é mensurável** (2026-10-20, §3.6) — **a janela registada** (§3.3, peça 3): o ajudante escreve `00-janela.json` ao lado das amostras, na abertura e no fecho | uma célula lenta é interpretável daqui a seis meses — **menos** no que as amostras sem instante não deixam dizer | **D5**, na metade que o formato de hoje permite |
 | 8 | **Recuo** (§5.2): o serviço corre numa etiqueta; recuar é `git checkout` da anterior e reiniciar a unidade. **Ensaiado** | recuar é um comando, e foi ensaiado | **D6** |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
 | 10 | **Cópias de `data/sessoes.db`**, se e quando o passo 8 da Fase 6 existir (§5.3) | o estado dos utilizadores sobrevive | **D8** |
@@ -1244,12 +1283,12 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D2 — o serviço sobrevive à sessão** 🔶 **instalado, por medir** | não é um processo de terminal | com `enable-linger`, fechar a sessão gráfica e reiniciar a máquina deixam o serviço de pé e o URL a responder. **Feito (2026-10-19):** a instalação, e 17 testes sobre o que torna o D2 possível — caminhos absolutos, `After` sem `Requires`, `WantedBy=default.target`, nunca o checkout de trabalho, e o `systemd-analyze --user verify` do próprio systemd; quatro mutações a morder. **Falta:** as duas metades que só o dono pode correr — um logout e um reinício (§5.4) |
 | **D3 — o túnel obedece ao sentinela** | uma fase derruba o URL, e devolve-o | abrir o ajudante `with`: o URL deixa de responder em **menos de 10 s**; fechá-lo: volta em menos de 30 s. E durante a janela, **zero** pedidos atendidos — verificado no registo do túnel, não por intenção |
 | **D4 — fechado antes de aberto** ✅ | estranhos não chegam ao serviço | de um endereço não convidado, o URL devolve o ecrã de autenticação do fornecedor e **nunca** toca no `uvicorn` — verificado nos registos do serviço, que não registam o pedido. **Medido (2026-10-19)**, contra um túnel protegido com uma lista que ninguém pode usar: `GET /` dá 302 para o ecrã da Cloudflare (46 702 bytes), `POST /api/perguntar` dá **401**, e os 4 pedidos de fora deixam **0** linhas no registo do serviço — com o instrumento verificado a morder no mesmo instante (+1 com um pedido local). `python -m src.web.instalar --verificar-d4 <url>` |
-| **D5 — a janela fica escrita** | uma célula lenta é interpretável | o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras |
+| **D5 — a janela fica escrita** 🔶 **metade medida** | uma célula lenta é interpretável | ~~o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras~~ — **a segunda metade não é mensurável: as amostras não têm instante nenhum** (§3.6). **Feito (2026-10-20):** `00-janela.json` com `inicio`, `fim`, o túnel e se ele foi parado, mais `bytes_no_inicio`/`bytes_no_fim`/`mtime_no_fim` do ficheiro das amostras — e a asserção passa a ser **«o ficheiro das amostras só cresceu dentro da janela»**. 8 testes, quatro mutações a morder |
 | **D6 — o recuo recua** | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido |
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (469 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (477 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já

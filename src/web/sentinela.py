@@ -90,6 +90,7 @@ from pathlib import Path
 from .estado import Componente
 from .tunel import (
     Tunel,
+    TunelAusente,
     TunelIndisponivel,
     avisar_que_nao_voltou,
 )
@@ -237,7 +238,8 @@ def limpar(*, alvo: Path | None = None) -> bool:
 
 
 @contextmanager
-def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None):
+def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None,
+            amostras: Path | None = None, janela: Path | None = None):
     """O ajudante das fases **futuras**: `with medicao("5Z"): ...`.
 
     As fases fechadas ficam como estão. Não se retroajusta um trinco aos
@@ -272,6 +274,12 @@ def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None):
     c = caminho() if alvo is None else alvo
     t = tunel_desta_maquina() if tunel is None else tunel
     m = escrever(fase, alvo=c)
+    # Houve porta a fechar? `TunelAusente.parar()` devolve `None` sem fazer
+    # nada — e correctamente, porque sem `PESSOABOT_TUNEL` não há alcance a
+    # fechar. Mas na janela isso **não** pode aparecer como «o túnel esteve em
+    # baixo»: é «não havia túnel», e quem ler a fase daqui a seis meses precisa
+    # de distinguir as duas. É a única coisa que esta linha decide.
+    parado = not isinstance(t, TunelAusente)
     try:
         t.parar()
     except TunelIndisponivel:
@@ -279,6 +287,16 @@ def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None):
         # impede isto de recusar perguntas ao servidor para sempre.
         limpar(alvo=c)
         raise
+    j = Janela(fase=fase, pid=m.pid, inicio=instante(m.inicio),
+               tunel=t.nome, parado=parado,
+               amostras=str(amostras) if amostras else "",
+               bytes_no_inicio=_bytes(amostras))
+    # Escrita **já aberta**, com `fim: null`, e não só no fim. Uma fase morta
+    # por `kill -9` não corre `finally` nenhum: sem esta escrita não deixava
+    # rasto algum, e quem lesse a pasta via amostras sem janela sem saber
+    # porquê. Com ela, fica lá a dizer que começou e não fechou — que é a
+    # mesma ideia do PID no sentinela, aplicada ao registo.
+    _escrever_janela(j, janela_de(amostras, janela))
     try:
         yield m
     finally:
@@ -287,3 +305,155 @@ def medicao(fase: str, *, alvo: Path | None = None, tunel: Tunel | None = None):
         except TunelIndisponivel as e:
             avisar_que_nao_voltou(t, e)
         limpar(alvo=c)
+        # **Depois** do `arrancar` e do `limpar`, e no `finally`: a janela tem
+        # de fechar mesmo quando a fase rebenta — uma corrida que morreu a meio
+        # é precisamente a que mais precisa de deixar escrito até onde foi.
+        _fechar_janela(j, amostras, janela)
+
+
+# --- a janela: o passo 7 do plano do serviço público, portão D5 ---------- #
+
+#: Onde a janela de uma fase se escreve, ao lado das amostras dela. O nome
+#: começa por `00-` de propósito: numa pasta de fase, o que explica a corrida
+#: tem de aparecer **antes** do que ela produziu.
+NOME_DA_JANELA = "00-janela.json"
+
+
+def instante(t: float | None = None) -> str:
+    """Um instante em UTC com `Z`, no mesmo formato do `saude.em_utc`.
+
+    O **mesmo** formato de propósito, e há um teste a compará-los: a janela vai
+    ser lida ao lado do `commit_em` do `/api/health`, e duas datas do mesmo
+    repositório em formatos diferentes é o tipo de atrito que faz quem as lê
+    desistir de as comparar. E em UTC porque o `journalctl` desta casa já
+    custou uma medição por causa de um fuso (`CONTROLO.md` §4, correcção 46).
+    """
+    from datetime import datetime, timezone
+    d = datetime.fromtimestamp(time.time() if t is None else t, timezone.utc)
+    return d.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+@dataclass(frozen=True)
+class Janela:
+    """Os instantes em que uma fase correu, e o que o túnel fez nesse tempo.
+
+    ## Porque é que isto não mede o que o portão D5 dizia que media
+
+    O **D5** afirma: «o ficheiro de uma fase corrida sob o ajudante contém os
+    instantes de túnel de pé, e eles **não se sobrepõem aos instantes das
+    amostras**». A segunda metade **não é mensurável com o formato de hoje**:
+    os dez `01-cru.jsonl` das Fases 5B a 5Z **não têm instante nenhum** —
+    verificado, campo a campo. Têm `segundos`, que é uma duração, e ninguém
+    sabe quando é que cada amostra aconteceu.
+
+    Então o que aqui se mede é outra coisa, e é dizível: **o ficheiro das
+    amostras só cresceu enquanto a janela esteve aberta.** `bytes_no_inicio`,
+    `bytes_no_fim` e `mtime_no_fim` são três instantes/medidas que existem hoje,
+    sem tocar em nenhum `gerar_amostras.py` — e o `pyproject.toml` já explica
+    porque é que nem o formatador lhes toca, «reformatá-los reescrevia o
+    registo».
+
+    Isto apanha o modo de falha que importa — **a fase correu fora do
+    ajudante**, ou alguém acrescentou amostras depois de o túnel voltar — e não
+    apanha uma amostra individual mal colocada dentro da janela. A diferença
+    está escrita em vez de escondida.
+    """
+
+    fase: str
+    pid: int
+    #: Instantes em UTC. `fim` é `None` quando o processo morreu com a janela
+    #: aberta — e isso **é** um resultado: as amostras dessa corrida não têm
+    #: janela fechada, logo não se sabe o que o túnel fez no fim.
+    inicio: str
+    fim: str | None = None
+    #: O que o `tunel.py` diz ser o túnel desta máquina. Hoje, com o passo 6
+    #: desligado (§7.5), é «nenhum» — e registá-lo é o que distingue «o túnel
+    #: esteve em baixo» de «não havia túnel nenhum».
+    tunel: str = ""
+    #: O túnel foi mesmo parado? `False` com `TunelAusente`, e aí a fase correu
+    #: sem público possível **por não haver porta**, não por ela se ter fechado.
+    parado: bool = False
+    amostras: str = ""
+    bytes_no_inicio: int = 0
+    bytes_no_fim: int = 0
+    mtime_no_fim: str | None = None
+
+    def falhas(self) -> list[str]:
+        """O que está errado nesta janela. Vazio é o que o portão D5 pede."""
+        ms = []
+        if self.fim is None:
+            ms.append("a janela nunca fechou: a fase morreu a meio, e não se "
+                      "sabe o que o túnel fez depois")
+        if not self.amostras:
+            ms.append("a janela não nomeia ficheiro de amostras, logo não diz "
+                      "nada sobre elas")
+        elif self.bytes_no_fim == self.bytes_no_inicio:
+            ms.append(f"{self.amostras} não cresceu durante a janela: a fase "
+                      f"não escreveu amostra nenhuma debaixo do ajudante")
+        elif self.mtime_no_fim is not None and self.fim is not None and not (
+                self.inicio <= self.mtime_no_fim <= self.fim):
+            ms.append(f"{self.amostras} foi escrito em {self.mtime_no_fim}, "
+                      f"fora da janela [{self.inicio}, {self.fim}]: houve "
+                      f"amostras geradas sem o ajudante")
+        return ms
+
+    def como_dicionario(self) -> dict:
+        from dataclasses import asdict
+        return asdict(self)
+
+
+def _bytes(caminho: Path | None) -> int:
+    try:
+        return Path(caminho).stat().st_size if caminho else 0
+    except OSError:
+        return 0
+
+
+def janela_de(amostras: Path | None, janela: Path | None) -> Path | None:
+    """Onde a janela se escreve: o que lhe derem, ou ao lado das amostras."""
+    if janela is not None:
+        return Path(janela)
+    return Path(amostras).parent / NOME_DA_JANELA if amostras else None
+
+
+def _escrever_janela(j: Janela, destino: Path | None) -> None:
+    """Nunca levanta. Ver o `_fechar_janela`."""
+    if destino is None:
+        return
+    try:
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        destino.write_text(
+            json.dumps(j.como_dicionario(), ensure_ascii=False, indent=1)
+            + "\n", encoding="utf-8")
+    except OSError as e:
+        print(f"⚠️ a janela de «{j.fase}» não se escreveu em {destino}: {e}")
+
+
+def _fechar_janela(j: Janela, amostras: Path | None,
+                   janela: Path | None) -> None:
+    """Fecha a janela, se houver onde. Nunca levanta.
+
+    Nunca levanta porque isto corre num `finally` **depois** de a fase ter
+    produzido os dados: uma falha a escrever o registo da janela não pode
+    deitar fora meia hora de geração, nem tapar a excepção do corpo da fase. É
+    a mesma decisão do `arrancar` acima, pela mesma razão.
+    """
+    destino = janela_de(amostras, janela)
+    if destino is None:
+        return
+    mtime = None
+    try:
+        if amostras is not None and Path(amostras).exists():
+            mtime = instante(Path(amostras).stat().st_mtime)
+    except OSError:
+        mtime = None
+    fechada = Janela(**(j.como_dicionario() | {
+        "fim": instante(), "bytes_no_fim": _bytes(amostras),
+        "mtime_no_fim": mtime}))
+    _escrever_janela(fechada, destino)
+
+
+def ler_janela(caminho: Path) -> Janela:
+    dados = json.loads(Path(caminho).read_text(encoding="utf-8"))
+    return Janela(**dados)
+

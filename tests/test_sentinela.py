@@ -758,3 +758,145 @@ def test_d3_o_caminho_do_estado_nao_pergunta_nada_ao_tunel(alvo, monkeypatch):
     sentinela.escrever("fase-5z")
     assert sentinela.a_correr() is not None
     assert sentinela.componente().pronto is False
+
+
+# --- o passo 7 do serviço público: a janela, portão D5 -------------------- #
+
+@pytest.fixture
+def fase(tmp_path):
+    """Uma pasta de fase com um `01-cru.jsonl` vazio, e o sentinela à parte."""
+    amostras = tmp_path / "fase-x" / "01-cru.jsonl"
+    amostras.parent.mkdir(parents=True)
+    amostras.write_text("", encoding="utf-8")
+    return amostras
+
+
+def _amostra(amostras, n: int = 1) -> None:
+    with amostras.open("a", encoding="utf-8") as f:
+        for i in range(n):
+            f.write(json.dumps({"pergunta_id": f"q{i:02d}",
+                                "segundos": 34.0}) + "\n")
+
+
+def test_d5_uma_fase_sob_o_ajudante_deixa_a_janela_sem_falhas(fase, tmp_path):
+    """O portão D5, na metade que é mensurável com o formato de hoje.
+
+    ⚠️ **A outra metade não é**, e está escrito na docstring da `Janela`: o D5
+    dizia «os instantes de túnel de pé não se sobrepõem aos **instantes das
+    amostras**», e os dez `01-cru.jsonl` das Fases 5B a 5Z **não têm instante
+    nenhum** — têm `segundos`, que é uma duração. O que se mede é que o
+    ficheiro das amostras **só cresceu dentro da janela**.
+    """
+    t = TunelDuplo(tmp_path / "sent")
+    with sentinela.medicao("X", alvo=tmp_path / "sent", tunel=t,
+                           amostras=fase):
+        _amostra(fase, 3)
+    j = sentinela.ler_janela(fase.parent / sentinela.NOME_DA_JANELA)
+
+    assert j.falhas() == []
+    assert [e for e, _, _ in t.registo] == ["parar", "arrancar"]
+    assert j.parado is True and j.tunel == "duplo.service"
+    assert j.bytes_no_inicio == 0 and j.bytes_no_fim > 0
+    assert j.inicio <= j.mtime_no_fim <= j.fim, (
+        "as amostras têm de ter sido escritas dentro da janela")
+
+
+def test_d5_a_janela_apanha_amostras_escritas_fora_dela(fase):
+    """O modo de falha que importa: a fase correu **sem** o ajudante.
+
+    Construída à mão porque é o que um ficheiro assim pareceria: a janela de
+    uma corrida, e um `01-cru.jsonl` tocado depois de o túnel voltar.
+    """
+    j = sentinela.Janela(
+        fase="X", pid=1, inicio="2026-10-20T10:00:00Z",
+        fim="2026-10-20T10:30:00Z", tunel="duplo.service", parado=True,
+        amostras=str(fase), bytes_no_inicio=0, bytes_no_fim=4096,
+        mtime_no_fim="2026-10-20T11:15:00Z")
+    falhas = j.falhas()
+    assert len(falhas) == 1
+    assert "fora da janela" in falhas[0] and "sem o ajudante" in falhas[0]
+
+
+def test_d5_uma_fase_que_nao_escreve_nada_e_uma_falha(fase, tmp_path):
+    """Janela aberta e fechada sem o ficheiro crescer: ninguém mediu nada."""
+    with sentinela.medicao("X", alvo=tmp_path / "sent", tunel=TunelDuplo(tmp_path / "sent"),
+                           amostras=fase):
+        pass
+    j = sentinela.ler_janela(fase.parent / sentinela.NOME_DA_JANELA)
+    assert any("não cresceu durante a janela" in f for f in j.falhas())
+
+
+def test_d5_a_janela_existe_desde_o_inicio_e_diz_que_nao_fechou(fase, tmp_path):
+    """Uma fase morta por `kill -9` não corre `finally` nenhum.
+
+    Sem a escrita à abertura não deixava rasto, e quem lesse a pasta via
+    amostras sem janela sem saber porquê. É a ideia do PID no sentinela —
+    «um esquecido diagnostica-se» — aplicada ao registo.
+    """
+    gestor = sentinela.medicao("X", alvo=tmp_path / "sent",
+                               tunel=TunelDuplo(tmp_path / "sent"),
+                               amostras=fase)
+    gestor.__enter__()
+    try:
+        aberta = sentinela.ler_janela(fase.parent / sentinela.NOME_DA_JANELA)
+        assert aberta.fim is None
+        assert any("nunca fechou" in f for f in aberta.falhas())
+    finally:
+        _amostra(fase)
+        gestor.__exit__(None, None, None)
+    assert sentinela.ler_janela(
+        fase.parent / sentinela.NOME_DA_JANELA).falhas() == []
+
+
+def test_d5_a_janela_fecha_mesmo_quando_a_fase_rebenta(fase, tmp_path):
+    """Uma corrida que morreu a meio é a que mais precisa de deixar escrito."""
+    with contextlib.suppress(RuntimeError), \
+            sentinela.medicao("X", alvo=tmp_path / "sent",
+                              tunel=TunelDuplo(tmp_path / "sent"),
+                              amostras=fase):
+        _amostra(fase)
+        raise RuntimeError("a fase rebentou")
+    j = sentinela.ler_janela(fase.parent / sentinela.NOME_DA_JANELA)
+    assert j.fim is not None and j.falhas() == []
+
+
+def test_d5_sem_tunel_a_janela_diz_que_nao_havia_porta(fase, tmp_path):
+    """`parado: false` com `TunelAusente` — e **não** «o túnel esteve em baixo».
+
+    É o estado desta máquina desde a §7.5, com o passo 6 desligado. Quem ler
+    esta fase daqui a seis meses tem de poder distinguir «fechámos o URL
+    durante a medição» de «não havia URL nenhum para fechar».
+    """
+    from src.web.tunel import TunelAusente
+    with sentinela.medicao("X", alvo=tmp_path / "sent", tunel=TunelAusente(),
+                           amostras=fase):
+        _amostra(fase)
+    j = sentinela.ler_janela(fase.parent / sentinela.NOME_DA_JANELA)
+    assert j.parado is False
+    assert "PESSOABOT_TUNEL" in j.tunel
+    assert j.falhas() == [], "não haver túnel não é uma falha da janela"
+
+
+def test_d5_sem_amostras_nomeadas_a_janela_queixa_se(tmp_path):
+    """Uma janela que não nomeia ficheiro não diz nada sobre amostra nenhuma."""
+    destino = tmp_path / "janela.json"
+    with sentinela.medicao("X", alvo=tmp_path / "sent",
+                           tunel=TunelDuplo(tmp_path / "sent"),
+                           janela=destino):
+        pass
+    assert any("não nomeia ficheiro" in f
+               for f in sentinela.ler_janela(destino).falhas())
+
+
+def test_o_instante_da_janela_tem_o_formato_do_api_health():
+    """O mesmo formato, de propósito: as duas datas vão ser lidas lado a lado.
+
+    O `commit_em` do `/api/health` e o `inicio` da janela saem do mesmo
+    repositório; em formatos diferentes, quem as compara desiste. E em UTC
+    porque um fuso já custou uma medição a esta casa (`CONTROLO.md` §4, #46).
+    """
+    from src.web.saude import em_utc
+    agora = sentinela.instante()
+    assert agora.endswith("Z") and len(agora) == 20
+    assert len(em_utc("2026-10-19T10:59:38-03:00")) == len(agora)
+    assert sentinela.instante(0) == "1970-01-01T00:00:00Z"
