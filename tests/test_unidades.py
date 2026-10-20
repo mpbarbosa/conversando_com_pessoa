@@ -43,6 +43,7 @@ from src.web.instalar import (
     clonar,
     conferir_sha,
     contar_acessos,
+    extrair_url,
     main,
 )
 from src.web.saude import RAIZ
@@ -505,3 +506,24 @@ def test_a_instalacao_reinicia_e_nao_so_activa():
         "sem o `restart`, uma instalação sobre um serviço a correr troca o "
         "checkout e não troca o processo — e os dois `systemctl` devolvem 0")
     assert "enable" in comandos, "o `enable` é o que faz o linger significar algo"
+
+
+# --- o URL, que muda de cada vez ------------------------------------------ #
+
+def test_o_url_lido_e_o_ultimo_anunciado():
+    """O registo acumula os arranques anteriores, e cada um teve outro nome.
+
+    Medido nesta máquina em 2026-10-19: um `restart` do túnel trocou
+    `keyboards-auburn-bean-apparent` por `charging-arrangements-whether-burst`.
+    Devolver o primeiro dava um URL **morto com ar de bom**, e quem o recebesse
+    culpava o serviço.
+    """
+    registo = ("INF Your protected quick Tunnel has been created!\n"
+               "INF |  https://keyboards-auburn-bean-apparent.trycloudflare.com  |\n"
+               "INF Initiating graceful shutdown\n"
+               "INF Your protected quick Tunnel has been created!\n"
+               "INF |  https://charging-arrangements-whether-burst.trycloudflare.com  |\n")
+    assert extrair_url(registo) == \
+        "https://charging-arrangements-whether-burst.trycloudflare.com"
+    assert extrair_url("ainda a arrancar, sem URL nenhum") is None
+    assert extrair_url("") is None

@@ -48,6 +48,7 @@ from __future__ import annotations
 
 import argparse
 import getpass
+import re
 import shutil
 import subprocess
 import sys
@@ -253,6 +254,55 @@ def ligar_linger(*, ensaio: bool) -> None:
     _correr("loginctl", "enable-linger", getpass.getuser(), ensaio=ensaio)
 
 
+#: O URL que o `cloudflared` anuncia no registo. É daqui que ele se lê, e não
+#: de um ficheiro: o nome **muda de cada vez** que o túnel arranca (§7.1), logo
+#: guardá-lo em qualquer lado era guardar uma mentira a partir do reinício
+#: seguinte.
+_URL_TUNEL = re.compile(r"https://[a-z0-9-]+\.trycloudflare\.com")
+
+
+def extrair_url(registo: str) -> str | None:
+    """O **último** URL anunciado no registo do túnel, ou `None`.
+
+    O último e não o primeiro: o registo acumula os arranques anteriores, e
+    cada um anunciou um nome diferente. Devolver o primeiro dava um URL morto
+    com ar de bom — e quem o recebesse ia culpar o serviço.
+    """
+    achados = _URL_TUNEL.findall(registo)
+    return achados[-1] if achados else None
+
+
+def url_do_tunel(unidade: str = NOME_TUNEL,
+                 tentativas: int = 20) -> str | None:
+    """O URL **desta** execução do túnel, e não de uma anterior.
+
+    ⚠️ **A primeira versão lia o registo inteiro logo a seguir ao `restart`, e
+    devolvia o URL da execução anterior** — porque o novo ainda não tinha sido
+    escrito. Um URL morto com ar de bom é pior do que nenhum: quem o recebe
+    culpa o serviço. Observado nesta máquina: o instalador imprimiu
+    `keyboards-auburn-bean-apparent` quando o túnel a correr já era
+    `charging-arrangements-whether-burst`.
+
+    A correcção é ler só o registo **desde o instante em que esta execução
+    ficou activa**, que é o que o próprio systemd reporta — e no **mesmo fuso**
+    em que o `journalctl` lê, que é o que a correcção 46 ensinou a não presumir.
+    """
+    desde = subprocess.run(
+        ("systemctl", "--user", "show", "-p", "ActiveEnterTimestamp",
+         "--value", unidade), capture_output=True, text=True).stdout.strip()
+    for n in range(tentativas):
+        cmd = ["journalctl", "--user", "-u", unidade, "--no-pager", "-o", "cat"]
+        if desde:
+            cmd += ["--since", desde]
+        achado = extrair_url(subprocess.run(cmd, capture_output=True,
+                                            text=True).stdout)
+        if achado:
+            return achado
+        if n + 1 < tentativas:
+            time.sleep(1)
+    return None
+
+
 def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
     """A queixa, se o serviço a correr não for o código instalado. `None` se for.
 
@@ -302,7 +352,8 @@ def _sha_da_saude(tentativas: int = TENTATIVAS_SAUDE) -> str | None:
     return None
 
 
-def verificar(alvo: Alvo, *, ensaio: bool) -> tuple[list[str], str | None]:
+def verificar(alvo: Alvo, *, ensaio: bool,
+              tunel: bool = False) -> tuple[list[str], str | None]:
     """O que se pode medir **sem** fechar a sessão nem reiniciar.
 
     Devolve `(linhas do relatório, queixa)`. O que fica de fora é o D2 inteiro,
@@ -315,7 +366,8 @@ def verificar(alvo: Alvo, *, ensaio: bool) -> tuple[list[str], str | None]:
     linger = _correr("loginctl", "show-user", getpass.getuser(),
                      "--property=Linger", ensaio=False).strip()
     linhas.append(f"  · {linger}")
-    for nome in GERADORES:
+    instaladas = list(GERADORES) + ([NOME_TUNEL] if tunel else [])
+    for nome in instaladas:
         estado = subprocess.run(
             ("systemctl", "--user", "is-enabled", nome),
             capture_output=True, text=True).stdout.strip()
@@ -328,6 +380,12 @@ def verificar(alvo: Alvo, *, ensaio: bool) -> tuple[list[str], str | None]:
                   f"{f' ({do_servico.erro})' if do_servico.erro else ''}")
     da_saude = _sha_da_saude()
     linhas.append(f"  · sha que o /api/health declara: {da_saude}")
+    if tunel:
+        url = url_do_tunel()
+        linhas.append(f"  · URL público: {url or 'ainda não anunciado'}")
+        if url:
+            linhas.append(f"    confirmar o D4:  python -m src.web.instalar "
+                          f"--verificar-d4 {url}")
     return linhas, conferir_sha(do_servico.sha, da_saude)
 
 
@@ -459,7 +517,8 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
     print("\n[verificação, do que não precisa de reinício]")
-    linhas, queixa = verificar(alvo, ensaio=a.ensaio)
+    linhas, queixa = verificar(alvo, ensaio=a.ensaio,
+                               tunel=bool(decidir_tunel()))
     for linha in linhas:
         print(linha)
     if queixa is not None:

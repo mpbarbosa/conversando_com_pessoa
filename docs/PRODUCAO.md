@@ -969,6 +969,35 @@ ficou prendido por teste é o predicado da conferência (verificado a morder) e 
 portão I1 usa nas duas chamadas a `Pipeline(...)`. Está escrito porque a
 alternativa era um teste que parecia cobrir o `restart` e não cobria.
 
+### O túnel instalado, e o nome que muda — já não é previsão
+
+A 2026-10-19 o dono pôs o seu endereço em `~/.config/pessoabot/convidados` e o
+instalador criou o `cloudflared.service`: **1 convidado**, unidade
+`enabled · active`, `Linger=yes`, e o D4 re-medido contra o túnel a sério —
+4 pedidos de fora, **0** linhas no registo, instrumento a morder.
+
+**E o nome mudar deixou de ser uma leitura da documentação.** Correr o
+instalador outra vez reiniciou a unidade, e o túnel passou de
+`keyboards-auburn-bean-apparent` a `charging-arrangements-whether-burst`. Dois
+nomes, medidos, numa diferença de minutos. É o que o §10 ponto 7 nomeia, e
+tem uma consequência prática imediata: **um convite enviado por correio caduca
+no próximo `restart`** — e o `restart` acontece em cada instalação, em cada
+recuo (passo 8) e em cada janela de medição (passo 5).
+
+⚠️ **Terceiro defeito meu no mesmo dia, e da mesma família.** A primeira versão
+do `url_do_tunel` lia o registo inteiro logo a seguir ao `restart` e devolvia o
+URL da execução **anterior**, porque o novo ainda não tinha sido escrito. O
+instalador imprimiu `keyboards-…` quando o túnel a correr já era
+`charging-…`: um URL morto com ar de bom, que é pior do que nenhum, porque quem
+o recebe culpa o serviço. Corrigido para ler só desde o
+`ActiveEnterTimestamp` que o próprio systemd reporta — e no **mesmo fuso** em
+que o `journalctl` lê, que é o que a correcção 46 ensinou a não presumir.
+
+Fica por medir a única coisa que o passo 6 ainda não sabe, e que não é minha:
+**entrar com o PIN e fazer uma pergunta**, para ver se o
+[cloudflare/cloudflared#1752](https://github.com/cloudflare/cloudflared/issues/1752)
+morde aqui.
+
 ⚠️ **Uma nota sobre a contagem de testes:** a suite passou de «441 passados, 1
 saltado» a **450 passados, nenhum saltado**. O que deixou de saltar foi o
 `test_servidor_e_modelo`, que salta quando o Ollama não responde — e o Ollama
@@ -1018,7 +1047,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
 | **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
 
-E a asserção de não-regressão: **`pytest` continua verde** (455 testes em
+E a asserção de não-regressão: **`pytest` continua verde** (456 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
 passo 2, 403 depois do passo 5 e 377 antes dele; ver a nota do §7.1 sobre o
 teste que deixou de saltar), e deste plano muda em `src/` apenas o que o passo 7 da Fase 6 já
