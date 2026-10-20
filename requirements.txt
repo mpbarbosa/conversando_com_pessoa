@@ -1,12 +1,35 @@
 # Dependências reais, verificadas contra os imports de `src/` em 2026-10-01.
-numpy
-sentence-transformers
-torch
-transformers
-rank-bm25
-requests
-typer
-langgraph
+#
+# **Versões fixas desde 2026-10-19.** As quatro primeiras são as do registo do
+# ambiente da medição, `docs/fase-0/01-ambiente.txt` (2026-09-30) — não as que o
+# resolvedor dava hoje, que eram `transformers 5.20.1` e `numpy 2.5.4`. As
+# restantes são as resolvidas em 2026-10-19, fixas para parar o drift, não
+# porque alguma medição dependa delas.
+#
+# O que isto compra: um ambiente reconstruível, e o fim de uma classe de drift
+# silencioso — o manifesto do índice (`src/retrieval/index.py`) valida encoder,
+# assinatura, nº de chunks e forma, mas **não grava versões de bibliotecas**,
+# logo uma troca de versão passava a sua validação sem deixar rasto.
+#
+# O que isto **não** compra, e foi medido: não põe o
+# `tests/test_retrieval_gold.py::test_o_top20_do_denso_esta_completamente_julgado`
+# a passar. Ele falha com «1 documentos do top-20 sem nota: ['q25/poem_4341']»
+# **antes e depois** de fixar as versões e reconstruir corpus e índice. A causa
+# não é drift de versão: na q25 a fronteira do top-20 é um empate decidido por
+# **um ULP de float32** — `poem_4341` e `poem_2733` dão ambos 0,819427, com
+# diferença de 5,96e-08, o menor intervalo representável nessa magnitude. Fica
+# abaixo do ruído de qualquer reordenação de BLAS, contagem de threads ou CPU,
+# logo **nenhum pin estabiliza isto**: o índice original tinha o empate a cair
+# do outro lado, e por isso os 433 julgamentos fechavam o top-20.
+# A correcção é julgar o `poem_4341`, não fixar versões.
+numpy==2.5.3
+sentence-transformers==6.1.0
+torch==2.14.1
+transformers==5.18.0
+rank-bm25==0.2.2
+requests==2.34.2
+typer==0.27.3
+langgraph==1.2.16
 
 # Interface gráfica (Fase 6, passo 3). Entram no mesmo commit que o código que
 # as importa e que os testes que falham sem elas — a lição de 01/10 com o
@@ -14,21 +37,23 @@ langgraph
 # O `uvicorn` serve o `src/web/app.py`; o Gradio foi avaliado e **recusado**
 # (docs/FASE-6.md §1.1): esconde a fronteira HTTP, que é a que tem de ser
 # testada. A página é HTML/JS estático, sem passo de build, logo não há Node.
-fastapi
-uvicorn
+fastapi==0.146.0
+uvicorn==0.54.0
 
 # Desenvolvimento
-pytest
+pytest==9.1.1
 # Linter e formatador, numa dependência só. Configurado em `pyproject.toml`,
 # que diz também o que está deliberadamente desligado e porquê — o `E501` e o
 # `SIM905` mexeriam em literais que são artefactos de medição.
-ruff
+ruff==0.17.1
 
 # Removidos nesta revisão, com motivo:
 # - `langchain`: estava declarado e usado em **zero linhas** (docs/CONTROLO.md §3).
 #   ⚠️ `langgraph` (acima) entrou em 2026-10-08 e é o caso oposto: `src/grafo.py`
 #   importa-o, o CLI expõe-no em `--grafo` e `tests/test_grafo.py` falha sem ele.
 #   A lição de 01/10 fica: dependência declarada e não exercida é dívida.
+#   Nota: o `langgraph` arrasta `langchain-core` como dependência transitiva.
+#   «Fora» é verdade sobre o que está declarado, não sobre o que está no venv.
 # - `faiss-cpu`: o índice é `numpy`, por decisão medida — 2290 × 768 = 7,0 MB,
 #   busca em 5,57 ms. O único `import faiss` que resta está em `src/retriever.py`,
 #   código anterior já substituído por `src/retrieval/`; para o correr, instale

@@ -144,7 +144,7 @@ Nenhuma destas é preferência: todas têm medição por trás.
 | chunks indexados | **2290** |
 | índice | 7,0 MB · busca 5,57 ms |
 | recuperação | **nDCG@5 = 0,606** (denso) · **0,696** com rerank · apt@3 = 95% · oráculo@20 = **0,980** |
-| conjunto dourado | **433 julgamentos**, 125 de nota 2, top-20 denso fechado |
+| conjunto dourado | **434 julgamentos**, 125 de nota 2, top-20 denso fechado — 433 das Fases 1-3B, +1 de 2026-10-19 (`q25/poem_4341`, que uma reconstrução do índice trouxe ao top-20 por um empate de um ULP; ver [`julgamentos-reconstrucao.json`](julgamentos-reconstrucao.json)) |
 | corpus.jsonl | 3,0 MB · build em ~40 s |
 | construção do índice | 383 s (6,4 min) |
 | latência de resposta prevista | ~44 s a 500 tokens de contexto |
@@ -822,7 +822,7 @@ leitura final é a **concordância dos dois**; discordarem não decide nada.
     de forma) em vez das personas: separa o confundidor do §9.3 da memorizacao
 [ ] registar a origem dos 2083 ficheiros (reprodutibilidade, §5)
 [ ] poem_224 esta indexado com mojibake e e recuperavel (visto no top-20 de q11)
-[ ] um segundo avaliador para o conjunto dourado: 433 julgamentos sao todos meus
+[ ] um segundo avaliador para o conjunto dourado: 434 julgamentos sao todos meus
 ```
 
 ---
