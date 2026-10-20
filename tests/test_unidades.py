@@ -47,9 +47,11 @@ from src.web.instalar import (
     decidir_tunel,
     extrair_url,
     main,
+    manifesto_aceite,
+    recuar,
     tunel_vivo,
 )
-from src.web.saude import RAIZ
+from src.web.saude import RAIZ, ler_lancamento
 from src.web.unidades import (
     DIRECTORIO,
     GERADORES,
@@ -745,3 +747,82 @@ def test_o_interruptor_sem_razao_escrita_ainda_desliga(tmp_path, monkeypatch,
     monkeypatch.setattr(instalar, "CONVIDADOS", convidados)
     assert decidir_tunel() == ()
     assert "sem razão escrita" in capsys.readouterr().out
+
+
+# --- o passo 8: o recuo, e a ordem que é a asserção ---------------------- #
+
+def _python_que_diz(tmp_path, saida: str, codigo: int = 0):
+    """Um `python` de mentira para o `manifesto_aceite` interrogar."""
+    f = tmp_path / "py-falso"
+    f.write_text(f"#!/bin/sh\necho '{saida}'\nexit {codigo}\n",
+                 encoding="utf-8")
+    f.chmod(0o755)
+    return f
+
+
+def test_d6_o_manifesto_aceite_le_o_diagnostico_do_checkout(tmp_path, alvo):
+    bom = Alvo(checkout=alvo.checkout,
+               python=_python_que_diz(tmp_path, "OK|2290 chunks · e5 · 768"),
+               ollama=alvo.ollama, cloudflared=alvo.cloudflared)
+    assert manifesto_aceite(bom) == (True, "2290 chunks · e5 · 768")
+
+    mau = Alvo(checkout=alvo.checkout,
+               python=_python_que_diz(tmp_path, "NAO|corpus mudou"),
+               ollama=alvo.ollama, cloudflared=alvo.cloudflared)
+    assert manifesto_aceite(mau) == (False, "corpus mudou")
+
+    rebentou = Alvo(checkout=alvo.checkout,
+                    python=_python_que_diz(tmp_path, "", codigo=1),
+                    ollama=alvo.ollama, cloudflared=alvo.cloudflared)
+    ok, detalhe = manifesto_aceite(rebentou)
+    assert ok is False and "não correu" in detalhe
+
+
+def test_d6_o_manifesto_verifica_se_antes_do_reinicio_e_nao_depois(
+        monkeypatch, par):
+    """**A ordem é a asserção do D6, e não é invertível.**
+
+    O manifesto compara encoder, assinatura, contagem e ordem, e devolve `None`
+    em vez de reconstruir em silêncio. Verificado **depois** do reinício, o
+    serviço fica de pé a cobrar **383 s de CPU saturado** à primeira pergunta
+    de quem estiver à espera — que num recuo é exactamente quem não pode
+    esperar. Um recuo assim não é um recuo: é outra avaria.
+    """
+    _, alvo_real, ref = par
+    corridos: list[tuple[str, ...]] = []
+
+    def espiar(*args, ensaio=False, cwd=None):
+        corridos.append(args)
+        return ""
+
+    monkeypatch.setattr(instalar, "_correr", espiar)
+    monkeypatch.setattr(instalar, "manifesto_aceite",
+                        lambda a: (False, "corpus mudou"))
+
+    assert recuar(alvo_real, ref, ensaio=False) == 1
+    assert not any("restart" in a for a in corridos), (
+        "o serviço foi reiniciado com um manifesto recusado: a primeira "
+        f"pergunta pagava 383 s. Correu: {corridos}")
+
+
+def test_d6_com_o_manifesto_aceite_o_recuo_reinicia(monkeypatch, par):
+    """E o outro lado: aceite, reinicia-se — senão o teste acima passava com
+    um recuo que nunca reinicia nada."""
+    _, alvo_real, ref = par
+    corridos: list[tuple[str, ...]] = []
+    monkeypatch.setattr(instalar, "_correr",
+                        lambda *a, ensaio=False, cwd=None: corridos.append(a))
+    monkeypatch.setattr(instalar, "manifesto_aceite", lambda a: (True, "ok"))
+    monkeypatch.setattr(instalar, "_sha_da_saude",
+                        lambda *a, **k: ler_lancamento(alvo_real.checkout).sha)
+
+    assert recuar(alvo_real, ref, ensaio=False) == 0
+    assert any("restart" in a for a in corridos)
+    assert any("install" in a for a in corridos), (
+        "o `pip install` tem de correr: as dependências podem ter mudado "
+        "entre etiquetas")
+
+
+def test_d6_o_recuo_recusa_o_checkout_de_trabalho(capsys):
+    assert main(["--recuar", "HEAD", "--destino", str(RAIZ)]) == 2
+    assert "recusado" in capsys.readouterr().err

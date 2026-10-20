@@ -510,6 +510,102 @@ def guardar_tunel() -> int:
     return 0
 
 
+#: Corre **dentro** do checkout do serviço e com o `python` dele: o diagnóstico
+#: do manifesto compara o índice com o corpus **daquele** `data/`, e correr isto
+#: do checkout de trabalho media o índice errado — a mesma classe de defeito do
+#: sentinela relativo (`CONTROLO.md` §4, #39).
+_DIAGNOSTICO = (
+    "import sys;"
+    "from src.corpus.build import load;"
+    "from src.web.estado import diagnosticar_indice;"
+    "m,c=load();ok,d=diagnosticar_indice(c,m['assinatura']);"
+    "print('OK' if ok else 'NAO', d, sep='|')"
+)
+
+
+def manifesto_aceite(alvo: Alvo) -> tuple[bool, str]:
+    """O índice do checkout do serviço serve, ou vai ser reconstruído?
+
+    É **a única peça do plano retirado que sobrevive inteira** (§5.2), e a razão
+    é um número: o manifesto compara encoder, assinatura do corpus, contagem e
+    ordem, e **devolve `None` em vez de reconstruir em silêncio**. Num recuo
+    isso é o comportamento certo e a consequência é má — o serviço arranca, e a
+    primeira pergunta de quem estiver à espera reconstrói o índice durante
+    **383 s** de CPU saturado.
+
+    Por isso o recuo pergunta isto **antes** de reiniciar, e recusa se divergir:
+    um recuo que deixa o serviço de pé a cobrar 383 s à primeira pergunta não é
+    um recuo, é outra avaria.
+    """
+    r = subprocess.run((str(alvo.python), "-c", _DIAGNOSTICO),
+                       cwd=str(alvo.checkout), capture_output=True, text=True)
+    if r.returncode != 0:
+        return False, f"o diagnóstico não correu: {r.stderr.strip()[:300]}"
+    cabeca, _, detalhe = r.stdout.strip().partition("|")
+    return cabeca == "OK", detalhe
+
+
+def recuar(alvo: Alvo, ref: str, *, ensaio: bool) -> int:
+    """Voltar a uma etiqueta. Portão **D6** — «recuar é um comando, e foi
+    ensaiado».
+
+        python -m src.web.instalar --recuar servico-2026-10-20a
+
+    A ordem é a asserção, e não é invertível:
+
+    1. **buscar e mudar de referência** (o `clonar`, com as duas correcções da
+       §7.1: sem `fetch` o `git` recusa a etiqueta com uma mensagem sobre
+       caminhos);
+    2. **`pip install`**, porque as dependências podem ter mudado entre
+       etiquetas — é o mesmo motivo pelo qual o `06_redeploy.sh` do repositório
+       irmão corre `npm ci` no recuo e não só restaura o `dist/`;
+    3. **verificar o manifesto**, e **recusar** se divergir. Antes do reinício,
+       nunca depois: ver `manifesto_aceite`;
+    4. só então **reiniciar**, e
+    5. **conferir pelo `/api/health`** que o processo é o da etiqueta — porque
+       `systemctl` a devolver 0 não é evidência de nada (§7.1, correcção 48).
+    """
+    print(f"a recuar para «{ref}» em {alvo.checkout}")
+    try:
+        print("\n[referência]")
+        clonar(alvo, ref, ensaio=ensaio)
+        print("\n[dependências]")
+        _correr("uv", "pip", "install", "--python", str(alvo.python),
+                "-r", "requirements.txt", ensaio=ensaio, cwd=alvo.checkout)
+    except Falhou as e:
+        print(f"\nrecuo abortado: {e}", file=sys.stderr)
+        return 1
+
+    print("\n[manifesto, **antes** do reinício]")
+    if ensaio:
+        print("    (o ensaio não diagnostica o índice)")
+    else:
+        ok, detalhe = manifesto_aceite(alvo)
+        print(f"  · {'aceite' if ok else 'RECUSADO'}: {detalhe}")
+        if not ok:
+            print("\nRECUO ABORTADO, e o serviço **não** foi reiniciado: com "
+                  "este índice a primeira pergunta reconstruía-o durante 383 s "
+                  "de CPU saturado. Resolve-se copiando o índice da etiqueta, "
+                  "ou reconstruindo-o à mão antes de reiniciar.",
+                  file=sys.stderr)
+            return 1
+
+    print("\n[reinício]")
+    _correr("systemctl", "--user", "restart", NOME_SERVICO, ensaio=ensaio)
+    if ensaio:
+        return 0
+    do_checkout = ler_lancamento(alvo.checkout).sha
+    da_saude = _sha_da_saude()
+    print(f"  · sha do checkout: {do_checkout}")
+    print(f"  · sha do /api/health: {da_saude}")
+    queixa = conferir_sha(do_checkout, da_saude)
+    if queixa is not None:
+        print(f"\nO RECUO NÃO PEGOU: {queixa}", file=sys.stderr)
+        return 1
+    print(f"\nrecuado para {do_checkout}, e o serviço a correr é esse.")
+    return 0
+
+
 def conferir_sha(do_checkout: str | None, da_saude: str | None) -> str | None:
     """A queixa, se o serviço a correr não for o código instalado. `None` se for.
 
@@ -694,6 +790,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verificar-d4", metavar="URL", default=None,
                    help="mede o portão D4 contra um URL público já de pé, e "
                         "não instala nada")
+    p.add_argument("--recuar", metavar="ETIQUETA", default=None,
+                   help="volta o serviço a uma etiqueta, verificando o "
+                        "manifesto antes de reiniciar (portão D6)")
     p.add_argument("--guardar-tunel", action="store_true",
                    help="uma passagem da guarda: reinicia o túnel se o URL "
                         "não responder. É o que o temporizador corre")
@@ -704,6 +803,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if a.verificar_d4:
         return verificar_d4(a.verificar_d4)
+
+    if a.recuar:
+        try:
+            alvo_recuo = Alvo.de(a.destino)
+            recusar_o_trabalho(alvo_recuo, RAIZ)
+        except ErroDeUnidade as e:
+            print(f"recusado: {e}", file=sys.stderr)
+            return 2
+        return recuar(alvo_recuo, a.recuar, ensaio=a.ensaio)
 
     if a.guardar_tunel:
         return guardar_tunel()
