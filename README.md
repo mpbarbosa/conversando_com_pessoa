@@ -293,5 +293,15 @@ mudou a recomendação de modelo.
 
 ## Licença
 
-Código sem licença declarada. O corpus não é distribuído aqui; ver
-[`data/README.md`](data/README.md).
+Código **sem licença declarada** — e isso, num repositório público, é uma
+ambiguidade que se resolve com uma linha. Está nomeada como pendente no §10 do
+[`PRODUCAO.md`](docs/PRODUCAO.md).
+
+> ⚠️ **A frase que estava aqui dizia «o corpus não é distribuído aqui», e é
+> falsa.** Os 2083 ficheiros **estão** no repositório, versionados desde
+> `396cca7` (2025-10-24) — correcção **42** do
+> [`CONTROLO.md`](docs/CONTROLO.md) §4. A obra de Pessoa está em **domínio
+> público desde 2006**; o que **não** está confirmado são os termos da
+> **transcrição** do Arquivo Pessoa, e [`data/README.md`](data/README.md) faz
+> essa distinção com cuidado. A decisão sobre o que fazer com isso está por
+> tomar, e é do dono.
