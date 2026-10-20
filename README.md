@@ -293,9 +293,12 @@ mudou a recomendação de modelo.
 
 ## Licença
 
-Código **sem licença declarada** — e isso, num repositório público, é uma
-ambiguidade que se resolve com uma linha. Está nomeada como pendente no §10 do
-[`PRODUCAO.md`](docs/PRODUCAO.md).
+O **código e a documentação** estão sob a licença **MIT** — ver
+[`LICENSE`](LICENSE). Declarada a 2026-10-20; até aí dizia «código sem licença
+declarada», que num repositório público é o contrário de «à vontade».
+
+**A licença não cobre `data/pessoa_poems/`**, e o `LICENSE` diz isso em letra
+própria em vez de o deixar implícito num ficheiro na raiz.
 
 > ⚠️ **A frase que estava aqui dizia «o corpus não é distribuído aqui», e é
 > falsa.** Os 2083 ficheiros **estão** no repositório, versionados desde

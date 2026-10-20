@@ -1,0 +1,36 @@
+MIT License
+
+Copyright (c) 2026 Marcelo Pereira Barbosa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+## O que esta licença NÃO cobre
+
+Esta licença cobre o **código** e a **documentação** deste repositório.
+
+**Não cobre `data/pessoa_poems/`**, que são 2083 ficheiros de texto com
+transcrições da obra de Fernando Pessoa, obtidas do Arquivo Pessoa. A obra
+está em **domínio público desde 2006** — 70 anos após a morte do autor —, mas
+isso **não** determina por si os termos de uso de uma **transcrição** ou
+edição específica, e esses **não estão confirmados**.
+
+A distinção, e a tentativa de confirmação, estão em `data/README.md`. Quem
+reutilizar este repositório reutiliza o código sob a MIT; sobre o corpus, a
+pergunta continua aberta e é de quem o reutilizar.

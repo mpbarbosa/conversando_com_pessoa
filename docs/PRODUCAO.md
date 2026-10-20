@@ -1410,7 +1410,7 @@ que precise de mexer na política está mal desenhado.
 | # | o que | porque fica de fora |
 |---|---|---|
 | 1 | **Confirmar os termos de uso do Arquivo Pessoa** (saída A) | é o que desbloqueia o passo 9 da Fase 6 e o painel do poema. Não é trabalho de publicação: é um pedido a terceiros, e `data/README.md` já registou a tentativa falhada de 2026-10-01 |
-| 2 | **Licença do código** | `README` §Licença: «código sem licença declarada». Um serviço público com origem num repositório público sem licença é uma ambiguidade que se resolve com uma linha. Não bloqueia nenhum passo; bloqueia chamar-lhe terminado |
+| 2 | ✅ **feito** (2026-10-20): **MIT**. O `LICENSE` diz em letra própria que **não** cobre `data/pessoa_poems/` — um ficheiro de licença na raiz, sozinho, lê-se como cobrindo as 2083 transcrições, e os termos delas não estão confirmados | era: «um serviço público com origem num repositório público sem licença é uma ambiguidade que se resolve com uma linha». Resolvida |
 | 3 | **`AnthropicRemote`** | continua a ser a resposta ao tecto de ~105 respostas/hora, e continua a **mudar a afirmação** de «sem chamada a API externa e sem credenciais». Fase própria, com medição comparada de qualidade contra as âncoras das Fases 5F–5Y |
 | 4 | **Uma segunda máquina** | é o que tornaria isto «produção» no sentido do irmão, e separaria quem edita de quem serve. Custa dinheiro, que é a restrição de onde este plano partiu |
 | 7 | **Um URL estável** | o Quick Tunnel muda de nome de cada vez que arranca (§7.1), logo um convite por correio caduca na primeira medição e o D3 só pode medir «volta um URL», não «volta o mesmo». Resolve-se com um túnel nomeado, que precisa de um domínio numa zona da Cloudflare — e isso é dinheiro, outra vez a restrição de origem |
