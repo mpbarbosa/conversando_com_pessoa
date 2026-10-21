@@ -30,8 +30,11 @@
 > deleting it would hide that the gap was ever there, and §§2–4 are the reasoning that decided
 > how each one got drawn, not merely a list of what was absent.
 >
-> **What has not been drawn** is all of §5 — the manifest decision table, the readiness
-> statechart, the measurement-provenance DAG — and the one narrow layering diagram of §6. The
+> **What has not been drawn** is the rest of §5 — the readiness statechart and the
+> measurement-provenance DAG — and the one narrow layering diagram of §6. The §5 list said
+> *«all of §5»* until the manifest decision table was drawn too
+> ([`manifesto-decisao.md`](manifesto-decisao.md), 2026-10-21), and **that one found a
+> divergence the parity test does not cover**. The
 > claim that made that last one worth drawing is also still true, and was re-checked on
 > 2026-10-21: **there is still no test on the import direction into `src/web/`.**
 
@@ -145,7 +148,10 @@ needing two paragraphs.
   `estado.diagnosticar_indice` **re-implements** the same five checks to say *which* one failed
   (I3), that this duplication is deliberate, and that a parity test is what holds it. A 5-row
   table with two implementation columns and the test that joins them states a known risk better
-  than the two docstrings that currently carry it.
+  than the two docstrings that currently carry it. **Drawn:**
+  [`manifesto-decisao.md`](manifesto-decisao.md) — and it was worth it: the table's §4 records a
+  manifest shape where the two implementations disagree, which the parity test does not
+  parametrise.
 - **The readiness statechart.** `docs/FASE-6.md` §4.2 lists four waits that are not the
   generation (corpus ~40 s, index ~6,4 min, router warm-up ~20 s, reranker load). It is a table
   of states with no transitions; `app.js` has the transitions and the locked/generating/cancelled
