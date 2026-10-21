@@ -6,9 +6,9 @@ import { flow } from "@twowayflow/dsl";
  * │ Type         Flow graph — cyclic (retry loop, fan-in outside a join node)                   │
  * │ Project      conversando_com_pessoa                                                         │
  * │ Description  The query-time half of PessoaBot: route the question to a heteronym, retrieve  │
- * │              densely and lexically, fuse by reciprocal rank, generate locally, then accept  │
- * │              or retry behind persona and copying guards. Projected from a real codebase, so │
- * │              the ids are the Python's own and the numbers are measured.                     │
+ * │              densely, rerank on request, generate locally, then accept or retry behind the  │
+ * │              persona and copying guards. Projected from a real codebase, so the ids are the │
+ * │              Python's own and the numbers are measured.                                     │
  * └─────────────────────────────────────────────────────────────────────────────────────────────┘
  *
  * The query-time pipeline of `conversando_com_pessoa` (PessoaBot): a local RAG chatbot that
@@ -30,6 +30,17 @@ import { flow } from "@twowayflow/dsl";
  * The code: `src/pipeline.py` runs this as a hand-written loop, `src/grafo.py` declares the
  * same policy as a LangGraph state graph, and `tests/test_grafo.py` fails if the two ever
  * disagree.
+ *
+ * **What this graph deliberately does not draw.** Until 2026-10-21 it showed a BM25 arm and
+ * an RRF `join` feeding the reranker. That code exists — `src/retrieval/search.py` defines
+ * `BuscaHibrida` over `IndiceLexical` and `fusion.rrf` — but no module under `src/` imports
+ * it: the AST import graph has no edge into `src.retrieval.search`, and the only importers
+ * in the repository are `tests/test_retrieval_gold.py` and `tests/test_fusion.py`.
+ * `Pipeline.recuperar` encodes the query, calls `index.search`, and optionally reranks. So
+ * the hybrid arm was a projection of code that does not run, and it has been removed rather
+ * than redrawn as a dotted line: this file is a graph of the query path, and the hybrid
+ * retriever is not on it. The finding is written up in `uml-class-diagram.md` §2, and the
+ * BM25 baseline is still measured by `tests/test_retrieval_gold.py` if it is ever rewired.
  */
 export default flow("pessoa-rag")
   .node("pergunta", {
@@ -51,14 +62,6 @@ export default flow("pessoa-rag")
       "The pre-built dense index read from disk; it declines to load unless its manifest matches the corpus signature, the encoder, the chunk count and the document order.",
     params: { caminho: "data/index", chunks: 2290, dim: 768, mb: 7.0, buscaMs: 5.57 },
   })
-  .node("indiceLexical", {
-    kind: "source",
-    at: [310, 620],
-    label: "BM25",
-    description:
-      "The BM25 postings over the same corpus, with a hand-revised Portuguese stopword list.",
-    params: { lib: "rank_bm25", stopwords: "revistas à mão", ndcg5: 0.488 },
-  })
   // `/auto` only. Measured 72% on 40 questions at +1.2 s; a corrected embedding centroid does
   // 68% for free, so the LLM router is not established as better — see docs/fase-4.
   .node("rotear", {
@@ -78,47 +81,26 @@ export default flow("pessoa-rag")
     description: "Embeds the question with e5, under the `query: ` prefix the model requires.",
     params: { modelo: "multilingual-e5-base", prefixo: "query: " },
   })
+  // The depth is not a constant: `Pipeline.recuperar` asks the index for `n_rerank`
+  // candidates when a reranker is attached and `top_k` when there is none, so that the
+  // reranker has something left to reorder. nDCG@5 and apt@3 measured by running
+  // `pytest tests/test_retrieval_gold.py -k linha_de_base` against the closed top-20 pool.
   .node("buscaDensa", {
     kind: "transform",
-    at: [1010, 80],
-    label: "top-20 denso",
-    description: "Nearest neighbours of the query vector in the dense index, cut at depth 20.",
-    params: { ndcg5: 0.719, apt3: 0.95, profundidade: 20 },
-  })
-  .node("buscaBm25", {
-    kind: "transform",
-    at: [660, 620],
-    label: "top-20 lexical",
+    at: [1010, 300],
+    label: "top-8 / top-6 denso",
     description:
-      "Term-overlap retrieval over the BM25 postings, cut at the same depth as the dense side so fusion sees two comparable lists.",
-  })
-  // The two retrievers overlap by a median of 1/5, and not at all in 9 of 40 questions.
-  // That disagreement is the whole reason fusion is worth doing.
-  .node("fundirRrf", {
-    kind: "join",
-    at: [1360, 360],
-    label: "fusão RRF",
-    description:
-      "Merges the two rankings by reciprocal rank, scoring a poem by where it sits in each list rather than by either engine's score scale.",
-    params: { k: 60, fonte: "Cormack et al., SIGIR 2009", dedupPor: "poem_id" },
-    run: (rankings: readonly string[][], k = 60) => {
-      const pontos = new Map<string, number>();
-      for (const lista of rankings) {
-        for (const [i, id] of lista.entries()) {
-          pontos.set(id, (pontos.get(id) ?? 0) + 1 / (k + i + 1));
-        }
-      }
-      return [...pontos].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-    },
+      "Nearest neighbours of the query vector in the dense index, cut at 8 when a reranker will follow and at 6 when nothing will.",
+    params: { ndcg5: 0.601, apt3: 0.95, comRerank: 8, semRerank: 6 },
   })
   // Opt-in: +0.090 nDCG@5 for +2.6 s. Never deeper than the top-20 pool the gold set covers,
   // or the measured delta stops meaning anything.
   .node("rerank", {
     kind: "filter",
-    at: [1700, 360],
+    at: [1360, 300],
     label: "rerank (opcional)",
     description:
-      "Re-scores the fused head with a cross-encoder and keeps the top 6; opt-in, because the gain costs seconds.",
+      "Re-scores the 8 dense candidates with a cross-encoder and keeps the top 6; opt-in, because the gain costs seconds.",
     params: { nRerank: 8, topK: 6, deltaNdcg5: 0.09, custoS: 2.6 },
   })
   .node("montar", {
@@ -192,17 +174,12 @@ export default flow("pessoa-rag")
   })
   .edge("pergunta", "rotear", { label: "texto" })
   .edge("pergunta", "encodeQuery", { label: "consulta" })
-  .edge("pergunta", "buscaBm25", { label: "termos" })
   .edge("pergunta", "montar")
   .edge("rotear", "buscaDensa", { label: "voz" })
-  .edge("rotear", "buscaBm25", { label: "voz" })
   .edge("rotear", "montar", { label: "persona" })
   .edge("indiceDenso", "buscaDensa", { label: "vectores" })
-  .edge("indiceLexical", "buscaBm25", { label: "postings" })
   .edge("encodeQuery", "buscaDensa", { label: "qv" })
-  .edge("buscaDensa", "fundirRrf", { label: "denso" })
-  .edge("buscaBm25", "fundirRrf", { label: "lexical" })
-  .edge("fundirRrf", "rerank", { label: "candidatos" })
+  .edge("buscaDensa", "rerank", { label: "candidatos" })
   .edge("rerank", "montar", { label: "top-6 poemas" })
   .edge("montar", "gerar", { label: "system + user" })
   .edge("gerar", "verificarPersona", { label: "versos" })
