@@ -9,9 +9,9 @@
 │             module-level functions, 38 modules that hold anything. Extracted by importing   │
 │             every module and asking `inspect` and `dataclasses.fields`, not by reading the  │
 │             source, so the member lists and the bases are the interpreter's own answer. The │
-│             shape it found is flat — 22 of the 46 classes are dataclasses and exactly one   │
-│             pair is related by inheritance — and this document says so instead of dressing  │
-│             110 functions up as methods.                                                    │
+│             shape it found is flat — 22 of the 46 classes are dataclasses and only two pairs│
+│             are related by inheritance, one of them an exception hierarchy — so this        │
+│             document says so instead of dressing 110 functions up as methods.               │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -32,14 +32,15 @@ under it and asked the interpreter what was there — `inspect.isclass`,
 | `StrEnum` | 2 |
 | `typing.Protocol` | 2 |
 | module-level functions | 110 |
-| inheritance edges between two of this project's own classes | **1** |
+| inheritance edges between two of this project's own classes | **2** |
 
 **So this is not an object-oriented codebase, and these diagrams should not pretend it
-is.** It is a set of frozen record types with 110 free functions operating on them. The
-one inheritance edge between two classes written here is
-`GeradorCancelavel --|> OllamaGenerator`; every other base class is from the standard
-library or a dependency (`StrEnum`, `Protocol`, `dict`, `RuntimeError`,
-`pydantic.BaseModel`). The abstraction that does the work is not a base class, it is the
+is.** It is a set of frozen record types with 110 free functions operating on them. The only
+two inheritance edges between classes written here are
+`GeradorCancelavel --|> OllamaGenerator` (§3) and `ListaVazia --|> ErroDeUnidade` (§5),
+and the second is an exception hierarchy, where the language offers no alternative. Every
+other base class is from the standard library or a dependency (`StrEnum`, `Protocol`,
+`dict`, `RuntimeError`, `pydantic.BaseModel`). The abstraction that does the work is not a base class, it is the
 `Generator` protocol — structural, never inherited from by anything in `src/`.
 
 Where a diagram below shows a box for something that is not a class, it carries the UML
@@ -49,6 +50,29 @@ arrows between `«module»` boxes are real `import` statements, read out of the 
 judgements about what belongs with what.
 
 Two modules could not be imported at all, which is itself a finding — see §6.
+
+### This document contradicts `NOTACAO.md` §6, on purpose
+
+[`NOTACAO.md`](NOTACAO.md) lists a UML class diagram under "not worth drawing", and its
+reason is right: *"a list of records with no structure to show"* is exactly what the
+numbers above describe. Nothing here disputes that the shape is flat.
+
+What drawing it anyway bought, and prose had not:
+
+- **`BuscaHibrida` is dead on the query path** (§2). That needs the import graph —
+  which `NOTACAO.md` also files under "auto-generatable", and which nobody had generated.
+  It was wrong in two `.flow.ts` files and in this folder's own README until it was.
+- **Two modules do not import at all** (§6), one of them only under the layout the
+  project actually uses.
+- **The count of inheritance edges.** `NOTACAO.md` says two and names one; an earlier
+  draft of this document said one and named one, and was wrong. Running the check gives
+  two — `GeradorCancelavel --|> OllamaGenerator` and `ListaVazia --|> ErroDeUnidade` —
+  and §7 is the command, so the next person does not have to count by hand either.
+
+The honest summary is that the diagram was not worth drawing *for its structure*, and was
+worth drawing *for what extracting it forced someone to check*. `NOTACAO.md` also counts
+42 classes where §7's command counts 46; both were careful, which is the argument for
+having the command rather than the number.
 
 ## 1. `src/corpus` — the record types everything else passes around
 
@@ -322,8 +346,9 @@ and the protocol is never inherited. The relation is structural, checked by the 
 checker and by the fact that `Pipeline` accepts anything with those four members — which
 is how `tests/` substitute a fake generator without a model.
 
-`GeradorCancelavel --|> OllamaGenerator` is the **only** inheritance edge in this
-repository between two classes defined in it. It adds two methods and no state beyond one
+`GeradorCancelavel --|> OllamaGenerator` is one of only two inheritance edges in this
+repository between two classes defined in it, and the only one that is not an exception
+hierarchy (the other is `ListaVazia --|> ErroDeUnidade`, §5). It adds two methods and no state beyond one
 per-request attribute, so the subclass exists to hold a handle that can be closed when a
 browser disconnects, not to specialise behaviour.
 

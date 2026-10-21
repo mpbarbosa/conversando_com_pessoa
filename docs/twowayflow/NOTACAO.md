@@ -12,6 +12,29 @@
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+> ⚠️ **The central claim of this note expired the same day it was written, and is recorded
+> here rather than edited away.** That is the habit corrections **42** and **43** of
+> [`CONTROLO.md`](../CONTROLO.md) §4 imposed on this repository, and the document that argues
+> for drawing things does not get an exemption from it.
+>
+> **All three of the notations argued for below have since been drawn** (2026-10-21):
+>
+> | § | argued as missing | drawn as |
+> |---|---|---|
+> | 2 | the wire protocol **in time** | [`turno-sequencia.md`](turno-sequencia.md) |
+> | 3 | the runtime topology of the service | [`servico-topologia.md`](servico-topologia.md) |
+> | 4 | the egress surface of the poem body | [`corpus-fronteiras.md`](corpus-fronteiras.md) |
+>
+> The title still says *«is missing»*, and that word is now wrong. It stays, for the same
+> reason the §Licença of the [`README.md`](../../README.md) keeps its struck-out sentence:
+> deleting it would hide that the gap was ever there, and §§2–4 are the reasoning that decided
+> how each one got drawn, not merely a list of what was absent.
+>
+> **What has not been drawn** is all of §5 — the manifest decision table, the readiness
+> statechart, the measurement-provenance DAG — and the one narrow layering diagram of §6. The
+> claim that made that last one worth drawing is also still true, and was re-checked on
+> 2026-10-21: **there is still no test on the import direction into `src/web/`.**
+
 ## 1. What is already drawn
 
 | Artifact | Notation | What it covers | Where |
@@ -23,7 +46,7 @@
 | `pessoa-rag.flow.ts` | twowayflow dataflow | query-time, with the retry cycle and the non-join fan-in | `docs/twowayflow/` |
 
 Everything else — 30+ phase documents, 13 thematic ones, a 162 KB `CONTROLO.md` — is prose
-and tables.
+and tables. **Three more have been drawn since this table was written; see the note above.**
 
 **The asymmetry worth naming first:** the one entity-level diagram in the repository describes
 `data/sessoes.db`, which **does not exist** (Fase 6 passo 8 is unbuilt; nothing in `src/`
@@ -159,3 +182,11 @@ alone.
 The sequence diagram (§2). It is the cheapest, it is the only one of the three whose absence has
 already cost this project a bug, and it is the one the existing `.flow.ts` projection cannot be
 extended to cover.
+
+> It was drawn first, and the other two followed the same day. Two things this section got
+> right, and one it did not say: the sequence diagram **was** the cheapest, and the bug it was
+> about — the guard running after its own fragments have left — is the one step the other two
+> diagrams both point back at. What it did not anticipate is that the egress diagram (§4) would
+> need to record that the I7′ **sweep itself** was once wrong and stayed green with the
+> retention switched off, which is a limit on how much any of these three can be trusted to
+> show. See §5 of [`corpus-fronteiras.md`](corpus-fronteiras.md).
