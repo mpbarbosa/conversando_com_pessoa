@@ -7,8 +7,8 @@
 │ Project      conversando_com_pessoa                                                         │
 │ Description  Every way `Index.load` can refuse an index on disk, the parallel implementation │
 │              in `estado.diagnosticar_indice` that exists to say WHICH check failed, and the  │
-│              parity test that licenses the duplication — including one case the parity test  │
-│              does not cover, found while drawing this and verified by probe.                 │
+│              parity test that licenses the duplication — including one case it did not       │
+│              cover, found while drawing this, verified by probe, and since closed.           │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -111,7 +111,7 @@ diagnosis side** — that test never calls `Index.load`. So the parity assertion
 to 7 and the good case, and rows 1 and 2 are each tested once, separately, against one
 implementation.
 
-## 4. One case the parity test does not cover
+## 4. One case the parity test did not cover
 
 Found while drawing this table, and verified by probe rather than reasoned at:
 
@@ -137,10 +137,16 @@ code back past a commit that added a field to `Manifesto`, keep the newer artifa
 manifest on disk has a field the code does not know. **`instalar.manifesto_aceite` — the check
 D6 runs *before* restarting — calls `diagnosticar_indice`**, which is the side that says yes.
 
-What it would take to close it, stated so it is not mistaken for drawn work: one more case in
-the parity parametrisation, and the diagnosis reading the manifest through `Manifesto(**m)`
-like the other side does, rather than by key. **Neither is done here** — this branch draws the
-table and does not touch `src/`.
+**Closed on 2026-10-21**, in the commit after this document: `estado._como_manifesto` now
+builds the manifest with `Manifesto(**m)` like the other side does, and
+`test_paridade_com_o_index_load` gained the `{"extra": …}` case. The sentence that stood here —
+*«neither is done here, this branch draws the table and does not touch `src/`»* — was true of
+the branch that drew the table, and is kept in that shape because the order mattered: the
+divergence was measured before anything was changed.
+
+The new case was checked against the **old** `estado.py` before being trusted: it fails with
+`divergência com o Index.load em {'extra': {'versao': 2}}`, and the message test fails too. A
+case that passes either way would have been worse than no case.
 
 ## 5. What each claim rests on
 
@@ -152,7 +158,7 @@ table and does not touch `src/`.
 | **the two implementations agree** | `test_paridade_com_o_index_load` (6 cases) |
 | the diagnosis compares against the encoder the system uses | `test_o_diagnostico_compara_contra_o_encoder_que_o_sistema_usa` |
 | asking the state loads nothing | `tests/test_app.py`, gate I3; and `test_i4_o_estado_responde_durante_uma_geracao` |
-| the extra-field divergence | **nothing — that is §4** |
+| the extra-field divergence | `test_paridade_com_o_index_load[torcer6]` and `test_diz_qual_campo_do_manifesto_divergiu[…campo a mais]`, both added after §4 measured it |
 
 The Mermaid block was rendered at 10.9.1 before being committed, and the §4 table is the output
 of a probe run against this repository's own `Index.load` and `diagnosticar_indice`, not a

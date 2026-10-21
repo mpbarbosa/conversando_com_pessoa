@@ -54,10 +54,11 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
 from ..corpus.build import CAMINHO as CAMINHO_CORPUS
 from ..retrieval.index import CAMINHO as CAMINHO_INDICE
+from ..retrieval.index import Manifesto
 from ..tokens import ENCODER
 
 
@@ -88,6 +89,50 @@ def manifesto_cru(caminho: str = CAMINHO_INDICE) -> tuple[dict | None, str]:
         return None, f"ilegível: {e}"
 
 
+def _como_manifesto(bruto: object) -> Manifesto | str:
+    """O `Manifesto`, ou a razão por que não é um. É a 2.ª saída do `Index.load`.
+
+    Existe porque ler o manifesto **por chave** não era a mesma verificação que
+    o `Index.load` faz. Ele constrói um `Manifesto(**m)`, logo recusa tanto o
+    campo a menos como o campo **a mais** — ambos `TypeError` —, e o
+    diagnóstico, que procurava as chaves que queria e ignorava as outras,
+    aceitava um manifesto que a produção recusa.
+
+    **O lado optimista era o errado.** O `/api/estado` dava o índice por pronto,
+    o portão I3 ficava satisfeito, e a pergunta seguinte reconstruía 6,4 min —
+    a interface a afirmar saúde sobre a peça prestes a custar a maior espera do
+    sistema. E era alcançável: o `copiar_artefactos` leva o manifesto do
+    checkout de trabalho para o do serviço, o `recuar` leva o código para uma
+    etiqueta anterior, e o `manifesto_aceite` — a verificação que o portão D6
+    corre **antes** do reinício — chama este diagnóstico.
+
+    Medido em `docs/twowayflow/manifesto-decisao.md` §4, e prendido pelo caso
+    `{"extra": ...}` do `test_paridade_com_o_index_load`.
+
+    Devolve o `Manifesto` ou a mensagem, em vez de levantar: quem chama tem de
+    responder ao `/api/estado` sempre, e uma excepção aqui rebentava o único
+    canal que a interface tem para dizer o que está mal.
+    """
+    try:
+        return Manifesto(**bruto)  # type: ignore[arg-type]
+    except TypeError:
+        pass
+    nomes = {f.name for f in fields(Manifesto)}
+    if not isinstance(bruto, dict):
+        return (f"manifesto não é um objecto: é {type(bruto).__name__}")
+    sobram = sorted(set(bruto) - nomes)
+    faltam = sorted(nomes - set(bruto))
+    # «campo a mais» primeiro, e nomeado: é o caso que não dá erro nenhum em
+    # lado nenhum — o índice até funcionaria — e por isso o que mais precisa de
+    # ser dito. O remédio é reconstruir, que é o que o `Index.load` já faz.
+    partes = []
+    if sobram:
+        partes.append(f"campo a mais: {sobram} — o `Index.load` recusa-o")
+    if faltam:
+        partes.append(f"sem o campo {faltam}")
+    return "manifesto com forma errada: " + "; ".join(partes or ["razão desconhecida"])
+
+
 def diagnosticar_indice(chunks, assinatura: str, *,
                         encoder: str = ENCODER,
                         caminho: str = CAMINHO_INDICE) -> tuple[bool, str]:
@@ -96,34 +141,34 @@ def diagnosticar_indice(chunks, assinatura: str, *,
     A ordem das verificações é a do `Index.load`, de propósito: é o que faz o
     teste de paridade comparar a mesma decisão e não uma parecida.
     """
-    m, erro = manifesto_cru(caminho)
-    if m is None:
+    bruto, erro = manifesto_cru(caminho)
+    if bruto is None:
         return False, erro
-    try:
-        if m["encoder"] != encoder:
-            return False, (f"encoder diferente: o índice é de «{m['encoder']}», "
-                           f"o sistema usa «{encoder}»")
-        if m["assinatura"] != assinatura:
-            return False, ("corpus mudou: a assinatura do `corpus.jsonl` não é "
-                           "a que gerou o índice")
-        if m["n_chunks"] != len(chunks):
-            return False, (f"contagem diferente: o índice tem {m['n_chunks']} "
-                           f"chunks, o corpus tem {len(chunks)}")
-        esperado = [[c.poem_id, c.chunk_ix] for c in chunks]
-        if m["chunk_ids"] != esperado:
-            return False, ("ordem dos documentos mudou: os ids do índice são "
-                           "posicionais, logo a ordem é parte da chave")
-        # A forma dos vectores é a última verificação do `Index.load`, e a
-        # única que obriga a tocar no `.npy`. O `mmap_mode="r"` lê o cabeçalho
-        # e deixa os 7,0 MB em disco — perguntar o estado não carrega nada.
-        import numpy as np
-        forma = np.load(f"{caminho}.npy", mmap_mode="r").shape
-        if forma != (len(chunks), m["dim"]):
-            return False, (f"forma dos vectores: {forma}, esperado "
-                           f"{(len(chunks), m['dim'])}")
-    except KeyError as e:
-        return False, f"manifesto sem o campo {e}"
-    return True, (f"{m['n_chunks']} chunks · {m['encoder']} · dim {m['dim']}")
+    m = _como_manifesto(bruto)
+    if isinstance(m, str):
+        return False, m
+    if m.encoder != encoder:
+        return False, (f"encoder diferente: o índice é de «{m.encoder}», "
+                       f"o sistema usa «{encoder}»")
+    if m.assinatura != assinatura:
+        return False, ("corpus mudou: a assinatura do `corpus.jsonl` não é "
+                       "a que gerou o índice")
+    if m.n_chunks != len(chunks):
+        return False, (f"contagem diferente: o índice tem {m.n_chunks} "
+                       f"chunks, o corpus tem {len(chunks)}")
+    esperado = [[c.poem_id, c.chunk_ix] for c in chunks]
+    if m.chunk_ids != esperado:
+        return False, ("ordem dos documentos mudou: os ids do índice são "
+                       "posicionais, logo a ordem é parte da chave")
+    # A forma dos vectores é a última verificação do `Index.load`, e a
+    # única que obriga a tocar no `.npy`. O `mmap_mode="r"` lê o cabeçalho
+    # e deixa os 7,0 MB em disco — perguntar o estado não carrega nada.
+    import numpy as np
+    forma = np.load(f"{caminho}.npy", mmap_mode="r").shape
+    if forma != (len(chunks), m.dim):
+        return False, (f"forma dos vectores: {forma}, esperado "
+                       f"{(len(chunks), m.dim)}")
+    return True, (f"{m.n_chunks} chunks · {m.encoder} · dim {m.dim}")
 
 
 def componente_ollama(gerador) -> Componente:
