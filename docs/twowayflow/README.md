@@ -10,9 +10,11 @@ diagrams, `*.flow.ts` projections, and analysis notes.
 |---|---|
 | [`pessoa-corpus-build.flow.ts`](pessoa-corpus-build.flow.ts) | The build-time half: 2083 poem files → `corpus.jsonl` → dense index, BM25 index and manifest. Code: `src/corpus/build.py`, `src/retrieval/index.py`. |
 | [`pessoa-rag.flow.ts`](pessoa-rag.flow.ts) | The query-time half: route to a heteronym, retrieve densely and lexically, fuse by reciprocal rank, generate locally, then accept or retry behind the persona and copying guards. Code: `src/pipeline.py`, `src/grafo.py`. |
+| [`turno-sequencia.md`](turno-sequencia.md) | One turn of `POST /api/perguntar` **in time**: the lock, the point past which no failure can be an HTTP status, the two retentions, and the fact that the plagiarism guard runs after its own fragments have left. Two Mermaid sequence diagrams. Code: `src/web/app.py`, `fluxo.py`, `cancelar.py`, `retencao.py`, `estatico/app.js`. |
+| [`NOTACAO.md`](NOTACAO.md) | An assessment of which diagrams this repository has and which three it is missing, with the reasons. Analysis note, no graph. |
 
-Each file carries a titleblock comment naming the diagram, its graph type, the project, and
-what it shows, so it stays readable when pulled out of this repo.
+Each file carries a titleblock naming the diagram, its graph type, the project, and what it
+shows, so it stays readable when pulled out of this repo.
 
 ## What they are, and what they are not
 
