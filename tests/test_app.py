@@ -69,8 +69,13 @@ ASSINATURA = "assinatura-de-teste"
 
 
 def _escrever_indice(tmp_path, *, encoder=ENCODER, assinatura=ASSINATURA,
-                     chunks=None, dim=4, ids=None, n_chunks=None):
-    """Escreve um índice em disco, com os campos que o teste quiser torcer."""
+                     chunks=None, dim=4, ids=None, n_chunks=None, extra=None):
+    """Escreve um índice em disco, com os campos que o teste quiser torcer.
+
+    `extra` acrescenta chaves que o `Manifesto` não tem. É o caso que a
+    paridade não cobria: o `Index.load` recusa-o no `Manifesto(**m)` e o
+    diagnóstico, que lia por chave, aceitava-o.
+    """
     chunks = CHUNKS if chunks is None else chunks
     caminho = str(tmp_path / "index")
     m = Manifesto(
@@ -78,9 +83,12 @@ def _escrever_indice(tmp_path, *, encoder=ENCODER, assinatura=ASSINATURA,
         n_chunks=len(chunks) if n_chunks is None else n_chunks,
         chunk_ids=([[c.poem_id, c.chunk_ix] for c in chunks]
                    if ids is None else ids))
+    bruto = dict(m.__dict__)
+    if extra:
+        bruto.update(extra)
     np.save(f"{caminho}.npy", np.zeros((len(chunks), dim), dtype="float32"))
     with open(f"{caminho}.manifest.json", "w", encoding="utf-8") as f:
-        json.dump(m.__dict__, f)
+        json.dump(bruto, f)
     return caminho
 
 
@@ -146,6 +154,11 @@ def test_o_custo_das_esperas_vai_declarado():
     ({"assinatura": "outra"}, "corpus mudou"),
     ({"n_chunks": 99}, "contagem"),
     ({"ids": [["poem_2", 0], ["poem_1", 0]]}, "ordem"),
+    # O campo a mais **nomeia-se**, porque é o único que não dá erro em lado
+    # nenhum: o índice até funcionava, e o que o recusa é o `Manifesto(**m)` do
+    # `Index.load`. Dizer «desactualizado» mandava reconstruir 6,4 min sem
+    # dizer que basta reescrever o manifesto.
+    ({"extra": {"versao": 2}}, "campo a mais"),
 ])
 def test_diz_qual_campo_do_manifesto_divergiu(tmp_path, torcer, esperado):
     caminho = _escrever_indice(tmp_path, **torcer)
@@ -189,6 +202,11 @@ class EncoderFalso:
     {"n_chunks": 99},
     {"ids": [["poem_2", 0], ["poem_1", 0]]},
     {"dim": 7},
+    # Acrescentado depois de a divergência ser medida, e não imaginada: com o
+    # diagnóstico a ler o manifesto por chave, ele dizia `True` e o
+    # `Index.load` devolvia `None`. Ver `docs/twowayflow/manifesto-decisao.md`
+    # §4, e o `_como_manifesto` que o fecha.
+    {"extra": {"versao": 2}},
 ])
 def test_paridade_com_o_index_load(tmp_path, torcer):
     """O diagnóstico aceita exactamente quando o `Index.load` carrega.
