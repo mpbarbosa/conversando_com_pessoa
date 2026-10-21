@@ -3,16 +3,15 @@ import { flow } from "@twowayflow/dsl";
 /**
  * ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
  * │ Name         pessoa-corpus-build                                                            │
- * │ Type         Flow graph — acyclic (two fan-ins, one node with three consumers)              │
+ * │ Type         Flow graph — acyclic (two fan-ins, one node with two consumers)                │
  * │ Project      conversando_com_pessoa                                                         │
  * │ Description  The build-time half of PessoaBot: 2083 poem files parsed, deduplicated,        │
- * │              chunked and signed into `corpus.jsonl`, which a dense index, a BM25 index and  │
- * │              a manifest each read. Companion to pessoa-rag.flow.ts, which is the query-time │
- * │              half.                                                                          │
+ * │              chunked and signed into `corpus.jsonl`, which a dense index and a manifest     │
+ * │              each read. Companion to pessoa-rag.flow.ts, which is the query-time half.      │
  * └─────────────────────────────────────────────────────────────────────────────────────────────┘
  *
- * The build-time half of `conversando_com_pessoa`: 2083 poem files in, a dense index and a
- * BM25 index out. Companion to `pessoa-rag.flow.ts`, which is the query-time half.
+ * The build-time half of `conversando_com_pessoa`: 2083 poem files in, a dense index out.
+ * Companion to `pessoa-rag.flow.ts`, which is the query-time half.
  *
  * The two are separate flows rather than one, because the project draws the line itself:
  * `corpus.jsonl` is *the boundary of the system* — everything downstream consumes it and
@@ -21,7 +20,16 @@ import { flow } from "@twowayflow/dsl";
  *
  * As a canvas exercise this file is the mirror of `pessoa-rag.flow.ts`: no cycle, but two
  * genuine fan-ins (`marcarDuplicados` and `corpusJsonl` each need inputs from more than one
- * upstream step) and a node whose three consumers run at different times.
+ * upstream step) and a node whose two consumers run at different times.
+ *
+ * **Nothing lexical is built here, and until 2026-10-21 this graph said otherwise.** It drew
+ * a sink for the BM25 postings, taken from `src/retrieval/lexical.py` existing rather than
+ * from anything writing it: `build()` opens exactly one file, `corpus.jsonl`, and
+ * `Index.save` writes `index.npy` and `index.manifest.json`. `IndiceLexical` builds its
+ * postings in memory from the chunks it is handed, at the moment someone constructs it, and
+ * the only code that constructs it is `src/retrieval/search.py` plus two test modules —
+ * none of which run at build time, or at all on the query path. See `uml-class-diagram.md`
+ * §2.
  *
  * The code: `src/corpus/build.py` for stage one, `src/retrieval/index.py` for stage two.
  */
@@ -91,7 +99,6 @@ export default flow("pessoa-corpus-build")
     label: "data/index",
     params: { forma: [2290, 768], mb: 7.0, naoUsa: "FAISS", porque: "forca bruta, 1.8M ops" },
   })
-  .node("indiceLexical", { kind: "sink", at: [1750, 560], label: "índice BM25" })
   // Refuses rather than rebuilding in silence, because an index loaded by mistake does not
   // error — it answers wrongly.
   .node("manifesto", {
@@ -110,7 +117,6 @@ export default flow("pessoa-corpus-build")
   .edge("assinatura", "corpusJsonl", { label: "sha256" })
   .edge("detectarDuplicados", "corpusJsonl", { label: "_meta: grupos" })
   .edge("corpusJsonl", "encodePassages", { label: "indexed_text" })
-  .edge("corpusJsonl", "indiceLexical", { label: "texto" })
   .edge("corpusJsonl", "manifesto", { label: "assinatura + ordem" })
   .edge("encodePassages", "indiceDenso", { label: "vectores" })
   .edge("encodePassages", "manifesto", { label: "encoder + dim" });

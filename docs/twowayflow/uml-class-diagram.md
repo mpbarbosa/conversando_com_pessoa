@@ -220,11 +220,19 @@ that method — printed with `inspect.getsource`, §7 — calls `encoder.encode_
 `index.search`, then optionally `reranker.rerank`. There is no BM25 and no reciprocal-rank
 fusion on the path a user's question takes.
 
-This matters because [`pessoa-rag.flow.ts`](pessoa-rag.flow.ts) in this same folder
-describes the query half as "retrieve densely and lexically, fuse by reciprocal rank".
-That is true of `src/retrieval/search.py`, which exists, is tested, and is never called;
-it is not true of `src/pipeline.py`, which answers the questions. `IndiceLexical`,
-`fusion.rrf` and `normalize.normalizar` are reachable only from `tests/`.
+`IndiceLexical`, `fusion.rrf` and `normalize.normalizar` are reachable only from `tests/`.
+
+Until this document was written, [`pessoa-rag.flow.ts`](pessoa-rag.flow.ts) in this same
+folder drew a BM25 arm and an RRF `join` feeding the reranker, and
+[`pessoa-corpus-build.flow.ts`](pessoa-corpus-build.flow.ts) drew a BM25 index as a
+build-time sink. Both were projections of `src/retrieval/search.py` and
+`src/retrieval/lexical.py` existing, not of anything running: `build()` opens exactly one
+file, `corpus.jsonl`, and no BM25 postings are ever written to disk. **Both graphs have
+since been corrected** — the hybrid arm and the lexical sink are gone, and each file
+records in its header what was removed and why. `BuscaHibrida` is still here, still
+tested, and still unwired; `tests/test_retrieval_gold.py` measures its lexical half at
+nDCG@5 0.392 against the dense path's 0.601, so rewiring it is a decision someone can
+make on evidence.
 
 ## 3. `src/generation`, `src/voices`, `src/web/cancelar` — the one protocol and the one subclass
 
