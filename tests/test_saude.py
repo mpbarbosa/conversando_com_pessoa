@@ -149,19 +149,43 @@ def test_d1_o_sha_e_do_checkout_do_servico_e_nao_do_cwd(checkout: Path):
         + _se_o_head_andou())
 
 
+def _com_estes_dois_shas(monkeypatch, importado: str, agora: str) -> None:
+    """Põe o `_se_o_head_andou` entre dois `sha` **ditados**, e não lidos.
+
+    As duas pontas que a frase compara são o `LANCAMENTO.sha` da importação e o
+    `git` corrido agora, e é por isso que ela tem de ser medida com as duas na
+    mão: um teste que lesse o `HEAD` deste checkout numa das pontas media o
+    ambiente em vez da frase.
+    """
+    monkeypatch.setattr(sys.modules[__name__], "LANCAMENTO",
+                        dataclasses.replace(LANCAMENTO, sha=importado))
+    monkeypatch.setattr(sys.modules[__name__], "_git",
+                        lambda *a, **k: agora)
+
+
 def test_a_mensagem_de_falha_nomeia_o_head_que_andou(monkeypatch):
     """O postscriptum só corre numa falha — ou seja, quando ninguém está a olhar.
 
     Sem este teste a frase era código que nunca se exercita e que apodrece até
     ao dia em que é precisa, que é exactamente o dia mau. Mede-se nos dois
     sentidos: calada com o `HEAD` quieto, e a nomeá-lo quando ele andou.
+
+    **E mede-os com os dois `sha` ditados**, porque a premissa deste teste é o
+    contrário da do resto do ficheiro. As asserções D1 afirmam algo sobre *este*
+    checkout e falham de propósito quando o `HEAD` anda a meio da corrida (é a
+    asserção a funcionar, não um defeito). Esta não: ela afirma algo sobre uma
+    **frase**, e enquanto leu o `HEAD` real na metade do «`HEAD` quieto» era o
+    único teste da casa que não sobrevivia à condição que a frase descreve —
+    morria ao lado das falhas que devia explicar, justamente no dia mau. Um
+    guarda de uma mensagem sobre o ambiente instável não pode ter o ambiente
+    estável por premissa.
     """
+    _com_estes_dois_shas(monkeypatch, importado="aaaaaaa", agora="aaaaaaa")
     assert _se_o_head_andou() == "", "com o HEAD quieto a frase tem de calar-se"
-    monkeypatch.setattr(sys.modules[__name__], "LANCAMENTO",
-                        dataclasses.replace(LANCAMENTO, sha="0000000"))
+    _com_estes_dois_shas(monkeypatch, importado="aaaaaaa", agora="bbbbbbb")
     aviso = _se_o_head_andou()
-    assert "0000000" in aviso, aviso
-    assert _git("rev-parse", "--short", "HEAD") in aviso, aviso
+    assert "aaaaaaa" in aviso, aviso
+    assert "bbbbbbb" in aviso, aviso
     assert "worktree" in aviso, "a frase tem de dizer o que fazer a seguir"
 
 
