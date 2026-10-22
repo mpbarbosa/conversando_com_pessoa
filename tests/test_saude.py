@@ -35,6 +35,7 @@ que o `test_d1_o_sha_nao_se_le_por_pedido` faz, com a disciplina do
 from __future__ import annotations
 
 import ast
+import dataclasses
 import inspect
 import os
 import subprocess
@@ -60,6 +61,28 @@ UM_ARRANQUE = "import src.web.app as a; print(a.LANCAMENTO.sha or '')"
 def _git(*args: str, cwd: Path | str = RAIZ) -> str:
     return subprocess.run(("git", "-C", str(cwd), *args), check=True,
                           capture_output=True, text=True).stdout.strip()
+
+
+def _se_o_head_andou() -> str:
+    """O postscriptum que nomeia a causa mais provável num checkout partilhado.
+
+    O `sha` lê-se **à importação** (ver o cabeçalho) e o `git` destas asserções
+    corre-se **agora**: entre os dois momentos outra sessão pode ter comutado de
+    ramo neste checkout, e então a falha não é do serviço — é da medição. Em
+    2026-10-21 foi o que aconteceu, e a mensagem de falha culpou o directório de
+    trabalho: uma sessão inteira foi atrás de um defeito que não existia. Daí
+    esta frase, que acrescenta à falha em vez de a esconder.
+    """
+    try:
+        agora = _git("rev-parse", "--short", "HEAD")
+    except Exception:  # o `git` em falta já tem o seu próprio teste
+        return ""
+    if agora == LANCAMENTO.sha:
+        return ""
+    return (f"\nATENÇÃO: o HEAD andou desde a importação "
+            f"({LANCAMENTO.sha} -> {agora}) — alguém comutou de ramo neste "
+            f"checkout a meio da corrida, e a falha é disso e não do serviço. "
+            f"Repita a medição num worktree próprio.")
 
 
 def _arrancar(cwd: Path | str) -> str:
@@ -102,8 +125,12 @@ def test_d1_a_rota_devolve_o_mesmo_sha_que_o_git():
     esperado = _git("rev-parse", "--short", "HEAD")
     with TestClient(criar_app(Servico(gerador=GeradorDeterminista()))) as c:
         d = c.get("/api/health").json()
-    assert d["sha"] == esperado
-    assert d["commit_em"] == em_utc(_git("show", "-s", "--format=%cI", "HEAD"))
+    assert d["sha"] == esperado, (
+        f"a rota deu {d['sha']!r} e o git diz {esperado!r}" + _se_o_head_andou())
+    esperado_em = em_utc(_git("show", "-s", "--format=%cI", "HEAD"))
+    assert d["commit_em"] == esperado_em, (
+        f"a rota deu {d['commit_em']!r} e o git diz {esperado_em!r}"
+        + _se_o_head_andou())
 
 
 # --- 2. o checkout do serviço, e não o directório de trabalho -------------- #
@@ -118,7 +145,24 @@ def test_d1_o_sha_e_do_checkout_do_servico_e_nao_do_cwd(checkout: Path):
     do_outro = _git("rev-parse", "--short", "HEAD", cwd=checkout)
     assert do_outro != LANCAMENTO.sha, "o duplo tem de ter um sha diferente"
     assert _arrancar(checkout) == LANCAMENTO.sha, (
-        "o sha seguiu o directório de trabalho em vez do checkout do serviço")
+        "o sha seguiu o directório de trabalho em vez do checkout do serviço"
+        + _se_o_head_andou())
+
+
+def test_a_mensagem_de_falha_nomeia_o_head_que_andou(monkeypatch):
+    """O postscriptum só corre numa falha — ou seja, quando ninguém está a olhar.
+
+    Sem este teste a frase era código que nunca se exercita e que apodrece até
+    ao dia em que é precisa, que é exactamente o dia mau. Mede-se nos dois
+    sentidos: calada com o `HEAD` quieto, e a nomeá-lo quando ele andou.
+    """
+    assert _se_o_head_andou() == "", "com o HEAD quieto a frase tem de calar-se"
+    monkeypatch.setattr(sys.modules[__name__], "LANCAMENTO",
+                        dataclasses.replace(LANCAMENTO, sha="0000000"))
+    aviso = _se_o_head_andou()
+    assert "0000000" in aviso, aviso
+    assert _git("rev-parse", "--short", "HEAD") in aviso, aviso
+    assert "worktree" in aviso, "a frase tem de dizer o que fazer a seguir"
 
 
 def test_d1_a_raiz_e_derivada_do_modulo_e_e_absoluta():
