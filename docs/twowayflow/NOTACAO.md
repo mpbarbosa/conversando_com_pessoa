@@ -166,10 +166,43 @@ needing two paragraphs.
 
 ## 6. Not worth drawing
 
+> ⚠️ **Two rows of this table were wrong, and are kept rather than edited away** (2026-10-22).
+> Both were drawn anyway, and **the drawing found a defect this note had missed**:
+> `src/retrieval/search.py` — `BuscaHibrida` over `IndiceLexical` and `fusion.rrf` — is
+> **reachable from no entry point of the product**, and both `*.flow.ts` projections had been
+> drawing it as part of the query path. Removed in
+> [`uml-class-diagram.md`](uml-class-diagram.md) §2 and in the two projections.
+>
+> **What this note got wrong is the shape of the mistake, not the detail.** The class-diagram
+> row is accurate about the *picture*: 42 classes, almost all frozen dataclasses, two
+> inheritance edges. It then concluded «not worth drawing», which answers a different question.
+> *Is the picture worth looking at?* and *is running the extraction worth it?* have different
+> answers, and the second one is cheap — the class diagram was built by importing every module
+> and asking `inspect` and `dataclasses.fields`, not by reading source, and that is what
+> surfaced the dead island. The import-graph row made the same error twice over: it called the
+> graph «auto-generatable», which is the reason to run it and not the reason to skip it, and it
+> deferred to the root `README.md`'s ASCII sketch, which is **itself wrong** — see below.
+>
+> **Re-measured here, 2026-10-22**, with an AST import graph from `src.cli`,
+> `src.web.__main__` and `src.web.app` over 46 modules: 32 reachable, and the unreachable set
+> includes `src.retrieval.search`, `.fusion`, `.lexical` **and `.normalize`** —
+> **four modules, one island**, where the write-ups name three. `search` imports `fusion` and
+> `lexical`, `lexical` imports `normalize`, and nothing under `src/` imports `search`; the
+> inner three each have an importer, so a one-hop count reads them as live while their only
+> importer is the dead module. `Pipeline.recuperar` is `encode_queries` → `index.search` →
+> optional rerank, and no BM25 at any point.
+>
+> **Still open, and not fixed by this note:** the root [`README.md`](../../README.md) «Como
+> funciona» sketch still lists `src/retrieval/lexical.py  BM25` as a step of the running
+> pipeline (line 71). It is the same claim the two projections just dropped, in the file most
+> people read. The project already knew — `docs/tematicos/BUSCA.md` says «Produção carrega o
+> índice denso e mais nada. O `BuscaHibrida` existe e não serve» — so the fact was written in
+> prose while the diagram and the README contradicted it.
+
 | Candidate | Why not |
 |---|---|
-| UML class diagram | 42 classes, almost all frozen dataclasses; two inheritance edges in the whole tree (`GeradorCancelavel`→`OllamaGenerator`) and two `Protocol`s. A class diagram would be a list of records with no structure to show. |
-| module import graph | auto-generatable, and the README's ASCII already carries the spine with the measurements attached. One exception below. |
+| ~~UML class diagram~~ **drawn** | 42 classes, almost all frozen dataclasses; two inheritance edges in the whole tree (`GeradorCancelavel`→`OllamaGenerator`) and two `Protocol`s. A class diagram would be a list of records with no structure to show. — **True of the picture, and the wrong conclusion:** see the note above, and [`uml-class-diagram.md`](uml-class-diagram.md). |
+| ~~module import graph~~ **run** | auto-generatable, and the README's ASCII already carries the spine with the measurements attached. One exception below. — **Both halves wrong:** auto-generatable is why to run it, and the ASCII is wrong about BM25. |
 | domain → wire schema map | `src/web/serial.py` *is* that map, one function per type, with a test that fails when a domain field is added and not serialized. A diagram would be a worse copy. |
 | C4 context diagram | one user, one machine, no external system but a local Ollama. The box would contain the whole repository. |
 | another dataflow of the query path | `pessoa-rag.flow.ts` already does it, and §2 above is the argument that a second one would repeat the same blind spot. |
@@ -180,8 +213,10 @@ publication plan needing to touch the policy is badly designed, and the code hon
 `plagio` and never writes policy, which is why `retencao.py` lives in the transport layer. That
 is a **layering constraint with a forbidden direction**, it is the load-bearing claim of the
 whole production plan, and it is currently enforced by nothing — there is no test on the import
-direction. A small layer diagram plus the test it implies would be worth more than the diagram
-alone.
+direction, re-checked 2026-10-22. A small layer diagram plus the test it implies would be worth
+more than the diagram alone. This is the one row of the table that the import graph above did
+**not** settle: it measures what is reachable, and this claim is about a direction that must
+never be taken.
 
 ## 7. If only one thing gets drawn
 
