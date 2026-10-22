@@ -67,8 +67,9 @@ data/pessoa_poems/ (2083 .txt)
         └─ src/corpus/build.py      → data/corpus.jsonl
         │
         ├─ src/retrieval/encoder.py  multilingual-e5-base
-        ├─ src/retrieval/index.py    índice denso em numpy + manifesto
-        └─ src/retrieval/lexical.py  BM25
+        └─ src/retrieval/index.py    índice denso em numpy + manifesto
+        ┊     ✗ src/retrieval/{search,lexical,normalize,fusion}.py  BM25 + RRF
+        ┊       existem, estão correctos e NÃO correm — nota abaixo
         │
         ├─ src/generation/prompt.py  persona no `system`, orçamento de tokens
         ├─ src/generation/ollama.py  llama3.1:8b-instruct-q4_K_M, em fluxo
@@ -77,6 +78,30 @@ data/pessoa_poems/ (2083 .txt)
         │
         └─ src/cli.py                `pessoa`
 ```
+
+> ⚠️ **A linha do `lexical.py` estava neste esboço como um passo do caminho que
+> corre, e é falsa.** Ficava a dizer `└─ src/retrieval/lexical.py  BM25` como se
+> a busca de produção fundisse denso e BM25; **Produção carrega o índice denso e
+> mais nada.** `Pipeline.recuperar` é `encode_queries` → `index.search` → rerank
+> opcional, e BM25 em ponto nenhum. É mantida à vista, marcada, em vez de
+> apagada — o hábito das correcções **42** e **43** do
+> [`CONTROLO.md`](docs/CONTROLO.md) §4.
+>
+> O facto já estava escrito em prosa — o [`BUSCA.md`](docs/tematicos/BUSCA.md) §6
+> abre com «O `BuscaHibrida` existe e não serve» desde 2026-10-12 — enquanto este
+> ficheiro, o mais lido, dizia o contrário. O que o grafo de imports de
+> 2026-10-22 acrescentou foi a **forma** do erro: não é um módulo a mais, são
+> **quatro, uma ilha** — `search` importa `fusion` e `lexical`, `lexical` importa
+> `normalize`, e nada sob `src/` importa `search`, pelo que nenhum é alcançável
+> de `src.cli`, `src.web.__main__` ou `src.web.app` (32 de 46 módulos
+> alcançáveis). Os três internos têm importador, e uma contagem a um salto
+> lê-los-ia como vivos. Ver [`NOTACAO.md`](docs/twowayflow/NOTACAO.md) §6 e
+> [`uml-class-diagram.md`](docs/twowayflow/uml-class-diagram.md) §2.
+>
+> **Os módulos ficam onde estão**, e o §4 do `BUSCA.md` diz porquê: o BM25 foi
+> escrito uma fase **antes** da que o reprovou, para que o gabarito não nascesse
+> enviesado a favor do denso. Apagá-lo apagaria a prova de que o resultado
+> negativo da Fase 2 valia algo.
 
 A orquestração existe em **duas formas que fazem a mesma coisa**:
 
