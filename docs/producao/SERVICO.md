@@ -25,6 +25,7 @@ lá, e os apontadores levam-nas.
 | URL público | **nenhum** | §7.5 do plano |
 | etiqueta a correr | `servico-2026-10-20c` | `/api/health` |
 | `sha` a correr | `aa15dd4` | `/api/health` |
+| sobrevive à sessão | **sim, medido** (2026-10-23): o `MainPID` **3032** atravessou um logout, e a unidade subiu 14 s depois do arranque, antes de qualquer login | portão **D2**, §9 do plano · [`GUIAO-D2.md`](GUIAO-D2.md) |
 
 **Por que é que não há URL público.** O túnel está desligado por decisão do
 dono, sobre uma medição: um *Quick Tunnel* protegido com `--allowed-mail` **não

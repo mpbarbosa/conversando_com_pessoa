@@ -40,6 +40,17 @@ pergunta, logo **não nasceu com ela** —, mas o que está medido é «o servi�
 diferença importa pela razão de sempre: a primeira é uma inferência sobre o que
 aconteceu, a segunda é uma observação de um acto que alguém fez. É a §3.
 
+> ✅ **E o logout foi feito, a 2026-10-23 às 23:12.** A sessão **156** foi
+> terminada e o `loginctl` deixou de a conhecer — «No session '156' known» —,
+> nasceu a **233** às 23:13:01, e do outro lado o **`MainPID` continua 3032**,
+> com `NRestarts=0` e o mesmo `ActiveEnterTimestampMonotonic`. O processo que
+> serve tem 1 d 11 h e sobreviveu à morte da sessão anterior: **a metade do
+> logout deixou de ser uma inferência**. Com a §5 corrida depois dela (200, 1
+> tentativa, 61,5 s, plágio zero), o **D2 está cumprido** e registado nos
+> quatro sítios da §6. O que segue fica escrito para a próxima vez que o portão
+> tenha de ser remedido — depois de um recuo, de uma reinstalação, ou de um
+> reinício que passe por um login antes de alguém se lembrar de medir.
+
 > ⚠️ **E esta leitura caduca.** Qualquer `python -m src.web.instalar` reinicia o
 > `pessoabot` e **apaga a evidência**: o serviço passa a ser mais novo que o
 > arranque e mais novo que a sessão. O verificador responde **«por medir»** nesse
