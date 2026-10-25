@@ -547,7 +547,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 7 | 🔶 **feito, e o portão reduzido ao que é mensurável** (2026-10-20, §3.6) — **a janela registada** (§3.3, peça 3): o ajudante escreve `00-janela.json` ao lado das amostras, na abertura e no fecho | uma célula lenta é interpretável daqui a seis meses — **menos** no que as amostras sem instante não deixam dizer | **D5**, na metade que o formato de hoje permite |
 | 8 | ✅ **feito e ensaiado** (2026-10-20, §5.5) — **recuo**: `python -m src.web.instalar --recuar <etiqueta>`, com o manifesto verificado **antes** do reinício | recuar é um comando, e foi ensaiado de uma etiqueta doente a sério | **D6** ✅ |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
-| 10 | **Cópias de `data/sessoes.db`**, se e quando o passo 8 da Fase 6 existir (§5.3) | o estado dos utilizadores sobrevive | **D8** |
+| 10 | 🔶 **desbloqueado e por fazer** — **cópias de `data/sessoes.db`** (§5.3). O passo 8 da Fase 6 **existe desde 2026-10-25**, logo a condição deste passo deixou de o adiar: há estado que nenhum script regenera, e o **D8 passa a exigível** | o estado dos utilizadores sobrevive | **D8** |
 | 11 | ✅ **feito** (2026-10-20) — **fechar**: `README` (§8), `CONTROLO.md`, e [`docs/producao/SERVICO.md`](producao/SERVICO.md) escrito **a partir da máquina**, com a proveniência de cada número | o serviço documentado | — |
 
 Os passos 1–2 são o que torna o túnel defensável. Os 3–5 são o serviço. Os 6–9
@@ -605,7 +605,7 @@ o portão **D6** mede:
 
 ### 5.3 O estado que nenhum script regenera
 
-Hoje: **nenhum**. `data/sessoes.db` é o passo 8 da Fase 6 e não existe. O
+Hoje: **`data/sessoes.db`**, desde 2026-10-25. ~~Nenhum: o `data/sessoes.db` é o passo 8 da Fase 6 e não existe.~~ O passo 8 está feito, e com ele esta secção deixou de ser hipotética — a base guarda as **perguntas** de quem usou o serviço, e nenhum script as regenera. O
 corpus, o `corpus.jsonl` e o índice são todos reconstruíveis a partir dos 2083
 ficheiros, e esses ~~não estão no repositório mas estão na máquina~~ **estão nos
 dois** — versionados desde `396cca7` (2025-10-24), ver a correcção **42**. Para
@@ -1411,7 +1411,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D5 — a janela fica escrita** 🔶 **metade medida** | uma célula lenta é interpretável | ~~o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras~~ — **a segunda metade não é mensurável: as amostras não têm instante nenhum** (§3.6). **Feito (2026-10-20):** `00-janela.json` com `inicio`, `fim`, o túnel e se ele foi parado, mais `bytes_no_inicio`/`bytes_no_fim`/`mtime_no_fim` do ficheiro das amostras — e a asserção passa a ser **«o ficheiro das amostras só cresceu dentro da janela»**. 8 testes, quatro mutações a morder |
 | **D6 — o recuo recua** ✅ | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido. **Feito (2026-10-20):** a `servico-2026-10-20b` rebenta no arranque — o serviço ficou `activating` com `status=1/FAILURE` e o `curl` a dar **000** —, e o recuo para a `servico-2026-10-20a` devolveu `status: ok` com `sha: fd43c2d` e `etiqueta: servico-2026-10-20a`. §5.5 |
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
-| **D8 — a cópia restaura** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. **Só é exigido se o passo 8 da Fase 6 existir** |
+| **D8 — a cópia restaura** 🔶 **exigível desde 2026-10-25, e por medir** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. ~~Só é exigido se o passo 8 da Fase 6 existir~~ — **o passo 8 existe**, logo a condição caiu. A base guarda perguntas de quem usou o sistema e **nenhum script a regenera**: é a primeira peça deste projecto de que isso é verdade |
 
 E a asserção de não-regressão: **`pytest` continua verde** (490 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do
