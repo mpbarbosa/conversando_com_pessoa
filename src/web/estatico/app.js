@@ -26,13 +26,18 @@
  * solto: o `src/web/app.py` tem a sua (`TIPOS_DE_EVENTO`) e
  * `tests/test_pagina.py` compara as duas. Uma página que escutasse `chunk`
  * enquanto o servidor emite `fragmento` não dava erro — dava um ecrã vazio. */
-const EVENTOS = ["proposta", "fragmento", "turno", "erro"];
+const EVENTOS = ["sessao", "proposta", "fragmento", "turno", "erro"];
 
 const $ = (sel) => document.querySelector(sel);
 
 const estado = {
   voz: "ortonimo",
   idioma: "pt",
+  /* A sessão em que esta conversa está a ser gravada, ou `null` antes da
+   * primeira pergunta. O servidor é que a nomeia — o evento `sessao`, primeiro
+   * do fluxo —, e a página só a repete no pedido seguinte. Inventá-la aqui era
+   * a página a decidir (§0). Com `null` o servidor abre uma nova. */
+  sessao: null,
   vozes: new Map(),       // voz -> {nomes, idiomas, idioma_unico, roteavel}
   roteador: null,         // {idiomas, acerto, custo_s, nota}
   aGerar: false,
@@ -211,6 +216,7 @@ async function perguntar(pergunta) {
         idioma: estado.idioma,
         rerank: $("#rerank").checked,
         auto: $("#auto").checked,
+        sessao_id: estado.sessao,
       }),
       signal: controlador.signal,
     });
@@ -349,6 +355,15 @@ function novoTurno(pergunta) {
 
   return {
     evento(e) {
+      if (e.tipo === "sessao") {
+        /* Em que sessão este turno foi gravado. Guarda-se para o pedido
+         * seguinte continuar a mesma conversa — e aceita-se `null`, que é «não
+         * se gravou»: a avaria está no `/api/estado`, como todas as outras, e
+         * repetir um id que o servidor não confirmou era a página a afirmar
+         * mais do que sabe. */
+        estado.sessao = e.sessao_id;
+        return;
+      }
       if (e.tipo === "proposta") {
         // §4.5: a proposta aparece antes de gerar. A geração arranca logo —
         // não se paga latência por uma caixa de diálogo —, e o utilizador vê

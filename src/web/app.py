@@ -101,6 +101,7 @@ from .retencao import Retentor, linhas_de_corpo, redigir
 from .saude import ler_lancamento
 from .sentinela import a_correr as medicao_a_correr
 from .sentinela import componente as componente_sentinela
+from .sessoes import Arquivo
 
 HOST = "127.0.0.1"
 PORTA = 8000
@@ -119,7 +120,12 @@ NDJSON = "application/x-ndjson"
 #: `fragmento` recebia o fluxo inteiro e desenhava um ecrã vazio, que é o
 #: parente próximo do «índice velho não dá erro: dá respostas erradas» do
 #: `src/retrieval/index.py`.
-TIPOS_DE_EVENTO = ("proposta", "fragmento", "turno", "erro")
+#: O `sessao` vem **primeiro** e é do passo 8: diz em que sessão este
+#: turno foi gravado, porque quem pergunta sem `sessao_id` recebe uma
+#: nova e não tem outra maneira de saber qual. Vai com `null` quando a
+#: gravação falhou — a alternativa era o cliente guardar um id que não
+#: existe, e a avaria fica também no `/api/estado`.
+TIPOS_DE_EVENTO = ("sessao", "proposta", "fragmento", "turno", "erro")
 
 #: A página: `index.html`, `app.js`, `estilo.css`, servidos como ficheiros.
 #: Sem passo de compilação e sem Node (§1.1 do plano).
@@ -168,7 +174,7 @@ class Servico:
     carregado» sem o carregar para descobrir.
     """
 
-    def __init__(self, gerador=None, pipeline=None):
+    def __init__(self, gerador=None, pipeline=None, arquivo=None):
         #: `GeradorCancelavel` e não `OllamaGenerator`: a subclasse acrescenta
         #: uma atribuição por pedido em fluxo e nada mais, e é o que permite
         #: fechar a resposta do `requests` quando o cliente desiste (§2.3,
@@ -195,6 +201,10 @@ class Servico:
         #: Instante monótono do início da geração em curso, para a estimativa
         #: de espera do `409`. `None` quando não há nenhuma.
         self.inicio_geracao: float | None = None
+        #: O histórico em disco (passo 8). Injectável porque os testes apontam
+        #: `PESSOABOT_SESSOES` a um ficheiro temporário — e porque um serviço
+        #: sem arquivo é uma configuração legítima que ninguém quis ainda.
+        self.arquivo = arquivo if arquivo is not None else Arquivo()
 
     # --- leituras baratas, que não provocam carregamento nenhum -----------
 
@@ -228,6 +238,17 @@ class Servico:
             else "desligado: +0,090 nDCG@5 por ~2,6 s, e é uma escolha",
             remedio=None if self.reranker_ligado else "liga-se em /rerank",
             custo_s=None if self.reranker_ligado else 2.6))
+        #: O arquivo **não** é exigido (não está em `EXIGIDOS`): sem disco
+        #: para escrever o sistema responde, e perde o histórico. Lê-se da
+        #: memória — `ultima_falha` — e não da base: o portão I4 dá 100 ms a
+        #: este caminho, e um `SELECT` aqui era trabalho novo no único canal
+        #: que diz «estou vivo» durante os 19 s de prefill.
+        cs.append(Componente(
+            "sessoes", self.arquivo.ultima_falha is None,
+            "a gravar" if self.arquivo.ultima_falha is None
+            else f"a última gravação falhou: {self.arquivo.ultima_falha}",
+            remedio=None if self.arquivo.ultima_falha is None
+            else "o histórico pára; as respostas continuam"))
         #: Em último porque é o único que não é uma peça do sistema: é o estado
         #: da **máquina** em volta dele. Custa um `stat` e um JSON pequeno, que
         #: é o que o portão I4 permite neste caminho (§2.4, portão I8).
@@ -404,6 +425,10 @@ class Pedido(BaseModel):
     rerank: bool = False
     #: O roteador propõe a voz. 68% de acerto medido na 5S, ~0,5 s a quente.
     auto: bool = False
+    #: A sessão em que este turno entra. `None` abre uma nova, e o primeiro
+    #: evento do fluxo diz qual. Um id que já não existe **não** é um erro:
+    #: abre-se outra e o evento `sessao` di-lo — ver `_abrir_sessao`.
+    sessao_id: str | None = None
 
 
 def _linha(evento: dict[str, Any]) -> bytes:
@@ -448,6 +473,48 @@ def _verificar_combinacao(p: Pedido) -> None:
         })
 
 
+def _abrir_sessao(servico: Servico, p: Pedido, voz: Voice, idioma: Lang
+                  ) -> str | None:
+    """A sessão deste turno, e a pergunta já gravada. `None` se falhar.
+
+    Síncrono de propósito: corre numa thread, porque `sqlite3` é bloqueante e
+    o portão **I4** mede o `/api/estado` a responder durante a geração.
+
+    **Uma falha de gravação não levanta.** Perder uma resposta de 30 s porque o
+    disco está cheio é pior do que não ter histórico — e não é silêncio: fica
+    em `ultima_falha`, que o componente `sessoes` do `/api/estado` publica com
+    o remédio ao lado, como o Ollama em baixo (portão I3).
+    """
+    a = servico.arquivo
+    try:
+        sid = p.sessao_id if p.sessao_id and a.existe(p.sessao_id) else None
+        if sid is None:
+            sid = a.criar_sessao(voz=serial.voz(voz),
+                                 idioma=serial.idioma(idioma),
+                                 modelo=servico.gerador.modelo,
+                                 rerank=p.rerank, auto=p.auto)
+        a.registar_mensagem(sid, "utilizador", p.pergunta)
+        return sid
+    except Exception as e:
+        a.ultima_falha = f"{type(e).__name__}: {e}"
+        return None
+
+
+def _gravar_turno(servico: Servico, sessao_id: str, publicado: dict[str, Any],
+                  proposta: dict[str, Any] | None) -> None:
+    """O turno **publicado** — o que foi ao fio — em disco. Não levanta.
+
+    É o `publicado` e não o `Turno`, e é a decisão 1 do `sessoes.py`: numa
+    cópia à letra o verso gerado **é** o verso de Pessoa, logo gravar a partir
+    do domínio obrigava a reimplementar a retenção do portão **I7′**. Partindo
+    do fio, o portão **I6** herda-a.
+    """
+    try:
+        servico.arquivo.registar_turno(sessao_id, publicado, proposta)
+    except Exception as e:
+        servico.arquivo.ultima_falha = f"{type(e).__name__}: {e}"
+
+
 async def _eventos(servico: Servico, p: Pedido):
     """O fluxo, evento a evento. Quem chama já tomou o trinco; aqui liberta-se.
 
@@ -475,23 +542,33 @@ async def _eventos(servico: Servico, p: Pedido):
         # gerar sem saber o que retir era publicar às cegas.
         corpo = await asyncio.to_thread(lambda: servico.corpo_retido)
         voz, idioma = p.voz, p.idioma
+        proposto: dict[str, Any] | None = None
         if p.auto:
             proposta = await asyncio.to_thread(servico.rotear, p.pergunta)
             # `voz is None` é «não sei», e mantém-se a voz corrente: inventar
             # uma era pior. Vai ao fio como tal, com `decidiu: false`.
             if proposta.decidiu:
                 voz = proposta.voz
+            proposto = serial.proposta(proposta)
             yield _linha({"tipo": "proposta",
-                          "proposta": serial.proposta(proposta),
+                          "proposta": proposto,
                           "voz": serial.voz(voz)})
         pipeline.reranker = await asyncio.to_thread(servico.reranker_para,
                                                     p.rerank)
+        # Depois da proposta e antes de gerar. Depois, porque a `voz_inicial`
+        # da sessão é a voz que vai gerar e não a que o cliente pediu; antes,
+        # porque uma pergunta cuja geração foi abortada aos 5 s **ficou feita**,
+        # e um histórico que só guarda o que correu bem mente sobre o uso.
+        sessao_id = await asyncio.to_thread(_abrir_sessao, servico, p, voz,
+                                            idioma)
+        yield _linha({"tipo": "sessao", "sessao_id": sessao_id})
 
         # A retenção do início, com a **mesma** função que o CLI chama (portão
         # I2). Uma segunda implementação — num `app.js`, por exemplo — era uma
         # segunda política de apresentação a divergir em silêncio.
         buffer: list[str] = []
         a_reter = True
+        ultimo: dict[str, Any] | None = None
         # A segunda retenção, e a que o túnel obrigou a existir: a do início é
         # de **apresentação** (preâmbulo e eco, portão I2) e esta é de
         # **publicação** (portão I7′). Uma instância por tentativa, porque a
@@ -522,8 +599,14 @@ async def _eventos(servico: Servico, p: Pedido):
             # `retidas` é só o do **fluxo**: é o número que explica um buraco
             # que o utilizador vê. O que o `redigir` tira do próprio `turno`
             # não deixa buraco nenhum no ecrã, logo não há o que explicar.
-            yield _linha({"tipo": "turno",
-                          "turno": redigir(serial.turno(item), corpo)[0],
+            publicado = redigir(serial.turno(item), corpo)[0]
+            # **O último, e não cada um.** O evento `turno` sai no fim de cada
+            # tentativa (§4.4), e o `historico` do último já contém todas — é o
+            # que a 5Y obrigou a registar. Gravar a cada tentativa dava N
+            # `turno_reg` para uma pergunta, e a contagem de perguntas do
+            # histórico passava a depender de quantas vezes o modelo plagiou.
+            ultimo = publicado
+            yield _linha({"tipo": "turno", "turno": publicado,
                           "retidas": retentor.retidas})
             # A tentativa seguinte volta a reter. O CLI **não** faz isto — o
             # `a_reter` dele não é reposto entre tentativas —, logo um eco na
@@ -531,6 +614,9 @@ async def _eventos(servico: Servico, p: Pedido):
             # portão I2 é sobre o fluxo inteiro e não sobre a 1.ª tentativa.
             buffer, a_reter = [], True
             retentor.reiniciar()
+        if ultimo is not None and sessao_id is not None:
+            await asyncio.to_thread(_gravar_turno, servico, sessao_id, ultimo,
+                                    proposto)
     except Exception as e:  # vai ao fio como evento `erro`; ver o docstring
         yield _linha({"tipo": "erro", "erro": type(e).__name__,
                       "mensagem": str(e)})
@@ -672,6 +758,61 @@ def criar_app(servico: Servico | None = None) -> FastAPI:
             "reranker": {"ganho_ndcg5": 0.090, "custo_s": 2.6,
                          "primeira_s": 4.8},
         }
+
+    @app.get("/api/sessoes")
+    def sessoes(limite: int = 50) -> dict:
+        """As sessões gravadas, da mais recente para a mais antiga.
+
+        Síncrona de propósito: um `def` corre na pool de threads do starlette,
+        logo o `sqlite3` bloqueante não bloqueia o laço. Um `async def` aqui
+        punha uma leitura de disco no caminho que o portão **I4** mede.
+
+        Não leva corpos de poemas: a `fonte` guarda `poem_id` e `chunk_ix`
+        (§3.3, portão **I6**), e esta rota devolve só a configuração, as
+        contagens e a primeira pergunta de cada conversa.
+        """
+        a: Arquivo = app.state.servico.arquivo
+        try:
+            return {"sessoes": a.listar_sessoes(limite)}
+        except Exception as e:
+            # Uma base ilegível não é um 500 do serviço: é uma peça em baixo,
+            # e o `/api/estado` é onde esta casa põe as peças em baixo.
+            a.ultima_falha = f"{type(e).__name__}: {e}"
+            raise HTTPException(503, detail={
+                "erro": "sessoes_indisponiveis",
+                "mensagem": str(e),
+                "remedio": "as respostas continuam; o histórico não",
+            })
+
+    @app.get("/api/sessoes/{sessao_id}")
+    def sessao(sessao_id: str) -> dict:
+        """Uma conversa, com as mensagens pela ordem em que aconteceram.
+
+        É esta que torna «reabrir a conversa de ontem» possível — o entregável
+        do passo 8. Uma lista de sessões que não se abrem não é histórico.
+
+        ⚠️ **O histórico mostra-se e não se alimenta** (§3.6): o `Pipeline`
+        recebe `responder(pergunta, voz, idioma)` e nada mais, e os orçamentos
+        de tokens e as latências medidas descrevem esse prompt. Esta rota lê o
+        passado; não o põe no prompt seguinte.
+        """
+        a: Arquivo = app.state.servico.arquivo
+        try:
+            s = a.ler_sessao(sessao_id)
+        except Exception as e:
+            a.ultima_falha = f"{type(e).__name__}: {e}"
+            raise HTTPException(503, detail={
+                "erro": "sessoes_indisponiveis",
+                "mensagem": str(e),
+                "remedio": "as respostas continuam; o histórico não",
+            })
+        if s is None:
+            raise HTTPException(404, detail={
+                "erro": "sessao_desconhecida",
+                "mensagem": f"não há sessão {sessao_id}",
+                "remedio": "perguntar sem `sessao_id` abre uma nova",
+            })
+        return s
 
     @app.post("/api/perguntar")
     async def perguntar(pedido: Pedido) -> StreamingResponse:

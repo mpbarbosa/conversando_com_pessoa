@@ -317,6 +317,25 @@ erDiagram
 | **`Fonte`** | `turno_id`, `poem_id`, `chunk_ix`, `ordem`, `papel` (`recuperado` \| `usado`) | o `Turno` tem **duas** listas, e a diferença é informativa: `montar` corta o contexto quando o orçamento acaba, logo há poemas recuperados que nunca entraram no prompt. Guarda **ids**, nunca corpos (§3.3) |
 | **`PropostaReg`** | `turno_id`, `voz_proposta`, `voz_usada`, `aceite`, `segundos` | §3.5. É a entidade com o maior retorno escondido desta fase |
 
+> ⚠️ **Duas divergências ao que esta tabela pede, tomadas ao construir o
+> passo 8 (2026-10-25), e registadas aqui porque mudam o que se pode ler da
+> base.**
+>
+> **(a) A `TentativaReg` não tem `aprovada`.** O domínio tem `Turno.aprovado`
+> — «veredicto limpo, sem plágio e não truncado», uma regra que a Fase 5R
+> corrigiu — e **não** tem `Tentativa.aprovada`. Escrevê-la na gravação era
+> pôr uma segunda cópia da política do §0 na camada de armazenamento, que é o
+> que o `serial.py` recusa fazer para o fio. Guardam-se os **três
+> ingredientes** (`veredicto_ok`, `plagiou`, `truncada`) e a regra fica onde
+> está. A coluna derivada volta a ser possível no dia em que
+> `Tentativa.aprovada` existir, com o `Turno.aprovado` a delegar nela — e isso
+> é mexer em `src/pipeline.py`, que esta fase não faz.
+>
+> **(b) O `aceite` da `PropostaReg` é anulável.** `Proposta.voz is None` é «o
+> roteador não teve opinião», e um `0` ali lia-se como «o utilizador recusou a
+> proposta». Estes dados existem **para** serem lidos como rótulos (§3.5), logo
+> um zero falso é pior que um nulo. `NULL` é «não houve proposta a aceitar».
+
 ### 3.3 O que a base de dados NÃO guarda, e é uma decisão de direitos
 
 **Corpos de poemas, nunca.** Só `poem_id` e `chunk_ix`.
@@ -576,7 +595,7 @@ dificuldade.
 | 5 | **A página**: fluxo, estados do §4.1–4.2, rodapé, fontes | a interface a funcionar | **I2** |
 | 6 | **Cancelamento** no cliente e no Ollama | abortar liberta o trinco e para a geração | **I5** |
 | 7 | ✅ **Sentinela de medição** (§2.4): `src/web/sentinela.py`, **caminho absoluto** (ver §2.4: o `data/…` relativo era um defeito), verificado antes de cada geração e reportado no `/api/estado`; ajudante `with` para fases futuras | o servidor e uma fase de medição deixam de se atropelar | **I8** ✅ |
-| 8 | **Persistência** (§3.4) e `GET /api/sessoes` | reabrir conversas; `PropostaReg` a acumular | **I6** |
+| 8 | ✅ **feito** (2026-10-25) — **persistência** (§3.4) e `GET /api/sessoes`, mais `GET /api/sessoes/{id}`, que o entregável obriga: uma lista de sessões que não se abrem não é histórico. `src/web/esquema.sql`, `src/web/sessoes.py`, o evento `sessao` como primeiro do fluxo, e um componente `sessoes` no `/api/estado`. **33 testes** (`test_sessoes.py` 27, `test_i6.py` 5, `conftest.py` 1 protecção), **536** na suíte | reabrir conversas; `PropostaReg` a acumular | **I6** ✅, e a mutação dele a morder |
 | 9 | **Painel do poema** e `GET /api/poema/{id}` | fichas de fonte clicáveis | **I7′**, e ver a nota abaixo |
 | 10 | **Fechar**: `requirements.txt`, `.gitignore` (`data/sessoes.db` **só** — o sentinela deixou de precisar de entrada quando o passo 7 o pôs fora de qualquer checkout; verificado, não assumido: `git status` não o vê. O `data/` **não** está ignorado por inteiro, só ficheiros nomeados), `README`, `CONTROLO.md` §2 e §7, e correr tudo | a fase documentada | 257+ testes a passar (eram 243 quando este plano foi escrito; o Passo 44 levou-os a 257) |
 
@@ -607,7 +626,7 @@ diz qual falhou.
 | **I3 — honestidade do estado** | A interface não diz pronto o que não está | com Ollama em baixo, `/api/estado` reporta-o e a página mostra `ollama serve`. Com o manifesto rejeitado, diz **qual** dos quatro campos divergiu |
 | **I4 — o laço não bloqueia** | O servidor responde durante uma geração | durante 30 s de geração, `GET /api/estado` responde em **< 100 ms**, em 10 de 10 tentativas |
 | **I5 — cancelar cancela** | Abortar para a geração | após `abort`, a pergunta seguinte arranca em menos de 2 s e o trinco está livre; o Ollama não está a decodificar |
-| **I6 — corpos não são guardados** | `data/sessoes.db` não contém poemas | varrimento da base por qualquer linha de corpo de qualquer poema do corpus: **zero** acertos |
+| **I6 — corpos não são guardados** ✅ | `data/sessoes.db` não contém poemas | varrimento da base por qualquer linha de corpo de qualquer poema do corpus: **zero** acertos. **Medido (2026-10-25)** em `tests/test_i6.py`, com o gerador a copiar à letra: o varrimento enumera tabelas pelo `sqlite_master` e colunas pelo `row_factory`, logo uma coluna nova entra sem ninguém se lembrar dela, e há um teste que **falha** se o esquema ganhar uma tabela. ⚠️ **E o que protege a tentativa plagiada não é a retenção:** o verso copiado vive no `historico[0].texto` — medido, **6 linhas de corpo**, contra zero na 2.ª tentativa e no texto final — e o §3.2 **não deu coluna de texto à `tentativa_reg`**. Não há o que redigir no que não se guarda; há teste a fixar a ausência da coluna. A **mutação** do portão corre sempre: um turno gravado com um poema do corpus no `texto` **é** acusado |
 | **I7 — o painel não é uma porta** ❌ **retirado** | O corpo do poema não sai da máquina | ~~`GET /api/poema/{id}` recusa pedidos de fora de `127.0.0.1`; o servidor não escuta noutro interface sem sinalizador explícito~~ — **substituído pelo I7′** (ver abaixo) no passo 2 do [`PRODUCAO.md`](PRODUCAO.md), em 2026-10-19 |
 | **I7′ — o corpo não sai desta máquina** ✅ | O corpo do poema não sai da máquina | **nenhuma linha de corpo de nenhum poema do corpus aparece em nenhuma resposta de nenhuma rota** — o varrimento do I6 apontado ao fio HTTP, em `tests/test_i7.py`. A asserção plena é **de fora**, contra o URL público, e essa metade espera o túnel (passos 4 e 6 do `PRODUCAO.md`) |
 | **I8 — o servidor cede à medição** ✅ | O servidor não compete com uma fase pelo mesmo Ollama | com o sentinela presente, `POST /api/perguntar` responde **409** nomeando a fase e o PID, e `GET /api/estado` mostra-o como componente; sem o ficheiro, gera normalmente. E a medição que o justifica: **com** sentinela, os `segundos` de 10 gerações do servidor e de 10 de um script não se sobrepõem no tempo — verificado por *timestamps*, não por intenção. **E a asserção que o [`PRODUCAO.md`](PRODUCAO.md) §4 acrescentou:** a fase escreve de um checkout e o servidor, **no outro**, vê-o — sem ela o I8 passava num processo com um directório só e não dizia nada sobre a máquina real. Tudo em `tests/test_sentinela.py`, 24 testes |

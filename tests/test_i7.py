@@ -102,6 +102,13 @@ ROTAS_COBERTAS = {
     ("GET", "/api/health"),
     ("GET", "/api/vozes"),
     ("POST", "/api/perguntar"),
+    # Do passo 8. São as duas rotas em que o varrimento **mais** interessa: o
+    # histórico guarda o `texto` de cada turno, e numa cópia à letra o verso
+    # gerado é o verso de Pessoa. O `_fio` lê-as **depois** da geração, com a
+    # sessão que a própria geração abriu, logo varre a tentativa plagiada tal
+    # como ela ficou em disco.
+    ("GET", "/api/sessoes"),
+    ("GET", "/api/sessoes/{sessao_id}"),
     # Do FastAPI, e não deste repositório — e vai ao fio como as outras. Não
     # leva corpo (leva o esquema das rotas), mas é varrida pela mesma razão
     # pela qual está nesta lista: o portão não distingue rotas minhas de rotas
@@ -189,14 +196,35 @@ def _cliente(chunks, gerador):
         yield c
 
 
+def _sessao_do_fluxo(fluxo: str) -> str | None:
+    """O `sessao_id` que o primeiro evento do fluxo anunciou, se houver."""
+    for linha in fluxo.split("\n"):
+        if not linha:
+            continue
+        e = json.loads(linha)
+        if e.get("tipo") == "sessao":
+            return e.get("sessao_id")
+    return None
+
+
 def _fio(cliente, pergunta: str = "o que é a natureza?") -> str:
-    """Tudo o que as rotas cobertas devolvem, num texto só."""
-    partes = [cliente.get("/api/estado").text, cliente.get("/api/health").text,
-              cliente.get("/api/vozes").text,
-              cliente.get("/openapi.json").text]
+    """Tudo o que as rotas cobertas devolvem, num texto só.
+
+    A geração vem **primeiro** e as rotas do histórico depois, com a sessão que
+    ela abriu: ler o histórico antes de haver histórico varria uma lista vazia
+    e dava o portão por cumprido sem olhar para onde o corpo pode estar.
+    """
     with cliente.stream("POST", "/api/perguntar",
                         json={"pergunta": pergunta, "voz": "caeiro"}) as r:
-        partes.append(r.read().decode("utf-8"))
+        fluxo = r.read().decode("utf-8")
+    partes = [cliente.get("/api/estado").text, cliente.get("/api/health").text,
+              cliente.get("/api/vozes").text,
+              cliente.get("/openapi.json").text, fluxo,
+              cliente.get("/api/sessoes").text]
+    sid = _sessao_do_fluxo(fluxo)
+    assert sid is not None, ("a geração não anunciou sessão nenhuma, logo o "
+                            "varrimento do histórico não olharia para nada")
+    partes.append(cliente.get(f"/api/sessoes/{sid}").text)
     return "\n".join(partes)
 
 

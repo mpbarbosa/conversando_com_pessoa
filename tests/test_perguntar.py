@@ -781,7 +781,7 @@ def test_o_corpo_e_ndjson_e_cada_linha_e_um_json_valido(chunks_caeiro):
     assert len(linhas) > 2, "não houve fluxo: saiu tudo numa linha"
     tipos = [json.loads(ln)["tipo"] for ln in linhas]
     assert tipos[-1] == "turno"
-    assert set(tipos) <= {"fragmento", "turno", "proposta", "erro"}
+    assert set(tipos) <= {"sessao", "fragmento", "turno", "proposta", "erro"}
     assert bruto.endswith("\n"), "a última linha também é uma linha"
 
 

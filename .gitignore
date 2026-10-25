@@ -255,3 +255,18 @@ docs/**/0*-chave.json
 # ficheiros, 241.250 palavras, versionados desde 396cca7 (2025-10-24) num
 # repositorio PUBLICO, apesar de o README ter afirmado durante um ano que nao
 # estavam no repositorio. Ver a correccao 42.
+
+# Sessoes do servico (passo 8 da Fase 6). Fora do repositorio por DUAS razoes,
+# e a segunda e a que um .gitignore raramente registra:
+#  1. direitos -- a base guarda poem_id e chunk_ix e NUNCA corpos (portao I6,
+#     secao 3.3 do docs/FASE-6.md), mas um ficheiro de sessoes versionado num
+#     repositorio publico e mais facil de partilhar por distraccao do que um
+#     corpus que ja se sabe sensivel;
+#  2. privacidade -- contem as PERGUNTAS de quem usou o sistema, que nao sao
+#     nossas para publicar.
+# Nao e reconstruivel: e o primeiro estado deste projecto que nenhum script
+# regenera (secao 5.3 do docs/PRODUCAO.md), e e por isso que o portao D8 --
+# copia com ensaio de restauro -- passa a ser exigivel.
+data/sessoes.db
+data/sessoes.db-wal
+data/sessoes.db-shm
