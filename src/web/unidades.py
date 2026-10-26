@@ -72,6 +72,11 @@ NOME_TUNEL = "cloudflared.service"
 #: tentativas em dez horas, com o `systemctl` a dizer `active` (§7.2 do plano).
 NOME_GUARDA = "pessoabot-tunel-guarda.service"
 NOME_TEMPORIZADOR = "pessoabot-tunel-guarda.timer"
+#: A cópia das sessões e o seu temporizador (passo 10, portão **D8**).
+#: Entram nos `GERADORES` ao contrário do túnel: uma unidade de túnel gerada
+#: sem pensar é um túnel aberto, e uma cópia gerada sem pensar é uma cópia.
+NOME_COPIA = "pessoabot-copia.service"
+NOME_TEMPORIZADOR_COPIA = "pessoabot-copia.timer"
 
 #: Onde o `systemctl --user` lê as unidades deste utilizador.
 DIRECTORIO = Path.home() / ".config" / "systemd" / "user"
@@ -357,10 +362,74 @@ WantedBy=timers.target
 """
 
 
-#: As unidades que não dependem de configuração, por nome. A ordem é a do
-#: arranque. O túnel **não** está aqui de propósito: gerá-lo exige a lista de
-#: convidados, e uma unidade de túnel que se gere sem pensar é um túnel aberto.
+def copia_das_sessoes(alvo: Alvo) -> str:
+    """Uma passagem da cópia. `oneshot`: corre, copia, verifica e morre.
+
+    Sem `After=` do `pessoabot.service`, e é deliberado: o `Connection.backup`
+    coopera com um escritor vivo (ver a decisão 1 do `copias.py`), logo não há
+    razão para a cópia esperar pelo serviço nem para o serviço esperar por ela.
+    E uma base que ainda não existe não é uma falha: o `--copiar` di-lo e sai
+    com 0, senão o temporizador enchia o registo de vermelho num serviço que
+    ninguém ainda usou.
+    """
+    return f"""\
+[Unit]
+Description=Uma cópia verificada do data/sessoes.db do PessoaBot (§5.3)
+Documentation=file://{alvo.checkout}/docs/PRODUCAO.md
+
+[Service]
+Type=oneshot
+WorkingDirectory={alvo.checkout}
+ExecStart={alvo.python} -m src.web.instalar --copiar
+"""
+
+
+def temporizador_da_copia(alvo: Alvo) -> str:
+    """Diário, e **com** `Persistent=true` — ao contrário do da guarda.
+
+    A diferença não é descuido, é o oposto da razão que o outro tem. O
+    temporizador da guarda recusa o `Persistent` porque a passagem «que faltou»
+    corre no instante em que a máquina acorda, quando a rede ainda não voltou —
+    e uma guarda que pergunta a um URL sem rede não serve para nada. Uma cópia
+    não pergunta nada a ninguém: lê um ficheiro local. A passagem que faltou é
+    exactamente a que interessa recuperar, porque um dia sem cópia é um dia de
+    perguntas que se perdem se o disco falhar nesse dia.
+    """
+    return f"""\
+[Unit]
+Description=Copia as sessões do PessoaBot uma vez por dia (§5.3, portão D8)
+Documentation=file://{alvo.checkout}/docs/PRODUCAO.md
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1d
+Persistent=true
+Unit={NOME_COPIA}
+
+[Install]
+WantedBy=timers.target
+"""
+
+
+#: Os **serviços de arranque**: os que ficam a correr e que o `linger` levanta.
+#: A ordem é a do arranque. O túnel **não** está aqui de propósito: gerá-lo
+#: exige a lista de convidados, e uma unidade de túnel que se gere sem pensar é
+#: um túnel aberto.
+#:
+#: ⚠️ **E a cópia também não está, por outra razão.** O `test_unidades.py` varre
+#: este dicionário a exigir `Type=exec` e `WantedBy=default.target` — que é o
+#: que o portão **D2** afirma destas duas unidades e **não** do que uma cópia
+#: é. Uma `oneshot` disparada por temporizador cumpre o contrário dos dois, e
+#: metê-la aqui não era arrumação: era afrouxar o D2 para quatro unidades para
+#: acomodar duas. Ficam no dicionário abaixo, com o seu próprio contrato.
 GERADORES = {NOME_OLLAMA: servico_ollama, NOME_SERVICO: servico_pessoabot}
+
+#: A cópia das sessões e o seu temporizador. Escrevem-se **sempre**, ao
+#: contrário do túnel: o que custa caro aqui é não os ter. Separados dos de
+#: cima porque são outra espécie de unidade — `oneshot` e `timer`, em
+#: `timers.target` —, e não porque sejam opcionais.
+GERADORES_DA_COPIA = {NOME_COPIA: copia_das_sessoes,
+                      NOME_TEMPORIZADOR_COPIA: temporizador_da_copia}
 
 
 def escrever(alvo: Alvo, directorio: Path = DIRECTORIO, *,
@@ -389,7 +458,8 @@ def escrever(alvo: Alvo, directorio: Path = DIRECTORIO, *,
     # unidades já estarem no disco, e meia instalação é pior do que nenhuma
     # porque parece feita.
     mudadas = mudadas if mudadas is not None else set()
-    textos = {nome: gerar(alvo) for nome, gerar in GERADORES.items()}
+    textos = {nome: gerar(alvo) for nome, gerar in
+              (GERADORES | GERADORES_DA_COPIA).items()}
     if convidados is not None:
         textos[NOME_TUNEL] = servico_tunel(alvo, ler_convidados(convidados))
         # A guarda só nasce com o túnel: sem túnel não há o que guardar, e um

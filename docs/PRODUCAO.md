@@ -547,7 +547,7 @@ estão aqui porque o túnel não deve existir antes deles.
 | 7 | 🔶 **feito, e o portão reduzido ao que é mensurável** (2026-10-20, §3.6) — **a janela registada** (§3.3, peça 3): o ajudante escreve `00-janela.json` ao lado das amostras, na abertura e no fecho | uma célula lenta é interpretável daqui a seis meses — **menos** no que as amostras sem instante não deixam dizer | **D5**, na metade que o formato de hoje permite |
 | 8 | ✅ **feito e ensaiado** (2026-10-20, §5.5) — **recuo**: `python -m src.web.instalar --recuar <etiqueta>`, com o manifesto verificado **antes** do reinício | recuar é um comando, e foi ensaiado de uma etiqueta doente a sério | **D6** ✅ |
 | 9 | **Limite de pedidos** (§7), e só então abrir ao público, se o dono quiser | um cliente em ciclo não nega o serviço nem mata as medições | **D7** |
-| 10 | 🔶 **desbloqueado e por fazer** — **cópias de `data/sessoes.db`** (§5.3). O passo 8 da Fase 6 **existe desde 2026-10-25**, logo a condição deste passo deixou de o adiar: há estado que nenhum script regenera, e o **D8 passa a exigível** | o estado dos utilizadores sobrevive | **D8** |
+| 10 | ✅ **feito e ensaiado** (2026-10-26, §5.6) — **cópias de `data/sessoes.db`**: `src/web/copias.py`, `--copiar`/`--listar-copias`/`--restaurar`, e `pessoabot-copia.{service,timer}` gerados pelo `unidades.py`. **O temporizador ainda não está na máquina** — escrevê-lo é um `instalar`, que move o serviço de etiqueta | o estado dos utilizadores sobrevive | **D8** ✅ |
 | 11 | ✅ **feito** (2026-10-20) — **fechar**: `README` (§8), `CONTROLO.md`, e [`docs/producao/SERVICO.md`](producao/SERVICO.md) escrito **a partir da máquina**, com a proveniência de cada número | o serviço documentado | — |
 
 Os passos 1–2 são o que torna o túnel defensável. Os 3–5 são o serviço. Os 6–9
@@ -661,6 +661,70 @@ regressão que constrói o mesmo caso — commit num ramo, etiqueta, ramo apagad
 `/api/health` era `null` desde que nasceu, e eu tinha escrito que era «o estado
 verdadeiro: não há etiquetas, e criá-las é o passo 8». São estas. Hoje diz
 `servico-2026-10-20a`, lido da máquina.
+
+### 5.6 O passo 10, ensaiado: a cópia, o restauro, e o defeito que o ensaio encontrou
+
+Escrito em 2026-10-26. `src/web/copias.py`, `python -m src.web.instalar
+--copiar | --listar-copias | --restaurar [ficheiro]`, mais
+`pessoabot-copia.service` e `pessoabot-copia.timer` gerados pelo
+`unidades.py`. **24 testes**, 560 na suíte.
+
+**A cópia é um `Connection.backup` e não um `cp`, e a razão é o WAL.** A base
+abre em `journal_mode = WAL`, logo o estado comprometido vive em **dois**
+ficheiros. Um `cp` do principal com o serviço a escrever dá um ficheiro ou
+atrasado (as transacções do WAL não entraram) ou roto (copiado a meio de uma
+escrita de página) — e nos dois casos o ficheiro existe, tem tamanho plausível e
+abre. Há um teste que escreve por uma ligação viva antes de copiar e exige que a
+cópia veja a transacção.
+
+**A ordem é a asserção, outra vez, e é a mesma do §5.5.** A cópia escreve-se com
+o nome `.parcial`, **verifica-se**, e só então toma o nome definitivo num
+`os.replace` atómico: com o nome final primeiro, uma cópia má substituía a
+última cópia boa, que é o pior resultado possível de um programa cujo trabalho é
+não perder dados. E o restauro **recusa antes de tocar na base** — verificado
+depois, já não há o que salvar —, guarda a base anterior em `.substituido` em
+vez de a apagar, e remove os `-wal`/`-shm` do original, porque um WAL antigo ao
+lado de uma base nova é a mistura de dois estados que o SQLite **tenta aplicar**.
+
+**O ensaio, duas vezes, nesta máquina:**
+
+| | |
+|---|---|
+| base de ensaio | 2 sessões · 4 mensagens (`--copiar` disse-o, e o `--listar-copias` confirmou abrindo a cópia) |
+| 1.ª passagem | base **apagada** a seguir, e `--restaurar` devolveu-a: 2 sessões, 4 mensagens |
+| 2.ª passagem | com a base de pé e **divergente** (3 sessões): a cópia entrou, e a base anterior ficou em `sessoes.db.substituido` com as 3 sessões intactas |
+| o serviço | `MainPID` **3264421 → 3272955**, e o `/api/health` a responder `sha aa15dd4` depois do arranque |
+
+⚠️ **E o ensaio encontrou um defeito que nenhum teste tinha apanhado.** As
+secções `[parar o serviço]` e `[arranque]` **não imprimiam nada**: o `_correr`
+só imprime em ensaio, logo o sucesso do restauro era a palavra do `systemctl` —
+exactamente a correcção **48** do §7.1 («`systemctl` a devolver 0 não é
+evidência de nada»), a repetir-se num comando novo. Corrigido com as duas
+asserções que esta casa já usa noutros sítios: o **`MainPID` dos dois lados**,
+que é a prova directa de que a unidade foi substituída (é a asserção do guião do
+D2 para o logout), e a **pergunta ao `/api/health`** depois do arranque, que é o
+que o recuo já fazia. Um restauro que deixe o serviço em baixo passa agora a
+dizê-lo e a sair com 1.
+
+**Duas coisas que o ensaio não cobre, e ficam escritas:**
+
+- **a base do serviço não existe.** O serviço a correr está na etiqueta
+  `servico-2026-10-20c`, de **antes** do passo 8 da Fase 6, logo não tem
+  `data/sessoes.db` nenhum. O ensaio correu sobre uma base construída para o
+  efeito, com sessões reais escritas pelo `Arquivo`. O que isto mede é o
+  mecanismo; o que falta medir é a cópia da base **daquele** serviço, e isso
+  chega com a próxima instalação;
+- **o temporizador não está instalado.** As duas unidades são geradas pelo
+  `unidades.py` e verificadas pelo `systemd-analyze --user verify` nos testes,
+  mas escrevê-las na máquina é um `instalar` — que move o serviço para a
+  etiqueta corrente, e isso é uma decisão de quem o corre, não deste passo.
+
+**O que a cópia não é.** Não é cópia do corpus: a base guarda `poem_id` e
+`chunk_ix` e nunca corpos (portão **I6**), e é por isso que estas cópias podem
+viver em `~/.local/state/pessoabot/copias/` — fora de qualquer checkout, pela
+lição do §4, porque uma cópia dentro do checkout do serviço morre com aquilo de
+que é cópia. Continua a conter as **perguntas** de quem usou o serviço, que é a
+outra razão do `.gitignore`.
 
 ### 5.4 O passo 4, instalado: onde vive, o que custa, e as duas metades do D2
 
@@ -1411,7 +1475,7 @@ Os dois primeiros são da Fase 6, reescritos; os restantes são deste plano.
 | **D5 — a janela fica escrita** 🔶 **metade medida** | uma célula lenta é interpretável | ~~o ficheiro de uma fase corrida sob o ajudante contém os instantes de túnel de pé, e eles **não se sobrepõem** aos instantes das amostras~~ — **a segunda metade não é mensurável: as amostras não têm instante nenhum** (§3.6). **Feito (2026-10-20):** `00-janela.json` com `inicio`, `fim`, o túnel e se ele foi parado, mais `bytes_no_inicio`/`bytes_no_fim`/`mtime_no_fim` do ficheiro das amostras — e a asserção passa a ser **«o ficheiro das amostras só cresceu dentro da janela»**. 8 testes, quatro mutações a morder |
 | **D6 — o recuo recua** ✅ | voltar a uma etiqueta é um comando | de uma etiqueta deliberadamente doente para a anterior: `pip install` corre, o manifesto é verificado **antes** do reinício, e `/api/health` devolve o `sha` anterior. Ensaiado, não presumido. **Feito (2026-10-20):** a `servico-2026-10-20b` rebenta no arranque — o serviço ficou `activating` com `status=1/FAILURE` e o `curl` a dar **000** —, e o recuo para a `servico-2026-10-20a` devolveu `status: ok` com `sha: fd43c2d` e `etiqueta: servico-2026-10-20a`. §5.5 |
 | **D7 — o limite limita** | um cliente em ciclo não ocupa a fila toda | com o limite activo, um cliente em ciclo recebe recusa do fornecedor e o `p95` de geração dos outros fica dentro do orçamento. **Só é exigido se o passo 9 for feito** |
-| **D8 — a cópia restaura** 🔶 **exigível desde 2026-10-25, e por medir** | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. ~~Só é exigido se o passo 8 da Fase 6 existir~~ — **o passo 8 existe**, logo a condição caiu. A base guarda perguntas de quem usou o sistema e **nenhum script a regenera**: é a primeira peça deste projecto de que isso é verdade |
+| **D8 — a cópia restaura** ✅ | a cópia de `sessoes.db` é uma cópia | restauro num directório limpo e as sessões de antes a aparecerem. ~~Só é exigido se o passo 8 da Fase 6 existir~~ — o passo 8 existe desde 2026-10-25, logo a condição caiu. **Medido (2026-10-26), e ensaiado duas vezes** (§5.6): base apagada e devolvida com as 2 sessões e as 4 mensagens; base divergente substituída com a anterior guardada em `.substituido` e as suas 3 sessões intactas; serviço `MainPID` **3264421 → 3272955** e `/api/health` a responder depois. O teste do portão restaura num directório que **não existe** — o caso do disco novo, que é aquele para que uma cópia existe — e tem instrumento próprio: uma cópia de uma base **vazia** restaura com sucesso e **não** passa por boa. ⚠️ **Ressalva:** a base do serviço a correr não existe (etiqueta de antes do passo 8), logo o ensaio usou uma base construída para o efeito |
 
 E a asserção de não-regressão: **`pytest` continua verde** (490 testes em
 2026-10-19, eram 450 depois do passo 6, 441 depois do passo 4, 424 depois do passo 3, 411 depois do

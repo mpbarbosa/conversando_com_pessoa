@@ -55,7 +55,9 @@ import sys
 import time
 from pathlib import Path
 
+from . import copias
 from .app import PORTA
+from .sessoes import caminho_padrao as sessoes_padrao
 from .saude import RAIZ, ler_lancamento
 from .unidades import (
     CONVIDADOS,
@@ -745,6 +747,160 @@ def _sessao_mais_recente_us() -> int:
     return max(marcas, default=0)
 
 
+def _pid_do_servico() -> int | None:
+    """O `MainPID` da unidade, ou `None` se estiver parada.
+
+    Existe porque o PID é a prova directa de que a unidade foi mesmo substituída
+    — a mesma asserção que o guião do portão D2 usa para o logout. Um
+    `systemctl stop` seguido de `start` que devolvam 0 com o mesmo PID significa
+    que nada aconteceu.
+    """
+    r = subprocess.run(("systemctl", "--user", "show", "-p", "MainPID",
+                        "--value", NOME_SERVICO),
+                       capture_output=True, text=True)
+    try:
+        return int(r.stdout.strip()) or None
+    except ValueError:
+        return None
+
+
+def copiar_sessoes(*, ensaio: bool) -> int:
+    """Uma cópia verificada do `data/sessoes.db`. É o que o temporizador corre.
+
+        python -m src.web.instalar --copiar
+
+    **Não há base ⇒ sai com 0.** Um serviço que ninguém ainda usou não tem
+    sessões, e tratar isso como falha enchia o registo de vermelho diário num
+    sistema são — e ensinava a ignorar o vermelho, que é o custo real.
+    """
+    origem = sessoes_padrao()
+    destino = copias.directorio_padrao()
+    print(f"base:    {origem}")
+    print(f"cópias:  {destino}")
+    if not Path(origem).exists():
+        print("não há base ainda: nada a copiar, e isso não é uma falha")
+        return 0
+    if ensaio:
+        print(f"    (o ensaio não copia; copiaria para {destino})")
+        return 0
+    try:
+        alvo = copias.copiar(origem, destino)
+    except copias.ErroDeCopia as e:
+        print(f"\nA CÓPIA NÃO SE FEZ: {e}", file=sys.stderr)
+        return 1
+    estado = copias.verificar(alvo)
+    print(f"  · {alvo.name}: {estado.detalhe}")
+    guardadas = copias.listar(destino)
+    n = len(guardadas)
+    print(f"  · {n} cópia{'s' if n != 1 else ''} guardada"
+          f"{'s' if n != 1 else ''} (máximo {copias.A_GUARDAR})")
+    return 0
+
+
+def listar_copias() -> int:
+    """As cópias, e o que cada uma tem dentro.
+
+        python -m src.web.instalar --listar-copias
+
+    Abre **cada uma** em vez de listar nomes e tamanhos: o tamanho de um
+    ficheiro de SQLite não diz se ele abre, e o que esta casa quer saber antes
+    de precisar de uma cópia é se ela serve.
+    """
+    destino = copias.directorio_padrao()
+    guardadas = copias.listar(destino)
+    print(f"cópias:  {destino}")
+    if not guardadas:
+        print("não há nenhuma")
+        return 0
+    for c in guardadas:
+        estado = copias.verificar(c)
+        print(f"  {'·' if estado.ok else '✗'} {c.name}: {estado.detalhe}")
+    return 0
+
+
+def restaurar_sessoes(ficheiro: str | None, *, ensaio: bool) -> int:
+    """Põe uma cópia no lugar da base. Portão **D8**.
+
+        python -m src.web.instalar --restaurar                  # a mais recente
+        python -m src.web.instalar --restaurar <caminho>
+
+    A ordem é a asserção, e é a mesma que o §5.5 fixou para o recuo — verificar
+    **antes** e nunca depois:
+
+    1. **verificar a cópia**, e recusar se não servir. Antes de tocar em nada:
+       verificada depois, já não há o que salvar;
+    2. **parar o serviço**. Parar que falha ⇒ **não se restaura** — é a mesma
+       assimetria do §3.4, e aqui é mais fácil de justificar: restaurar por
+       baixo de um escritor vivo é trocar o ficheiro a quem tem o WAL aberto;
+    3. **restaurar**, guardando a base anterior em `.substituido`;
+    4. **verificar a base** restaurada;
+    5. **arrancar o serviço** outra vez.
+    """
+    base = sessoes_padrao()
+    copia = (Path(ficheiro) if ficheiro
+             else copias.ultima(copias.directorio_padrao()))
+    if copia is None:
+        print(f"não há cópias em {copias.directorio_padrao()}",
+              file=sys.stderr)
+        return 1
+    print(f"cópia:   {copia}")
+    print(f"base:    {base}")
+
+    print("\n[a cópia, **antes** de tocar na base]")
+    estado = copias.verificar(copia)
+    print(f"  · {'aceite' if estado.ok else 'RECUSADA'}: {estado.detalhe}")
+    if not estado.ok:
+        print("\nRESTAURO ABORTADO, e a base está como estava.", file=sys.stderr)
+        return 1
+    if ensaio:
+        print("\n    (o ensaio não para o serviço nem mexe na base)")
+        return 0
+
+    print("\n[parar o serviço]")
+    antes = _pid_do_servico()
+    print(f"  · MainPID antes: {antes or '(parado)'}")
+    try:
+        _correr("systemctl", "--user", "stop", NOME_SERVICO, ensaio=False)
+    except Falhou as e:
+        print(f"\nRESTAURO ABORTADO: não consegui parar o serviço ({e}). "
+              f"Restaurar com um escritor vivo é trocar o ficheiro a quem tem "
+              f"o WAL aberto.", file=sys.stderr)
+        return 1
+
+    print("\n[restauro]")
+    try:
+        final = copias.restaurar(copia, base)
+    except copias.ErroDeCopia as e:
+        print(f"\nO RESTAURO FALHOU: {e}", file=sys.stderr)
+        print("o serviço fica parado de propósito: arranca-se à mão depois de "
+              "olhar para a base.", file=sys.stderr)
+        return 1
+    print(f"  · base restaurada: {final.detalhe}")
+    anterior = Path(str(base) + ".substituido")
+    if anterior.exists():
+        print(f"  · a base anterior ficou em {anterior.name}")
+
+    print("\n[arranque]")
+    _correr("systemctl", "--user", "start", NOME_SERVICO, ensaio=False)
+    depois = _pid_do_servico()
+    print(f"  · MainPID depois: {depois or '(parado)'}")
+    # O `systemctl` a devolver 0 **não é evidência de nada** — é a correcção 48
+    # do §7.1, e este ensaio quase a repetiu: as duas secções acima não
+    # imprimiam nada e o sucesso do restauro era a palavra do `systemctl`.
+    # Pergunta-se ao serviço, como o recuo faz.
+    sha = _sha_da_saude()
+    print(f"  · sha do /api/health: {sha or '(não respondeu)'}")
+    if sha is None:
+        print("\nA BASE FOI RESTAURADA e o serviço **não** voltou a responder: "
+              "o restauro está feito, o arranque não. `systemctl --user status "
+              f"{NOME_SERVICO}` diz porquê.", file=sys.stderr)
+        return 1
+    print(f"\nrestaurado de {copia.name}: {final.sessoes} sessões, "
+          f"{final.mensagens} mensagens. O serviço voltou "
+          f"({antes or '—'} → {depois or '—'}).")
+    return 0
+
+
 def verificar_d2() -> int:
     """Portão **D2**, contra o estado actual da máquina.
 
@@ -968,6 +1124,16 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verificar-d2", action="store_true",
                    help="julga o portão D2 pelo tempo monótono: o serviço é "
                         "mais velho que a sessão, e subiu no arranque?")
+    p.add_argument("--copiar", action="store_true",
+                   help="uma cópia verificada do data/sessoes.db, e roda as "
+                        "antigas. É o que o temporizador corre (portão D8)")
+    p.add_argument("--restaurar", metavar="FICHEIRO", nargs="?",
+                   const="", default=None,
+                   help="põe uma cópia no lugar da base, verificando-a antes "
+                        "de tocar em nada; sem argumento, a mais recente")
+    p.add_argument("--listar-copias", action="store_true",
+                   help="as cópias que existem, da mais antiga para a mais "
+                        "recente, com o que cada uma tem dentro")
     p.add_argument("--recuar", metavar="ETIQUETA", default=None,
                    help="volta o serviço a uma etiqueta, verificando o "
                         "manifesto antes de reiniciar (portão D6)")
@@ -984,6 +1150,12 @@ def main(argv: list[str] | None = None) -> int:
 
     if a.verificar_d2:
         return verificar_d2()
+    if a.copiar:
+        return copiar_sessoes(ensaio=a.ensaio)
+    if a.restaurar is not None:
+        return restaurar_sessoes(a.restaurar or None, ensaio=a.ensaio)
+    if a.listar_copias:
+        return listar_copias()
 
     if a.recuar:
         try:
