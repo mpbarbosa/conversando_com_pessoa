@@ -57,6 +57,7 @@ from src.web.instalar import (
 )
 from src.web.saude import RAIZ, ler_lancamento
 from src.web.unidades import (
+    GERADORES_DA_COPIA,
     DIRECTORIO,
     GERADORES,
     KEEP_ALIVE,
@@ -332,14 +333,16 @@ def test_d4_a_unidade_do_tunel_leva_a_lista_e_o_caminho_absoluto(alvo,
 
 def test_d4_escrever_sem_lista_da_so_o_servico_e_com_lista_da_o_tunel(
         alvo, tmp_path, convidados):
+    # A cópia das sessões e o seu temporizador escrevem-se **sempre** (passo 10
+    # do PRODUCAO.md): ao contrário do túnel, o que custa caro é não os ter.
+    sempre = set(GERADORES) | set(GERADORES_DA_COPIA)
     sem = escrever(alvo, tmp_path / "sem", convidados=None)
-    assert set(sem) == set(GERADORES), (
+    assert set(sem) == sempre, (
         "sem lista não se escreve túnel, e isso não é erro: é o passo 6 "
         "ainda não dado")
 
     com = escrever(alvo, tmp_path / "com", convidados=convidados)
-    assert set(com) == set(GERADORES) | {NOME_TUNEL, NOME_GUARDA,
-                                         NOME_TEMPORIZADOR}
+    assert set(com) == sempre | {NOME_TUNEL, NOME_GUARDA, NOME_TEMPORIZADOR}
     assert "--allowed-mail" in com[NOME_TUNEL].read_text(encoding="utf-8")
 
 
