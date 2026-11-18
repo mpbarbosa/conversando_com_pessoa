@@ -22,9 +22,17 @@
 # logo **nenhum pin estabiliza isto**: o índice original tinha o empate a cair
 # do outro lado, e por isso os 433 julgamentos fechavam o top-20.
 # A correcção é julgar o `poem_4341`, não fixar versões.
+#
+# O `torch` fixa-se **com** o `+cpu`, e do índice CPU do PyTorch (2026-11-18).
+# `torch==2.14.1` sem sufixo cumpria o pin e trazia do PyPI a compilação CUDA:
+# foi o que o `.venv` do serviço recebeu, ~4,5 GB de `nvidia-*` e `triton`
+# numa máquina sem GPU NVIDIA (só a Intel Meteor Lake), enquanto o registo da
+# medição diz `torch 2.14.1+cpu | cuda: False`. É o drift que o pin existia
+# para impedir, a passar pelo pin — porque `==2.14.1` aceita as duas.
+--extra-index-url https://download.pytorch.org/whl/cpu
 numpy==2.5.3
 sentence-transformers==6.1.0
-torch==2.14.1
+torch==2.14.1+cpu
 transformers==5.18.0
 rank-bm25==0.2.2
 requests==2.34.2
