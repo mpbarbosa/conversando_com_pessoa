@@ -182,12 +182,25 @@ def criar_venv(alvo: Alvo, *, ensaio: bool) -> None:
 
     Próprio e não partilhado: ver o cabeçalho. 5,7 GB é o preço de o serviço não
     mudar debaixo dos pés por causa de um `pip install` de desenvolvimento.
+
+    ⚠️ **Cria-se só se faltar; as dependências instalam-se sempre.** A primeira
+    versão saía aqui quando o `.venv` existia, logo uma instalação por cima
+    nunca aplicava o `requirements.txt` da referência nova — só o `recuar` o
+    fazia. Achado a 2026-11-18: o pin do `torch` passou a `2.14.1+cpu`, e
+    instalar essa referência teria deixado no serviço o `2.14.1+cu130`, com o
+    `/api/health` a dizer o `sha` novo. É o mesmo motivo do passo 2 do recuo:
+    as dependências podem ter mudado entre referências.
+
+    O que isto **não** faz: desinstalar o que deixou de ser pedido. Um
+    `pip install` só acrescenta e troca, e o `uv pip sync` não serve — o
+    `requirements.txt` fixa as directas, não as 79 resolvidas, e o `sync`
+    apagava as transitivas.
     """
     if alvo.python.exists():
         print(f"  · o .venv já existe: {alvo.python}")
-        return
-    _correr("uv", "venv", "--python", "3.12", ".venv",
-            ensaio=ensaio, cwd=alvo.checkout)
+    else:
+        _correr("uv", "venv", "--python", "3.12", ".venv",
+                ensaio=ensaio, cwd=alvo.checkout)
     _correr("uv", "pip", "install", "--python", str(alvo.python),
             "-r", "requirements.txt", ensaio=ensaio, cwd=alvo.checkout)
 
