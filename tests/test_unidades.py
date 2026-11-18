@@ -47,6 +47,7 @@ from src.web.instalar import (
     clonar,
     conferir_sha,
     contar_acessos,
+    criar_venv,
     decidir_guarda,
     decidir_tunel,
     extrair_url,
@@ -849,6 +850,44 @@ def test_d6_com_o_manifesto_aceite_o_recuo_reinicia(monkeypatch, par):
     assert any("install" in a for a in corridos), (
         "o `pip install` tem de correr: as dependências podem ter mudado "
         "entre etiquetas")
+
+
+def _espiar_correr(monkeypatch) -> list[tuple[str, ...]]:
+    corridos: list[tuple[str, ...]] = []
+    monkeypatch.setattr(instalar, "_correr",
+                        lambda *a, ensaio=False, cwd=None: corridos.append(a))
+    return corridos
+
+
+def test_instalar_sobre_um_venv_existente_aplica_o_requirements(
+        monkeypatch, alvo):
+    """**O defeito achado a 2026-11-18.** Com o `.venv` de pé, o `criar_venv`
+    saía sem instalar nada, logo uma instalação por cima nunca aplicava o
+    `requirements.txt` da referência nova: o pin do `torch` passou a
+    `2.14.1+cpu` e o serviço teria ficado no `2.14.1+cu130`, com o
+    `/api/health` a dizer o `sha` novo."""
+    assert alvo.python.exists()
+    corridos = _espiar_correr(monkeypatch)
+
+    criar_venv(alvo, ensaio=False)
+
+    assert any(a[:3] == ("uv", "pip", "install") and "requirements.txt" in a
+               for a in corridos), (
+        f"um .venv existente não recebeu o requirements.txt. Correu: {corridos}")
+    assert not any(a[:2] == ("uv", "venv") for a in corridos), (
+        "recriar um .venv existente apagava-o: 5,7 GB a reinstalar")
+
+
+def test_sem_venv_cria_o_e_instala(monkeypatch, alvo):
+    """E o outro lado: sem `.venv`, cria-se **e** instala-se — senão o teste
+    acima passava com um `criar_venv` que nunca cria nada."""
+    alvo.python.unlink()
+    corridos = _espiar_correr(monkeypatch)
+
+    criar_venv(alvo, ensaio=False)
+
+    assert [a[:3] for a in corridos] == [("uv", "venv", "--python"),
+                                         ("uv", "pip", "install")]
 
 
 def test_d6_o_recuo_recusa_o_checkout_de_trabalho(capsys):
